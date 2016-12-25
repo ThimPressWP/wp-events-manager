@@ -8,8 +8,8 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !defined( 'TP_Event_Woo_File' ) ) {
-	define( 'TP_Event_Woo_File', __FILE__ );
+if ( !defined( 'TP_EVENT_WOO_FILE' ) ) {
+	define( 'TP_EVENT_WOO_FILE', __FILE__ );
 	require_once dirname(__FILE__) .'includes/event-woo-constants.php';
 }
 
