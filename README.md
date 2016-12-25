@@ -1,1 +1,1 @@
-# woo-integrated
+# Integrated payment via Woocommerce gateways
