@@ -1,1 +1,1 @@
-# Integrated payment via Woocommerce gateways
+# Integrated payment via Woocommerce gateways for TP Event plugin
