@@ -5,7 +5,7 @@
   Plugin URI: http://thimpress.com/thim-event
   Description: Thim event - countdown
   Author: ThimPress
-  Version: 1.5
+  Version: 2.0
   Author URI: http://thimpress.com
  */
 
@@ -39,7 +39,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->set_define( 'TP_EVENT_INC_URI', TP_EVENT_URI . 'inc/' );
 			$this->set_define( 'TP_EVENT_ASSETS_URI', TP_EVENT_URI . 'assets' );
 			$this->set_define( 'TP_EVENT_LIB_URI', TP_EVENT_INC_URI . 'libraries/' );
-			$this->set_define( 'TP_EVENT_VER', '1.5' );
+			$this->set_define( 'TP_EVENT_VER', '2.0' );
 			$this->set_define( 'TP_EVENT_MAIN_FILE', __FILE__ );
 		}
 
@@ -54,7 +54,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 		/**
 		 * Init hooks plugins
-		 * @since 1.4.1.4
+		 * @since 2.0
 		 */
 		public function init_hooks() {
 			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
