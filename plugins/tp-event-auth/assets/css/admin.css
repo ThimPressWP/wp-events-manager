@@ -1,0 +1,25 @@
+/*
+* @Author: ducnvtt
+* @Date:   2016-03-07 16:15:05
+* @Last Modified by:   ducnvtt
+* @Last Modified time: 2016-03-07 16:21:01
+*/
+.event_auth_admin_table_booking td,
+.event_auth_admin_table_booking th{
+	padding: 10px;
+	border: 1px solid;
+}
+.event_booking_status{
+    font-size: 13px;
+    font-weight: 500;
+    font-style: italic;
+}
+.event_booking_status.pending{
+    color: #DC3838;
+}
+.event_booking_status.processing{
+    color: #F9D209;
+}
+.event_booking_status.completed{
+    color: #38DC55;
+}
