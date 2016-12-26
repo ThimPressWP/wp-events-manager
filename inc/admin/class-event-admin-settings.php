@@ -21,7 +21,7 @@ class Event_Admin_Settings {
     /**
      * Add message
      * @param type $message
-     * @since 1.4.2
+     * @since 1.5
      */
     public static function add_message( $message = '' ) {
         self::$messages[] = $message;
@@ -29,7 +29,7 @@ class Event_Admin_Settings {
 
     /**
      * Display messages
-     * @since 1.4.2
+     * @since 1.5
      */
     public static function show_messages() {
         foreach ( self::$messages as $message ) {
@@ -39,7 +39,7 @@ class Event_Admin_Settings {
 
     /**
      * Save event setting
-     * @since 1.4.2
+     * @since 1.5
      */
     public static function save() {
         if ( empty( $_POST['tp-event-settings-nonce'] ) || !wp_verify_nonce( $_POST['tp-event-settings-nonce'], 'tp-event-settings' ) ) {
@@ -56,7 +56,7 @@ class Event_Admin_Settings {
 
     /**
      * Output page setting
-     * @since 1.4.2
+     * @since 1.5
      */
     public static function output() {
         global $current_tab, $current_section;
@@ -352,7 +352,7 @@ class Event_Admin_Settings {
     /**
      * Save fields options
      * @param type $settings
-     * @since 1.4.2
+     * @since 1.5
      */
     public static function save_fields( $settings = array() ) {
         foreach ( $settings as $setting ) {

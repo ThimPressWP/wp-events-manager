@@ -78,7 +78,7 @@ abstract class Event_Admin_Setting_Page {
 
     /**
      * Save action callback
-     * @since 1.4.2
+     * @since 1.5
      */
     public function save() {
         $settings = $this->get_settings();

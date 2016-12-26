@@ -17,7 +17,7 @@ class Event_Install {
      */
     public static function init() {
         self::$db_upgrade = array(
-            '1.4.2' => TP_EVENT_INC . 'admin/upgrades/upgrade-1.4.2.php'
+            '1.5' => TP_EVENT_INC . 'admin/upgrades/upgrade-1.5.php'
         );
     }
 
