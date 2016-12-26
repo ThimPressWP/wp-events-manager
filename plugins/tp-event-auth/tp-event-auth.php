@@ -133,6 +133,18 @@ if ( !class_exists( 'TP_Event_Authentication' ) ) {
         }
 
         /**
+         * event_auth_init hook
+         * @return
+         */
+        public function event_auth_init() {
+            if ( !$this->is_active ) {
+                return;
+            }
+
+            do_action( 'event_auth_init', $this );
+        }
+
+        /**
          * payment gateways
          * @return type Auth_Payment_Gateways
          */

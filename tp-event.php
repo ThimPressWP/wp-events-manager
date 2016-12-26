@@ -57,9 +57,10 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * @since 2.0
 		 */
 		public function init_hooks() {
+			// plugin init
+			add_action( 'init', array( $this, 'tp_event_init' ), 0 );
 			// plugin loaded
 			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
-
 			// event auth loaded
 			add_action( 'event_auth_loaded', array( $this, 'event_auth_loaded' ), 1 );
 		}
@@ -67,7 +68,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		/**
 		 * Load components when plugin loaded
 		 */
-		public function loaded(){
+		public function loaded() {
 			// load text domain
 			$this->text_domain();
 
@@ -158,6 +159,11 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function admin_notice() {
 			$this->_include( 'admin/views/notices.php' );
+		}
+
+
+		public function tp_event_init() {
+			do_action( 'tp_event_init', $this );
 		}
 
 		/**
