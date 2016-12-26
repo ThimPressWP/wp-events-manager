@@ -81,27 +81,10 @@ if ( !class_exists( 'TP_Event_Authentication' ) ) {
          * @since 1.0.3
          */
         public function init_hooks() {
-            // plugins_loaded hook
-            add_action( 'plugins_loaded', array( $this, 'loaded' ) );
-
             // init this plugin hook
             add_action( 'init', array( $this, 'event_auth_init' ), 0 );
-            add_action( 'event_auth_loaded', array( $this, 'event_auth_loaded' ), 1 );
             register_activation_hook( plugin_basename( __FILE__ ), array( $this, 'install' ) );
             register_deactivation_hook( plugin_basename( __FILE__ ), array( $this, 'uninstall' ) );
-        }
-
-        /**
-         * load text domain
-         * include file
-         * @return null
-         */
-        public function loaded() {
-            // load text domain
-            $this->load_textdomain();
-
-            // is tp-event plugin installed and actived
-            $this->is_active();
         }
 
         /**
@@ -121,47 +104,6 @@ if ( !class_exists( 'TP_Event_Authentication' ) ) {
             if ( function_exists( 'event_create_page' ) ) {
                 $this->_include( 'class-auth-install.php' );
                 Auth_Install::uninstall();
-            }
-        }
-
-        /**
-         * load text domain
-         * @return boolean
-         */
-        public function load_textdomain() {
-            // current locale
-            $locale = get_locale();
-
-            $default = WP_LANG_DIR . '/plugins/tp-event-auth-' . $locale . '.mo';
-            $mofile = $plugin = TP_EVENT_AUTH_PATH . '/languages/tp-event-auth-' . $locale . '.mo';
-
-            if ( file_exists( $default ) ) {
-                $mofile = $default;
-            }
-
-            load_textdomain( 'tp-event-auth', $mofile );
-        }
-
-        /**
-         * is_active TP Event
-         * @return boolean
-         */
-        public function is_active() {
-
-            if ( !function_exists( 'get_plugin_data' ) ) {
-                require_once ABSPATH . '/wp-admin/includes/plugin.php';
-            }
-
-            if ( class_exists( 'TP_Event' ) && ( is_plugin_active( 'tp-event/tp-event.php' ) || is_plugin_active( 'wp-event/wp-event.php' ) ) ) {
-                $this->is_active = true;
-            }
-
-            if ( !$this->is_active ) {
-                add_action( 'admin_notices', array( $this, 'admin_notice' ) );
-            } else {
-                $this->includes();
-
-                do_action( 'event_auth_loaded', $this );
             }
         }
 
@@ -200,17 +142,6 @@ if ( !class_exists( 'TP_Event_Authentication' ) ) {
             }
 
             do_action( 'event_auth_init', $this );
-        }
-
-        /**
-         * event auth loaded hook
-         * @return initialize object Auth, Loader, Settings
-         */
-        public function event_auth_loaded() {
-            /**
-             * session
-             */
-            $this->session = new Auth_Session();
         }
 
         /**
