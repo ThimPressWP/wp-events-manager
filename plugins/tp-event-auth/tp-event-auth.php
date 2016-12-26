@@ -153,14 +153,6 @@ if ( !class_exists( 'TP_Event_Authentication' ) ) {
         }
 
         /**
-         * admin notice
-         * @return message string
-         */
-        public function admin_notice() {
-            $this->_include( 'admin/views/notices.php' );
-        }
-
-        /**
          * enqueue asset files
          * @param type $hook
          */

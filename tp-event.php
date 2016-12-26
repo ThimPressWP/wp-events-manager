@@ -71,6 +71,11 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			// load event auth
 			do_action( 'event_auth_loaded', $this );
+
+			// add notice
+			$this->admin_notice();
+
+
 		}
 
 		/**
@@ -143,6 +148,14 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function event_auth_loaded() {
 			$this->_session = new Auth_Session();
+		}
+
+		/**
+		 * admin notice
+		 * @return string
+		 */
+		public function admin_notice() {
+			$this->_include( 'admin/views/notices.php' );
 		}
 
 		/**
