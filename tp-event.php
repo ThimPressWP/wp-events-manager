@@ -10,137 +10,160 @@
  */
 
 if ( !defined( 'ABSPATH' ) )
-    exit();
+	exit();
 
 /**
  * Event class
  */
 if ( !class_exists( 'TP_Event' ) ) {
 
-    final class TP_Event {
+	final class TP_Event {
 
-        private static $instance = null;
+		private static $_instance = null;
 
-        public function __construct() {
-            $this->define_constants();
-            $this->includes();
-            $this->init_hooks();
-        }
+		public $_session = null;
 
-        /**
-         * Define Plugins Constants
-         */
-        public function define_constants() {
-            $this->set_define( 'TP_EVENT_PATH', plugin_dir_path( __FILE__ ) );
-            $this->set_define( 'TP_EVENT_URI', plugin_dir_url( __FILE__ ) );
-            $this->set_define( 'TP_EVENT_INC', TP_EVENT_PATH . 'inc/' );
-            $this->set_define( 'TP_EVENT_INC_URI', TP_EVENT_URI . 'inc/' );
-            $this->set_define( 'TP_EVENT_ASSETS_URI', TP_EVENT_URI . 'assets' );
-            $this->set_define( 'TP_EVENT_LIB_URI', TP_EVENT_INC_URI . 'libraries/' );
-            $this->set_define( 'TP_EVENT_VER', '1.5' );
-            $this->set_define( 'TP_EVENT_MAIN_FILE', __FILE__ );
-        }
+		public function __construct() {
+			$this->define_constants();
+			$this->includes();
+			$this->init_hooks();
+		}
 
-        /**
-         * single define
-         */
-        public function set_define( $name = '', $value = '' ) {
-            if ( $name && !defined( $name ) ) {
-                define( $name, $value );
-            }
-        }
+		/**
+		 * Define Plugins Constants
+		 */
+		public function define_constants() {
+			$this->set_define( 'TP_EVENT_PATH', plugin_dir_path( __FILE__ ) );
+			$this->set_define( 'TP_EVENT_URI', plugin_dir_url( __FILE__ ) );
+			$this->set_define( 'TP_EVENT_INC', TP_EVENT_PATH . 'inc/' );
+			$this->set_define( 'TP_EVENT_INC_URI', TP_EVENT_URI . 'inc/' );
+			$this->set_define( 'TP_EVENT_ASSETS_URI', TP_EVENT_URI . 'assets' );
+			$this->set_define( 'TP_EVENT_LIB_URI', TP_EVENT_INC_URI . 'libraries/' );
+			$this->set_define( 'TP_EVENT_VER', '1.5' );
+			$this->set_define( 'TP_EVENT_MAIN_FILE', __FILE__ );
+		}
 
-        /**
-         * Init hooks plugins
-         * @since 1.4.1.4
-         */
-        public function init_hooks() {
-            add_action( 'plugins_loaded', array( $this, 'text_domain' ) );
-        }
+		/**
+		 * single define
+		 */
+		public function set_define( $name = '', $value = '' ) {
+			if ( $name && !defined( $name ) ) {
+				define( $name, $value );
+			}
+		}
 
-        /**
-         * include file
-         *
-         * @param  array or string
-         *
-         * @return null
-         */
-        public function includes() {
+		/**
+		 * Init hooks plugins
+		 * @since 1.4.1.4
+		 */
+		public function init_hooks() {
+			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
 
-            $this->_include( 'inc/class-event-autoloader.php' );
-            $this->_include( 'inc/class-event-assets.php' );
-            $this->_include( 'inc/core-functions.php' );
-            $this->_include( 'inc/class-event-setting.php' );
+			add_action( 'event_auth_loaded', array( $this, 'event_auth_loaded' ), 1 );
+		}
 
-            $this->_include( 'inc/class-event-custom-post-types.php' );
+		/**
+		 * Load components when plugin loaded
+		 */
+		public function loaded(){
+			// load text domain
+			$this->text_domain();
 
-            if ( is_admin() ) {
-                $this->_include( 'inc/admin/class-event-admin.php' );
-            } else {
-                $this->_include( 'inc/class-event-template.php' );
-                $this->_include( 'inc/class-event-frontend-scripts.php' );
-                $this->_include( 'inc/shortcodes/class-event-shortcode-countdown.php' );
-            }
+			// load event auth
+			do_action( 'event_auth_loaded', $this );
+		}
 
-            $this->_include( 'inc/class-event-install.php' );
-        }
+		/**
+		 * include file
+		 *
+		 * @param  array || string
+		 *
+		 * @return null
+		 */
+		public function includes() {
 
-        /**
-         * Include single file
-         * @param type $file
-         */
-        public function _include( $file = null ) {
-            if ( is_array( $file ) ) {
-                foreach ( $file as $key => $f ) {
-                    if ( file_exists( TP_EVENT_PATH . $f ) )
-                        require_once TP_EVENT_PATH . $f;
-                }
-            } else {
-                if ( file_exists( TP_EVENT_PATH . $file ) )
-                    require_once TP_EVENT_PATH . $file;
-                elseif ( file_exists( $file ) )
-                    require_once $file;
-            }
-        }
+			$this->_include( 'inc/class-event-autoloader.php' );
+			$this->_include( 'inc/class-event-assets.php' );
+			$this->_include( 'inc/core-functions.php' );
+			$this->_include( 'inc/class-event-setting.php' );
 
-        /**
-         * load text domain
-         * @return null
-         */
-        public function text_domain() {
-            // Get mo file
-            $text_domain = 'tp-event';
-            $locale = apply_filters( 'plugin_locale', get_locale(), $text_domain );
-            $mo_file = $text_domain . '-' . $locale . '.mo';
-            // Check mo file global
-            $mo_global = WP_LANG_DIR . '/plugins/' . $mo_file;
-            // Load translate file
-            if ( file_exists( $mo_global ) ) {
-                load_textdomain( $text_domain, $mo_global );
-            } else {
-                load_textdomain( $text_domain, TP_EVENT_PATH . '/languages/' . $mo_file );
-            }
-        }
+			$this->_include( 'inc/class-event-custom-post-types.php' );
 
-        /**
-         * get instance class
-         * @return TP_Event 
-         */
-        public static function instance() {
-            if ( !empty( self::$instance ) ) {
-                return self::$instance;
-            }
-            return self::$instance = new self();
-        }
+			if ( is_admin() ) {
+				$this->_include( 'inc/admin/class-event-admin.php' );
+			} else {
+				$this->_include( 'inc/class-event-template.php' );
+				$this->_include( 'inc/class-event-frontend-scripts.php' );
+				$this->_include( 'inc/shortcodes/class-event-shortcode-countdown.php' );
+			}
 
-    }
+			$this->_include( 'inc/class-event-install.php' );
+		}
 
-    if ( !function_exists( 'tp_event' ) ) {
+		/**
+		 * Include single file
+		 *
+		 * @param $file
+		 */
+		public function _include( $file = null ) {
+			if ( is_array( $file ) ) {
+				foreach ( $file as $key => $f ) {
+					if ( file_exists( TP_EVENT_PATH . $f ) )
+						require_once TP_EVENT_PATH . $f;
+				}
+			} else {
+				if ( file_exists( TP_EVENT_PATH . $file ) )
+					require_once TP_EVENT_PATH . $file;
+				elseif ( file_exists( $file ) )
+					require_once $file;
+			}
+		}
 
-        function tp_event() {
-            return TP_Event::instance();
-        }
+		/**
+		 * load text domain
+		 * @return null
+		 */
+		public function text_domain() {
+			// Get mo file
+			$text_domain = 'tp-event';
+			$locale      = apply_filters( 'plugin_locale', get_locale(), $text_domain );
+			$mo_file     = $text_domain . '-' . $locale . '.mo';
+			// Check mo file global
+			$mo_global = WP_LANG_DIR . '/plugins/' . $mo_file;
+			// Load translate file
+			if ( file_exists( $mo_global ) ) {
+				load_textdomain( $text_domain, $mo_global );
+			} else {
+				load_textdomain( $text_domain, TP_EVENT_PATH . '/languages/' . $mo_file );
+			}
+		}
 
-    }
-    tp_event();
+		/**
+		 * Session
+		 */
+		public function event_auth_loaded() {
+			$this->_session = new Auth_Session();
+		}
+
+		/**
+		 * get instance class
+		 * @return TP_Event
+		 */
+		public static function instance() {
+			if ( !empty( self::$_instance ) ) {
+				return self::$_instance;
+			}
+			return self::$_instance = new self();
+		}
+
+	}
+
+	if ( !function_exists( 'tp_event' ) ) {
+
+		function tp_event() {
+			return TP_Event::instance();
+		}
+
+	}
+	tp_event();
 }
