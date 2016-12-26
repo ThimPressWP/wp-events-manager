@@ -57,8 +57,10 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * @since 2.0
 		 */
 		public function init_hooks() {
+			// plugin loaded
 			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
 
+			// event auth loaded
 			add_action( 'event_auth_loaded', array( $this, 'event_auth_loaded' ), 1 );
 		}
 
