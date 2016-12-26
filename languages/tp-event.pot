@@ -1,0 +1,354 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-13 07:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:26
+msgctxt "post type general name"
+msgid "Events"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:27
+msgctxt "post type singular name"
+msgid "Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:28
+msgctxt "admin menu"
+msgid "Events"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:29
+msgctxt "add new on admin bar"
+msgid "Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:30
+msgctxt "event"
+msgid "Add New"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:31
+msgid "Add New Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:32
+msgid "New Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:33
+msgid "Edit Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:34
+msgid "View Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:35
+msgid "Events"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:36
+msgid "Search Events"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:37
+msgid "Parent Events:"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:38
+msgid "No events found."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:39
+msgid "No events found in Trash."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:44
+msgid "Event post type."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:50
+msgctxt "URL slug"
+msgid "events"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:103
+msgid "Start"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:104
+msgid "End"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:105
+msgid "Author"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:106
+msgid "Status"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:107
+msgid "Date"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:177 
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:180 
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:183
+msgid "Event updated."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:178
+msgid "Custom field updated."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:179
+msgid "Custom field deleted."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:182
+msgid "Book restored to revision from %s"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:184
+msgid "Event saved."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:185
+msgid "Event submitted."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:187
+msgid "Event scheduled for: <strong>%1$s</strong>."
+msgstr ""
+
+#. translators: Publish box date format, see http://php.net/date
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:189
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:191
+msgid "Event draft updated."
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:197
+msgid "View event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-custom-post-types.php:203
+msgid "Preview event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-roles.php:15
+msgid "Event Manager"
+msgstr ""
+
+#: /home/svn/tp-event/inc/class-event-roles.php:45
+msgid "Event Editor"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:361
+msgid "Years"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:362
+msgid "Months"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:363
+msgid "Weeks"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:364
+msgid "Days"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:365
+msgid "Hours"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:366
+msgid "Minutes"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:367
+msgid "Seconds"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:370
+msgid "Year"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:371
+msgid "Month"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:372
+msgid "Week"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:373
+msgid "Day"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:374
+msgid "Hour"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:375
+msgid "Minute"
+msgstr ""
+
+#: /home/svn/tp-event/inc/core-functions.php:376
+msgid "Second"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:33 
+#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:33
+msgid "TP Events"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:40
+msgid "TP Events Settings"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:40
+msgid "Settings"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/class-event-admin-metaboxes.php:23
+msgid "Event Settings"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/class-event-admin-settings.php:53
+msgid "Your settings have been saved."
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/class-event-admin-settings.php:328
+msgid "---Select page---"
+msgstr ""
+
+#. Base ID
+#: /home/svn/tp-event/inc/widgets/class-event-widget-countdown.php:14
+msgid "Countdown Widget Post Type Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/widgets/class-event-widget-countdown.php:15
+msgid "Beautifull Countdown"
+msgstr ""
+
+#: /home/svn/tp-event/templates/loop/excerpt.php:12
+msgid "View Detail"
+msgstr ""
+
+#: /home/svn/tp-event/templates/loop/location.php:11
+msgid "Location: "
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:36
+msgid "Please make sure end time after start time"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:110 
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:111 
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:127 
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:128
+msgid "Remove time"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:110 
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:111 
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:127 
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:128
+msgid "Use time"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:114
+msgid "Date Start"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:122
+msgid "Time Start"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:132
+msgid "Date End"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:140
+msgid "Time End"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:146 
+#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:38
+msgid "Shortcode"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:23
+msgid "General"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:37
+msgid "General Options"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:38
+msgid "General options for system."
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:43
+msgid "Event Archive Page"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:44
+msgid "Select page show events list."
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/views/html-admin-settings.php:40
+msgid "Save changes"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:6
+msgid "Start Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:17
+msgid "End Event"
+msgstr ""
+
+#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:28
+msgid "Location"
+msgstr ""
+
+#. Name of the plugin
+msgid "Thim Events"
+msgstr ""
+
+#. Description of the plugin
+msgid "Thim event - countdown"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://thimpress.com/thim-event"
+msgstr ""
+
+#. Author of the plugin
+msgid "ThimPress"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://thimpress.com"
+msgstr ""
