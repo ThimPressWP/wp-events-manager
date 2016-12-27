@@ -27,8 +27,8 @@ class Event_Frontend_Assets {
         Event_Assets::register_style( 'thim-event-owl-carousel-css', TP_EVENT_LIB_URI . '/owl-carousel/css/owl.carousel.css' );
 
         // magnific-popup
-		Event_Assets::register_style( 'tp-event-auth-magnific-popup', TP_EVENT_ASSETS_URI . '/magnific-popup/magnific-popup.css', array() );
-		Event_Assets::register_script( 'tp-event-auth-popup', TP_EVENT_ASSETS_URI . '/magnific-popup/jquery.magnific-popup.js', array(), TP_EVENT_VER, true );
+		Event_Assets::register_style( 'tp-event-auth-magnific-popup', TP_EVENT_LIB_URI . '/magnific-popup/css/magnific-popup.css', array() );
+		Event_Assets::register_script( 'tp-event-auth-popup', TP_EVENT_LIB_URI . '/magnific-popup/js/jquery.magnific-popup.min.js', array(), TP_EVENT_VER, true );
 
         // events
         Event_Assets::register_script( 'thim-event', TP_EVENT_ASSETS_URI . '/js/frontend/events.js' );
