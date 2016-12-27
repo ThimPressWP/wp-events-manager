@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) {
 event_auth_print_notices();
 
 if ( !is_user_logged_in() ) {
-    printf( __( 'You are not <a href="%s">login</a>', 'tp-event' ), event_auth_login_url() );
+    printf( __( 'You are not <a href="%s">login</a>', 'tp-event' ), tp_event_login_url() );
     return;
 }
 

@@ -7,7 +7,7 @@ $event = new Auth_Event( $event_id );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 ?>
 
-<?php if ( $user_reg == 0 || event_get_option( 'email_register_times' ) === 'many' ) : ?>
+<?php if ( $user_reg == 0 || tp_event_get_option( 'email_register_times' ) === 'many' ) : ?>
 
     <div class="event_register_area">
 
@@ -15,7 +15,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 
         <form name="event_register" class="event_register" method="POST">
 
-            <?php if ( !$event->is_free() || event_get_option( 'email_register_times' ) === 'many' ) : ?>
+            <?php if ( !$event->is_free() || tp_event_get_option( 'email_register_times' ) === 'many' ) : ?>
                 <!--allow set slot-->
                 <div class="event_auth_form_field">
                     <label for="event_register_qty"><?php _e( 'Quantity', 'tp-event' ) ?></label>

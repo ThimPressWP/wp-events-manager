@@ -87,7 +87,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * install plugin hook
 		 */
 		public function install() {
-			if ( function_exists( 'event_create_page' ) ) {
+			if ( function_exists( 'tp_event_create_page' ) ) {
 				$this->_include( 'inc/class-auth-install.php' );
 				Auth_Install::install();
 			}
@@ -97,7 +97,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * uninstall plugin hook
 		 */
 		public function uninstall() {
-			if ( function_exists( 'event_create_page' ) ) {
+			if ( function_exists( 'tp_event_create_page' ) ) {
 				$this->_include( 'inc/class-auth-install.php' );
 				Auth_Install::uninstall();
 			}

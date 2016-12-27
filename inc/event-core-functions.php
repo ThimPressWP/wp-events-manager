@@ -114,6 +114,14 @@ if ( !function_exists( 'tp_event_get_template_part' ) ) {
 
 }
 
+if ( !function_exists( 'tp_event_get_template_content' ) ) {
+	function tp_event_get_template_content( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+		ob_start();
+		tp_event_get_template( $template_name, $args, $template_path, $default_path );
+		return ob_get_clean();
+	}
+}
+
 if ( !function_exists( 'tp_event_locate_template' ) ) {
 
 	function tp_event_locate_template( $template_name, $template_path = '', $default_path = '' ) {
@@ -362,47 +370,49 @@ if ( !function_exists( 'tp_event_loop_event_location' ) ) {
 }
 
 // l18n
-function tp_event_l18n() {
-	return apply_filters( 'thimpress_event_l18n', array(
-		'gmt_offset'      => esc_js( get_option( 'gmt_offset' ) ),
-		'current_time'    => esc_js( date( 'M j, Y H:i:s O', current_time( 'timestamp', 1 ) ) ),
-		'l18n'            => array(
-			'labels'  => array(
-				__( 'Years', 'tp-event' ),
-				__( 'Months', 'tp-event' ),
-				__( 'Weeks', 'tp-event' ),
-				__( 'Days', 'tp-event' ),
-				__( 'Hours', 'tp-event' ),
-				__( 'Minutes', 'tp-event' ),
-				__( 'Seconds', 'tp-event' ),
+if ( !function_exists( 'tp_event_l18n' ) ) {
+	function tp_event_l18n() {
+		return apply_filters( 'thimpress_event_l18n', array(
+			'gmt_offset'      => esc_js( get_option( 'gmt_offset' ) ),
+			'current_time'    => esc_js( date( 'M j, Y H:i:s O', current_time( 'timestamp', 1 ) ) ),
+			'l18n'            => array(
+				'labels'  => array(
+					__( 'Years', 'tp-event' ),
+					__( 'Months', 'tp-event' ),
+					__( 'Weeks', 'tp-event' ),
+					__( 'Days', 'tp-event' ),
+					__( 'Hours', 'tp-event' ),
+					__( 'Minutes', 'tp-event' ),
+					__( 'Seconds', 'tp-event' ),
+				),
+				'labels1' => array(
+					__( 'Year', 'tp-event' ),
+					__( 'Month', 'tp-event' ),
+					__( 'Week', 'tp-event' ),
+					__( 'Day', 'tp-event' ),
+					__( 'Hour', 'tp-event' ),
+					__( 'Minute', 'tp-event' ),
+					__( 'Second', 'tp-event' ),
+				)
 			),
-			'labels1' => array(
-				__( 'Year', 'tp-event' ),
-				__( 'Month', 'tp-event' ),
-				__( 'Week', 'tp-event' ),
-				__( 'Day', 'tp-event' ),
-				__( 'Hour', 'tp-event' ),
-				__( 'Minute', 'tp-event' ),
-				__( 'Second', 'tp-event' ),
-			)
-		),
-		'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-		'something_wrong' => __( 'Something went wrong.', 'tp-event' ),
-		'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
-	) );
+			'ajaxurl'         => admin_url( 'admin-ajax.php' ),
+			'something_wrong' => __( 'Something went wrong.', 'tp-event' ),
+			'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
+		) );
+	}
 }
 
-if ( !function_exists( 'event_get_option' ) ) {
+if ( !function_exists( 'tp_event_get_option' ) ) {
 
 	/**
-	 * event_get_option
+	 * tp_event_get_option
 	 *
 	 * @param type $name
 	 * @param type $default
 	 *
 	 * @return type
 	 */
-	function event_get_option( $name, $default = null ) {
+	function tp_event_get_option( $name, $default = null ) {
 		if ( strpos( $name, 'thimpress_events_' ) !== 0 ) {
 			$name = 'thimpress_events_' . $name;
 		}
@@ -411,95 +421,100 @@ if ( !function_exists( 'event_get_option' ) ) {
 
 }
 
-if ( !function_exists( 'event_update_option' ) ) {
+if ( !function_exists( 'tp_event_update_option' ) ) {
 
 	/**
-	 * event_get_option
+	 * tp_event_get_option
 	 *
 	 * @param type $name
 	 * @param type $default
 	 *
 	 * @return type
 	 */
-	function event_update_option( $name, $default = null ) {
+	function tp_event_update_option( $name, $default = null ) {
 		return update_option( 'thimpress_events_' . $name, $default );
 	}
 
 }
 
-function event_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
-	global $wpdb;
+/**
+ * Create Wordpress Page
+ */
+if ( !function_exists( 'tp_event_create_page' ) ) {
+	function tp_event_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
+		global $wpdb;
 
-	$option_value = event_get_option( $option );
+		$option_value = tp_event_get_option( $option );
 
-	if ( $option_value > 0 ) {
-		$page_object = get_post( $option_value );
+		if ( $option_value > 0 ) {
+			$page_object = get_post( $option_value );
 
-		if ( $page_object && 'page' === $page_object->post_type && !in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ) ) ) {
-			// Valid page is already in place
-			return $page_object->ID;
+			if ( $page_object && 'page' === $page_object->post_type && !in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ) ) ) {
+				// Valid page is already in place
+				return $page_object->ID;
+			}
 		}
-	}
 
-	if ( strlen( $page_content ) > 0 ) {
-		// Search for an existing page with the specified page content (typically a shortcode)
-		$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
-	} else {
-		// Search for an existing page with the specified page slug
-		$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
-	}
+		if ( strlen( $page_content ) > 0 ) {
+			// Search for an existing page with the specified page content (typically a shortcode)
+			$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
+		} else {
+			// Search for an existing page with the specified page slug
+			$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
+		}
 
-	$valid_page_found = apply_filters( 'event_auth_create_page_id', $valid_page_found, $slug, $page_content );
+		$valid_page_found = apply_filters( 'event_auth_create_page_id', $valid_page_found, $slug, $page_content );
 
-	if ( $valid_page_found ) {
+		if ( $valid_page_found ) {
+			if ( $option ) {
+				tp_event_update_option( $option, $valid_page_found );
+			}
+			return $valid_page_found;
+		}
+
+		// Search for a matching valid trashed page
+		if ( strlen( $page_content ) > 0 ) {
+			// Search for an existing page with the specified page content (typically a shortcode)
+			$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
+		} else {
+			// Search for an existing page with the specified page slug
+			$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_name = %s LIMIT 1;", $slug ) );
+		}
+
+		if ( $trashed_page_found ) {
+			$page_id   = $trashed_page_found;
+			$page_data = array(
+				'ID'          => $page_id,
+				'post_status' => 'publish',
+			);
+			wp_update_post( $page_data );
+		} else {
+			$page_data = array(
+				'post_status'    => 'publish',
+				'post_type'      => 'page',
+				'post_author'    => 1,
+				'post_name'      => $slug,
+				'post_title'     => $page_title,
+				'post_content'   => $page_content,
+				'post_parent'    => $post_parent,
+				'comment_status' => 'closed'
+			);
+			$page_id   = wp_insert_post( $page_data );
+		}
+
 		if ( $option ) {
-			event_update_option( $option, $valid_page_found );
+			tp_event_update_option( $option, $page_id );
 		}
-		return $valid_page_found;
-	}
 
-	// Search for a matching valid trashed page
-	if ( strlen( $page_content ) > 0 ) {
-		// Search for an existing page with the specified page content (typically a shortcode)
-		$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
-	} else {
-		// Search for an existing page with the specified page slug
-		$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_name = %s LIMIT 1;", $slug ) );
+		return $page_id;
 	}
-
-	if ( $trashed_page_found ) {
-		$page_id   = $trashed_page_found;
-		$page_data = array(
-			'ID'          => $page_id,
-			'post_status' => 'publish',
-		);
-		wp_update_post( $page_data );
-	} else {
-		$page_data = array(
-			'post_status'    => 'publish',
-			'post_type'      => 'page',
-			'post_author'    => 1,
-			'post_name'      => $slug,
-			'post_title'     => $page_title,
-			'post_content'   => $page_content,
-			'post_parent'    => $post_parent,
-			'comment_status' => 'closed'
-		);
-		$page_id   = wp_insert_post( $page_data );
-	}
-
-	if ( $option ) {
-		event_update_option( $option, $page_id );
-	}
-
-	return $page_id;
 }
 
-if ( !function_exists( 'event_get_page_id' ) ) {
+if ( !function_exists( 'tp_event_get_page_id' ) ) {
 
-	function event_get_page_id( $name = null ) {
+	function tp_event_get_page_id( $name = null ) {
 
-		return apply_filters( 'event_get_page_id', event_get_option( $name . '_page_id' ) );
+		return apply_filters( 'tp_event_get_page_id', tp_event_get_option( $name . '_page_id' ) );
 	}
 
 }
@@ -532,5 +547,4 @@ if ( !function_exists( 'event_schedule_update_status' ) ) {
 			wp_update_post( array( 'ID' => $post_id, 'post_status' => $status ) );
 		}
 	}
-
 }

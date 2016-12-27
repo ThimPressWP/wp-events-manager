@@ -11,7 +11,7 @@ if ( !$booking || !$user ) {
 <h2><?php printf( __( 'Hello %s!', 'tp-event' ), $user->data->display_name ); ?></h2>
 <?php
 printf(
-        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<br /><a href="%s">Your account.</a>', 'tp-event' ), get_permalink( $booking->event_id ), event_auth_account_url()
+        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<br /><a href="%s">Your account.</a>', 'tp-event' ), get_permalink( $booking->event_id ), tp_event_account_url()
 );
 ?>
 

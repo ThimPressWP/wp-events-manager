@@ -33,20 +33,20 @@ class Auth_Authentication {
 
     public static function auth_init() {
 
-        self::$login_url = event_auth_login_url();
+        self::$login_url = tp_event_login_url();
 
-        self::$register_url = event_auth_register_url();
+        self::$register_url = tp_event_register_url();
 
-        self::$forgot_url = event_auth_forgot_password_url();
+        self::$forgot_url = tp_event_forgot_password_url();
 
-        self::$account_url = event_auth_account_url();
+        self::$account_url = tp_event_account_url();
 
-        self::$reset_url = event_auth_reset_password_url();
+        self::$reset_url = tp_event_reset_password_url();
     }
 
     // redirect logout
     public static function wp_logout() {
-        event_auth_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'tp-event' ) ) );
+        tp_event_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'tp-event' ) ) );
         wp_safe_redirect( self::$login_url );
         exit();
     }
@@ -94,7 +94,7 @@ class Auth_Authentication {
 
     // shortcode login form
     public static function event_auth_login( $atts = array(), $content = null ) {
-        if ( !( $login_page_id = tpe_auth_get_page_id( 'login' ) ) ) {
+        if ( !( $login_page_id = tp_event_get_page_id( 'login' ) ) ) {
             return;
         }
 
@@ -106,7 +106,7 @@ class Auth_Authentication {
 
     // shortcode register form
     public static function event_auth_register( $atts = array(), $content = null ) {
-        if ( !( $register_page_id = tpe_auth_get_page_id( 'register' ) ) ) {
+        if ( !( $register_page_id = tp_event_get_page_id( 'register' ) ) ) {
             return;
         }
 
@@ -133,14 +133,14 @@ class Auth_Authentication {
     // shortcode lostpassword
     public static function forgot_pass( $atts = array(), $content = null ) {
 
-        if ( !tpe_auth_get_page_id( 'forgot_pass' ) ) {
+        if ( !tp_event_get_page_id( 'forgot_pass' ) ) {
             return;
         }
 
         $checkemail = isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false;
 
         if ( $checkemail ) {
-            event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
+            tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
         } else {
             tp_event_get_template( 'auths/form-forgot-password.php' );
         }
@@ -148,7 +148,7 @@ class Auth_Authentication {
 
     // shortcode lostpassword
     public static function reset_password( $atts = array(), $content = null ) {
-        if ( !tpe_auth_get_page_id( 'reset_password' ) ) {
+        if ( !tp_event_get_page_id( 'reset_password' ) ) {
             return;
         }
         $atts = wp_parse_args( $atts, array(
@@ -163,7 +163,7 @@ class Auth_Authentication {
                 ) );
 
         if ( $atts['checkemail'] ) {
-            event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
+            tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
         }
 
         tp_event_get_template( 'auths/form-reset-password.php', array( 'atts' => $atts ) );
@@ -176,8 +176,8 @@ class Auth_Authentication {
             'post_type' => 'event_auth_book',
             'posts_per_page' => -1,
             'order' => 'DESC',
-            'posts_per_page'    => event_get_option( 'payment_litmit_showup', 10 ),
-            'offset'    => ( ( get_query_var('paged') - 1 ) > 0 ? ( get_query_var('paged') - 1 ) : 0 ) * event_get_option( 'payment_litmit_showup', 10 ),
+            'posts_per_page'    => tp_event_get_option( 'payment_litmit_showup', 10 ),
+            'offset'    => ( ( get_query_var('paged') - 1 ) > 0 ? ( get_query_var('paged') - 1 ) : 0 ) * tp_event_get_option( 'payment_litmit_showup', 10 ),
             'meta_query' => array(
                 array(
                     'key' => 'ea_booking_user_id',
@@ -196,7 +196,7 @@ class Auth_Authentication {
         }
 
         global $post;
-        if ( is_user_logged_in() && in_array( $post->ID, array( tpe_auth_get_page_id( 'login' ), tpe_auth_get_page_id( 'register' ) ) ) ) {
+        if ( is_user_logged_in() && in_array( $post->ID, array( tp_event_get_page_id( 'login' ), tp_event_get_page_id( 'register' ) ) ) ) {
             wp_safe_redirect( self::$account_url );
             exit();
         }
@@ -226,7 +226,7 @@ class Auth_Authentication {
                 if ( event_auth_is_ajax() ) {
                     $fields[$code] = $message[0];
                 } else {
-                    event_auth_add_notice( 'error', $message[0] );
+                    tp_event_add_notice( 'error', $message[0] );
                 }
             }
             if ( event_auth_is_ajax() ) {
@@ -240,7 +240,7 @@ class Auth_Authentication {
             }
 
             // not enable option 'register_notify' login user now
-            $send_notify = event_get_option( 'register_notify', true );
+            $send_notify = tp_event_get_option( 'register_notify', true );
             if ( !$send_notify ) {
                 wp_set_auth_cookie( $user_id, true, is_ssl() );
             } else {
@@ -286,15 +286,15 @@ class Auth_Authentication {
             $validation_error = apply_filters( 'event_auth_process_login_errors', $validation_error, $username, $password );
 
             if ( $validation_error->get_error_code() ) {
-                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . $validation_error->get_error_message() );
+                tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . $validation_error->get_error_message() );
             }
 
             if ( empty( $username ) ) {
-                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'Username is required.', 'tp-event' ) );
+                tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'Username is required.', 'tp-event' ) );
             }
 
             if ( empty( $_POST['user_pass'] ) ) {
-                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'Password is required.', 'tp-event' ) );
+                tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'Password is required.', 'tp-event' ) );
             }
 
             if ( is_email( $username ) && apply_filters( 'event_auth_get_username_from_email', true ) ) {
@@ -303,7 +303,7 @@ class Auth_Authentication {
                 if ( isset( $user->user_login ) ) {
                     $creds['user_login'] = $user->user_login;
                 } else {
-                    event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'tp-event' ) );
+                    tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'tp-event' ) );
                 }
             } else {
                 $creds['user_login'] = $username;
@@ -320,12 +320,12 @@ class Auth_Authentication {
                     $message = $user->get_error_message();
                     $message = str_replace( wp_lostpassword_url(), self::$forgot_url, $message );
                     $message = str_replace( '<strong>' . esc_html( $creds['user_login'] ) . '</strong>', '<strong>' . esc_html( $username ) . '</strong>', $message );
-                    event_auth_add_notice( 'error', $message );
+                    tp_event_add_notice( 'error', $message );
 
                     // break
                     throw new Exception;
                 } else {
-                    event_auth_add_notice( 'success', __( 'You have logged in', 'tp-event' ) );
+                    tp_event_add_notice( 'success', __( 'You have logged in', 'tp-event' ) );
 
                     if ( !defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
                         wp_redirect( apply_filters( 'event_auth_login_redirect', $redirect, $user ) );
@@ -343,7 +343,7 @@ class Auth_Authentication {
             }
         } catch ( Exception $ex ) {
             if ( $ex ) {
-                event_auth_add_notice( 'error', $ex->getMessage() );
+                tp_event_add_notice( 'error', $ex->getMessage() );
             }
         }
 

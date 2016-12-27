@@ -78,7 +78,7 @@ class Auth_Install {
 		);
 
 		foreach ( $pages as $name => $page ) {
-			event_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? event_get_page_id( $page['parent'] ) : '' );
+			tp_event_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? tp_event_get_page_id( $page['parent'] ) : '' );
 		}
 	}
 

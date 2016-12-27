@@ -122,7 +122,7 @@ class Event_Admin_Settings {
 
                 case 'select':
                 case 'multiselect':
-                    $selected = event_get_option( $field['id'], isset( $field['default'] ) ? $field['default'] : array()  );
+                    $selected = tp_event_get_option( $field['id'], isset( $field['default'] ) ? $field['default'] : array()  );
                     ?>
                     <tr valign="top">
                         <th scope="row">
@@ -159,7 +159,7 @@ class Event_Admin_Settings {
                 case 'number':
                 case 'email':
                 case 'password':
-                    $value = event_get_option( $field['id'] );
+                    $value = tp_event_get_option( $field['id'] );
                     ?>
                     <tr valign="top">
                         <th scope="row">
@@ -193,7 +193,7 @@ class Event_Admin_Settings {
                     break;
 
                 case 'checkbox':
-                    $val = event_get_option( $field['id'] );
+                    $val = tp_event_get_option( $field['id'] );
                     ?>
                     <tr valign="top"<?php echo isset( $field['trclass'] ) ? ' class="' . implode( '', $field['trclass'] ) . '"' : '' ?>>
                         <th scope="row">
@@ -216,7 +216,7 @@ class Event_Admin_Settings {
                     break;
 
                 case 'radio':
-                    $selected = event_get_option( $field['id'], isset( $field['default'] ) ? $field['default'] : ''  );
+                    $selected = tp_event_get_option( $field['id'], isset( $field['default'] ) ? $field['default'] : ''  );
                     ?>
                     <tr valign="top">
                         <th scope="row">
@@ -247,8 +247,8 @@ class Event_Admin_Settings {
                     break;
 
                 case 'image_size':
-                    $width = event_get_option( $field['id'] . '_width', isset( $field['default']['width'] ) ? $field['default']['width'] : 270  );
-                    $height = event_get_option( $field['id'] . '_height', isset( $field['default']['height'] ) ? $field['default']['height'] : 270  );
+                    $width = tp_event_get_option( $field['id'] . '_width', isset( $field['default']['width'] ) ? $field['default']['width'] : 270  );
+                    $height = tp_event_get_option( $field['id'] . '_height', isset( $field['default']['height'] ) ? $field['default']['height'] : 270  );
                     ?>
                     <tr valign="top">
                         <th scope="row">
@@ -286,7 +286,7 @@ class Event_Admin_Settings {
                     break;
 
                 case 'textarea':
-                    $content = event_get_option( $field['id'] );
+                    $content = tp_event_get_option( $field['id'] );
                     ?>
                     <tr valign="top">
                         <th scope="row">
@@ -310,7 +310,7 @@ class Event_Admin_Settings {
                     break;
 
                 case 'select_page':
-                    $selected = event_get_option( $field['id'], 0 );
+                    $selected = tp_event_get_option( $field['id'], 0 );
                     ?>
                     <tr valign="top">
                         <th scope="row">

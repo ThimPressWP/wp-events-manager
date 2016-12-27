@@ -71,7 +71,7 @@ abstract class Auth_Abstract_Payment_Gateway {
      * @return boolean
      */
     public function is_enable() {
-        if ( event_get_option( $this->id . '_enable', 'yes' ) === 'yes' ) {
+        if ( tp_event_get_option( $this->id . '_enable', 'yes' ) === 'yes' ) {
             return $this->is_enable = true;
         }
         return $this->is_enable = false;
