@@ -130,9 +130,9 @@ class Auth_Admin_Settings {
      * @return array
      */
     public static function setting_pages( $pages = array() ) {
-        $pages[] = require_once TP_EVENT_AUTH_PATH . 'inc/admin/settings/class-auth-admin-setting-email.php';
-        $pages[] = require_once TP_EVENT_AUTH_PATH . 'inc/admin/settings/class-auth-admin-setting-checkout.php';
-        $pages[] = require_once TP_EVENT_AUTH_PATH . 'inc/admin/settings/class-auth-admin-setting-account.php';
+        $pages[] = require_once TP_EVENT_PATH . 'inc/admin/settings/class-auth-admin-setting-email.php';
+        $pages[] = require_once TP_EVENT_PATH . 'inc/admin/settings/class-auth-admin-setting-checkout.php';
+        $pages[] = require_once TP_EVENT_PATH . 'inc/admin/settings/class-auth-admin-setting-account.php';
         return $pages;
     }
 

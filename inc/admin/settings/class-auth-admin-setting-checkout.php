@@ -85,7 +85,7 @@ class Event_Admin_Setting_Checkout extends Event_Admin_Setting_Page {
      */
     public function get_sections() {
         $sections[''] = __( 'Checkout General', 'tp-event-auth' );
-        $payment_gateways = TP_Event_Authentication()->payment_gateways()->gateways;
+        $payment_gateways = TP_Event()->payment_gateways()->gateways;
         if ( $payment_gateways ) {
             foreach ( $payment_gateways as $id => $gateway ) {
                 $sections[$id] = $gateway->title;
@@ -97,7 +97,7 @@ class Event_Admin_Setting_Checkout extends Event_Admin_Setting_Page {
     public function output( $tab ) {
         global $current_section;
         if ( $current_section ) {
-            $gateways = TP_Event_Authentication()->payment_gateways()->gateways;
+            $gateways = TP_Event()->payment_gateways()->gateways;
             foreach ( $gateways as $gateway ) {
                 if ( $current_section === $gateway->id ) {
                     $fields = $gateway->admin_fields();
@@ -113,7 +113,7 @@ class Event_Admin_Setting_Checkout extends Event_Admin_Setting_Page {
     public function save() {
         global $current_section;
         if ( $current_section ) {
-            $gateways = TP_Event_Authentication()->payment_gateways()->gateways;
+            $gateways = TP_Event()->payment_gateways()->gateways;
             foreach ( $gateways as $gateway ) {
                 if ( $current_section === $gateway->id ) {
                     $fields = $gateway->admin_fields();

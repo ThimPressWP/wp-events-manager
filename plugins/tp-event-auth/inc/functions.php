@@ -261,12 +261,12 @@ if ( !function_exists( 'event_auth_get_current_url' ) ) {
 if ( !function_exists( 'event_auth_add_notice' ) ) {
     function event_auth_add_notice( $type = 'error', $msg = '' ) {
         if ( ! $msg ) return;
-        $notices = TP_Event_Authentication()->session->get( 'notices', array() );
+        $notices = TP_Event::instance()->_session->get( 'notices', array() );
         if ( ! isset( $notices[ $type ] ) ) {
             $notices[$type] = array();
         }
         $notices[$type][] = $msg;
-        TP_Event_Authentication()->session->set( 'notices', $notices );
+		TP_Event::instance()->_session->set( 'notices', $notices );
     }
 
 }
@@ -275,7 +275,7 @@ if ( !function_exists( 'event_auth_get_notice' ) ) {
 
     function event_auth_get_notice( $type = null ) {
         if ( $type ) {
-            $notices = TP_Event_Authentication()->session->get( 'notices', array() );
+            $notices = TP_Event::instance()->_session->get( 'notices', array() );
             return isset( $notices[$type] ) ? $notices[$type] : array();
         }
     }
@@ -286,7 +286,7 @@ if ( !function_exists( 'event_auth_has_notice' ) ) {
 
     function event_auth_has_notice( $type = null ) {
         if ( $type ) {
-            $notices = TP_Event_Authentication()->session->get( 'notices', array() );
+            $notices = TP_Event::instance()->_session->get( 'notices', array() );
             return isset( $notices[$type] );
         }
     }
@@ -296,12 +296,12 @@ if ( !function_exists( 'event_auth_has_notice' ) ) {
 if ( !function_exists( 'event_auth_print_notices' ) ) {
 
     function event_auth_print_notices() {
-        if ( $notices = TP_Event_Authentication()->session->get( 'notices', array() ) ) {
+        if ( $notices = TP_Event::instance()->_session->get( 'notices', array() ) ) {
             ob_start();
             tpe_auth_addon_get_template( 'messages.php', array( 'messages' => $notices ) );
             $html = ob_get_clean();
             echo $html;
-            TP_Event_Authentication()->session->set( 'notices', array() );
+			TP_Event::instance()->_session->set( 'notices', array() );
         }
 
     }
@@ -557,7 +557,7 @@ function event_auth_format_price( $price, $with_currency = true ) {
 
 // list payments gateway
 function event_auth_payments() {
-    return TP_Event_Authentication()->payment_gateways()->get_payment_gateways();
+    return TP_Event()->payment_gateways()->get_payment_gateways();
 }
 
 // list payments gateway
