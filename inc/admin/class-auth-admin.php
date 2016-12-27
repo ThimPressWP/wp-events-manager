@@ -27,7 +27,7 @@ class Auth_Admin {
 	 * @param type $hook
 	 */
 	public function register_scripts( $hook ) {
-		Event_Assets::register_style( 'event-auth-admin', TP_EVENT_AUTH_ASSETS_URI . '/css/admin.css' );
+		Event_Assets::register_style( 'event-auth-admin', TP_EVENT_ASSETS_URI . '/css/admin.css' );
 	}
 
 	public function user_menu( $menus ) {
@@ -41,7 +41,7 @@ class Auth_Admin {
 		?>
         <div class="wrap">
 
-            <h2><?php _e( 'Event Users', 'tp-event' ); ?></h2>
+            <h2><?php _e( 'Event Users', 'tp-event-auth' ); ?></h2>
 
 			<?php $user_table->prepare_items(); ?>
             <form method="post">
