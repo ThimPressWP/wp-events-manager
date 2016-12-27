@@ -47,7 +47,6 @@ if ( !class_exists( 'TP_Event_Authentication' ) ) {
 		 */
 		public function __construct() {
 			$this->define_constants();
-			$this->init_hooks();
 		}
 
 		/**
@@ -77,85 +76,6 @@ if ( !class_exists( 'TP_Event_Authentication' ) ) {
 			}
 		}
 
-		/**
-		 * Init hook
-		 * @since 1.0.3
-		 */
-		public function init_hooks() {
-			// init this plugin hook
-//			register_activation_hook( plugin_basename( __FILE__ ), array( $this, 'install' ) );
-//			register_deactivation_hook( plugin_basename( __FILE__ ), array( $this, 'uninstall' ) );
-		}
-
-		/**
-		 * install plugin hook
-		 */
-//		public function install() {
-//			if ( function_exists( 'event_create_page' ) ) {
-//				$this->_include( 'class-auth-install.php' );
-//				Auth_Install::install();
-//			}
-//		}
-
-		/**
-		 * uninstall plugin hook
-		 */
-//		public function uninstall() {
-//			if ( function_exists( 'event_create_page' ) ) {
-//				$this->_include( 'class-auth-install.php' );
-//				Auth_Install::uninstall();
-//			}
-//		}
-
-		/**
-		 * include files needed
-		 */
-		private function includes() {
-			$this->_include( 'class-auth-autoloader.php' );
-			$this->_include( 'class-auth-ajax.php' );
-			$this->_include( 'class-auth-post-types.php' );
-			$this->_include( 'functions.php' );
-			$this->_include( 'gateways/class-auth-abstract-payment-gateway.php' );
-			$this->_include( 'emails/class-auth-event-register-event.php' );
-			if ( is_admin() ) {
-
-			} else {
-				$this->_include( 'template-hook.php' );
-				$this->_include( 'class-auth-authentication.php' );
-				$this->_include( 'class-auth-shortcodes.php' );
-			}
-
-			#enqueue script
-			if ( !is_admin() ) {
-				add_action( 'event_before_enqueue_scripts', array( $this, 'register_scripts' ) );
-			}
-			$this->_include( 'class-auth-install.php' );
-		}
-
-		/**
-		 * payment gateways
-		 * @return type Auth_Payment_Gateways
-		 */
-		public function payment_gateways() {
-			return Auth_Payment_Gateways::instance();
-		}
-
-		/**
-		 * enqueue asset files
-		 *
-		 * @param type $hook
-		 */
-		public function register_scripts( $hook ) {
-			Event_Assets::register_style( 'tp-event-auth', TP_EVENT_AUTH_ASSETS_URI . '/css/site.css', array() );
-			Event_Assets::register_script( 'tp-event-auth', TP_EVENT_AUTH_ASSETS_URI . '/js/site.js', array(), TP_EVENT_AUTH_VER, true );
-			Event_Assets::localize_script( 'tp-event-auth', 'event_auth_object', apply_filters( 'event_auth_object', array(
-				'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-				'something_wrong' => __( 'Something went wrong.', 'tp-event-auth' ),
-				'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
-			) ) );
-			Event_Assets::register_style( 'tp-event-auth-magnific-popup', TP_EVENT_AUTH_ASSETS_URI . '/magnific-popup/magnific-popup.css', array() );
-			Event_Assets::register_script( 'tp-event-auth-popup', TP_EVENT_AUTH_ASSETS_URI . '/magnific-popup/jquery.magnific-popup.js', array(), TP_EVENT_AUTH_VER, true );
-		}
 
 		/**
 		 * _include

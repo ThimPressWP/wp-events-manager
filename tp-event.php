@@ -113,11 +113,19 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function includes() {
 
 			$this->_include( 'inc/class-event-autoloader.php' );
+			$this->_include( 'inc/class-auth-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
-			$this->_include( 'inc/core-functions.php' );
+			$this->_include( 'inc/class-auth-ajax.php' );
+			$this->_include( 'inc/event-core-functions.php' );
 			$this->_include( 'inc/class-event-setting.php' );
 
 			$this->_include( 'inc/class-event-custom-post-types.php' );
+
+			$this->_include( 'inc/class-auth-post-types.php' );
+			$this->_include( 'inc/event-auth-functions.php' );
+			$this->_include( 'inc/gateways/class-auth-abstract-payment-gateway.php' );
+			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
+
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
@@ -126,10 +134,39 @@ if ( !class_exists( 'TP_Event' ) ) {
 				$this->_include( 'inc/class-event-template.php' );
 				$this->_include( 'inc/class-event-frontend-scripts.php' );
 				$this->_include( 'inc/shortcodes/class-event-shortcode-countdown.php' );
+
+				$this->_include( 'inc/event-auth-template-hook.php' );
+				$this->_include( 'inc/class-auth-authentication.php' );
+				$this->_include( 'inc/class-auth-shortcodes.php' );
+
+				#enqueue script
+				if ( !is_admin() ) {
+					add_action( 'event_before_enqueue_scripts', array( $this, 'register_scripts' ) );
+				}
+
 			}
 
 			$this->_include( 'inc/class-event-install.php' );
+			$this->_include( 'inc/class-auth-install.php' );
 		}
+
+		/**
+		 * enqueue asset files
+		 *
+		 * @param type $hook
+		 */
+		public function register_scripts( $hook ) {
+			Event_Assets::register_style( 'tp-event-auth', TP_EVENT_ASSETS_URI . '/css/site.css', array() );
+			Event_Assets::register_script( 'tp-event-auth', TP_EVENT_ASSETS_URI . '/js/site.js', array(), TP_EVENT_VER, true );
+			Event_Assets::localize_script( 'tp-event-auth', 'event_auth_object', apply_filters( 'event_auth_object', array(
+				'ajaxurl'         => admin_url( 'admin-ajax.php' ),
+				'something_wrong' => __( 'Something went wrong.', 'tp-event-auth' ),
+				'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
+			) ) );
+			Event_Assets::register_style( 'tp-event-auth-magnific-popup', TP_EVENT_ASSETS_URI . '/magnific-popup/magnific-popup.css', array() );
+			Event_Assets::register_script( 'tp-event-auth-popup', TP_EVENT_ASSETS_URI . '/magnific-popup/jquery.magnific-popup.js', array(), TP_EVENT_VER, true );
+		}
+		
 
 		/**
 		 * Include single file
