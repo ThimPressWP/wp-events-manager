@@ -22,13 +22,13 @@
 				_event_id = _this.attr( 'data-event' );
 
 			$.ajax( {
-				url: event_auth_object.ajaxurl,
+				url: TP_Event.ajaxurl,
 				type: 'POST',
 				dataType: 'html',
 				async: false,
 				data: {
 					event_id: _event_id,
-					nonce: event_auth_object.register_button,
+					nonce: TP_Event.register_button,
 					action: 'load_form_register'
 				},
 				beforeSend: function () {
@@ -58,7 +58,7 @@
 				_notices = _self.find( '.event-auth-notice' );
 
 			$.ajax( {
-				url: event_auth_object.ajaxurl,
+				url: TP_Event.ajaxurl,
 				type: 'POST',
 				data: _data,
 				dataType: 'json',
@@ -70,7 +70,7 @@
 			} ).done( function ( res ) {
 				button.removeClass( 'event-register-loading' );
 				if ( typeof res.status === 'undefined' ) {
-					Event_Auth.set_message( _self, event_auth_object.something_wrong );
+					Event_Auth.set_message( _self, TP_Event.something_wrong );
 					return;
 				}
 
@@ -85,7 +85,7 @@
 
 			} ).fail( function () {
 				button.removeClass( 'event-register-loading' );
-				Event_Auth.set_message( _self, event_auth_object.something_wrong );
+				Event_Auth.set_message( _self, TP_Event.something_wrong );
 				return;
 			} ).always(function(){
 				_self.removeClass( 'active' );
@@ -163,7 +163,7 @@
 				_data = _this.serializeArray();
 
 			$.ajax( {
-				url: event_auth_object.ajaxurl,
+				url: TP_Event.ajaxurl,
 				type: 'POST',
 				data: _data,
 				async: false,

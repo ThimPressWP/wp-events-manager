@@ -7,7 +7,7 @@ $event = new Auth_Event( $event_id );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 ?>
 
-<?php if ( $user_reg = 0 || event_get_option( 'email_register_times' ) === 'many' ) : ?>
+<?php if ( $user_reg == 0 || event_get_option( 'email_register_times' ) === 'many' ) : ?>
 
     <div class="event_register_area">
 
