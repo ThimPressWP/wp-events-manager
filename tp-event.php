@@ -124,7 +124,11 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-auth-post-types.php' );
 			$this->_include( 'inc/event-auth-functions.php' );
 			$this->_include( 'inc/gateways/class-auth-abstract-payment-gateway.php' );
+
 			$this->_include( 'inc/gateways/paypal/class-auth-payment-gateway-paypal.php' );
+
+			$this->_include( 'inc/admin/metaboxes/class-auth-admin-metabox-booking-information.php' );
+
 
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
 

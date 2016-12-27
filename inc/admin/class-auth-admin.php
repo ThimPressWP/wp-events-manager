@@ -36,7 +36,7 @@ class Auth_Admin {
 	}
 
 	public function register_options_page() {
-		TP_Event_Authentication()->_include( 'admin/class-auth-user-table.php' );
+		TP_Event()->_include( 'inc/admin/class-auth-user-table.php' );
 		$user_table = new Auth_User_Table();
 		?>
         <div class="wrap">
