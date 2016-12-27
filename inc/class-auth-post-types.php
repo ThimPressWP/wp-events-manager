@@ -26,31 +26,31 @@ class Auth_Post_Types {
     public function register_post_types() {
         // event auth book
         $labels = array(
-            'name' => _x( 'Books', 'post type general name', 'tp-event-auth' ),
-            'singular_name' => _x( 'Book', 'post type singular name', 'tp-event-auth' ),
-            'menu_name' => _x( 'Books', 'admin menu', 'tp-event-auth' ),
-            'name_admin_bar' => _x( 'Book', 'add new on admin bar', 'tp-event-auth' ),
-            'add_new' => _x( 'Add New', 'book', 'tp-event-auth' ),
-            'add_new_item' => __( 'Add New Book', 'tp-event-auth' ),
-            'new_item' => __( 'New Book', 'tp-event-auth' ),
-            'edit_item' => __( 'Edit Book', 'tp-event-auth' ),
-            'view_item' => __( 'View Book', 'tp-event-auth' ),
-            'all_items' => __( 'Books', 'tp-event-auth' ),
-            'search_items' => __( 'Search Books', 'tp-event-auth' ),
-            'parent_item_colon' => __( 'Parent Books:', 'tp-event-auth' ),
-            'not_found' => __( 'No books found.', 'tp-event-auth' ),
-            'not_found_in_trash' => __( 'No books found in Trash.', 'tp-event-auth' )
+            'name' => _x( 'Books', 'post type general name', 'tp-event' ),
+            'singular_name' => _x( 'Book', 'post type singular name', 'tp-event' ),
+            'menu_name' => _x( 'Books', 'admin menu', 'tp-event' ),
+            'name_admin_bar' => _x( 'Book', 'add new on admin bar', 'tp-event' ),
+            'add_new' => _x( 'Add New', 'book', 'tp-event' ),
+            'add_new_item' => __( 'Add New Book', 'tp-event' ),
+            'new_item' => __( 'New Book', 'tp-event' ),
+            'edit_item' => __( 'Edit Book', 'tp-event' ),
+            'view_item' => __( 'View Book', 'tp-event' ),
+            'all_items' => __( 'Books', 'tp-event' ),
+            'search_items' => __( 'Search Books', 'tp-event' ),
+            'parent_item_colon' => __( 'Parent Books:', 'tp-event' ),
+            'not_found' => __( 'No books found.', 'tp-event' ),
+            'not_found_in_trash' => __( 'No books found in Trash.', 'tp-event' )
         );
 
         $args = array(
             'labels' => $labels,
-            'description' => __( 'Description.', 'tp-event-auth' ),
+            'description' => __( 'Description.', 'tp-event' ),
             'public' => true,
             'publicly_queryable' => false,
             'show_ui' => true,
             'show_in_menu' => 'tp-event-setting',
             'query_var' => true,
-            'rewrite' => array( 'slug' => _x( 'event-book', 'URL slug', 'tp-event-auth' ) ),
+            'rewrite' => array( 'slug' => _x( 'event-book', 'URL slug', 'tp-event' ) ),
             'capability_type' => 'post',
             'has_archive' => false,
             'hierarchical' => false,
@@ -71,12 +71,12 @@ class Auth_Post_Types {
         $columns = array();
         // set
         $columns['cb'] = __( '<label class="screen-reader-text __web-inspector-hide-shortcut__" for="cb-select-all-1">Select All</label><input id="cb-select-all-1" type="checkbox">' );
-        $columns['ID'] = __( 'ID', 'tp-event-auth' );
-        $columns['event'] = __( 'Event', 'tp-event-auth' );
-        $columns['user'] = __( 'User', 'tp-event-auth' );
-        $columns['cost'] = __( 'Cost', 'tp-event-auth' );
-        $columns['slot'] = __( 'Slot', 'tp-event-auth' );
-        $columns['status'] = __( 'Status', 'tp-event-auth' );
+        $columns['ID'] = __( 'ID', 'tp-event' );
+        $columns['event'] = __( 'Event', 'tp-event' );
+        $columns['user'] = __( 'User', 'tp-event' );
+        $columns['cost'] = __( 'Cost', 'tp-event' );
+        $columns['slot'] = __( 'Slot', 'tp-event' );
+        $columns['status'] = __( 'Status', 'tp-event' );
         return $columns;
     }
 
@@ -95,7 +95,7 @@ class Auth_Post_Types {
                 break;
             case 'cost':
                 # code...
-                $return = $booking->price > 0 ? event_auth_format_price( $booking->price, $booking->currency ) : __( 'Free', 'tp-event-auth' );
+                $return = $booking->price > 0 ? event_auth_format_price( $booking->price, $booking->currency ) : __( 'Free', 'tp-event' );
                 break;
             case 'slot':
                 # code...
@@ -112,7 +112,7 @@ class Auth_Post_Types {
                 # code...
                 $user = get_userdata( $booking->user_id );
                 $return = array();
-                $return[] = sprintf( __( '<a href="%s">%s</a><br />', 'tp-event-auth' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
+                $return[] = sprintf( __( '<a href="%s">%s</a><br />', 'tp-event' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
                 $return = implode( '', $return );
                 break;
             default:
@@ -125,10 +125,10 @@ class Auth_Post_Types {
 
     public function post_types_tp_event_columns( $columns ) {
         unset( $columns['author'], $columns['comments'], $columns['date'] );
-        $columns['type'] = __( 'Type', 'tp-event-auth' );
-        $columns['booked_slot'] = __( 'Booked / Total', 'tp-event-auth' );
-        $columns['date'] = __( 'Date', 'tp-event-auth' );
-        $columns['author'] = __( 'Author', 'tp-event-auth' );
+        $columns['type'] = __( 'Type', 'tp-event' );
+        $columns['booked_slot'] = __( 'Booked / Total', 'tp-event' );
+        $columns['date'] = __( 'Date', 'tp-event' );
+        $columns['author'] = __( 'Author', 'tp-event' );
         return $columns;
     }
 
@@ -139,9 +139,9 @@ class Auth_Post_Types {
             case 'type':
                 # code...
                 if ( $event->is_free() ) {
-                    $return = __( '<span class="event_auth_event_type">Free</span>', 'tp-event-auth' );
+                    $return = __( '<span class="event_auth_event_type">Free</span>', 'tp-event' );
                 } else {
-                    $return = sprintf( __( '<span class="event_auth_event_type">%s/%s</span><br />', 'tp-event-auth' ), event_auth_format_price( $event->get_price() ), __( 'slot', 'tp-event-auth' ) );
+                    $return = sprintf( __( '<span class="event_auth_event_type">%s/%s</span><br />', 'tp-event' ), event_auth_format_price( $event->get_price() ), __( 'slot', 'tp-event' ) );
                 }
                 break;
             case 'booked_slot':
@@ -158,7 +158,7 @@ class Auth_Post_Types {
     // register post status
     public function register_post_status() {
         register_post_status( 'ea-cancelled', apply_filters( 'event_auth_register_status_cancelled', array(
-            'label' => _x( 'Cancelled', 'Booking status', 'tp-event-auth' ),
+            'label' => _x( 'Cancelled', 'Booking status', 'tp-event' ),
             'public' => true,
             'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
@@ -167,7 +167,7 @@ class Auth_Post_Types {
         ) ) );
 
         register_post_status( 'ea-pending', apply_filters( 'event_auth_register_status_pending', array(
-            'label' => _x( 'Pending', 'Booking status', 'tp-event-auth' ),
+            'label' => _x( 'Pending', 'Booking status', 'tp-event' ),
             'public' => true,
             'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
@@ -176,7 +176,7 @@ class Auth_Post_Types {
         ) ) );
 
         register_post_status( 'ea-processing', apply_filters( 'event_auth_register_status_processing', array(
-            'label' => _x( 'Processing', 'Booking status', 'tp-event-auth' ),
+            'label' => _x( 'Processing', 'Booking status', 'tp-event' ),
             'public' => true,
             'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
@@ -185,7 +185,7 @@ class Auth_Post_Types {
         ) ) );
 
         register_post_status( 'ea-completed', apply_filters( 'event_auth_register_status_completed', array(
-            'label' => _x( 'Completed', 'Booking status', 'tp-event-auth' ),
+            'label' => _x( 'Completed', 'Booking status', 'tp-event' ),
             'public' => true,
             'exclude_from_search' => false,
             'show_in_admin_all_list' => true,

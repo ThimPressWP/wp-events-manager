@@ -56,9 +56,9 @@ class Auth_Booking {
             'payment_id' => false
                 ) );
         $booking_id = wp_insert_post( array(
-            'post_title' => sprintf( __( '%s booking event %s', 'tp-event-auth' ), $user->user_nicename, $args['event_id'] ),
-            'post_content' => sprintf( __( '%s booking event %s with %s slot', 'tp-event-auth' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
-            'post_exceprt' => sprintf( __( '%s booking event %s with %s slot', 'tp-event-auth' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+            'post_title' => sprintf( __( '%s booking event %s', 'tp-event' ), $user->user_nicename, $args['event_id'] ),
+            'post_content' => sprintf( __( '%s booking event %s with %s slot', 'tp-event' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+            'post_exceprt' => sprintf( __( '%s booking event %s with %s slot', 'tp-event' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
             'post_status' => 'ea-pending',
             'post_type' => 'event_auth_book'
                 ) );
@@ -81,7 +81,7 @@ class Auth_Booking {
             return;
         }
         if ( !$this->post || !$this->ID ) {
-            throw new Exception( sprintf( __( 'Booking ID #%s is not exists.', 'tp-event-auth' ), $this->ID ) );
+            throw new Exception( sprintf( __( 'Booking ID #%s is not exists.', 'tp-event' ), $this->ID ) );
         }
         $old_status = get_post_status( $this->ID );
 

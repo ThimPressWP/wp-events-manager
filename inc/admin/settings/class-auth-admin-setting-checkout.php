@@ -20,7 +20,7 @@ class Event_Admin_Setting_Checkout extends Event_Admin_Setting_Page {
 
     public function __construct() {
         $this->id = 'checkout';
-        $this->label = __( 'Checkout', 'tp-event-auth' );
+        $this->label = __( 'Checkout', 'tp-event' );
         add_filter( 'event_admin_settings_tabs_array', array( $this, 'add_setting_tab' ) );
         add_action( 'event_admin_setting_sections_' . $this->id, array( $this, 'output_section' ) );
         add_action( 'event_admin_setting_update_' . $this->id, array( $this, 'save' ) );
@@ -37,34 +37,34 @@ class Event_Admin_Setting_Checkout extends Event_Admin_Setting_Page {
             array(
                 'type' => 'section_start',
                 'id' => 'general_settings',
-                'title' => __( 'General Options', 'tp-event-auth' ),
-                'desc' => __( 'General options for system.', 'tp-event-auth' )
+                'title' => __( 'General Options', 'tp-event' ),
+                'desc' => __( 'General options for system.', 'tp-event' )
             ),
             array(
                 'type' => 'select',
-                'title' => __( 'Environment', 'tp-event-auth' ),
-                'desc' => __( 'This controlls test or production mode.', 'tp-event-auth' ),
+                'title' => __( 'Environment', 'tp-event' ),
+                'desc' => __( 'This controlls test or production mode.', 'tp-event' ),
                 'id' => $prefix . 'checkout_environment',
                 'options' => array(
-                    'test' => __( 'Test', 'tp-event-auth' ),
-                    'production' => __( 'Production.', 'tp-event-auth' )
+                    'test' => __( 'Test', 'tp-event' ),
+                    'production' => __( 'Production.', 'tp-event' )
                 )
             ),
             array(
                 'type' => 'select',
-                'title' => __( 'Booking times free/email', 'tp-event-auth' ),
-                'desc' => __( 'This controlls how many time booking free event of an email.', 'tp-event-auth' ),
+                'title' => __( 'Booking times free/email', 'tp-event' ),
+                'desc' => __( 'This controlls how many time booking free event of an email.', 'tp-event' ),
                 'id' => $prefix . 'email_register_times',
                 'options' => array(
-                    'once' => __( 'Once', 'tp-event-auth' ),
-                    'many' => __( 'Many', 'tp-event-auth' )
+                    'once' => __( 'Once', 'tp-event' ),
+                    'many' => __( 'Many', 'tp-event' )
                 ),
                 'default' => 'many'
             ),
             array(
                 'type' => 'number',
-                'title' => __( 'Cancel payment status.', 'tp-event-auth' ),
-                'desc' => __( 'How long cancel a payment.', 'tp-event-auth' ),
+                'title' => __( 'Cancel payment status.', 'tp-event' ),
+                'desc' => __( 'How long cancel a payment.', 'tp-event' ),
                 'atts' => array(
                     'min' => 0,
                     'step' => 'any'
@@ -84,7 +84,7 @@ class Event_Admin_Setting_Checkout extends Event_Admin_Setting_Page {
      * Add Sections
      */
     public function get_sections() {
-        $sections[''] = __( 'Checkout General', 'tp-event-auth' );
+        $sections[''] = __( 'Checkout General', 'tp-event' );
         $payment_gateways = TP_Event()->payment_gateways()->gateways;
         if ( $payment_gateways ) {
             foreach ( $payment_gateways as $id => $gateway ) {

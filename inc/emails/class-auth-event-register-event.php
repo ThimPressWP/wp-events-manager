@@ -22,7 +22,7 @@ class Auth_Email_Register_Event {
         }
 
         if ( !$booking_id ) {
-            throw new Exception( sprintf( __( 'Error %s booking ID', 'tp-event-auth' ), $booking_id ) );
+            throw new Exception( sprintf( __( 'Error %s booking ID', 'tp-event' ), $booking_id ) );
         }
 
         if ( event_get_option( 'email_enable', 'yes' ) === 'no' ) {
@@ -34,7 +34,7 @@ class Auth_Email_Register_Event {
         if ( $booking ) {
             $user_id = $booking->user_id;
             if ( !$user_id ) {
-                throw new Exception( __( 'User is not exists!', 'tp-event-auth' ) );
+                throw new Exception( __( 'User is not exists!', 'tp-event' ) );
                 die();
             }
             $user = get_userdata( $user_id );
@@ -48,7 +48,7 @@ class Auth_Email_Register_Event {
             add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 
             if ( $user && $to = $user->data->user_email ) {
-                $email_content = tpe_auth_addon_get_template_content( 'emails/register-event.php', array( 'booking' => $booking, 'user' => $user ) );
+                $email_content = tp_event_get_template_content( 'emails/register-event.php', array( 'booking' => $booking, 'user' => $user ) );
 
                 return wp_mail( $to, $email_subject, stripslashes( $email_content ), $headers );
             }

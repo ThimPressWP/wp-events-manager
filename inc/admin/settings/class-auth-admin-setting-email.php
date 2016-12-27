@@ -20,7 +20,7 @@ class Event_Admin_Setting_Email extends Event_Admin_Setting_Page {
 
     public function __construct() {
         $this->id = 'email';
-        $this->label = __( 'Emails', 'tp-event-auth' );
+        $this->label = __( 'Emails', 'tp-event' );
         parent::__construct();
     }
 
@@ -37,36 +37,36 @@ class Event_Admin_Setting_Email extends Event_Admin_Setting_Page {
                 ),
                 array(
                     'type' => 'select',
-                    'title' => __( 'Enable', 'tp-event-auth' ),
-                    'desc' => __( 'This controlls what the email', 'tp-event-auth' ),
+                    'title' => __( 'Enable', 'tp-event' ),
+                    'desc' => __( 'This controlls what the email', 'tp-event' ),
                     'id' => $prefix . 'email_enable',
                     'options' => array(
-                        'yes' => __( 'Yes', 'tp-event-auth' ),
-                        'no' => __( 'No', 'tp-event-auth' )
+                        'yes' => __( 'Yes', 'tp-event' ),
+                        'no' => __( 'No', 'tp-event' )
                     ),
                     'default' => 'yes'
                 ),
                 array(
                     'type' => 'text',
-                    'title' => __( 'From name', 'tp-event-auth' ),
-                    'desc' => __( 'This set email from name', 'tp-event-auth' ),
+                    'title' => __( 'From name', 'tp-event' ),
+                    'desc' => __( 'This set email from name', 'tp-event' ),
                     'placeholder' => get_option( 'blogname' ),
                     'id' => $prefix . 'email_from_name',
                     'default' => get_option( 'blog_name' )
                 ),
                 array(
                     'type' => 'email',
-                    'title' => __( 'Email from', 'tp-event-auth' ),
-                    'desc' => __( 'This set email send', 'tp-event-auth' ),
+                    'title' => __( 'Email from', 'tp-event' ),
+                    'desc' => __( 'This set email send', 'tp-event' ),
                     'placeholder' => get_option( 'admin_email' ),
                     'id' => $prefix . 'admin_email',
                     'default' => get_option( 'admin_email' )
                 ),
                 array(
                     'type' => 'text',
-                    'title' => __( 'Subject', 'tp-event-auth' ),
-                    'desc' => __( 'This set email subject', 'tp-event-auth' ),
-                    'placeholder' => __( 'Register event', 'tp-event-auth' ),
+                    'title' => __( 'Subject', 'tp-event' ),
+                    'desc' => __( 'This set email subject', 'tp-event' ),
+                    'placeholder' => __( 'Register event', 'tp-event' ),
                     'id' => $prefix . 'email_subject',
                     'default' => ''
                 ),

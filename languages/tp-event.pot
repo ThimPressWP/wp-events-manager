@@ -1,354 +1,1279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-13 07:19+0000\n"
+"POT-Creation-Date: 2016-12-27 11:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:26
+#: tp-event.php:169
+msgid "Something went wrong."
+msgstr ""
+
+#: inc/class-auth-ajax.php:44
+msgid "Event not found."
+msgstr ""
+
+#: inc/class-auth-ajax.php:53
+msgid "You must login before register"
+msgstr ""
+
+#: inc/class-auth-ajax.php:63
+msgid "has been expired"
+msgstr ""
+
+#: inc/class-auth-ajax.php:65
+msgid "You have registered this event before."
+msgstr ""
+
+#: inc/class-auth-ajax.php:87 inc/class-auth-ajax.php:91
+msgid "Invalid request."
+msgstr ""
+
+#: inc/class-auth-ajax.php:96
+msgid "Invalid event request."
+msgstr ""
+
+#: inc/class-auth-ajax.php:103
+msgid "Quantity must integer."
+msgstr ""
+
+#: inc/class-auth-ajax.php:116
+msgid "You are registerd this event."
+msgstr ""
+
+#: inc/class-auth-ajax.php:134
+msgid "is not ready. Please contact administrator to setup PayPal email."
+msgstr ""
+
+#: inc/class-auth-ajax.php:149
+#, php-format
+msgid ""
+"Book ID <strong>%s</strong> completed! We'll send mail to <strong>%s</"
+"strong> when it is approve."
+msgstr ""
+
+#: inc/class-auth-ajax.php:164
+msgid "Payment method is not available"
+msgstr ""
+
+#: inc/class-auth-ajax.php:186
+#, php-format
+msgid "You Must <a href=\"%s\">Login</a>"
+msgstr ""
+
+#: inc/class-auth-authentication.php:49
+msgid "You have been sign out!"
+msgstr ""
+
+#: inc/class-auth-authentication.php:143 inc/class-auth-authentication.php:166
+msgid "Check your email for a link to reset your password."
+msgstr ""
+
+#: inc/class-auth-authentication.php:289 inc/class-auth-authentication.php:293
+#: inc/class-auth-authentication.php:297 inc/class-auth-authentication.php:306
+msgid "ERROR"
+msgstr ""
+
+#: inc/class-auth-authentication.php:293
+msgid "Username is required."
+msgstr ""
+
+#: inc/class-auth-authentication.php:297
+msgid "Password is required."
+msgstr ""
+
+#: inc/class-auth-authentication.php:306
+msgid "A user could not be found with this email address."
+msgstr ""
+
+#: inc/class-auth-authentication.php:328
+msgid "You have logged in"
+msgstr ""
+
+#: inc/class-auth-booking.php:59
+#, php-format
+msgid "%s booking event %s"
+msgstr ""
+
+#: inc/class-auth-booking.php:60 inc/class-auth-booking.php:61
+#, php-format
+msgid "%s booking event %s with %s slot"
+msgstr ""
+
+#: inc/class-auth-booking.php:84
+#, php-format
+msgid "Booking ID #%s is not exists."
+msgstr ""
+
+#: inc/class-auth-install.php:54
+msgctxt "Page slug"
+msgid "auth-register"
+msgstr ""
+
+#: inc/class-auth-install.php:55
+msgctxt "Page title"
+msgid "Auth Register"
+msgstr ""
+
+#: inc/class-auth-install.php:59
+msgctxt "Page slug"
+msgid "auth-login"
+msgstr ""
+
+#: inc/class-auth-install.php:60
+msgctxt "Page title"
+msgid "Auth Login"
+msgstr ""
+
+#: inc/class-auth-install.php:64
+msgctxt "Page slug"
+msgid "auth-account"
+msgstr ""
+
+#: inc/class-auth-install.php:65
+msgctxt "Page title"
+msgid "Auth Account"
+msgstr ""
+
+#: inc/class-auth-post-types.php:29
+msgctxt "post type general name"
+msgid "Books"
+msgstr ""
+
+#: inc/class-auth-post-types.php:30
+msgctxt "post type singular name"
+msgid "Book"
+msgstr ""
+
+#: inc/class-auth-post-types.php:31
+msgctxt "admin menu"
+msgid "Books"
+msgstr ""
+
+#: inc/class-auth-post-types.php:32
+msgctxt "add new on admin bar"
+msgid "Book"
+msgstr ""
+
+#: inc/class-auth-post-types.php:33
+msgctxt "book"
+msgid "Add New"
+msgstr ""
+
+#: inc/class-auth-post-types.php:34
+msgid "Add New Book"
+msgstr ""
+
+#: inc/class-auth-post-types.php:35
+msgid "New Book"
+msgstr ""
+
+#: inc/class-auth-post-types.php:36
+msgid "Edit Book"
+msgstr ""
+
+#: inc/class-auth-post-types.php:37
+msgid "View Book"
+msgstr ""
+
+#: inc/class-auth-post-types.php:38
+msgid "Books"
+msgstr ""
+
+#: inc/class-auth-post-types.php:39
+msgid "Search Books"
+msgstr ""
+
+#: inc/class-auth-post-types.php:40
+msgid "Parent Books:"
+msgstr ""
+
+#: inc/class-auth-post-types.php:41
+msgid "No books found."
+msgstr ""
+
+#: inc/class-auth-post-types.php:42
+msgid "No books found in Trash."
+msgstr ""
+
+#: inc/class-auth-post-types.php:47
+msgid "Description."
+msgstr ""
+
+#: inc/class-auth-post-types.php:53
+msgctxt "URL slug"
+msgid "event-book"
+msgstr ""
+
+#: inc/class-auth-post-types.php:73
+msgid ""
+"<label class=\"screen-reader-text __web-inspector-hide-shortcut__\" for=\"cb-"
+"select-all-1\">Select All</label><input id=\"cb-select-all-1\" type="
+"\"checkbox\">"
+msgstr ""
+
+#: inc/class-auth-post-types.php:74
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:12
+#: templates/emails/register-event.php:21
+msgid "ID"
+msgstr ""
+
+#: inc/class-auth-post-types.php:75
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:14
+#: templates/emails/register-event.php:22
+msgid "Event"
+msgstr ""
+
+#: inc/class-auth-post-types.php:76
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:13
+msgid "User"
+msgstr ""
+
+#: inc/class-auth-post-types.php:77
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:15
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:28
+#: templates/auths/my-account.php:21 templates/auths/my-account.php:33
+#: templates/emails/register-event.php:25
+#: templates/emails/register-event.php:34
+msgid "Cost"
+msgstr ""
+
+#: inc/class-auth-post-types.php:78 templates/emails/register-event.php:24
+msgid "Slot"
+msgstr ""
+
+#: inc/class-auth-post-types.php:79 inc/class-event-custom-post-types.php:106
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:19
+#: templates/auths/my-account.php:24 templates/emails/register-event.php:27
+msgid "Status"
+msgstr ""
+
+#: inc/class-auth-post-types.php:98
+#: inc/admin/class-auth-admin-metaboxes.php:30
+#: inc/admin/class-auth-admin-metaboxes.php:31
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:28
+#: templates/button-register-event.php:31 templates/auths/my-account.php:33
+#: templates/emails/register-event.php:34
+msgid "Free"
+msgstr ""
+
+#: inc/class-auth-post-types.php:115
+#, php-format
+msgid "<a href=\"%s\">%s</a><br />"
+msgstr ""
+
+#: inc/class-auth-post-types.php:128
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:16
+#: templates/auths/my-account.php:20 templates/emails/register-event.php:23
+msgid "Type"
+msgstr ""
+
+#: inc/class-auth-post-types.php:129
+msgid "Booked / Total"
+msgstr ""
+
+#: inc/class-auth-post-types.php:130 inc/class-event-custom-post-types.php:107
+msgid "Date"
+msgstr ""
+
+#: inc/class-auth-post-types.php:131 inc/class-event-custom-post-types.php:105
+msgid "Author"
+msgstr ""
+
+#: inc/class-auth-post-types.php:142
+msgid "<span class=\"event_auth_event_type\">Free</span>"
+msgstr ""
+
+#: inc/class-auth-post-types.php:144
+#, php-format
+msgid "<span class=\"event_auth_event_type\">%s/%s</span><br />"
+msgstr ""
+
+#: inc/class-auth-post-types.php:144
+msgid "slot"
+msgstr ""
+
+#: inc/class-auth-post-types.php:161
+msgctxt "Booking status"
+msgid "Cancelled"
+msgstr ""
+
+#: inc/class-auth-post-types.php:166
+#, php-format
+msgid "Cancelled <span class=\"count\">(%s)</span>"
+msgid_plural "Cancelled <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-auth-post-types.php:170
+msgctxt "Booking status"
+msgid "Pending"
+msgstr ""
+
+#: inc/class-auth-post-types.php:175
+#, php-format
+msgid "Pending <span class=\"count\">(%s)</span>"
+msgid_plural "Pending <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-auth-post-types.php:179
+msgctxt "Booking status"
+msgid "Processing"
+msgstr ""
+
+#: inc/class-auth-post-types.php:184
+#, php-format
+msgid "Processing <span class=\"count\">(%s)</span>"
+msgid_plural "Processing <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-auth-post-types.php:188
+msgctxt "Booking status"
+msgid "Completed"
+msgstr ""
+
+#: inc/class-auth-post-types.php:193
+#, php-format
+msgid "Completed <span class=\"count\">(%s)</span>"
+msgid_plural "Completed <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-event-custom-post-types.php:26
 msgctxt "post type general name"
 msgid "Events"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:27
+#: inc/class-event-custom-post-types.php:27
 msgctxt "post type singular name"
 msgid "Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:28
+#: inc/class-event-custom-post-types.php:28
 msgctxt "admin menu"
 msgid "Events"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:29
+#: inc/class-event-custom-post-types.php:29
 msgctxt "add new on admin bar"
 msgid "Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:30
+#: inc/class-event-custom-post-types.php:30
 msgctxt "event"
 msgid "Add New"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:31
+#: inc/class-event-custom-post-types.php:31
 msgid "Add New Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:32
+#: inc/class-event-custom-post-types.php:32
 msgid "New Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:33
+#: inc/class-event-custom-post-types.php:33
 msgid "Edit Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:34
+#: inc/class-event-custom-post-types.php:34
 msgid "View Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:35
+#: inc/class-event-custom-post-types.php:35 templates/auths/my-account.php:19
 msgid "Events"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:36
+#: inc/class-event-custom-post-types.php:36
 msgid "Search Events"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:37
+#: inc/class-event-custom-post-types.php:37
 msgid "Parent Events:"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:38
+#: inc/class-event-custom-post-types.php:38
 msgid "No events found."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:39
+#: inc/class-event-custom-post-types.php:39
 msgid "No events found in Trash."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:44
+#: inc/class-event-custom-post-types.php:44
 msgid "Event post type."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:50
+#: inc/class-event-custom-post-types.php:50
 msgctxt "URL slug"
 msgid "events"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:103
+#: inc/class-event-custom-post-types.php:66
+msgctxt "tp-event"
+msgid "Upcoming"
+msgstr ""
+
+#: inc/class-event-custom-post-types.php:71
+#, php-format
+msgid "Upcoming <span class=\"count\">(%s)</span>"
+msgid_plural "Upcoming <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-event-custom-post-types.php:76
+msgctxt "tp-event"
+msgid "Happenning"
+msgstr ""
+
+#: inc/class-event-custom-post-types.php:81
+#, php-format
+msgid "Happenning <span class=\"count\">(%s)</span>"
+msgid_plural "Happenning <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-event-custom-post-types.php:86
+msgctxt "tp-event"
+msgid "Expired"
+msgstr ""
+
+#: inc/class-event-custom-post-types.php:91
+#, php-format
+msgid "Expired <span class=\"count\">(%s)</span>"
+msgid_plural "Expired <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-event-custom-post-types.php:103
 msgid "Start"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:104
+#: inc/class-event-custom-post-types.php:104
 msgid "End"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:105
-msgid "Author"
-msgstr ""
-
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:106
-msgid "Status"
-msgstr ""
-
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:107
-msgid "Date"
-msgstr ""
-
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:177 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:180 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:183
+#: inc/class-event-custom-post-types.php:179
+#: inc/class-event-custom-post-types.php:182
+#: inc/class-event-custom-post-types.php:185
 msgid "Event updated."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:178
+#: inc/class-event-custom-post-types.php:180
 msgid "Custom field updated."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:179
+#: inc/class-event-custom-post-types.php:181
 msgid "Custom field deleted."
 msgstr ""
 
-#. translators: %s: date and time of the revision
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:182
+#: inc/class-event-custom-post-types.php:184
+#, php-format
 msgid "Book restored to revision from %s"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:184
+#: inc/class-event-custom-post-types.php:186
 msgid "Event saved."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:185
+#: inc/class-event-custom-post-types.php:187
 msgid "Event submitted."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:187
+#: inc/class-event-custom-post-types.php:189
+#, php-format
 msgid "Event scheduled for: <strong>%1$s</strong>."
 msgstr ""
 
-#. translators: Publish box date format, see http://php.net/date
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:189
+#: inc/class-event-custom-post-types.php:191
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:191
+#: inc/class-event-custom-post-types.php:193
 msgid "Event draft updated."
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:197
+#: inc/class-event-custom-post-types.php:199
 msgid "View event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-custom-post-types.php:203
+#: inc/class-event-custom-post-types.php:205
 msgid "Preview event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-roles.php:15
+#: inc/class-event-install.php:84
+msgctxt "Page Slug"
+msgid "events"
+msgstr ""
+
+#: inc/class-event-install.php:85
+msgctxt "Page Title"
+msgid "Event Archive"
+msgstr ""
+
+#: inc/class-event-roles.php:15
 msgid "Event Manager"
 msgstr ""
 
-#: /home/svn/tp-event/inc/class-event-roles.php:45
+#: inc/class-event-roles.php:45
 msgid "Event Editor"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:361
+#: inc/event-auth-functions.php:586 inc/event-auth-functions.php:611
+#, php-format
+msgid "<span class=\"event_booking_status cancelled\">%s</span>"
+msgstr ""
+
+#: inc/event-auth-functions.php:590 inc/event-auth-functions.php:612
+#, php-format
+msgid "<span class=\"event_booking_status pending\">%s</span>"
+msgstr ""
+
+#: inc/event-auth-functions.php:594 inc/event-auth-functions.php:613
+#, php-format
+msgid "<span class=\"event_booking_status processing\">%s</span>"
+msgstr ""
+
+#: inc/event-auth-functions.php:598 inc/event-auth-functions.php:614
+#, php-format
+msgid "<span class=\"event_booking_status completed\">%s</span>"
+msgstr ""
+
+#: inc/event-auth-functions.php:611
+msgid "Cancelled"
+msgstr ""
+
+#: inc/event-auth-functions.php:612
+msgid "Pending"
+msgstr ""
+
+#: inc/event-auth-functions.php:613
+msgid "Processing"
+msgstr ""
+
+#: inc/event-auth-functions.php:614
+msgid "Completed"
+msgstr ""
+
+#: inc/event-auth-functions.php:651
+msgid "Confirm Password is not match."
+msgstr ""
+
+#: inc/event-auth-functions.php:658 inc/event-auth-functions.php:667
+#: inc/event-auth-functions.php:669 inc/event-auth-functions.php:673
+#: inc/event-auth-functions.php:692
+msgid "ERROR: "
+msgstr ""
+
+#: inc/event-auth-functions.php:658
+msgid "Username is required field."
+msgstr ""
+
+#: inc/event-auth-functions.php:660
+msgid "Username is already exists."
+msgstr ""
+
+#: inc/event-auth-functions.php:667
+msgid "Please provide a valid email address."
+msgstr ""
+
+#: inc/event-auth-functions.php:669
+msgid "An account is already registered with your email address. Please login."
+msgstr ""
+
+#: inc/event-auth-functions.php:673
+msgid "Password is required field."
+msgstr ""
+
+#: inc/event-auth-functions.php:692
+msgid "Couldn't register."
+msgstr ""
+
+#: inc/event-core-functions.php:361
 msgid "Years"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:362
+#: inc/event-core-functions.php:362
 msgid "Months"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:363
+#: inc/event-core-functions.php:363
 msgid "Weeks"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:364
+#: inc/event-core-functions.php:364
 msgid "Days"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:365
+#: inc/event-core-functions.php:365
 msgid "Hours"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:366
+#: inc/event-core-functions.php:366
 msgid "Minutes"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:367
+#: inc/event-core-functions.php:367
 msgid "Seconds"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:370
+#: inc/event-core-functions.php:370
 msgid "Year"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:371
+#: inc/event-core-functions.php:371
 msgid "Month"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:372
+#: inc/event-core-functions.php:372
 msgid "Week"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:373
+#: inc/event-core-functions.php:373
 msgid "Day"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:374
+#: inc/event-core-functions.php:374
 msgid "Hour"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:375
+#: inc/event-core-functions.php:375
 msgid "Minute"
 msgstr ""
 
-#: /home/svn/tp-event/inc/core-functions.php:376
+#: inc/event-core-functions.php:376
 msgid "Second"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:33 
-#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:33
+#: inc/admin/class-auth-admin-metaboxes.php:17
+msgid "Booking Information"
+msgstr ""
+
+#: inc/admin/class-auth-admin-metaboxes.php:30
+#: inc/admin/class-auth-admin-metaboxes.php:31
+msgid "Set Price"
+msgstr ""
+
+#: inc/admin/class-auth-admin-metaboxes.php:35
+msgid "Qty"
+msgstr ""
+
+#: inc/admin/class-auth-admin-metaboxes.php:43
+msgid "Price"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:26
+msgid "Authentication Settings"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:27
+msgid "Auth setting page"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:31
+msgid "Register Page"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:32
+msgid "This controlls which the register page."
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:37
+msgid "Login Page"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:38
+msgid "This controlls which the login page."
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:55
+msgid "My Account"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:56
+msgid "This controlls which the dashboard page."
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:61
+msgid "Send email."
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:62
+msgid "Send notify when user register."
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:73
+#: inc/admin/class-auth-admin-settings.php:78
+msgid "Currency"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:74
+msgid "Currency setting will show up on frontend"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:79
+msgid "This controlls what the currency prices"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:86
+msgid "Currency Position"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:87
+msgid "This controlls the position of the currency symbol"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:90
+msgid "Left"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:91
+msgid "Right"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:92
+msgid "Left with space"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:93
+msgid "Right with space"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:99
+msgid "Thousand Separator"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:106
+msgid "Decimal Separator"
+msgstr ""
+
+#: inc/admin/class-auth-admin-settings.php:113
+msgid "Number of Decimals"
+msgstr ""
+
+#: inc/admin/class-auth-admin.php:34
+msgid "Users"
+msgstr ""
+
+#: inc/admin/class-auth-admin.php:44
+msgid "Event Users"
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:17
+msgid "user"
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:18
+msgid "users"
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:64
+msgid "View"
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:75
+msgid "No users found."
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:107 templates/auths/form-login.php:13
+#: templates/auths/form-register.php:12
+msgid "Username"
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:108
+msgid "Name"
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:109
+#: templates/auths/form-register.php:17
+msgid "Email"
+msgstr ""
+
+#: inc/admin/class-auth-user-table.php:110
+msgid "Event Booking"
+msgstr ""
+
+#: inc/admin/class-event-admin-menu.php:33
 msgid "TP Events"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:40
+#: inc/admin/class-event-admin-menu.php:40
 msgid "TP Events Settings"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/class-event-admin-menu.php:40
+#: inc/admin/class-event-admin-menu.php:40
 msgid "Settings"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/class-event-admin-metaboxes.php:23
+#: inc/admin/class-event-admin-metaboxes.php:23
 msgid "Event Settings"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/class-event-admin-settings.php:53
+#: inc/admin/class-event-admin-settings.php:53
 msgid "Your settings have been saved."
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/class-event-admin-settings.php:328
+#: inc/admin/class-event-admin-settings.php:328
 msgid "---Select page---"
 msgstr ""
 
-#. Base ID
-#: /home/svn/tp-event/inc/widgets/class-event-widget-countdown.php:14
-msgid "Countdown Widget Post Type Event"
-msgstr ""
-
-#: /home/svn/tp-event/inc/widgets/class-event-widget-countdown.php:15
-msgid "Beautifull Countdown"
-msgstr ""
-
-#: /home/svn/tp-event/templates/loop/excerpt.php:12
-msgid "View Detail"
-msgstr ""
-
-#: /home/svn/tp-event/templates/loop/location.php:11
-msgid "Location: "
-msgstr ""
-
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:36
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:36
 msgid "Please make sure end time after start time"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:110 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:111 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:127 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:128
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:110
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:111
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:127
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:128
 msgid "Remove time"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:110 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:111 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:127 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:128
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:110
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:111
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:127
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:128
 msgid "Use time"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:114
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:114
 msgid "Date Start"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:122
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:122
 msgid "Time Start"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:132
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:132
 msgid "Date End"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:140
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:140
 msgid "Time End"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/class-event-admin-metabox-event.php:146 
-#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:38
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:146
+#: inc/admin/metaboxes/views/event-countdown.php:38
 msgid "Shortcode"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:23
-msgid "General"
-msgstr ""
-
-#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:37
-msgid "General Options"
-msgstr ""
-
-#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:38
-msgid "General options for system."
-msgstr ""
-
-#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:43
-msgid "Event Archive Page"
-msgstr ""
-
-#: /home/svn/tp-event/inc/admin/settings/class-event-admin-setting-general.php:44
-msgid "Select page show events list."
-msgstr ""
-
-#: /home/svn/tp-event/inc/admin/views/html-admin-settings.php:40
-msgid "Save changes"
-msgstr ""
-
-#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:6
+#: inc/admin/metaboxes/views/event-countdown.php:6
 msgid "Start Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:17
+#: inc/admin/metaboxes/views/event-countdown.php:17
 msgid "End Event"
 msgstr ""
 
-#: /home/svn/tp-event/inc/admin/metaboxes/views/event-countdown.php:28
+#: inc/admin/metaboxes/views/event-countdown.php:28
 msgid "Location"
 msgstr ""
 
-#. Name of the plugin
-msgid "Thim Events"
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:17
+#: templates/form-book-event.php:21 templates/auths/my-account.php:22
+msgid "Quantity"
 msgstr ""
 
-#. Description of the plugin
-msgid "Thim event - countdown"
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:18
+#: templates/emails/register-event.php:26
+msgid "Payment Method"
 msgstr ""
 
-#. URI of the plugin
-msgid "http://thimpress.com/thim-event"
+#: inc/admin/metaboxes/views/html-metabox-booking-information.php:30
+#: templates/auths/my-account.php:36 templates/emails/register-event.php:37
+msgid "No payment."
 msgstr ""
 
-#. Author of the plugin
-msgid "ThimPress"
+#: inc/admin/settings/class-auth-admin-setting-account.php:23
+msgid "Account"
 msgstr ""
 
-#. Author URI of the plugin
-msgid "http://thimpress.com"
+#: inc/admin/settings/class-auth-admin-setting-account.php:40
+msgid "Payments limited display"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-account.php:41
+msgid "How many payment show up on account page"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:23
+msgid "Checkout"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:40
+#: inc/admin/settings/class-event-admin-setting-general.php:37
+msgid "General Options"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:41
+#: inc/admin/settings/class-event-admin-setting-general.php:38
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:132
+msgid "General options for system."
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:45
+msgid "Environment"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:46
+msgid "This controlls test or production mode."
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:49
+msgid "Test"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:50
+msgid "Production."
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:55
+msgid "Booking times free/email"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:56
+msgid "This controlls how many time booking free event of an email."
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:59
+msgid "Once"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:60
+msgid "Many"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:66
+msgid "Cancel payment status."
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:67
+msgid "How long cancel a payment."
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-checkout.php:87
+msgid "Checkout General"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:23
+msgid "Emails"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:40
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:136
+msgid "Enable"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:41
+msgid "This controlls what the email"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:44
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:141
+msgid "Yes"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:45
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:140
+msgid "No"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:51
+msgid "From name"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:52
+msgid "This set email from name"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:59
+msgid "Email from"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:60
+msgid "This set email send"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:67
+msgid "Subject"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:68
+msgid "This set email subject"
+msgstr ""
+
+#: inc/admin/settings/class-auth-admin-setting-email.php:69
+msgid "Register event"
+msgstr ""
+
+#: inc/admin/settings/class-event-admin-setting-general.php:23
+msgid "General"
+msgstr ""
+
+#: inc/admin/settings/class-event-admin-setting-general.php:43
+msgid "Event Archive Page"
+msgstr ""
+
+#: inc/admin/settings/class-event-admin-setting-general.php:44
+msgid "Select page show events list."
+msgstr ""
+
+#: inc/admin/views/html-admin-settings.php:40
+msgid "Save changes"
+msgstr ""
+
+#: inc/admin/views/notices.php:13
+msgid ""
+"The <strong>TP Event</strong> is not installed and/or activated. Please "
+"install and/or activate before you can using <strong>TP Event Auth</strong> "
+"add-on"
+msgstr ""
+
+#: inc/emails/class-auth-event-register-event.php:25
+#, php-format
+msgid "Error %s booking ID"
+msgstr ""
+
+#: inc/emails/class-auth-event-register-event.php:37
+msgid "User is not exists!"
+msgstr ""
+
+#: inc/gateways/class-auth-abstract-payment-gateway.php:103
+msgid "Payment completed. We will send you email when payment method verify."
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:28
+msgid "Paypal"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:29
+msgid "PayPal"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:61
+msgid ""
+"Payment is completed. We will send you email when payment status is completed"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:63
+msgid "Booking is cancel."
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:131
+msgid "Paypal Settings"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:137
+msgid "This controlls enable payment method"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:146
+msgid "Paypal sandbox email"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:147
+msgid "Paypal Business Email"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:153
+msgid "Paypal email"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:154
+msgid "Production environment"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:188
+msgid "Booking ID is not exists!"
+msgstr ""
+
+#: inc/gateways/paypal/class-auth-payment-gateway-paypal.php:230
+msgid ""
+"Email Business PayPal is invalid. Please contact administrator to setup "
+"PayPal email."
+msgstr ""
+
+#: inc/widgets/class-event-widget-countdown.php:14
+msgid "Countdown Widget Post Type Event"
+msgstr ""
+
+#: inc/widgets/class-event-widget-countdown.php:15
+msgid "Beautifull Countdown"
+msgstr ""
+
+#: inc/widgets/class-event-widget-countdown.php:71
+msgid "Title:"
+msgstr ""
+
+#: inc/widgets/class-event-widget-countdown.php:75
+msgid "Carousel Slide:"
+msgstr ""
+
+#: inc/widgets/class-event-widget-countdown.php:79
+msgid "Navigation:"
+msgstr ""
+
+#: inc/widgets/class-event-widget-countdown.php:83
+msgid "Pagiantion:"
+msgstr ""
+
+#: inc/widgets/class-event-widget-countdown.php:87
+msgid "Events:"
+msgstr ""
+
+#: templates/button-register-event.php:18
+msgid "Total Slot:"
+msgstr ""
+
+#: templates/button-register-event.php:22
+msgid "Booked Time:"
+msgstr ""
+
+#: templates/button-register-event.php:26
+msgid "Booked Slot:"
+msgstr ""
+
+#: templates/button-register-event.php:30
+msgid "Cost:"
+msgstr ""
+
+#: templates/button-register-event.php:35 templates/form-book-event.php:55
+msgid "Register Now"
+msgstr ""
+
+#: templates/auths/error.php:7
+msgid "Oops! Something went wrong."
+msgstr ""
+
+#: templates/auths/form-forgot-password.php:20
+msgid ""
+"Please enter your username or email address. You will receive a link to "
+"create a new password via email."
+msgstr ""
+
+#: templates/auths/form-forgot-password.php:23
+msgid "Username or Email:"
+msgstr ""
+
+#: templates/auths/form-forgot-password.php:36
+msgid "Get New Password"
+msgstr ""
+
+#: templates/auths/form-forgot-password.php:43
+#: templates/auths/form-login.php:36
+msgid "Login"
+msgstr ""
+
+#: templates/auths/form-forgot-password.php:48
+msgid "Create new user"
+msgstr ""
+
+#: templates/auths/form-login.php:18 templates/auths/form-register.php:22
+#: templates/auths/form-reset-password.php:19
+msgid "Password"
+msgstr ""
+
+#: templates/auths/form-login.php:26
+msgid "Remember me"
+msgstr ""
+
+#: templates/auths/form-login.php:43 templates/auths/form-register.php:45
+#: templates/auths/form-reset-password.php:66
+msgid "Register"
+msgstr ""
+
+#: templates/auths/form-login.php:45
+msgid "Forgot Password"
+msgstr ""
+
+#: templates/auths/form-register-not-allow.php:7
+msgid "User registration is currently not allowed."
+msgstr ""
+
+#: templates/auths/form-register.php:27
+#: templates/auths/form-reset-password.php:31
+msgid "Confirm Password"
+msgstr ""
+
+#: templates/auths/form-register.php:36
+msgid "Registration confirmation will be emailed to you."
+msgstr ""
+
+#: templates/auths/form-register.php:51
+#: templates/auths/form-reset-password.php:62
+msgid "Log in"
+msgstr ""
+
+#: templates/auths/form-register.php:52
+msgid "Password Lost and Found"
+msgstr ""
+
+#: templates/auths/form-register.php:52
+msgid "Lost your password?"
+msgstr ""
+
+#: templates/auths/form-reset-password.php:56
+msgid "Reset Password"
+msgstr ""
+
+#: templates/auths/my-account.php:9
+#, php-format
+msgid "You are not <a href=\"%s\">login</a>"
+msgstr ""
+
+#: templates/auths/my-account.php:18
+msgid "Booking ID"
+msgstr ""
+
+#: templates/auths/my-account.php:23
+msgid "Method"
+msgstr ""
+
+#: templates/auths/my-account.php:54 templates/auths/my-account.php:66
+msgid "« Previous"
+msgstr ""
+
+#: templates/auths/my-account.php:55 templates/auths/my-account.php:67
+msgid "Next »"
+msgstr ""
+
+#: templates/auths/register-completed.php:9
+#, php-format
+msgid ""
+"You have successfully registered to <strong>%s</strong>. We have emailed "
+"your password to <i>%s</i> the email address you entered."
+msgstr ""
+
+#: templates/emails/register-event.php:11
+#, php-format
+msgid "Hello %s!"
+msgstr ""
+
+#: templates/emails/register-event.php:14
+#, php-format
+msgid ""
+"You have been registered successful our <a href=\"%s\">event</a>. Please go "
+"to the following link for more details.<br /><a href=\"%s\">Your account.</a>"
+msgstr ""
+
+#: templates/loop/excerpt.php:12
+msgid "View Detail"
+msgstr ""
+
+#: templates/loop/location.php:11
+msgid "Location: "
 msgstr ""

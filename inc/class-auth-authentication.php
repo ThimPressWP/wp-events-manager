@@ -46,7 +46,7 @@ class Auth_Authentication {
 
     // redirect logout
     public static function wp_logout() {
-        event_auth_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'tp-event-auth' ) ) );
+        event_auth_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'tp-event' ) ) );
         wp_safe_redirect( self::$login_url );
         exit();
     }
@@ -101,7 +101,7 @@ class Auth_Authentication {
         if ( is_user_logged_in() ) {
             return;
         }
-        tpe_auth_addon_get_template( 'auths/form-login.php' );
+		tp_event_get_template( 'auths/form-login.php' );
     }
 
     // shortcode register form
@@ -112,21 +112,21 @@ class Auth_Authentication {
 
         if ( !get_option( 'users_can_register' ) ) {
             // register not allowed
-            tpe_auth_addon_get_template( 'auths/form-register-not-allow.php' );
+			tp_event_get_template( 'auths/form-register-not-allow.php' );
         } elseif ( !empty( $_REQUEST['registered'] ) ) {
             $email = sanitize_email( $_REQUEST['registered'] );
             $user = get_user_by( 'email', $email );
             if ( $user && $user->ID ) {
                 wp_new_user_notification( $user->ID );
                 // register completed
-                tpe_auth_addon_get_template( 'auths/register-completed.php' );
+				tp_event_get_template( 'auths/register-completed.php' );
             } else {
                 // error
-                tpe_auth_addon_get_template( 'auths/error.php' );
+                tp_event_get_template( 'auths/error.php' );
             }
         } elseif ( !is_user_logged_in() ) {
             // show register form
-            tpe_auth_addon_get_template( 'auths/form-register.php' );
+            tp_event_get_template( 'auths/form-register.php' );
         }
     }
 
@@ -140,9 +140,9 @@ class Auth_Authentication {
         $checkemail = isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false;
 
         if ( $checkemail ) {
-            event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event-auth' ) );
+            event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
         } else {
-            tpe_auth_addon_get_template( 'auths/form-forgot-password.php' );
+            tp_event_get_template( 'auths/form-forgot-password.php' );
         }
     }
 
@@ -163,10 +163,10 @@ class Auth_Authentication {
                 ) );
 
         if ( $atts['checkemail'] ) {
-            event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event-auth' ) );
+            event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
         }
 
-        tpe_auth_addon_get_template( 'auths/form-reset-password.php', array( 'atts' => $atts ) );
+        tp_event_get_template( 'auths/form-reset-password.php', array( 'atts' => $atts ) );
     }
 
     // shortcode account
@@ -186,7 +186,7 @@ class Auth_Authentication {
             ),
         );
         $atts = new WP_Query( $args );
-        tpe_auth_addon_get_template( 'auths/my-account.php', array( 'query' => $atts ) );
+        tp_event_get_template( 'auths/my-account.php', array( 'query' => $atts ) );
         wp_reset_postdata();
     }
 
@@ -286,15 +286,15 @@ class Auth_Authentication {
             $validation_error = apply_filters( 'event_auth_process_login_errors', $validation_error, $username, $password );
 
             if ( $validation_error->get_error_code() ) {
-                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event-auth' ) . ':</strong> ' . $validation_error->get_error_message() );
+                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . $validation_error->get_error_message() );
             }
 
             if ( empty( $username ) ) {
-                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event-auth' ) . ':</strong> ' . __( 'Username is required.', 'tp-event-auth' ) );
+                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'Username is required.', 'tp-event' ) );
             }
 
             if ( empty( $_POST['user_pass'] ) ) {
-                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event-auth' ) . ':</strong> ' . __( 'Password is required.', 'tp-event-auth' ) );
+                event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'Password is required.', 'tp-event' ) );
             }
 
             if ( is_email( $username ) && apply_filters( 'event_auth_get_username_from_email', true ) ) {
@@ -303,7 +303,7 @@ class Auth_Authentication {
                 if ( isset( $user->user_login ) ) {
                     $creds['user_login'] = $user->user_login;
                 } else {
-                    event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event-auth' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'tp-event-auth' ) );
+                    event_auth_add_notice( 'error', '<strong>' . __( 'ERROR', 'tp-event' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'tp-event' ) );
                 }
             } else {
                 $creds['user_login'] = $username;
@@ -325,7 +325,7 @@ class Auth_Authentication {
                     // break
                     throw new Exception;
                 } else {
-                    event_auth_add_notice( 'success', __( 'You have logged in', 'tp-event-auth' ) );
+                    event_auth_add_notice( 'success', __( 'You have logged in', 'tp-event' ) );
 
                     if ( !defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
                         wp_redirect( apply_filters( 'event_auth_login_redirect', $redirect, $user ) );

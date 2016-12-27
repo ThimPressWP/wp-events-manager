@@ -15,23 +15,23 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
 
     <ul class="event-info">
         <li class="total">
-            <span class="label"><?php _e( 'Total Slot:', 'tp-event-auth' ) ?></span>
+            <span class="label"><?php _e( 'Total Slot:', 'tp-event' ) ?></span>
             <span clsas="detail"><?php echo esc_html( absint( $event->qty ) ) ?></span>
         </li>
         <li class="booking_time">
-            <span class="label"><?php _e( 'Booked Time:', 'tp-event-auth' ) ?></span>
+            <span class="label"><?php _e( 'Booked Time:', 'tp-event' ) ?></span>
             <span clsas="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ) ?></span>
         </li>
         <li class="booking_slote">
-            <span class="label"><?php _e( 'Booked Slot:', 'tp-event-auth' ) ?></span>
+            <span class="label"><?php _e( 'Booked Slot:', 'tp-event' ) ?></span>
             <span clsas="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ) ?></span>
         </li>
         <li class="price">
-            <span class="label"><?php _e( 'Cost:', 'tp-event-auth' ) ?></span>
-            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'tp-event-auth' ) : event_auth_format_price( $event->get_price() )  ) ?></span>
+            <span class="label"><?php _e( 'Cost:', 'tp-event' ) ?></span>
+            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'tp-event' ) : event_auth_format_price( $event->get_price() )  ) ?></span>
         </li>
     </ul>
 
-    <a class="event_register_submit event_auth_button event-load-booking-form" data-event="<?php echo esc_attr( get_the_ID() ) ?>"><?php _e( 'Register Now', 'tp-event-auth' ); ?></a>
+    <a class="event_register_submit event_auth_button event-load-booking-form" data-event="<?php echo esc_attr( get_the_ID() ) ?>"><?php _e( 'Register Now', 'tp-event' ); ?></a>
 
 </div>

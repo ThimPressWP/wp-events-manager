@@ -7,7 +7,7 @@ $event = new Auth_Event( $event_id );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 ?>
 
-<?php if ( $user_reg = 0 || event_get_option( 'email_register_times' ) === 'many' ) : ?>
+<?php if ( $user_reg == 0 || event_get_option( 'email_register_times' ) === 'many' ) : ?>
 
     <div class="event_register_area">
 
@@ -18,7 +18,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
             <?php if ( !$event->is_free() || event_get_option( 'email_register_times' ) === 'many' ) : ?>
                 <!--allow set slot-->
                 <div class="event_auth_form_field">
-                    <label for="event_register_qty"><?php _e( 'Quantity', 'tp-event-auth' ) ?></label>
+                    <label for="event_register_qty"><?php _e( 'Quantity', 'tp-event' ) ?></label>
                     <input type="number" name="qty" value="1" min="1" id="event_register_qty"/>
                 </div>
                 <!--end allow set slot-->
@@ -52,7 +52,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
                 <input type="hidden" name="event_id" value="<?php echo esc_attr( $event_id ) ?>" />
                 <input type="hidden" name="action" value="event_auth_register" />
                 <?php wp_nonce_field( 'event_auth_register_nonce', 'event_auth_register_nonce' ); ?>
-                <button class="event_register_submit event_auth_button"><?php _e( 'Register Now', 'tp-event-auth' ); ?></button>
+                <button class="event_register_submit event_auth_button"><?php _e( 'Register Now', 'tp-event' ); ?></button>
             </div>
 
         </form>

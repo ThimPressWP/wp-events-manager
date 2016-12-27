@@ -27,16 +27,16 @@ class Auth_Admin {
 	 * @param type $hook
 	 */
 	public function register_scripts( $hook ) {
-		Event_Assets::register_style( 'event-auth-admin', TP_EVENT_AUTH_ASSETS_URI . '/css/admin.css' );
+		Event_Assets::register_style( 'event-auth-admin', TP_EVENT_ASSETS_URI . '/css/admin.css' );
 	}
 
 	public function user_menu( $menus ) {
-		$menus[] = array( 'tp-event-setting', __( 'Users', 'tp-event-auth' ), __( 'Users', 'tp-event-auth' ), 'edit_others_tp_events', 'tp-event-users', array( $this, 'register_options_page' ) );
+		$menus[] = array( 'tp-event-setting', __( 'Users', 'tp-event' ), __( 'Users', 'tp-event' ), 'edit_others_tp_events', 'tp-event-users', array( $this, 'register_options_page' ) );
 		return $menus;
 	}
 
 	public function register_options_page() {
-		TP_Event_Authentication()->_include( 'admin/class-auth-user-table.php' );
+		TP_Event()->_include( 'inc/admin/class-auth-user-table.php' );
 		$user_table = new Auth_User_Table();
 		?>
         <div class="wrap">

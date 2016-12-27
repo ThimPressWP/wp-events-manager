@@ -14,8 +14,8 @@ class Auth_User_Table extends WP_List_Table {
 
     public function __construct() {
         parent::__construct( array(
-            'singular' => __( 'user', 'tp-event-auth' ),
-            'plural' => __( 'users', 'tp-event-auth' ),
+            'singular' => __( 'user', 'tp-event' ),
+            'plural' => __( 'users', 'tp-event' ),
             'ajax' => false
         ) );
     }
@@ -61,7 +61,7 @@ class Auth_User_Table extends WP_List_Table {
                     'user_login' => sprintf( '<a href="%s">%s</a>', get_edit_user_link( $user->ID ), $user->user_login ),
                     'user_nicename' => $user->user_nicename,
                     'user_email' => $user->user_email,
-                    'bookings' => sprintf( '<a href="%s">%s</a>', $booking_url, __( 'View', 'tp-event-auth' ) ),
+                    'bookings' => sprintf( '<a href="%s">%s</a>', $booking_url, __( 'View', 'tp-event' ) ),
                         // 'approved'		=> (boolean) $approve
                 );
             }
@@ -72,7 +72,7 @@ class Auth_User_Table extends WP_List_Table {
 
     // $this->items is empty
     public function no_items() {
-        _e( 'No users found.', 'tp-event-auth' );
+        _e( 'No users found.', 'tp-event' );
     }
 
     // default columns
@@ -104,10 +104,10 @@ class Auth_User_Table extends WP_List_Table {
     public function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />',
-            'user_login' => __( 'Username', 'tp-event-auth' ),
-            'user_nicename' => __( 'Name', 'tp-event-auth' ),
-            'user_email' => __( 'Email', 'tp-event-auth' ),
-            'bookings' => __( 'Event Booking', 'tp-event-auth' )
+            'user_login' => __( 'Username', 'tp-event' ),
+            'user_nicename' => __( 'Name', 'tp-event' ),
+            'user_email' => __( 'Email', 'tp-event' ),
+            'bookings' => __( 'Event Booking', 'tp-event' )
         );
         return $columns;
     }
@@ -125,8 +125,8 @@ class Auth_User_Table extends WP_List_Table {
     public function get_bulk_actions() {
 
         return array(
-                // 'approve'    	=> __( 'Approve', 'tp-event-auth' ),
-                // 'unapprove'    	=> __( 'Unapprove', 'tp-event-auth' )
+                // 'approve'    	=> __( 'Approve', 'tp-event' ),
+                // 'unapprove'    	=> __( 'Unapprove', 'tp-event' )
         );
     }
 
@@ -178,14 +178,14 @@ class Auth_User_Table extends WP_List_Table {
         // $status = wp_nonce_url( $status, 'event_auth_user_action', 'event_nonce' );
         $actions = array();
         if ( isset( $item['approved'] ) && !$item['approved'] ) {
-            // $status_name = __( 'Approve', 'tp-event-auth' );
+            // $status_name = __( 'Approve', 'tp-event' );
             // $status = add_query_arg( array(
             // 			'action' 	=> 'approve',
             // 			'user_id' 	=> $item['ID']
             // 		), $status );
             // $actions['edit'] = sprintf( __( '<a href="%s">%s</a>' ), $status, $status_name );
         } else {
-            // $status_name = __( 'Unapprove', 'tp-event-auth' );
+            // $status_name = __( 'Unapprove', 'tp-event' );
             // $status = add_query_arg( array(
             // 		'action' 	=> 'unapprove',
             // 		'user_id' 	=> $item['ID']

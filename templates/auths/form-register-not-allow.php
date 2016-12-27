@@ -4,4 +4,4 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<p><?php _e( 'User registration is currently not allowed.', 'tp-event-auth' ) ?></p>
+<p><?php _e( 'User registration is currently not allowed.', 'tp-event' ) ?></p>

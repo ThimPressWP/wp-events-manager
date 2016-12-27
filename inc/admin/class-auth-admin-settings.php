@@ -23,43 +23,43 @@ class Auth_Admin_Settings {
             array(
                 'type' => 'section_start',
                 'id' => 'auth_general_settings',
-                'title' => __( 'Authentication Settings', 'tp-event-auth' ),
-                'desc' => __( 'Auth setting page', 'tp-event-auth' )
+                'title' => __( 'Authentication Settings', 'tp-event' ),
+                'desc' => __( 'Auth setting page', 'tp-event' )
             ),
             array(
                 'type' => 'select_page',
-                'title' => __( 'Register Page', 'tp-event-auth' ),
-                'desc' => __( 'This controlls which the register page.', 'tp-event-auth' ),
+                'title' => __( 'Register Page', 'tp-event' ),
+                'desc' => __( 'This controlls which the register page.', 'tp-event' ),
                 'id'    => $prefix . 'register_page_id',
             ),
             array(
                 'type' => 'select_page',
-                'title' => __( 'Login Page', 'tp-event-auth' ),
-                'desc' => __( 'This controlls which the login page.', 'tp-event-auth' ),
+                'title' => __( 'Login Page', 'tp-event' ),
+                'desc' => __( 'This controlls which the login page.', 'tp-event' ),
                 'id'    => $prefix . 'login_page_id',
             ),
 //            array(
 //                'type' => 'select_page',
-//                'title' => __( 'Reset Password', 'tp-event-auth' ),
-//                'desc' => __( 'This controlls which the reset password page.', 'tp-event-auth' ),
+//                'title' => __( 'Reset Password', 'tp-event' ),
+//                'desc' => __( 'This controlls which the reset password page.', 'tp-event' ),
 //                'id'    => $prefix . 'reset_password_page_id'
 //            ),
 //            array(
 //                'type' => 'select_page',
-//                'title' => __( 'Forgot Pass', 'tp-event-auth' ),
-//                'desc' => __( 'This controlls which the forgot password page.', 'tp-event-auth' ),
+//                'title' => __( 'Forgot Pass', 'tp-event' ),
+//                'desc' => __( 'This controlls which the forgot password page.', 'tp-event' ),
 //                'id' => $prefix . 'forgot_pass_page_id'
 //            ),
             array(
                 'type' => 'select_page',
-                'title' => __( 'My Account', 'tp-event-auth' ),
-                'desc' => __( 'This controlls which the dashboard page.', 'tp-event-auth' ),
+                'title' => __( 'My Account', 'tp-event' ),
+                'desc' => __( 'This controlls which the dashboard page.', 'tp-event' ),
                 'id' => $prefix . 'account_page_id',
             ),
             array(
                 'type' => 'checkbox',
-                'title' => __( 'Send email.', 'tp-event-auth' ),
-                'desc' => __( 'Send notify when user register.', 'tp-event-auth' ),
+                'title' => __( 'Send email.', 'tp-event' ),
+                'desc' => __( 'Send notify when user register.', 'tp-event' ),
                 'id' => $prefix . 'register_notify',
             ),
             array(
@@ -70,47 +70,47 @@ class Auth_Admin_Settings {
             array(
                 'type' => 'section_start',
                 'id' => 'auth_currency_settings',
-                'title' => __( 'Currency', 'tp-event-auth' ),
-                'desc'  => __( 'Currency setting will show up on frontend', 'tp-event-auth' )
+                'title' => __( 'Currency', 'tp-event' ),
+                'desc'  => __( 'Currency setting will show up on frontend', 'tp-event' )
             ),
             array(
                 'type' => 'select',
-                'title' => __( 'Currency', 'tp-event-auth' ),
-                'desc' => __( 'This controlls what the currency prices', 'tp-event-auth' ),
+                'title' => __( 'Currency', 'tp-event' ),
+                'desc' => __( 'This controlls what the currency prices', 'tp-event' ),
                 'id' => $prefix . 'currency',
                 'options' => event_auth_currencies(),
                 'default' => 'USD'
             ),
             array(
                 'type' => 'select',
-                'title' => __( 'Currency Position', 'tp-event-auth' ),
-                'desc' => __( 'This controlls the position of the currency symbol', 'tp-event-auth' ),
+                'title' => __( 'Currency Position', 'tp-event' ),
+                'desc' => __( 'This controlls the position of the currency symbol', 'tp-event' ),
                 'id' => $prefix . 'currency_position',
                 'options' => array(
-                    'left' => __( 'Left', 'tp-event-auth' ) . ' ' . '(£99.99)',
-                    'right' => __( 'Right', 'tp-event-auth' ) . ' ' . '(99.99£)',
-                    'left_space' => __( 'Left with space', 'tp-event-auth' ) . ' ' . '(£ 99.99)',
-                    'right_space' => __( 'Right with space', 'tp-event-auth' ) . ' ' . '(99.99 £)',
+                    'left' => __( 'Left', 'tp-event' ) . ' ' . '(£99.99)',
+                    'right' => __( 'Right', 'tp-event' ) . ' ' . '(99.99£)',
+                    'left_space' => __( 'Left with space', 'tp-event' ) . ' ' . '(£ 99.99)',
+                    'right_space' => __( 'Right with space', 'tp-event' ) . ' ' . '(99.99 £)',
                 ),
                 'default' => 'left'
             ),
             array(
                 'type' => 'text',
-                'title' => __( 'Thousand Separator', 'tp-event-auth' ),
+                'title' => __( 'Thousand Separator', 'tp-event' ),
                 'id' => $prefix . 'currency_thousand',
                 'default' => ',',
                 'placeholder' => ','
             ),
             array(
                 'type' => 'text',
-                'title' => __( 'Decimal Separator', 'tp-event-auth' ),
+                'title' => __( 'Decimal Separator', 'tp-event' ),
                 'id' => $prefix . 'currency_separator',
                 'default' => '.',
                 'placeholder' => '.'
             ),
             array(
                 'type' => 'number',
-                'title' => __( 'Number of Decimals', 'tp-event-auth' ),
+                'title' => __( 'Number of Decimals', 'tp-event' ),
                 'id' => $prefix . 'currency_num_decimal',
                 'atts' => array( 'step' => 'any' ),
                 'default' => '2',
