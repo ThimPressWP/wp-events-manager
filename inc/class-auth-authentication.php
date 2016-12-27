@@ -214,7 +214,7 @@ class Auth_Authentication {
         $password = !empty( $_POST['user_pass'] ) ? $_POST['user_pass'] : '';
         $password1 = !empty( $_POST['confirm_password'] ) ? $_POST['confirm_password'] : '';
 
-        $user_id = event_auth_create_new_user( apply_filters( 'event_auth_user_process_register_data', array(
+        $user_id = tp_event_create_new_user( apply_filters( 'event_auth_user_process_register_data', array(
             'username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $password1
                 ) ) );
 
@@ -223,13 +223,13 @@ class Auth_Authentication {
             foreach ( $user_id->errors as $code => $message ) {
                 if ( !$message[0] )
                     continue;
-                if ( event_auth_is_ajax() ) {
+                if ( tp_event_is_ajax() ) {
                     $fields[$code] = $message[0];
                 } else {
                     tp_event_add_notice( 'error', $message[0] );
                 }
             }
-            if ( event_auth_is_ajax() ) {
+            if ( tp_event_is_ajax() ) {
                 wp_send_json( array( 'status' => false, 'fields' => $fields ) );
             }
         } else {
@@ -247,7 +247,7 @@ class Auth_Authentication {
                 $url = add_query_arg( 'registered', $email, self::$register_url );
             }
 
-            if ( event_auth_is_ajax() ) {
+            if ( tp_event_is_ajax() ) {
                 wp_send_json( array( 'status' => true, 'redirect' => $url ) );
             } else {
                 wp_safe_redirect( $url );
@@ -313,7 +313,7 @@ class Auth_Authentication {
             $creds['remember'] = isset( $_POST['rememberme'] );
             $secure_cookie = is_ssl() ? true : false;
 
-            if ( !event_auth_has_notice( 'error' ) ) {
+            if ( !tp_event_has_notice( 'error' ) ) {
                 $user = wp_signon( apply_filters( 'event_auth_login_credentials', $creds ), $secure_cookie );
 
                 if ( is_wp_error( $user ) ) {
@@ -335,7 +335,7 @@ class Auth_Authentication {
                         $response['status'] = true;
                         $response['redirect'] = apply_filters( 'event_auth_ajax_login_redirect', $redirect );
                         ob_start();
-                        event_auth_print_notices();
+                        tp_event_print_notices();
                         $response['notices'] = ob_get_clean();
                         wp_send_json( $response );
                     }
@@ -352,7 +352,7 @@ class Auth_Authentication {
             $response['status'] = false;
             $response['redirect'] = apply_filters( 'event_auth_ajax_login_redirect', $redirect );
             ob_start();
-            event_auth_print_notices();
+            tp_event_print_notices();
             $response['notices'] = ob_get_clean();
             wp_send_json( $response );
         }

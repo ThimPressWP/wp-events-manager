@@ -30,7 +30,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
             <!--Hide payment option when cost is 0-->
             <?php if ( ! $event->is_free() ) : ?>
                 <ul class="event_auth_payment_methods">
-                    <?php $payments = event_auth_payments(); ?>
+                    <?php $payments = tp_event_payments(); ?>
                     <?php
                         $i = 0;
                         foreach ( $payments as $id => $payment ) :

@@ -43,7 +43,7 @@ class Auth_Ajax {
 		if ( !$event_id ) {
 			tp_event_add_notice( 'error', __( 'Event not found.', 'tp-event' ) );
 			ob_start();
-			echo event_auth_print_notices();
+			echo tp_event_print_notices();
 			echo ob_get_clean();
 			die();
 		} else if ( !is_user_logged_in() ) {
@@ -60,9 +60,9 @@ class Auth_Ajax {
 			$registered_time = $event->booked_quantity( get_current_user_id() );
 			ob_start();
 			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
-				event_auth_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
+				tp_event_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
 			} else if ( $registered_time && tp_event_get_option( 'email_register_times' ) === 'once' ) {
-				event_auth_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
+				tp_event_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
 			} else {
 				tp_event_get_template( 'form-book-event.php', array( 'event_id' => $event_id ) );
 			}
@@ -117,14 +117,14 @@ class Auth_Ajax {
 			}
 
 			$payment         = isset( $_POST['payment_method'] ) ? sanitize_text_field( $_POST['payment_method'] ) : false;
-			$payment_methods = event_auth_payments();
+			$payment_methods = tp_event_payments();
 			// create new book return $booking_id if success and WP Error if fail
 			$args = apply_filters( 'event_auth_create_booking_args', array(
 				'event_id'   => $event_id,
 				'qty'        => $qty,
 				'price'      => (float) $event->get_price() * $qty,
 				'payment_id' => $payment,
-				'currency'   => event_auth_get_currency()
+				'currency'   => tp_event_get_currency()
 			) );
 
 			$payment = !empty( $payment_methods[$payment] ) ? $payment_methods[$payment] : false;
@@ -146,7 +146,7 @@ class Auth_Ajax {
 
 					// user booking
 					$user = get_userdata( $book->user_id );
-					tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), event_auth_format_ID( $booking_id ), $user->user_email ) );
+					tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
 					wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
 						'status' => true,
 						'url'    => tp_event_account_url()
@@ -171,7 +171,7 @@ class Auth_Ajax {
 			}
 		}
 		ob_start();
-		event_auth_print_notices();
+		tp_event_print_notices();
 		$message = ob_get_clean();
 		// allow hook
 		wp_send_json( array(

@@ -116,13 +116,12 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-auth-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
 			$this->_include( 'inc/class-auth-ajax.php' );
-			$this->_include( 'inc/event-core-functions.php' );
+			$this->_include( 'inc/tp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-setting.php' );
 
 			$this->_include( 'inc/class-event-custom-post-types.php' );
 
 			$this->_include( 'inc/class-auth-post-types.php' );
-			$this->_include( 'inc/event-auth-functions.php' );
 			$this->_include( 'inc/gateways/class-auth-abstract-payment-gateway.php' );
 
 			$this->_include( 'inc/gateways/paypal/class-auth-payment-gateway-paypal.php' );

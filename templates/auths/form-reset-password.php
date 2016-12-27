@@ -9,7 +9,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-event_auth_print_notices();
+tp_event_print_notices();
 ?>
 <form name="resetpassform" action="<?php echo esc_url( network_site_url( 'wp-login.php?action=resetpass', 'login_post' ) ); ?>" method="POST" class="event-auth-form">
     <input type="hidden" name="user_login" value="<?php echo esc_attr( $atts['login'] ); ?>" />

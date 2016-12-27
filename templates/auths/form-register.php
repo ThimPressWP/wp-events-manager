@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-event_auth_print_notices();
+tp_event_print_notices();
 ?>
 
 <form name="event_auth_register_form" action="" method="post" class="event-auth-form">

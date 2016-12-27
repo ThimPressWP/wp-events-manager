@@ -9,7 +9,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-event_auth_print_notices();
+tp_event_print_notices();
 ?>
 
 <?php if ( empty ( $_REQUEST['checkemail'] ) ) : ?>

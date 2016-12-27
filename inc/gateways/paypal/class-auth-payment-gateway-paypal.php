@@ -172,7 +172,7 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
 
         // book
         $book = Auth_Booking::instance( $booking_id );
-        $description = sprintf( '%s(%s)', $book->post->post_title, event_auth_format_price( $book->price, $book->currency ) );
+        $description = sprintf( '%s(%s)', $book->post->post_title, tp_event_format_price( $book->price, $book->currency ) );
 
         return $description;
     }
@@ -190,7 +190,7 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             die();
         }
         // book
-        $book = event_auth_get_booking( $booking_id );
+        $book = tp_event_get_booking( $booking_id );
 
         // create nonce
         $nonce = wp_create_nonce( 'event-auth-paypal-nonce' );
@@ -205,7 +205,7 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             'quantity' => '1',
             'business' => $this->paypal_email, // business email paypal
             'item_name' => $this->get_item_name( $booking_id ),
-            'currency_code' => event_auth_get_currency(),
+            'currency_code' => tp_event_get_currency(),
             'notify_url' => home_url(),
             'no_note' => '1',
             'shipping' => '0',
