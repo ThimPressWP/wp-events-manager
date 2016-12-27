@@ -10,7 +10,7 @@ add_action( 'tp_event_after_single_event', 'event_auth_register' );
 if ( !function_exists( 'event_auth_register' ) ) {
 
     function event_auth_register() {
-        tpe_auth_addon_get_template( 'button-register-event.php' );
+		tp_event_get_template( 'button-register-event.php' );
     }
 
 }

@@ -101,7 +101,7 @@ class Auth_Authentication {
         if ( is_user_logged_in() ) {
             return;
         }
-        tpe_auth_addon_get_template( 'auths/form-login.php' );
+		tp_event_get_template( 'auths/form-login.php' );
     }
 
     // shortcode register form
@@ -112,21 +112,21 @@ class Auth_Authentication {
 
         if ( !get_option( 'users_can_register' ) ) {
             // register not allowed
-            tpe_auth_addon_get_template( 'auths/form-register-not-allow.php' );
+			tp_event_get_template( 'auths/form-register-not-allow.php' );
         } elseif ( !empty( $_REQUEST['registered'] ) ) {
             $email = sanitize_email( $_REQUEST['registered'] );
             $user = get_user_by( 'email', $email );
             if ( $user && $user->ID ) {
                 wp_new_user_notification( $user->ID );
                 // register completed
-                tpe_auth_addon_get_template( 'auths/register-completed.php' );
+				tp_event_get_template( 'auths/register-completed.php' );
             } else {
                 // error
-                tpe_auth_addon_get_template( 'auths/error.php' );
+                tp_event_get_template( 'auths/error.php' );
             }
         } elseif ( !is_user_logged_in() ) {
             // show register form
-            tpe_auth_addon_get_template( 'auths/form-register.php' );
+            tp_event_get_template( 'auths/form-register.php' );
         }
     }
 
@@ -142,7 +142,7 @@ class Auth_Authentication {
         if ( $checkemail ) {
             event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
         } else {
-            tpe_auth_addon_get_template( 'auths/form-forgot-password.php' );
+            tp_event_get_template( 'auths/form-forgot-password.php' );
         }
     }
 
@@ -166,7 +166,7 @@ class Auth_Authentication {
             event_auth_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
         }
 
-        tpe_auth_addon_get_template( 'auths/form-reset-password.php', array( 'atts' => $atts ) );
+        tp_event_get_template( 'auths/form-reset-password.php', array( 'atts' => $atts ) );
     }
 
     // shortcode account
@@ -186,7 +186,7 @@ class Auth_Authentication {
             ),
         );
         $atts = new WP_Query( $args );
-        tpe_auth_addon_get_template( 'auths/my-account.php', array( 'query' => $atts ) );
+        tp_event_get_template( 'auths/my-account.php', array( 'query' => $atts ) );
         wp_reset_postdata();
     }
 

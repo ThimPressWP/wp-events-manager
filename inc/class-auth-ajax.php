@@ -64,7 +64,7 @@ class Auth_Ajax {
             } else if( $registered_time && event_get_option( 'email_register_times' ) === 'once' ) {
                 event_auth_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
             } else {
-                tpe_auth_addon_get_template( 'form-book-event.php', array( 'event_id' => $event_id ) );
+                tp_event_get_template( 'form-book-event.php', array( 'event_id' => $event_id ) );
             }
             echo ob_get_clean();
             die();

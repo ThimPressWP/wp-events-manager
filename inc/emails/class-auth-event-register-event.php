@@ -48,7 +48,7 @@ class Auth_Email_Register_Event {
             add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 
             if ( $user && $to = $user->data->user_email ) {
-                $email_content = tpe_auth_addon_get_template_content( 'emails/register-event.php', array( 'booking' => $booking, 'user' => $user ) );
+                $email_content = tp_event_get_template_content( 'emails/register-event.php', array( 'booking' => $booking, 'user' => $user ) );
 
                 return wp_mail( $to, $email_subject, stripslashes( $email_content ), $headers );
             }
