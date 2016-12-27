@@ -124,6 +124,8 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-auth-post-types.php' );
 			$this->_include( 'inc/event-auth-functions.php' );
 			$this->_include( 'inc/gateways/class-auth-abstract-payment-gateway.php' );
+			$this->_include( 'inc/gateways/paypal/class-auth-payment-gateway-paypal.php' );
+
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
 
 
@@ -166,7 +168,14 @@ if ( !class_exists( 'TP_Event' ) ) {
 			Event_Assets::register_style( 'tp-event-auth-magnific-popup', TP_EVENT_ASSETS_URI . '/magnific-popup/magnific-popup.css', array() );
 			Event_Assets::register_script( 'tp-event-auth-popup', TP_EVENT_ASSETS_URI . '/magnific-popup/jquery.magnific-popup.js', array(), TP_EVENT_VER, true );
 		}
-		
+
+		/**
+		 * payment gateways
+		 * @return  TP_Event_Payment_Gateways
+		 */
+		public function payment_gateways() {
+			return Auth_Payment_Gateways::instance();
+		}
 
 		/**
 		 * Include single file

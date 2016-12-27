@@ -557,7 +557,7 @@ function event_auth_format_price( $price, $with_currency = true ) {
 
 // list payments gateway
 function event_auth_payments() {
-    return TP_Event_Authentication()->payment_gateways()->get_payment_gateways();
+    return TP_Event()->payment_gateways()->get_payment_gateways();
 }
 
 // list payments gateway
