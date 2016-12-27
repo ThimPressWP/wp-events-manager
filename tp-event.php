@@ -58,11 +58,15 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function init_hooks() {
 			// plugin init
-			add_action( 'init', array( $this, 'tp_event_init' ), 0 );
+//			add_action( 'init', array( $this, 'tp_event_init' ), 0 );
 			// plugin loaded
 			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
 			// event auth loaded
 			add_action( 'event_auth_loaded', array( $this, 'event_auth_loaded' ), 1 );
+
+			// init this plugin hook
+			register_activation_hook( plugin_basename( __FILE__ ), array( $this, 'install' ) );
+			register_deactivation_hook( plugin_basename( __FILE__ ), array( $this, 'uninstall' ) );
 		}
 
 		/**
@@ -77,8 +81,26 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			// add notice
 			$this->admin_notice();
+		}
 
+		/**
+		 * install plugin hook
+		 */
+		public function install() {
+			if ( function_exists( 'event_create_page' ) ) {
+				$this->_include( 'inc/class-auth-install.php' );
+				Auth_Install::install();
+			}
+		}
 
+		/**
+		 * uninstall plugin hook
+		 */
+		public function uninstall() {
+			if ( function_exists( 'event_create_page' ) ) {
+				$this->_include( 'inc/class-auth-install.php' );
+				Auth_Install::uninstall();
+			}
 		}
 
 		/**
@@ -99,6 +121,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
+				$this->_include( 'inc/admin/class-auth-admin.php' );
 			} else {
 				$this->_include( 'inc/class-event-template.php' );
 				$this->_include( 'inc/class-event-frontend-scripts.php' );
