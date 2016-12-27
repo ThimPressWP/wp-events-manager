@@ -40,7 +40,7 @@ if ( !function_exists( 'tpe_auth_addon_get_template_content' ) ) {
 if ( !function_exists( 'tpe_auth_addon_template_path' ) ) {
 
     function tpe_auth_addon_template_path() {
-        return apply_filters( 'tpe_auth_addon_template_path', 'tp-event-auth' );
+        return apply_filters( 'tpe_auth_addon_template_path', 'tp-event' );
     }
 
 }
@@ -583,19 +583,19 @@ function event_auth_booking_status( $id = null ) {
         switch ( $status ) {
             case 'cancelled':
                 # code...
-                $return = sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'tp-event-auth' ), ucfirst( $status ) );
+                $return = sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'tp-event' ), ucfirst( $status ) );
                 break;
             case 'pending':
                 # code...
-                $return = sprintf( __( '<span class="event_booking_status pending">%s</span>', 'tp-event-auth' ), ucfirst( $status ) );
+                $return = sprintf( __( '<span class="event_booking_status pending">%s</span>', 'tp-event' ), ucfirst( $status ) );
                 break;
             case 'processing':
                 # code...
-                $return = sprintf( __( '<span class="event_booking_status processing">%s</span>', 'tp-event-auth' ), ucfirst( $status ) );
+                $return = sprintf( __( '<span class="event_booking_status processing">%s</span>', 'tp-event' ), ucfirst( $status ) );
                 break;
             case 'completed':
                 # code...
-                $return = sprintf( __( '<span class="event_booking_status completed">%s</span>', 'tp-event-auth' ), ucfirst( $status ) );
+                $return = sprintf( __( '<span class="event_booking_status completed">%s</span>', 'tp-event' ), ucfirst( $status ) );
                 break;
             default:
                 # code...
@@ -608,10 +608,10 @@ function event_auth_booking_status( $id = null ) {
 
 function event_auth_get_payment_status() {
     return apply_filters( 'event_auth_get_payment_status', array(
-        'ea-cancelled' => sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'tp-event-auth' ), __( 'Cancelled', 'tp-event-auth' ) ),
-        'ea-pending' => sprintf( __( '<span class="event_booking_status pending">%s</span>', 'tp-event-auth' ), __( 'Pending', 'tp-event-auth' ) ),
-        'ea-processing' => sprintf( __( '<span class="event_booking_status processing">%s</span>', 'tp-event-auth' ), __( 'Processing', 'tp-event-auth' ) ),
-        'ea-completed' => sprintf( __( '<span class="event_booking_status completed">%s</span>', 'tp-event-auth' ), __( 'Completed', 'tp-event-auth' ) ),
+        'ea-cancelled' => sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'tp-event' ), __( 'Cancelled', 'tp-event' ) ),
+        'ea-pending' => sprintf( __( '<span class="event_booking_status pending">%s</span>', 'tp-event' ), __( 'Pending', 'tp-event' ) ),
+        'ea-processing' => sprintf( __( '<span class="event_booking_status processing">%s</span>', 'tp-event' ), __( 'Processing', 'tp-event' ) ),
+        'ea-completed' => sprintf( __( '<span class="event_booking_status completed">%s</span>', 'tp-event' ), __( 'Completed', 'tp-event' ) ),
             ) );
 }
 
@@ -648,29 +648,29 @@ if ( !function_exists( 'event_auth_create_new_user' ) ) {
         if ( ! empty( $cred['confirm_password'] ) ) {
             $confirm_password = $cred['confirm_password'];
             if ( $password && $confirm_password && $confirm_password !== $confirm_password ) {
-                $errors->add( 'confirm_password', __( 'Confirm Password is not match.', 'tp-event-auth' ) );
+                $errors->add( 'confirm_password', __( 'Confirm Password is not match.', 'tp-event' ) );
             }
         }
         /**
          * Validate username
          */
         if ( !$username ) {
-            $errors->add( 'user_login', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event-auth' ), __( 'Username is required field.', 'tp-event-auth' ) ) );
+            $errors->add( 'user_login', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event' ), __( 'Username is required field.', 'tp-event' ) ) );
         } else if ( username_exists( $username ) ) {
-            $errors->add( 'user_login', __( 'Username is already exists.', 'tp-event-auth' ) );
+            $errors->add( 'user_login', __( 'Username is already exists.', 'tp-event' ) );
         }
 
         /**
          * Validate email
          */
         if ( !$email || !is_email( $email ) ) {
-            $errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event-auth' ), __( 'Please provide a valid email address.', 'tp-event-auth' ) ) );
+            $errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event' ), __( 'Please provide a valid email address.', 'tp-event' ) ) );
         } else if ( email_exists( $email ) ) {
-            $errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event-auth' ), __( 'An account is already registered with your email address. Please login.', 'tp-event-auth' ) ) );
+            $errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event' ), __( 'An account is already registered with your email address. Please login.', 'tp-event' ) ) );
         }
 
         if ( empty( $password ) ) {
-            $errors->add( 'password', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event-auth' ), __( 'Password is required field.', 'tp-event-auth' ) ) );
+            $errors->add( 'password', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event' ), __( 'Password is required field.', 'tp-event' ) ) );
         }
 
         $errors = apply_filters( 'event_auth_register_errors', $errors, $username, $email, $password );
@@ -689,7 +689,7 @@ if ( !function_exists( 'event_auth_create_new_user' ) ) {
          * Insert new user return WP_Error
          */
         if ( is_wp_error( $user_id ) ) {
-            $errors->add( 'insert_user_error', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event-auth' ), __( 'Couldn\'t register.', 'tp-event-auth' ) ) );
+            $errors->add( 'insert_user_error', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ',  'tp-event' ), __( 'Couldn\'t register.', 'tp-event' ) ) );
             return $errors;
         }
 

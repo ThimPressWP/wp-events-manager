@@ -41,7 +41,7 @@ class Auth_Ajax {
         $event_id = !empty( $_POST['event_id'] ) ? absint( $_POST['event_id'] ) : 0;
 
         if ( !$event_id ) {
-            event_auth_add_notice( 'error', __( 'Event not found.', 'tp-event-auth' ) );
+            event_auth_add_notice( 'error', __( 'Event not found.', 'tp-event' ) );
             ob_start();
             echo event_auth_print_notices();
             echo ob_get_clean();
@@ -50,7 +50,7 @@ class Auth_Ajax {
             /**
              * return html login form if not user logged in
              */
-            event_auth_add_notice( 'error', __( 'You must login before register', 'tp-event-auth' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
+            event_auth_add_notice( 'error', __( 'You must login before register', 'tp-event' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
             ob_start();
             echo Auth_Authentication::event_auth_login();
             echo ob_get_clean();
@@ -60,9 +60,9 @@ class Auth_Ajax {
             $registered_time = $event->booked_quantity( get_current_user_id() );
             ob_start();
             if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
-                event_auth_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event-auth' ) ) );
+                event_auth_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
             } else if( $registered_time && event_get_option( 'email_register_times' ) === 'once' ) {
-                event_auth_print_notice( 'error', __( 'You have registered this event before.', 'tp-event-auth' ) );
+                event_auth_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
             } else {
                 tpe_auth_addon_get_template( 'form-book-event.php', array( 'event_id' => $event_id ) );
             }
@@ -84,23 +84,23 @@ class Auth_Ajax {
         try {
             // sanitize, validate data
             if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
-                throw new Exception( __( 'Invalid request.', 'tp-event-auth' ) );
+                throw new Exception( __( 'Invalid request.', 'tp-event' ) );
             }
 
             if ( !isset( $_POST['action'] ) || !check_ajax_referer( 'event_auth_register_nonce', 'event_auth_register_nonce' ) ) {
-                throw new Exception( __( 'Invalid request.', 'tp-event-auth' ) );
+                throw new Exception( __( 'Invalid request.', 'tp-event' ) );
             }
 
             $event_id = false;
             if ( !isset( $_POST['event_id'] ) || !is_numeric( $_POST['event_id'] ) ) {
-                throw new Exception( __( 'Invalid event request.', 'tp-event-auth' ) );
+                throw new Exception( __( 'Invalid event request.', 'tp-event' ) );
             } else {
                 $event_id = absint( sanitize_text_field( $_POST['event_id'] ) );
             }
 
             $qty = 0;
             if ( !isset( $_POST['qty'] ) || !is_numeric( $_POST['qty'] ) ) {
-                throw new Exception( __( 'Quantity must integer.', 'tp-event-auth' ) );
+                throw new Exception( __( 'Quantity must integer.', 'tp-event' ) );
             } else {
                 $qty = absint( sanitize_text_field( $_POST['qty'] ) );
             }
@@ -113,7 +113,7 @@ class Auth_Ajax {
             $registered = $event->booked_quantity( $user->ID );
 
             if ( $event->is_free() && $registered != 0 && event_get_option( 'email_register_times', 'once' ) === 'once' ) {
-                throw new Exception( __( 'You are registerd this event.', 'tp-event-auth' ) );
+                throw new Exception( __( 'You are registerd this event.', 'tp-event' ) );
             }
 
             $payment = isset( $_POST['payment_method'] ) ? sanitize_text_field( $_POST['payment_method'] ) : false;
@@ -131,7 +131,7 @@ class Auth_Ajax {
             $return = array();
 
             if ( $args['price'] > 0 && $payment && ! $payment->is_available() ) {
-                throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup PayPal email.', 'tp-event-auth' ) ) );
+                throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup PayPal email.', 'tp-event' ) ) );
             }
 
             $booking_id = $booking->create_booking( $args );
@@ -146,7 +146,7 @@ class Auth_Ajax {
 
                     // user booking
                     $user = get_userdata( $book->user_id );
-                    event_auth_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event-auth' ), event_auth_format_ID( $booking_id ), $user->user_email ) );
+                    event_auth_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), event_auth_format_ID( $booking_id ), $user->user_email ) );
                     wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
                         'status' => true,
                         'url' => event_auth_account_url()
@@ -161,7 +161,7 @@ class Auth_Ajax {
                 } else {
                     wp_send_json( array(
                         'status'    => false,
-                        'message'   => __( 'Payment method is not available', 'tp-event-auth' )
+                        'message'   => __( 'Payment method is not available', 'tp-event' )
                     ) );
                 }
             }
@@ -183,7 +183,7 @@ class Auth_Ajax {
 
     // ajax nopriv: user is not signin
     public function must_login() {
-        wp_send_json( array( 'status' => false, 'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'tp-event-auth' ), event_auth_login_url() ) ) );
+        wp_send_json( array( 'status' => false, 'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'tp-event' ), event_auth_login_url() ) ) );
         die();
     }
 

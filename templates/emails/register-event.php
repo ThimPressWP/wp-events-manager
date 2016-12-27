@@ -8,33 +8,33 @@ if ( !$booking || !$user ) {
 }
 ?>
 
-<h2><?php printf( __( 'Hello %s!', 'tp-event-auth' ), $user->data->display_name ); ?></h2>
+<h2><?php printf( __( 'Hello %s!', 'tp-event' ), $user->data->display_name ); ?></h2>
 <?php
 printf(
-        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<br /><a href="%s">Your account.</a>', 'tp-event-auth' ), get_permalink( $booking->event_id ), event_auth_account_url()
+        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<br /><a href="%s">Your account.</a>', 'tp-event' ), get_permalink( $booking->event_id ), event_auth_account_url()
 );
 ?>
 
 <table class="event_auth_admin_table_booking">
     <thead>
         <tr>
-            <th style="border: 1px solid #eee"><?php _e( 'ID', 'tp-event-auth' ) ?></th>
-            <th style="border: 1px solid #eee"><?php _e( 'Event', 'tp-event-auth' ) ?></th>
-            <th style="border: 1px solid #eee"><?php _e( 'Type', 'tp-event-auth' ) ?></th>
-            <th style="border: 1px solid #eee"><?php _e( 'Slot', 'tp-event-auth' ) ?></th>
-            <th style="border: 1px solid #eee"><?php _e( 'Cost', 'tp-event-auth' ) ?></th>
-            <th style="border: 1px solid #eee"><?php _e( 'Payment Method', 'tp-event-auth' ) ?></th>
-            <th style="border: 1px solid #eee"><?php _e( 'Status', 'tp-event-auth' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'ID', 'tp-event' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'Event', 'tp-event' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'Type', 'tp-event' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'Slot', 'tp-event' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'Cost', 'tp-event' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'Payment Method', 'tp-event' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'Status', 'tp-event' ) ?></th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td style="border: 1px solid #eee"><?php printf( '%s', event_auth_format_ID( $booking->ID ) ) ?></td>
             <td style="border: 1px solid #eee"><?php printf( '<a href="%s">%s</a>', get_permalink( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
-            <td style="border: 1px solid #eee"><?php printf( '%s', floatval( $booking->price ) == 0 ? __( 'Free', 'tp-event-auth' ) : __( 'Cost', 'tp-event-auth' )  ) ?></td>
+            <td style="border: 1px solid #eee"><?php printf( '%s', floatval( $booking->price ) == 0 ? __( 'Free', 'tp-event' ) : __( 'Cost', 'tp-event' )  ) ?></td>
             <td style="border: 1px solid #eee"><?php printf( '%s', $booking->qty ) ?></td>
             <td style="border: 1px solid #eee"><?php printf( '%s', event_auth_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
-            <td style="border: 1px solid #eee"><?php printf( '%s', $booking->payment_id ? event_auth_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event-auth' )  ) ?></td>
+            <td style="border: 1px solid #eee"><?php printf( '%s', $booking->payment_id ? event_auth_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' )  ) ?></td>
             <td style="border: 1px solid #eee">
                 <?php
                 $return = array();

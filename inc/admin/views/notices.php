@@ -10,5 +10,5 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="error">
-    <p><?php _e( 'The <strong>TP Event</strong> is not installed and/or activated. Please install and/or activate before you can using <strong>TP Event Auth</strong> add-on', 'tp-event-auth' ); ?></p>
+    <p><?php _e( 'The <strong>TP Event</strong> is not installed and/or activated. Please install and/or activate before you can using <strong>TP Event Auth</strong> add-on', 'tp-event' ); ?></p>
 </div>

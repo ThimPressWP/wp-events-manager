@@ -17,10 +17,10 @@ event_auth_print_notices();
     <form name="lostpasswordform" class="lostpasswordform event-auth-form" action="" method="post">
 
         <p class="form-row event_auth_forgot_password_message message">
-            <?php _e( 'Please enter your username or email address. You will receive a link to create a new password via email.', 'tp-event-auth' ) ?>
+            <?php _e( 'Please enter your username or email address. You will receive a link to create a new password via email.', 'tp-event' ) ?>
         </p>
         <p class="form-row required">
-            <label for="user_login" ><?php _e( 'Username or Email:', 'tp-event-auth' ) ?><br />
+            <label for="user_login" ><?php _e( 'Username or Email:', 'tp-event' ) ?><br />
                 <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( !empty( $_POST['user_login'] ) ? $_POST['user_login'] : '' ); ?>" size="20" /></label>
         </p>
     <?php
@@ -33,19 +33,19 @@ event_auth_print_notices();
     ?>
         <input type="hidden" name="redirect_to" value="<?php echo esc_attr( ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ); ?>" />
         <p class="form-row submit">
-            <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Get New Password', 'tp-event-auth' ); ?>" />
+            <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Get New Password', 'tp-event' ); ?>" />
         </p>
 
     </form>
 
     <div class="event_auth_lost_pass_footer">
         <a href="<?php echo esc_attr( event_auth_login_url() ) ?>">
-            <?php _e( 'Login', 'tp-event-auth' ); ?>
+            <?php _e( 'Login', 'tp-event' ); ?>
         </a> | 
         <?php if ( !is_user_logged_in() ) : ?>
 
             <a href="<?php echo esc_attr( event_auth_register_url() ) ?>">
-                <?php _e( 'Create new user', 'tp-event-auth' ); ?>
+                <?php _e( 'Create new user', 'tp-event' ); ?>
             </a>
 
         <?php endif; ?>

@@ -22,7 +22,7 @@ class Auth_Email_Register_Event {
         }
 
         if ( !$booking_id ) {
-            throw new Exception( sprintf( __( 'Error %s booking ID', 'tp-event-auth' ), $booking_id ) );
+            throw new Exception( sprintf( __( 'Error %s booking ID', 'tp-event' ), $booking_id ) );
         }
 
         if ( event_get_option( 'email_enable', 'yes' ) === 'no' ) {
@@ -34,7 +34,7 @@ class Auth_Email_Register_Event {
         if ( $booking ) {
             $user_id = $booking->user_id;
             if ( !$user_id ) {
-                throw new Exception( __( 'User is not exists!', 'tp-event-auth' ) );
+                throw new Exception( __( 'User is not exists!', 'tp-event' ) );
                 die();
             }
             $user = get_userdata( $user_id );

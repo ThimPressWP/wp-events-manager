@@ -166,7 +166,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			Event_Assets::register_script( 'tp-event-auth', TP_EVENT_ASSETS_URI . '/js/site.js', array(), TP_EVENT_VER, true );
 			Event_Assets::localize_script( 'tp-event-auth', 'event_auth_object', apply_filters( 'event_auth_object', array(
 				'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-				'something_wrong' => __( 'Something went wrong.', 'tp-event-auth' ),
+				'something_wrong' => __( 'Something went wrong.', 'tp-event' ),
 				'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
 			) ) );
 			Event_Assets::register_style( 'tp-event-auth-magnific-popup', TP_EVENT_ASSETS_URI . '/magnific-popup/magnific-popup.css', array() );

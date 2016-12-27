@@ -31,7 +31,7 @@ class Auth_Admin {
 	}
 
 	public function user_menu( $menus ) {
-		$menus[] = array( 'tp-event-setting', __( 'Users', 'tp-event-auth' ), __( 'Users', 'tp-event-auth' ), 'edit_others_tp_events', 'tp-event-users', array( $this, 'register_options_page' ) );
+		$menus[] = array( 'tp-event-setting', __( 'Users', 'tp-event' ), __( 'Users', 'tp-event' ), 'edit_others_tp_events', 'tp-event-users', array( $this, 'register_options_page' ) );
 		return $menus;
 	}
 
@@ -41,7 +41,7 @@ class Auth_Admin {
 		?>
         <div class="wrap">
 
-            <h2><?php _e( 'Event Users', 'tp-event-auth' ); ?></h2>
+            <h2><?php _e( 'Event Users', 'tp-event' ); ?></h2>
 
 			<?php $user_table->prepare_items(); ?>
             <form method="post">

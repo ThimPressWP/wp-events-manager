@@ -20,7 +20,7 @@ class Event_Admin_Setting_Account extends Event_Admin_Setting_Page {
 
     public function __construct() {
         $this->id = 'account';
-        $this->label = __( 'Account', 'tp-event-auth' );
+        $this->label = __( 'Account', 'tp-event' );
         parent::__construct();
     }
 
@@ -37,8 +37,8 @@ class Event_Admin_Setting_Account extends Event_Admin_Setting_Page {
                 ),
                 array(
                     'type' => 'number',
-                    'title' => __( 'Payments limited display', 'tp-event-auth' ),
-                    'desc' => __( 'How many payment show up on account page', 'tp-event-auth' ),
+                    'title' => __( 'Payments limited display', 'tp-event' ),
+                    'desc' => __( 'How many payment show up on account page', 'tp-event' ),
                     'id' => $prefix . 'payment_litmit_showup',
                     'atts' => array(
                         'step' => 1,

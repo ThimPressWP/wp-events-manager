@@ -25,8 +25,8 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
     public $_title = null;
 
     public function __construct() {
-        $this->_title = __( 'Paypal', 'tp-event-auth' );
-        $this->title = __( 'PayPal', 'tp-event-auth' );
+        $this->_title = __( 'Paypal', 'tp-event' );
+        $this->title = __( 'PayPal', 'tp-event' );
         parent::__construct();
         $this->paypal_url = 'https://www.sandbox.paypal.com/';
         $this->paypal_payment_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
@@ -58,9 +58,9 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             }
 
             if ( sanitize_text_field( $_GET['event-auth-paypal-payment'] ) === 'completed' ) {
-                event_auth_add_notice( 'success', sprintf( __( 'Payment is completed. We will send you email when payment status is completed', 'tp-event-auth' ) ) );
+                event_auth_add_notice( 'success', sprintf( __( 'Payment is completed. We will send you email when payment status is completed', 'tp-event' ) ) );
             } else if ( sanitize_text_field( $_GET['event-auth-paypal-payment'] ) === 'cancel' ) {
-                event_auth_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'tp-event-auth' ) ) );
+                event_auth_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'tp-event' ) ) );
             }
             // redirect
             $url = add_query_arg( array( 'event-auth-paypal-nonce' => $_GET['event-auth-paypal-nonce'] ), event_auth_account_url() );
@@ -128,30 +128,30 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             array(
                 'type' => 'section_start',
                 'id' => 'paypal_settings',
-                'title' => __( 'Paypal Settings', 'tp-event-auth' ),
-                'desc' => __( 'General options for system.', 'tp-event-auth' )
+                'title' => __( 'Paypal Settings', 'tp-event' ),
+                'desc' => __( 'General options for system.', 'tp-event' )
             ),
             array(
                 'type' => 'select',
-                'title' => __( 'Enable', 'tp-event-auth' ),
-                'desc' => __( 'This controlls enable payment method', 'tp-event-auth' ),
+                'title' => __( 'Enable', 'tp-event' ),
+                'desc' => __( 'This controlls enable payment method', 'tp-event' ),
                 'id' => $prefix . 'paypal_enable',
                 'options' => array(
-                    'no' => __( 'No', 'tp-event-auth' ),
-                    'yes' => __( 'Yes', 'tp-event-auth' )
+                    'no' => __( 'No', 'tp-event' ),
+                    'yes' => __( 'Yes', 'tp-event' )
                 )
             ),
             array(
                 'type' => 'text',
-                'title' => __( 'Paypal sandbox email', 'tp-event-auth' ),
-                'desc' => __( 'Paypal Business Email', 'tp-event-auth' ),
+                'title' => __( 'Paypal sandbox email', 'tp-event' ),
+                'desc' => __( 'Paypal Business Email', 'tp-event' ),
                 'id' => $prefix . 'paypal_sanbox_email',
                 'default'   => ''
             ),
             array(
                 'type' => 'text',
-                'title' => __( 'Paypal email', 'tp-event-auth' ),
-                'desc' => __( 'Production environment', 'tp-event-auth' ),
+                'title' => __( 'Paypal email', 'tp-event' ),
+                'desc' => __( 'Production environment', 'tp-event' ),
                 'id' => $prefix . 'paypal_email',
                 'default'   => ''
             ),
@@ -185,7 +185,7 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
         if ( !$booking_id ) {
             wp_send_json( array(
                 'status' => false,
-                'message' => __( 'Booking ID is not exists!', 'tp-event-auth' )
+                'message' => __( 'Booking ID is not exists!', 'tp-event' )
             ) );
             die();
         }
@@ -227,7 +227,7 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
         if ( !$this->is_available() ) {
             return array(
                 'status' => false,
-                'message' => __( 'Email Business PayPal is invalid. Please contact administrator to setup PayPal email.', 'tp-event-auth' )
+                'message' => __( 'Email Business PayPal is invalid. Please contact administrator to setup PayPal email.', 'tp-event' )
             );
         }
         return array(
