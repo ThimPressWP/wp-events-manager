@@ -5,7 +5,7 @@
  *
  * @author ducnvtt
  */
-class Auth_Session {
+class Event_Session {
     
     /**
      * array key of session or cookie

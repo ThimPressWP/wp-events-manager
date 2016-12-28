@@ -106,8 +106,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			$this->_include( 'inc/gateways/paypal/class-auth-payment-gateway-paypal.php' );
 
-			$this->_include( 'inc/admin/metaboxes/class-auth-admin-metabox-booking-information.php' );
-
+			$this->_include( 'inc/admin/metaboxes/class-event-admin-metabox-booking-information.php' );
 
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
 
@@ -178,7 +177,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * Session
 		 */
 		public function event_auth_loaded() {
-			$this->_session = new Auth_Session();
+			$this->_session = new Event_Session();
 		}
 
 		/**
