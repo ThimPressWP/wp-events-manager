@@ -95,7 +95,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-event-autoloader.php' );
 			$this->_include( 'inc/class-auth-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
-			$this->_include( 'inc/class-auth-ajax.php' );
+			$this->_include( 'inc/class-event-ajax.php' );
 			$this->_include( 'inc/tp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-setting.php' );
 
@@ -120,7 +120,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 				$this->_include( 'inc/class-event-frontend-scripts.php' );
 				$this->_include( 'inc/shortcodes/class-event-shortcode-countdown.php' );
 
-				$this->_include( 'inc/event-auth-template-hook.php' );
+				$this->_include( 'inc/tp-event-template-hook.php' );
 				$this->_include( 'inc/class-auth-authentication.php' );
 				$this->_include( 'inc/class-auth-shortcodes.php' );
 			}

@@ -11,7 +11,7 @@ class Auth_Email_Register_Event {
 
     public function __construct() {
 
-        add_action( 'event_auth_updated_status', array( $this, 'email_register' ), 10, 3 );
+        add_action( 'tp_event_updated_status', array( $this, 'email_register' ), 10, 3 );
     }
 
     // send email
@@ -29,7 +29,7 @@ class Auth_Email_Register_Event {
             return;
         }
 
-        $booking = Auth_Booking::instance( $booking_id );
+        $booking = Event_Booking::instance( $booking_id );
 
         if ( $booking ) {
             $user_id = $booking->user_id;

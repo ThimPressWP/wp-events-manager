@@ -82,7 +82,7 @@ class Auth_Post_Types {
 
     // post type custom column
     public function post_types_columns_content( $column, $booking_id ) {
-        $booking = Auth_Booking::instance( $booking_id );
+        $booking = Event_Booking::instance( $booking_id );
         $return = '';
         switch ( $column ) {
             case 'ID':

@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 global $post;
-$booking = Auth_Booking::instance( $post->ID );
+$booking = Event_Booking::instance( $post->ID );
 $user = get_userdata( $booking->user_id );
 ?>
 <table class="event_auth_admin_table_booking">

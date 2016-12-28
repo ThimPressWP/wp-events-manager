@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  * Ajax Process
  */
-class Auth_Ajax {
+class Event_Ajax {
 
 	public function __construct() {
 		// actions with
@@ -106,7 +106,7 @@ class Auth_Ajax {
 			}
 			// End sanitize, validate data
 			// load booking module
-			$booking = Auth_Booking::instance();
+			$booking = Event_Booking::instance();
 			$event   = Auth_Event::instance( $event_id );
 
 			$user       = wp_get_current_user();
@@ -141,7 +141,7 @@ class Auth_Ajax {
 			} else {
 				if ( $args['price'] == 0 ) {
 					// update booking status
-					$book = Auth_Booking::instance( $booking_id );
+					$book = Event_Booking::instance( $booking_id );
 					$book->update_status( 'pending' );
 
 					// user booking
@@ -190,4 +190,4 @@ class Auth_Ajax {
 }
 
 // initialize ajax class process
-new Auth_Ajax();
+new Event_Ajax();
