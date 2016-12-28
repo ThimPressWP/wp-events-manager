@@ -3,7 +3,7 @@
 /*
   Plugin Name: Thim Events
   Plugin URI: http://thimpress.com/thim-event
-  Description: Thim event - countdown
+  Description: A complete plugin for Event management and online booking system
   Author: ThimPress
   Version: 2.0
   Author URI: http://thimpress.com
