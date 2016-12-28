@@ -40,7 +40,7 @@ class Auth_Admin_Metaboxes {
         <div class="option_group<?php echo (!$is_not_free ) ? ' hide-if-js' : ''; ?>">
             <input id="set_price" type="hidden" value="<?php echo esc_attr( $is_not_free ) ?>" name="<?php echo esc_attr( $prefix ) ?>is_not_free" />
             <p class="form-field">
-                <label for="_auth_cost"><?php printf( '%s(%s)', __( 'Price', 'tp-event' ), event_auth_get_currency_symbol() ) ?></label>
+                <label for="_auth_cost"><?php printf( '%s(%s)', __( 'Price', 'tp-event' ), tp_event_get_currency_symbol() ) ?></label>
                 <input type="number" step="any" min="0" class="short" name="<?php echo esc_attr( $prefix ) ?>price" id="_quantity" value="<?php echo esc_attr( floatval( $price ) ) ?>" />
             </p>
         </div>

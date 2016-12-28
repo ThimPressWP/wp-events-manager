@@ -5,9 +5,9 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Auth_Booking
+ * Event_Booking
  */
-class Auth_Booking {
+class Event_Booking {
 
     private static $instance = null;
     public $post = null;
@@ -70,7 +70,7 @@ class Auth_Booking {
                 update_post_meta( $booking_id, 'ea_booking_' . $key, $val );
             }
 
-            do_action( 'event_auth_create_new_booking', $booking_id, $args );
+            do_action( 'tp_event_create_new_booking', $booking_id, $args );
             return $booking_id;
         }
     }
@@ -93,9 +93,9 @@ class Auth_Booking {
 
         if ( $id && !is_wp_error( $id ) ) {
             // send email or anythings
-            do_action( 'event_auth_updated_status', $id, $old_status, $status );
+            do_action( 'tp_event_updated_status', $id, $old_status, $status );
 
-            do_action( 'event_auth_updated_status_' . $old_status . '_' . $status, $id, $old_status, $status );
+            do_action( 'tp_event_updated_status_' . $old_status . '_' . $status, $id, $old_status, $status );
         }
     }
 

@@ -78,7 +78,7 @@ class Auth_Admin_Settings {
                 'title' => __( 'Currency', 'tp-event' ),
                 'desc' => __( 'This controlls what the currency prices', 'tp-event' ),
                 'id' => $prefix . 'currency',
-                'options' => event_auth_currencies(),
+                'options' => tp_event_currencies(),
                 'default' => 'USD'
             ),
             array(

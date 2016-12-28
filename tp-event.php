@@ -84,26 +84,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 		}
 
 		/**
-		 * install plugin hook
-		 */
-		public function install() {
-			if ( function_exists( 'event_create_page' ) ) {
-				$this->_include( 'inc/class-auth-install.php' );
-				Auth_Install::install();
-			}
-		}
-
-		/**
-		 * uninstall plugin hook
-		 */
-		public function uninstall() {
-			if ( function_exists( 'event_create_page' ) ) {
-				$this->_include( 'inc/class-auth-install.php' );
-				Auth_Install::uninstall();
-			}
-		}
-
-		/**
 		 * include file
 		 *
 		 * @param  array || string
@@ -115,20 +95,18 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-event-autoloader.php' );
 			$this->_include( 'inc/class-auth-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
-			$this->_include( 'inc/class-auth-ajax.php' );
-			$this->_include( 'inc/event-core-functions.php' );
+			$this->_include( 'inc/class-event-ajax.php' );
+			$this->_include( 'inc/tp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-setting.php' );
 
 			$this->_include( 'inc/class-event-custom-post-types.php' );
 
 			$this->_include( 'inc/class-auth-post-types.php' );
-			$this->_include( 'inc/event-auth-functions.php' );
 			$this->_include( 'inc/gateways/class-auth-abstract-payment-gateway.php' );
 
 			$this->_include( 'inc/gateways/paypal/class-auth-payment-gateway-paypal.php' );
 
-			$this->_include( 'inc/admin/metaboxes/class-auth-admin-metabox-booking-information.php' );
-
+			$this->_include( 'inc/admin/metaboxes/class-event-admin-metabox-booking-information.php' );
 
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
 
@@ -141,13 +119,12 @@ if ( !class_exists( 'TP_Event' ) ) {
 				$this->_include( 'inc/class-event-frontend-scripts.php' );
 				$this->_include( 'inc/shortcodes/class-event-shortcode-countdown.php' );
 
-				$this->_include( 'inc/event-auth-template-hook.php' );
+				$this->_include( 'inc/tp-event-template-hook.php' );
 				$this->_include( 'inc/class-auth-authentication.php' );
 				$this->_include( 'inc/class-auth-shortcodes.php' );
 			}
 
 			$this->_include( 'inc/class-event-install.php' );
-			$this->_include( 'inc/class-auth-install.php' );
 		}
 
 		/**
@@ -200,7 +177,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * Session
 		 */
 		public function event_auth_loaded() {
-			$this->_session = new Auth_Session();
+			$this->_session = new Event_Session();
 		}
 
 		/**

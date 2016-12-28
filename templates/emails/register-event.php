@@ -11,7 +11,7 @@ if ( !$booking || !$user ) {
 <h2><?php printf( __( 'Hello %s!', 'tp-event' ), $user->data->display_name ); ?></h2>
 <?php
 printf(
-        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<br /><a href="%s">Your account.</a>', 'tp-event' ), get_permalink( $booking->event_id ), event_auth_account_url()
+        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<br /><a href="%s">Your account.</a>', 'tp-event' ), get_permalink( $booking->event_id ), tp_event_account_url()
 );
 ?>
 
@@ -29,17 +29,17 @@ printf(
     </thead>
     <tbody>
         <tr>
-            <td style="border: 1px solid #eee"><?php printf( '%s', event_auth_format_ID( $booking->ID ) ) ?></td>
+            <td style="border: 1px solid #eee"><?php printf( '%s', tp_event_format_ID( $booking->ID ) ) ?></td>
             <td style="border: 1px solid #eee"><?php printf( '<a href="%s">%s</a>', get_permalink( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
             <td style="border: 1px solid #eee"><?php printf( '%s', floatval( $booking->price ) == 0 ? __( 'Free', 'tp-event' ) : __( 'Cost', 'tp-event' )  ) ?></td>
             <td style="border: 1px solid #eee"><?php printf( '%s', $booking->qty ) ?></td>
-            <td style="border: 1px solid #eee"><?php printf( '%s', event_auth_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
-            <td style="border: 1px solid #eee"><?php printf( '%s', $booking->payment_id ? event_auth_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' )  ) ?></td>
+            <td style="border: 1px solid #eee"><?php printf( '%s', tp_event_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
+            <td style="border: 1px solid #eee"><?php printf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' )  ) ?></td>
             <td style="border: 1px solid #eee">
                 <?php
                 $return = array();
-                $return[] = sprintf( '%s', event_auth_booking_status( $booking->ID ) );
-                $return[] = $booking->payment_id ? sprintf( '<br />(%s)', event_auth_get_payment_title( $booking->payment_id ) ) : '';
+                $return[] = sprintf( '%s', tp_event_booking_status( $booking->ID ) );
+                $return[] = $booking->payment_id ? sprintf( '<br />(%s)', tp_event_get_payment_title( $booking->payment_id ) ) : '';
                 $return = implode( '', $return );
                 printf( '%s', $return );
                 ?>

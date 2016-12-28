@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-event_auth_print_notices();
+tp_event_print_notices();
 ?>
 
 <form name="event_auth_register_form" action="" method="post" class="event-auth-form">
@@ -30,7 +30,7 @@ event_auth_print_notices();
 
     <?php do_action( 'event_auth_register_form' ); ?>
 
-    <?php $send_notify = event_get_option( 'register_notify', true ); ?>
+    <?php $send_notify = tp_event_get_option( 'register_notify', true ); ?>
     <?php if ( $send_notify ) : ?>
         <p id="reg_passmail" class="form-row">
             <?php _e( 'Registration confirmation will be emailed to you.', 'tp-event' ); ?>
@@ -48,6 +48,6 @@ event_auth_print_notices();
 </form>
 
 <p id="nav">
-    <a href="<?php echo esc_url( event_auth_login_url() ); ?>"><?php _e( 'Log in', 'tp-event' ); ?></a> |
+    <a href="<?php echo esc_url( tp_event_login_url() ); ?>"><?php _e( 'Log in', 'tp-event' ); ?></a> |
     <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'tp-event' ) ?>"><?php _e( 'Lost your password?', 'tp-event' ); ?></a>
 </p>

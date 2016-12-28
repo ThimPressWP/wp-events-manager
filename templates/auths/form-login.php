@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-event_auth_print_notices();
+tp_event_print_notices();
 
 ?>
 
@@ -40,7 +40,7 @@ event_auth_print_notices();
 
 <p>
     <?php if ( get_option( 'users_can_register' ) ) : ?>
-        <a href="<?php echo esc_attr( event_auth_register_url() ); ?>"><?php _e( 'Register', 'tp-event' ) ?></a> |
+        <a href="<?php echo esc_attr( tp_event_register_url() ); ?>"><?php _e( 'Register', 'tp-event' ) ?></a> |
     <?php endif; ?>
     <a href="<?php echo esc_attr( wp_lostpassword_url() ); ?>"><?php _e( 'Forgot Password', 'tp-event' ) ?></a>
 </p>

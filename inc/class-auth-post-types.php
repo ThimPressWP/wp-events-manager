@@ -82,12 +82,12 @@ class Auth_Post_Types {
 
     // post type custom column
     public function post_types_columns_content( $column, $booking_id ) {
-        $booking = Auth_Booking::instance( $booking_id );
+        $booking = Event_Booking::instance( $booking_id );
         $return = '';
         switch ( $column ) {
             case 'ID':
                 # code...
-                $return = sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), event_auth_format_ID( $booking_id ) );
+                $return = sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), tp_event_format_ID( $booking_id ) );
                 break;
             case 'event':
                 # code...
@@ -95,7 +95,7 @@ class Auth_Post_Types {
                 break;
             case 'cost':
                 # code...
-                $return = $booking->price > 0 ? event_auth_format_price( $booking->price, $booking->currency ) : __( 'Free', 'tp-event' );
+                $return = $booking->price > 0 ? tp_event_format_price( $booking->price, $booking->currency ) : __( 'Free', 'tp-event' );
                 break;
             case 'slot':
                 # code...
@@ -104,8 +104,8 @@ class Auth_Post_Types {
             case 'status':
                 # code...
                 $return = array();
-                $return[] = sprintf( '%s', event_auth_booking_status( $booking_id ) );
-                $return[] = $booking->payment_id ? sprintf( '<br />(%s)', event_auth_get_payment_title( $booking->payment_id ) ) : '';
+                $return[] = sprintf( '%s', tp_event_booking_status( $booking_id ) );
+                $return[] = $booking->payment_id ? sprintf( '<br />(%s)', tp_event_get_payment_title( $booking->payment_id ) ) : '';
                 $return = implode( '', $return );
                 break;
             case 'user':
@@ -141,7 +141,7 @@ class Auth_Post_Types {
                 if ( $event->is_free() ) {
                     $return = __( '<span class="event_auth_event_type">Free</span>', 'tp-event' );
                 } else {
-                    $return = sprintf( __( '<span class="event_auth_event_type">%s/%s</span><br />', 'tp-event' ), event_auth_format_price( $event->get_price() ), __( 'slot', 'tp-event' ) );
+                    $return = sprintf( __( '<span class="event_auth_event_type">%s/%s</span><br />', 'tp-event' ), tp_event_format_price( $event->get_price() ), __( 'slot', 'tp-event' ) );
                 }
                 break;
             case 'booked_slot':

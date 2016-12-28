@@ -28,7 +28,7 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
         </li>
         <li class="price">
             <span class="label"><?php _e( 'Cost:', 'tp-event' ) ?></span>
-            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'tp-event' ) : event_auth_format_price( $event->get_price() )  ) ?></span>
+            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'tp-event' ) : tp_event_format_price( $event->get_price() )  ) ?></span>
         </li>
     </ul>
 

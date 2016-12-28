@@ -30,13 +30,13 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
         parent::__construct();
         $this->paypal_url = 'https://www.sandbox.paypal.com/';
         $this->paypal_payment_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-        $this->paypal_email = event_get_option( 'paypal_sanbox_email' );
+        $this->paypal_email = tp_event_get_option( 'paypal_sanbox_email' );
 
         // production environment
-        if ( event_get_option( 'checkout_environment', 'test' ) === 'production' ) {
+        if ( tp_event_get_option( 'checkout_environment', 'test' ) === 'production' ) {
             $this->paypal_url = 'https://www.paypal.com/';
             $this->paypal_payment_url = 'https://www.paypal.com/cgi-bin/webscr';
-            $this->paypal_email = event_get_option( 'paypal_email' );
+            $this->paypal_email = tp_event_get_option( 'paypal_email' );
         }
         // // init process
         add_action( 'init', array( $this, 'payment_validation' ), 99 );
@@ -58,12 +58,12 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             }
 
             if ( sanitize_text_field( $_GET['event-auth-paypal-payment'] ) === 'completed' ) {
-                event_auth_add_notice( 'success', sprintf( __( 'Payment is completed. We will send you email when payment status is completed', 'tp-event' ) ) );
+                tp_event_add_notice( 'success', sprintf( __( 'Payment is completed. We will send you email when payment status is completed', 'tp-event' ) ) );
             } else if ( sanitize_text_field( $_GET['event-auth-paypal-payment'] ) === 'cancel' ) {
-                event_auth_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'tp-event' ) ) );
+                tp_event_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'tp-event' ) ) );
             }
             // redirect
-            $url = add_query_arg( array( 'event-auth-paypal-nonce' => $_GET['event-auth-paypal-nonce'] ), event_auth_account_url() );
+            $url = add_query_arg( array( 'event-auth-paypal-nonce' => $_GET['event-auth-paypal-nonce'] ), tp_event_account_url() );
             wp_redirect( $url );
             exit();
         }
@@ -84,7 +84,7 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             if ( !isset( $transaction_subject->booking_id ) || !$booking_id = $transaction_subject->booking_id )
                 return;
 
-            $book = Auth_Booking::instance( $booking_id );
+            $book = Event_Booking::instance( $booking_id );
 
             // santitize
             $pay_verify = array_merge( array( 'cmd' => '_notify-validate' ), array_map( 'stripcslashes', $_POST ) );
@@ -171,8 +171,8 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             return;
 
         // book
-        $book = Auth_Booking::instance( $booking_id );
-        $description = sprintf( '%s(%s)', $book->post->post_title, event_auth_format_price( $book->price, $book->currency ) );
+        $book = Event_Booking::instance( $booking_id );
+        $description = sprintf( '%s(%s)', $book->post->post_title, tp_event_format_price( $book->price, $book->currency ) );
 
         return $description;
     }
@@ -190,7 +190,7 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             die();
         }
         // book
-        $book = event_auth_get_booking( $booking_id );
+        $book = tp_event_get_booking( $booking_id );
 
         // create nonce
         $nonce = wp_create_nonce( 'event-auth-paypal-nonce' );
@@ -205,15 +205,15 @@ class Auth_Payment_Gateway_Paypal extends Auth_Abstract_Payment_Gateway {
             'quantity' => '1',
             'business' => $this->paypal_email, // business email paypal
             'item_name' => $this->get_item_name( $booking_id ),
-            'currency_code' => event_auth_get_currency(),
+            'currency_code' => tp_event_get_currency(),
             'notify_url' => home_url(),
             'no_note' => '1',
             'shipping' => '0',
             'email' => $email,
             'rm' => '2',
             'no_shipping' => '1',
-            'return' => add_query_arg( array( 'event-auth-paypal-payment' => 'completed', 'event-auth-paypal-nonce' => $nonce ), event_auth_account_url() ),
-            'cancel_return' => add_query_arg( array( 'event-auth-paypal-payment' => 'cancel', 'event-auth-paypal-nonce' => $nonce ), event_auth_account_url() ),
+            'return' => add_query_arg( array( 'event-auth-paypal-payment' => 'completed', 'event-auth-paypal-nonce' => $nonce ), tp_event_account_url() ),
+            'cancel_return' => add_query_arg( array( 'event-auth-paypal-payment' => 'cancel', 'event-auth-paypal-nonce' => $nonce ), tp_event_account_url() ),
             'custom' => json_encode( array( 'booking_id' => $booking_id, 'user_id' => $book->user_id ) )
         );
 

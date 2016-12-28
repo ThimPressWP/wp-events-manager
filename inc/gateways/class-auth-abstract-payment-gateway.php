@@ -71,7 +71,7 @@ abstract class Auth_Abstract_Payment_Gateway {
      * @return boolean
      */
     public function is_enable() {
-        if ( event_get_option( $this->id . '_enable', 'yes' ) === 'yes' ) {
+        if ( tp_event_get_option( $this->id . '_enable', 'yes' ) === 'yes' ) {
             return $this->is_enable = true;
         }
         return $this->is_enable = false;
@@ -99,8 +99,8 @@ abstract class Auth_Abstract_Payment_Gateway {
      * @return null
      */
     public function completed_process_message() {
-        if ( !event_auth_has_notice( 'success' ) ) {
-            event_auth_has_notice( 'success', __( 'Payment completed. We will send you email when payment method verify.', 'tp-event' ) );
+        if ( !tp_event_has_notice( 'success' ) ) {
+            tp_event_has_notice( 'success', __( 'Payment completed. We will send you email when payment method verify.', 'tp-event' ) );
         }
     }
 

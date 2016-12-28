@@ -3,10 +3,10 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-event_auth_print_notices();
+tp_event_print_notices();
 
 if ( !is_user_logged_in() ) {
-    printf( __( 'You are not <a href="%s">login</a>', 'tp-event' ), event_auth_login_url() );
+    printf( __( 'You are not <a href="%s">login</a>', 'tp-event' ), tp_event_login_url() );
     return;
 }
 
@@ -26,15 +26,15 @@ if ( $query->have_posts() ) :
     <tbody>
         <?php foreach ( $query->posts as $post ): ?>
 
-            <?php $booking = Auth_Booking::instance( $post->ID ) ?>
+            <?php $booking = Event_Booking::instance( $post->ID ) ?>
             <tr>
-                <td><?php printf( '%s', event_auth_format_ID( $post->ID ) ) ?></td>
+                <td><?php printf( '%s', tp_event_format_ID( $post->ID ) ) ?></td>
                 <td><?php printf( '<a href="%s">%s</a>', get_the_permalink( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
                 <td><?php printf( '%s', floatval( $booking->price ) == 0 ? __( 'Free', 'tp-event' ) : __( 'Cost', 'tp-event' )  ) ?></td>
-                <td><?php printf( '%s', event_auth_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
+                <td><?php printf( '%s', tp_event_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
                 <td><?php printf( '%s', $booking->qty ) ?></td>
-                <td><?php printf( '%s', $booking->payment_id ? event_auth_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' )  ) ?></td>
-                <th><?php printf( '%s', event_auth_booking_status( $booking->ID ) ); ?></th>
+                <td><?php printf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' )  ) ?></td>
+                <th><?php printf( '%s', tp_event_booking_status( $booking->ID ) ); ?></th>
             </tr>
 
         <?php endforeach; ?>

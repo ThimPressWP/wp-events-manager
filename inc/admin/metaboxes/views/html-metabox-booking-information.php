@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 global $post;
-$booking = Auth_Booking::instance( $post->ID );
+$booking = Event_Booking::instance( $post->ID );
 $user = get_userdata( $booking->user_id );
 ?>
 <table class="event_auth_admin_table_booking">
@@ -21,16 +21,16 @@ $user = get_userdata( $booking->user_id );
     </thead>
     <tbody>
         <tr>
-            <td><?php printf( '%s', event_auth_format_ID( $post->ID ) ) ?></td>
+            <td><?php printf( '%s', tp_event_format_ID( $post->ID ) ) ?></td>
             <td><?php printf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->data->user_nicename ) ?></td>
             <td><?php printf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
-            <td><?php printf( '%s', event_auth_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
+            <td><?php printf( '%s', tp_event_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
             <td><?php printf( '%s', floatval( $booking->price ) == 0 ? __( 'Free', 'tp-event' ) : __( 'Cost', 'tp-event' )  ) ?></td>
             <td><?php printf( '%s', $booking->qty ) ?></td>
-            <td><?php printf( '%s', $booking->payment_id ? event_auth_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' )  ) ?></td>
+            <td><?php printf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' )  ) ?></td>
             <td>
                 <select name="_auth_status">
-                    <?php foreach ( event_auth_get_payment_status() as $key => $text ) : ?>
+                    <?php foreach ( tp_event_get_payment_status() as $key => $text ) : ?>
                         <option value="<?php echo esc_attr( $key ) ?>"<?php echo get_post_status( $post->ID ) === $key ? ' selected' : '' ?>><?php printf( '%s', $text ) ?></option>
                     <?php endforeach; ?>
                 </select>

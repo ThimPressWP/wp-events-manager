@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  * Ajax Process
  */
-class Auth_Ajax {
+class Event_Ajax {
 
 	public function __construct() {
 		// actions with
@@ -41,16 +41,16 @@ class Auth_Ajax {
 		$event_id = !empty( $_POST['event_id'] ) ? absint( $_POST['event_id'] ) : 0;
 
 		if ( !$event_id ) {
-			event_auth_add_notice( 'error', __( 'Event not found.', 'tp-event' ) );
+			tp_event_add_notice( 'error', __( 'Event not found.', 'tp-event' ) );
 			ob_start();
-			echo event_auth_print_notices();
+			echo tp_event_print_notices();
 			echo ob_get_clean();
 			die();
 		} else if ( !is_user_logged_in() ) {
 			/**
 			 * return html login form if not user logged in
 			 */
-			event_auth_add_notice( 'error', __( 'You must login before register', 'tp-event' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
+			tp_event_add_notice( 'error', __( 'You must login before register', 'tp-event' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			ob_start();
 			echo Auth_Authentication::event_auth_login();
 			echo ob_get_clean();
@@ -60,9 +60,9 @@ class Auth_Ajax {
 			$registered_time = $event->booked_quantity( get_current_user_id() );
 			ob_start();
 			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
-				event_auth_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
-			} else if ( $registered_time && event_get_option( 'email_register_times' ) === 'once' ) {
-				event_auth_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
+				tp_event_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
+			} else if ( $registered_time && tp_event_get_option( 'email_register_times' ) === 'once' ) {
+				tp_event_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
 			} else {
 				tp_event_get_template( 'form-book-event.php', array( 'event_id' => $event_id ) );
 			}
@@ -106,25 +106,25 @@ class Auth_Ajax {
 			}
 			// End sanitize, validate data
 			// load booking module
-			$booking = Auth_Booking::instance();
+			$booking = Event_Booking::instance();
 			$event   = Auth_Event::instance( $event_id );
 
 			$user       = wp_get_current_user();
 			$registered = $event->booked_quantity( $user->ID );
 
-			if ( $event->is_free() && $registered != 0 && event_get_option( 'email_register_times', 'once' ) === 'once' ) {
+			if ( $event->is_free() && $registered != 0 && tp_event_get_option( 'email_register_times', 'once' ) === 'once' ) {
 				throw new Exception( __( 'You are registerd this event.', 'tp-event' ) );
 			}
 
 			$payment         = isset( $_POST['payment_method'] ) ? sanitize_text_field( $_POST['payment_method'] ) : false;
-			$payment_methods = event_auth_payments();
+			$payment_methods = tp_event_payments();
 			// create new book return $booking_id if success and WP Error if fail
 			$args = apply_filters( 'event_auth_create_booking_args', array(
 				'event_id'   => $event_id,
 				'qty'        => $qty,
 				'price'      => (float) $event->get_price() * $qty,
 				'payment_id' => $payment,
-				'currency'   => event_auth_get_currency()
+				'currency'   => tp_event_get_currency()
 			) );
 
 			$payment = !empty( $payment_methods[$payment] ) ? $payment_methods[$payment] : false;
@@ -141,15 +141,15 @@ class Auth_Ajax {
 			} else {
 				if ( $args['price'] == 0 ) {
 					// update booking status
-					$book = Auth_Booking::instance( $booking_id );
+					$book = Event_Booking::instance( $booking_id );
 					$book->update_status( 'pending' );
 
 					// user booking
 					$user = get_userdata( $book->user_id );
-					event_auth_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), event_auth_format_ID( $booking_id ), $user->user_email ) );
+					tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
 					wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
 						'status' => true,
-						'url'    => event_auth_account_url()
+						'url'    => tp_event_account_url()
 					) ) );
 				} else if ( $payment ) {
 					$return = $payment->process( $booking_id );
@@ -167,11 +167,11 @@ class Auth_Ajax {
 			}
 		} catch ( Exception $e ) {
 			if ( $e ) {
-				event_auth_add_notice( 'error', $e->getMessage() );
+				tp_event_add_notice( 'error', $e->getMessage() );
 			}
 		}
 		ob_start();
-		event_auth_print_notices();
+		tp_event_print_notices();
 		$message = ob_get_clean();
 		// allow hook
 		wp_send_json( array(
@@ -183,11 +183,11 @@ class Auth_Ajax {
 
 	// ajax nopriv: user is not signin
 	public function must_login() {
-		wp_send_json( array( 'status' => false, 'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'tp-event' ), event_auth_login_url() ) ) );
+		wp_send_json( array( 'status' => false, 'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'tp-event' ), tp_event_login_url() ) ) );
 		die();
 	}
 
 }
 
 // initialize ajax class process
-new Auth_Ajax();
+new Event_Ajax();

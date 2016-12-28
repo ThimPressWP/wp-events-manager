@@ -9,7 +9,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-event_auth_print_notices();
+tp_event_print_notices();
 ?>
 
 <?php if ( empty ( $_REQUEST['checkemail'] ) ) : ?>
@@ -39,12 +39,12 @@ event_auth_print_notices();
     </form>
 
     <div class="event_auth_lost_pass_footer">
-        <a href="<?php echo esc_attr( event_auth_login_url() ) ?>">
+        <a href="<?php echo esc_attr( tp_event_login_url() ) ?>">
             <?php _e( 'Login', 'tp-event' ); ?>
         </a> | 
         <?php if ( !is_user_logged_in() ) : ?>
 
-            <a href="<?php echo esc_attr( event_auth_register_url() ) ?>">
+            <a href="<?php echo esc_attr( tp_event_register_url() ) ?>">
                 <?php _e( 'Create new user', 'tp-event' ); ?>
             </a>
 

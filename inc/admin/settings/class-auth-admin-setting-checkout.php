@@ -64,7 +64,7 @@ class Event_Admin_Setting_Checkout extends Event_Admin_Setting_Page {
             array(
                 'type' => 'number',
                 'title' => __( 'Cancel payment status.', 'tp-event' ),
-                'desc' => __( 'How long cancel a payment.', 'tp-event' ),
+                'desc' => __( 'How long cancel a payment (hour).', 'tp-event' ),
                 'atts' => array(
                     'min' => 0,
                     'step' => 'any'
