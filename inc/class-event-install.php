@@ -84,7 +84,22 @@ class Event_Install {
                 'name'    => _x( 'events', 'Page Slug', 'tp-hotel-booking' ),
                 'title'   => _x( 'Event Archive', 'Page Title', 'tp-hotel-booking' ),
                 'content' => '[' . apply_filters( 'event_archive_page_content', 'event_archive' ) . ']'
-            )
+            ),
+			'register' => array(
+				'name'    => _x( 'auth-register', 'Page slug', 'tp-event' ),
+				'title'   => _x( 'Auth Register', 'Page title', 'tp-event' ),
+				'content' => '[' . apply_filters( 'event_auth_register_shortcode_tag', 'event_auth_register' ) . ']'
+			),
+			'login'    => array(
+				'name'    => _x( 'auth-login', 'Page slug', 'tp-event' ),
+				'title'   => _x( 'Auth Login', 'Page title', 'tp-event' ),
+				'content' => '[' . apply_filters( 'event_auth_login_shortcode_tag', 'event_auth_login' ) . ']'
+			),
+			'account'  => array(
+				'name'    => _x( 'auth-account', 'Page slug', 'tp-event' ),
+				'title'   => _x( 'Auth Account', 'Page title', 'tp-event' ),
+				'content' => '[' . apply_filters( 'event_auth_my_account_shortcode_tag', 'event_auth_my_account' ) . ']'
+			),
         );
         foreach ( $pages as $name => $page ) {
             tp_event_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? tp_event_get_page_id( $page['parent'] ) : '' );

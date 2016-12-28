@@ -20,7 +20,7 @@ class Auth_Install {
 		/**
 		 * Create pages
 		 */
-		self::create_pages();
+//		self::create_pages();
 
 		/**
 		 * create roles
@@ -49,22 +49,22 @@ class Auth_Install {
 	 * Create default pages
 	 */
 	public static function create_pages() {
-		$pages = array(
-			'register' => array(
-				'name'    => _x( 'auth-register', 'Page slug', 'tp-event' ),
-				'title'   => _x( 'Auth Register', 'Page title', 'tp-event' ),
-				'content' => '[' . apply_filters( 'event_auth_register_shortcode_tag', 'event_auth_register' ) . ']'
-			),
-			'login'    => array(
-				'name'    => _x( 'auth-login', 'Page slug', 'tp-event' ),
-				'title'   => _x( 'Auth Login', 'Page title', 'tp-event' ),
-				'content' => '[' . apply_filters( 'event_auth_login_shortcode_tag', 'event_auth_login' ) . ']'
-			),
-			'account'  => array(
-				'name'    => _x( 'auth-account', 'Page slug', 'tp-event' ),
-				'title'   => _x( 'Auth Account', 'Page title', 'tp-event' ),
-				'content' => '[' . apply_filters( 'event_auth_my_account_shortcode_tag', 'event_auth_my_account' ) . ']'
-			),
+//		$pages = array(
+//			'register' => array(
+//				'name'    => _x( 'auth-register', 'Page slug', 'tp-event' ),
+//				'title'   => _x( 'Auth Register', 'Page title', 'tp-event' ),
+//				'content' => '[' . apply_filters( 'event_auth_register_shortcode_tag', 'event_auth_register' ) . ']'
+//			),
+//			'login'    => array(
+//				'name'    => _x( 'auth-login', 'Page slug', 'tp-event' ),
+//				'title'   => _x( 'Auth Login', 'Page title', 'tp-event' ),
+//				'content' => '[' . apply_filters( 'event_auth_login_shortcode_tag', 'event_auth_login' ) . ']'
+//			),
+//			'account'  => array(
+//				'name'    => _x( 'auth-account', 'Page slug', 'tp-event' ),
+//				'title'   => _x( 'Auth Account', 'Page title', 'tp-event' ),
+//				'content' => '[' . apply_filters( 'event_auth_my_account_shortcode_tag', 'event_auth_my_account' ) . ']'
+//			),
 //            'reset_password' => array(
 //                'name' => _x( 'auth-resetpass', 'Page slug', 'tp-event' ),
 //                'title' => _x( 'Auth Reset Password', 'Page title', 'tp-event' ),
@@ -75,11 +75,11 @@ class Auth_Install {
 //                'title' => _x( 'Auth Forgot Password', 'Page title', 'tp-event' ),
 //                'content' => '[' . apply_filters( 'event_auth_forgot_password_shortcode_tag', 'event_auth_forgot_password' ) . ']'
 //            )
-		);
-
-		foreach ( $pages as $name => $page ) {
-			tp_event_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? tp_event_get_page_id( $page['parent'] ) : '' );
-		}
+//		);
+//
+//		foreach ( $pages as $name => $page ) {
+//			tp_event_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? tp_event_get_page_id( $page['parent'] ) : '' );
+//		}
 	}
 
 	/**

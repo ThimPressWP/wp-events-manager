@@ -84,26 +84,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 		}
 
 		/**
-		 * install plugin hook
-		 */
-		public function install() {
-			if ( function_exists( 'tp_event_create_page' ) ) {
-				$this->_include( 'inc/class-auth-install.php' );
-				Auth_Install::install();
-			}
-		}
-
-		/**
-		 * uninstall plugin hook
-		 */
-		public function uninstall() {
-			if ( function_exists( 'tp_event_create_page' ) ) {
-				$this->_include( 'inc/class-auth-install.php' );
-				Auth_Install::uninstall();
-			}
-		}
-
-		/**
 		 * include file
 		 *
 		 * @param  array || string
@@ -146,7 +126,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 			}
 
 			$this->_include( 'inc/class-event-install.php' );
-			$this->_include( 'inc/class-auth-install.php' );
 		}
 
 		/**
