@@ -124,7 +124,7 @@ class Event_Paypal_Payment_Gateway extends Event_Abstract_Payment_Gateway {
      */
     public function admin_fields() {
         $prefix = 'thimpress_events_';
-        return apply_filters( 'event_auth_paypal_admin_fields', array(
+        return apply_filters( 'tp_event_paypal_admin_fields', array(
             array(
                 'type' => 'section_start',
                 'id' => 'paypal_settings',

@@ -19,7 +19,8 @@ class Event_Payment_Gateways {
 		$payment_gatways =
 			apply_filters( 'event_auth_payment_gateways',
 				array(
-					'Event_Paypal_Payment_Gateway'
+					'Event_Paypal_Payment_Gateway',
+					'Event_Woo_Payment_Gateway'
 				)
 			);
 

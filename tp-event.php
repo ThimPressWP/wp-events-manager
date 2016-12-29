@@ -104,7 +104,8 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-auth-post-types.php' );
 			$this->_include( 'inc/gateways/class-event-abstract-payment-gateway.php' );
 
-			$this->_include( 'inc/gateways/paypal/class-event-payment-gateway-paypal.php' );
+			$this->_include( 'inc/gateways/paypal/class-event-paypal-payment-gateway.php' );
+			$this->_include( 'inc/gateways/woo-payment/class-event-woo-payment-gateway.php' );
 
 			$this->_include( 'inc/admin/metaboxes/class-event-admin-metabox-booking-information.php' );
 
