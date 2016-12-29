@@ -33,7 +33,7 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 	 * @return boolean
 	 */
 	public function is_available() {
-		return !empty( $this->paypal_email ) && get_option( 'thimpress_events_paypal_enable' ) === 'yes';
+		return get_option( 'thimpress_events_woo_payment_enable' ) === 'yes';
 	}
 
 
@@ -42,19 +42,19 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 	 * @return array
 	 */
 	public function admin_fields() {
-		$prefix = 'thimpress_events_';
+		$prefix = 'tp_event_';
 		return apply_filters( 'tp_event_woo_admin_fields', array(
 			array(
 				'type'  => 'section_start',
 				'id'    => 'woo_settings',
-				'title' => __( 'Woocomerce', 'tp-event' ),
+				'title' => __( 'Woocommerce', 'tp-event' ),
 				'desc'  => __( 'Settings for WooCommerce checkout process.', 'tp-event' )
 			),
 			array(
 				'type'    => 'select',
 				'title'   => __( 'Enable', 'tp-event' ),
 				'desc'    => __( 'This controlls enable payment method', 'tp-event' ),
-				'id'      => $prefix . 'paypal_enable',
+				'id'      => $prefix . 'woo_payment_enable',
 				'options' => array(
 					'no'  => __( 'No', 'tp-event' ),
 					'yes' => __( 'Yes', 'tp-event' )
