@@ -17,7 +17,6 @@ class Auth_Admin {
 	 * include needed files
 	 */
 	private function _includes() {
-		TP_Event::instance()->_include( 'inc/admin/class-auth-admin-settings.php' );
 		TP_Event::instance()->_include( 'inc/admin/class-auth-admin-metaboxes.php' );
 	}
 
