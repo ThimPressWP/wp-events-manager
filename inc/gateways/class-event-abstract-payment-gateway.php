@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-abstract class Auth_Abstract_Payment_Gateway {
+abstract class Event_Abstract_Payment_Gateway {
 
     /**
      * id of payment
