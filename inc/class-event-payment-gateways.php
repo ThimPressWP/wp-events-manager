@@ -16,9 +16,12 @@ class Event_Payment_Gateways {
 	}
 
 	public function init() {
-		$payment_gatways = apply_filters( 'event_auth_payment_gateways', array(
-			'Event_Payment_Gateway_Paypal'
-		) );
+		$payment_gatways =
+			apply_filters( 'event_auth_payment_gateways',
+				array(
+					'Event_Paypal_Payment_Gateway'
+				)
+			);
 
 		foreach ( $payment_gatways as $gateway ) {
 			$gateway                      = is_string( $gateway ) ? new $gateway : $gateway;
