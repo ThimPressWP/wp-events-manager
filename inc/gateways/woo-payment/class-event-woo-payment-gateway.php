@@ -13,7 +13,7 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 
 	public $title = null;
 
-	public $is_enable = false;
+	protected static $available = false;
 
 	/**
 	 * payment title
@@ -25,15 +25,39 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 		$this->_title = __( 'Woocommerce', 'tp-event' );
 		$this->title  = __( 'Woocommerce', 'tp-event' );
 		parent::__construct();
+		$this->load();
+	}
+
+	public function load() {
+
+		if ( !function_exists( 'is_plugin_active' ) ) {
+			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+
+		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) && class_exists( 'WC_Install' ) ) {
+			self::$available = true;
+		} else {
+			self::$available = false;
+		}
+
+		if ( self::$available ) {
+			add_filter( 'tp_event_get_currency', array( $this, 'woocommerce_currency' ), 10 );
+		}
 
 	}
+
+
+	public function woocommerce_currency() {
+		return get_woocommerce_currency();
+	}
+	
 
 	/**
 	 *
 	 * @return boolean
 	 */
 	public function is_available() {
-		return get_option( 'thimpress_events_woo_payment_enable' ) === 'yes';
+		return ( self::$available && tp_event_get_option( 'woo_payment_enable' ) === 'yes' );
 	}
 
 
@@ -62,7 +86,7 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 			),
 			array(
 				'type' => 'section_end',
-				'id'   => 'paypal_settings'
+				'id'   => 'woo_settings'
 			)
 		) );
 	}
