@@ -9,7 +9,7 @@ add_action( 'tp_event_after_loop_event_item', 'tp_event_register' );
 add_action( 'tp_event_after_single_event', 'tp_event_register' );
 if ( !function_exists( 'tp_event_register' ) ) {
 
-    function event_auth_register() {
+    function tp_event_register() {
 		tp_event_get_template( 'button-register-event.php' );
     }
 
