@@ -13,8 +13,9 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 
 	public $title = null;
 
-
 	protected static $available = false;
+
+	protected static $cart_url = null;
 
 	/**
 	 * payment title
@@ -42,6 +43,9 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 		}
 
 		if ( self::$available ) {
+
+			self::$cart_url = wc_get_cart_url() ? wc_get_cart_url() : '';
+
 			add_filter( 'tp_event_get_currency', array( $this, 'woocommerce_currency' ), 50 );
 			add_filter( 'tp_event_currency_symbol', array( $this, 'woocommerce_currency_symbol' ), 50, 2 );
 			add_filter( 'tp_event_format_price', array( $this, 'woocommerce_price_format' ), 50, 3 );
@@ -101,7 +105,7 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 	 * @return array
 	 */
 	public function admin_fields() {
-		$prefix = 'tp_event_';
+		$prefix = 'thimpress_events_';
 		return apply_filters( 'tp_event_woo_admin_fields', array(
 			array(
 				'type'  => 'section_start',
@@ -124,6 +128,44 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 				'id'   => 'woo_settings'
 			)
 		) );
+	}
+
+	/**
+	 * Checkout url with Woocommerce
+	 *
+	 * checkout url
+	 * @return url string
+	 */
+	public function checkout_url( $booking_id = false ) {
+		if ( !$booking_id ) {
+			wp_send_json( array(
+				'status'  => false,
+				'message' => __( 'Booking ID is not exists!', 'tp-event' )
+			) );
+			die();
+		}
+
+		return $this::$cart_url;
+	}
+
+	/**
+	 * Checkout process via Woocommerce gateway
+	 *
+	 * @param bool $amount
+	 *
+	 * @return array
+	 */
+	public function process( $amount = false ) {
+		if ( !$this->is_available() ) {
+			return array(
+				'status'  => false,
+				'message' => __( 'Please check Woocommerce checkout process settings again.', 'tp-event' )
+			);
+		}
+		return array(
+			'status' => true,
+			'url'    => $this->checkout_url( $amount )
+		);
 	}
 
 

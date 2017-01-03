@@ -53,7 +53,7 @@ class Event_Paypal_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 	// callback
 	public function payment_validation() {
 		if ( isset( $_GET['event-auth-paypal-payment'] ) && $_GET['event-auth-paypal-payment'] ) {
-			if ( !isset( $_GET['event-auth-paypal-nonce'] ) || !wp_verify_nonce( $_GET['event-auth-paypal-nonce'], 'event-auth-paypal-nonce' ) ) {
+			if ( !isset( $_GET['tp-event-paypal-nonce'] ) || !wp_verify_nonce( $_GET['tp-event-paypal-nonce'], 'tp-event-paypal-nonce' ) ) {
 				return;
 			}
 
@@ -63,7 +63,7 @@ class Event_Paypal_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 				tp_event_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'tp-event' ) ) );
 			}
 			// redirect
-			$url = add_query_arg( array( 'event-auth-paypal-nonce' => $_GET['event-auth-paypal-nonce'] ), tp_event_account_url() );
+			$url = add_query_arg( array( 'tp-event-paypal-nonce' => $_GET['tp-event-paypal-nonce'] ), tp_event_account_url() );
 			wp_redirect( $url );
 			exit();
 		}
@@ -193,7 +193,7 @@ class Event_Paypal_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 		$book = tp_event_get_booking( $booking_id );
 
 		// create nonce
-		$nonce = wp_create_nonce( 'event-auth-paypal-nonce' );
+		$nonce = wp_create_nonce( 'tp-event-paypal-nonce' );
 
 		$user  = get_userdata( $book->user_id );
 		$email = $user->user_email;
@@ -212,13 +212,13 @@ class Event_Paypal_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 			'email'         => $email,
 			'rm'            => '2',
 			'no_shipping'   => '1',
-			'return'        => add_query_arg( array( 'event-auth-paypal-payment' => 'completed', 'event-auth-paypal-nonce' => $nonce ), tp_event_account_url() ),
-			'cancel_return' => add_query_arg( array( 'event-auth-paypal-payment' => 'cancel', 'event-auth-paypal-nonce' => $nonce ), tp_event_account_url() ),
+			'return'        => add_query_arg( array( 'event-auth-paypal-payment' => 'completed', 'tp-event-paypal-nonce' => $nonce ), tp_event_account_url() ),
+			'cancel_return' => add_query_arg( array( 'event-auth-paypal-payment' => 'cancel', 'tp-event-paypal-nonce' => $nonce ), tp_event_account_url() ),
 			'custom'        => json_encode( array( 'booking_id' => $booking_id, 'user_id' => $book->user_id ) )
 		);
 
 		// allow hook paypal param
-		$query = apply_filters( 'event_auth_payment_paypal_params', $query );
+		$query = apply_filters( 'tp_event_paypal_payment_params', $query );
 
 		return $this->paypal_payment_url . '?' . http_build_query( $query );
 	}
