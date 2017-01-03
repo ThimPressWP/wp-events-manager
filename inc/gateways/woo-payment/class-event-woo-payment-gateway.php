@@ -13,6 +13,7 @@ class Event_Woo_Payment_Gateway extends Event_Abstract_Payment_Gateway {
 
 	public $title = null;
 
+
 	protected static $available = false;
 
 	/**
