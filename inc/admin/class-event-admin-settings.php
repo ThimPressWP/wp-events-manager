@@ -15,6 +15,7 @@ class Event_Admin_Settings {
 	public static function get_setting_pages() {
 		$settings   = array();
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-general.php';
+		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-pages.php';
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-email.php';
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-checkout.php';
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-account.php';
@@ -166,7 +167,7 @@ class Event_Admin_Settings {
 				case 'number':
 				case 'email':
 				case 'password':
-					$value = tp_event_get_option( $field['id'] );
+					$value = tp_event_get_option( $field['id'] ) ? tp_event_get_option( $field['id'] ) : esc_attr( $field['default'] );
 					?>
                     <tr valign="top">
                         <th scope="row">
