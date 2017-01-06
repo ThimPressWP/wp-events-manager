@@ -43,7 +43,7 @@ add_action( 'widgets_init', 'tp_event_register_countdown_widget' );
 if ( !function_exists( 'tp_event_register_countdown_widget' ) ) {
 
 	function tp_event_register_countdown_widget() {
-		register_widget( 'Event_Widget_Countdown' );
+		register_widget( 'TP_Event_Widget_Countdown' );
 	}
 
 }

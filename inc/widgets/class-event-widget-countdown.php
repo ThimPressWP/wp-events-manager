@@ -3,7 +3,7 @@
 /**
  * Adds Foo_Widget widget.
  */
-class Event_Widget_Countdown extends WP_Widget {
+class TP_Event_Widget_Countdown extends WP_Widget {
 
     /**
      * Register widget with WordPress.
@@ -11,8 +11,8 @@ class Event_Widget_Countdown extends WP_Widget {
     function __construct() {
         parent::__construct(
                 'tp_event_widget_countdown', // Base ID
-                __( 'Countdown Widget Post Type Event', 'tp-event' ), // Name
-                array( 'description' => __( 'Beautifull Countdown', 'tp-event' ), ) // Args
+                __( 'TP Event Countdown', 'tp-event' ), // Name
+                array( 'description' => __( 'Countdown timer for event', 'tp-event' ), ) // Args
         );
     }
 
