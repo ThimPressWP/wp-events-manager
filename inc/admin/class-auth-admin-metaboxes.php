@@ -8,14 +8,14 @@ class Auth_Admin_Metaboxes {
         add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 3 );
         add_action( 'event_admin_metabox_before_fields', array( __CLASS__, 'add_event_fields' ), 10, 2 );
         
-        add_action( 'event_auth_process_update_event_auth_book_meta', array( 'Auth_Admin_Metabox_Booking_Information', 'save' ), 10, 3 );
+        add_action( 'event_auth_process_update_event_auth_book_meta', array( 'TP_Event_Admin_Metabox_Booking', 'save' ), 10, 3 );
     }
 
     public static function add_meta_boxes() {
         add_meta_box( 
             'booking-information',
             __( 'Booking Information', 'tp-event' ),
-            array( 'Auth_Admin_Metabox_Booking_Information', 'render' ),
+            array( 'TP_Event_Admin_Metabox_Booking', 'render' ),
             'event_auth_book',
             'normal',
             'default'

@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Event_Payment_Gateways {
+class TP_Event_Payment_Gateways {
 
 	/**
 	 * gateways method

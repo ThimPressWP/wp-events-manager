@@ -12,7 +12,7 @@ class Event_Admin_Metaboxes {
         /**
          * Save post meta
          */
-        add_action( 'event_process_update_tp_event_meta', array( 'Event_Admin_Metabox_Event', 'save' ), 10, 2 );
+        add_action( 'event_process_update_tp_event_meta', array( 'TP_Event_Admin_Metabox_Event', 'save' ), 10, 2 );
     }
 
     /**
@@ -20,11 +20,8 @@ class Event_Admin_Metaboxes {
      */
     public static function add_meta_boxes() {
         add_meta_box(
-                'tp_event_setting_section', __( 'Event Settings', 'tp-event' ), array( 'Event_Admin_Metabox_Event', 'render' ), 'tp_event', 'normal', 'high'
+                'tp_event_setting_section', __( 'Event Settings', 'tp-event' ), array( 'TP_Event_Admin_Metabox_Event', 'render' ), 'tp_event', 'normal', 'high'
         );
-//        add_meta_box(
-//                'tp_event_timing', __( 'Event Timing Period', 'tp-event' ), array( 'Event_Admin_Metabox_Event_Timing', 'render' ), 'tp_event', 'normal', 'high'
-//        );
     }
 
     /**
