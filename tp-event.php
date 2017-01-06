@@ -93,7 +93,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function includes() {
 
 			$this->_include( 'inc/class-event-autoloader.php' );
-			$this->_include( 'inc/class-auth-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
 			$this->_include( 'inc/class-event-ajax.php' );
 			$this->_include( 'inc/tp-event-core-functions.php' );
@@ -103,11 +102,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			$this->_include( 'inc/class-auth-post-types.php' );
 			$this->_include( 'inc/gateways/class-event-abstract-payment-gateway.php' );
-
-			$this->_include( 'inc/gateways/paypal/class-event-paypal-payment-gateway.php' );
-			$this->_include( 'inc/gateways/woo-payment/class-event-woo-payment-gateway.php' );
-
-			$this->_include( 'inc/admin/metaboxes/class-event-admin-metabox-booking-information.php' );
 
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
 
@@ -133,7 +127,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * @return  TP_Event_Payment_Gateways
 		 */
 		public function payment_gateways() {
-			return Event_Payment_Gateways::instance();
+			return TP_Event_Payment_Gateways::instance();
 		}
 
 		/**

@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit();
 
-class Auth_Admin_Metabox_Booking_Information {
+class TP_Event_Admin_Metabox_Booking {
 
     public static function render() {
         require_once dirname( __FILE__ ) . '/views/html-metabox-booking-information.php';

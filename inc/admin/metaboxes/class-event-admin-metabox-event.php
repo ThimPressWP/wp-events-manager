@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-class Event_Admin_Metabox_Event {
+class TP_Event_Admin_Metabox_Event {
 
     public static function init() {
 //        add_action( 'tp_event_schedule_status', array( __CLASS__, 'schedule_status' ), 10, 2 );
@@ -156,4 +156,4 @@ class Event_Admin_Metabox_Event {
 
 }
 
-Event_Admin_Metabox_Event::init();
+TP_Event_Admin_Metabox_Event::init();

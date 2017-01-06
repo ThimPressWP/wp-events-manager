@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Event_Paypal_Payment_Gateway extends Event_Abstract_Payment_Gateway {
+class TP_Event_Payment_Gateway_Paypal extends Event_Abstract_Payment_Gateway {
 
 	/**
 	 * id of payment
