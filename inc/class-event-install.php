@@ -80,11 +80,6 @@ class Event_Install {
      */
     public static function create_pages() {
         $pages = array(
-            'archive'    => array(
-                'name'    => _x( 'event-archive', 'Page slug', 'tp-event' ),
-                'title'   => _x( 'Event Archive', 'Page title', 'tp-event' ),
-                'content' => '[' . apply_filters( 'tp_event_archive_page_shortcode_tag', 'tp_event_archive_page' ) . ']'
-            ),
 			'register' => array(
 				'name'    => _x( 'user-register', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'User Register', 'Page title', 'tp-event' ),
