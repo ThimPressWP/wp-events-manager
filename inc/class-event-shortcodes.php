@@ -17,12 +17,11 @@ class TP_Event_Shortcodes {
 	 * Init shortcodes
 	 */
 	public static function init() {
-
 		add_action( 'tp_event_shortcode_wrapper_start', array( __CLASS__, 'shortcode_wrapper_start' ) );
 		add_action( 'tp_event_shortcode_wrapper_end', array( __CLASS__, 'shortcode_wrapper_end' ) );
 
 		$shortcodes = array(
-			'event_list' => __CLASS__ . '::event_list',
+			'list_event' => __CLASS__ . '::list_event',
 			'register'   => __CLASS__ . '::register',
 			'login'      => __CLASS__ . '::login',
 			'account'    => __CLASS__ . '::account',
@@ -36,7 +35,12 @@ class TP_Event_Shortcodes {
 		add_action( 'template_redirect', array( __CLASS__, 'auto_shortcode' ) );
 	}
 
-	public static function event_list( $atts ) {
+	public static function list_event( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'post_type' => 'tp_event'
+			), $atts
+		);
 		return TP_Event_Shortcodes::render( 'event-list', 'event-list.php', $atts );
 	}
 
@@ -82,9 +86,11 @@ class TP_Event_Shortcodes {
 	public static function render( $shortcode = '', $template = '', $atts = array() ) {
 		ob_start();
 		do_action( 'tp_event_shortcode_wrapper_start', $shortcode );
-		tp_event_get_template( 'shortcodes/' . $template, $atts );
+		tp_event_get_template( 'shortcodes/' . $template, array( 'atts' => $atts ) );
 		do_action( 'tp_event_shortcode_wrapper_end', $shortcode );
 		return ob_get_clean();
 	}
 
 }
+
+TP_Event_Shortcodes::init();
