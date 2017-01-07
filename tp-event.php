@@ -105,6 +105,10 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
 
+			$this->_include( 'inc/abstracts/class-event-abstract-meta-box.php' );
+			$this->_include( 'inc/abstracts/class-event-abstract-setting.php' );
+			$this->_include( 'inc/abstracts/class-event-abstract-shortcodes.php' );
+
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
@@ -114,7 +118,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 				$this->_include( 'inc/class-event-frontend-scripts.php' );
 
 				$this->_include( 'inc/tp-event-template-hook.php' );
-				$this->_include( 'inc/class-auth-authentication.php' );
+				$this->_include( 'inc/class-event-authentication.php' );
 				$this->_include( 'inc/class-event-shortcodes.php' );
 			}
 

@@ -46,6 +46,8 @@ abstract class Event_Abstract_Setting_Base extends TP_Event_Settings {
 
         $this->options();
         add_filter( 'tp_event_settings_field', array( $this, 'settings' ) );
+
+        parent::__construct();
     }
 
     function settings( $settings ) {

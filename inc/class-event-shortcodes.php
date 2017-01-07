@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class TP_Event_Shortcodes {
+class TP_Event_Shortcodes extends Event_Abstract_Shortcodes {
 
 	public static function init() {
 
@@ -21,7 +21,7 @@ class TP_Event_Shortcodes {
 		);
 
 		foreach ( $shortcodes as $shortcode ) {
-			add_shortcode( 'event_' . $shortcode, array( __CLASS__, $shortcode ) );
+			add_shortcode( 'tp_event_' . $shortcode, array( __CLASS__, $shortcode ) );
 		}
 	}
 
