@@ -80,25 +80,25 @@ class Event_Install {
      */
     public static function create_pages() {
         $pages = array(
-            'event_archive'    => array(
-                'name'    => _x( 'events', 'Page Slug', 'tp-hotel-booking' ),
-                'title'   => _x( 'Event Archive', 'Page Title', 'tp-hotel-booking' ),
-                'content' => '[' . apply_filters( 'event_archive_page_content', 'event_archive' ) . ']'
+            'archive'    => array(
+                'name'    => _x( 'event-archive', 'Page slug', 'tp-event' ),
+                'title'   => _x( 'Event Archive', 'Page title', 'tp-event' ),
+                'content' => '[' . apply_filters( 'tp_event_archive_page_shortcode_tag', 'tp_event_archive_page' ) . ']'
             ),
 			'register' => array(
-				'name'    => _x( 'auth-register', 'Page slug', 'tp-event' ),
-				'title'   => _x( 'Auth Register', 'Page title', 'tp-event' ),
-				'content' => '[' . apply_filters( 'event_auth_register_shortcode_tag', 'event_auth_register' ) . ']'
+				'name'    => _x( 'user-register', 'Page slug', 'tp-event' ),
+				'title'   => _x( 'User Register', 'Page title', 'tp-event' ),
+				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'tp_event_register' ) . ']'
 			),
 			'login'    => array(
-				'name'    => _x( 'auth-login', 'Page slug', 'tp-event' ),
-				'title'   => _x( 'Auth Login', 'Page title', 'tp-event' ),
-				'content' => '[' . apply_filters( 'event_auth_login_shortcode_tag', 'event_auth_login' ) . ']'
+				'name'    => _x( 'user-login', 'Page slug', 'tp-event' ),
+				'title'   => _x( 'User Login', 'Page title', 'tp-event' ),
+				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'tp_event_login' ) . ']'
 			),
 			'account'  => array(
-				'name'    => _x( 'auth-account', 'Page slug', 'tp-event' ),
-				'title'   => _x( 'Auth Account', 'Page title', 'tp-event' ),
-				'content' => '[' . apply_filters( 'event_auth_my_account_shortcode_tag', 'event_auth_my_account' ) . ']'
+				'name'    => _x( 'user-account', 'Page slug', 'tp-event' ),
+				'title'   => _x( 'User Account', 'Page title', 'tp-event' ),
+				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'tp_event_account' ) . ']'
 			),
         );
         foreach ( $pages as $name => $page ) {

@@ -1,54 +1,35 @@
 <?php
+/*
+ * @author leehld
+ */
 
-if ( !defined( 'ABSPATH' ) ) {
-	exit();
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
-class TP_Event_Shortcodes extends Event_Abstract_Shortcodes {
+/**
+ * TP_Event_Shortcodes class
+ */
+class TP_Event_Shortcodes {
 
+	/**
+	 * Init shortcodes
+	 */
 	public static function init() {
-
-		add_action( 'tp_event_before_wrap_shortcode', array( __CLASS__, 'shortcode_start_wrap' ) );
-		add_action( 'tp_event_after_wrap_shortcode', array( __CLASS__, 'shortcode_end_wrap' ) );
-
 		$shortcodes = array(
-			'auth',
-			'auth_login',
-			'auth_register',
-//            'auth_forgot_password',
-//            'auth_reset_password',
-			'auth_my_account',
+			'archive_page'    => __CLASS__ . '::archive_page',
+			'register'        => __CLASS__ . '::register',
+			'login'           => __CLASS__ . '::login',
+			'account'         => __CLASS__ . '::account',
+			'countdown'       => __CLASS__ . '::countdown',
 		);
 
-		foreach ( $shortcodes as $shortcode ) {
-			add_shortcode( 'tp_event_' . $shortcode, array( __CLASS__, $shortcode ) );
+		foreach ( $shortcodes as $shortcode => $function ) {
+			add_shortcode( apply_filters( "tp_event_{$shortcode}_shortcode_tag", 'tp_event_' . $shortcode ), $function );
 		}
-	}
 
-	public static function auth( $atts, $content = '' ) {
-		Auth_Authentication::event_auth( $atts, $content );
-	}
-
-	public static function auth_login( $atts, $content = '' ) {
-		Auth_Authentication::event_auth_login( $atts, $content );
-	}
-
-	public static function auth_register( $atts, $content = '' ) {
-		Auth_Authentication::event_auth_register( $atts, $content );
-	}
-
-	public static function auth_forgot_password( $atts, $content = '' ) {
-		Auth_Authentication::forgot_pass( $atts, $content );
-	}
-
-	public static function auth_reset_password( $atts, $content = '' ) {
-		Auth_Authentication::reset_password( $atts, $content );
-	}
-
-	public static function auth_my_account( $atts, $content = '' ) {
-		Auth_Authentication::my_account( $atts, $content );
+		add_action( 'template_redirect', array( __CLASS__, 'auto_shortcode' ) );
 	}
 
 }
-
-TP_Event_Shortcodes::init();
