@@ -1,6 +1,6 @@
 <?php
 
-class Event_Shortcode_Countdown extends Event_Abstract_Shortcodes {
+class Event_Shortcode_Countdown extends TP_Event_Abstract_Shortcodes {
 
     /**
      * template file
