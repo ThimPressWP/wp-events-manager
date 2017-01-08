@@ -84,7 +84,7 @@ class TP_Event_Payment_Gateway_Paypal extends Event_Abstract_Payment_Gateway {
 			if ( !isset( $transaction_subject->booking_id ) || !$booking_id = $transaction_subject->booking_id )
 				return;
 
-			$book = Event_Booking::instance( $booking_id );
+			$book = TP_Event_Booking::instance( $booking_id );
 
 			// santitize
 			$pay_verify = array_merge( array( 'cmd' => '_notify-validate' ), array_map( 'stripcslashes', $_POST ) );
@@ -171,7 +171,7 @@ class TP_Event_Payment_Gateway_Paypal extends Event_Abstract_Payment_Gateway {
 			return;
 
 		// book
-		$book        = Event_Booking::instance( $booking_id );
+		$book        = TP_Event_Booking::instance( $booking_id );
 		$description = sprintf( '%s(%s)', $book->post->post_title, tp_event_format_price( $book->price, $book->currency ) );
 
 		return $description;

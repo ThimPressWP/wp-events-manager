@@ -29,7 +29,7 @@ class Auth_Email_Register_Event {
             return;
         }
 
-        $booking = Event_Booking::instance( $booking_id );
+        $booking = TP_Event_Booking::instance( $booking_id );
 
         if ( $booking ) {
             $user_id = $booking->user_id;

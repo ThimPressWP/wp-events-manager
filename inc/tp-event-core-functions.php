@@ -1112,10 +1112,10 @@ if ( !function_exists( 'tp_event_get_booking' ) ) {
 	 *
 	 * @param type $booking_id
 	 *
-	 * @return Event_Booking
+	 * @return TP_Event_Booking
 	 */
 	function tp_event_get_booking( $booking_id ) {
-		return Event_Booking::instance( $booking_id );
+		return TP_Event_Booking::instance( $booking_id );
 	}
 
 }

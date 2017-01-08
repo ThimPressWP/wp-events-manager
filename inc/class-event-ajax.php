@@ -106,7 +106,7 @@ class Event_Ajax {
 			}
 			// End sanitize, validate data
 			// load booking module
-			$booking = Event_Booking::instance();
+			$booking = TP_Event_Booking::instance();
 			$event   = Auth_Event::instance( $event_id );
 
 			$user       = wp_get_current_user();
@@ -144,7 +144,7 @@ class Event_Ajax {
 				} else {
 					if ( $args['price'] == 0 ) {
 						// update booking status
-						$book = Event_Booking::instance( $booking_id );
+						$book = TP_Event_Booking::instance( $booking_id );
 						$book->update_status( 'pending' );
 
 						// user booking

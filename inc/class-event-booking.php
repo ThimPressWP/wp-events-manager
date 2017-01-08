@@ -3,11 +3,10 @@
 if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 /**
- * Event_Booking
+ * TP_Event_Booking
  */
-class Event_Booking {
+class TP_Event_Booking {
 
 	private static $instance = null;
 	public $post = null;
