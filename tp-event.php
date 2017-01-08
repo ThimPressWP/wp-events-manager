@@ -98,9 +98,8 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/tp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-setting.php' );
 
-			$this->_include( 'inc/class-event-custom-post-types.php' );
+			$this->_include( 'inc/class-event-post-types.php' );
 
-			$this->_include( 'inc/class-auth-post-types.php' );
 			$this->_include( 'inc/gateways/class-event-abstract-payment-gateway.php' );
 
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
