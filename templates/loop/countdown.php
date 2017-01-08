@@ -10,5 +10,3 @@ $date = new DateTime( date( 'Y-m-d H:i:s', strtotime( $time ) ), new DateTimeZon
     <div class="tp_event_counter" data-time="<?php echo esc_attr( $date->format( 'M j, Y H:i:s O' ) ) ?>"></div>
 
 </div>
-
-<p style="clear:both"></p>

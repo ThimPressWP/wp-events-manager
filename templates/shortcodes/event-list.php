@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$list_event = new WP_Query( $atts );
+$list_event = new WP_Query( $args );
 ?>
 
 <?php

@@ -107,7 +107,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			$this->_include( 'inc/abstracts/class-event-abstract-meta-box.php' );
 			$this->_include( 'inc/abstracts/class-event-abstract-setting.php' );
-			$this->_include( 'inc/abstracts/class-event-abstract-shortcodes.php' );
 
 
 			if ( is_admin() ) {

@@ -22,15 +22,15 @@ if ( !function_exists( 'tp_event_content_filter' ) ) {
     function tp_event_content_filter( $content ) {
         global $post;
         if ( ( $login_page_id = tp_event_get_page_id( 'login' ) ) && is_page( $login_page_id ) ) {
-            $content = do_shortcode( '[event_auth_login]' );
+            $content = do_shortcode( '[tp_event_login]' );
         } else if ( ( $register_page_id = tp_event_get_page_id( 'register' ) ) && is_page( $register_page_id ) ) {
-            $content = do_shortcode( '[event_auth_register]' );
+            $content = do_shortcode( '[tp_event_register]' );
         } else if ( ( $forgot_page_id = tp_event_get_page_id( 'forgot_pass' ) ) && is_page( $forgot_page_id ) ) {
-            $content = do_shortcode( '[event_auth_forgot_password]' );
+            $content = do_shortcode( '[tp_event_forgot_password]' );
         } else if ( ( $reset_page_id = tp_event_get_page_id( 'reset_password' ) ) && is_page( $reset_page_id ) ) {
-            $content = do_shortcode( '[event_auth_reset_password]' );
+            $content = do_shortcode( '[tp_event_reset_password]' );
         } else if ( ( $account_page_id = tp_event_get_page_id( 'account' ) ) && is_page( $account_page_id ) ) {
-            $content = do_shortcode( '[event_auth_my_account]' );
+            $content = do_shortcode( '[tp_event_account]' );
         }
 
         return $content;
