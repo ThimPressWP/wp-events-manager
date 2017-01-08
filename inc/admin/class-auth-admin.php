@@ -9,15 +9,7 @@ class Auth_Admin {
 
 		add_filter( 'event_admnin_menus', array( $this, 'user_menu' ), 9 );
 		// add_action( 'parse_request', array( $this, 'load_booking_by_user' ) );
-		$this->_includes();
 		add_action( 'event_before_enqueue_scripts', array( $this, 'register_scripts' ) );
-	}
-
-	/**
-	 * include needed files
-	 */
-	private function _includes() {
-		TP_Event::instance()->_include( 'inc/admin/class-auth-admin-metaboxes.php' );
 	}
 
 	/**
