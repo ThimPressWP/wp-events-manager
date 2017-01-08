@@ -35,13 +35,52 @@ class TP_Event_Shortcodes {
 		add_action( 'template_redirect', array( __CLASS__, 'auto_shortcode' ) );
 	}
 
+	/**
+	 * Shortcode show list event
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
 	public static function list_event( $atts ) {
 		$atts = shortcode_atts(
 			array(
 				'post_type' => 'tp_event'
 			), $atts
 		);
-		return TP_Event_Shortcodes::render( 'event-list', 'event-list.php', $atts );
+		return TP_Event_Shortcodes::render( 'list-event', 'event-list.php', $atts );
+	}
+
+
+	/**
+	 * Shortcode user register
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	public static function register( $atts ) {
+
+		if ( !get_option( 'users_can_register' ) ) {
+			return TP_Event_Shortcodes::render( 'user-register', 'user-cannot-register.php' );
+		} elseif ( !empty( $_REQUEST['registered'] ) ) {
+			$email = sanitize_email( $_REQUEST['registered'] );
+			$user  = get_user_by( 'email', $email );
+			if ( $user && $user->ID ) {
+				wp_new_user_notification( $user->ID );
+				// register completed
+				return TP_Event_Shortcodes::render( 'user-register', 'register-completed.php' );
+			} else {
+				// error
+				return TP_Event_Shortcodes::render( 'user-register', 'register-error.php' );
+			}
+		} elseif ( !is_user_logged_in() ) {
+			// show register form
+			return TP_Event_Shortcodes::render( 'user-register', 'form-register.php' );
+		}
+
+		return '';
+
 	}
 
 	/**
@@ -64,7 +103,7 @@ class TP_Event_Shortcodes {
 	 * @param $shortcode
 	 */
 	public static function shortcode_wrapper_start( $shortcode ) {
-		echo '<div class="tp-event-wrapper "' . esc_attr( $shortcode ) . '>';
+		echo '<div class="event-wrapper-shortcode ' . esc_attr( $shortcode ) . '">';
 	}
 
 	/**
