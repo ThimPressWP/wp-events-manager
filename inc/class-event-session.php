@@ -5,113 +5,122 @@
  *
  * @author ducnvtt
  */
-class Event_Session {
-    
-    /**
-     * array key of session or cookie
-     * @var type string
-     */
-    private $_name = null;
 
-    /**
-     * is change is TRUE if has change $_data
-     * @var type bool
-     */
-    private $_is_changed = false;
+class TP_Event_Session {
 
-    /**
-     * session data
-     * @var type array
-     */
-    private $_data = array();
+	/**
+	 * array key of session or cookie
+	 * @var type string
+	 */
+	private $_name = null;
 
-    /**
-     * live time of cookie
-     * @var type timestamp
-     */
-    private $_live_time = null;
+	/**
+	 * is change is TRUE if has change $_data
+	 * @var type bool
+	 */
+	private $_is_changed = false;
 
-    public function __construct() {
-        $this->_name = 'event_auth_session_' . COOKIEHASH;
-        $this->_data = $this->get_session_data();
-        add_action( 'shutdown', array( $this, 'maybe_save_data' ), 0 );
-    }
+	/**
+	 * session data
+	 * @var type array
+	 */
+	private $_data = array();
 
-    /**
-     * get data
-     * @param type $name
-     */
-    public function __get( $name ) {
-        $this->get( $name );
-    }
+	/**
+	 * live time of cookie
+	 * @var type timestamp
+	 */
+	private $_live_time = null;
 
-    /**
-     * set data
-     * @param type $name
-     * @param type $value
-     */
-    public function __set( $name, $value ) {
-        $this->set( $name, $value );
-    }
+	public function __construct() {
+		$this->_name = 'event_auth_session_' . COOKIEHASH;
+		$this->_data = $this->get_session_data();
+		add_action( 'shutdown', array( $this, 'maybe_save_data' ), 0 );
+	}
 
-    /**
-     * isset array key data
-     * @param type $name
-     * @return type bool
-     */
-    public function __isset( $name ) {
-        return isset( $this->_data[$name] );
-    }
+	/**
+	 * get data
+	 *
+	 * @param type $name
+	 */
+	public function __get( $name ) {
+		$this->get( $name );
+	}
 
-    /**
-     * unset item data
-     * @param type $name
-     */
-    public function __unset( $name ) {
-        if ( isset( $this->_data[$name] ) ) {
-            unset( $this->_data[$name] );
-            $this->_is_changed = true;
-        }
-    }
+	/**
+	 * set data
+	 *
+	 * @param type $name
+	 * @param type $value
+	 */
+	public function __set( $name, $value ) {
+		$this->set( $name, $value );
+	}
 
-    /**
-     * get data
-     * @param type $name
-     * @param type $default
-     * @return type
-     */
-    public function get( $name = null, $default = null ) {
-        return isset( $this->_data[$name] ) ? maybe_unserialize( $this->_data[$name] ) : $default;
-    }
+	/**
+	 * isset array key data
+	 *
+	 * @param type $name
+	 *
+	 * @return type bool
+	 */
+	public function __isset( $name ) {
+		return isset( $this->_data[$name] );
+	}
 
-    /**
-     * set data
-     * @param type $name
-     * @param type $value
-     */
-    public function set( $name = '', $value = '' ) {
-        if ( $name && $value !== $this->get( $name ) ) {
-            $this->_data[$name] = maybe_serialize( $value );
-            $this->_is_changed = true;
-            $this->maybe_save_data();
-        }
-    }
+	/**
+	 * unset item data
+	 *
+	 * @param type $name
+	 */
+	public function __unset( $name ) {
+		if ( isset( $this->_data[$name] ) ) {
+			unset( $this->_data[$name] );
+			$this->_is_changed = true;
+		}
+	}
 
-    /**
-     * save session data
-     */
-    public function maybe_save_data() {
-        if ( $this->_is_changed ) {
-            $_SESSION[$this->_name] = maybe_serialize( $this->_data );
-        }
-    }
+	/**
+	 * get data
+	 *
+	 * @param type $name
+	 * @param type $default
+	 *
+	 * @return type
+	 */
+	public function get( $name = null, $default = null ) {
+		return isset( $this->_data[$name] ) ? maybe_unserialize( $this->_data[$name] ) : $default;
+	}
 
-    /**
-     * get session data
-     * @return array
-     */
-    private function get_session_data() {
-        return isset( $_SESSION[$this->_name] ) ? maybe_unserialize( $_SESSION[$this->_name] ) : array();
-    }
+	/**
+	 * set data
+	 *
+	 * @param type $name
+	 * @param type $value
+	 */
+	public function set( $name = '', $value = '' ) {
+		if ( $name && $value !== $this->get( $name ) ) {
+			$this->_data[$name] = maybe_serialize( $value );
+			$this->_is_changed  = true;
+			$this->maybe_save_data();
+		}
+	}
+
+	/**
+	 * save session data
+	 */
+	public function maybe_save_data() {
+		if ( $this->_is_changed ) {
+			$_SESSION[$this->_name] = maybe_serialize( $this->_data );
+		}
+	}
+
+	/**
+	 * get session data
+	 * @return array
+	 */
+	private function get_session_data() {
+		return isset( $_SESSION[$this->_name] ) ? maybe_unserialize( $_SESSION[$this->_name] ) : array();
+	}
 
 }

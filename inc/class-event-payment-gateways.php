@@ -56,3 +56,5 @@ class TP_Event_Payment_Gateways {
 	}
 
 }
+
+TP_Event_Payment_Gateways::instance();

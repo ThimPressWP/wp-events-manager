@@ -942,7 +942,7 @@ if ( !function_exists( 'tp_event_payments' ) ) {
 
 // list payments gateway
 	function tp_event_payments() {
-		return TP_Event()->payment_gateways()->get_payment_gateways();
+		return TP_Event_Payment_Gateways::instance()->get_payment_gateways();
 	}
 
 }
