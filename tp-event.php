@@ -106,7 +106,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
-				$this->_include( 'inc/admin/class-auth-admin.php' );
 			} else {
 				$this->_include( 'inc/class-event-template.php' );
 				$this->_include( 'inc/class-event-frontend-scripts.php' );

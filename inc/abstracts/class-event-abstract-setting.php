@@ -77,7 +77,7 @@ abstract class TP_Event_Admin_Setting_Page {
 	 */
 	public function output( $tab ) {
 		$settings = $this->get_settings();
-		Event_Admin_Settings::render_fields( $settings );
+		TP_Event_Admin_Settings::render_fields( $settings );
 	}
 
 	/**
@@ -86,7 +86,7 @@ abstract class TP_Event_Admin_Setting_Page {
 	 */
 	public function save() {
 		$settings = $this->get_settings();
-		Event_Admin_Settings::save_fields( $settings );
+		TP_Event_Admin_Settings::save_fields( $settings );
 	}
 
 }

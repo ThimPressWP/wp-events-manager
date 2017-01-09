@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit();
 
-class Event_Admin_Settings {
+class TP_Event_Admin_Settings {
 
 	private static $messages = array();
 
@@ -174,4 +174,4 @@ class Event_Admin_Settings {
 
 }
 
-Event_Admin_Settings::init();
+TP_Event_Admin_Settings::init();

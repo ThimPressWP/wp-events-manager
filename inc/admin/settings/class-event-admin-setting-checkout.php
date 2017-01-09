@@ -100,7 +100,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Admin_Setting_Page {
             foreach ( $gateways as $gateway ) {
                 if ( $current_section === $gateway->id ) {
                     $fields = $gateway->admin_fields();
-                    Event_Admin_Settings::render_fields( $fields );
+                    TP_Event_Admin_Settings::render_fields( $fields );
                     break;
                 }
             }
@@ -116,7 +116,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Admin_Setting_Page {
             foreach ( $gateways as $gateway ) {
                 if ( $current_section === $gateway->id ) {
                     $fields = $gateway->admin_fields();
-                    Event_Admin_Settings::save_fields( $fields );
+                    TP_Event_Admin_Settings::save_fields( $fields );
                     break;
                 }
             }

@@ -64,7 +64,7 @@ class Event_Install {
 	 * Create default options
 	 */
 	public static function create_options() {
-		$setings = Event_Admin_Settings::get_setting_pages();
+		$setings = TP_Event_Admin_Settings::get_setting_pages();
 		foreach ( $setings as $setting ) {
 			$options = $setting->get_settings();
 			foreach ( $options as $option ) {
