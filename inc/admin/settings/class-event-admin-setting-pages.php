@@ -61,7 +61,7 @@ class Event_Admin_Setting_Pages extends Event_Admin_Setting_Page {
 			array(
 				'type'  => 'select_page',
 				'title' => __( 'My Account', 'tp-event' ),
-				'desc'  => __( 'This controlls which the dashboard page', 'tp-event' ),
+				'desc'  => __( 'This controlls which the user account page', 'tp-event' ),
 				'id'    => $prefix . 'account_page_id',
 			),
 			array(

@@ -18,7 +18,10 @@ class TP_Event_Admin_Metabox_Booking {
 		global $post;
 		$booking = TP_Event_Booking::instance( $post->ID );
 		$user    = get_userdata( $booking->user_id );
+		$prefix         = 'tp_event_';
 		?>
+
+		<?php do_action( 'tp_event_admin_metabox_before_fields', $post, $prefix ); ?>
         <table class="event_auth_admin_table_booking">
             <thead>
             <tr>
@@ -53,6 +56,7 @@ class TP_Event_Admin_Metabox_Booking {
 			<?php wp_nonce_field( 'event_nonce', 'event-nonce' ); ?>
             </tbody>
         </table>
+		<?php do_action( 'tp_event_admin_metabox_after_fields', $post, $prefix ); ?>
 		<?php
 	}
 

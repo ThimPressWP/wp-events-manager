@@ -109,7 +109,7 @@ class TP_Event_Admin_Metabox_Event {
 		?>
         <div class="event_meta_box_container">
             <div class="event_meta_panel">
-				<?php do_action( 'event_admin_metabox_before_fields', $post, $prefix ); ?>
+				<?php do_action( 'tp_event_admin_metabox_before_fields', $post, $prefix ); ?>
 
                 <div class="option_group">
                     <p class="form-field">
@@ -169,7 +169,7 @@ class TP_Event_Admin_Metabox_Event {
                     </p>
                 </div>
 				<?php wp_nonce_field( 'event_nonce', 'event-nonce' ); ?>
-				<?php do_action( 'event_admin_metabox_after_fields', $post, $prefix ); ?>
+				<?php do_action( 'tp_event_admin_metabox_after_fields', $post, $prefix ); ?>
             </div>
         </div>
 		<?php
