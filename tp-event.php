@@ -101,9 +101,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
 
-			$this->_include( 'inc/abstracts/class-event-abstract-setting.php' );
-
-
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
 			} else {

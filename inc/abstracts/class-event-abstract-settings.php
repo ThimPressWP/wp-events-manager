@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-abstract class TP_Event_Admin_Setting_Page {
+abstract class TP_Event_Abstract_Settings {
 
 	/**
 	 * Setting page id

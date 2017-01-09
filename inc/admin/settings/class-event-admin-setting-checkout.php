@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit();
 }
 
-class TP_Event_Admin_Setting_Checkout extends TP_Event_Admin_Setting_Page {
+class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Settings {
 
     /**
      * ID

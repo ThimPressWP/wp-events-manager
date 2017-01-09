@@ -67,7 +67,7 @@ class Event_Autoloader {
 			$path = $this->include_path . 'gateways/' . substr( str_replace( '_', '-', $class ), strlen( 'tp_event_payment_gateway_' ) ) . '/';
 		}
 		// abstract class
-		if ( strpos( $class, 'tp_event_abstract' ) === 0 ) {
+		if ( strpos( $class, 'tp_event_abstract_' ) === 0 ) {
 			$path = $this->include_path . 'abstracts/';
 		}
 
