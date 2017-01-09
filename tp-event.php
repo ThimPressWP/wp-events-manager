@@ -108,7 +108,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
 			} else {
 				$this->_include( 'inc/class-event-template.php' );
-				$this->_include( 'inc/class-event-frontend-scripts.php' );
+				$this->_include( 'inc/class-event-frontend-assets.php' );
 
 				$this->_include( 'inc/tp-event-template-hook.php' );
 				$this->_include( 'inc/class-event-authentication.php' );

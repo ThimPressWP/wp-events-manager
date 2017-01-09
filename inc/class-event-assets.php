@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit();
 /**
  * DN_Assets class
  */
-class Event_Assets {
+class TP_Event_Assets {
 
 	/**
 	 * styles
@@ -62,7 +62,7 @@ class Event_Assets {
 		/**
 		 * Before enqueue scripts
 		 */
-		do_action( 'event_before_enqueue_scripts', $hook );
+		do_action( 'tp_event_before_enqueue_scripts', $hook );
 
 		wp_enqueue_script( 'jquery' );
 		// wp_dequeue_script( 'jquery-ui-datepicker' );
@@ -91,7 +91,7 @@ class Event_Assets {
 		/**
 		 * After enqueue scripts
 		 */
-		do_action( 'event_after_enqueue_scripts', $hook );
+		do_action( 'tp_event_after_enqueue_scripts', $hook );
 	}
 
 	/**
@@ -146,4 +146,4 @@ class Event_Assets {
 /**
  * init
  */
-Event_Assets::init();
+TP_Event_Assets::init();
