@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  *
  */
-class Auth_Email_Register_Event {
+class TP_Event_Email_Register_Event {
 
     public function __construct() {
 
@@ -75,4 +75,4 @@ class Auth_Email_Register_Event {
 
 }
 
-new Auth_Email_Register_Event();
+new TP_Event_Email_Register_Event();

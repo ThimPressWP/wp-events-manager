@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Event_Admin {
+class TP_Event_Admin {
 
     public function __construct() {
 
@@ -19,4 +19,4 @@ class Event_Admin {
 
 }
 
-new Event_Admin();
+new TP_Event_Admin();

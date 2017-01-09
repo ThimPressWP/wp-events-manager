@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class Event_Admin_Menu {
+class TP_Event_Admin_Menu {
 
 	/**
 	 * menus
@@ -62,4 +62,4 @@ class Event_Admin_Menu {
 
 }
 
-Event_Admin_Menu::instance();
+TP_Event_Admin_Menu::instance();

@@ -92,23 +92,22 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-event-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
 			$this->_include( 'inc/class-event-ajax.php' );
-			$this->_include( 'inc/tp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-setting.php' );
 			$this->_include( 'inc/class-event-post-types.php' );
-			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
+			$this->_include( 'inc/emails/class-event-register-event.php' );
+			$this->_include( 'inc/tp-event-core-functions.php' );
+			$this->_include( 'inc/class-event-install.php' );
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
 			} else {
 				$this->_include( 'inc/class-event-template.php' );
 				$this->_include( 'inc/class-event-frontend-assets.php' );
-
 				$this->_include( 'inc/tp-event-template-hook.php' );
 				$this->_include( 'inc/class-event-authentication.php' );
 				$this->_include( 'inc/class-event-shortcodes.php' );
 			}
 
-			$this->_include( 'inc/class-event-install.php' );
 		}
 
 		/**
