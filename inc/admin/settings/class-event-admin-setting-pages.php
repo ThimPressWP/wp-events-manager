@@ -8,7 +8,7 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-class Event_Admin_Setting_Pages extends Event_Admin_Setting_Page {
+class TP_Event_Admin_Setting_Pages extends TP_Event_Admin_Setting_Page {
 
 	/**
 	 * ID
@@ -79,4 +79,4 @@ class Event_Admin_Setting_Pages extends Event_Admin_Setting_Page {
 
 }
 
-return new Event_Admin_Setting_Pages();
+return new TP_Event_Admin_Setting_Pages();
