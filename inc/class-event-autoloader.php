@@ -76,11 +76,9 @@ class Event_Autoloader {
 			$path = $this->include_path . '/widgets/';
 		}
 
-		// admin metaboxs TP_Event_Admin_Metabox_Booking
+		// admin metaboxs
 		if ( strpos( $class, '_event_admin_metabox_' ) ) {
 			$path = $this->include_path . 'admin/metaboxes/';
-		} else if ( strpos( $class, 'event_admin_' ) === 0 ) {
-			$path = $this->include_path . 'admin/';
 		}
 
 		$this->load_file( $path . $file );
