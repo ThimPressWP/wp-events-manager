@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TP_Event_Payment_Gateway_Woocommerce extends Event_Abstract_Payment_Gateway {
+class TP_Event_Payment_Gateway_Woocommerce extends TP_Event_Abstract_Payment_Gateway {
 
 	/**
 	 * id of payment
