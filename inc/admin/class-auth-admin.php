@@ -9,16 +9,6 @@ class Auth_Admin {
 
 		add_filter( 'event_admnin_menus', array( $this, 'user_menu' ), 9 );
 		// add_action( 'parse_request', array( $this, 'load_booking_by_user' ) );
-		add_action( 'event_before_enqueue_scripts', array( $this, 'register_scripts' ) );
-	}
-
-	/**
-	 * Register scripts
-	 *
-	 * @param type $hook
-	 */
-	public function register_scripts( $hook ) {
-		Event_Assets::register_style( 'event-auth-admin', TP_EVENT_ASSETS_URI . '/css/admin.css' );
 	}
 
 	public function user_menu( $menus ) {
