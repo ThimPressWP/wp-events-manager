@@ -23,10 +23,14 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 		public $_session = null;
 
+		/**
+		 * TP_Event constructor.
+		 */
 		public function __construct() {
 			$this->define_constants();
 			$this->includes();
 			$this->init_hooks();
+			do_action( 'tp_event_init', $this );
 		}
 
 		/**
@@ -57,12 +61,8 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * @since 2.0
 		 */
 		public function init_hooks() {
-			// plugin init
-//			add_action( 'init', array( $this, 'tp_event_init' ), 0 );
 			// plugin loaded
 			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
-			// event auth loaded
-			add_action( 'event_auth_loaded', array( $this, 'event_auth_loaded' ), 1 );
 
 			// init this plugin hook
 			register_activation_hook( plugin_basename( __FILE__ ), array( $this, 'install' ) );
@@ -75,12 +75,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function loaded() {
 			// load text domain
 			$this->text_domain();
-
-			// load event auth
-			do_action( 'event_auth_loaded', $this );
-
-			// add notice
-			$this->admin_notice();
+			$this->_session = new TP_Event_Session();
 		}
 
 		/**
@@ -92,42 +87,26 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function includes() {
 
+			$this->_include( 'inc/tp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
 			$this->_include( 'inc/class-event-ajax.php' );
-			$this->_include( 'inc/tp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-setting.php' );
-
-			$this->_include( 'inc/class-event-custom-post-types.php' );
-
-			$this->_include( 'inc/class-auth-post-types.php' );
-			$this->_include( 'inc/gateways/class-event-abstract-payment-gateway.php' );
-
-			$this->_include( 'inc/emails/class-auth-event-register-event.php' );
-
+			$this->_include( 'inc/class-event-post-types.php' );
+			$this->_include( 'inc/emails/class-event-register-event.php' );
+			$this->_include( 'inc/class-event-payment-gateways.php' );
+			$this->_include( 'inc/class-event-install.php' );
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
-				$this->_include( 'inc/admin/class-auth-admin.php' );
 			} else {
 				$this->_include( 'inc/class-event-template.php' );
-				$this->_include( 'inc/class-event-frontend-scripts.php' );
-				$this->_include( 'inc/shortcodes/class-event-shortcode-countdown.php' );
-
+				$this->_include( 'inc/class-event-frontend-assets.php' );
 				$this->_include( 'inc/tp-event-template-hook.php' );
-				$this->_include( 'inc/class-auth-authentication.php' );
-				$this->_include( 'inc/class-auth-shortcodes.php' );
+				$this->_include( 'inc/class-event-authentication.php' );
+				$this->_include( 'inc/class-event-shortcodes.php' );
 			}
 
-			$this->_include( 'inc/class-event-install.php' );
-		}
-
-		/**
-		 * payment gateways
-		 * @return  TP_Event_Payment_Gateways
-		 */
-		public function payment_gateways() {
-			return TP_Event_Payment_Gateways::instance();
 		}
 
 		/**
@@ -166,26 +145,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 			} else {
 				load_textdomain( $text_domain, TP_EVENT_PATH . '/languages/' . $mo_file );
 			}
-		}
-
-		/**
-		 * Session
-		 */
-		public function event_auth_loaded() {
-			$this->_session = new Event_Session();
-		}
-
-		/**
-		 * admin notice
-		 * @return string
-		 */
-		public function admin_notice() {
-			$this->_include( 'admin/views/notices.php' );
-		}
-
-
-		public function tp_event_init() {
-			do_action( 'tp_event_init', $this );
 		}
 
 		/**

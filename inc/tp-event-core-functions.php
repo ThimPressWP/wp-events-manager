@@ -226,9 +226,9 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 		}
 
 		if ( $l10 ) {
-			return date_i18n( $format, strtotime( $post->event_start ) );
+			return date_i18n( $format, strtotime( $post->tp_event_start ) );
 		} else {
-			return date( $format, strtotime( $post->event_start ) );
+			return date( $format, strtotime( $post->tp_event_start ) );
 		}
 	}
 
@@ -245,9 +245,9 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 		}
 
 		if ( $l10 ) {
-			return date_i18n( $format, strtotime( $post->event_end ) );
+			return date_i18n( $format, strtotime( $post->tp_event_end ) );
 		} else {
-			return date( $format, strtotime( $post->event_end ) );
+			return date( $format, strtotime( $post->tp_event_end ) );
 		}
 	}
 
@@ -260,8 +260,8 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 */
 	function tp_event_get_time( $format = 'Y-m-d H:i:s', $post = null, $l10 = true ) {
 		$current_time = current_time( 'timestamp', 1 );
-		$start        = tp_event_start();
-		$end          = tp_event_end();
+		$start        = tp_event_start( 'Y-m-d H:i:s', $post );
+		$end          = tp_event_end( 'Y-m-d H:i:s', $post );
 		if ( $current_time < strtotime( $start ) ) {
 			return tp_event_start( $format, $post, $l10 );
 		} else {
@@ -942,7 +942,7 @@ if ( !function_exists( 'tp_event_payments' ) ) {
 
 // list payments gateway
 	function tp_event_payments() {
-		return TP_Event()->payment_gateways()->get_payment_gateways();
+		return TP_Event_Payment_Gateways::instance()->get_payment_gateways();
 	}
 
 }
@@ -1112,10 +1112,10 @@ if ( !function_exists( 'tp_event_get_booking' ) ) {
 	 *
 	 * @param type $booking_id
 	 *
-	 * @return Event_Booking
+	 * @return TP_Event_Booking
 	 */
 	function tp_event_get_booking( $booking_id ) {
-		return Event_Booking::instance( $booking_id );
+		return TP_Event_Booking::instance( $booking_id );
 	}
 
 }

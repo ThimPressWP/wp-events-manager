@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit();
 }
 
-class Event_Settings {
+class TP_Event_Settings {
 
     /**
      * $_options

@@ -1,53 +1,27 @@
 <?php
-/**
- * The Template for displaying all archive products.
- *
- * Override this template by copying it to yourtheme/tp-event/templates/shortcode/event-countdown.php
- *
- * @author 		ThimPress
- * @package 	tp-event
- * @version     1.0
+/*
+ * @author leehld
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
+
+if ( !$args['event_id'] || !get_post( $args['event_id'] ) ) {
+	echo esc_html__( 'Invalid Event ID', 'tp-event' );
+} else {
+	$event = get_post( $args['event_id'] );
+	echo get_the_title( $args['event_id'] );
+
+	$time = tp_event_get_time( 'M j, Y H:i:s O', $event, false );
+	$date = new DateTime( date( 'Y-m-d H:i:s', strtotime( $time ) ), new DateTimeZone( tp_event_get_timezone_string() ) );
+	?>
+    <div class="entry-countdown">
+
+        <div class="tp_event_counter" data-time="<?php echo esc_attr( $date->format( 'M j, Y H:i:s O' ) ) ?>"></div>
+
+    </div>
+	<?php
 }
 
-$the_posts = new WP_Query( $args );
-
-?>
-
-<ul class="tp_event_owl_carousel owl-carousel owl-theme"<?php echo isset( $atts ) ? ' data-countdown="'.esc_js( json_encode( $atts ) ).'"' : '' ?> >
-
-	<?php if ( $the_posts->have_posts() ) : ?>
-
-		<?php
-			/**
-			 * tp_event_before_shop_loop hook
-			 *
-			 * @hooked tp_event_result_count - 20
-			 * @hooked tp_event_catalog_ordering - 30
-			 */
-			do_action( 'tp_event_before_event_loop' );
-		?>
-
-		<?php while ( $the_posts->have_posts() ) : $the_posts->the_post(); ?>
-
-			<?php tp_event_get_template_part( 'content', 'event' ); ?>
-
-		<?php endwhile; // end of the loop. ?>
-
-		<?php wp_reset_postdata(); ?>
-
-		<?php
-			/**
-			 * tp_event_after_shop_loop hook
-			 *
-			 * @hooked tp_event_pagination - 10
-			 */
-			do_action( 'tp_event_after_event_loop' );
-		?>
-
-	<?php endif; ?>
-
-</ul>

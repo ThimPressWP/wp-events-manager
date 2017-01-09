@@ -63,27 +63,22 @@ class Event_Autoloader {
 		$path = $this->include_path;
 
 		// payment gateways
-		if ( strpos( $class, '_payment_gateway_' ) ) {
+		if ( strpos( $class, 'tp_event_payment_gateway_' ) === 0 ) {
 			$path = $this->include_path . 'gateways/' . substr( str_replace( '_', '-', $class ), strlen( 'tp_event_payment_gateway_' ) ) . '/';
 		}
-
 		// abstract class
-		if ( strpos( $class, 'event_abstract' ) === 0 ) {
+		if ( strpos( $class, 'tp_event_abstract_' ) === 0 ) {
 			$path = $this->include_path . 'abstracts/';
 		}
 
 		// widgets
-		if ( stripos( $class, '_event_widget_' ) ) {
+		if ( stripos( $class, 'tp_event_widget_' ) === 0 ) {
 			$path = $this->include_path . '/widgets/';
-		} else if ( stripos( $class, 'event_shortcode_' ) === 0 ) {
-			$path = $this->include_path . '/shortcodes/';
 		}
 
-		// admin metaboxs TP_Event_Admin_Metabox_Booking
+		// admin metaboxs
 		if ( strpos( $class, '_event_admin_metabox_' ) ) {
 			$path = $this->include_path . 'admin/metaboxes/';
-		} else if ( strpos( $class, 'event_admin_' ) === 0 ) {
-			$path = $this->include_path . 'admin/';
 		}
 
 		$this->load_file( $path . $file );

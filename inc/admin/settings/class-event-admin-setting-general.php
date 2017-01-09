@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class Event_Admin_Setting_General extends Event_Admin_Setting_Page {
+class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 
 	/**
 	 * ID
@@ -86,4 +86,4 @@ class Event_Admin_Setting_General extends Event_Admin_Setting_Page {
 
 }
 
-return new Event_Admin_Setting_General();
+return new TP_Event_Admin_Setting_General();

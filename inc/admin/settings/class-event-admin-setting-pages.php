@@ -8,7 +8,7 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-class Event_Admin_Setting_Pages extends Event_Admin_Setting_Page {
+class TP_Event_Admin_Setting_Pages extends TP_Event_Abstract_Setting {
 
 	/**
 	 * ID
@@ -48,12 +48,6 @@ class Event_Admin_Setting_Pages extends Event_Admin_Setting_Page {
 			),
 			array(
 				'type'  => 'select_page',
-				'id'    => $prefix . 'event_archive_page_id',
-				'title' => __( 'Event Archive Page', 'tp-event' ),
-				'desc'  => __( 'Select page show events list', 'tp-event' )
-			),
-			array(
-				'type'  => 'select_page',
 				'title' => __( 'Register Page', 'tp-event' ),
 				'desc'  => __( 'This controls which the register page', 'tp-event' ),
 				'id'    => $prefix . 'register_page_id',
@@ -64,22 +58,10 @@ class Event_Admin_Setting_Pages extends Event_Admin_Setting_Page {
 				'desc'  => __( 'This controlls which the login page', 'tp-event' ),
 				'id'    => $prefix . 'login_page_id',
 			),
-//            array(
-//                'type' => 'select_page',
-//                'title' => __( 'Reset Password', 'tp-event' ),
-//                'desc' => __( 'This controlls which the reset password page.', 'tp-event' ),
-//                'id'    => $prefix . 'reset_password_page_id'
-//            ),
-//            array(
-//                'type' => 'select_page',
-//                'title' => __( 'Forgot Pass', 'tp-event' ),
-//                'desc' => __( 'This controlls which the forgot password page.', 'tp-event' ),
-//                'id' => $prefix . 'forgot_pass_page_id'
-//            ),
 			array(
 				'type'  => 'select_page',
 				'title' => __( 'My Account', 'tp-event' ),
-				'desc'  => __( 'This controlls which the dashboard page', 'tp-event' ),
+				'desc'  => __( 'This controlls which the user account page', 'tp-event' ),
 				'id'    => $prefix . 'account_page_id',
 			),
 			array(
@@ -97,4 +79,4 @@ class Event_Admin_Setting_Pages extends Event_Admin_Setting_Page {
 
 }
 
-return new Event_Admin_Setting_Pages();
+return new TP_Event_Admin_Setting_Pages();

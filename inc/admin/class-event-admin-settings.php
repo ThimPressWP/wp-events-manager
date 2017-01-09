@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit();
 
-class Event_Admin_Settings {
+class TP_Event_Admin_Settings {
 
 	private static $messages = array();
 
@@ -18,7 +18,6 @@ class Event_Admin_Settings {
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-pages.php';
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-email.php';
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-checkout.php';
-		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-account.php';
 		return apply_filters( 'event_admin_setting_pages', $settings );
 	}
 
@@ -74,7 +73,7 @@ class Event_Admin_Settings {
 			self::save();
 		}
 
-		require_once( TP_EVENT_INC . 'admin/views/html-admin-settings.php' );
+		require_once( TP_EVENT_INC . 'admin/views/settings/save-settings.php' );
 	}
 
 	/**
@@ -101,7 +100,7 @@ class Event_Admin_Settings {
 				'atts'        => array()
 			) );
 
-			$custom_attr    = '';
+			$custom_attr = '';
 			if ( !empty( $field['atts'] ) ) {
 				foreach ( $field['atts'] as $k => $val ) {
 					$custom_attr .= $k . '="' . $val . '"';
@@ -109,249 +108,46 @@ class Event_Admin_Settings {
 			}
 			switch ( $field['type'] ) {
 				case 'section_start':
-					?>
-					<?php if ( isset( $field['title'] ) ) : ?>
-                    <h3><?php echo esc_html( $field['title'] ); ?></h3>
-					<?php if ( isset( $field['desc'] ) ) : ?>
-                        <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-					<?php endif; ?>
-                    <table class="form-table">
-				<?php endif; ?>
-					<?php
+					require_once( TP_EVENT_INC . 'admin/views/settings/fields/section-start.php' );
 					break;
-
 				case 'section_end':
-					?>
-					<?php do_action( 'event_setting_field_' . $field['id'] . '_end' ); ?>
-                    </table>
-					<?php do_action( 'event_setting_field_' . $field['id'] . '_after' ); ?>
-					<?php
+					require_once( TP_EVENT_INC . 'admin/views/settings/fields/section-end.php' );
 					break;
 
 				case 'select':
 				case 'multiselect':
-					$selected = tp_event_get_option( $field['id'], isset( $field['default'] ) ? $field['default'] : array() );
-					?>
-                    <tr valign="top">
-                        <th scope="row">
-							<?php if ( isset( $field['title'] ) ) : ?>
-                                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
-									<?php echo esc_html( $field['title'] ) ?>
-                                </label>
-							<?php endif; ?>
-                        </th>
-                        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-							<?php if ( isset( $field['options'] ) ) : ?>
-                                <select name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?><?php echo $field['type'] === 'multiselect' ? '[]' : '' ?>"
-                                        id="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>"
-									<?php echo ( $field['type'] === 'multiple' ) ? 'multiple="multiple"' : '' ?>
-                                >
-									<?php foreach ( $field['options'] as $val => $text ) : ?>
-                                        <option value="<?php echo esc_attr( $val ) ?>"
-											<?php echo ( is_array( $selected ) && in_array( $val, $selected ) ) || $selected === $val ? ' selected' : '' ?>
-                                        >
-											<?php echo esc_html( $text ) ?>
-                                        </option>
-									<?php endforeach; ?>
-                                </select>
-								<?php if ( isset( $field['desc'] ) ) : ?>
-                                    <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-								<?php endif; ?>
-							<?php endif; ?>
-                        </td>
-                    </tr>
-					<?php
+					require( TP_EVENT_INC . 'admin/views/settings/fields/select.php' );
 					break;
 
 				case 'text':
 				case 'number':
 				case 'email':
 				case 'password':
-					$value = tp_event_get_option( $field['id'] ) ? tp_event_get_option( $field['id'] ) : esc_attr( $field['default'] );
-					?>
-                    <tr valign="top">
-                        <th scope="row">
-							<?php if ( isset( $field['title'] ) ) : ?>
-                                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
-									<?php echo esc_html( $field['title'] ) ?>
-                                </label>
-							<?php endif; ?>
-                        </th>
-                        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-                            <input
-                                type="<?php echo esc_attr( $field['type'] ) ?>"
-                                name="<?php echo esc_attr( $field['id'] ) ?>"
-                                value="<?php echo esc_attr( $value ) ?>"
-                                class="regular-text"
-                                placeholder="<?php echo esc_attr( $field['placeholder'] ) ?>"
-								<?php if ( $field['type'] === 'number' ) : ?>
-
-									<?php echo isset( $field['min'] ) && is_numeric( $field['min'] ) ? ' min="' . esc_attr( $field['min'] ) . '"' : '' ?>
-									<?php echo isset( $field['max'] ) && is_numeric( $field['max'] ) ? ' max="' . esc_attr( $field['max'] ) . '"' : '' ?>
-									<?php echo isset( $field['step'] ) ? ' step="' . esc_attr( $field['step'] ) . '"' : '' ?>
-
-								<?php endif; ?>
-                            />
-							<?php if ( isset( $field['desc'] ) ) : ?>
-                                <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-							<?php endif; ?>
-                        </td>
-                    </tr>
-					<?php
+					require( TP_EVENT_INC . 'admin/views/settings/fields/text.php' );
 					break;
 
 				case 'checkbox':
-					$val = tp_event_get_option( $field['id'] );
-					?>
-                    <tr valign="top"<?php echo isset( $field['trclass'] ) ? ' class="' . implode( '', $field['trclass'] ) . '"' : '' ?>>
-                        <th scope="row">
-							<?php if ( isset( $field['title'] ) ) : ?>
-                                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
-									<?php echo esc_html( $field['title'] ) ?>
-                                </label>
-							<?php endif; ?>
-                        </th>
-                        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-                            <input type="hidden" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="0" />
-                            <input type="checkbox" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="1" <?php echo $custom_attr ?><?php checked( $val, $field['default'] ); ?>/>
-
-							<?php if ( isset( $field['desc'] ) ) : ?>
-                                <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-							<?php endif; ?>
-                        </td>
-                    </tr>
-					<?php
+					require( TP_EVENT_INC . 'admin/views/settings/fields/checkbox.php' );
 					break;
 
 				case 'radio':
-					$selected = tp_event_get_option( $field['id'], isset( $field['default'] ) ? $field['default'] : '' );
-					?>
-                    <tr valign="top">
-                        <th scope="row">
-							<?php if ( isset( $field['title'] ) ) : ?>
-                                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
-									<?php echo esc_html( $field['title'] ) ?>
-                                </label>
-							<?php endif; ?>
-                        </th>
-                        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-							<?php if ( isset( $field['options'] ) ) : ?>
-								<?php foreach ( $field['options'] as $val => $text ) : ?>
-
-                                    <label>
-                                        <input type="radio" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>"<?php selected( $selected, $val ); ?>/>
-										<?php echo esc_html( $text ) ?>
-                                    </label>
-
-								<?php endforeach; ?>
-
-								<?php if ( isset( $field['desc'] ) ) : ?>
-                                    <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-								<?php endif; ?>
-							<?php endif; ?>
-                        </td>
-                    </tr>
-					<?php
+					require( TP_EVENT_INC . 'admin/views/settings/fields/radio.php' );
 					break;
 
 				case 'image_size':
-					$width = tp_event_get_option( $field['id'] . '_width', isset( $field['default']['width'] ) ? $field['default']['width'] : 270 );
-					$height = tp_event_get_option( $field['id'] . '_height', isset( $field['default']['height'] ) ? $field['default']['height'] : 270 );
-					?>
-                    <tr valign="top">
-                        <th scope="row">
-							<?php if ( isset( $field['title'] ) ) : ?>
-                                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
-									<?php echo esc_html( $field['title'] ) ?>
-                                </label>
-							<?php endif; ?>
-                        </th>
-                        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-							<?php if ( isset( $field['id'] ) && isset( $field['options'] ) ) : ?>
-
-								<?php if ( isset( $field['options']['width'] ) ) : ?>
-                                    <input
-                                        type="number"
-                                        name="<?php echo esc_attr( $field['id'] ) ?>_width"
-                                        value="<?php echo esc_attr( $width ) ?>"
-                                    /> x
-								<?php endif; ?>
-								<?php if ( isset( $field['options']['height'] ) ) : ?>
-                                    <input
-                                        type="number"
-                                        name="<?php echo esc_attr( $field['id'] ) ?>_height"
-                                        value="<?php echo esc_attr( $height ) ?>"
-                                    /> px
-								<?php endif; ?>
-
-								<?php if ( isset( $field['desc'] ) ) : ?>
-                                    <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-								<?php endif; ?>
-							<?php endif; ?>
-                        </td>
-                    </tr>
-					<?php
+					require( TP_EVENT_INC . 'admin/views/settings/fields/image-size.php' );
 					break;
 
 				case 'textarea':
-					$content = tp_event_get_option( $field['id'] );
-					?>
-                    <tr valign="top">
-                        <th scope="row">
-							<?php if ( isset( $field['title'] ) ) : ?>
-                                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
-									<?php echo esc_html( $field['title'] ) ?>
-                                </label>
-							<?php endif; ?>
-                        </th>
-                        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-							<?php if ( isset( $field['id'] ) ) : ?>
-								<?php wp_editor( $content, $field['id'], isset( $field['options'] ) ? $field['options'] : array() ); ?>
-
-								<?php if ( isset( $field['desc'] ) ) : ?>
-                                    <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-								<?php endif; ?>
-							<?php endif; ?>
-                        </td>
-                    </tr>
-					<?php
+					require( TP_EVENT_INC . 'admin/views/settings/fields/textarea.php' );
 					break;
 
 				case 'select_page':
-					$selected = tp_event_get_option( $field['id'], 0 );
-					?>
-                    <tr valign="top">
-                        <th scope="row">
-							<?php if ( isset( $field['title'] ) ) : ?>
-                                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
-									<?php echo esc_html( $field['title'] ) ?>
-                                </label>
-							<?php endif; ?>
-                        </th>
-                        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-							<?php if ( isset( $field['id'] ) ) : ?>
-								<?php
-								wp_dropdown_pages(
-									array(
-										'show_option_none'  => __( '---Select page---', 'tp-event' ),
-										'option_none_value' => 0,
-										'name'              => $field['id'],
-										'selected'          => $selected
-									)
-								);
-								?>
-
-								<?php if ( isset( $field['desc'] ) ) : ?>
-                                    <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
-								<?php endif; ?>
-							<?php endif; ?>
-                        </td>
-                    </tr>
-					<?php
+					require( TP_EVENT_INC . 'admin/views/settings/fields/select-page.php' );
 					break;
 
 				default:
-					do_action( 'event_setting_field_' . $field['id'], $field );
+					do_action( 'tp_event_setting_field_' . $field['id'], $field );
 					break;
 			}
 		}
@@ -378,4 +174,4 @@ class Event_Admin_Settings {
 
 }
 
-Event_Admin_Settings::init();
+TP_Event_Admin_Settings::init();

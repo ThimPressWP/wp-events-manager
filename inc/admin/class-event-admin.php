@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Event_Admin {
+class TP_Event_Admin {
 
     public function __construct() {
 
@@ -11,11 +11,12 @@ class Event_Admin {
 
     private function _includes() {
         TP_Event::instance()->_include( 'inc/admin/class-event-admin-menu.php' );
-        TP_Event::instance()->_include( 'inc/admin/class-event-admin-setting-page.php' );
         TP_Event::instance()->_include( 'inc/admin/class-event-admin-assets.php' );
         TP_Event::instance()->_include( 'inc/admin/class-event-admin-metaboxes.php' );
-    }
+		TP_Event::instance()->_include( 'inc/admin/class-event-admin-settings.php' );
+		TP_Event::instance()->_include( 'inc/admin/class-event-admin-users.php' );
+	}
 
 }
 
-new Event_Admin();
+new TP_Event_Admin();
