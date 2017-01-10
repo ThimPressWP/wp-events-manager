@@ -130,6 +130,10 @@ class TP_Event_Admin_Settings {
 					require( TP_EVENT_INC . 'admin/views/settings/fields/checkbox.php' );
 					break;
 
+				case 'yes_no':
+					require( TP_EVENT_INC . 'admin/views/settings/fields/yes-no.php' );
+					break;
+
 				case 'radio':
 					require( TP_EVENT_INC . 'admin/views/settings/fields/radio.php' );
 					break;

@@ -949,16 +949,23 @@ if ( !function_exists( 'tp_event_format_price' ) ) {
 
 if ( !function_exists( 'tp_event_payments' ) ) {
 
-// list payments gateway
+	// List payment gateways
 	function tp_event_payments() {
 		return TP_Event_Payment_Gateways::instance()->get_payment_gateways();
 	}
 
 }
 
+if ( !function_exists( 'tp_event_gateways_available' ) ) {
+	// List payment gateways available
+	function tp_event_gateways_available() {
+		return TP_Event_Payment_Gateways::instance()->get_payment_gateways_available();
+	}
+}
+
 if ( !function_exists( 'tp_event_get_payment_title' ) ) {
 
-// list payments gateway
+// List payments gateway title
 	function tp_event_get_payment_title( $payment_id = null ) {
 		$payments = tp_event_payments();
 		return isset( $payments[$payment_id] ) ? $payments[$payment_id]->title : '';
@@ -1176,7 +1183,7 @@ if ( !function_exists( 'tp_event_cancel_payment_booking' ) ) {
 
 		if ( $post_status === 'ea-pending' ) {
 			wp_update_post( array(
-				'ID' => $booking_id,
+				'ID'          => $booking_id,
 				'post_status' => 'ea-cancelled'
 			) );
 		}

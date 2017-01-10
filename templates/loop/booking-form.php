@@ -29,22 +29,17 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 
             <!--Hide payment option when cost is 0-->
 			<?php if ( !$event->is_free() ) {
-				$payments = tp_event_payments();
+				$payments = tp_event_gateways_available();
 				if ( $payments ) { ?>
                     <ul class="event_auth_payment_methods">
-						<?php
-						$i = 0;
-						foreach ( $payments as $id => $payment ) :
-							?>
+						<?php $i = 0; ?>
+						<?php foreach ( $payments as $id => $payment ) : ?>
                             <li>
                                 <input id="payment_method_<?php echo esc_attr( $id ) ?>" type="radio" name="payment_method" value="<?php echo esc_attr( $id ) ?>"<?php echo $i === 0 ? ' checked' : '' ?>/>
                                 <label for="payment_method_<?php echo esc_attr( $id ) ?>"><?php echo esc_html( $payment->get_title() ) ?></label>
                             </li>
-							<?php
-							$i ++;
-						endforeach;
-						?>
-						<?php //do_action( 'event_auth_payment_gateways_select' ); ?>
+							<?php $i ++; ?>
+						<?php endforeach; ?>
                     </ul>
 				<?php }
 			} ?>
