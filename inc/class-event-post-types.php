@@ -93,7 +93,7 @@ class Event_Custom_Post_Types {
 			'add_new'            => _x( 'Add New', 'book', 'tp-event' ),
 			'add_new_item'       => __( 'Add New Booking', 'tp-event' ),
 			'new_item'           => __( 'New Booking', 'tp-event' ),
-			'edit_item'          => __( 'Edit Booking', 'tp-event' ),
+			'edit_item'          => __( 'Booking Details', 'tp-event' ),
 			'view_item'          => __( 'View Booking', 'tp-event' ),
 			'all_items'          => __( 'Bookings', 'tp-event' ),
 			'search_items'       => __( 'Search Books', 'tp-event' ),
@@ -116,7 +116,7 @@ class Event_Custom_Post_Types {
 			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title' ),
+			'supports'           => false,
 			'capabilities'       => array(
 				'create_posts' => 'do_not_allow'
 			),
