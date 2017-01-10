@@ -64,7 +64,7 @@ class Event_Ajax {
 			} else if ( $registered_time && tp_event_get_option( 'email_register_times' ) === 'once' ) {
 				tp_event_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
 			} else {
-				tp_event_get_template( 'form-book-event.php', array( 'event_id' => $event_id ) );
+				tp_event_get_template( 'loop/booking-form.php', array( 'event_id' => $event_id ) );
 			}
 			echo ob_get_clean();
 			die();

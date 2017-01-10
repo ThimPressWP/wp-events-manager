@@ -65,10 +65,11 @@ class TP_Event_Admin_Setting_Pages extends TP_Event_Abstract_Setting {
 				'id'    => $prefix . 'account_page_id',
 			),
 			array(
-				'type'  => 'checkbox',
-				'title' => __( 'Send email', 'tp-event' ),
-				'desc'  => __( 'Send notify when user register', 'tp-event' ),
-				'id'    => $prefix . 'register_notify',
+				'type'    => 'checkbox',
+				'title'   => __( 'Send email', 'tp-event' ),
+				'desc'    => __( 'Send notify when user register', 'tp-event' ),
+				'id'      => $prefix . 'register_notify',
+				'default' => false
 			),
 			array(
 				'type' => 'section_end',

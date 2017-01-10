@@ -37,15 +37,20 @@ class TP_Event_Payment_Gateways {
 	 * @return type array
 	 */
 	public function get_payment_gateways() {
-		$payment_gateways_available = array();
-		if ( $this->gateways ) {
-			foreach ( $this->gateways as $id => $gateway ) {
-				if ( $gateway->is_available() ) {
-					$payment_gateways_available[$id] = $gateway;
-				}
+		return $this->gateways;
+	}
+
+	public function get_payment_gateways_available() {
+		$gateways  = $this->get_payment_gateways();
+		$available = array();
+
+		foreach ( $gateways as $id => $gateway ) {
+			if ( $gateway->is_available() ) {
+				$available[$id] = $gateway;
 			}
 		}
-		return $payment_gateways_available;
+
+		return $available;
 	}
 
 	public static function instance() {
