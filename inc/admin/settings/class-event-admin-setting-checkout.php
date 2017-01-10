@@ -37,22 +37,13 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 			array(
 				'type'  => 'section_start',
 				'id'    => 'general_settings',
-				'title' => __( 'Checkout Process', 'tp-event' )
-			),
-			array(
-				'type'    => 'select',
-				'title'   => __( 'Environment', 'tp-event' ),
-				'desc'    => __( 'This controlls test or production mode.', 'tp-event' ),
-				'id'      => $prefix . 'checkout_environment',
-				'options' => array(
-					'test'       => __( 'Test', 'tp-event' ),
-					'production' => __( 'Production.', 'tp-event' )
-				)
+				'title' => __( 'Checkout Process', 'tp-event' ),
+				'desc'  => __( 'General options for system.', 'tp-event' )
 			),
 			array(
 				'type'    => 'select',
 				'title'   => __( 'Booking times free/email', 'tp-event' ),
-				'desc'    => __( 'This controlls how many time booking free event of an email.', 'tp-event' ),
+				'desc'    => __( 'This controls how many time booking free event of an email', 'tp-event' ),
 				'id'      => $prefix . 'email_register_times',
 				'options' => array(
 					'once' => __( 'Once', 'tp-event' ),
@@ -62,8 +53,8 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 			),
 			array(
 				'type'        => 'number',
-				'title'       => __( 'Cancel payment status.', 'tp-event' ),
-				'desc'        => __( 'How long cancel a payment (hour).', 'tp-event' ),
+				'title'       => __( 'Cancel payment status', 'tp-event' ),
+				'desc'        => __( 'How long cancel a payment (hour)', 'tp-event' ),
 				'atts'        => array(
 					'min'  => 0,
 					'step' => 'any'

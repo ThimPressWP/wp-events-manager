@@ -28,16 +28,18 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 		$this->_title = __( 'Paypal', 'tp-event' );
 		$this->title  = __( 'PayPal', 'tp-event' );
 		parent::__construct();
-		$this->paypal_url         = 'https://www.sandbox.paypal.com/';
-		$this->paypal_payment_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-		$this->paypal_email       = tp_event_get_option( 'paypal_sanbox_email' );
 
 		// production environment
-		if ( tp_event_get_option( 'checkout_environment', 'test' ) === 'production' ) {
-			$this->paypal_url         = 'https://www.paypal.com/';
-			$this->paypal_payment_url = 'https://www.paypal.com/cgi-bin/webscr';
-			$this->paypal_email       = tp_event_get_option( 'paypal_email' );
+		$this->paypal_url         = 'https://www.paypal.com/';
+		$this->paypal_payment_url = 'https://www.paypal.com/cgi-bin/webscr';
+		$this->paypal_email       = tp_event_get_option( 'paypal_email' ) ? tp_event_get_option( 'paypal_email' ) : '';
+
+		if ( tp_event_get_option( 'paypal_sandbox_mode' ) ) {
+			$this->paypal_url         = 'https://www.sandbox.paypal.com/';
+			$this->paypal_payment_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+			$this->paypal_email       = tp_event_get_option( 'paypal_sanbox_email' ) ? tp_event_get_option( 'paypal_sanbox_email' ) : '';
 		}
+
 		// // init process
 		add_action( 'init', array( $this, 'payment_validation' ), 99 );
 	}
@@ -128,31 +130,31 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 			array(
 				'type'  => 'section_start',
 				'id'    => 'paypal_settings',
-				'title' => __( 'Paypal Settings', 'tp-event' ),
-				'desc'  => __( 'General options for system.', 'tp-event' )
+				'title' => __( 'Paypal Settings', 'tp-event' )
 			),
 			array(
-				'type'    => 'select',
+				'type'    => 'yes_no',
 				'title'   => __( 'Enable', 'tp-event' ),
-				'desc'    => __( 'This controlls enable payment method', 'tp-event' ),
+				'desc'    => __( 'This controls enable payment method', 'tp-event' ),
 				'id'      => $prefix . 'paypal_enable',
-				'options' => array(
-					'no'  => __( 'No', 'tp-event' ),
-					'yes' => __( 'Yes', 'tp-event' )
-				)
-			),
-			array(
-				'type'    => 'text',
-				'title'   => __( 'Paypal sandbox email', 'tp-event' ),
-				'desc'    => __( 'Paypal Business Email', 'tp-event' ),
-				'id'      => $prefix . 'paypal_sanbox_email',
-				'default' => ''
+				'default' => 'no'
 			),
 			array(
 				'type'    => 'text',
 				'title'   => __( 'Paypal email', 'tp-event' ),
-				'desc'    => __( 'Production environment', 'tp-event' ),
 				'id'      => $prefix . 'paypal_email',
+				'default' => ''
+			),
+			array(
+				'type'    => 'checkbox',
+				'title'   => __( 'Sandbox mode', 'tp-event' ),
+				'id'      => $prefix . 'paypal_sandbox_mode',
+				'default' => false
+			),
+			array(
+				'type'    => 'text',
+				'title'   => __( 'Paypal Sandbox email', 'tp-event' ),
+				'id'      => $prefix . 'paypal_sanbox_email',
 				'default' => ''
 			),
 			array(
