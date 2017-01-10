@@ -175,19 +175,11 @@
 	background-color: #eee;
 }
 
-.event_auth_payment_methods li {
-
-}
-
 .single-tp_event .entry-summary {
 	margin-bottom: 0;
 }
 
-.single-tp_event .event-countdown {
-	margin-top: 20px;
-}
-
-.single-tp_event .event-content {
+.post-type-archive-tp_event .event-title, .entry-summary .event-countdown, .entry-summary .event-content {
 	margin-top: 20px;
 }
 

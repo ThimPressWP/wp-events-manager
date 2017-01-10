@@ -21,10 +21,13 @@ class TP_Event_Admin_Metaboxes {
 	 */
 	public static function add_meta_boxes() {
 		add_meta_box(
-			'tp_event_setting_section', __( 'Event Settings', 'tp-event' ), array( 'TP_Event_Admin_Metabox_Event', 'render' ), 'tp_event', 'normal', 'high'
+			'event-settings-metabox', __( 'Event Settings', 'tp-event' ), array( 'TP_Event_Admin_Metabox_Event', 'render' ), 'tp_event', 'normal', 'high'
 		);
 		add_meta_box(
-			'booking-information', __( 'Booking Information', 'tp-event' ), array( 'TP_Event_Admin_Metabox_Booking', 'render' ), 'event_auth_book', 'normal', 'default'
+			'booking-information-metabox', __( 'Booking Information', 'tp-event' ), array( 'TP_Event_Admin_Metabox_Booking', 'render' ), 'event_auth_book', 'normal', 'default'
+		);
+		add_meta_box(
+			'booking-status-side', __( 'Booking Actions', 'tp-event' ), array( 'TP_Event_Admin_Metabox_Booking', 'side' ), 'event_auth_book', 'side', 'high'
 		);
 	}
 
