@@ -6,6 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="entry-content">
+<div class="event-content">
 	<?php the_content(); ?>
 </div>

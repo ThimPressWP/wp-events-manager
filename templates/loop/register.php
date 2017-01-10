@@ -2,7 +2,6 @@
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
-
 $event = new Auth_Event( get_the_ID() );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 
@@ -11,7 +10,7 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
 }
 ?>
 
-<div class="event_register_area">
+<div class="event-register">
 
     <ul class="event-info">
         <li class="total">

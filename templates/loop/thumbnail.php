@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if( has_post_thumbnail() ):  ?>
 
-	<div class="entry-thumbnail">
+	<div class="event-thumbnail">
 		<?php if( ! is_singular( 'tp_event' ) || ! in_the_loop() ): ?>
 			<a href="<?php the_permalink() ?>">
 		<?php endif; ?>

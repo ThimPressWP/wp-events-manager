@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="entry-title">
+<div class="event-title">
 	<?php if( ! is_singular( 'tp_event' ) || ! in_the_loop() ): ?>
 		<h4><a href="<?php the_permalink() ?>">
 	<?php else: ?>
