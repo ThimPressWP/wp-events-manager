@@ -7,7 +7,7 @@
 	overflow-x: hidden;
 }
 
-#tp_event_setting_section .shortcode {
+#event-settings-metabox .shortcode {
 	min-width: 300px;
 }
 
@@ -60,7 +60,7 @@
 /**
  * metabox
  */
-#tp_event_setting_section .inside {
+#event-settings-metabox .inside {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -232,4 +232,29 @@
 	padding: 15px 10px;
 	font-size: 16px;
 	border: 1px solid #DDD;
+}
+
+#booking-status-side label {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+#booking-status-side .booking-status-description {
+	font-size: smaller;
+	background: #CEE8FF;
+	padding: 5px;
+	font-style: italic;
+	color: #848484;
+	position: relative;
+	margin-top: 10px;
+	border-radius: 3px;
+}
+
+#booking-status-side .booking-status-description::before {
+	content: '';
+	border: 5px solid transparent;
+	border-bottom-color: #CEE8FF;
+	position: absolute;
+	top: -10px;
 }
