@@ -179,10 +179,20 @@
 
 }
 
+.single-tp_event .entry-summary {
+	margin-bottom: 0;
+}
+
 .single-tp_event .event-countdown {
 	margin-top: 20px;
 }
 
 .single-tp_event .event-content {
 	margin-top: 20px;
+}
+
+.single-tp_event .event-register a {
+	display: inline-block;
+	margin-top: -10px;
+	margin-bottom: 20px;
 }

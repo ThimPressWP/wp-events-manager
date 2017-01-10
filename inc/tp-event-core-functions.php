@@ -360,6 +360,15 @@ if ( !function_exists( 'tp_event_single_event_content' ) ) {
 
 }
 
+add_action( 'tp_event_after_single_event', 'tp_event_single_event_register' );
+if ( !function_exists( 'tp_event_single_event_register' ) ) {
+
+	function tp_event_single_event_register() {
+		tp_event_get_template( 'loop/register.php' );
+	}
+
+}
+
 add_action( 'tp_event_loop_event_location', 'tp_event_loop_event_location' );
 if ( !function_exists( 'tp_event_loop_event_location' ) ) {
 
