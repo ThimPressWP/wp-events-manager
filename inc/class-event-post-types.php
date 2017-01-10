@@ -107,6 +107,7 @@ class Event_Custom_Post_Types {
 			'description'        => __( 'Description.', 'tp-event' ),
 			'public'             => true,
 			'publicly_queryable' => false,
+			'show_in_admin_bar'  => false,
 			'show_ui'            => true,
 			'show_in_menu'       => 'tp-event-setting',
 			'query_var'          => true,
