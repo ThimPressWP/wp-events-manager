@@ -10,21 +10,23 @@ defined( 'ABSPATH' ) || exit;
 
 $val = tp_event_get_option( $field['id'] );
 ?>
-	<tr valign="top"<?php echo isset( $field['trclass'] ) ? ' class="' . implode( '', $field['trclass'] ) . '"' : '' ?>>
-		<th scope="row">
+    <tr valign="top"<?php echo isset( $field['trclass'] ) ? ' class="' . implode( '', $field['trclass'] ) . '"' : '' ?>>
+        <th scope="row">
 			<?php if ( isset( $field['title'] ) ) : ?>
-				<label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
+                <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
 					<?php echo esc_html( $field['title'] ) ?>
-				</label>
+                </label>
 			<?php endif; ?>
-		</th>
-		<td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
-			<input type="hidden" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="0" />
-			<input type="checkbox" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="1" <?php echo $custom_attr ?><?php checked( $val, $field['default'] ); ?>/>
+        </th>
+        <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
+            <input type="hidden" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="0" />
+            <input type="checkbox" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="1"
+				<?php echo $custom_attr ?><?php echo empty( $val ) ? checked( $field['default'], 1 ) : checked( $val, 1, false ); ?>
+            />
 
 			<?php if ( isset( $field['desc'] ) ) : ?>
-				<span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
+                <span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
 			<?php endif; ?>
-		</td>
-	</tr>
+        </td>
+    </tr>
 <?php
