@@ -24,26 +24,23 @@ $use_end_time = get_post_meta( $post_id, $prefix . 'use_end_time', true );
 $qty         = get_post_meta( $post_id, $prefix . 'qty', true );
 $price       = get_post_meta( $post_id, $prefix . 'price', true );
 $location    = get_post_meta( $post_id, $prefix . 'location', true );
-$is_not_free = get_post_meta( $post_id, $prefix . 'is_not_free', true );
-$data_text   = !$is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-event' );
-$text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-event' );
 ?>
 <div class="event_meta_box_container">
     <div class="event_meta_panel">
 		<?php do_action( 'tp_event_admin_event_metabox_before_fields', $post, $prefix ); ?>
-
         <div class="option_group">
             <p class="form-field">
                 <label for="_quantity"><?php _e( 'Quantity', 'tp-event' ) ?></label>
                 <input type="number" min="0" step="1" class="short" name="<?php echo esc_attr( $prefix ) ?>qty" id="_quantity" value="<?php echo esc_attr( absint( $qty ) ) ?>">
-                <span class="description"><a href="#" data-target="set_price" class="open-extra" data-text="<?php echo esc_attr( $data_text ) ?>"><?php echo esc_html( $text ) ?></a></span>
             </p>
         </div>
-        <div class="option_group<?php echo ( !$is_not_free ) ? ' hide-if-js' : ''; ?>">
-            <input id="set_price" type="hidden" value="<?php echo esc_attr( $is_not_free ) ?>" name="<?php echo esc_attr( $prefix ) ?>is_not_free" />
+        <div class="option_group">
             <p class="form-field">
-                <label for="_auth_cost"><?php printf( '%s(%s)', __( 'Price', 'tp-event' ), tp_event_get_currency_symbol() ) ?></label>
-                <input type="number" step="any" min="0" class="short" name="<?php echo esc_attr( $prefix ) ?>price" id="_quantity" value="<?php echo esc_attr( floatval( $price ) ) ?>" />
+                <label for="_price"><?php printf( '%s(%s)', __( 'Price', 'tp-event' ), tp_event_get_currency_symbol() ) ?></label>
+                <input type="number" step="any" min="0" class="short" name="<?php echo esc_attr( $prefix ) ?>price" id="_price" value="<?php echo esc_attr( floatval( $price ) ) ?>" />
+            </p>
+            <p class="event-meta-notice">
+				<?php echo esc_html__( 'Set 0 to make it becomes free event', 'tp-event' ); ?>
             </p>
         </div>
 
@@ -67,7 +64,7 @@ $text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-ev
                 <input type="text" class="short" name="<?php echo esc_attr( $prefix ) ?>location" id="location" value="<?php echo esc_attr( $location ) ?>">
             </p>
 			<?php if ( !tp_event_get_option( 'google_map_api_key' ) ): ?>
-                <p class="location-notice">
+                <p class="event-meta-notice">
 					<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'tp-event' ); ?>
                     <a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=general' ); ?>"><?php echo esc_html__( 'Set up here' ) ?></a>
                 </p>
