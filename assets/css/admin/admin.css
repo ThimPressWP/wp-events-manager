@@ -269,3 +269,20 @@
 	margin-top: -15px;
 	font-style: italic;
 }
+
+#event-time-metabox input {
+	display: inline-block;
+}
+
+#event-time-metabox #_date_start, #event-time-metabox #_date_end {
+	width: 100px;
+}
+
+#event-time-metabox #_time_start, #event-time-metabox #_time_end {
+	width: 80px;
+}
+
+#event-time-metabox .time-connect {
+	float: left;
+	margin: 5px 10px;
+}
