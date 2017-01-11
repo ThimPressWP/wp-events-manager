@@ -19,7 +19,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 	public $label = null;
 
 	public function __construct() {
-		$this->id    = 'general';
+		$this->id    = 'event_general';
 		$this->label = __( 'General', 'tp-event' );
 		parent::__construct();
 	}

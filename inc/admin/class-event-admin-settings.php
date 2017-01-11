@@ -16,7 +16,7 @@ class TP_Event_Admin_Settings {
 		$settings   = array();
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-general.php';
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-pages.php';
-		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-email.php';
+		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-emails.php';
 		$settings[] = require_once TP_EVENT_INC . 'admin/settings/class-event-admin-setting-checkout.php';
 		return apply_filters( 'event_admin_setting_pages', $settings );
 	}
