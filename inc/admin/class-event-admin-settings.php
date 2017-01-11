@@ -72,8 +72,29 @@ class TP_Event_Admin_Settings {
 		if ( !empty( $_POST ) ) {
 			self::save();
 		}
-
-		require_once( TP_EVENT_INC . 'admin/views/settings/save-settings.php' );
+		if ( $tabs ): ?>
+            <div class="wrap">
+                <form method="POST" name="tp_event_options" action="">
+                    <h2 class="nav-tab-wrapper">
+						<?php foreach ( $tabs as $key => $title ): ?>
+                            <a href="<?php echo esc_url( admin_url( 'admin.php?page=tp-event-setting&tab=' . $key ) ); ?>" class="nav-tab<?php echo $current_tab === $key ? ' nav-tab-active' : '' ?>" data-tab="<?php echo esc_attr( $key ) ?>">
+								<?php printf( '%s', $title ) ?>
+                            </a>
+						<?php endforeach; ?>
+                    </h2>
+                    <div class="tp_event_wrapper_content">
+						<?php do_action( 'event_admin_setting_sections_' . $current_tab ); ?>
+                        <!--Display message updated || error-->
+						<?php self::show_messages(); ?>
+						<?php do_action( 'event_admin_setting_' . $current_tab ); ?>
+                    </div>
+                    <p class="submit">
+						<?php wp_nonce_field( 'tp-event-settings', 'tp-event-settings-nonce' ); ?>
+                        <input name="save" class="button-primary" type="submit" value="<?php esc_attr_e( 'Save changes', 'tp-event' ); ?>" />
+                    </p>
+                </form>
+            </div>
+		<?php endif;
 	}
 
 	/**
@@ -108,46 +129,46 @@ class TP_Event_Admin_Settings {
 			}
 			switch ( $field['type'] ) {
 				case 'section_start':
-					require_once( TP_EVENT_INC . 'admin/views/settings/fields/section-start.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/section-start.php' );
 					break;
 				case 'section_end':
-					require_once( TP_EVENT_INC . 'admin/views/settings/fields/section-end.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/section-end.php' );
 					break;
 
 				case 'select':
 				case 'multiselect':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/select.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/select.php' );
 					break;
 
 				case 'text':
 				case 'number':
 				case 'email':
 				case 'password':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/text.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/text.php' );
 					break;
 
 				case 'checkbox':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/checkbox.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/checkbox.php' );
 					break;
 
 				case 'yes_no':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/yes-no.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/yes-no.php' );
 					break;
 
 				case 'radio':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/radio.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/radio.php' );
 					break;
 
 				case 'image_size':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/image-size.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/image-size.php' );
 					break;
 
 				case 'textarea':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/textarea.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/textarea.php' );
 					break;
 
 				case 'select_page':
-					require( TP_EVENT_INC . 'admin/views/settings/fields/select-page.php' );
+					include( TP_EVENT_INC . 'admin/views/settings/select-page.php' );
 					break;
 
 				default:
