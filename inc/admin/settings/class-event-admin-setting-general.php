@@ -19,7 +19,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 	public $label = null;
 
 	public function __construct() {
-		$this->id    = 'general';
+		$this->id    = 'event_general';
 		$this->label = __( 'General', 'tp-event' );
 		parent::__construct();
 	}
@@ -82,7 +82,6 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'title'   => __( 'Google Map API Key', 'tp-event' ),
 				'id'      => $prefix . 'google_map_api_key',
 				'desc'    => __( 'Refer on https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key', 'tp-event' ),
-				'default' => 'AIzaSyCQhaFU8j_b86uXZ4g3FYgN7z9Jzm0V-pw',
 			),
 			array(
 				'type' => 'section_end',

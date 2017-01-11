@@ -264,8 +264,26 @@
 	margin-top: 5px;
 }
 
-.event_meta_box_container .location-notice {
+.event_meta_box_container .event-meta-notice {
 	margin-left: 170px;
 	margin-top: -15px;
 	font-style: italic;
+}
+
+#event-time-metabox input {
+	display: inline-block;
+}
+
+#event-time-metabox #_date_start, #event-time-metabox #_date_end {
+	width: 100px;
+	margin-right: 4px;
+}
+
+#event-time-metabox #_time_start, #event-time-metabox #_time_end {
+	width: 75px;
+}
+
+#event-time-metabox .time-connect {
+	float: left;
+	margin: 5px 14px;
 }

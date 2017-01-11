@@ -19,7 +19,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 	public $label = null;
 
 	public function __construct() {
-		$this->id    = 'email';
+		$this->id    = 'event_emails';
 		$this->label = __( 'Emails', 'tp-event' );
 		parent::__construct();
 	}

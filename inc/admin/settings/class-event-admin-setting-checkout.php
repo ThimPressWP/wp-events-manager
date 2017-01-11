@@ -19,7 +19,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 	public $label = null;
 
 	public function __construct() {
-		$this->id    = 'checkout';
+		$this->id    = 'event_checkout';
 		$this->label = __( 'Checkout', 'tp-event' );
 		add_filter( 'event_admin_settings_tabs_array', array( $this, 'add_setting_tab' ) );
 		add_action( 'event_admin_setting_sections_' . $this->id, array( $this, 'output_section' ) );

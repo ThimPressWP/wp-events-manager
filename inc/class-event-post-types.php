@@ -216,7 +216,7 @@ class Event_Custom_Post_Types {
 		$columns['start']       = __( 'Start', 'tp-event' );
 		$columns['end']         = __( 'End', 'tp-event' );
 		$columns['status']      = __( 'Status', 'tp-event' );
-		$columns['price']        = __( 'Price', 'tp-event' );
+		$columns['price']       = __( 'Price', 'tp-event' );
 		$columns['booked_slot'] = __( 'Booked / Total', 'tp-event' );
 		return $columns;
 	}
@@ -255,7 +255,8 @@ class Event_Custom_Post_Types {
 				}
 				break;
 			case 'booked_slot':
-				sprintf( '%s/%s', $event->booked_quantity(), (int) $event->quantity );
+				$total = get_post_meta( $post_id, 'tp_event_qty', true ) ? get_post_meta( $post_id, 'tp_event_qty', true ) : esc_html__( 'Unlimited', 'tp-event' );
+				echo sprintf( '%s / %s', $event->booked_quantity(), $total );
 				break;
 			default:
 				break;

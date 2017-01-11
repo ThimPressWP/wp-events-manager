@@ -35,7 +35,7 @@ if ( $query->have_posts() ) :
                 <td><?php printf( '%s', floatval( $booking->price ) == 0 ? __( 'Free', 'tp-event' ) : __( 'Cost', 'tp-event' ) ) ?></td>
                 <td><?php printf( '%s', tp_event_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
                 <td><?php printf( '%s', $booking->qty ) ?></td>
-                <td><?php printf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment.', 'tp-event' ) ) ?></td>
+                <td><?php printf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment', 'tp-event' ) ) ?></td>
                 <th><?php printf( '%s', tp_event_booking_status( $booking->ID ) ); ?></th>
             </tr>
 
