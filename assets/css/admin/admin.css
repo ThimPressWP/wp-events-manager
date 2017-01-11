@@ -258,3 +258,8 @@
 	position: absolute;
 	top: -10px;
 }
+
+.event-form-field .description {
+	font-style: italic;
+	margin-top: 5px;
+}
