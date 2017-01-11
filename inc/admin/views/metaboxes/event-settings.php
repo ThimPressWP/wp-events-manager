@@ -85,7 +85,7 @@ $text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-ev
             <div class="option_group">
                 <p class="form-field">
                     <label for="_shortcode"><?php _e( 'Shortcode', 'tp-event' ) ?></label>
-                    <input type="text" class="short" id="_shortcode" value="<?php echo esc_attr( '[tp_event_countdown events="' . $post->ID . '"]' ); ?>" readonly>
+                    <input type="text" class="short" id="_shortcode" value="<?php echo esc_attr( '[tp_event_countdown event_id="' . $post->ID . '"]' ); ?>" readonly>
                 </p>
             </div>
 			<?php wp_nonce_field( 'event_nonce', 'event-nonce' ); ?>
