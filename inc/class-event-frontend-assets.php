@@ -18,13 +18,13 @@ class TP_Event_Frontend_Assets {
 	 * @param type $hook
 	 */
 	public static function register_scripts( $hook ) {
-		TP_Event_Assets::register_script( 'tp--countdown-plugin-js', TP_EVENT_LIB_URI . '/countdown/js/jquery.plugin.min.js' );
+		TP_Event_Assets::register_script( 'tp-countdown-plugin-js', TP_EVENT_LIB_URI . '/countdown/js/jquery.plugin.min.js' );
 		TP_Event_Assets::register_script( 'tp-event-countdown-js', TP_EVENT_LIB_URI . '/countdown/js/jquery.countdown.min.js' );
 		TP_Event_Assets::register_style( 'tp-event-countdown-css', TP_EVENT_LIB_URI . '/countdown/css/jquery.countdown.css' );
-		TP_Event_Assets::localize_script( 'tp-event-l18n', 'TP_Event', tp_event_l18n() );
+		TP_Event_Assets::localize_script( 'tp-event-countdown-js', 'TP_Event', tp_event_l18n() );
 
 		// google map
-		TP_Event_Assets::register_script( 'tp-event-google-map', TP_EVENT_ASSETS_URI . '/js/frontend/google-map/google-map.js' );
+		TP_Event_Assets::register_script( 'tp-event-google-map', TP_EVENT_ASSETS_URI . '/js/frontend/google-map.js' );
 
 		// owl-carousel
 		TP_Event_Assets::register_script( 'tp-event-owl-carousel-js', TP_EVENT_LIB_URI . '/owl-carousel/js/owl.carousel.min.js' );

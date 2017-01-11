@@ -23,6 +23,7 @@ $use_end_time = get_post_meta( $post_id, $prefix . 'use_end_time', true );
 
 $qty         = get_post_meta( $post_id, $prefix . 'qty', true );
 $price       = get_post_meta( $post_id, $prefix . 'price', true );
+$location    = get_post_meta( $post_id, $prefix . 'location', true );
 $is_not_free = get_post_meta( $post_id, $prefix . 'is_not_free', true );
 $data_text   = !$is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-event' );
 $text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-event' );
@@ -80,6 +81,12 @@ $text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-ev
                 <p class="form-field">
                     <label for="_time_end"><?php _e( 'Time End', 'tp-event' ) ?></label>
                     <input type="text" class="short" name="<?php echo esc_attr( $prefix ) ?>time_end" id="_time_end" value="<?php echo esc_attr( $time_end ) ?>">
+                </p>
+            </div>
+            <div class="option_group">
+                <p class="form-field">
+                    <label for="_location"><?php _e( 'Location', 'tp-event' ) ?></label>
+                    <input type="text" class="short" name="<?php echo esc_attr( $prefix ) ?>location" id="location" value="<?php echo esc_attr( $location ) ?>">
                 </p>
             </div>
             <div class="option_group">

@@ -270,7 +270,7 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	}
 
 	/**
-	 * get time event countdown
+	 * get event location
 	 *
 	 * @param  string $format
 	 *
@@ -281,6 +281,37 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 			$post = get_post();
 
 		return get_post_meta( $post->ID, 'tp_event_location', true );
+	}
+
+	/**
+	 * get event location map
+	 */
+	function tp_event_get_location_map() {
+		if ( !tp_event_get_option( 'google_map_api_key' ) || !tp_event_location() ) {
+			return;
+		}
+
+		$map_args = apply_filters( 'tp_event_filter_event_location_map', array(
+			'height'   => 300,
+			'map_id'   => md5( tp_event_location() ),
+			'map_data' => array(
+				'address'     => tp_event_location(),
+				'zoom'        => 14,
+				'scroll-zoom' => true,
+				'draggable'   => false,
+				'api-key'     => tp_event_get_option( 'google_map_api_key' ),
+			)
+		) );
+
+		?>
+        <div class="event-google-map-canvas" style="height: <?php echo $map_args['height']; ?>px;" id="map-canvas-<?php echo $map_args['map_id']; ?>"
+			<?php foreach ( $map_args['map_data'] as $key => $val ) : ?>
+				<?php if ( !empty( $val ) ) : ?>
+                    data-<?php echo esc_attr( $key ) . '="' . esc_attr( $val ) . '"' ?>
+				<?php endif ?>
+			<?php endforeach; ?>
+        ></div>
+		<?php
 	}
 
 }
