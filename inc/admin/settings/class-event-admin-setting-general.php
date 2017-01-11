@@ -78,6 +78,12 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'default' => '2',
 			),
 			array(
+				'type'    => 'text',
+				'title'   => __( 'Google Map API Key', 'tp-event' ),
+				'id'      => $prefix . 'google_map_api_key',
+				'default' => 'AIzaSyAVv2tyh3rLYN0bQlLPyUWkPgGohVUyixE',
+			),
+			array(
 				'type' => 'section_end',
 				'id'   => 'auth_currency_settings'
 			),
