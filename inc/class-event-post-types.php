@@ -291,10 +291,9 @@ class Event_Custom_Post_Types {
 	 */
 	public function booking_column_content( $column, $booking_id ) {
 		$booking = TP_Event_Booking::instance( $booking_id );
-		$return  = '';
 		switch ( $column ) {
 			case 'ID':
-				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), tp_event_format_ID( $booking_id ) );
+				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->ID ), tp_event_format_ID( $booking_id ) );
 				break;
 			case 'event':
 				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) );
