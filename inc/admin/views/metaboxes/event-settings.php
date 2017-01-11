@@ -14,12 +14,10 @@ $prefix         = 'tp_event_';
 $start          = get_post_meta( $post->ID, $prefix . 'start', true );
 $date_start     = $start ? date( 'Y-m-d', strtotime( $start ) ) : '';
 $time_start     = $start ? date( 'H:i', strtotime( $start ) ) : '';
-$use_start_time = get_post_meta( $post_id, $prefix . 'use_start_time', true );
 
 $end          = get_post_meta( $post->ID, $prefix . 'end', true );
 $date_end     = $end ? date( 'Y-m-d', strtotime( $end ) ) : '';
 $time_end     = $end ? date( 'H:i', strtotime( $end ) ) : '';
-$use_end_time = get_post_meta( $post_id, $prefix . 'use_end_time', true );
 
 $qty         = get_post_meta( $post_id, $prefix . 'qty', true );
 $price       = get_post_meta( $post_id, $prefix . 'price', true );

@@ -52,7 +52,7 @@ class Auth_Event {
 	 * @return type boolean
 	 */
 	public function is_free() {
-		return (!$this->get_price() ||$this->get_price()  )? true : false;
+		return ( !$this->get_price() ) ? true : false;
 	}
 
 	/**

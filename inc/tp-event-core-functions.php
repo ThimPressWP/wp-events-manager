@@ -195,16 +195,12 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 
 		$post->event_start = null;
 		if ( $start ) {
-			$use_start_time    = get_post_meta( $post_id, 'tp_event_use_start_time', true );
-			$start             = $use_start_time ? date( 'Y-m-d H:i:s', strtotime( $start ) ) : date( 'Y-m-d', strtotime( $start ) );
-			$post->event_start = $start;
+			$post->event_start = date( 'Y-m-d H:i:s', strtotime( $start ) );
 		}
 
 		$post->event_end = null;
 		if ( $end ) {
-			$use_end_time    = get_post_meta( $post_id, 'tp_event_use_end_time', true );
-			$end             = $use_end_time ? date( 'Y-m-d H:i:s', strtotime( $end ) ) : date( 'Y-m-d', strtotime( $end ) );
-			$post->event_end = $end;
+			$post->event_end = date( 'Y-m-d H:i:s', strtotime( $end ) );
 		}
 
 		$location       = get_post_meta( $post->ID, 'tp_event_location', true );

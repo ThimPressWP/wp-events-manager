@@ -58,12 +58,6 @@ if ( $events->have_posts() ) {
         $price = get_post_meta( get_the_ID(), 'thimpress_event_auth_cost', true );
         update_post_meta( get_the_ID(), 'tp_event_qty', absint( $qty ) );
         update_post_meta( get_the_ID(), 'tp_event_price', absint( $price ) );
-
-        $use_start_time = $time_start ? 'yes' : '';
-        update_post_meta( get_the_ID(), 'tp_event_use_start_time', $use_start_time );
-
-        $use_end_time = $time_end ? 'yes' : '';
-        update_post_meta( get_the_ID(), 'tp_event_use_end_time', $use_end_time );
     }
     wp_reset_query();
 }
