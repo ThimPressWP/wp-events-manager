@@ -24,12 +24,7 @@
 			do_action( 'tp_event_single_event_thumbnail' );
 
 			/**
-			 * tp_event_loop_event_countdown
-			 */
-			do_action( 'tp_event_loop_event_location' );
-
-			/**
-			 * tp_event_loop_event_countdown
+			 * tp_event_loop_event_countdown hook
 			 */
 			do_action( 'tp_event_loop_event_countdown' );
 
@@ -37,6 +32,11 @@
 			 * tp_event_single_event_content hook
 			 */
 			do_action( 'tp_event_single_event_content' );
+
+		/**
+		 * tp_event_loop_event_location hook
+		 */
+		do_action( 'tp_event_loop_event_location' );
 		?>
 
 	</div><!-- .summary -->

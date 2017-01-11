@@ -1,13 +1,13 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
+if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 ?>
 
-<?php if( tp_event_location() ): ?>
-	<div class="entry-location">
-		<span><?php _e( 'Location: ', 'tp-event' ) ?></span><?php echo tp_event_location(); ?>
-	</div>
+<?php if ( tp_event_location() ): ?>
+    <div class="event-location">
+		<?php tp_event_get_location_map(); ?>
+    </div>
 <?php endif; ?>

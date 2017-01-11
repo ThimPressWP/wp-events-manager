@@ -23,6 +23,7 @@ $use_end_time = get_post_meta( $post_id, $prefix . 'use_end_time', true );
 
 $qty         = get_post_meta( $post_id, $prefix . 'qty', true );
 $price       = get_post_meta( $post_id, $prefix . 'price', true );
+$location    = get_post_meta( $post_id, $prefix . 'location', true );
 $is_not_free = get_post_meta( $post_id, $prefix . 'is_not_free', true );
 $data_text   = !$is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-event' );
 $text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-event' );
@@ -84,8 +85,20 @@ $text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-ev
             </div>
             <div class="option_group">
                 <p class="form-field">
+                    <label for="_location"><?php _e( 'Location', 'tp-event' ) ?></label>
+                    <input type="text" class="short" name="<?php echo esc_attr( $prefix ) ?>location" id="location" value="<?php echo esc_attr( $location ) ?>">
+                </p>
+				<?php if ( !tp_event_get_option( 'google_map_api_key' ) ): ?>
+                    <p class="location-notice">
+						<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'tp-event' ); ?>
+                        <a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=general' ); ?>"><?php echo esc_html__( 'Set up here' ) ?></a>
+                    </p>
+				<?php endif; ?>
+            </div>
+            <div class="option_group">
+                <p class="form-field">
                     <label for="_shortcode"><?php _e( 'Shortcode', 'tp-event' ) ?></label>
-                    <input type="text" class="short" id="_shortcode" value="<?php echo esc_attr( '[tp_event_countdown events="' . $post->ID . '"]' ); ?>" readonly>
+                    <input type="text" class="short" id="_shortcode" value="<?php echo esc_attr( '[tp_event_countdown event_id="' . $post->ID . '"]' ); ?>" readonly>
                 </p>
             </div>
 			<?php wp_nonce_field( 'event_nonce', 'event-nonce' ); ?>

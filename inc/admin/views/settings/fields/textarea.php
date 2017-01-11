@@ -23,7 +23,7 @@ $content = tp_event_get_option( $field['id'] );
 				<?php wp_editor( $content, $field['id'], isset( $field['options'] ) ? $field['options'] : array() ); ?>
 
 				<?php if ( isset( $field['desc'] ) ) : ?>
-					<span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
+					<div class="description"><?php echo esc_html( $field['desc'] ) ?></div>
 				<?php endif; ?>
 			<?php endif; ?>
 		</td>

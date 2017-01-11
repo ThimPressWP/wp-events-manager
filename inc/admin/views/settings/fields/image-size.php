@@ -38,7 +38,7 @@ $height = tp_event_get_option( $field['id'] . '_height', isset( $field['default'
 				<?php endif; ?>
 
 				<?php if ( isset( $field['desc'] ) ) : ?>
-					<span class="description"><?php echo esc_html( $field['desc'] ) ?></span>
+					<div class="description"><?php echo esc_html( $field['desc'] ) ?></div>
 				<?php endif; ?>
 			<?php endif; ?>
 		</td>

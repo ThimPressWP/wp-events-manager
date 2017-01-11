@@ -215,11 +215,9 @@ class Event_Custom_Post_Types {
 		unset( $columns['comments'], $columns['date'] );
 		$columns['start']       = __( 'Start', 'tp-event' );
 		$columns['end']         = __( 'End', 'tp-event' );
-		$columns['date']        = __( 'Date', 'tp-event' );
 		$columns['status']      = __( 'Status', 'tp-event' );
-		$columns['type']        = __( 'Type', 'tp-event' );
+		$columns['price']        = __( 'Price', 'tp-event' );
 		$columns['booked_slot'] = __( 'Booked / Total', 'tp-event' );
-		$columns['date']        = __( 'Date', 'tp-event' );
 		return $columns;
 	}
 
@@ -249,7 +247,7 @@ class Event_Custom_Post_Types {
 					printf( '%s', date( $date_time_format, strtotime( $start ) ) );
 				}
 				break;
-			case 'type':
+			case 'price':
 				if ( $event->is_free() ) {
 					echo '<span class="event_auth_event_type">' . __( 'Free', 'tp-event' ) . '</span>';
 				} else {
@@ -291,10 +289,9 @@ class Event_Custom_Post_Types {
 	 */
 	public function booking_column_content( $column, $booking_id ) {
 		$booking = TP_Event_Booking::instance( $booking_id );
-		$return  = '';
 		switch ( $column ) {
 			case 'ID':
-				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), tp_event_format_ID( $booking_id ) );
+				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->ID ), tp_event_format_ID( $booking_id ) );
 				break;
 			case 'event':
 				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) );
