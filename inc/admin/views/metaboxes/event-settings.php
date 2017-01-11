@@ -88,6 +88,12 @@ $text        = $is_not_free ? __( 'Free', 'tp-event' ) : __( 'Set Price', 'tp-ev
                     <label for="_location"><?php _e( 'Location', 'tp-event' ) ?></label>
                     <input type="text" class="short" name="<?php echo esc_attr( $prefix ) ?>location" id="location" value="<?php echo esc_attr( $location ) ?>">
                 </p>
+				<?php if ( !tp_event_get_option( 'google_map_api_key' ) ): ?>
+                    <p class="location-notice">
+						<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'tp-event' ); ?>
+                        <a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=general' ); ?>"><?php echo esc_html__( 'Set up here' ) ?></a>
+                    </p>
+				<?php endif; ?>
             </div>
             <div class="option_group">
                 <p class="form-field">

@@ -263,3 +263,9 @@
 	font-style: italic;
 	margin-top: 5px;
 }
+
+.event_meta_box_container .location-notice {
+	margin-left: 170px;
+	margin-top: -15px;
+	font-style: italic;
+}
