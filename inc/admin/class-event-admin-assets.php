@@ -22,6 +22,7 @@ class TP_Event_Admin_Assets {
 		TP_Event_Assets::register_style( 'tp-event-admin-css', TP_EVENT_ASSETS_URI . '/css/admin/admin.css' );
 		TP_Event_Assets::register_script( 'tp-event-admin-datetimepicker-full', TP_EVENT_ASSETS_URI . '/js/datetimepicker/jquery.datetimepicker.full.min.js' );
 		TP_Event_Assets::register_style( 'tp-event-admin-datetimepicker-min', TP_EVENT_ASSETS_URI . '/css/datetimepicker/jquery.datetimepicker.min.css' );
+		TP_Event_Assets::register_script( 'tp-event-admin-jsx', TP_EVENT_ASSETS_URI . '/js/admin/admin-jsx.js', array( 'react', 'react-dom', 'babel' ) );
 	}
 
 }
