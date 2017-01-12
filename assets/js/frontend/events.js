@@ -1,6 +1,6 @@
 ( function ( $ ) {
 
-	var Event_Auth = {
+	var TP_Event_Frontend = {
 		init: function () {
 			var $doc = $( document );
 			/**
@@ -39,7 +39,7 @@
 					_this.find( '.event-icon-spinner2' ).remove();
 				} )
 				.done( function ( html ) {
-					Event_Auth.lightbox( html );
+					TP_Event_Frontend.lightbox( html );
 				} )
 				.fail( function () {
 
@@ -70,7 +70,7 @@
 			} ).done( function ( res ) {
 				button.removeClass( 'event-register-loading' );
 				if ( typeof res.status === 'undefined' ) {
-					Event_Auth.set_message( _self, TP_Event.something_wrong );
+					TP_Event_Frontend.set_message( _self, TP_Event.something_wrong );
 					return;
 				}
 
@@ -79,13 +79,13 @@
 				}
 
 				if ( typeof res.message !== 'undefined' ) {
-					Event_Auth.set_message( _self, res.message );
+					TP_Event_Frontend.set_message( _self, res.message );
 					return;
 				}
 
 			} ).fail( function () {
 				button.removeClass( 'event-register-loading' );
-				Event_Auth.set_message( _self, TP_Event.something_wrong );
+				TP_Event_Frontend.set_message( _self, TP_Event.something_wrong );
 				return;
 			} ).always(function(){
 				_self.removeClass( 'active' );
@@ -144,7 +144,7 @@
 						var timeout = setTimeout( function () {
 							lightbox.addClass( 'event-in' );
 							clearTimeout( timeout );
-							Event_Auth.sanitize_form_field();
+							TP_Event_Frontend.sanitize_form_field();
 						}, 100 );
 					},
 					close: function () {
@@ -198,53 +198,53 @@
 		}
 	};
 
-    $( document ).ready( function () {
+	$( document ).ready( function () {
 
-		Event_Auth.init();
+		TP_Event_Frontend.init();
 
-        // countdown each
-        var counts = $( '.tp_event_counter' );
-        for ( var i = 0; i < counts.length; i++ ) {
-            var time = $( counts[i] ).attr( 'data-time' );
-            time = new Date( time );
+		// countdown each
+		var counts = $( '.tp_event_counter' );
+		for ( var i = 0; i < counts.length; i++ ) {
+			var time = $( counts[i] ).attr( 'data-time' );
+			time = new Date( time );
 
-            $( counts[i] ).countdown( {
-                labels: TP_Event.l18n.labels,
-                labels1: TP_Event.l18n.label1,
-                until: time,
-                serverSync: TP_Event.current_time
-            } );
-        }
+			$( counts[i] ).countdown( {
+				labels: TP_Event.l18n.labels,
+				labels1: TP_Event.l18n.label1,
+				until: time,
+				serverSync: TP_Event.current_time
+			} );
+		}
 
-        // owl-carausel
-        var carousels = $( '.tp_event_owl_carousel' );
-        for ( var i = 0; i < carousels.length; i++ ) {
-            var data = $( carousels[i] ).attr( 'data-countdown' );
-            var options = {
-                navigation: true, // Show next and prev buttons
-                slideSpeed: 300,
-                paginationSpeed: 400,
-                singleItem: true
-            };
-            if ( typeof data !== 'undefined' ) {
-                data = JSON.parse( data );
-                $.extend( options, data );
+		// owl-carausel
+		var carousels = $( '.tp_event_owl_carousel' );
+		for ( var i = 0; i < carousels.length; i++ ) {
+			var data = $( carousels[i] ).attr( 'data-countdown' );
+			var options = {
+				navigation: true, // Show next and prev buttons
+				slideSpeed: 300,
+				paginationSpeed: 400,
+				singleItem: true
+			};
+			if ( typeof data !== 'undefined' ) {
+				data = JSON.parse( data );
+				$.extend( options, data );
 
-                $.each( options, function ( k, v ) {
-                    if ( v === 'true' ){
-                        options[k] = true;
-                    } else if ( v === 'false' ) {
-                        options[k] = false;
-                    }
-                } );
-            }
+				$.each( options, function ( k, v ) {
+					if ( v === 'true' ){
+						options[k] = true;
+					} else if ( v === 'false' ) {
+						options[k] = false;
+					}
+				} );
+			}
 
-            if ( typeof options.slide === 'undefined' || options.slide === true ) {
-                $( carousels[i] ).owlCarousel( options );
-            } else {
-                $( carousels[i] ).removeClass( 'owl-carousel' );
-            }
-        }
-    } );
+			if ( typeof options.slide === 'undefined' || options.slide === true ) {
+				$( carousels[i] ).owlCarousel( options );
+			} else {
+				$( carousels[i] ).removeClass( 'owl-carousel' );
+			}
+		}
+	} );
 
 } )( jQuery );
