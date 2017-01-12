@@ -42,7 +42,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 						<?php endforeach; ?>
                     </ul>
 				<?php } else {
-					tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.' ) );
+					tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'tp-event' ) );
 				}
 			} ?>
             <!--End hide payment option when cost is 0-->
