@@ -29,7 +29,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 
             <!--Hide payment option when cost is 0-->
 			<?php if ( !$event->is_free() ) {
-				$payments = tp_event_gateways_available();
+				$payments = tp_event_gateways_enable();
 				if ( $payments ) { ?>
                     <ul class="event_auth_payment_methods">
 						<?php $i = 0; ?>
@@ -41,7 +41,9 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 							<?php $i ++; ?>
 						<?php endforeach; ?>
                     </ul>
-				<?php }
+				<?php } else {
+					tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'tp-event' ) );
+				}
 			} ?>
             <!--End hide payment option when cost is 0-->
 
@@ -49,7 +51,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
                 <input type="hidden" name="event_id" value="<?php echo esc_attr( $event_id ) ?>" />
                 <input type="hidden" name="action" value="event_auth_register" />
 				<?php wp_nonce_field( 'event_auth_register_nonce', 'event_auth_register_nonce' ); ?>
-                <button class="event_register_submit event_auth_button"><?php _e( 'Register Now', 'tp-event' ); ?></button>
+                <button class="event_register_submit event_auth_button" <?php echo $payments ? '' : 'disabled="disabled"' ?>><?php _e( 'Register Now', 'tp-event' ); ?></button>
             </div>
 
         </form>

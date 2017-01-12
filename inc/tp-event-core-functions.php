@@ -433,7 +433,7 @@ if ( !function_exists( 'tp_event_l18n' ) ) {
 				)
 			),
 			'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-			'something_wrong' => __( 'Something went wrong.', 'tp-event' ),
+			'something_wrong' => __( 'Something went wrong', 'tp-event' ),
 			'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
 		) );
 	}
@@ -975,19 +975,21 @@ if ( !function_exists( 'tp_event_format_price' ) ) {
 	}
 }
 
-if ( !function_exists( 'tp_event_payments' ) ) {
+if ( !function_exists( 'tp_event_payment_gateways' ) ) {
 
 	// List payment gateways
-	function tp_event_payments() {
+	function tp_event_payment_gateways() {
 		return TP_Event_Payment_Gateways::instance()->get_payment_gateways();
-	}
 
+	}
 }
 
-if ( !function_exists( 'tp_event_gateways_available' ) ) {
-	// List payment gateways available
-	function tp_event_gateways_available() {
-		return TP_Event_Payment_Gateways::instance()->get_payment_gateways_available();
+if ( !function_exists( 'tp_event_gateways_enable' ) ) {
+
+	// List payment gateways
+	function tp_event_gateways_enable() {
+		return TP_Event_Payment_Gateways::instance()->get_payment_gateways_enable();
+
 	}
 }
 
@@ -995,7 +997,7 @@ if ( !function_exists( 'tp_event_get_payment_title' ) ) {
 
 // List payments gateway title
 	function tp_event_get_payment_title( $payment_id = null ) {
-		$payments = tp_event_payments();
+		$payments = tp_event_payment_gateways();
 		return isset( $payments[$payment_id] ) ? $payments[$payment_id]->title : '';
 	}
 

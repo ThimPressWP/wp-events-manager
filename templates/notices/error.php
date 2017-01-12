@@ -5,7 +5,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<ul class="event-auth-notice error">
+<ul class="tp-event-notice error">
 
     <?php foreach ( $messages as $message ) : ?>
 

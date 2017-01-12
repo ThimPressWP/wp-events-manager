@@ -43,10 +43,10 @@ abstract class TP_Event_Abstract_Payment_Gateway {
     }
 
     /**
-     * refun action
+     * refund action
      * @return null
      */
-    protected function refun() {
+    protected function refund() {
         
     }
 

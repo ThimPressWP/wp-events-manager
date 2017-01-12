@@ -17,7 +17,7 @@ class TP_Event_Payment_Gateways {
 
 	public function init() {
 		$payment_gatways =
-			apply_filters( 'event_auth_payment_gateways',
+			apply_filters( 'tp_event_payment_gateways',
 				array(
 					'TP_Event_Payment_Gateway_Paypal',
 					'TP_Event_Payment_Gateway_Woocommerce'
@@ -33,24 +33,37 @@ class TP_Event_Payment_Gateways {
 	}
 
 	/**
-	 * payment gateways available
-	 * @return type array
+	 * Get payment gateways available
+	 *
+	 * @return array
 	 */
 	public function get_payment_gateways() {
-		return $this->gateways;
-	}
+		$gateways = $this->gateways;
 
-	public function get_payment_gateways_available() {
-		$gateways  = $this->get_payment_gateways();
 		$available = array();
-
 		foreach ( $gateways as $id => $gateway ) {
 			if ( $gateway->is_available() ) {
 				$available[$id] = $gateway;
 			}
 		}
-
 		return $available;
+	}
+
+	/**
+	 * Get payment gateways enable
+	 *
+	 * @return array
+	 */
+	public function get_payment_gateways_enable() {
+		$gateways = $this->gateways;
+
+		$enable = array();
+		foreach ( $gateways as $id => $gateway ) {
+			if ( $gateway->is_enable() ) {
+				$enable[$id] = $gateway;
+			}
+		}
+		return $enable;
 	}
 
 	public static function instance() {
