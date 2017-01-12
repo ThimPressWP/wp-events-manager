@@ -288,7 +288,8 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 		}
 
 		$map_args = apply_filters( 'tp_event_filter_event_location_map', array(
-			'height'   => 300,
+			'height'   => '300px',
+			'width'    => '100%',
 			'map_id'   => md5( tp_event_location() ),
 			'map_data' => array(
 				'address'     => tp_event_location(),
@@ -300,7 +301,7 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 		) );
 
 		?>
-        <div class="event-google-map-canvas" style="height: <?php echo $map_args['height']; ?>px;" id="map-canvas-<?php echo $map_args['map_id']; ?>"
+        <div class="event-google-map-canvas" style="height: <?php echo $map_args['height']; ?>; width: <?php echo $map_args['width']; ?>" id="map-canvas-<?php echo $map_args['map_id']; ?>"
 			<?php foreach ( $map_args['map_data'] as $key => $val ) : ?>
 				<?php if ( !empty( $val ) ) : ?>
                     data-<?php echo esc_attr( $key ) . '="' . esc_attr( $val ) . '"' ?>
