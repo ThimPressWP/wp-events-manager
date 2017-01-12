@@ -270,6 +270,10 @@
 	font-style: italic;
 }
 
+#event-time-metabox {
+	margin-bottom: 14px;
+}
+
 #event-time-metabox input {
 	display: inline-block;
 }
