@@ -35,8 +35,8 @@ class TP_Event_Frontend_Assets {
 		TP_Event_Assets::register_style( 'tp-event-magnific-popup-css', TP_EVENT_LIB_URI . '/magnific-popup/css/magnific-popup.css', array() );
 
 		// events
-		TP_Event_Assets::register_script( 'thim-event-frontend-js', TP_EVENT_ASSETS_URI . '/js/frontend/events.js' );
-		TP_Event_Assets::register_style( 'thim-event-fronted-css', TP_EVENT_ASSETS_URI . '/css/frontend/events.css' );
+		TP_Event_Assets::register_script( 'tp-event-frontend-js', TP_EVENT_ASSETS_URI . '/js/frontend/events.js' );
+		TP_Event_Assets::register_style( 'tp-event-fronted-css', TP_EVENT_ASSETS_URI . '/css/frontend/events.css' );
 	}
 
 }

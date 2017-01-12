@@ -33,9 +33,8 @@ class TP_Event_Admin_Metabox_Event {
 		update_post_meta( $post_id, 'tp_event_end', $end );
 
 		if ( ( $start && !$end ) || ( strtotime( $start ) >= strtotime( $end ) ) ) {
-			TP_Event_Admin_Metaboxes::add_error( __( 'Please make sure end time after start time', 'tp-event' ) );
+			TP_Event_Admin_Metaboxes::add_error( __( 'Please make sure event time is validate', 'tp-event' ) );
 			wp_update_post( array( 'ID' => $post_id, 'post_status' => 'publish' ) );
-			return;
 		}
 
 		$event_start = strtotime( $start );
