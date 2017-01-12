@@ -63,10 +63,10 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function init_hooks() {
 			// plugin loaded
 			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
+		}
 
-			// init this plugin hook
-			register_activation_hook( plugin_basename( __FILE__ ), array( $this, 'install' ) );
-			register_deactivation_hook( plugin_basename( __FILE__ ), array( $this, 'uninstall' ) );
+		public function install() {
+			die( 'xxx' );
 		}
 
 		/**

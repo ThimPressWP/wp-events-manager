@@ -60,20 +60,6 @@ class Event_Install {
 		Event_Roles::remove_roles();
 	}
 
-	/**
-	 * Create default options
-	 */
-	public static function create_options() {
-		$setings = TP_Event_Admin_Settings::get_setting_pages();
-		foreach ( $setings as $setting ) {
-			$options = $setting->get_settings();
-			foreach ( $options as $option ) {
-				if ( !empty( $option['id'] ) && !get_option( $option['id'] ) && !empty( $option['default'] ) ) {
-					update_option( $option['id'], $option['default'] );
-				}
-			}
-		}
-	}
 
 	/**
 	 * Create pages
