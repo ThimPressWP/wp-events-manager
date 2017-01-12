@@ -105,21 +105,21 @@
 	visibility: visible;
 }
 
-.event-auth-notice {
-	margin: 0 0 2em !important;
+.tp-event-notice {
+	margin: 10px 0 2em !important;
 	position: relative;
 	list-style: none !important;
 	width: auto;
 	word-wrap: break-word;
 }
 
-.event-auth-notice.success {
+.tp-event-notice.success {
 	color: #31708f;
 	background: #d9edf7;
 	padding: 10px 15px !important;
 }
 
-.event-auth-notice.error {
+.tp-event-notice.error {
 	padding: 1em 2em 1em 1.5em !important;
 	background-color: #fdb494;
 	color: #515151;

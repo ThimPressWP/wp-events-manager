@@ -55,7 +55,7 @@
 			var _self = $( this ),
 				_data = _self.serializeArray(),
 				button = _self.find( 'button[type="submit"]' ),
-				_notices = _self.find( '.event-auth-notice' );
+				_notices = _self.find( '.tp-event-notice' );
 
 			$.ajax( {
 				url: TP_Event.ajaxurl,
@@ -94,7 +94,7 @@
 			return false;
 		},
 		set_message: function ( form, message ) {
-			var html = '<ul class="event-auth-notice error">';
+			var html = '<ul class="tp-event-notice error">';
 			html += '<li class="event_auth_register_message_error">' + message + '</li>';
 			html += '</ul>';
 			form.find( '.event_register_foot' ).after( html );
@@ -169,7 +169,7 @@
 				async: false,
 				beforeSend: function () {
 //                    setTimeout( function(){
-					_lightbox.find( '.event-auth-notice' ).slideUp().remove();
+					_lightbox.find( '.tp-event-notice' ).slideUp().remove();
 //                    } );
 					_button.addClass( 'event-register-loading' );
 				}
@@ -188,7 +188,7 @@
 					}
 				}
 			} ).fail( function ( jqXHR, textStatus, errorThrown ) {
-				var html = '<ul class="event-auth-notice error">';
+				var html = '<ul class="tp-event-notice error">';
 				html += '<li>' + jqXHR + '</li>';
 				html += '</ul>';
 				_this.before( res.notices );

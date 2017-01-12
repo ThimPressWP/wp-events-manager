@@ -3,6 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit();
 }
 ?>
-<ul class="event-auth-notice error">
+<ul class="tp-event-notice error">
     <li><?php _e( 'Oops! Something went wrong.' ) ?></li>
 </ul>
