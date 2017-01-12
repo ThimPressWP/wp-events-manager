@@ -28,7 +28,6 @@ class TP_Event_Assets {
 	public static function init() {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
-		add_filter( 'script_loader_tag', array( __CLASS__, 'load_script_jsx' ), 10, 3 );
 	}
 
 	/**
@@ -43,16 +42,6 @@ class TP_Event_Assets {
 	 */
 	public static function register_style( $handle, $src, $deps = array(), $ver = false, $media = 'all' ) {
 		self::$_styles[$handle] = array( $handle, self::_get_file_uri( $src ), $deps, $ver, $media );
-	}
-
-	/**
-	 * load jsx script tag
-	 */
-	public static function load_script_jsx( $tag, $handle, $src ) {
-		if ( strpos( $handle, 'jsx' ) ) {
-			$tag = str_replace( "<script type='text/javascript'", "<script type='text/babel'", $tag );
-		}
-		return $tag;
 	}
 
 	/**
@@ -81,9 +70,6 @@ class TP_Event_Assets {
 		wp_enqueue_script( 'wp-util' );
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'underscore' );
-		wp_enqueue_script( 'react', TP_EVENT_ASSETS_URI . '/js/libraries/react.min.js', array(), TP_EVENT_VER, true );
-		wp_enqueue_script( 'react-dom', TP_EVENT_ASSETS_URI . '/js/libraries/react-dom.min.js', array( 'react' ), TP_EVENT_VER, true );
-		wp_enqueue_script( 'babel', TP_EVENT_ASSETS_URI . '/js/libraries/browser.min.js', array(), TP_EVENT_VER, true );
 
 		if ( self::$_scripts ) {
 			foreach ( self::$_scripts as $handle => $param ) {

@@ -37,8 +37,6 @@ class TP_Event_Frontend_Assets {
 		// events
 		TP_Event_Assets::register_script( 'tp-event-frontend-js', TP_EVENT_ASSETS_URI . '/js/frontend/events.js' );
 		TP_Event_Assets::register_style( 'tp-event-fronted-css', TP_EVENT_ASSETS_URI . '/css/frontend/events.css' );
-
-		TP_Event_Assets::register_script( 'tp-event-frontend-jsx', TP_EVENT_ASSETS_URI . '/js/frontend/events-jsx.js', array('react', 'react-dom', 'babel') );
 	}
 
 }
