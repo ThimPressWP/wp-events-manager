@@ -18,6 +18,8 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	// payment url
 	protected $paypal_payment_url = null;
 
+	protected static $enable = false;
+
 	/**
 	 * payment title
 	 * @var null
@@ -44,13 +46,22 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 		add_action( 'init', array( $this, 'payment_validation' ), 99 );
 	}
 
-	/**
-	 *
-	 * @return boolean
+	/*
+	 * Check gateway available
 	 */
 	public function is_available() {
-		return !empty( $this->paypal_email ) && tp_event_get_option( 'paypal_enable' ) === 'yes';
+		return true;
 	}
+
+	/*
+	 * Check gateway enable
+	 */
+	public function is_enable() {
+		self::$enable = !empty( $this->paypal_email ) && tp_event_get_option( 'paypal_enable' ) === 'yes';
+		return self::$enable;
+	}
+
+
 
 	// callback
 	public function payment_validation() {

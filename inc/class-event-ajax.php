@@ -116,7 +116,7 @@ class Event_Ajax {
 				throw new Exception( __( 'You are registered this event.', 'tp-event' ) );
 			}
 
-			$payment_methods = tp_event_payments();
+			$payment_methods = tp_event_payment_gateways();
 
 			$payment = isset( $_POST['payment_method'] ) ? sanitize_text_field( $_POST['payment_method'] ) : false;
 

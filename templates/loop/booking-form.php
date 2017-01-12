@@ -29,7 +29,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 
             <!--Hide payment option when cost is 0-->
 			<?php if ( !$event->is_free() ) {
-				$payments = tp_event_gateways_available();
+				$payments = tp_event_gateways_enable();
 				if ( $payments ) { ?>
                     <ul class="event_auth_payment_methods">
 						<?php $i = 0; ?>
