@@ -432,7 +432,7 @@ if ( !function_exists( 'tp_event_l18n' ) ) {
 				)
 			),
 			'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-			'something_wrong' => __( 'Something went wrong.', 'tp-event' ),
+			'something_wrong' => __( 'Something went wrong', 'tp-event' ),
 			'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
 		) );
 	}
