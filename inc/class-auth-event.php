@@ -159,7 +159,7 @@ class Auth_Event {
 	 *
 	 * @return type
 	 */
-	public static function instance( $id ) {
+	public static function instance( $id, $option = null ) {
 		$event_id = false;
 		if ( is_numeric( $id ) && $id && get_post_type( $id ) === 'tp_event' ) {
 			$post     = get_post( $id );
