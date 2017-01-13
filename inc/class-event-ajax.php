@@ -137,7 +137,7 @@ class TP_Event_Ajax {
 				throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup payment gateways.', 'tp-event' ) ) );
 			}
 
-			$booking_id = $booking->create_booking( $args );
+			$booking_id = $booking->create_booking( $args, $args['payment_id'] );
 			// create booking result
 			if ( is_wp_error( $booking_id ) ) {
 				throw new Exception( $booking_id->get_error_message() );
