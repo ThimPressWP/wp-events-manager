@@ -156,11 +156,9 @@ class Event_Ajax {
 						) ) );
 					} else if ( $payment ) {
 						$return = $payment->process( $booking_id );
-
 						if ( isset( $return['status'] ) && $return['status'] === false ) {
 							wp_delete_post( $booking_id );
 						}
-
 						wp_send_json( $return );
 					} else {
 						wp_send_json( array(
@@ -169,9 +167,6 @@ class Event_Ajax {
 						) );
 					}
 				}
-			} elseif ( $args['payment_id'] == 'woocommerce' ) {
-				$booking->add_to_woo_item($args);
-
 			}
 		} catch ( Exception $e ) {
 			if ( $e ) {

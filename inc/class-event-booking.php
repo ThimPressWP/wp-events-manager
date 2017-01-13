@@ -77,46 +77,6 @@ class TP_Event_Booking {
 		}
 	}
 
-	public function add_to_woo_item( $args = array() ) {
-		global $woocommerce;
-
-		$cart_items = $woocommerce->cart->get_cart();
-		// current user
-		$user = wp_get_current_user();
-
-		// merge argument
-		$args = wp_parse_args( $args, array(
-			'user_id'  => $user->ID,
-			'event_id' => 0,
-			'qty'      => 1,
-			'price'    => 0,
-		) );
-
-		$woo_cart_param = array(
-			'product_id' => $args['event_id'],
-			'price'      => $args['price']
-		);
-
-		if ( isset( $args['parent_id'] ) ) {
-			$woo_cart_param['parent_id'] = $args['parent_id'];
-		}
-
-		$woo_cart_id = $woocommerce->cart->generate_cart_id( $woo_cart_param['product_id'], null, array(), $woo_cart_param );
-
-		if ( array_key_exists( $woo_cart_id, $cart_items ) ) {
-			$woocommerce->cart->set_quantity( $woo_cart_id, $args['qty'] );
-		} else {
-			echo '<pre>';
-			var_dump( $woo_cart_param);
-			echo '</pre>';
-
-			$woo_cart_id = $woocommerce->cart->add_to_cart( $woo_cart_param['product_id'], $args['qty'], null, array(), $woo_cart_param );
-		}
-
-		return $woo_cart_id;
-
-	}
-
 	// update status
 	public function update_status( $status = 'ea-completed' ) {
 		if ( !$this->post || $this->post->post_type !== 'event_auth_book' ) {

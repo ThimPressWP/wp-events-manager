@@ -62,7 +62,6 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	}
 
 
-
 	// callback
 	public function payment_validation() {
 		if ( isset( $_GET['event-auth-paypal-payment'] ) && $_GET['event-auth-paypal-payment'] ) {
