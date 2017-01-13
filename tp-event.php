@@ -37,23 +37,14 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * Define Plugins Constants
 		 */
 		public function define_constants() {
-			$this->set_define( 'TP_EVENT_PATH', plugin_dir_path( __FILE__ ) );
-			$this->set_define( 'TP_EVENT_URI', plugin_dir_url( __FILE__ ) );
-			$this->set_define( 'TP_EVENT_INC', TP_EVENT_PATH . 'inc/' );
-			$this->set_define( 'TP_EVENT_INC_URI', TP_EVENT_URI . 'inc/' );
-			$this->set_define( 'TP_EVENT_ASSETS_URI', TP_EVENT_URI . 'assets' );
-			$this->set_define( 'TP_EVENT_LIB_URI', TP_EVENT_INC_URI . 'libraries/' );
-			$this->set_define( 'TP_EVENT_VER', '2.0' );
-			$this->set_define( 'TP_EVENT_MAIN_FILE', __FILE__ );
-		}
-
-		/**
-		 * single define
-		 */
-		public function set_define( $name = '', $value = '' ) {
-			if ( $name && !defined( $name ) ) {
-				define( $name, $value );
-			}
+			define( 'TP_EVENT_PATH', plugin_dir_path( __FILE__ ) );
+			define( 'TP_EVENT_URI', plugin_dir_url( __FILE__ ) );
+			define( 'TP_EVENT_INC', TP_EVENT_PATH . 'inc/' );
+			define( 'TP_EVENT_INC_URI', TP_EVENT_URI . 'inc/' );
+			define( 'TP_EVENT_ASSETS_URI', TP_EVENT_URI . 'assets' );
+			define( 'TP_EVENT_LIB_URI', TP_EVENT_INC_URI . 'libraries/' );
+			define( 'TP_EVENT_VER', '2.0' );
+			define( 'TP_EVENT_MAIN_FILE', __FILE__ );
 		}
 
 		/**
@@ -63,10 +54,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function init_hooks() {
 			// plugin loaded
 			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
-		}
-
-		public function install() {
-			die( 'xxx' );
 		}
 
 		/**

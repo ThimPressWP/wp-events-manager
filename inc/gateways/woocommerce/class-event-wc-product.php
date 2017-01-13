@@ -8,11 +8,10 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'WC_Product_Simple' ) ) {
+if ( !class_exists( 'WC_Product' ) )
 	return;
-}
 
-class TP_Event_WC_Product extends WC_Product_Simple {
+class TP_Event_WC_Product extends WC_Product {
 
 	public $data = null;
 	public $total;
