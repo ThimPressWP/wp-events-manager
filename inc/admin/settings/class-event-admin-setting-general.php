@@ -84,6 +84,13 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'desc'    => __( 'Refer on https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key', 'tp-event' ),
 			),
 			array(
+				'type'    => 'checkbox',
+				'title'   => __( 'Send email', 'tp-event' ),
+				'desc'    => __( 'Send notify when user register', 'tp-event' ),
+				'id'      => $prefix . 'register_notify',
+				'default' => false
+			),
+			array(
 				'type' => 'section_end',
 				'id'   => 'auth_currency_settings'
 			),
