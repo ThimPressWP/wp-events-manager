@@ -11,13 +11,11 @@ defined( 'ABSPATH' ) || exit;
 global $post;
 $post_id    = $post->ID;
 $prefix     = 'tp_event_';
-$start      = get_post_meta( $post->ID, $prefix . 'start', true );
-$date_start = $start ? date( 'Y-m-d', strtotime( $start ) ) : '';
-$time_start = $start ? date( 'H:i', strtotime( $start ) ) : '';
+$date_start = get_post_meta( $post->ID, $prefix . 'date_start', true ) ? date( 'Y-m-d', strtotime( get_post_meta( $post->ID, $prefix . 'date_start', true ) ) ) : '';
+$time_start = get_post_meta( $post->ID, $prefix . 'time_start', true ) ? date( 'H:i', strtotime( get_post_meta( $post->ID, $prefix . 'time_start', true ) ) ) : '';
 
-$end      = get_post_meta( $post->ID, $prefix . 'end', true );
-$date_end = $end ? date( 'Y-m-d', strtotime( $end ) ) : '';
-$time_end = $end ? date( 'H:i', strtotime( $end ) ) : '';
+$date_end = get_post_meta( $post->ID, $prefix . 'date_end', true ) ? date( 'Y-m-d', strtotime( get_post_meta( $post->ID, $prefix . 'date_end', true ) ) ) : '';
+$time_end = get_post_meta( $post->ID, $prefix . 'time_end', true ) ? date( 'H:i', strtotime( get_post_meta( $post->ID, $prefix . 'time_end', true ) ) ) : '';
 
 $qty      = get_post_meta( $post_id, $prefix . 'qty', true );
 $price    = get_post_meta( $post_id, $prefix . 'price', true );
@@ -51,13 +49,15 @@ $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
                 <input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ) ?>date_start" id="_date_start"
                        value="<?php echo $date_start ? esc_attr( $date_start ) : esc_attr( $today ); ?>">
                 <label hidden for="_time_start"></label>
-                <input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ) ?>time_start" id="_time_start" value="<?php echo esc_attr( $time_start ) ?>">
+                <input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ) ?>time_start" id="_time_start"
+                       value="<?php echo $time_start ? esc_attr( $time_start ) : '' ?>">
                 <span class="time-connect"> <?php echo esc_html__( 'to', 'tp-event' ); ?></span>
                 <label hidden for="_date_end"></label>
                 <input type="text" class="short date-end" name="<?php echo esc_attr( $prefix ) ?>date_end" id="_date_end"
                        value="<?php echo $date_end ? esc_attr( $date_end ) : esc_attr( $tomorrow ); ?>">
                 <label hidden for="_time_end"></label>
-                <input type="text" class="short time-end" name="<?php echo esc_attr( $prefix ) ?>time_end" id="_time_end" value="<?php echo esc_attr( $time_end ) ?>">
+                <input type="text" class="short time-end" name="<?php echo esc_attr( $prefix ) ?>time_end" id="_time_end"
+                       value="<?php echo $time_end ? esc_attr( $time_end ) : '' ?>">
             </div>
         </div>
         <div class="option_group">
