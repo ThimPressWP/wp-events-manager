@@ -28,7 +28,6 @@ class TP_Event_Authentication {
 
         // process
         add_action( 'wp_logout', array( __CLASS__, 'wp_logout' ) );
-        add_action( 'template_redirect', array( __CLASS__, 'template_redirect' ) );
     }
 
     public static function auth_init() {
