@@ -69,7 +69,7 @@ class Event_Ajax {
 	 * Login Ajax
 	 */
 	public function event_login_action() {
-		TP_Event_Authentication::process_login();
+		TP_Event_User_Process::process_login();
 		die();
 	}
 
