@@ -47,13 +47,7 @@ class Event_Ajax {
 			echo ob_get_clean();
 			die();
 		} else if ( !is_user_logged_in() ) {
-			/**
-			 * return html login form if not user logged in
-			 */
-			tp_event_add_notice( 'error', __( 'You must login before register', 'tp-event' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
-			ob_start();
-			echo Auth_Authentication::event_auth_login();
-			echo ob_get_clean();
+			tp_event_print_notice( 'error', __( 'You must login before register ', 'tp-event' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			die();
 		} else {
 			$event           = new Auth_Event( $event_id );
@@ -62,7 +56,7 @@ class Event_Ajax {
 			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
 				tp_event_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
 			} else if ( $registered_time && tp_event_get_option( 'email_register_times' ) === 'once' ) {
-				tp_event_print_notice( 'error', __( 'You have registered this event before.', 'tp-event' ) );
+				tp_event_print_notice( 'error', __( 'You have registered this event before', 'tp-event' ) );
 			} else {
 				tp_event_get_template( 'loop/booking-form.php', array( 'event_id' => $event_id ) );
 			}
@@ -75,7 +69,7 @@ class Event_Ajax {
 	 * Login Ajax
 	 */
 	public function event_login_action() {
-		Auth_Authentication::process_login();
+		TP_Event_Authentication::process_login();
 		die();
 	}
 
@@ -170,7 +164,7 @@ class Event_Ajax {
 					}
 				}
 			} elseif ( $args['payment_id'] == 'woocommerce' ) {
-				$booking->add_to_woo_item($args);
+				$booking->add_to_woo_item( $args );
 
 			}
 		} catch ( Exception $e ) {
