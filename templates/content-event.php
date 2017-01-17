@@ -50,12 +50,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			do_action( 'tp_event_single_event_thumbnail' );
 
 			/**
-			 * tp_event_loop_event_countdown
+			 * tp_event_loop_event_count hook
 			 */
 			do_action( 'tp_event_loop_event_countdown' );
 
 			/**
-			 * tp_event_loop_event_countdown
+			 * tp_event_loop_event_location hook
 			 */
 			do_action( 'tp_event_loop_event_location' );
 

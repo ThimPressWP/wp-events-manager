@@ -50,7 +50,7 @@ class Event_Ajax {
 			tp_event_print_notice( 'error', __( 'You must login before register ', 'tp-event' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			die();
 		} else {
-			$event           = new Auth_Event( $event_id );
+			$event           = new TP_Event_Event( $event_id );
 			$registered_time = $event->booked_quantity( get_current_user_id() );
 			ob_start();
 			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
@@ -101,7 +101,7 @@ class Event_Ajax {
 			// End sanitize, validate data
 			// load booking module
 			$booking = TP_Event_Booking::instance();
-			$event   = Auth_Event::instance( $event_id );
+			$event   = TP_Event_Event::instance( $event_id );
 
 			$user       = wp_get_current_user();
 			$registered = $event->booked_quantity( $user->ID );
