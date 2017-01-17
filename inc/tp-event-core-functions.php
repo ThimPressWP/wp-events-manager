@@ -222,9 +222,9 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 		}
 
 		if ( $l10 ) {
-			return date_i18n( date( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) ) );
+			return date_i18n( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
 		} else {
-			return date( date( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) ) );
+			return date( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
 		}
 	}
 
@@ -241,9 +241,9 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 		}
 
 		if ( $l10 ) {
-			return date_i18n( date( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) ) );
+			return date_i18n( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
 		} else {
-			return date( date( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) ) );
+			return date( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
 		}
 	}
 
