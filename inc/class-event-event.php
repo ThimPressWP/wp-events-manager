@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Auth_Event {
+class TP_Event_Event {
 
 	public $post = null;
 	public $ID = null;
@@ -153,7 +153,7 @@ class Auth_Event {
 	}
 
 	/**
-	 * Auth_Event instance
+	 * TP_Event_Event instance
 	 *
 	 * @param WP_Post $id
 	 *

@@ -1220,3 +1220,23 @@ if ( !function_exists( 'tp_event_cancel_payment_booking' ) ) {
 	}
 
 }
+
+// Update functions from version 1.4
+if ( !function_exists( 'event_get_option' ) ) {
+
+	/**
+	 * event_get_option
+	 *
+	 * @param type $name
+	 * @param type $default
+	 *
+	 * @return type
+	 */
+	function event_get_option( $name, $default = null ) {
+		if ( strpos( $name, 'thimpress_events_' ) !== 0 ) {
+			$name = 'thimpress_events_' . $name;
+		}
+		return get_option( $name, $default );
+	}
+
+}

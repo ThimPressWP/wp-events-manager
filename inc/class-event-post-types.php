@@ -228,7 +228,7 @@ class Event_Custom_Post_Types {
 	 * @param type $post_id
 	 */
 	public function event_column_content( $column, $post_id ) {
-		$event = Auth_Event::instance( $post_id );
+		$event = TP_Event_Event::instance( $post_id );
 		switch ( $column ) {
 			case 'status' :
 				$status = get_post_status_object( get_post_status( $post_id ) );
