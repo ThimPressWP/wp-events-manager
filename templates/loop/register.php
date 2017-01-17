@@ -2,7 +2,7 @@
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
-$event = new Auth_Event( get_the_ID() );
+$event = new TP_Event_Event( get_the_ID() );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 
 if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expired' ) {
