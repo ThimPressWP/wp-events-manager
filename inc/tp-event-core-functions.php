@@ -700,7 +700,7 @@ if ( !function_exists( 'tp_event_print_notices' ) ) {
 	function tp_event_print_notices() {
 		if ( $notices = TP_Event()->_session->get( 'notices', array() ) ) {
 			ob_start();
-			tp_event_get_template( 'messages.php', array( 'messages' => $notices ) );
+			tp_event_get_template( 'notices/messages.php', array( 'messages' => $notices ) );
 			$html = ob_get_clean();
 			echo $html;
 			TP_Event()->_session->set( 'notices', array() );
