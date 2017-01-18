@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  * Ajax Process
  */
-class Event_Ajax {
+class TP_Event_Ajax {
 
 	public function __construct() {
 		// actions with
@@ -124,49 +124,44 @@ class Event_Ajax {
 			) );
 
 			$payment = !empty( $payment_methods[$payment] ) ? $payment_methods[$payment] : false;
-			$return  = array();
+
+			$return = array();
 
 			if ( $args['price'] > 0 && $payment && !$payment->is_available() ) {
 				throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup payment gateways.', 'tp-event' ) ) );
 			}
 
-			if ( $args['payment_id'] == 'paypal' ) {
-				$booking_id = $booking->create_booking( $args );
-				// create booking result
-				if ( is_wp_error( $booking_id ) ) {
-					throw new Exception( $booking_id->get_error_message() );
-				} else {
-					if ( $args['price'] == 0 ) {
-						// update booking status
-						$book = TP_Event_Booking::instance( $booking_id );
-						$book->update_status( 'pending' );
+			$booking_id = $booking->create_booking( $args, $args['payment_id'] );
+			// create booking result
+			if ( is_wp_error( $booking_id ) ) {
+				throw new Exception( $booking_id->get_error_message() );
+			} else {
+				if ( $args['price'] == 0 ) {
+					// update booking status
+					$book = TP_Event_Booking::instance( $booking_id );
+					$book->update_status( 'pending' );
 
-						// user booking
-						$user = get_userdata( $book->user_id );
-						tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
-						wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
-							'status' => true,
-							'url'    => tp_event_account_url()
-						) ) );
-					} else if ( $payment ) {
-						$return = $payment->process( $booking_id );
-
-						if ( isset( $return['status'] ) && $return['status'] === false ) {
-							wp_delete_post( $booking_id );
-						}
-
-						wp_send_json( $return );
-					} else {
-						wp_send_json( array(
-							'status'  => false,
-							'message' => __( 'Payment method is not available', 'tp-event' )
-						) );
+					// user booking
+					$user = get_userdata( $book->user_id );
+					tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
+					wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
+						'status' => true,
+						'url'    => tp_event_account_url()
+					) ) );
+				} else if ( $payment ) {
+					$return = $payment->process( $booking_id );
+					if ( isset( $return['status'] ) && $return['status'] === false ) {
+						wp_delete_post( $booking_id );
 					}
+					wp_send_json( $return );
+				} else {
+					wp_send_json( array(
+						'status'  => false,
+						'message' => __( 'Payment method is not available', 'tp-event' )
+					) );
 				}
-			} elseif ( $args['payment_id'] == 'woocommerce' ) {
-				$booking->add_to_woo_item( $args );
-
 			}
+
 		} catch ( Exception $e ) {
 			if ( $e ) {
 				tp_event_add_notice( 'error', $e->getMessage() );
@@ -192,4 +187,4 @@ class Event_Ajax {
 }
 
 // initialize ajax class process
-new Event_Ajax();
+new TP_Event_Ajax();

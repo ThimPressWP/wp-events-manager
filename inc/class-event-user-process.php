@@ -210,14 +210,14 @@ class TP_Event_User_Process {
      * Process Lost Password
      */
     public static function process_lost_password() {
-        
+
     }
 
     /**
      * Process Reset Password
      */
     public static function process_reset_password() {
-        
+
     }
 
 }

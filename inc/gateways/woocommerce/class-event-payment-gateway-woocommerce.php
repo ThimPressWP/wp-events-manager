@@ -17,8 +17,6 @@ class TP_Event_Payment_Gateway_Woocommerce extends TP_Event_Abstract_Payment_Gat
 
 	protected static $enable = false;
 
-	protected static $cart_url = null;
-
 	/**
 	 * payment title
 	 * @var null
@@ -49,11 +47,11 @@ class TP_Event_Payment_Gateway_Woocommerce extends TP_Event_Abstract_Payment_Gat
 	/**
 	 * Check gateway enable
 	 */
-	public function is_enable(){
-		if(!$this->is_available()){
+	public function is_enable() {
+		if ( !$this->is_available() ) {
 			self::$enable = false;
 		} else {
-				self::$enable = tp_event_get_option( 'woo_payment_enable' );
+			self::$enable = tp_event_get_option( 'woo_payment_enable' );
 		}
 		return self::$enable;
 	}
@@ -89,10 +87,12 @@ class TP_Event_Payment_Gateway_Woocommerce extends TP_Event_Abstract_Payment_Gat
 	/**
 	 * Checkout url with Woocommerce
 	 *
-	 * checkout url
-	 * @return url string
+	 * @param bool $booking_id
+	 *
+	 * @return string
 	 */
 	public function checkout_url( $booking_id = false ) {
+
 		if ( !$booking_id ) {
 			wp_send_json( array(
 				'status'  => false,
@@ -101,7 +101,13 @@ class TP_Event_Payment_Gateway_Woocommerce extends TP_Event_Abstract_Payment_Gat
 			die();
 		}
 
-		return $this::$cart_url;
+		global $woocommerce;
+
+		if ( $woocommerce->cart ) {
+			return $woocommerce->cart->get_checkout_url();
+		} else {
+			return get_admin_url();
+		}
 	}
 
 	/**
@@ -115,7 +121,7 @@ class TP_Event_Payment_Gateway_Woocommerce extends TP_Event_Abstract_Payment_Gat
 		if ( !$this->is_available() ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'Please check Woocommerce checkout process settings again.', 'tp-event' )
+				'message' => __( 'Please contact administrator to setup Woocommerce payment gateway.', 'tp-event' )
 			);
 		}
 		return array(
