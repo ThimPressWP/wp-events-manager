@@ -40,7 +40,7 @@ class TP_Event_Shortcodes {
 	/**
 	 * Redirect page
 	 */
-	public function auto_shortcode() {
+	public static function auto_shortcode() {
 		if ( !is_page() ) {
 			return;
 		}
