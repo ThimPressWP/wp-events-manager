@@ -228,23 +228,30 @@ class Event_Custom_Post_Types {
 	 * @param type $post_id
 	 */
 	public function event_column_content( $column, $post_id ) {
-		$date_time_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
-		$event            = Auth_Event::instance( $post_id );
+		$event = TP_Event_Event::instance( $post_id );
 		switch ( $column ) {
 			case 'status' :
 				$status = get_post_status_object( get_post_status( $post_id ) );
 				echo $status->label;
 				break;
 			case 'start' :
-				$start = get_post_meta( $post_id, 'tp_event_start', true );
-				if ( $start ) {
-					printf( '%s', date( $date_time_format, strtotime( $start ) ) );
+				$date_start = get_post_meta( $post_id, 'tp_event_date_start', true );
+				$time_start = get_post_meta( $post_id, 'tp_event_time_start', true );
+				if ( $date_start ) {
+					printf( '%s', date( get_option( 'date_format' ), strtotime( $date_start ) ) );
+				}
+				if ( $time_start ) {
+					printf( ' %s', date( get_option( 'time_format' ), strtotime( $time_start ) ) );
 				}
 				break;
 			case 'end' :
-				$start = get_post_meta( $post_id, 'tp_event_end', true );
-				if ( $start ) {
-					printf( '%s', date( $date_time_format, strtotime( $start ) ) );
+				$date_end = get_post_meta( $post_id, 'tp_event_date_end', true );
+				$time_end = get_post_meta( $post_id, 'tp_event_time_end', true );
+				if ( $date_end ) {
+					printf( '%s', date( get_option( 'date_format' ), strtotime( $date_end ) ) );
+				}
+				if ( $time_end ) {
+					printf( ' %s', date( get_option( 'time_format' ), strtotime( $time_end ) ) );
 				}
 				break;
 			case 'price':

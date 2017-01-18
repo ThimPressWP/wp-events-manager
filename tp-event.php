@@ -89,7 +89,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			} else {
 				$this->_include( 'inc/class-event-template.php' );
 				$this->_include( 'inc/class-event-frontend-assets.php' );
-				$this->_include( 'inc/class-event-authentication.php' );
+				$this->_include( 'inc/class-event-user-process.php' );
 				$this->_include( 'inc/class-event-shortcodes.php' );
 			}
 

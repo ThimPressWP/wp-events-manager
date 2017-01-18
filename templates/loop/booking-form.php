@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$event    = new Auth_Event( $event_id );
+$event    = new TP_Event_Event( $event_id );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 ?>
 

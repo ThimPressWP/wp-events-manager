@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class Auth_Authentication {
+class TP_Event_User_Process {
 
     private static $login_url = null;
     private static $register_url = null;
@@ -28,7 +28,6 @@ class Auth_Authentication {
 
         // process
         add_action( 'wp_logout', array( __CLASS__, 'wp_logout' ) );
-        add_action( 'template_redirect', array( __CLASS__, 'template_redirect' ) );
     }
 
     public static function auth_init() {
@@ -49,157 +48,6 @@ class Auth_Authentication {
         tp_event_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'tp-event' ) ) );
         wp_safe_redirect( self::$login_url );
         exit();
-    }
-
-    // shortcodes
-    public static function event_auth( $atts, $content = null ) {
-        extract( wp_parse_args( $atts, array(
-            'page' => 'login'
-        ) ) );
-
-        $page = strtolower( $page );
-
-        switch ( $page ) {
-            case 'login':
-                $page = 'login';
-                break;
-
-            case 'my_account':
-                $page = 'my_account';
-                break;
-
-            case 'my-account':
-                $page = 'my_account';
-                break;
-
-            case 'register':
-                $page = 'register';
-                break;
-
-            case 'forgot_password':
-                $page = 'forgot_password';
-                break;
-
-            case 'forgot-password':
-                $page = 'forgot_password';
-                break;
-
-            default:
-                $page = 'login';
-                break;
-        }
-
-        return do_shortcode( '[event_auth_' . $page . ']' );
-    }
-
-    // shortcode login form
-    public static function event_auth_login( $atts = array(), $content = null ) {
-        if ( !( $login_page_id = tp_event_get_page_id( 'login' ) ) ) {
-            return;
-        }
-
-        if ( is_user_logged_in() ) {
-            return;
-        }
-		tp_event_get_template( 'auths/form-login.php' );
-    }
-
-    // shortcode register form
-    public static function event_auth_register( $atts = array(), $content = null ) {
-        if ( !( $register_page_id = tp_event_get_page_id( 'register' ) ) ) {
-            return;
-        }
-
-        if ( !get_option( 'users_can_register' ) ) {
-            // register not allowed
-			tp_event_get_template( 'auths/form-register-not-allow.php' );
-        } elseif ( !empty( $_REQUEST['registered'] ) ) {
-            $email = sanitize_email( $_REQUEST['registered'] );
-            $user = get_user_by( 'email', $email );
-            if ( $user && $user->ID ) {
-                wp_new_user_notification( $user->ID );
-                // register completed
-				tp_event_get_template( 'auths/register-completed.php' );
-            } else {
-                // error
-                tp_event_get_template( 'auths/error.php' );
-            }
-        } elseif ( !is_user_logged_in() ) {
-            // show register form
-            tp_event_get_template( 'auths/form-register.php' );
-        }
-    }
-
-    // shortcode lostpassword
-    public static function forgot_pass( $atts = array(), $content = null ) {
-
-        if ( !tp_event_get_page_id( 'forgot_pass' ) ) {
-            return;
-        }
-
-        $checkemail = isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false;
-
-        if ( $checkemail ) {
-            tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
-        } else {
-            tp_event_get_template( 'auths/form-forgot-password.php' );
-        }
-    }
-
-    // shortcode lostpassword
-    public static function reset_password( $atts = array(), $content = null ) {
-        if ( !tp_event_get_page_id( 'reset_password' ) ) {
-            return;
-        }
-        $atts = wp_parse_args( $atts, array(
-            'key' => isset( $_REQUEST['key'] ) ? sanitize_text_field( $_REQUEST['key'] ) : '',
-            'login' => isset( $_REQUEST['login'] ) ? sanitize_text_field( $_REQUEST['login'] ) : ''
-                ) );
-
-        $atts = wp_parse_args( $atts, array(
-            'user_login' => '',
-            'redirect_to' => '',
-            'checkemail' => isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false
-                ) );
-
-        if ( $atts['checkemail'] ) {
-            tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
-        }
-
-        tp_event_get_template( 'auths/form-reset-password.php', array( 'atts' => $atts ) );
-    }
-
-    // shortcode account
-    public static function my_account( $atts = array(), $content = null ) {
-        $user = wp_get_current_user();
-        $args = array(
-            'post_type' => 'event_auth_book',
-            'posts_per_page' => -1,
-            'order' => 'DESC',
-            'posts_per_page'    => tp_event_get_option( 'payment_litmit_showup', 10 ),
-            'offset'    => ( ( get_query_var('paged') - 1 ) > 0 ? ( get_query_var('paged') - 1 ) : 0 ) * tp_event_get_option( 'payment_litmit_showup', 10 ),
-            'meta_query' => array(
-                array(
-                    'key' => 'ea_booking_user_id',
-                    'value' => $user->ID
-                ),
-            ),
-        );
-        $atts = new WP_Query( $args );
-        tp_event_get_template( 'auths/my-account.php', array( 'query' => $atts ) );
-        wp_reset_postdata();
-    }
-
-    public static function template_redirect() {
-        if ( !is_page() ) {
-            return;
-        }
-
-        global $post;
-        if ( is_user_logged_in() && in_array( $post->ID, array( tp_event_get_page_id( 'login' ), tp_event_get_page_id( 'register' ) ) ) ) {
-            wp_safe_redirect( self::$account_url );
-            exit();
-        }
     }
 
     /**
@@ -362,16 +210,16 @@ class Auth_Authentication {
      * Process Lost Password
      */
     public static function process_lost_password() {
-        
+
     }
 
     /**
      * Process Reset Password
      */
     public static function process_reset_password() {
-        
+
     }
 
 }
 
-Auth_Authentication::init();
+TP_Event_User_Process::init();

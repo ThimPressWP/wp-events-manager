@@ -18,19 +18,15 @@ class TP_Event_Admin_Metabox_Event {
 			if ( strpos( $name, 'tp_event_' ) !== 0 ) {
 				continue;
 			}
-			if ( !in_array( $name, array( 'tp_event_date_start', 'tp_event_time_start', 'tp_event_date_end', 'tp_event_time_end' ) ) ) {
-				update_post_meta( $post_id, $name, $value );
-			}
+			update_post_meta( $post_id, $name, $value );
 		}
 		// Start
 		$start = !empty( $_POST['tp_event_date_start'] ) ? sanitize_text_field( $_POST['tp_event_date_start'] ) : '';
 		$start .= $start && !empty( $_POST['tp_event_time_start'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_start'] ) : '';
-		update_post_meta( $post_id, 'tp_event_start', $start );
 
 		// End
 		$end = !empty( $_POST['tp_event_date_end'] ) ? sanitize_text_field( $_POST['tp_event_date_end'] ) : '';
 		$end .= $end && !empty( $_POST['tp_event_time_end'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_end'] ) : '';
-		update_post_meta( $post_id, 'tp_event_end', $end );
 
 		if ( ( $start && !$end ) || ( strtotime( $start ) >= strtotime( $end ) ) ) {
 			TP_Event_Admin_Metaboxes::add_error( __( 'Please make sure event time is validate', 'tp-event' ) );

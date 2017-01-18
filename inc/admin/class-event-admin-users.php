@@ -239,7 +239,7 @@ class TP_Event_Admin_Users extends WP_List_Table {
 		?>
         <div class="wrap">
 
-            <h2><?php _e( 'Event Users', 'tp-event-auth' ); ?></h2>
+            <h2><?php _e( 'Event Users', 'tp-event' ); ?></h2>
 
 			<?php $user_table->prepare_items(); ?>
             <form method="post">

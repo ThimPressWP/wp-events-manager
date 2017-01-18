@@ -190,17 +190,17 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 			return $post;
 		}
 		$post_id = $post->ID;
-		$start   = get_post_meta( $post_id, 'tp_event_start', true );
-		$end     = get_post_meta( $post_id, 'tp_event_end', true );
+		$start   = get_post_meta( $post_id, 'tp_event_date_start', true );
+		$end     = get_post_meta( $post_id, 'tp_event_date_end', true );
 
 		$post->event_start = null;
 		if ( $start ) {
-			$post->event_start = date( 'Y-m-d H:i:s', strtotime( $start ) );
+			$post->event_start = date( 'Y-m-d H:i', strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
 		}
 
 		$post->event_end = null;
 		if ( $end ) {
-			$post->event_end = date( 'Y-m-d H:i:s', strtotime( $end ) );
+			$post->event_end = date( 'Y-m-d H:i', strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
 		}
 
 		$location       = get_post_meta( $post->ID, 'tp_event_location', true );
@@ -216,15 +216,15 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 *
 	 * @return [type]         [description]
 	 */
-	function tp_event_start( $format = 'Y-m-d H:i:s', $post = null, $l10 = true ) {
+	function tp_event_start( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
 		if ( !$post ) {
 			$post = get_post();
 		}
 
 		if ( $l10 ) {
-			return date_i18n( $format, strtotime( $post->tp_event_start ) );
+			return date_i18n( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
 		} else {
-			return date( $format, strtotime( $post->tp_event_start ) );
+			return date( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
 		}
 	}
 
@@ -235,15 +235,15 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 *
 	 * @return
 	 */
-	function tp_event_end( $format = 'Y-m-d H:i:s', $post = null, $l10 = true ) {
+	function tp_event_end( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
 		if ( !$post ) {
 			$post = get_post();
 		}
 
 		if ( $l10 ) {
-			return date_i18n( $format, strtotime( $post->tp_event_end ) );
+			return date_i18n( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
 		} else {
-			return date( $format, strtotime( $post->tp_event_end ) );
+			return date( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
 		}
 	}
 
@@ -254,10 +254,10 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 *
 	 * @return string
 	 */
-	function tp_event_get_time( $format = 'Y-m-d H:i:s', $post = null, $l10 = true ) {
+	function tp_event_get_time( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
 		$current_time = current_time( 'timestamp', 1 );
-		$start        = tp_event_start( 'Y-m-d H:i:s', $post );
-		$end          = tp_event_end( 'Y-m-d H:i:s', $post );
+		$start        = tp_event_start( 'Y-m-d H:i', $post );
+		$end          = tp_event_end( 'Y-m-d H:i', $post );
 		if ( $current_time < strtotime( $start ) ) {
 			return tp_event_start( $format, $post, $l10 );
 		} else {
@@ -1217,6 +1217,26 @@ if ( !function_exists( 'tp_event_cancel_payment_booking' ) ) {
 				'post_status' => 'ea-cancelled'
 			) );
 		}
+	}
+
+}
+
+// Update functions from version 1.4
+if ( !function_exists( 'event_get_option' ) ) {
+
+	/**
+	 * event_get_option
+	 *
+	 * @param type $name
+	 * @param type $default
+	 *
+	 * @return type
+	 */
+	function event_get_option( $name, $default = null ) {
+		if ( strpos( $name, 'thimpress_events_' ) !== 0 ) {
+			$name = 'thimpress_events_' . $name;
+		}
+		return get_option( $name, $default );
 	}
 
 }
