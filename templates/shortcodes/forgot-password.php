@@ -14,7 +14,7 @@ tp_event_print_notices();
 
 <?php if ( empty ( $_REQUEST['checkemail'] ) ) : ?>
 
-    <form name="lostpasswordform" class="lostpasswordform event-auth-form" action="" method="post">
+    <form name="forgot-password" class="forgot-password event-auth-form" action="" method="post">
 
         <p class="form-row event_auth_forgot_password_message message">
             <?php _e( 'Please enter your username or email address. You will receive a link to create a new password via email.', 'tp-event' ) ?>
@@ -29,7 +29,7 @@ tp_event_print_notices();
      *
      * @since 2.1.0
      */
-    do_action( 'event_auth_lostpassword_form' );
+    do_action( 'tp_event_forgot_password_form' );
     ?>
         <input type="hidden" name="redirect_to" value="<?php echo esc_attr( ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ); ?>" />
         <p class="form-row submit">
@@ -51,6 +51,6 @@ tp_event_print_notices();
         <?php endif; ?>
     </div>
 
-    <?php do_action( 'event_auth_lostpassword_form_footer' ); ?>
+    <?php do_action( 'tp_event_forgot_password_form_footer' ); ?>
 
 <?php endif; ?>
