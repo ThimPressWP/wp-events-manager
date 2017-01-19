@@ -272,7 +272,7 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 *
 	 * @return string
 	 */
-	function tp_event_get_location( $post = null ) {
+	function tp_event_location( $post = null ) {
 		if ( !$post )
 			$post = get_post();
 
@@ -311,16 +311,16 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 * get event location map
 	 */
 	function tp_event_get_location_map() {
-		if ( !tp_event_get_option( 'google_map_api_key' ) || !tp_event_get_location() ) {
+		if ( !tp_event_get_option( 'google_map_api_key' ) || !tp_event_location() ) {
 			return;
 		}
 
 		$map_args = apply_filters( 'tp_event_filter_event_location_map', array(
 			'height'   => '300px',
 			'width'    => '100%',
-			'map_id'   => md5( tp_event_get_location() ),
+			'map_id'   => md5( tp_event_location() ),
 			'map_data' => array(
-				'address'     => tp_event_get_location(),
+				'address'     => tp_event_location(),
 				'zoom'        => 14,
 				'scroll-zoom' => true,
 				'draggable'   => false,
