@@ -66,27 +66,27 @@ class Event_Install {
 	 */
 	public static function create_pages() {
 		$pages = array(
-			'register'       => array(
+			'event_register'       => array(
 				'name'    => _x( 'user-register', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'User Register', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'tp_event_register' ) . ']'
 			),
-			'login'          => array(
+			'event_login'          => array(
 				'name'    => _x( 'user-login', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'User Login', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'tp_event_login' ) . ']'
 			),
-			'forgot_password'    => array(
+			'event_forgot_password'    => array(
 				'name'    => _x( 'forgot-password', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'Forgot Password', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_forgot_password_shortcode_tag', 'tp_event_forgot_password' ) . ']'
 			),
-			'reset_password' => array(
+			'event_reset_password' => array(
 				'name'    => _x( 'reset-password', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'Reset Password', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_reset_password_shortcode_tag', 'tp_event_reset_password' ) . ']'
 			),
-			'account'        => array(
+			'event_account'        => array(
 				'name'    => _x( 'user-account', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'User Account', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'tp_event_account' ) . ']'

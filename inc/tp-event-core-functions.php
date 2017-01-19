@@ -612,7 +612,7 @@ if ( !function_exists( 'event_schedule_update_status' ) ) {
 if ( !function_exists( 'tp_event_login_url' ) ) {
 
 	function tp_event_login_url() {
-		$url = get_permalink( tp_event_get_page_id( 'login' ) );
+		$url = get_permalink( tp_event_get_page_id( 'event_login' ) );
 		if ( !$url ) {
 			$url = wp_login_url();
 		}
@@ -625,7 +625,7 @@ if ( !function_exists( 'tp_event_login_url' ) ) {
 if ( !function_exists( 'tp_event_register_url' ) ) {
 
 	function tp_event_register_url() {
-		$url = get_permalink( tp_event_get_page_id( 'register' ) );
+		$url = get_permalink( tp_event_get_page_id( 'event_register' ) );
 		if ( !$url ) {
 			$url = wp_registration_url();
 		}
@@ -638,7 +638,7 @@ if ( !function_exists( 'tp_event_register_url' ) ) {
 if ( !function_exists( 'tp_event_forgot_password_url' ) ) {
 
 	function tp_event_forgot_password_url() {
-		$url = get_permalink( tp_event_get_page_id( 'forgot_pass' ) );
+		$url = get_permalink( tp_event_get_page_id( 'event_forgot_password' ) );
 		if ( !$url ) {
 			$url = wp_lostpassword_url();
 		}
@@ -652,7 +652,7 @@ if ( !function_exists( 'tp_event_forgot_password_url' ) ) {
 if ( !function_exists( 'tp_event_reset_password_url' ) ) {
 
 	function tp_event_reset_password_url() {
-		$url = get_permalink( tp_event_get_page_id( 'reset_password' ) );
+		$url = get_permalink( tp_event_get_page_id( 'event_reset_password' ) );
 		if ( !$url ) {
 			$url = add_query_arg( 'action', 'rp', wp_login_url() );
 		}
@@ -665,7 +665,7 @@ if ( !function_exists( 'tp_event_reset_password_url' ) ) {
 if ( !function_exists( 'tp_event_account_url' ) ) {
 
 	function tp_event_account_url() {
-		$url = get_permalink( tp_event_get_page_id( 'account' ) );
+		$url = get_permalink( tp_event_get_page_id( 'event_account' ) );
 		if ( !$url ) {
 			$url = home_url();
 		}
@@ -723,7 +723,7 @@ if ( !function_exists( 'tp_event_print_notices' ) ) {
 	function tp_event_print_notices() {
 		if ( $notices = TP_Event()->_session->get( 'notices', array() ) ) {
 			ob_start();
-			tp_event_get_template( 'messages.php', array( 'messages' => $notices ) );
+			tp_event_get_template( 'notices/messages.php', array( 'messages' => $notices ) );
 			$html = ob_get_clean();
 			echo $html;
 			TP_Event()->_session->set( 'notices', array() );
@@ -1195,15 +1195,15 @@ if ( !function_exists( 'tp_event_content_filter' ) ) {
 
 	function tp_event_content_filter( $content ) {
 		global $post;
-		if ( ( $login_page_id = tp_event_get_page_id( 'login' ) ) && is_page( $login_page_id ) ) {
+		if ( ( $login_page_id = tp_event_get_page_id( 'event_login' ) ) && is_page( $login_page_id ) ) {
 			$content = do_shortcode( '[tp_event_login]' );
-		} else if ( ( $register_page_id = tp_event_get_page_id( 'register' ) ) && is_page( $register_page_id ) ) {
+		} else if ( ( $register_page_id = tp_event_get_page_id( 'event_register' ) ) && is_page( $register_page_id ) ) {
 			$content = do_shortcode( '[tp_event_register]' );
-		} else if ( ( $forgot_page_id = tp_event_get_page_id( 'forgot_pass' ) ) && is_page( $forgot_page_id ) ) {
+		} else if ( ( $forgot_page_id = tp_event_get_page_id( 'event_forgot_pass' ) ) && is_page( $forgot_page_id ) ) {
 			$content = do_shortcode( '[tp_event_forgot_password]' );
-		} else if ( ( $reset_page_id = tp_event_get_page_id( 'reset_password' ) ) && is_page( $reset_page_id ) ) {
+		} else if ( ( $reset_page_id = tp_event_get_page_id( 'event_reset_password' ) ) && is_page( $reset_page_id ) ) {
 			$content = do_shortcode( '[tp_event_reset_password]' );
-		} else if ( ( $account_page_id = tp_event_get_page_id( 'account' ) ) && is_page( $account_page_id ) ) {
+		} else if ( ( $account_page_id = tp_event_get_page_id( 'event_account' ) ) && is_page( $account_page_id ) ) {
 			$content = do_shortcode( '[tp_event_account]' );
 		}
 

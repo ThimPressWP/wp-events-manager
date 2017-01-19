@@ -41,7 +41,7 @@ tp_event_print_notices();
 
     <p class="submit form-row">
         <input type="hidden" name="redirect_to" value="<?php echo esc_attr( ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ); ?>" />
-        <?php wp_nonce_field( 'auth-reigter-nonce', 'auth-nonce' ); ?>
+        <?php wp_nonce_field( 'tp-event-register-nonce', 'tp-event-nonce' ); ?>
         <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Register', 'tp-event' ); ?>" />
     </p>
 
