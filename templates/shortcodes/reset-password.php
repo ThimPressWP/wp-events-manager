@@ -28,7 +28,7 @@ tp_event_print_notices();
 
     <div class="user-pass2-wrap">
         <p class="form-row required">
-            <label for="pass2"><?php _e( 'Confirm Password', 'tp-event' ) ?></label><br />
+            <label for="pass2"><?php _e( 'Confirm Password', 'tp-event' ) ?></label>
         </p>
 
         <div class="wp-pwd">
@@ -39,7 +39,6 @@ tp_event_print_notices();
     </div>
 
     <p class="description indicator-hint"><?php echo wp_get_password_hint(); ?></p>
-    <br class="clear" />
 
     <?php
     /**

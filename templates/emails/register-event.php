@@ -11,7 +11,7 @@ if ( !$booking || !$user ) {
 <h2><?php printf( __( 'Hello %s!', 'tp-event' ), $user->data->display_name ); ?></h2>
 <?php
 printf(
-        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<br /><a href="%s">Your account.</a>', 'tp-event' ), get_permalink( $booking->event_id ), tp_event_account_url()
+        __( 'You have been registered successful our <a href="%s">event</a>. Please go to the following link for more details.<a href="%s">Your account.</a>', 'tp-event' ), get_permalink( $booking->event_id ), tp_event_account_url()
 );
 ?>
 
@@ -39,7 +39,7 @@ printf(
                 <?php
                 $return = array();
                 $return[] = sprintf( '%s', tp_event_booking_status( $booking->ID ) );
-                $return[] = $booking->payment_id ? sprintf( '<br />(%s)', tp_event_get_payment_title( $booking->payment_id ) ) : '';
+                $return[] = $booking->payment_id ? sprintf( '(%s)', tp_event_get_payment_title( $booking->payment_id ) ) : '';
                 $return = implode( '', $return );
                 printf( '%s', $return );
                 ?>

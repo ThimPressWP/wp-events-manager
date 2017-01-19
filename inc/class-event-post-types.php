@@ -258,7 +258,7 @@ class Event_Custom_Post_Types {
 				if ( $event->is_free() ) {
 					echo '<span class="event_auth_event_type">' . __( 'Free', 'tp-event' ) . '</span>';
 				} else {
-					echo sprintf( __( '<span class="event_auth_event_type">%s/%s</span><br />', 'tp-event' ), tp_event_format_price( $event->get_price() ), __( 'slot', 'tp-event' ) );
+					echo sprintf( __( '<span class="event_auth_event_type">%s/%s</span>', 'tp-event' ), tp_event_format_price( $event->get_price() ), __( 'slot', 'tp-event' ) );
 				}
 				break;
 			case 'booked_slot':
@@ -313,14 +313,14 @@ class Event_Custom_Post_Types {
 			case 'status':
 				$return   = array();
 				$return[] = sprintf( '%s', tp_event_booking_status( $booking_id ) );
-				$return[] = $booking->payment_id ? sprintf( '<br />(%s)', tp_event_get_payment_title( $booking->payment_id ) ) : '';
+				$return[] = $booking->payment_id ? sprintf( '(%s)', tp_event_get_payment_title( $booking->payment_id ) ) : '';
 				$return   = implode( '', $return );
 				echo $return;
 				break;
 			case 'user':
 				$user     = get_userdata( $booking->user_id );
 				$return   = array();
-				$return[] = sprintf( __( '<a href="%s">%s</a><br />', 'tp-event' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
+				$return[] = sprintf( __( '<a href="%s">%s</a>', 'tp-event' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
 				$return   = implode( '', $return );
 				echo $return;
 				break;

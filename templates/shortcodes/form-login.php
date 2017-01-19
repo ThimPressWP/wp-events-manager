@@ -10,12 +10,12 @@ tp_event_print_notices();
 <form name="event_auth_login_form" action="" method="post" class="event-auth-form">
 
     <p class="form-row form-required">
-        <label for="user_login"><?php _e( 'Username', 'tp-event' ) ?><span class="required">*</span><br /></label>
+        <label for="user_login"><?php _e( 'Username', 'tp-event' ) ?><span class="required">*</span></label>
         <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( ! empty( $_POST['user_login'] ) ? sanitize_text_field( $_POST['user_login'] ) : '' ) ?>" size="20" /></label>
     </p>
 
     <p class="form-row form-required">
-        <label for="user_pass"><?php _e( 'Password', 'tp-event' ) ?><span class="required">*</span><br /></label>
+        <label for="user_pass"><?php _e( 'Password', 'tp-event' ) ?><span class="required">*</span></label>
         <input type="password" name="user_pass" id="user_pass" class="input" value="" size="25" />
     </p>
 
@@ -26,8 +26,6 @@ tp_event_print_notices();
             <input class="input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'tp-event' ); ?>
         </label>
     </p>
-
-    <br class="clear" />
 
     <p class="submit form-row">
         <?php wp_nonce_field( 'auth-login-nonce', 'auth-nonce' ); ?>

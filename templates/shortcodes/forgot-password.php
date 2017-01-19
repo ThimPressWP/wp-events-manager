@@ -20,7 +20,7 @@ tp_event_print_notices();
             <?php _e( 'Please enter your username or email address. You will receive a link to create a new password via email.', 'tp-event' ) ?>
         </p>
         <p class="form-row required">
-            <label for="user_login" ><?php _e( 'Username or Email:', 'tp-event' ) ?><br />
+            <label for="user_login" ><?php _e( 'Username or Email:', 'tp-event' ) ?>
                 <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( !empty( $_POST['user_login'] ) ? $_POST['user_login'] : '' ); ?>" size="20" /></label>
         </p>
     <?php
