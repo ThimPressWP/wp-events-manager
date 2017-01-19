@@ -286,11 +286,25 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 *
 	 * @return string
 	 */
-	function tp_event_get_note( $post = null ) {
+	function tp_event_get_event_note( $post = null ) {
 		if ( !$post )
 			$post = get_post();
 
 		return get_post_meta( $post->ID, 'tp_event_note', true );
+	}
+
+	/**
+	 * get event booking note
+	 *
+	 * @param  string $format
+	 *
+	 * @return string
+	 */
+	function tp_event_get_booking_note( $post = null ) {
+		if ( !$post )
+			$post = get_post();
+
+		return get_post_meta( $post->ID, 'ea_booking_note', true );
 	}
 
 	/**

@@ -9,6 +9,10 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
+<?php global $post; ?>
+
+<?php $notes = get_post_meta( $post->ID, 'ea_booking_note', true ); ?>
+
 <div id="event-booking-actions" class="booking-actions">
     <label for="booking-status"><?php echo esc_html__( 'Booking Status', 'tp-event' ); ?></label>
     <select name="booking-status" id="booking-status">
@@ -17,4 +21,8 @@ defined( 'ABSPATH' ) || exit;
 		<?php endforeach; ?>
     </select>
     <p class="booking-status-description"><?php echo esc_html__( 'Update booking event status', 'tp-event' ); ?></p>
+</div>
+<div id="event-booking-notes" class="booking-notes">
+    <label for="booking-notes"><?php echo esc_html__( 'Booking Notes', 'tp-event' ); ?></label>
+    <textarea id="booking-notes" name="booking-notes" rows="3"><?php echo esc_html( $notes ); ?></textarea>
 </div>

@@ -260,6 +260,10 @@
 	top: -10px;
 }
 
+#booking-status-side textarea{
+	width: 100%;
+}
+
 .event-form-field .description {
 	font-style: italic;
 	margin-top: 5px;
@@ -291,4 +295,8 @@
 #event-time-metabox .time-connect {
 	float: left;
 	margin: 5px 14px;
+}
+
+.post-type-event_auth_book #postbox-container-2{
+	margin-top: -20px;
 }
