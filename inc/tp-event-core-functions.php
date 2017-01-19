@@ -272,7 +272,7 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 *
 	 * @return string
 	 */
-	function tp_event_location( $post = null ) {
+	function tp_event_get_location( $post = null ) {
 		if ( !$post )
 			$post = get_post();
 
@@ -280,19 +280,33 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	}
 
 	/**
+	 * get event note
+	 *
+	 * @param  string $format
+	 *
+	 * @return string
+	 */
+	function tp_event_get_note( $post = null ) {
+		if ( !$post )
+			$post = get_post();
+
+		return get_post_meta( $post->ID, 'tp_event_note', true );
+	}
+
+	/**
 	 * get event location map
 	 */
 	function tp_event_get_location_map() {
-		if ( !tp_event_get_option( 'google_map_api_key' ) || !tp_event_location() ) {
+		if ( !tp_event_get_option( 'google_map_api_key' ) || !tp_event_get_location() ) {
 			return;
 		}
 
 		$map_args = apply_filters( 'tp_event_filter_event_location_map', array(
 			'height'   => '300px',
 			'width'    => '100%',
-			'map_id'   => md5( tp_event_location() ),
+			'map_id'   => md5( tp_event_get_location() ),
 			'map_data' => array(
-				'address'     => tp_event_location(),
+				'address'     => tp_event_get_location(),
 				'zoom'        => 14,
 				'scroll-zoom' => true,
 				'draggable'   => false,
@@ -384,6 +398,15 @@ if ( !function_exists( 'tp_event_single_event_content' ) ) {
 			tp_event_get_template( 'loop/excerpt.php' );
 		else
 			tp_event_get_template( 'loop/content.php' );
+	}
+
+}
+
+add_action( 'tp_event_loop_event_note', 'tp_event_loop_event_note' );
+if ( !function_exists( 'tp_event_loop_event_note' ) ) {
+
+	function tp_event_loop_event_note() {
+		tp_event_get_template( 'loop/note.php' );
 	}
 
 }

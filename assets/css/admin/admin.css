@@ -88,7 +88,8 @@
 
 .event_meta_box_container input[type="text"],
 .event_meta_box_container input[type="email"],
-.event_meta_box_container input[type="number"] {
+.event_meta_box_container input[type="number"],
+.event_meta_box_container textarea {
 	width: 50%;
 	float: left;
 }
