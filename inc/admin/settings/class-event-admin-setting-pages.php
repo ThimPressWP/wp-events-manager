@@ -55,13 +55,25 @@ class TP_Event_Admin_Setting_Pages extends TP_Event_Abstract_Setting {
 			array(
 				'type'  => 'select_page',
 				'title' => __( 'Login Page', 'tp-event' ),
-				'desc'  => __( 'This controlls which the login page', 'tp-event' ),
+				'desc'  => __( 'This controls which the login page', 'tp-event' ),
 				'id'    => $prefix . 'login_page_id',
 			),
 			array(
 				'type'  => 'select_page',
+				'title' => __( 'Forgot Password', 'tp-event' ),
+				'desc'  => __( 'This controls which the forgot password page', 'tp-event' ),
+				'id'    => $prefix . 'forgot_password_page_id',
+			),
+			array(
+				'type'  => 'select_page',
+				'title' => __( 'Reset Password', 'tp-event' ),
+				'desc'  => __( 'This controls which the reset password page', 'tp-event' ),
+				'id'    => $prefix . 'reset_password_page_id',
+			),
+			array(
+				'type'  => 'select_page',
 				'title' => __( 'My Account', 'tp-event' ),
-				'desc'  => __( 'This controlls which the user account page', 'tp-event' ),
+				'desc'  => __( 'This controls which the user account page', 'tp-event' ),
 				'id'    => $prefix . 'account_page_id',
 			),
 			array(

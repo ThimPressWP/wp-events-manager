@@ -46,7 +46,7 @@ class TP_Event_Shortcodes {
 		}
 
 		global $post;
-		if ( is_user_logged_in() && in_array( $post->ID, array( tp_event_get_page_id( 'event_register' ), tp_event_get_page_id( 'event_login' ) ) ) ) {
+		if ( is_user_logged_in() && in_array( $post->ID, array( tp_event_get_page_id( 'register' ), tp_event_get_page_id( 'login' ) ) ) ) {
 			wp_safe_redirect( home_url( '/' ) );
 		}
 	}
@@ -106,7 +106,7 @@ class TP_Event_Shortcodes {
 	 */
 	public static function register( $atts ) {
 
-		if ( !tp_event_get_page_id( 'event_register' ) ) {
+		if ( !tp_event_get_page_id( 'register' ) ) {
 			return '';
 		}
 		if ( !get_option( 'users_can_register' ) ) {
@@ -138,7 +138,7 @@ class TP_Event_Shortcodes {
 	 * @return string
 	 */
 	public static function login( $atts ) {
-		if ( !tp_event_get_page_id( 'event_login' ) || is_user_logged_in() ) {
+		if ( !tp_event_get_page_id( 'login' ) || is_user_logged_in() ) {
 			return '';
 		}
 
@@ -153,7 +153,7 @@ class TP_Event_Shortcodes {
 	 * @return string
 	 */
 	public static function forgot_password( $atts ) {
-		if ( !tp_event_get_page_id( 'event_forgot_password' ) ) {
+		if ( !tp_event_get_page_id( 'forgot_password' ) ) {
 			return '';
 		}
 
@@ -174,7 +174,7 @@ class TP_Event_Shortcodes {
 	 * @return string
 	 */
 	public static function reset_password( $atts ) {
-		if ( !tp_event_get_page_id( 'event_reset_password' ) ) {
+		if ( !tp_event_get_page_id( 'reset_password' ) ) {
 			return '';
 		}
 

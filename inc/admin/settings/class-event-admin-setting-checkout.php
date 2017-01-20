@@ -38,7 +38,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 				'type'  => 'section_start',
 				'id'    => 'general_settings',
 				'title' => __( 'Checkout Process', 'tp-event' ),
-				'desc'  => __( 'General options for system.', 'tp-event' )
+				'desc'  => __( 'General options for system', 'tp-event' )
 			),
 			array(
 				'type'    => 'select',
