@@ -30,6 +30,9 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 	 */
 	public function get_settings() {
 		$prefix = 'thimpress_events_';
+
+		$event_register = tp_event_get_option( 'email_enable' );
+
 		return apply_filters( 'event_admin_setting_page_' . $this->id, array(
 			array(
 				'type'  => 'section_start',
@@ -37,39 +40,42 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 				'title' => __( 'Email Notifications', 'tp-event' ),
 			),
 			array(
-				'type'    => 'select',
-				'title'   => __( 'Enable', 'tp-event' ),
-				'desc'    => __( 'This controlls what the email', 'tp-event' ),
+				'type'    => 'yes_no',
+				'title'   => __( 'Event register', 'tp-event' ),
+				'desc'    => __( 'Send notify when user register event', 'tp-event' ),
 				'id'      => $prefix . 'email_enable',
-				'options' => array(
-					'yes' => __( 'Yes', 'tp-event' ),
-					'no'  => __( 'No', 'tp-event' )
-				),
 				'default' => 'yes'
 			),
 			array(
 				'type'        => 'text',
 				'title'       => __( 'From name', 'tp-event' ),
-				'desc'        => __( 'This set email from name', 'tp-event' ),
 				'placeholder' => get_option( 'blogname' ),
 				'id'          => $prefix . 'email_from_name',
-				'default'     => get_option( 'blog_name' )
+				'default'     => get_option( 'blog_name' ),
+				'class'       => 'email-setting-form-name' . ( $event_register != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'        => 'email',
 				'title'       => __( 'Email from', 'tp-event' ),
-				'desc'        => __( 'This set email send', 'tp-event' ),
 				'placeholder' => get_option( 'admin_email' ),
 				'id'          => $prefix . 'admin_email',
-				'default'     => get_option( 'admin_email' )
+				'default'     => get_option( 'admin_email' ),
+				'class'       => 'email-setting-email-form' . ( $event_register != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'        => 'text',
 				'title'       => __( 'Subject', 'tp-event' ),
-				'desc'        => __( 'This set email subject', 'tp-event' ),
 				'placeholder' => __( 'Register event', 'tp-event' ),
 				'id'          => $prefix . 'email_subject',
-				'default'     => ''
+				'default'     => '',
+				'class'       => 'email-setting-subject' . ( $event_register != 'yes' ? ' hide-if-js' : '' )
+			),
+			array(
+				'type'    => 'checkbox',
+				'title'   => __( 'Account register', 'tp-event' ),
+				'desc'    => __( 'Send notify when user register account', 'tp-event' ),
+				'id'      => $prefix . 'register_notify',
+				'default' => false
 			),
 			array(
 				'type' => 'section_end',

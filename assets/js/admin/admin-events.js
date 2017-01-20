@@ -26,6 +26,11 @@
 			});
 		}
 
+		var $chkPayment = $('input[name="thimpress_events_email_enable"]').on('click', function () {
+			var toggle = !($(this).is(':checked'));
+			$('.email-setting-form-name, .email-setting-email-form, .email-setting-subject').toggleClass('hide-if-js', toggle);
+		})
+
 		TP_Event_Admin.admin_meta_boxes.init();
 	};
 

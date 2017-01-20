@@ -40,7 +40,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 			array(
 				'type'    => 'select',
 				'title'   => __( 'Currency', 'tp-event' ),
-				'desc'    => __( 'This controlls what the currency prices', 'tp-event' ),
+				'desc'    => __( 'This controls what the currency prices', 'tp-event' ),
 				'id'      => $prefix . 'currency',
 				'options' => tp_event_currencies(),
 				'default' => 'USD'
@@ -48,7 +48,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 			array(
 				'type'    => 'select',
 				'title'   => __( 'Currency Position', 'tp-event' ),
-				'desc'    => __( 'This controlls the position of the currency symbol', 'tp-event' ),
+				'desc'    => __( 'This controls the position of the currency symbol', 'tp-event' ),
 				'id'      => $prefix . 'currency_position',
 				'options' => array(
 					'left'        => __( 'Left', 'tp-event' ) . ' ' . '(£99.99)',
@@ -82,13 +82,6 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'title'   => __( 'Google Map API Key', 'tp-event' ),
 				'id'      => $prefix . 'google_map_api_key',
 				'desc'    => __( 'Refer on https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key', 'tp-event' ),
-			),
-			array(
-				'type'    => 'checkbox',
-				'title'   => __( 'Send email', 'tp-event' ),
-				'desc'    => __( 'Send notify when user register', 'tp-event' ),
-				'id'      => $prefix . 'register_notify',
-				'default' => false
 			),
 			array(
 				'type' => 'section_end',
