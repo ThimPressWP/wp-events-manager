@@ -30,6 +30,9 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 	 */
 	public function get_settings() {
 		$prefix = 'thimpress_events_';
+
+		$allow_register_event = tp_event_get_option( 'allow_register_event' );
+
 		return apply_filters( 'event_admin_setting_page_' . $this->id, array(
 			// Currency
 			array(
@@ -38,12 +41,20 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'title' => __( 'General Options', 'tp-event' ),
 			),
 			array(
+				'type'    => 'yes_no',
+				'title'   => __( 'Event registration', 'tp-event' ),
+				'desc'    => __( 'Allows user register events', 'tp-event' ),
+				'id'      => $prefix . 'allow_register_event',
+				'default' => 'yes'
+			),
+			array(
 				'type'    => 'select',
 				'title'   => __( 'Currency', 'tp-event' ),
 				'desc'    => __( 'This controls what the currency prices', 'tp-event' ),
 				'id'      => $prefix . 'currency',
 				'options' => tp_event_currencies(),
-				'default' => 'USD'
+				'default' => 'USD',
+				'class'   => 'setting-currency' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'select',
@@ -56,19 +67,22 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 					'left_space'  => __( 'Left with space', 'tp-event' ) . ' ' . '(£ 99.99)',
 					'right_space' => __( 'Right with space', 'tp-event' ) . ' ' . '(99.99 £)',
 				),
-				'default' => 'left'
+				'default' => 'left',
+				'class'   => 'setting-currency-position' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'text',
 				'title'   => __( 'Thousand Separator', 'tp-event' ),
 				'id'      => $prefix . 'currency_thousand',
 				'default' => ',',
+				'class'   => 'setting-currency-thousand' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'text',
 				'title'   => __( 'Decimal Separator', 'tp-event' ),
 				'id'      => $prefix . 'currency_separator',
 				'default' => '.',
+				'class'   => 'setting-currency-separator' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'number',
@@ -76,12 +90,13 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'id'      => $prefix . 'currency_num_decimal',
 				'atts'    => array( 'step' => 'any' ),
 				'default' => '2',
+				'class'   => 'setting-number-decimals' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
-				'type'    => 'text',
-				'title'   => __( 'Google Map API Key', 'tp-event' ),
-				'id'      => $prefix . 'google_map_api_key',
-				'desc'    => __( 'Refer on https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key', 'tp-event' ),
+				'type'  => 'text',
+				'title' => __( 'Google Map API Key', 'tp-event' ),
+				'id'    => $prefix . 'google_map_api_key',
+				'desc'  => __( 'Refer on https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key', 'tp-event' ),
 			),
 			array(
 				'type' => 'section_end',
