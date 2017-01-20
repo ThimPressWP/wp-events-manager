@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 $width  = tp_event_get_option( $field['id'] . '_width', isset( $field['default']['width'] ) ? $field['default']['width'] : 270 );
 $height = tp_event_get_option( $field['id'] . '_height', isset( $field['default']['height'] ) ? $field['default']['height'] : 270 );
 ?>
-<tr valign="top" <?php echo isset( $field['class'] ) ? 'class="' . $field['class'] . '"' : ''; ?>>
+<tr valign="top" <?php echo $field['class'] ? 'class="' . $field['class'] . '"' : ''; ?>>
     <th scope="row">
 		<?php if ( isset( $field['title'] ) ) : ?>
             <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
