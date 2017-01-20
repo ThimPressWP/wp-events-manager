@@ -1206,7 +1206,6 @@ if ( !function_exists( 'tp_event_get_booking' ) ) {
 // filter shortcode
 add_filter( 'the_content', 'tp_event_content_filter', 1 );
 if ( !function_exists( 'tp_event_content_filter' ) ) {
-
 	function tp_event_content_filter( $content ) {
 		if ( ( $login_page_id = tp_event_get_page_id( 'login' ) ) && is_page( $login_page_id ) ) {
 			$content = do_shortcode( '[tp_event_login]' );
