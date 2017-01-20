@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 $value = tp_event_get_option( $field['id'] ) ? tp_event_get_option( $field['id'] ) : esc_attr( $field['default'] );
 ?>
-<tr valign="top">
+<tr valign="top" <?php echo isset( $field['class'] ) ? 'class="' . $field['class'] . '"' : ''; ?>>
     <th scope="row">
 		<?php if ( isset( $field['title'] ) ) : ?>
             <label for="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>">
