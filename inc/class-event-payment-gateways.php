@@ -20,7 +20,6 @@ class TP_Event_Payment_Gateways {
 			apply_filters( 'tp_event_payment_gateways',
 				array(
 					'TP_Event_Payment_Gateway_Paypal',
-					'TP_Event_Payment_Gateway_Woocommerce'
 				)
 			);
 
