@@ -140,12 +140,12 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 			array(
 				'type'  => 'section_start',
 				'id'    => 'paypal_settings',
-				'title' => __( 'Paypal Settings', 'tp-event' )
+				'title' => __( 'Paypal Settings', 'tp-event' ),
+				'desc'  => esc_html__( 'Make payment via Paypal', 'tp-event' )
 			),
 			array(
 				'type'    => 'yes_no',
 				'title'   => __( 'Enable', 'tp-event' ),
-				'desc'    => __( 'This controls enable payment method', 'tp-event' ),
 				'id'      => $prefix . 'paypal_enable',
 				'default' => 'no'
 			),
