@@ -183,6 +183,24 @@
 	margin-top: 20px;
 }
 
+.post-type-archive-tp_event ul {
+	list-style-type: none;
+}
+
+.post-type-archive-tp_event ul li.tp_event {
+	width: calc(50% - 30px);
+	float: left;
+}
+
+.post-type-archive-tp_event ul li.tp_event:nth-child(2n) {
+	margin-left: 15px;
+}
+
+.post-type-archive-tp_event ul li.tp_event:nth-child(2n+1) {
+	margin-right: 15px;
+	clear: both;
+}
+
 .single-tp_event .event-register a {
 	display: inline-block;
 	margin-top: -10px;
