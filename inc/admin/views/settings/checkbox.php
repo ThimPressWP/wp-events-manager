@@ -21,7 +21,7 @@ $val = tp_event_get_option( $field['id'] );
     <td class="event-form-field event-form-field-<?php echo esc_attr( $field['type'] ) ?>">
         <input type="hidden" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="0" />
         <input type="checkbox" name="<?php echo isset( $field['id'] ) ? esc_attr( $field['id'] ) : '' ?>" value="1"
-			<?php echo $custom_attr ?><?php echo empty( $val ) ? checked( $field['default'], 1 ) : checked( $val, 1, false ); ?>
+			<?php echo empty( $val ) ? checked( $field['default'], 1 ) : checked( $val, 1, false ); ?>
         />
 
 		<?php if ( isset( $field['desc'] ) ) : ?>

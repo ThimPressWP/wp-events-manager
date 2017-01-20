@@ -2,10 +2,8 @@
 
 	<?php
 	/**
-	 * tp_event_before_loop_room_summary hook
+	 * tp_event_before_single_event hook
 	 *
-	 * @hooked tp_event_show_room_sale_flash - 10
-	 * @hooked tp_event_show_room_images - 20
 	 */
 	do_action( 'tp_event_before_single_event' );
 	?>
@@ -48,11 +46,9 @@
 
 	<?php
 	/**
-	 * tp_event_after_loop_room hook
+	 * tp_event_after_single_event hook
 	 *
-	 * @hooked tp_event_output_room_data_tabs - 10
-	 * @hooked tp_event_upsell_display - 15
-	 * @hooked tp_event_output_related_products - 20
+	 * @hooked tp_event_after_single_event - 10
 	 */
 	do_action( 'tp_event_after_single_event' );
 	?>

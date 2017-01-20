@@ -1,12 +1,17 @@
 <?php
 if ( !defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
-$event = new TP_Event_Event( get_the_ID() );
+
+if ( tp_event_get_option( 'allow_register_event' ) == 'no' ) {
+	return;
+}
+
+$event    = new TP_Event_Event( get_the_ID() );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 
 if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expired' ) {
-    return;
+	return;
 }
 ?>
 
@@ -23,7 +28,7 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
         </li>
         <li class="price">
             <span class="label"><?php _e( 'Cost:', 'tp-event' ) ?></span>
-            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'tp-event' ) : tp_event_format_price( $event->get_price() )  ) ?></span>
+            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'tp-event' ) : tp_event_format_price( $event->get_price() ) ) ?></span>
         </li>
     </ul>
 

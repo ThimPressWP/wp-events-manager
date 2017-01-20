@@ -31,7 +31,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 	public function get_settings() {
 		$prefix = 'thimpress_events_';
 
-		$event_register = tp_event_get_option( 'email_enable' );
+		$register_event_mail = tp_event_get_option( 'email_enable' );
 
 		return apply_filters( 'event_admin_setting_page_' . $this->id, array(
 			array(
@@ -52,7 +52,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 				'placeholder' => get_option( 'blogname' ),
 				'id'          => $prefix . 'email_from_name',
 				'default'     => get_option( 'blog_name' ),
-				'class'       => 'email-setting-form-name' . ( $event_register != 'yes' ? ' hide-if-js' : '' )
+				'class'       => 'email-setting-form-name' . ( $register_event_mail != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'        => 'email',
@@ -60,7 +60,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 				'placeholder' => get_option( 'admin_email' ),
 				'id'          => $prefix . 'admin_email',
 				'default'     => get_option( 'admin_email' ),
-				'class'       => 'email-setting-email-form' . ( $event_register != 'yes' ? ' hide-if-js' : '' )
+				'class'       => 'email-setting-email-form' . ( $register_event_mail != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'        => 'text',
@@ -68,7 +68,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 				'placeholder' => __( 'Register event', 'tp-event' ),
 				'id'          => $prefix . 'email_subject',
 				'default'     => '',
-				'class'       => 'email-setting-subject' . ( $event_register != 'yes' ? ' hide-if-js' : '' )
+				'class'       => 'email-setting-subject' . ( $register_event_mail != 'yes' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'checkbox',
