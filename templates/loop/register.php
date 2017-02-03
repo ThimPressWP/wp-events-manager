@@ -22,7 +22,7 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
             <span class="label"><?php _e( 'Total Slot:', 'tp-event' ) ?></span>
             <span clsas="detail"><?php echo esc_html( absint( $event->qty ) ) ?></span>
         </li>
-        <li class="booking_slote">
+        <li class="booking_slot">
             <span class="label"><?php _e( 'Booked Slot:', 'tp-event' ) ?></span>
             <span clsas="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ) ?></span>
         </li>

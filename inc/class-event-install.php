@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Event_Install {
+class TP_Event_Install {
 
 	/**
 	 * upgrade store
@@ -118,8 +118,8 @@ class Event_Install {
 
 }
 
-Event_Install::init();
+TP_Event_Install::init();
 
 // active plugin
-register_activation_hook( TP_EVENT_MAIN_FILE, array( 'Event_Install', 'install' ) );
-register_deactivation_hook( TP_EVENT_MAIN_FILE, array( 'Event_Install', 'uninstall' ) );
+register_activation_hook( TP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'install' ) );
+register_deactivation_hook( TP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'uninstall' ) );
