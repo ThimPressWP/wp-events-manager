@@ -27,6 +27,13 @@ class Event_Install {
 	public static function install() {
 		if ( !defined( 'TP_EVENT_INSTALLING' ) ) {
 			define( 'TP_EVENT_INSTALLING', true );
+			if ( !function_exists( 'get_plugin_data' ) ) {
+				require_once ABSPATH . '/wp-admin/includes/plugin.php';
+			}
+
+			if ( class_exists( 'TP_Event_Authentication' ) && ( is_plugin_active( 'tp-event-auth/tp-event-auth.php' ) ) ) {
+				die( esc_html__( 'Please deactivate and delete Thim Event Authentication add-on before activate Thim Events plugin.', 'tp-event' ) );
+			}
 		}
 		/**
 		 * Upgrade options
@@ -66,27 +73,27 @@ class Event_Install {
 	 */
 	public static function create_pages() {
 		$pages = array(
-			'register'       => array(
+			'register'        => array(
 				'name'    => _x( 'user-register', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'User Register', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'tp_event_register' ) . ']'
 			),
-			'login'          => array(
+			'login'           => array(
 				'name'    => _x( 'user-login', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'User Login', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'tp_event_login' ) . ']'
 			),
-			'forgot_password'    => array(
+			'forgot_password' => array(
 				'name'    => _x( 'forgot-password', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'Forgot Password', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_forgot_password_shortcode_tag', 'tp_event_forgot_password' ) . ']'
 			),
-			'reset_password' => array(
+			'reset_password'  => array(
 				'name'    => _x( 'reset-password', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'Reset Password', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_reset_password_shortcode_tag', 'tp_event_reset_password' ) . ']'
 			),
-			'account'        => array(
+			'account'         => array(
 				'name'    => _x( 'user-account', 'Page slug', 'tp-event' ),
 				'title'   => _x( 'User Account', 'Page title', 'tp-event' ),
 				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'tp_event_account' ) . ']'

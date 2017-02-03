@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  * register all post type
  */
-class Event_Custom_Post_Types {
+class TP_Event_Custom_Post_Types {
 
 	public function __construct() {
 
@@ -431,4 +431,4 @@ class Event_Custom_Post_Types {
 
 }
 
-new Event_Custom_Post_Types();
+new TP_Event_Custom_Post_Types();
