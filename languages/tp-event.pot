@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-20 14:46+0700\n"
+"POT-Creation-Date: 2017-02-03 09:27+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,52 +85,58 @@ msgstr ""
 msgid "Booking ID #%s is not exists."
 msgstr ""
 
-#: inc/class-event-install.php:70
+#: inc/class-event-install.php:35
+msgid ""
+"Please deactivate and delete Thim Event Authentication add-on before "
+"activate Thim Events plugin."
+msgstr ""
+
+#: inc/class-event-install.php:77
 msgctxt "Page slug"
 msgid "user-register"
 msgstr ""
 
-#: inc/class-event-install.php:71
+#: inc/class-event-install.php:78
 msgctxt "Page title"
 msgid "User Register"
 msgstr ""
 
-#: inc/class-event-install.php:75
+#: inc/class-event-install.php:82
 msgctxt "Page slug"
 msgid "user-login"
 msgstr ""
 
-#: inc/class-event-install.php:76
+#: inc/class-event-install.php:83
 msgctxt "Page title"
 msgid "User Login"
 msgstr ""
 
-#: inc/class-event-install.php:80
+#: inc/class-event-install.php:87
 msgctxt "Page slug"
 msgid "forgot-password"
 msgstr ""
 
-#: inc/class-event-install.php:81
+#: inc/class-event-install.php:88
 msgctxt "Page title"
 msgid "Forgot Password"
 msgstr ""
 
-#: inc/class-event-install.php:85
+#: inc/class-event-install.php:92
 msgctxt "Page slug"
 msgid "reset-password"
 msgstr ""
 
-#: inc/class-event-install.php:86
+#: inc/class-event-install.php:93
 msgctxt "Page title"
 msgid "Reset Password"
 msgstr ""
 
-#: inc/class-event-install.php:90
+#: inc/class-event-install.php:97
 msgctxt "Page slug"
 msgid "user-account"
 msgstr ""
 
-#: inc/class-event-install.php:91
+#: inc/class-event-install.php:98
 msgctxt "Page title"
 msgid "User Account"
 msgstr ""
