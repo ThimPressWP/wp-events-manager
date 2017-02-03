@@ -54,7 +54,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'id'      => $prefix . 'currency',
 				'options' => tp_event_currencies(),
 				'default' => 'USD',
-				'class'   => 'setting-currency' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
+				'class'   => 'setting-currency' . ( $allow_register_event == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'select',
@@ -68,21 +68,21 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 					'right_space' => __( 'Right with space', 'tp-event' ) . ' ' . '(99.99 £)',
 				),
 				'default' => 'left',
-				'class'   => 'setting-currency-position' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
+				'class'   => 'setting-currency-position' . ( $allow_register_event == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'text',
 				'title'   => __( 'Thousand Separator', 'tp-event' ),
 				'id'      => $prefix . 'currency_thousand',
 				'default' => ',',
-				'class'   => 'setting-currency-thousand' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
+				'class'   => 'setting-currency-thousand' . ( $allow_register_event == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'text',
 				'title'   => __( 'Decimal Separator', 'tp-event' ),
 				'id'      => $prefix . 'currency_separator',
 				'default' => '.',
-				'class'   => 'setting-currency-separator' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
+				'class'   => 'setting-currency-separator' . ( $allow_register_event == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'number',
@@ -90,7 +90,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'id'      => $prefix . 'currency_num_decimal',
 				'atts'    => array( 'step' => 'any' ),
 				'default' => '2',
-				'class'   => 'setting-number-decimals' . ( $allow_register_event != 'yes' ? ' hide-if-js' : '' )
+				'class'   => 'setting-number-decimals' . ( $allow_register_event == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'  => 'text',
