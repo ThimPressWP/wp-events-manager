@@ -94,9 +94,9 @@
 			return false;
 		},
 		set_message: function ( form, message ) {
-			var html = '<ul class="tp-event-notice error">';
-			html += '<li class="event_auth_register_message_error">' + message + '</li>';
-			html += '</ul>';
+			var html = '<div class="tp-event-notice error">';
+			html += '<div class="event_auth_register_message_error">' + message + '</div>';
+			html += '</div>';
 			form.find( '.event_register_foot' ).append( html );
 		},
 		/**
