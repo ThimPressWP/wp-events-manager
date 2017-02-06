@@ -74,7 +74,7 @@ class TP_Event_Custom_Post_Types {
 			'capability_type'    => 'tp_event',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
-			'hierarchical'       => false,
+			'hierarchical'       => true,
 			'menu_position'      => 8,
 			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 		);
@@ -136,28 +136,30 @@ class TP_Event_Custom_Post_Types {
 	 */
 	public function register_event_category_tax() {
 
-		$args = array(
-			'hierarchical' => true,
-			'label'        => __( 'Event Category', 'tp-event' ),
-			'labels'       => array(
-				'name'              => _x( 'Event Categories', 'taxonomy general name', 'tp-event' ),
-				'singular_name'     => _x( 'Event Category', 'taxonomy singular name', 'tp-event' ),
-				'menu_name'         => _x( 'Event Categories', 'Room Types', 'tp-event' ),
-				'search_items'      => __( 'Search Event Categories', 'tp-event' ),
-				'all_items'         => __( 'All Event Categories', 'tp-event' ),
-				'parent_item'       => __( 'Parent Event Category', 'tp-event' ),
-				'parent_item_colon' => __( 'Parent Event Category:', 'tp-event' ),
-				'edit_item'         => __( 'Edit Event Category', 'tp-event' ),
-				'update_item'       => __( 'Update Event Category', 'tp-event' ),
-				'add_new_item'      => __( 'Add New Event Category', 'tp-event' ),
-				'new_item_name'     => __( 'New Event Category Name', 'tp-event' )
-			),
-			'public'       => true,
-			'show_ui'      => true,
-			'query_var'    => true,
-			'rewrite'      => array( 'slug' => _x( 'event-category', 'URL slug', 'tp-event' ) )
+		$labels = array(
+			'name'              => _x( 'Event Categories', 'taxonomy general name', 'tp-event' ),
+			'singular_name'     => _x( 'Event Category', 'taxonomy singular name', 'tp-event' ),
+			'search_items'      => __( 'Search Categories', 'tp-event' ),
+			'all_items'         => __( 'All Categories', 'tp-event' ),
+			'parent_item'       => __( 'Parent Category', 'tp-event' ),
+			'parent_item_colon' => __( 'Parent Category:', 'tp-event' ),
+			'edit_item'         => __( 'Edit Category', 'tp-event' ),
+			'update_item'       => __( 'Update Category', 'tp-event' ),
+			'add_new_item'      => __( 'Add New Category', 'tp-event' ),
+			'new_item_name'     => __( 'New Category Name', 'tp-event' ),
+			'menu_name'         => __( 'Category', 'tp-event' ),
 		);
-		$args = apply_filters( 'tp_event_register_tax_event_category_arg', $args );
+
+		$args = array(
+			'public'            => true,
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'tp-event-category' ),
+		);
+
 		register_taxonomy( 'tp_event_category', array( 'tp_event' ), $args );
 	}
 
@@ -177,12 +179,12 @@ class TP_Event_Custom_Post_Types {
 		) ) );
 
 		register_post_status( 'tp-event-happenning', apply_filters( 'tp_event_register_happening_status_args', array(
-			'label'                     => _x( 'Happenning', 'tp-event' ),
+			'label'                     => _x( 'Happening', 'tp-event' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
 			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Happenning <span class="count">(%s)</span>', 'Happenning <span class="count">(%s)</span>' ),
+			'label_count'               => _n_noop( 'Happening <span class="count">(%s)</span>', 'Happening <span class="count">(%s)</span>' ),
 		) ) );
 
 		register_post_status( 'tp-event-expired', apply_filters( 'tp_event_register_expired_status_args', array(
