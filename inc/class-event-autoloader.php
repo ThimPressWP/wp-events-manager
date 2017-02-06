@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Event_Autoloader {
+class TP_Event_Autoloader {
 
 	/**
 	 * Path to the includes directory
@@ -85,4 +85,4 @@ class Event_Autoloader {
 	}
 }
 
-new Event_Autoloader();
+new TP_Event_Autoloader();

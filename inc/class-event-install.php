@@ -44,11 +44,11 @@ class TP_Event_Install {
 		/**
 		 * Add new roles
 		 */
-		Event_Roles::add_roles();
+		TP_Event_Roles::add_roles();
 		/**
 		 * Add new caps
 		 */
-		Event_Roles::add_caps();
+		TP_Event_Roles::add_caps();
 		/**
 		 * Create Pages
 		 */
@@ -66,7 +66,7 @@ class TP_Event_Install {
 		/**
 		 * Remove Caps and Roles
 		 */
-		Event_Roles::remove_roles();
+		TP_Event_Roles::remove_roles();
 	}
 
 
