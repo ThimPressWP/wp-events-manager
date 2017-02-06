@@ -31,9 +31,11 @@ class TP_Event_Install {
 				require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			}
 
-			if ( class_exists( 'TP_Event_Authentication' ) && ( is_plugin_active( 'tp-event-auth/tp-event-auth.php' ) ) ) {
-				die( esc_html__( 'Please deactivate and delete Thim Event Authentication add-on before activate Thim Events plugin.', 'tp-event' ) );
+			$active_plugins = get_option( 'active_plugins', true );
+			if ( ( $key = array_search( 'tp-event-auth/tp-event-auth.php', $active_plugins ) ) !== false ) {
+				unset( $active_plugins[$key] );
 			}
+			update_option( 'active_plugins', $active_plugins );
 		}
 		/**
 		 * Upgrade options
