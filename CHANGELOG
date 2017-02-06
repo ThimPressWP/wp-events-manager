@@ -1,3 +1,12 @@
+=== 2.0 ===
+- Included TP Event Auth add-on
+- Rebuild Core
+- Add event note
+- Add booking note
+- Add map location for event
+- Add setting for set up Google map API key
+- Update booking detail page
+
 === 1.4.2 ===
 - Rebuild Core
 - Update database
