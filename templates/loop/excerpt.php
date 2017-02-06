@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="event-content">
+<div class="entry-content">
 	<?php the_excerpt(); ?>
 	<a class="tp_event_view-detail view-detail" href="<?php echo esc_attr( get_the_permalink() ); ?>">
 	<?php printf( '%s', __( 'View Detail', 'tp-event' ) ) ?>

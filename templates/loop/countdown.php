@@ -5,7 +5,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 $current_time = date( 'Y-m-d H:i' );
 $time         = tp_event_get_time( 'Y-m-d H:i', null, false ); ?>
-<div class="event-countdown">
+<div class="entry-countdown">
 
 	<?php if ( $time > $current_time ) { ?>
 		<?php $date = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ), new DateTimeZone( tp_event_get_timezone_string() ) ); ?>

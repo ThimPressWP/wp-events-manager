@@ -15,7 +15,7 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
 }
 ?>
 
-<div class="event-register">
+<div class="entry-register">
 
     <ul class="event-info">
         <li class="total">

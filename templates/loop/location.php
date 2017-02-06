@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 ?>
 
 <?php if ( tp_event_location() ): ?>
-    <div class="event-location">
+    <div class="entry-location">
 		<?php tp_event_get_location_map(); ?>
     </div>
 <?php endif; ?>
