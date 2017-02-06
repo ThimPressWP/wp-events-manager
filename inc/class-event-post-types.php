@@ -14,6 +14,9 @@ class TP_Event_Custom_Post_Types {
 		add_action( 'init', array( $this, 'register_event_post_type' ) );
 		add_action( 'init', array( $this, 'register_booking_post_type' ) );
 
+		// register event category
+		add_action( 'init', array( $this, 'register_event_category_tax' ) );
+
 		// register post type status
 		add_action( 'init', array( $this, 'register_event_status' ) );
 		add_action( 'init', array( $this, 'register_booking_status' ) );
@@ -67,6 +70,7 @@ class TP_Event_Custom_Post_Types {
 			'show_in_menu'       => 'tp-event-setting',
 			'query_var'          => true,
 			'rewrite'            => array( 'slug' => _x( 'events', 'URL slug', 'tp-event' ) ),
+			'taxonomies'         => array( 'tp_event_category' ),
 			'capability_type'    => 'tp_event',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
@@ -125,6 +129,36 @@ class TP_Event_Custom_Post_Types {
 
 		$args = apply_filters( 'event_auth_book_args', $args );
 		register_post_type( 'event_auth_book', $args );
+	}
+
+	/**
+	 * Register event category taxonomy
+	 */
+	public function register_event_category_tax() {
+
+		$args = array(
+			'hierarchical' => true,
+			'label'        => __( 'Event Category', 'tp-event' ),
+			'labels'       => array(
+				'name'              => _x( 'Event Categories', 'taxonomy general name', 'tp-event' ),
+				'singular_name'     => _x( 'Event Category', 'taxonomy singular name', 'tp-event' ),
+				'menu_name'         => _x( 'Event Categories', 'Room Types', 'tp-event' ),
+				'search_items'      => __( 'Search Event Categories', 'tp-event' ),
+				'all_items'         => __( 'All Event Categories', 'tp-event' ),
+				'parent_item'       => __( 'Parent Event Category', 'tp-event' ),
+				'parent_item_colon' => __( 'Parent Event Category:', 'tp-event' ),
+				'edit_item'         => __( 'Edit Event Category', 'tp-event' ),
+				'update_item'       => __( 'Update Event Category', 'tp-event' ),
+				'add_new_item'      => __( 'Add New Event Category', 'tp-event' ),
+				'new_item_name'     => __( 'New Event Category Name', 'tp-event' )
+			),
+			'public'       => true,
+			'show_ui'      => true,
+			'query_var'    => true,
+			'rewrite'      => array( 'slug' => _x( 'event-category', 'URL slug', 'tp-event' ) )
+		);
+		$args = apply_filters( 'tp_event_register_tax_event_category_arg', $args );
+		register_taxonomy( 'tp_event_category', array( 'tp_event' ), $args );
 	}
 
 	/**

@@ -1275,3 +1275,49 @@ if ( !function_exists( 'event_get_option' ) ) {
 	}
 
 }
+
+// Add event category tab in admin table page
+add_action( 'all_admin_notices', 'tp_event_admin_table_tabs' );
+function tp_event_admin_table_tabs() {
+	if ( !is_admin() ) return;
+	$admin_tabs = apply_filters(
+		'tp_event_admin_event_tab_info',
+		array(
+			10 => array(
+				'link' => 'edit.php?post_type=tp_event',
+				'name' => __( 'Events', 'tp-event' ),
+				'id'   => 'edit-tp_event'
+			),
+			20 => array(
+				'link' => 'edit-tags.php?taxonomy=tp_event_category&post_type=tp_event',
+				'name' => __( 'Categories', 'tp-event' ),
+				'id'   => 'edit-tp_event_category'
+			)
+		)
+	);
+	ksort( $admin_tabs );
+	$tabs = array();
+	foreach ( $admin_tabs as $key => $value ) {
+		array_push( $tabs, $key );
+	}
+
+	$pages = apply_filters( 'tp-event_admin_tabs_on_pages', array( 'edit-tp_event', 'edit-tp_event_category', 'tp_event' ) );
+
+	$admin_tabs_on_page = array();
+	foreach ( $pages as $page ) {
+		$admin_tabs_on_page[$page] = $tabs;
+	}
+
+	$current_page_id = get_current_screen()->id;
+	$current_user    = wp_get_current_user();
+	if ( !in_array( 'administrator', $current_user->roles ) ) return;
+	if ( !empty( $admin_tabs_on_page[$current_page_id] ) && count( $admin_tabs_on_page[$current_page_id] ) ) { ?>
+        <h2 class="nav-tab-wrapper event-nav-tab-wrapper">
+			<?php foreach ( $admin_tabs_on_page[$current_page_id] as $admin_tab_id ) {
+				$class = ( $admin_tabs[$admin_tab_id]['id'] == $current_page_id ? 'nav-tab nav-tab-active' : 'nav-tab' );
+				echo '<a href="' . admin_url( $admin_tabs[$admin_tab_id]["link"] ) . '" class="' . $class . ' nav-tab-' . $admin_tabs[$admin_tab_id]["id"] . '">' . $admin_tabs[$admin_tab_id]["name"] . '</a>';
+			} ?>
+        </h2>
+		<?php
+	}
+}
