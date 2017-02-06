@@ -201,6 +201,11 @@
 	clear: both;
 }
 
+#content article.tp_single_event .entry-content {
+	float: none;
+	width: 100%;
+}
+
 .single-tp_event .entry-register a {
 	display: inline-block;
 	margin-top: -10px;

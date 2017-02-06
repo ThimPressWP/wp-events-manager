@@ -97,7 +97,7 @@
 			var html = '<ul class="tp-event-notice error">';
 			html += '<li class="event_auth_register_message_error">' + message + '</li>';
 			html += '</ul>';
-			form.find( '.event_register_foot' ).after( html );
+			form.find( '.event_register_foot' ).append( html );
 		},
 		/**
 		 * sanitize form field
