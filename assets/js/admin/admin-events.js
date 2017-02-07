@@ -31,6 +31,11 @@
 			$('.email-setting-form-name, .email-setting-email-form, .email-setting-subject').toggleClass('hide-if-js', toggle);
 		});
 
+		$('input[name="thimpress_events_paypal_enable"]').on('click', function () {
+			var toggle = !($(this).is(':checked'));
+			$('.paypal-production-email, .paypal-sandbox-mode, .paypal-sandbox-email').toggleClass('hide-if-js', toggle);
+		});
+
 		$('input[name="thimpress_events_allow_register_event"]').on('click', function () {
 			var toggle = !($(this).is(':checked'));
 			$('.setting-currency, .setting-currency-position, .setting-currency-thousand, .setting-currency-separator, .setting-number-decimals').toggleClass('hide-if-js', toggle);

@@ -22,7 +22,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	protected static $enable = false;
 
 	public function __construct() {
-		$this->title  = __( 'PayPal', 'tp-event' );
+		$this->title = __( 'PayPal', 'tp-event' );
 		parent::__construct();
 
 		// production environment
@@ -129,7 +129,8 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	 * @return array
 	 */
 	public function admin_fields() {
-		$prefix = 'thimpress_events_';
+		$prefix        = 'thimpress_events_';
+		$paypal_enable = tp_event_get_option( 'paypal_enable' );
 		return apply_filters( 'tp_event_paypal_admin_fields', array(
 			array(
 				'type'  => 'section_start',
@@ -147,19 +148,22 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 				'type'    => 'text',
 				'title'   => __( 'Paypal email', 'tp-event' ),
 				'id'      => $prefix . 'paypal_email',
-				'default' => ''
+				'default' => '',
+				'class'   => 'paypal-production-email' . ( $paypal_enable == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'checkbox',
 				'title'   => __( 'Sandbox mode', 'tp-event' ),
 				'id'      => $prefix . 'paypal_sandbox_mode',
-				'default' => false
+				'default' => false,
+				'class'   => 'paypal-sandbox-mode' . ( $paypal_enable == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'text',
 				'title'   => __( 'Paypal Sandbox email', 'tp-event' ),
 				'id'      => $prefix . 'paypal_sanbox_email',
-				'default' => ''
+				'default' => '',
+				'class'   => 'paypal-sandbox-email' . ( $paypal_enable == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type' => 'section_end',
