@@ -16,14 +16,14 @@ class TP_Event_Payment_Gateways {
 	}
 
 	public function init() {
-		$payment_gatways =
+		$payment_gateways =
 			apply_filters( 'tp_event_payment_gateways',
 				array(
 					'TP_Event_Payment_Gateway_Paypal',
 				)
 			);
 
-		foreach ( $payment_gatways as $gateway ) {
+		foreach ( $payment_gateways as $gateway ) {
 			$gateway                      = is_string( $gateway ) ? new $gateway : $gateway;
 			$this->gateways[$gateway->id] = $gateway;
 		}
