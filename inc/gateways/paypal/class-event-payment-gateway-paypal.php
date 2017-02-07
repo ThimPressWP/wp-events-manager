@@ -10,6 +10,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	 * @var null
 	 */
 	public $id = 'paypal';
+	// title
 	public $title = null;
 	// email
 	protected $paypal_email = null;
@@ -17,17 +18,10 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	protected $paypal_url = null;
 	// payment url
 	protected $paypal_payment_url = null;
-
+	// enable
 	protected static $enable = false;
 
-	/**
-	 * payment title
-	 * @var null
-	 */
-	public $_title = null;
-
 	public function __construct() {
-		$this->_title = __( 'Paypal', 'tp-event' );
 		$this->title  = __( 'PayPal', 'tp-event' );
 		parent::__construct();
 

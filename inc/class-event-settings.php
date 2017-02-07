@@ -1,120 +1,132 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit();
+if ( !defined( 'ABSPATH' ) ) {
+	exit();
 }
 
 class TP_Event_Settings {
 
-    /**
-     * $_options
-     * @var null
-     */
-    public $_options = null;
+	/**
+	 * $_options
+	 * @var null
+	 */
+	public $_options = null;
 
-    /**
-     * prefix option name
-     * @var string
-     */
-    public $_prefix = 'thimpress_events';
+	/**
+	 * prefix option name
+	 * @var string
+	 */
+	public $_prefix = 'thimpress_events';
 
-    /**
-     * _instance
-     * @var null
-     */
-    static $_instance = null;
+	/**
+	 * _instance
+	 * @var null
+	 */
+	static $_instance = null;
 
-    public function __construct( $prefix = null ) {
-        if ( $prefix )
-            $this->_prefix = $prefix;
+	public function __construct( $prefix = null ) {
+		if ( $prefix )
+			$this->_prefix = $prefix;
 
-        // load options
-        if ( !$this->_options )
-            $this->_options = $this->options();
-    }
+		// load options
+		if ( !$this->_options )
+			$this->_options = $this->options();
+	}
 
-    public function __get( $id = null ) {
-        $settings = apply_filters( 'tp_event_settings_field', array() );
+	public function __get( $id = null ) {
+		$settings = apply_filters( 'tp_event_settings_field', array() );
 
-        if ( isset( $settings[$id] ) ) {
-            return $settings[$id];
-        }
-    }
+		if ( isset( $settings[$id] ) ) {
+			return $settings[$id];
+		}
+	}
 
-    /**
-     * options load options
-     * @return array || null
-     */
-    protected function options() {
-        return get_option( $this->_prefix, null );
-    }
+	/**
+	 * options load options
+	 * @return array || null
+	 */
+	protected function options() {
+		$options = call_user_func_array( 'array_merge', get_option( $this->_prefix, null ) );
 
-    /**
-     * get_name_field
-     * @param  $name of field option
-     * @return string name field
-     */
-    public function get_field_name( $name = null ) {
-        if ( !$this->_prefix || !$name )
-            return;
+		return $options;
+	}
 
-        return $this->_prefix . '[' . $name . ']';
-    }
+	/**
+	 * get_name_field
+	 *
+	 * @param  $name of field option
+	 *
+	 * @return string name field
+	 */
+	public function get_field_name( $name = null ) {
+		if ( !$this->_prefix || !$name )
+			return;
 
-    /**
-     * get_name_field
-     * @param  $name of field option
-     * @return string name field
-     */
-    public function get_field_id( $name = null, $default = null ) {
-        if ( !$this->_prefix || !$name )
-            return;
+		return $this->_prefix . '[' . $name . ']';
+	}
 
-        return $this->_prefix . '_' . $name;
-    }
+	/**
+	 * get_name_field
+	 *
+	 * @param  $name of field option
+	 *
+	 * @return string name field
+	 */
+	public function get_field_id( $name = null, $default = null ) {
+		if ( !$this->_prefix || !$name )
+			return;
 
-    /**
-     * get option value
-     * @param  $name
-     * @return option value. array, string, boolean
-     */
-    public function get( $name = null, $default = null ) {
-        if ( !$this->_options )
-            $this->_options = $this->options();
+		return $this->_prefix . '_' . $name;
+	}
 
-        if ( $name && isset( $this->_options[$name] ) )
-            return $this->_options[$name];
+	/**
+	 * get option value
+	 *
+	 * @param  $name
+	 *
+	 * @return option value. array, string, boolean
+	 */
+	public function get( $name = null, $default = null ) {
+		if ( !$this->_options )
+			$this->_options = $this->options();
 
-        return $default;
-    }
+		if ( $name && isset( $this->_options[$name] ) )
+			return $this->_options[$name];
 
-    /**
-     * get option value
-     * @param  $name
-     * @return option value. array, string, boolean
-     */
-    public function set( $name = null, $default = null ) {
-        if ( !$this->_options )
-            $this->_options = $this->options();
+		return $default;
+	}
 
-        if ( $name && isset( $this->_options[$name] ) )
-            return $this->_options[$name];
+	/**
+	 * get option value
+	 *
+	 * @param  $name
+	 *
+	 * @return option value. array, string, boolean
+	 */
+	public function set( $name = null, $default = null ) {
+		if ( !$this->_options )
+			$this->_options = $this->options();
 
-        return $default;
-    }
+		if ( $name && isset( $this->_options[$name] ) )
+			return $this->_options[$name];
 
-    /**
-     * instance
-     * @param  $prefix
-     * @return object class
-     */
-    public static function instance( $prefix = null ) {
+		return $default;
+	}
 
-        if ( !empty( self::$_instance[$prefix] ) ) {
+	/**
+	 * instance
+	 *
+	 * @param  $prefix
+	 *
+	 * @return object class
+	 */
+	public static function instance( $prefix = null ) {
 
-            return $GLOBALS['event_auth_settings'] = self::$_instance[$prefix];
-        }
+		if ( !empty( self::$_instance[$prefix] ) ) {
 
-        return $GLOBALS['event_auth_settings'] = self::$_instance[$prefix] = new self( $prefix );
-    }
+			return $GLOBALS['event_auth_settings'] = self::$_instance[$prefix];
+		}
+
+		return $GLOBALS['event_auth_settings'] = self::$_instance[$prefix] = new self( $prefix );
+	}
 
 }

@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: Thim Events
-  Plugin URI: http://thimpress.com/thim-event
+  Plugin URI: http://thimpress.com/
   Description: A complete plugin for Event management and online booking system
   Author: ThimPress
   Version: 2.0
@@ -84,11 +84,11 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-event-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
 			$this->_include( 'inc/class-event-ajax.php' );
-			$this->_include( 'inc/class-event-setting.php' );
 			$this->_include( 'inc/class-event-post-types.php' );
 			$this->_include( 'inc/emails/class-event-register-event.php' );
 			$this->_include( 'inc/class-event-payment-gateways.php' );
 			$this->_include( 'inc/class-event-install.php' );
+			$this->settings = TP_Event_Settings::instance();
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );
@@ -152,12 +152,15 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 	}
 
-	if ( !function_exists( 'tp_event' ) ) {
+	if ( !function_exists( 'TP_EVENT' ) ) {
 
-		function tp_event() {
+		function TP_EVENT() {
 			return TP_Event::instance();
 		}
 
 	}
-	tp_event();
+	TP_EVENT();
 }
+
+
+$GLOBALS['TP_Event'] = TP_EVENT();
