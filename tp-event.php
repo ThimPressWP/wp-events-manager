@@ -30,7 +30,6 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->define_constants();
 			$this->includes();
 			$this->init_hooks();
-			do_action( 'tp_event_init', $this );
 		}
 
 		/**
@@ -69,6 +68,8 @@ if ( !class_exists( 'TP_Event' ) ) {
 			// load text domain
 			$this->text_domain();
 			$this->_session = new TP_Event_Session();
+
+			do_action( 'tp_event_init', $this );
 		}
 
 		/**
