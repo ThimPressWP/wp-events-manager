@@ -16,12 +16,7 @@ class TP_Event_Payment_Gateways {
 	}
 
 	public function init() {
-		$payment_gateways =
-			apply_filters( 'tp_event_payment_gateways',
-				array(
-					'TP_Event_Payment_Gateway_Paypal',
-				)
-			);
+		$payment_gateways = array( 'TP_Event_Payment_Gateway_Paypal' );
 
 		foreach ( $payment_gateways as $gateway ) {
 			$gateway                      = is_string( $gateway ) ? new $gateway : $gateway;
@@ -38,6 +33,8 @@ class TP_Event_Payment_Gateways {
 	 */
 	public function get_payment_gateways() {
 		$gateways = $this->gateways;
+
+		$gateways = apply_filters( 'tp_event_payment_gateways', $gateways );
 
 		$available = array();
 		foreach ( $gateways as $id => $gateway ) {
