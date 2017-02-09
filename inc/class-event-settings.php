@@ -45,9 +45,12 @@ class TP_Event_Settings {
 	 * @return array || null
 	 */
 	protected function options() {
-		$options = call_user_func_array( 'array_merge', get_option( $this->_prefix, null ) );
 
-		return $options;
+		if ( is_array( get_option( $this->_prefix, null ) ) ) {
+			return call_user_func_array( 'array_merge', get_option( $this->_prefix, null ) );
+		}
+
+		return get_option( $this->_prefix, null );
 	}
 
 	/**
