@@ -51,7 +51,7 @@ class TP_Event_Payment_Gateways {
 	 * @return array
 	 */
 	public function get_payment_gateways_enable() {
-		$gateways = $this->gateways;
+		$gateways = $this->get_payment_gateways();
 
 		$enable = array();
 		foreach ( $gateways as $id => $gateway ) {
