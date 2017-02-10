@@ -55,8 +55,10 @@ class TP_Event_Ajax {
 			ob_start();
 			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
 				tp_event_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
-			} else if ( $registered_time && tp_event_get_option( 'email_register_times' ) === 'once' ) {
+			} else if ( $registered_time && tp_event_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) {
 				tp_event_print_notice( 'error', __( 'You have registered this event before', 'tp-event' ) );
+			} else if ( !$event->get_slot_available() ) {
+				tp_event_print_notice( 'error', __( 'The event is full, the registration is closed', 'tp-event' ) );
 			} else {
 				tp_event_get_template( 'loop/booking-form.php', array( 'event_id' => $event_id ) );
 			}

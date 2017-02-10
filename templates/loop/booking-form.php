@@ -7,54 +7,49 @@ $event    = new TP_Event_Event( $event_id );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 ?>
 
-<?php if ( $user_reg == 0 || tp_event_get_option( 'email_register_times' ) === 'many' ) : ?>
-    <div class="event_register_area">
 
-        <h2><?php echo esc_html( $event->get_title() ) ?></h2>
+<div class="event_register_area">
 
-        <form name="event_register" class="event_register" method="POST">
+    <h2><?php echo esc_html( $event->get_title() ) ?></h2>
 
-			<?php if ( !$event->is_free() || tp_event_get_option( 'email_register_times' ) === 'many' ) : ?>
-                <!--allow set slot-->
-                <div class="event_auth_form_field">
-                    <label for="event_register_qty"><?php _e( 'Quantity', 'tp-event' ) ?></label>
-                    <input type="number" name="qty" value="1" min="1" id="event_register_qty" />
-                </div>
-                <!--end allow set slot-->
-			<?php else: ?>
-                <!--disallow set slot-->
-                <input type="hidden" name="qty" value="1" min="1" />
-			<?php endif; ?>
+    <form name="event_register" class="event_register" method="POST">
 
-            <!--Hide payment option when cost is 0-->
-			<?php if ( !$event->is_free() ) {
-				$payments = tp_event_gateways_enable();
-				if ( $payments ) { ?>
-                    <ul class="event_auth_payment_methods">
-						<?php $i = 0; ?>
-						<?php foreach ( $payments as $id => $payment ) : ?>
-                            <li>
-                                <input id="payment_method_<?php echo esc_attr( $id ) ?>" type="radio" name="payment_method" value="<?php echo esc_attr( $id ) ?>"<?php echo $i === 0 ? ' checked' : '' ?>/>
-                                <label for="payment_method_<?php echo esc_attr( $id ) ?>"><?php echo esc_html( $payment->get_title() ) ?></label>
-                            </li>
-							<?php $i ++; ?>
-						<?php endforeach; ?>
-                    </ul>
-				<?php } else {
-					tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'tp-event' ) );
-				}
-			} ?>
-            <!--End hide payment option when cost is 0-->
-
-            <div class="event_register_foot">
-                <input type="hidden" name="event_id" value="<?php echo esc_attr( $event_id ) ?>" />
-                <input type="hidden" name="action" value="event_auth_register" />
-				<?php wp_nonce_field( 'event_auth_register_nonce', 'event_auth_register_nonce' ); ?>
-                <button class="event_register_submit event_auth_button" <?php echo $payments ? '' : 'disabled="disabled"' ?>><?php _e( 'Register Now', 'tp-event' ); ?></button>
+		<?php if ( $user_reg == 0 && $event->is_free() && tp_event_get_option( 'email_register_times' ) === 'once' ) { ?>
+            <input type="hidden" name="qty" value="1" min="1" />
+		<?php } else { ?>
+            <div class="event_auth_form_field">
+                <label for="event_register_qty"><?php _e( 'Quantity', 'tp-event' ) ?></label>
+                <input type="number" name="qty" value="1" min="1" max="<?php echo $event->get_slot_available()?>" id="event_register_qty" />
             </div>
+		<?php } ?>
 
-        </form>
+        <!--Hide payment option when cost is 0-->
+		<?php if ( !$event->is_free() ) {
+			$payments = tp_event_gateways_enable();
+			if ( $payments ) { ?>
+                <ul class="event_auth_payment_methods">
+					<?php $i = 0; ?>
+					<?php foreach ( $payments as $id => $payment ) : ?>
+                        <li>
+                            <input id="payment_method_<?php echo esc_attr( $id ) ?>" type="radio" name="payment_method" value="<?php echo esc_attr( $id ) ?>"<?php echo $i === 0 ? ' checked' : '' ?>/>
+                            <label for="payment_method_<?php echo esc_attr( $id ) ?>"><?php echo esc_html( $payment->get_title() ) ?></label>
+                        </li>
+						<?php $i ++; ?>
+					<?php endforeach; ?>
+                </ul>
+			<?php } else {
+				tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'tp-event' ) );
+			}
+		} ?>
+        <!--End hide payment option when cost is 0-->
 
-    </div>
+        <div class="event_register_foot">
+            <input type="hidden" name="event_id" value="<?php echo esc_attr( $event_id ) ?>" />
+            <input type="hidden" name="action" value="event_auth_register" />
+			<?php wp_nonce_field( 'event_auth_register_nonce', 'event_auth_register_nonce' ); ?>
+            <button class="event_register_submit event_auth_button" <?php echo $payments ? '' : 'disabled="disabled"' ?>><?php _e( 'Register Now', 'tp-event' ); ?></button>
+        </div>
 
-<?php endif; ?>
+    </form>
+
+</div>
