@@ -136,6 +136,9 @@ class TP_Event_Ajax {
 			if ( is_wp_error( $booking_id ) ) {
 				throw new Exception( $booking_id->get_error_message() );
 			} else {
+
+				do_action( 'tp_event_register_event_action', $args );
+
 				if ( $args['price'] == 0 ) {
 					// update booking status
 					$book = TP_Event_Booking::instance( $booking_id );
