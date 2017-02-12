@@ -80,30 +80,29 @@ class TP_Event_Ajax {
 		try {
 			// sanitize, validate data
 			if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
-				throw new Exception( __( 'Invalid request.', 'tp-event' ) );
+				throw new Exception( __( 'Invalid request', 'tp-event' ) );
 			}
 
 			if ( !isset( $_POST['action'] ) || !check_ajax_referer( 'event_auth_register_nonce', 'event_auth_register_nonce' ) ) {
-				throw new Exception( __( 'Invalid request.', 'tp-event' ) );
+				throw new Exception( __( 'Invalid request', 'tp-event' ) );
 			}
 
 			$event_id = false;
 			if ( !isset( $_POST['event_id'] ) || !is_numeric( $_POST['event_id'] ) ) {
-				throw new Exception( __( 'Invalid event request.', 'tp-event' ) );
+				throw new Exception( __( 'Invalid event request', 'tp-event' ) );
 			} else {
 				$event_id = absint( sanitize_text_field( $_POST['event_id'] ) );
 			}
 
 			$qty = 0;
 			if ( !isset( $_POST['qty'] ) || !is_numeric( $_POST['qty'] ) ) {
-				throw new Exception( __( 'Quantity must integer.', 'tp-event' ) );
+				throw new Exception( __( 'Quantity must integer', 'tp-event' ) );
 			} else {
 				$qty = absint( sanitize_text_field( $_POST['qty'] ) );
 			}
 			// End sanitize, validate data
 			// load booking module
-			$booking = TP_Event_Booking::instance();
-			$event   = TP_Event_Event::instance( $event_id );
+			$event = TP_Event_Event::instance( $event_id );
 
 			$user       = wp_get_current_user();
 			$registered = $event->booked_quantity( $user->ID );
@@ -130,41 +129,13 @@ class TP_Event_Ajax {
 			$return = array();
 
 			if ( $args['price'] > 0 && $payment && !$payment->is_available() ) {
-				throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup payment gateways.', 'tp-event' ) ) );
+				throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup payment gateways', 'tp-event' ) ) );
 			}
 
-			$booking_id = $booking->create_booking( $args, $args['payment_id'] );
-			// create booking result
-			if ( is_wp_error( $booking_id ) ) {
-				throw new Exception( $booking_id->get_error_message() );
+			if ( !$payment ) {
+				throw new Exception( __( 'Payment method is not available', 'tp-event' ) );
 			} else {
-
-				do_action( 'tp_event_register_event_action', $args );
-
-				if ( $args['price'] == 0 ) {
-					// update booking status
-					$book = TP_Event_Booking::instance( $booking_id );
-					$book->update_status( 'pending' );
-
-					// user booking
-					$user = get_userdata( $book->user_id );
-					tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
-					wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
-						'status' => true,
-						'url'    => tp_event_account_url()
-					) ) );
-				} else if ( $payment ) {
-					$return = $payment->process( $booking_id );
-					if ( isset( $return['status'] ) && $return['status'] === false ) {
-						wp_delete_post( $booking_id );
-					}
-					wp_send_json( $return );
-				} else {
-					wp_send_json( array(
-						'status'  => false,
-						'message' => __( 'Payment method is not available', 'tp-event' )
-					) );
-				}
+				$payment->booking_process( $args );
 			}
 
 		} catch ( Exception $e ) {
