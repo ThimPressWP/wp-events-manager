@@ -340,8 +340,15 @@ class TP_Event_Custom_Post_Types {
 			case 'event':
 				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) );
 				break;
+			case 'user':
+				$user     = get_userdata( $booking->user_id );
+				$return   = array();
+				$return[] = sprintf( __( '<a href="%s">%s</a>', 'tp-event' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
+				$return   = implode( '', $return );
+				echo $return;
+				break;
 			case 'cost':
-				echo $booking->price > 0 ? tp_event_format_price( $booking->price, $booking->currency ) : __( 'Free', 'tp-event' );
+				echo $booking->price > 0 ? tp_event_format_price( $booking->price ) : __( 'Free', 'tp-event' );
 				break;
 			case 'slot':
 				echo $booking->qty;
@@ -349,14 +356,7 @@ class TP_Event_Custom_Post_Types {
 			case 'status':
 				$return   = array();
 				$return[] = sprintf( '%s', tp_event_booking_status( $booking_id ) );
-				$return[] = $booking->payment_id ? sprintf( '(%s)', tp_event_get_payment_title( $booking->payment_id ) ) : '';
-				$return   = implode( '', $return );
-				echo $return;
-				break;
-			case 'user':
-				$user     = get_userdata( $booking->user_id );
-				$return   = array();
-				$return[] = sprintf( __( '<a href="%s">%s</a>', 'tp-event' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
+				$return[] = $booking->payment_id ? '<p>' . __( sprintf( '(via %s)', tp_event_get_payment_title( $booking->payment_id ) ), 'tp-event' ) . '</p>' : '';
 				$return   = implode( '', $return );
 				echo $return;
 				break;
