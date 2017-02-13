@@ -52,7 +52,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	 */
 	public function is_enable() {
 		self::$enable = !empty( $this->paypal_email ) && tp_event_get_option( 'paypal_enable' ) === 'yes';
-		return self::$enable;
+		return apply_filters( 'tp_event_enable_paypal_payment', self::$enable );
 	}
 
 
@@ -142,7 +142,8 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 				'type'    => 'yes_no',
 				'title'   => __( 'Enable', 'tp-event' ),
 				'id'      => $prefix . 'paypal_enable',
-				'default' => 'no'
+				'default' => 'no',
+				'desc'    => apply_filters( 'tp_event_filter_enable_paypal_gateway', '' )
 			),
 			array(
 				'type'    => 'text',
