@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Package Name\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 09:27+0700\n"
+"POT-Creation-Date: 2017-02-13 21:18+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,38 +34,42 @@ msgstr ""
 msgid "You have registered this event before"
 msgstr ""
 
-#: inc/class-event-ajax.php:81 inc/class-event-ajax.php:85
-msgid "Invalid request."
+#: inc/class-event-ajax.php:61
+msgid "The event is full, the registration is closed"
 msgstr ""
 
-#: inc/class-event-ajax.php:90
-msgid "Invalid event request."
+#: inc/class-event-ajax.php:83 inc/class-event-ajax.php:87
+msgid "Invalid request"
 msgstr ""
 
-#: inc/class-event-ajax.php:97
-msgid "Quantity must integer."
+#: inc/class-event-ajax.php:92
+msgid "Invalid event request"
 msgstr ""
 
-#: inc/class-event-ajax.php:110
+#: inc/class-event-ajax.php:99
+msgid "Quantity must integer"
+msgstr ""
+
+#: inc/class-event-ajax.php:112
 msgid "You are registered this event."
 msgstr ""
 
-#: inc/class-event-ajax.php:131
-msgid "is not ready. Please contact administrator to setup payment gateways."
+#: inc/class-event-ajax.php:133
+msgid "is not ready. Please contact administrator to setup payment gateways"
 msgstr ""
 
-#: inc/class-event-ajax.php:146
+#: inc/class-event-ajax.php:155
 #, php-format
 msgid ""
 "Book ID <strong>%s</strong> completed! We'll send mail to <strong>%s</"
 "strong> when it is approve."
 msgstr ""
 
-#: inc/class-event-ajax.php:160
+#: inc/class-event-ajax.php:169
 msgid "Payment method is not available"
 msgstr ""
 
-#: inc/class-event-ajax.php:183
+#: inc/class-event-ajax.php:193
 #, php-format
 msgid "You Must <a href=\"%s\">Login</a>"
 msgstr ""
@@ -85,349 +89,390 @@ msgstr ""
 msgid "Booking ID #%s is not exists."
 msgstr ""
 
-#: inc/class-event-install.php:35
-msgid ""
-"Please deactivate and delete Thim Event Authentication add-on before "
-"activate Thim Events plugin."
-msgstr ""
-
-#: inc/class-event-install.php:77
+#: inc/class-event-install.php:79
 msgctxt "Page slug"
 msgid "user-register"
 msgstr ""
 
-#: inc/class-event-install.php:78
+#: inc/class-event-install.php:80
 msgctxt "Page title"
 msgid "User Register"
 msgstr ""
 
-#: inc/class-event-install.php:82
+#: inc/class-event-install.php:84
 msgctxt "Page slug"
 msgid "user-login"
 msgstr ""
 
-#: inc/class-event-install.php:83
+#: inc/class-event-install.php:85
 msgctxt "Page title"
 msgid "User Login"
 msgstr ""
 
-#: inc/class-event-install.php:87
+#: inc/class-event-install.php:89
 msgctxt "Page slug"
 msgid "forgot-password"
 msgstr ""
 
-#: inc/class-event-install.php:88
+#: inc/class-event-install.php:90
 msgctxt "Page title"
 msgid "Forgot Password"
 msgstr ""
 
-#: inc/class-event-install.php:92
+#: inc/class-event-install.php:94
 msgctxt "Page slug"
 msgid "reset-password"
 msgstr ""
 
-#: inc/class-event-install.php:93
+#: inc/class-event-install.php:95
 msgctxt "Page title"
 msgid "Reset Password"
 msgstr ""
 
-#: inc/class-event-install.php:97
+#: inc/class-event-install.php:99
 msgctxt "Page slug"
 msgid "user-account"
 msgstr ""
 
-#: inc/class-event-install.php:98
+#: inc/class-event-install.php:100
 msgctxt "Page title"
 msgid "User Account"
 msgstr ""
 
-#: inc/class-event-post-types.php:45
+#: inc/class-event-post-types.php:48
 msgctxt "post type general name"
 msgid "Events"
 msgstr ""
 
-#: inc/class-event-post-types.php:46
+#: inc/class-event-post-types.php:49
 msgctxt "post type singular name"
 msgid "Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:47
+#: inc/class-event-post-types.php:50
 msgctxt "admin menu"
 msgid "Events"
 msgstr ""
 
-#: inc/class-event-post-types.php:48
+#: inc/class-event-post-types.php:51
 msgctxt "add new on admin bar"
 msgid "Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:49
+#: inc/class-event-post-types.php:52
 msgctxt "event"
 msgid "Add New"
 msgstr ""
 
-#: inc/class-event-post-types.php:50
+#: inc/class-event-post-types.php:53
 msgid "Add New Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:51
+#: inc/class-event-post-types.php:54
 msgid "New Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:52
+#: inc/class-event-post-types.php:55
 msgid "Edit Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:53
+#: inc/class-event-post-types.php:56
 msgid "View Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:54 templates/shortcodes/user-account.php:21
+#: inc/class-event-post-types.php:57 inc/tp-event-core-functions.php:1288
+#: templates/shortcodes/user-account.php:21
 msgid "Events"
 msgstr ""
 
-#: inc/class-event-post-types.php:55
+#: inc/class-event-post-types.php:58
 msgid "Search Events"
 msgstr ""
 
-#: inc/class-event-post-types.php:56
+#: inc/class-event-post-types.php:59
 msgid "Parent Events:"
 msgstr ""
 
-#: inc/class-event-post-types.php:57
+#: inc/class-event-post-types.php:60
 msgid "No events found."
 msgstr ""
 
-#: inc/class-event-post-types.php:58
+#: inc/class-event-post-types.php:61
 msgid "No events found in Trash."
 msgstr ""
 
-#: inc/class-event-post-types.php:63
+#: inc/class-event-post-types.php:66
 msgid "Event post type."
 msgstr ""
 
-#: inc/class-event-post-types.php:69
+#: inc/class-event-post-types.php:72
 msgctxt "URL slug"
 msgid "events"
 msgstr ""
 
-#: inc/class-event-post-types.php:89
+#: inc/class-event-post-types.php:93
 msgctxt "post type general name"
 msgid "Bookings"
 msgstr ""
 
-#: inc/class-event-post-types.php:90
+#: inc/class-event-post-types.php:94
 msgctxt "post type singular name"
 msgid "Booking"
 msgstr ""
 
-#: inc/class-event-post-types.php:91
+#: inc/class-event-post-types.php:95
 msgctxt "admin menu"
 msgid "Bookings"
 msgstr ""
 
-#: inc/class-event-post-types.php:92
+#: inc/class-event-post-types.php:96
 msgctxt "add new on admin bar"
 msgid "Booking"
 msgstr ""
 
-#: inc/class-event-post-types.php:93
+#: inc/class-event-post-types.php:97
 msgctxt "book"
 msgid "Add New"
 msgstr ""
 
-#: inc/class-event-post-types.php:94
+#: inc/class-event-post-types.php:98
 msgid "Add New Booking"
 msgstr ""
 
-#: inc/class-event-post-types.php:95
+#: inc/class-event-post-types.php:99
 msgid "New Booking"
 msgstr ""
 
-#: inc/class-event-post-types.php:96
+#: inc/class-event-post-types.php:100
 #: inc/admin/views/metaboxes/booking-details.php:40
 msgid "Booking Details"
 msgstr ""
 
-#: inc/class-event-post-types.php:97
+#: inc/class-event-post-types.php:101
 msgid "View Booking"
 msgstr ""
 
-#: inc/class-event-post-types.php:98
+#: inc/class-event-post-types.php:102
 msgid "Bookings"
 msgstr ""
 
-#: inc/class-event-post-types.php:99
+#: inc/class-event-post-types.php:103
 msgid "Search Books"
 msgstr ""
 
-#: inc/class-event-post-types.php:100
+#: inc/class-event-post-types.php:104
 msgid "Parent Books:"
 msgstr ""
 
-#: inc/class-event-post-types.php:101
+#: inc/class-event-post-types.php:105
 msgid "No books found."
 msgstr ""
 
-#: inc/class-event-post-types.php:102
+#: inc/class-event-post-types.php:106
 msgid "No books found in Trash."
 msgstr ""
 
-#: inc/class-event-post-types.php:107
+#: inc/class-event-post-types.php:111
 msgid "Description."
 msgstr ""
 
-#: inc/class-event-post-types.php:114
+#: inc/class-event-post-types.php:118
 msgctxt "URL slug"
 msgid "event-book"
 msgstr ""
 
-#: inc/class-event-post-types.php:137
+#: inc/class-event-post-types.php:140
+msgctxt "taxonomy general name"
+msgid "Event Categories"
+msgstr ""
+
+#: inc/class-event-post-types.php:141
+msgctxt "taxonomy singular name"
+msgid "Event Category"
+msgstr ""
+
+#: inc/class-event-post-types.php:142
+msgid "Search Categories"
+msgstr ""
+
+#: inc/class-event-post-types.php:143
+msgid "All Categories"
+msgstr ""
+
+#: inc/class-event-post-types.php:144
+msgid "Parent Category"
+msgstr ""
+
+#: inc/class-event-post-types.php:145
+msgid "Parent Category:"
+msgstr ""
+
+#: inc/class-event-post-types.php:146
+msgid "Edit Category"
+msgstr ""
+
+#: inc/class-event-post-types.php:147
+msgid "Update Category"
+msgstr ""
+
+#: inc/class-event-post-types.php:148
+msgid "Add New Category"
+msgstr ""
+
+#: inc/class-event-post-types.php:149
+msgid "New Category Name"
+msgstr ""
+
+#: inc/class-event-post-types.php:150
+msgid "Category"
+msgstr ""
+
+#: inc/class-event-post-types.php:173
 msgctxt "tp-event"
 msgid "Upcoming"
 msgstr ""
 
-#: inc/class-event-post-types.php:142
+#: inc/class-event-post-types.php:178
 #, php-format
 msgid "Upcoming <span class=\"count\">(%s)</span>"
 msgid_plural "Upcoming <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-event-post-types.php:146
+#: inc/class-event-post-types.php:182
 msgctxt "tp-event"
-msgid "Happenning"
+msgid "Happening"
 msgstr ""
 
-#: inc/class-event-post-types.php:151
+#: inc/class-event-post-types.php:187
 #, php-format
-msgid "Happenning <span class=\"count\">(%s)</span>"
-msgid_plural "Happenning <span class=\"count\">(%s)</span>"
+msgid "Happening <span class=\"count\">(%s)</span>"
+msgid_plural "Happening <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-event-post-types.php:155
+#: inc/class-event-post-types.php:191
 msgctxt "tp-event"
 msgid "Expired"
 msgstr ""
 
-#: inc/class-event-post-types.php:160
+#: inc/class-event-post-types.php:196
 #, php-format
 msgid "Expired <span class=\"count\">(%s)</span>"
 msgid_plural "Expired <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-event-post-types.php:170
+#: inc/class-event-post-types.php:206
 msgctxt "Booking status"
 msgid "Cancelled"
 msgstr ""
 
-#: inc/class-event-post-types.php:175
+#: inc/class-event-post-types.php:211
 #, php-format
 msgid "Cancelled <span class=\"count\">(%s)</span>"
 msgid_plural "Cancelled <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-event-post-types.php:179
+#: inc/class-event-post-types.php:215
 msgctxt "Booking status"
 msgid "Pending"
 msgstr ""
 
-#: inc/class-event-post-types.php:184
+#: inc/class-event-post-types.php:220
 #, php-format
 msgid "Pending <span class=\"count\">(%s)</span>"
 msgid_plural "Pending <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-event-post-types.php:188
+#: inc/class-event-post-types.php:224
 msgctxt "Booking status"
 msgid "Processing"
 msgstr ""
 
-#: inc/class-event-post-types.php:193
+#: inc/class-event-post-types.php:229
 #, php-format
 msgid "Processing <span class=\"count\">(%s)</span>"
 msgid_plural "Processing <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-event-post-types.php:197
+#: inc/class-event-post-types.php:233
 msgctxt "Booking status"
 msgid "Completed"
 msgstr ""
 
-#: inc/class-event-post-types.php:202
+#: inc/class-event-post-types.php:238
 #, php-format
 msgid "Completed <span class=\"count\">(%s)</span>"
 msgid_plural "Completed <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-event-post-types.php:216
+#: inc/class-event-post-types.php:252
 msgid "Start"
 msgstr ""
 
-#: inc/class-event-post-types.php:217
+#: inc/class-event-post-types.php:253
 msgid "End"
 msgstr ""
 
-#: inc/class-event-post-types.php:218 inc/class-event-post-types.php:288
+#: inc/class-event-post-types.php:254 inc/class-event-post-types.php:324
 #: templates/emails/register-event.php:27
 #: templates/shortcodes/user-account.php:26
 msgid "Status"
 msgstr ""
 
-#: inc/class-event-post-types.php:219
+#: inc/class-event-post-types.php:255
 #: inc/admin/views/metaboxes/event-settings.php:38
 msgid "Price"
 msgstr ""
 
-#: inc/class-event-post-types.php:220
+#: inc/class-event-post-types.php:256
 msgid "Booked / Total"
 msgstr ""
 
-#: inc/class-event-post-types.php:259 inc/class-event-post-types.php:308
+#: inc/class-event-post-types.php:295 inc/class-event-post-types.php:351
 #: templates/emails/register-event.php:34 templates/loop/register.php:31
 #: templates/shortcodes/user-account.php:35
 msgid "Free"
 msgstr ""
 
-#: inc/class-event-post-types.php:261
+#: inc/class-event-post-types.php:297
 #, php-format
 msgid "<span class=\"event_auth_event_type\">%s/%s</span>"
 msgstr ""
 
-#: inc/class-event-post-types.php:261
+#: inc/class-event-post-types.php:297
 msgid "slot"
 msgstr ""
 
-#: inc/class-event-post-types.php:265
+#: inc/class-event-post-types.php:301
 msgid "Unlimited"
 msgstr ""
 
-#: inc/class-event-post-types.php:282
+#: inc/class-event-post-types.php:318
 msgid ""
 "<label class=\"screen-reader-text __web-inspector-hide-shortcut__\" for=\"cb-"
 "select-all-1\">Select All</label><input id=\"cb-select-all-1\" type="
 "\"checkbox\">"
 msgstr ""
 
-#: inc/class-event-post-types.php:283 templates/emails/register-event.php:21
+#: inc/class-event-post-types.php:319 templates/emails/register-event.php:21
 msgid "ID"
 msgstr ""
 
-#: inc/class-event-post-types.php:284 templates/emails/register-event.php:22
+#: inc/class-event-post-types.php:320 templates/emails/register-event.php:22
 msgid "Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:285
+#: inc/class-event-post-types.php:321
 msgid "User"
 msgstr ""
 
-#: inc/class-event-post-types.php:286
+#: inc/class-event-post-types.php:322
 #: inc/admin/views/metaboxes/booking-details.php:46
 #: templates/emails/register-event.php:25
 #: templates/emails/register-event.php:34
@@ -436,59 +481,59 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: inc/class-event-post-types.php:287 templates/emails/register-event.php:24
+#: inc/class-event-post-types.php:323 templates/emails/register-event.php:24
 msgid "Slot"
 msgstr ""
 
-#: inc/class-event-post-types.php:323
+#: inc/class-event-post-types.php:346
 #, php-format
 msgid "<a href=\"%s\">%s</a>"
 msgstr ""
 
-#: inc/class-event-post-types.php:399 inc/class-event-post-types.php:402
-#: inc/class-event-post-types.php:405
+#: inc/class-event-post-types.php:435 inc/class-event-post-types.php:438
+#: inc/class-event-post-types.php:441
 msgid "Event updated."
 msgstr ""
 
-#: inc/class-event-post-types.php:400
+#: inc/class-event-post-types.php:436
 msgid "Custom field updated."
 msgstr ""
 
-#: inc/class-event-post-types.php:401
+#: inc/class-event-post-types.php:437
 msgid "Custom field deleted."
 msgstr ""
 
-#: inc/class-event-post-types.php:404
+#: inc/class-event-post-types.php:440
 #, php-format
 msgid "Book restored to revision from %s"
 msgstr ""
 
-#: inc/class-event-post-types.php:406
+#: inc/class-event-post-types.php:442
 msgid "Event saved."
 msgstr ""
 
-#: inc/class-event-post-types.php:407
+#: inc/class-event-post-types.php:443
 msgid "Event submitted."
 msgstr ""
 
-#: inc/class-event-post-types.php:409
+#: inc/class-event-post-types.php:445
 #, php-format
 msgid "Event scheduled for: <strong>%1$s</strong>."
 msgstr ""
 
-#: inc/class-event-post-types.php:411
+#: inc/class-event-post-types.php:447
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: inc/class-event-post-types.php:413
+#: inc/class-event-post-types.php:449
 msgid "Event draft updated."
 msgstr ""
 
-#: inc/class-event-post-types.php:419
+#: inc/class-event-post-types.php:455
 msgid "View event"
 msgstr ""
 
-#: inc/class-event-post-types.php:425
+#: inc/class-event-post-types.php:461
 msgid "Preview event"
 msgstr ""
 
@@ -659,7 +704,11 @@ msgstr ""
 msgid "Couldn't register."
 msgstr ""
 
-#: inc/abstracts/class-event-abstract-payment-gateway.php:103
+#: inc/tp-event-core-functions.php:1293
+msgid "Categories"
+msgstr ""
+
+#: inc/abstracts/class-event-abstract-payment-gateway.php:106
 msgid "Payment completed. We will send you email when payment method verify."
 msgstr ""
 
@@ -987,17 +1036,17 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: inc/admin/views/metaboxes/booking-details.php:57
+#: inc/admin/views/metaboxes/booking-details.php:58
 #: templates/emails/register-event.php:37
 #: templates/shortcodes/user-account.php:38
 msgid "No payment"
 msgstr ""
 
-#: inc/admin/views/metaboxes/booking-details.php:63
+#: inc/admin/views/metaboxes/booking-details.php:64
 msgid "Sub Total"
 msgstr ""
 
-#: inc/admin/views/metaboxes/booking-details.php:67
+#: inc/admin/views/metaboxes/booking-details.php:68
 msgid "Total"
 msgstr ""
 
@@ -1046,52 +1095,48 @@ msgstr ""
 msgid "User is not exists!"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:30
-msgid "Paypal"
-msgstr ""
-
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:31
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:25
 msgid "PayPal"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:73
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:67
 msgid ""
 "Payment is completed. We will send you email when payment status is completed"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:75
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:69
 msgid "Booking is cancel."
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:143
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:138
 msgid "Paypal Settings"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:144
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:139
 msgid "Make payment via Paypal"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:148
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:143
 msgid "Enable"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:154
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:150
 msgid "Paypal email"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:160
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:157
 msgid "Sandbox mode"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:166
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:164
 msgid "Paypal Sandbox email"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:200
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:199
 msgid "Booking ID is not exists!"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:242
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:241
 msgid ""
 "Email Business PayPal is invalid. Please contact administrator to setup "
 "PayPal email."
@@ -1142,17 +1187,17 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: templates/loop/booking-form.php:45
+#: templates/loop/booking-form.php:41
 msgid ""
 "There are no payment gateway available. Please contact administrator to "
 "setup it."
 msgstr ""
 
-#: templates/loop/booking-form.php:54 templates/loop/register.php:35
+#: templates/loop/booking-form.php:50 templates/loop/register.php:35
 msgid "Register Now"
 msgstr ""
 
-#: templates/loop/countdown.php:14 templates/shortcodes/event-countdown.php:26
+#: templates/loop/countdown.php:14
 msgid "This event has expired"
 msgstr ""
 
@@ -1176,7 +1221,7 @@ msgstr ""
 msgid "Cost:"
 msgstr ""
 
-#: templates/shortcodes/event-countdown.php:12
+#: templates/shortcodes/event-countdown.php:26
 msgid "Invalid Event ID"
 msgstr ""
 
