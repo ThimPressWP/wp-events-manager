@@ -53,10 +53,10 @@ $prefix  = 'tp_event_';
             <tr data-item_id="<?php echo esc_attr( $booking->event_id ); ?>">
 				<?php $event = TP_Event_Event::instance( $booking->event_id ); ?>
                 <td><?php echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
-                <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $event->price ), $booking->currency ) ) ?></td>
+                <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $event->price ) ) ) ?></td>
                 <td><?php echo sprintf( '%s', $booking->qty ) ?></td>
                 <td><?php echo sprintf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment', 'tp-event' ) ) ?></td>
-                <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
+                <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ) ) ) ?></td>
             </tr>
             </tbody>
             <tfoot>
@@ -66,7 +66,7 @@ $prefix  = 'tp_event_';
             </tr>
             <tr>
                 <td colspan="4"><?php _e( 'Total', 'tp-event' ); ?></td>
-                <td class="booking-total"><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
+                <td class="booking-total"><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ) ) ) ?></td>
             </tr>
             </tfoot>
 			<?php wp_nonce_field( 'event_booking_nonce', 'event-booking-nonce' ); ?>
