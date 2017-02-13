@@ -233,40 +233,17 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 		return $this->paypal_payment_url . '?' . http_build_query( $query );
 	}
 
-	/*
-	 * Create booking event process
-	 */
-	public function booking_process( $args ) {
-
-		$booking    = TP_Event_Booking::instance();
-		$booking_id = $booking->create_booking( $args, $args['payment_id'] );
-		// create booking result
-		if ( is_wp_error( $booking_id ) ) {
-			throw new Exception( $booking_id->get_error_message() );
-		} else {
-
-			if ( $args['price'] == 0 ) {
-				// update booking status
-				$book = TP_Event_Booking::instance( $booking_id );
-				$book->update_status( 'pending' );
-
-				// user booking
-				$user = get_userdata( $book->user_id );
-				tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
-				wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
-					'status' => true,
-					'url'    => tp_event_account_url()
-				) ) );
-			} else {
-				wp_send_json(
-					array(
-						'status' => true,
-						'url'    => $this->checkout_url( $booking_id )
-					)
-				);
-			}
+	public function process( $amount = false ) {
+		if ( !$this->is_available() ) {
+			return array(
+				'status'  => false,
+				'message' => __( 'Email Business PayPal is invalid. Please contact administrator to setup PayPal email.', 'tp-event' )
+			);
 		}
+		return array(
+			'status' => true,
+			'url'    => $this->checkout_url( $amount )
+		);
 	}
-
 
 }
