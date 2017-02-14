@@ -40,7 +40,7 @@ abstract class TP_Event_Abstract_Payment_Gateway {
 	 * payment process
 	 * @return null
 	 */
-	protected function process( $amount = false ) {
+	protected function process( $event_id = false ) {
 
 	}
 

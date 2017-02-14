@@ -135,7 +135,7 @@ class TP_Event_Ajax {
 			if ( $payment->id == 'woo_payment' ) {
 
 				do_action( 'tp_event_register_event_action', $args );
-				$return = $payment->process();
+				$return = $payment->process($event_id);
 				wp_send_json( $return );
 
 			} else {
