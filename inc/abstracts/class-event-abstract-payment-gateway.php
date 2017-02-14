@@ -23,7 +23,6 @@ abstract class TP_Event_Abstract_Payment_Gateway {
 	public $icon = null;
 
 	public function __construct() {
-		$this->icon = TP_EVENT_INC_URI . '/gateways/' . $this->id . '/' . $this->id . '.png';
 		add_action( 'event_admin_setting_page_checkout_section', array( $this, 'add_sections' ) );
 		add_action( 'event_auth_payment_gateways_select', array( $this, 'event_auth_gateways' ) );
 	}
