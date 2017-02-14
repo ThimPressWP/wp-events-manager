@@ -80,12 +80,15 @@
 
 				if (res.status === true && res.url == '' && typeof res.event !== 'undefined') {
 					$.magnificPopup.close();
-					$('.entry-register').append(
-						'<div class="woocommerce-message">' +
-						TP_Event.woo_cart_url +
-						'<p>' + '“' + res.event + '”' + TP_Event.add_to_cart + '</p>' +
-						'</div>'
-					);
+					$('.woocommerce-message').hide();
+					setTimeout(function () {
+						$('.entry-register, .event_register_foot').append(
+							'<div class="woocommerce-message">' +
+							TP_Event.woo_cart_url +
+							'<p>' + '“' + res.event + '”' + TP_Event.add_to_cart + '</p>' +
+							'</div>'
+						)
+					}, 100);
 				}
 
 				if (typeof res.message !== 'undefined') {
