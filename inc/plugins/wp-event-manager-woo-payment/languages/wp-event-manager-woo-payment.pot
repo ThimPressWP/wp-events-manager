@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-16 13:47+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: wp-event-manager-woo-payment.php:116
+msgid " has been added to your cart."
+msgstr ""
+
+#: wp-event-manager-woo-payment.php:117
+msgid "View Cart"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:35
+msgid "Woocommerce"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:69
+msgid "Woocommerce Payment Settings"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:70
+msgid "Make a payment with WooCommerce payment methods"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:74
+msgid "Enable"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:75
+msgid ""
+"If WooCommerce Payment is enabled you can not use other payment gateways"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:81
+msgid "Register event process"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:84
+msgid "Add to cart"
+msgstr ""
+
+#: inc/class-event-wc-payment.php:85
+msgid "Go to checkout"
+msgstr ""
