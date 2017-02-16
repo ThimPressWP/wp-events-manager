@@ -23,7 +23,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 
 	public function __construct() {
 		$this->title = __( 'PayPal', 'wp-event-manager' );
-		$this->icon = TP_EVENT_INC_URI . '/gateways/' . $this->id . '/' . $this->id . '.png';
+		$this->icon = WP_EVENT_INC_URI . '/gateways/' . $this->id . '/' . $this->id . '.png';
 		parent::__construct();
 
 		// production environment

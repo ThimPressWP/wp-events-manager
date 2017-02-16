@@ -18,11 +18,11 @@ class TP_Event_Admin_Metabox_Booking {
 	}
 
 	public static function render() {
-		require_once( TP_EVENT_INC . 'admin/views/metaboxes/booking-details.php' );
+		require_once( WP_EVENT_INC . 'admin/views/metaboxes/booking-details.php' );
 	}
 
 	public static function side() {
-		require_once( TP_EVENT_INC . 'admin/views/metaboxes/booking-actions.php' );
+		require_once( WP_EVENT_INC . 'admin/views/metaboxes/booking-actions.php' );
 	}
 
 }

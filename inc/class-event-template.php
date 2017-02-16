@@ -47,7 +47,7 @@ class TP_Event_Template {
             $template = locate_template( array_unique( $find ) );
             if( ! $template )
             {
-                $template = untrailingslashit( TP_EVENT_PATH ) . '/templates/' . $file;
+                $template = untrailingslashit( WP_EVENT_PATH ) . '/templates/' . $file;
             }
         }
 

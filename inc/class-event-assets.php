@@ -132,8 +132,8 @@ class TP_Event_Assets {
 	 * @param type $uri
 	 */
 	public static function _get_path_by_uri( $uri = '' ) {
-		$base_url = trailingslashit( TP_EVENT_URI );
-		$path     = trailingslashit( TP_EVENT_PATH );
+		$base_url = trailingslashit( WP_EVENT_URI );
+		$path     = trailingslashit( WP_EVENT_PATH );
 
 		/**
 		 * file path

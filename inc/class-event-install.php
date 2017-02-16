@@ -17,7 +17,7 @@ class TP_Event_Install {
 	 */
 	public static function init() {
 		self::$db_upgrade = array(
-			'2.0' => TP_EVENT_INC . 'admin/upgrades/upgrade-2.0.php'
+			'2.0' => WP_EVENT_INC . 'admin/upgrades/upgrade-2.0.php'
 		);
 	}
 
@@ -56,7 +56,7 @@ class TP_Event_Install {
 		/**
 		 * Update current version
 		 */
-		update_option( 'thimpress-event-version', TP_EVENT_VER );
+		update_option( 'thimpress-event-version', WP_EVENT_VER );
 	}
 
 	/**
@@ -123,5 +123,5 @@ class TP_Event_Install {
 TP_Event_Install::init();
 
 // active plugin
-register_activation_hook( TP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'install' ) );
-register_deactivation_hook( TP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'uninstall' ) );
+register_activation_hook( WP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'install' ) );
+register_deactivation_hook( WP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'uninstall' ) );

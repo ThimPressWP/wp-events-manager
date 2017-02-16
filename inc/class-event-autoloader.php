@@ -22,7 +22,7 @@ class TP_Event_Autoloader {
 
 		spl_autoload_register( array( $this, 'autoload' ) );
 
-		$this->include_path = untrailingslashit( TP_EVENT_PATH ) . '/inc/';
+		$this->include_path = untrailingslashit( WP_EVENT_PATH ) . '/inc/';
 	}
 
 	/**
