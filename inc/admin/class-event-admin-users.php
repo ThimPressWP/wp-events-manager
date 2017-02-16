@@ -19,8 +19,8 @@ class TP_Event_Admin_Users extends WP_List_Table {
 
 	public function __construct() {
 		parent::__construct( array(
-			'singular' => __( 'user', 'tp-event' ),
-			'plural'   => __( 'users', 'tp-event' ),
+			'singular' => __( 'user', 'wp-event-manager' ),
+			'plural'   => __( 'users', 'wp-event-manager' ),
 			'ajax'     => false
 		) );
 	}
@@ -66,7 +66,7 @@ class TP_Event_Admin_Users extends WP_List_Table {
 					'user_login'    => sprintf( '<a href="%s">%s</a>', get_edit_user_link( $user->ID ), $user->user_login ),
 					'user_nicename' => $user->user_nicename,
 					'user_email'    => $user->user_email,
-					'bookings'      => sprintf( '<a href="%s">%s</a>', $booking_url, __( 'View', 'tp-event' ) ),
+					'bookings'      => sprintf( '<a href="%s">%s</a>', $booking_url, __( 'View', 'wp-event-manager' ) ),
 					// 'approved'		=> (boolean) $approve
 				);
 			}
@@ -77,7 +77,7 @@ class TP_Event_Admin_Users extends WP_List_Table {
 
 	// $this->items is empty
 	public function no_items() {
-		_e( 'No users found.', 'tp-event' );
+		_e( 'No users found.', 'wp-event-manager' );
 	}
 
 	// default columns
@@ -109,10 +109,10 @@ class TP_Event_Admin_Users extends WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'            => '<input type="checkbox" />',
-			'user_login'    => __( 'Username', 'tp-event' ),
-			'user_nicename' => __( 'Name', 'tp-event' ),
-			'user_email'    => __( 'Email', 'tp-event' ),
-			'bookings'      => __( 'Event Booking', 'tp-event' )
+			'user_login'    => __( 'Username', 'wp-event-manager' ),
+			'user_nicename' => __( 'Name', 'wp-event-manager' ),
+			'user_email'    => __( 'Email', 'wp-event-manager' ),
+			'bookings'      => __( 'Event Booking', 'wp-event-manager' )
 		);
 		return $columns;
 	}
@@ -130,8 +130,8 @@ class TP_Event_Admin_Users extends WP_List_Table {
 	public function get_bulk_actions() {
 
 		return array(
-			// 'approve'    	=> __( 'Approve', 'tp-event' ),
-			// 'unapprove'    	=> __( 'Unapprove', 'tp-event' )
+			// 'approve'    	=> __( 'Approve', 'wp-event-manager' ),
+			// 'unapprove'    	=> __( 'Unapprove', 'wp-event-manager' )
 		);
 	}
 
@@ -183,14 +183,14 @@ class TP_Event_Admin_Users extends WP_List_Table {
 		// $status = wp_nonce_url( $status, 'event_auth_user_action', 'event_nonce' );
 		$actions = array();
 		if ( isset( $item['approved'] ) && !$item['approved'] ) {
-			// $status_name = __( 'Approve', 'tp-event' );
+			// $status_name = __( 'Approve', 'wp-event-manager' );
 			// $status = add_query_arg( array(
 			// 			'action' 	=> 'approve',
 			// 			'user_id' 	=> $item['ID']
 			// 		), $status );
 			// $actions['edit'] = sprintf( __( '<a href="%s">%s</a>' ), $status, $status_name );
 		} else {
-			// $status_name = __( 'Unapprove', 'tp-event' );
+			// $status_name = __( 'Unapprove', 'wp-event-manager' );
 			// $status = add_query_arg( array(
 			// 		'action' 	=> 'unapprove',
 			// 		'user_id' 	=> $item['ID']
@@ -239,7 +239,7 @@ class TP_Event_Admin_Users extends WP_List_Table {
 		?>
         <div class="wrap">
 
-            <h2><?php _e( 'Event Users', 'tp-event' ); ?></h2>
+            <h2><?php _e( 'Event Users', 'wp-event-manager' ); ?></h2>
 
 			<?php $user_table->prepare_items(); ?>
             <form method="post">

@@ -76,7 +76,7 @@ if ( !function_exists( 'tp_event_get_template' ) ) {
 if ( !function_exists( 'tp_event_template_path' ) ) {
 
 	function tp_event_template_path() {
-		return apply_filters( 'tp_event_template_path', 'tp-event' );
+		return apply_filters( 'tp_event_template_path', 'wp-event-manager' );
 	}
 
 }
@@ -451,26 +451,26 @@ if ( !function_exists( 'tp_event_l18n' ) ) {
 			'current_time'    => esc_js( date( 'M j, Y H:i:s O', current_time( 'timestamp', 1 ) ) ),
 			'l18n'            => array(
 				'labels'  => array(
-					__( 'Years', 'tp-event' ),
-					__( 'Months', 'tp-event' ),
-					__( 'Weeks', 'tp-event' ),
-					__( 'Days', 'tp-event' ),
-					__( 'Hours', 'tp-event' ),
-					__( 'Minutes', 'tp-event' ),
-					__( 'Seconds', 'tp-event' ),
+					__( 'Years', 'wp-event-manager' ),
+					__( 'Months', 'wp-event-manager' ),
+					__( 'Weeks', 'wp-event-manager' ),
+					__( 'Days', 'wp-event-manager' ),
+					__( 'Hours', 'wp-event-manager' ),
+					__( 'Minutes', 'wp-event-manager' ),
+					__( 'Seconds', 'wp-event-manager' ),
 				),
 				'labels1' => array(
-					__( 'Year', 'tp-event' ),
-					__( 'Month', 'tp-event' ),
-					__( 'Week', 'tp-event' ),
-					__( 'Day', 'tp-event' ),
-					__( 'Hour', 'tp-event' ),
-					__( 'Minute', 'tp-event' ),
-					__( 'Second', 'tp-event' ),
+					__( 'Year', 'wp-event-manager' ),
+					__( 'Month', 'wp-event-manager' ),
+					__( 'Week', 'wp-event-manager' ),
+					__( 'Day', 'wp-event-manager' ),
+					__( 'Hour', 'wp-event-manager' ),
+					__( 'Minute', 'wp-event-manager' ),
+					__( 'Second', 'wp-event-manager' ),
 				)
 			),
 			'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-			'something_wrong' => __( 'Something went wrong', 'tp-event' ),
+			'something_wrong' => __( 'Something went wrong', 'wp-event-manager' ),
 			'register_button' => wp_create_nonce( 'event-auth-register-nonce' )
 		) );
 	}
@@ -1063,19 +1063,19 @@ if ( !function_exists( 'tp_event_booking_status' ) ) {
 			switch ( $status ) {
 				case 'cancelled':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'tp-event' ), ucfirst( $status ) );
+					$return = sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'wp-event-manager' ), ucfirst( $status ) );
 					break;
 				case 'pending':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status pending">%s</span>', 'tp-event' ), ucfirst( $status ) );
+					$return = sprintf( __( '<span class="event_booking_status pending">%s</span>', 'wp-event-manager' ), ucfirst( $status ) );
 					break;
 				case 'processing':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status processing">%s</span>', 'tp-event' ), ucfirst( $status ) );
+					$return = sprintf( __( '<span class="event_booking_status processing">%s</span>', 'wp-event-manager' ), ucfirst( $status ) );
 					break;
 				case 'completed':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status completed">%s</span>', 'tp-event' ), ucfirst( $status ) );
+					$return = sprintf( __( '<span class="event_booking_status completed">%s</span>', 'wp-event-manager' ), ucfirst( $status ) );
 					break;
 				default:
 					# code...
@@ -1092,10 +1092,10 @@ if ( !function_exists( 'tp_event_get_payment_status' ) ) {
 
 	function tp_event_get_payment_status() {
 		return apply_filters( 'tp_event_get_payment_status', array(
-			'ea-cancelled'  => sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'tp-event' ), __( 'Cancelled', 'tp-event' ) ),
-			'ea-pending'    => sprintf( __( '<span class="event_booking_status pending">%s</span>', 'tp-event' ), __( 'Pending', 'tp-event' ) ),
-			'ea-processing' => sprintf( __( '<span class="event_booking_status processing">%s</span>', 'tp-event' ), __( 'Processing', 'tp-event' ) ),
-			'ea-completed'  => sprintf( __( '<span class="event_booking_status completed">%s</span>', 'tp-event' ), __( 'Completed', 'tp-event' ) ),
+			'ea-cancelled'  => sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'wp-event-manager' ), __( 'Cancelled', 'wp-event-manager' ) ),
+			'ea-pending'    => sprintf( __( '<span class="event_booking_status pending">%s</span>', 'wp-event-manager' ), __( 'Pending', 'wp-event-manager' ) ),
+			'ea-processing' => sprintf( __( '<span class="event_booking_status processing">%s</span>', 'wp-event-manager' ), __( 'Processing', 'wp-event-manager' ) ),
+			'ea-completed'  => sprintf( __( '<span class="event_booking_status completed">%s</span>', 'wp-event-manager' ), __( 'Completed', 'wp-event-manager' ) ),
 		) );
 	}
 
@@ -1136,29 +1136,29 @@ if ( !function_exists( 'tp_event_create_new_user' ) ) {
 		if ( !empty( $cred['confirm_password'] ) ) {
 			$confirm_password = $cred['confirm_password'];
 			if ( $password && $confirm_password && $confirm_password !== $confirm_password ) {
-				$errors->add( 'confirm_password', __( 'Confirm Password is not match.', 'tp-event' ) );
+				$errors->add( 'confirm_password', __( 'Confirm Password is not match.', 'wp-event-manager' ) );
 			}
 		}
 		/**
 		 * Validate username
 		 */
 		if ( !$username ) {
-			$errors->add( 'user_login', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'tp-event' ), __( 'Username is required field.', 'tp-event' ) ) );
+			$errors->add( 'user_login', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-event-manager' ), __( 'Username is required field.', 'wp-event-manager' ) ) );
 		} else if ( username_exists( $username ) ) {
-			$errors->add( 'user_login', __( 'Username is already exists.', 'tp-event' ) );
+			$errors->add( 'user_login', __( 'Username is already exists.', 'wp-event-manager' ) );
 		}
 
 		/**
 		 * Validate email
 		 */
 		if ( !$email || !is_email( $email ) ) {
-			$errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'tp-event' ), __( 'Please provide a valid email address.', 'tp-event' ) ) );
+			$errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-event-manager' ), __( 'Please provide a valid email address.', 'wp-event-manager' ) ) );
 		} else if ( email_exists( $email ) ) {
-			$errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'tp-event' ), __( 'An account is already registered with your email address. Please login.', 'tp-event' ) ) );
+			$errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-event-manager' ), __( 'An account is already registered with your email address. Please login.', 'wp-event-manager' ) ) );
 		}
 
 		if ( empty( $password ) ) {
-			$errors->add( 'password', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'tp-event' ), __( 'Password is required field.', 'tp-event' ) ) );
+			$errors->add( 'password', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-event-manager' ), __( 'Password is required field.', 'wp-event-manager' ) ) );
 		}
 
 		$errors = apply_filters( 'tp_event_register_errors', $errors, $username, $email, $password );
@@ -1177,7 +1177,7 @@ if ( !function_exists( 'tp_event_create_new_user' ) ) {
 		 * Insert new user return WP_Error
 		 */
 		if ( is_wp_error( $user_id ) ) {
-			$errors->add( 'insert_user_error', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'tp-event' ), __( 'Couldn\'t register.', 'tp-event' ) ) );
+			$errors->add( 'insert_user_error', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-event-manager' ), __( 'Couldn\'t register.', 'wp-event-manager' ) ) );
 			return $errors;
 		}
 
@@ -1285,12 +1285,12 @@ function tp_event_admin_table_tabs() {
 		array(
 			10 => array(
 				'link' => 'edit.php?post_type=tp_event',
-				'name' => __( 'Events', 'tp-event' ),
+				'name' => __( 'Events', 'wp-event-manager' ),
 				'id'   => 'edit-tp_event'
 			),
 			20 => array(
 				'link' => 'edit-tags.php?taxonomy=tp_event_category&post_type=tp_event',
-				'name' => __( 'Categories', 'tp-event' ),
+				'name' => __( 'Categories', 'wp-event-manager' ),
 				'id'   => 'edit-tp_event_category'
 			)
 		)

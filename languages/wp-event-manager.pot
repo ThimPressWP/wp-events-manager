@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Package Name\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-13 21:18+0700\n"
+"POT-Creation-Date: 2017-02-16 13:18+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -328,7 +328,7 @@ msgid "Category"
 msgstr ""
 
 #: inc/class-event-post-types.php:173
-msgctxt "tp-event"
+msgctxt "wp-event-manager"
 msgid "Upcoming"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/class-event-post-types.php:182
-msgctxt "tp-event"
+msgctxt "wp-event-manager"
 msgid "Happening"
 msgstr ""
 
@@ -352,7 +352,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/class-event-post-types.php:191
-msgctxt "tp-event"
+msgctxt "wp-event-manager"
 msgid "Expired"
 msgstr ""
 
@@ -708,7 +708,7 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: inc/abstracts/class-event-abstract-payment-gateway.php:106
+#: inc/abstracts/class-event-abstract-payment-gateway.php:105
 msgid "Payment completed. We will send you email when payment method verify."
 msgstr ""
 
@@ -1099,44 +1099,44 @@ msgstr ""
 msgid "PayPal"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:67
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:68
 msgid ""
 "Payment is completed. We will send you email when payment status is completed"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:69
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:70
 msgid "Booking is cancel."
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:138
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:139
 msgid "Paypal Settings"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:139
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:140
 msgid "Make payment via Paypal"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:143
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:144
 msgid "Enable"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:150
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:151
 msgid "Paypal email"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:157
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:158
 msgid "Sandbox mode"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:164
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:165
 msgid "Paypal Sandbox email"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:199
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:200
 msgid "Booking ID is not exists!"
 msgstr ""
 
-#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:241
+#: inc/gateways/paypal/class-event-payment-gateway-paypal.php:242
 msgid ""
 "Email Business PayPal is invalid. Please contact administrator to setup "
 "PayPal email."

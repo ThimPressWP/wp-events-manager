@@ -17,10 +17,10 @@ tp_event_print_notices();
     <form name="forgot-password" class="forgot-password event-auth-form" action="" method="post">
 
         <p class="form-row event_auth_forgot_password_message message">
-            <?php _e( 'Please enter your username or email address. You will receive a link to create a new password via email.', 'tp-event' ) ?>
+            <?php _e( 'Please enter your username or email address. You will receive a link to create a new password via email.', 'wp-event-manager' ) ?>
         </p>
         <p class="form-row required">
-            <label for="user_login" ><?php _e( 'Username or Email:', 'tp-event' ) ?>
+            <label for="user_login" ><?php _e( 'Username or Email:', 'wp-event-manager' ) ?>
                 <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( !empty( $_POST['user_login'] ) ? $_POST['user_login'] : '' ); ?>" size="20" /></label>
         </p>
     <?php
@@ -33,19 +33,19 @@ tp_event_print_notices();
     ?>
         <input type="hidden" name="redirect_to" value="<?php echo esc_attr( ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ); ?>" />
         <p class="form-row submit">
-            <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Get New Password', 'tp-event' ); ?>" />
+            <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Get New Password', 'wp-event-manager' ); ?>" />
         </p>
 
     </form>
 
     <div class="event_auth_lost_pass_footer">
         <a href="<?php echo esc_attr( tp_event_login_url() ) ?>">
-            <?php _e( 'Login', 'tp-event' ); ?>
+            <?php _e( 'Login', 'wp-event-manager' ); ?>
         </a> | 
         <?php if ( !is_user_logged_in() ) : ?>
 
             <a href="<?php echo esc_attr( tp_event_register_url() ) ?>">
-                <?php _e( 'Create new user', 'tp-event' ); ?>
+                <?php _e( 'Create new user', 'wp-event-manager' ); ?>
             </a>
 
         <?php endif; ?>

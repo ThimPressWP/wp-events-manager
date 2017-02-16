@@ -18,7 +18,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
             <input type="hidden" name="qty" value="1" min="1" />
 		<?php } else { ?>
             <div class="event_auth_form_field">
-                <label for="event_register_qty"><?php _e( 'Quantity', 'tp-event' ) ?></label>
+                <label for="event_register_qty"><?php _e( 'Quantity', 'wp-event-manager' ) ?></label>
                 <input type="number" name="qty" value="1" min="1" max="<?php echo $event->get_slot_available()?>" id="event_register_qty" />
             </div>
 		<?php } ?>
@@ -38,7 +38,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 					<?php endforeach; ?>
                 </ul>
 			<?php } else {
-				tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'tp-event' ) );
+				tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'wp-event-manager' ) );
 			}
 		} ?>
         <!--End hide payment option when cost is 0-->
@@ -47,7 +47,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
             <input type="hidden" name="event_id" value="<?php echo esc_attr( $event_id ) ?>" />
             <input type="hidden" name="action" value="event_auth_register" />
 			<?php wp_nonce_field( 'event_auth_register_nonce', 'event_auth_register_nonce' ); ?>
-            <button class="event_register_submit event_auth_button" <?php echo $payments ? '' : 'disabled="disabled"' ?>><?php _e( 'Register Now', 'tp-event' ); ?></button>
+            <button class="event_register_submit event_auth_button" <?php echo $payments ? '' : 'disabled="disabled"' ?>><?php _e( 'Register Now', 'wp-event-manager' ); ?></button>
         </div>
 
     </form>

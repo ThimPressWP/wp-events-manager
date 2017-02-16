@@ -22,7 +22,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 	protected static $enable = false;
 
 	public function __construct() {
-		$this->title = __( 'PayPal', 'tp-event' );
+		$this->title = __( 'PayPal', 'wp-event-manager' );
 		$this->icon = TP_EVENT_INC_URI . '/gateways/' . $this->id . '/' . $this->id . '.png';
 		parent::__construct();
 
@@ -65,9 +65,9 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 			}
 
 			if ( sanitize_text_field( $_GET['event-auth-paypal-payment'] ) === 'completed' ) {
-				tp_event_add_notice( 'success', sprintf( __( 'Payment is completed. We will send you email when payment status is completed', 'tp-event' ) ) );
+				tp_event_add_notice( 'success', sprintf( __( 'Payment is completed. We will send you email when payment status is completed', 'wp-event-manager' ) ) );
 			} else if ( sanitize_text_field( $_GET['event-auth-paypal-payment'] ) === 'cancel' ) {
-				tp_event_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'tp-event' ) ) );
+				tp_event_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'wp-event-manager' ) ) );
 			}
 			// redirect
 			$url = add_query_arg( array( 'tp-event-paypal-nonce' => $_GET['tp-event-paypal-nonce'] ), tp_event_account_url() );
@@ -136,33 +136,33 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 			array(
 				'type'  => 'section_start',
 				'id'    => 'paypal_settings',
-				'title' => __( 'Paypal Settings', 'tp-event' ),
-				'desc'  => esc_html__( 'Make payment via Paypal', 'tp-event' )
+				'title' => __( 'Paypal Settings', 'wp-event-manager' ),
+				'desc'  => esc_html__( 'Make payment via Paypal', 'wp-event-manager' )
 			),
 			array(
 				'type'    => 'yes_no',
-				'title'   => __( 'Enable', 'tp-event' ),
+				'title'   => __( 'Enable', 'wp-event-manager' ),
 				'id'      => $prefix . 'paypal_enable',
 				'default' => 'no',
 				'desc'    => apply_filters( 'tp_event_filter_enable_paypal_gateway', '' )
 			),
 			array(
 				'type'    => 'text',
-				'title'   => __( 'Paypal email', 'tp-event' ),
+				'title'   => __( 'Paypal email', 'wp-event-manager' ),
 				'id'      => $prefix . 'paypal_email',
 				'default' => '',
 				'class'   => 'paypal-production-email' . ( $paypal_enable == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'checkbox',
-				'title'   => __( 'Sandbox mode', 'tp-event' ),
+				'title'   => __( 'Sandbox mode', 'wp-event-manager' ),
 				'id'      => $prefix . 'paypal_sandbox_mode',
 				'default' => false,
 				'class'   => 'paypal-sandbox-mode' . ( $paypal_enable == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'text',
-				'title'   => __( 'Paypal Sandbox email', 'tp-event' ),
+				'title'   => __( 'Paypal Sandbox email', 'wp-event-manager' ),
 				'id'      => $prefix . 'paypal_sanbox_email',
 				'default' => '',
 				'class'   => 'paypal-sandbox-email' . ( $paypal_enable == 'no' ? ' hide-if-js' : '' )
@@ -197,7 +197,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 		if ( !$booking_id ) {
 			wp_send_json( array(
 				'status'  => false,
-				'message' => __( 'Booking ID is not exists!', 'tp-event' )
+				'message' => __( 'Booking ID is not exists!', 'wp-event-manager' )
 			) );
 			die();
 		}
@@ -239,7 +239,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 		if ( !$this->is_available() ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'Email Business PayPal is invalid. Please contact administrator to setup PayPal email.', 'tp-event' )
+				'message' => __( 'Email Business PayPal is invalid. Please contact administrator to setup PayPal email.', 'wp-event-manager' )
 			);
 		}
 		return array(

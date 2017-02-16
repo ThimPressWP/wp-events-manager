@@ -45,31 +45,31 @@ class TP_Event_Custom_Post_Types {
 	public function register_event_post_type() {
 		// post type
 		$labels = array(
-			'name'               => _x( 'Events', 'post type general name', 'tp-event' ),
-			'singular_name'      => _x( 'Event', 'post type singular name', 'tp-event' ),
-			'menu_name'          => _x( 'Events', 'admin menu', 'tp-event' ),
-			'name_admin_bar'     => _x( 'Event', 'add new on admin bar', 'tp-event' ),
-			'add_new'            => _x( 'Add New', 'event', 'tp-event' ),
-			'add_new_item'       => __( 'Add New Event', 'tp-event' ),
-			'new_item'           => __( 'New Event', 'tp-event' ),
-			'edit_item'          => __( 'Edit Event', 'tp-event' ),
-			'view_item'          => __( 'View Event', 'tp-event' ),
-			'all_items'          => __( 'Events', 'tp-event' ),
-			'search_items'       => __( 'Search Events', 'tp-event' ),
-			'parent_item_colon'  => __( 'Parent Events:', 'tp-event' ),
-			'not_found'          => __( 'No events found.', 'tp-event' ),
-			'not_found_in_trash' => __( 'No events found in Trash.', 'tp-event' )
+			'name'               => _x( 'Events', 'post type general name', 'wp-event-manager' ),
+			'singular_name'      => _x( 'Event', 'post type singular name', 'wp-event-manager' ),
+			'menu_name'          => _x( 'Events', 'admin menu', 'wp-event-manager' ),
+			'name_admin_bar'     => _x( 'Event', 'add new on admin bar', 'wp-event-manager' ),
+			'add_new'            => _x( 'Add New', 'event', 'wp-event-manager' ),
+			'add_new_item'       => __( 'Add New Event', 'wp-event-manager' ),
+			'new_item'           => __( 'New Event', 'wp-event-manager' ),
+			'edit_item'          => __( 'Edit Event', 'wp-event-manager' ),
+			'view_item'          => __( 'View Event', 'wp-event-manager' ),
+			'all_items'          => __( 'Events', 'wp-event-manager' ),
+			'search_items'       => __( 'Search Events', 'wp-event-manager' ),
+			'parent_item_colon'  => __( 'Parent Events:', 'wp-event-manager' ),
+			'not_found'          => __( 'No events found.', 'wp-event-manager' ),
+			'not_found_in_trash' => __( 'No events found in Trash.', 'wp-event-manager' )
 		);
 
 		$args = array(
 			'labels'             => $labels,
-			'description'        => __( 'Event post type.', 'tp-event' ),
+			'description'        => __( 'Event post type.', 'wp-event-manager' ),
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
 			'show_in_menu'       => 'tp-event-setting',
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => _x( 'events', 'URL slug', 'tp-event' ) ),
+			'rewrite'            => array( 'slug' => _x( 'events', 'URL slug', 'wp-event-manager' ) ),
 			'taxonomies'         => array( 'tp_event_category' ),
 			'capability_type'    => 'tp_event',
 			'map_meta_cap'       => true,
@@ -90,32 +90,32 @@ class TP_Event_Custom_Post_Types {
 	public function register_booking_post_type() {
 		// event auth book
 		$labels = array(
-			'name'               => _x( 'Bookings', 'post type general name', 'tp-event' ),
-			'singular_name'      => _x( 'Booking', 'post type singular name', 'tp-event' ),
-			'menu_name'          => _x( 'Bookings', 'admin menu', 'tp-event' ),
-			'name_admin_bar'     => _x( 'Booking', 'add new on admin bar', 'tp-event' ),
-			'add_new'            => _x( 'Add New', 'book', 'tp-event' ),
-			'add_new_item'       => __( 'Add New Booking', 'tp-event' ),
-			'new_item'           => __( 'New Booking', 'tp-event' ),
-			'edit_item'          => __( 'Booking Details', 'tp-event' ),
-			'view_item'          => __( 'View Booking', 'tp-event' ),
-			'all_items'          => __( 'Bookings', 'tp-event' ),
-			'search_items'       => __( 'Search Books', 'tp-event' ),
-			'parent_item_colon'  => __( 'Parent Books:', 'tp-event' ),
-			'not_found'          => __( 'No books found.', 'tp-event' ),
-			'not_found_in_trash' => __( 'No books found in Trash.', 'tp-event' )
+			'name'               => _x( 'Bookings', 'post type general name', 'wp-event-manager' ),
+			'singular_name'      => _x( 'Booking', 'post type singular name', 'wp-event-manager' ),
+			'menu_name'          => _x( 'Bookings', 'admin menu', 'wp-event-manager' ),
+			'name_admin_bar'     => _x( 'Booking', 'add new on admin bar', 'wp-event-manager' ),
+			'add_new'            => _x( 'Add New', 'book', 'wp-event-manager' ),
+			'add_new_item'       => __( 'Add New Booking', 'wp-event-manager' ),
+			'new_item'           => __( 'New Booking', 'wp-event-manager' ),
+			'edit_item'          => __( 'Booking Details', 'wp-event-manager' ),
+			'view_item'          => __( 'View Booking', 'wp-event-manager' ),
+			'all_items'          => __( 'Bookings', 'wp-event-manager' ),
+			'search_items'       => __( 'Search Books', 'wp-event-manager' ),
+			'parent_item_colon'  => __( 'Parent Books:', 'wp-event-manager' ),
+			'not_found'          => __( 'No books found.', 'wp-event-manager' ),
+			'not_found_in_trash' => __( 'No books found in Trash.', 'wp-event-manager' )
 		);
 
 		$args = array(
 			'labels'             => $labels,
-			'description'        => __( 'Description.', 'tp-event' ),
+			'description'        => __( 'Description.', 'wp-event-manager' ),
 			'public'             => true,
 			'publicly_queryable' => false,
 			'show_in_admin_bar'  => false,
 			'show_ui'            => true,
 			'show_in_menu'       => 'tp-event-setting',
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => _x( 'event-book', 'URL slug', 'tp-event' ) ),
+			'rewrite'            => array( 'slug' => _x( 'event-book', 'URL slug', 'wp-event-manager' ) ),
 			'capability_type'    => 'post',
 			'has_archive'        => false,
 			'hierarchical'       => false,
@@ -137,17 +137,17 @@ class TP_Event_Custom_Post_Types {
 	public function register_event_category_tax() {
 
 		$labels = array(
-			'name'              => _x( 'Event Categories', 'taxonomy general name', 'tp-event' ),
-			'singular_name'     => _x( 'Event Category', 'taxonomy singular name', 'tp-event' ),
-			'search_items'      => __( 'Search Categories', 'tp-event' ),
-			'all_items'         => __( 'All Categories', 'tp-event' ),
-			'parent_item'       => __( 'Parent Category', 'tp-event' ),
-			'parent_item_colon' => __( 'Parent Category:', 'tp-event' ),
-			'edit_item'         => __( 'Edit Category', 'tp-event' ),
-			'update_item'       => __( 'Update Category', 'tp-event' ),
-			'add_new_item'      => __( 'Add New Category', 'tp-event' ),
-			'new_item_name'     => __( 'New Category Name', 'tp-event' ),
-			'menu_name'         => __( 'Category', 'tp-event' ),
+			'name'              => _x( 'Event Categories', 'taxonomy general name', 'wp-event-manager' ),
+			'singular_name'     => _x( 'Event Category', 'taxonomy singular name', 'wp-event-manager' ),
+			'search_items'      => __( 'Search Categories', 'wp-event-manager' ),
+			'all_items'         => __( 'All Categories', 'wp-event-manager' ),
+			'parent_item'       => __( 'Parent Category', 'wp-event-manager' ),
+			'parent_item_colon' => __( 'Parent Category:', 'wp-event-manager' ),
+			'edit_item'         => __( 'Edit Category', 'wp-event-manager' ),
+			'update_item'       => __( 'Update Category', 'wp-event-manager' ),
+			'add_new_item'      => __( 'Add New Category', 'wp-event-manager' ),
+			'new_item_name'     => __( 'New Category Name', 'wp-event-manager' ),
+			'menu_name'         => __( 'Category', 'wp-event-manager' ),
 		);
 
 		$args = array(
@@ -170,7 +170,7 @@ class TP_Event_Custom_Post_Types {
 		// post status // upcoming // expired // happening
 
 		register_post_status( 'tp-event-upcoming', apply_filters( 'tp_event_register_upcoming_status_args', array(
-			'label'                     => _x( 'Upcoming', 'tp-event' ),
+			'label'                     => _x( 'Upcoming', 'wp-event-manager' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -179,7 +179,7 @@ class TP_Event_Custom_Post_Types {
 		) ) );
 
 		register_post_status( 'tp-event-happenning', apply_filters( 'tp_event_register_happening_status_args', array(
-			'label'                     => _x( 'Happening', 'tp-event' ),
+			'label'                     => _x( 'Happening', 'wp-event-manager' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -188,7 +188,7 @@ class TP_Event_Custom_Post_Types {
 		) ) );
 
 		register_post_status( 'tp-event-expired', apply_filters( 'tp_event_register_expired_status_args', array(
-			'label'                     => _x( 'Expired', 'tp-event' ),
+			'label'                     => _x( 'Expired', 'wp-event-manager' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -203,7 +203,7 @@ class TP_Event_Custom_Post_Types {
 	public function register_booking_status() {
 
 		register_post_status( 'ea-cancelled', apply_filters( 'event_auth_register_status_cancelled', array(
-			'label'                     => _x( 'Cancelled', 'Booking status', 'tp-event' ),
+			'label'                     => _x( 'Cancelled', 'Booking status', 'wp-event-manager' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -212,7 +212,7 @@ class TP_Event_Custom_Post_Types {
 		) ) );
 
 		register_post_status( 'ea-pending', apply_filters( 'event_auth_register_status_pending', array(
-			'label'                     => _x( 'Pending', 'Booking status', 'tp-event' ),
+			'label'                     => _x( 'Pending', 'Booking status', 'wp-event-manager' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -221,7 +221,7 @@ class TP_Event_Custom_Post_Types {
 		) ) );
 
 		register_post_status( 'ea-processing', apply_filters( 'event_auth_register_status_processing', array(
-			'label'                     => _x( 'Processing', 'Booking status', 'tp-event' ),
+			'label'                     => _x( 'Processing', 'Booking status', 'wp-event-manager' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -230,7 +230,7 @@ class TP_Event_Custom_Post_Types {
 		) ) );
 
 		register_post_status( 'ea-completed', apply_filters( 'event_auth_register_status_completed', array(
-			'label'                     => _x( 'Completed', 'Booking status', 'tp-event' ),
+			'label'                     => _x( 'Completed', 'Booking status', 'wp-event-manager' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -249,11 +249,11 @@ class TP_Event_Custom_Post_Types {
 	 */
 	public function event_columns( $columns ) {
 		unset( $columns['comments'], $columns['date'] );
-		$columns['start']       = __( 'Start', 'tp-event' );
-		$columns['end']         = __( 'End', 'tp-event' );
-		$columns['status']      = __( 'Status', 'tp-event' );
-		$columns['price']       = __( 'Price', 'tp-event' );
-		$columns['booked_slot'] = __( 'Booked / Total', 'tp-event' );
+		$columns['start']       = __( 'Start', 'wp-event-manager' );
+		$columns['end']         = __( 'End', 'wp-event-manager' );
+		$columns['status']      = __( 'Status', 'wp-event-manager' );
+		$columns['price']       = __( 'Price', 'wp-event-manager' );
+		$columns['booked_slot'] = __( 'Booked / Total', 'wp-event-manager' );
 		return $columns;
 	}
 
@@ -292,13 +292,13 @@ class TP_Event_Custom_Post_Types {
 				break;
 			case 'price':
 				if ( $event->is_free() ) {
-					echo '<span class="event_auth_event_type">' . __( 'Free', 'tp-event' ) . '</span>';
+					echo '<span class="event_auth_event_type">' . __( 'Free', 'wp-event-manager' ) . '</span>';
 				} else {
-					echo sprintf( __( '<span class="event_auth_event_type">%s/%s</span>', 'tp-event' ), tp_event_format_price( $event->get_price() ), __( 'slot', 'tp-event' ) );
+					echo sprintf( __( '<span class="event_auth_event_type">%s/%s</span>', 'wp-event-manager' ), tp_event_format_price( $event->get_price() ), __( 'slot', 'wp-event-manager' ) );
 				}
 				break;
 			case 'booked_slot':
-				$total = get_post_meta( $post_id, 'tp_event_qty', true ) ? get_post_meta( $post_id, 'tp_event_qty', true ) : esc_html__( 'Unlimited', 'tp-event' );
+				$total = get_post_meta( $post_id, 'tp_event_qty', true ) ? get_post_meta( $post_id, 'tp_event_qty', true ) : esc_html__( 'Unlimited', 'wp-event-manager' );
 				echo sprintf( '%s / %s', $event->booked_quantity(), $total );
 				break;
 			default:
@@ -316,12 +316,12 @@ class TP_Event_Custom_Post_Types {
 		$columns = array();
 		// set
 		$columns['cb']     = __( '<label class="screen-reader-text __web-inspector-hide-shortcut__" for="cb-select-all-1">Select All</label><input id="cb-select-all-1" type="checkbox">' );
-		$columns['ID']     = __( 'ID', 'tp-event' );
-		$columns['event']  = __( 'Event', 'tp-event' );
-		$columns['user']   = __( 'User', 'tp-event' );
-		$columns['cost']   = __( 'Cost', 'tp-event' );
-		$columns['slot']   = __( 'Slot', 'tp-event' );
-		$columns['status'] = __( 'Status', 'tp-event' );
+		$columns['ID']     = __( 'ID', 'wp-event-manager' );
+		$columns['event']  = __( 'Event', 'wp-event-manager' );
+		$columns['user']   = __( 'User', 'wp-event-manager' );
+		$columns['cost']   = __( 'Cost', 'wp-event-manager' );
+		$columns['slot']   = __( 'Slot', 'wp-event-manager' );
+		$columns['status'] = __( 'Status', 'wp-event-manager' );
 		return $columns;
 	}
 
@@ -343,12 +343,12 @@ class TP_Event_Custom_Post_Types {
 			case 'user':
 				$user     = get_userdata( $booking->user_id );
 				$return   = array();
-				$return[] = sprintf( __( '<a href="%s">%s</a>', 'tp-event' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
+				$return[] = sprintf( __( '<a href="%s">%s</a>', 'wp-event-manager' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
 				$return   = implode( '', $return );
 				echo $return;
 				break;
 			case 'cost':
-				echo $booking->price > 0 ? tp_event_format_price( $booking->price ) : __( 'Free', 'tp-event' );
+				echo $booking->price > 0 ? tp_event_format_price( $booking->price ) : __( 'Free', 'wp-event-manager' );
 				break;
 			case 'slot':
 				echo $booking->qty;
@@ -356,7 +356,7 @@ class TP_Event_Custom_Post_Types {
 			case 'status':
 				$return   = array();
 				$return[] = sprintf( '%s', tp_event_booking_status( $booking_id ) );
-				$return[] = $booking->payment_id ? '<p>' . __( sprintf( '(via %s)', tp_event_get_payment_title( $booking->payment_id ) ), 'tp-event' ) . '</p>' : '';
+				$return[] = $booking->payment_id ? '<p>' . __( sprintf( '(via %s)', tp_event_get_payment_title( $booking->payment_id ) ), 'wp-event-manager' ) . '</p>' : '';
 				$return   = implode( '', $return );
 				echo $return;
 				break;
@@ -432,33 +432,33 @@ class TP_Event_Custom_Post_Types {
 		}
 		$messages['tp_event'] = array(
 			0  => '', // Unused. Messages start at index 1.
-			1  => __( 'Event updated.', 'tp-event' ),
-			2  => __( 'Custom field updated.', 'tp-event' ),
-			3  => __( 'Custom field deleted.', 'tp-event' ),
-			4  => __( 'Event updated.', 'tp-event' ),
+			1  => __( 'Event updated.', 'wp-event-manager' ),
+			2  => __( 'Custom field updated.', 'wp-event-manager' ),
+			3  => __( 'Custom field deleted.', 'wp-event-manager' ),
+			4  => __( 'Event updated.', 'wp-event-manager' ),
 			/* translators: %s: date and time of the revision */
-			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Book restored to revision from %s', 'tp-event' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6  => __( 'Event updated.', 'tp-event' ),
-			7  => __( 'Event saved.', 'tp-event' ),
-			8  => __( 'Event submitted.', 'tp-event' ),
+			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Book restored to revision from %s', 'wp-event-manager' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => __( 'Event updated.', 'wp-event-manager' ),
+			7  => __( 'Event saved.', 'wp-event-manager' ),
+			8  => __( 'Event submitted.', 'wp-event-manager' ),
 			9  => sprintf(
-				__( 'Event scheduled for: <strong>%1$s</strong>.', 'tp-event' ),
+				__( 'Event scheduled for: <strong>%1$s</strong>.', 'wp-event-manager' ),
 				// translators: Publish box date format, see http://php.net/date
-				date_i18n( __( 'M j, Y @ G:i', 'tp-event' ), strtotime( $post->post_date ) )
+				date_i18n( __( 'M j, Y @ G:i', 'wp-event-manager' ), strtotime( $post->post_date ) )
 			),
-			10 => __( 'Event draft updated.', 'tp-event' )
+			10 => __( 'Event draft updated.', 'wp-event-manager' )
 		);
 
 		if ( $post_type_object->publicly_queryable ) {
 			$permalink = get_permalink( $post->ID );
 
-			$view_link = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'tp-event' ) );
+			$view_link = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'wp-event-manager' ) );
 			$messages[$post_type][1] .= $view_link;
 			$messages[$post_type][6] .= $view_link;
 			$messages[$post_type][9] .= $view_link;
 
 			$preview_permalink = add_query_arg( 'preview', 'true', $permalink );
-			$preview_link      = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'tp-event' ) );
+			$preview_link      = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'wp-event-manager' ) );
 			$messages[$post_type][8] .= $preview_link;
 			$messages[$post_type][10] .= $preview_link;
 		}

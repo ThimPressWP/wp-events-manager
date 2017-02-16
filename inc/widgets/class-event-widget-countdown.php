@@ -11,8 +11,8 @@ class TP_Event_Widget_Countdown extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'tp_event_widget_countdown', // Base ID
-			__( 'TP Event Countdown', 'tp-event' ), // Name
-			array( 'description' => __( 'Countdown timer for event', 'tp-event' ), ) // Args
+			__( 'TP Event Countdown', 'wp-event-manager' ), // Name
+			array( 'description' => __( 'Countdown timer for event', 'wp-event-manager' ), ) // Args
 		);
 	}
 

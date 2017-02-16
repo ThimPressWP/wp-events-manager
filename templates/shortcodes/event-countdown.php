@@ -23,6 +23,6 @@ if ( $args['event_id'] ) {
 		<?php
 	}
 } else { ?>
-    <p class="tp-event-notice error"><?php echo esc_html__( 'Invalid Event ID', 'tp-event' ); ?></p>
+    <p class="tp-event-notice error"><?php echo esc_html__( 'Invalid Event ID', 'wp-event-manager' ); ?></p>
 	<?php
 }

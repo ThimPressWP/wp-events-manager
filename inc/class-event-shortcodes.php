@@ -159,7 +159,7 @@ class TP_Event_Shortcodes {
 
 		$checkemail = isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false;
 		if ( $checkemail ) {
-			tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
+			tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-event-manager' ) );
 		} else {
 			return TP_Event_Shortcodes::render( 'forgot-password', 'forgot-password.php' );
 		}
@@ -190,7 +190,7 @@ class TP_Event_Shortcodes {
 		) );
 
 		if ( $atts['checkemail'] ) {
-			tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'tp-event' ) );
+			tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-event-manager' ) );
 		}
 		return TP_Event_Shortcodes::render( 'reset-password', 'reset-password.php', array( 'atts' => $atts ) );
 

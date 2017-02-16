@@ -31,22 +31,22 @@ $prefix  = 'tp_event_';
             </div>
         </div>
         <div class="booking-data">
-            <h3 class="booking-data-number"><?php echo sprintf( esc_attr__( 'Order %s', 'tp-event' ), tp_event_format_ID( $post->ID ) ); ?></h3>
+            <h3 class="booking-data-number"><?php echo sprintf( esc_attr__( 'Order %s', 'wp-event-manager' ), tp_event_format_ID( $post->ID ) ); ?></h3>
             <div class="booking-date">
-				<?php echo sprintf( __( 'Date %s', 'tp-event' ), $post->post_date ); ?>
+				<?php echo sprintf( __( 'Date %s', 'wp-event-manager' ), $post->post_date ); ?>
             </div>
         </div>
 
-        <h3><?php _e( 'Booking Details', 'tp-event' ); ?></h3>
+        <h3><?php _e( 'Booking Details', 'wp-event-manager' ); ?></h3>
 
         <table class="booking-table">
             <thead>
             <tr>
-                <th><?php _e( 'Item', 'tp-event' ); ?></th>
-                <th><?php _e( 'Cost', 'tp-event' ); ?></th>
-                <th><?php _e( 'Quantity', 'tp-event' ); ?></th>
-                <th><?php _e( 'Payment Method', 'tp-event' ) ?></th>
-                <th><?php _e( 'Amount', 'tp-event' ); ?></th>
+                <th><?php _e( 'Item', 'wp-event-manager' ); ?></th>
+                <th><?php _e( 'Cost', 'wp-event-manager' ); ?></th>
+                <th><?php _e( 'Quantity', 'wp-event-manager' ); ?></th>
+                <th><?php _e( 'Payment Method', 'wp-event-manager' ) ?></th>
+                <th><?php _e( 'Amount', 'wp-event-manager' ); ?></th>
             </tr>
             </thead>
             <tbody>
@@ -55,17 +55,17 @@ $prefix  = 'tp_event_';
                 <td><?php echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
                 <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $event->price ) ) ) ?></td>
                 <td><?php echo sprintf( '%s', $booking->qty ) ?></td>
-                <td><?php echo sprintf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment', 'tp-event' ) ) ?></td>
+                <td><?php echo sprintf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-event-manager' ) ) ?></td>
                 <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ) ) ) ?></td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
-                <td width="300" colspan="4"><?php _e( 'Sub Total', 'tp-event' ); ?></td>
+                <td width="300" colspan="4"><?php _e( 'Sub Total', 'wp-event-manager' ); ?></td>
                 <td width="100"><span class="booking-subtotal"><?php ?></span></td>
             </tr>
             <tr>
-                <td colspan="4"><?php _e( 'Total', 'tp-event' ); ?></td>
+                <td colspan="4"><?php _e( 'Total', 'wp-event-manager' ); ?></td>
                 <td class="booking-total"><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ) ) ) ?></td>
             </tr>
             </tfoot>

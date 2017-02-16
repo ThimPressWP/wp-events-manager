@@ -1,7 +1,7 @@
 <?php
 
 /*
-  Plugin Name: Thim Events
+  Plugin Name: WP Event Manager
   Plugin URI: http://thimpress.com/
   Description: A complete plugin for Event management and online booking system
   Author: ThimPress
@@ -127,7 +127,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function text_domain() {
 			// Get mo file
-			$text_domain = 'tp-event';
+			$text_domain = 'wp-event-manager';
 			$locale      = apply_filters( 'plugin_locale', get_locale(), $text_domain );
 			$mo_file     = $text_domain . '-' . $locale . '.mo';
 			// Check mo file global

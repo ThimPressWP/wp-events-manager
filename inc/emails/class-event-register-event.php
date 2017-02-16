@@ -22,7 +22,7 @@ class TP_Event_Email_Register_Event {
         }
 
         if ( !$booking_id ) {
-            throw new Exception( sprintf( __( 'Error %s booking ID', 'tp-event' ), $booking_id ) );
+            throw new Exception( sprintf( __( 'Error %s booking ID', 'wp-event-manager' ), $booking_id ) );
         }
 
         if ( tp_event_get_option( 'email_enable', 'yes' ) === 'no' ) {
@@ -34,7 +34,7 @@ class TP_Event_Email_Register_Event {
         if ( $booking ) {
             $user_id = $booking->user_id;
             if ( !$user_id ) {
-                throw new Exception( __( 'User is not exists!', 'tp-event' ) );
+                throw new Exception( __( 'User is not exists!', 'wp-event-manager' ) );
                 die();
             }
             $user = get_userdata( $user_id );

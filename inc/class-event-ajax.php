@@ -41,24 +41,24 @@ class TP_Event_Ajax {
 		$event_id = !empty( $_POST['event_id'] ) ? absint( $_POST['event_id'] ) : 0;
 
 		if ( !$event_id ) {
-			tp_event_add_notice( 'error', __( 'Event not found.', 'tp-event' ) );
+			tp_event_add_notice( 'error', __( 'Event not found.', 'wp-event-manager' ) );
 			ob_start();
 			echo tp_event_print_notices();
 			echo ob_get_clean();
 			die();
 		} else if ( !is_user_logged_in() ) {
-			tp_event_print_notice( 'error', __( 'You must login before register ', 'tp-event' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
+			tp_event_print_notice( 'error', __( 'You must login before register ', 'wp-event-manager' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			die();
 		} else {
 			$event           = new TP_Event_Event( $event_id );
 			$registered_time = $event->booked_quantity( get_current_user_id() );
 			ob_start();
 			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
-				tp_event_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'tp-event' ) ) );
+				tp_event_print_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'wp-event-manager' ) ) );
 			} else if ( $registered_time && tp_event_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) {
-				tp_event_print_notice( 'error', __( 'You have registered this event before', 'tp-event' ) );
+				tp_event_print_notice( 'error', __( 'You have registered this event before', 'wp-event-manager' ) );
 			} else if ( !$event->get_slot_available() ) {
-				tp_event_print_notice( 'error', __( 'The event is full, the registration is closed', 'tp-event' ) );
+				tp_event_print_notice( 'error', __( 'The event is full, the registration is closed', 'wp-event-manager' ) );
 			} else {
 				tp_event_get_template( 'loop/booking-form.php', array( 'event_id' => $event_id ) );
 			}
@@ -80,23 +80,23 @@ class TP_Event_Ajax {
 		try {
 			// sanitize, validate data
 			if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
-				throw new Exception( __( 'Invalid request', 'tp-event' ) );
+				throw new Exception( __( 'Invalid request', 'wp-event-manager' ) );
 			}
 
 			if ( !isset( $_POST['action'] ) || !check_ajax_referer( 'event_auth_register_nonce', 'event_auth_register_nonce' ) ) {
-				throw new Exception( __( 'Invalid request', 'tp-event' ) );
+				throw new Exception( __( 'Invalid request', 'wp-event-manager' ) );
 			}
 
 			$event_id = false;
 			if ( !isset( $_POST['event_id'] ) || !is_numeric( $_POST['event_id'] ) ) {
-				throw new Exception( __( 'Invalid event request', 'tp-event' ) );
+				throw new Exception( __( 'Invalid event request', 'wp-event-manager' ) );
 			} else {
 				$event_id = absint( sanitize_text_field( $_POST['event_id'] ) );
 			}
 
 			$qty = 0;
 			if ( !isset( $_POST['qty'] ) || !is_numeric( $_POST['qty'] ) ) {
-				throw new Exception( __( 'Quantity must integer', 'tp-event' ) );
+				throw new Exception( __( 'Quantity must integer', 'wp-event-manager' ) );
 			} else {
 				$qty = absint( sanitize_text_field( $_POST['qty'] ) );
 			}
@@ -109,7 +109,7 @@ class TP_Event_Ajax {
 			$registered = $event->booked_quantity( $user->ID );
 
 			if ( $event->is_free() && $registered != 0 && tp_event_get_option( 'email_register_times', 'once' ) === 'once' ) {
-				throw new Exception( __( 'You are registered this event.', 'tp-event' ) );
+				throw new Exception( __( 'You are registered this event.', 'wp-event-manager' ) );
 			}
 
 			$payment_methods = tp_event_payment_gateways();
@@ -130,7 +130,7 @@ class TP_Event_Ajax {
 			$return = array();
 
 			if ( $args['price'] > 0 && $payment && !$payment->is_available() ) {
-				throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup payment gateways', 'tp-event' ) ) );
+				throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup payment gateways', 'wp-event-manager' ) ) );
 			}
 			if ( $payment->id == 'woo_payment' ) {
 
@@ -152,7 +152,7 @@ class TP_Event_Ajax {
 
 						// user booking
 						$user = get_userdata( $book->user_id );
-						tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'tp-event' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
+						tp_event_add_notice( 'success', sprintf( __( 'Book ID <strong>%s</strong> completed! We\'ll send mail to <strong>%s</strong> when it is approve.', 'wp-event-manager' ), tp_event_format_ID( $booking_id ), $user->user_email ) );
 						wp_send_json( apply_filters( 'event_auth_register_ajax_result', array(
 							'status' => true,
 							'url'    => tp_event_account_url()
@@ -166,7 +166,7 @@ class TP_Event_Ajax {
 					} else {
 						wp_send_json( array(
 							'status'  => false,
-							'message' => __( 'Payment method is not available', 'tp-event' )
+							'message' => __( 'Payment method is not available', 'wp-event-manager' )
 						) );
 					}
 				}
@@ -190,7 +190,7 @@ class TP_Event_Ajax {
 
 	// ajax nopriv: user is not signin
 	public function must_login() {
-		wp_send_json( array( 'status' => false, 'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'tp-event' ), tp_event_login_url() ) ) );
+		wp_send_json( array( 'status' => false, 'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'wp-event-manager' ), tp_event_login_url() ) ) );
 		die();
 	}
 

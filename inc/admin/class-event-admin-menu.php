@@ -30,14 +30,14 @@ class TP_Event_Admin_Menu {
 		 * @var array
 		 */
 		$menus = apply_filters( 'tp_event_admin_menu', $this->_menus );
-		add_menu_page( __( 'TP Events', 'tp-event' ), __( 'TP Events', 'tp-event' ), 'edit_others_tp_events', 'tp-event-setting', null, 'dashicons-calendar', 9 );
+		add_menu_page( __( 'TP Events', 'wp-event-manager' ), __( 'TP Events', 'wp-event-manager' ), 'edit_others_tp_events', 'tp-event-setting', null, 'dashicons-calendar', 9 );
 		if ( $menus ) {
 			foreach ( $menus as $menu ) {
 				call_user_func_array( 'add_submenu_page', $menu );
 			}
 		}
-		add_submenu_page( 'tp-event-setting', __( 'TP Event Users', 'tp-event' ), __( 'Users', 'tp-event' ), 'edit_others_tp_events', 'tp-event-users', array( 'TP_Event_Admin_Users', 'output' ) );
-		add_submenu_page( 'tp-event-setting', __( 'TP Event Settings', 'tp-event' ), __( 'Settings', 'tp-event' ), 'event_manage_settings', 'tp-event-setting', array( 'TP_Event_Admin_Settings', 'output' ) );
+		add_submenu_page( 'tp-event-setting', __( 'TP Event Users', 'wp-event-manager' ), __( 'Users', 'wp-event-manager' ), 'edit_others_tp_events', 'tp-event-users', array( 'TP_Event_Admin_Users', 'output' ) );
+		add_submenu_page( 'tp-event-setting', __( 'TP Event Settings', 'wp-event-manager' ), __( 'Settings', 'wp-event-manager' ), 'event_manage_settings', 'tp-event-setting', array( 'TP_Event_Admin_Settings', 'output' ) );
 	}
 
 	/**
