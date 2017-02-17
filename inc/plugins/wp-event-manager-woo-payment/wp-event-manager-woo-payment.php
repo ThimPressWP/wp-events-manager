@@ -1,10 +1,10 @@
 <?php
 /*
-  Plugin Name: Thim Events - WooCommerce Payment Methods Integration
+  Plugin Name: WP Event Manager - WooCommerce Payment Methods Integration
   Plugin URI: http://thimpress.com/
   Description: Support paying for a booking with the payment methods provided by Woocommerce
   Author: ThimPress
-  Version: 1.0
+  Version: 2.0
   Author URI: http://thimpress.com/
   Requires at least: 3.8
   Tested up to: 4.7.2

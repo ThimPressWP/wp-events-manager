@@ -21,25 +21,6 @@ if ( !function_exists( 'tp_event_get_timezone_string' ) ) {
 
 }
 
-//function tp_event_set_timezones( $gmt_offset ) {
-//    $tzstring = get_option( 'timezone_string' );
-//    if ( $tzstring ) {
-//    if ( $tzstring ) {
-//        date_default_timezone_set( $tzstring );
-//    } else {
-//        $timezones = timezone_identifiers_list();
-//        foreach ( $timezones as $key => $zone ) {
-//            $origin_dtz = new DateTimeZone( $zone );
-//            $origin_dt = new DateTime( 'now', $origin_dtz );
-//            $offset = $origin_dtz->getOffset( $origin_dt ) / 3600;
-//            if ( $offset == $gmt_offset ) {
-//                date_default_timezone_set( $zone );
-//            }
-//        }
-//    }
-//}
-//tp_event_set_timezones( get_option( 'gmt_offset' ) );
-
 add_action( 'widgets_init', 'tp_event_register_countdown_widget' );
 if ( !function_exists( 'tp_event_register_countdown_widget' ) ) {
 
