@@ -81,7 +81,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function includes() {
 
-			$this->_include( 'inc/tp-event-core-functions.php' );
+			$this->_include( 'inc/wp-event-core-functions.php' );
 			$this->_include( 'inc/class-event-autoloader.php' );
 			$this->_include( 'inc/class-event-assets.php' );
 			$this->_include( 'inc/class-event-ajax.php' );
