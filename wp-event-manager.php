@@ -40,7 +40,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->set_define( 'WP_EVENT_URI', plugin_dir_url( __FILE__ ) );
 			$this->set_define( 'WP_EVENT_INC', WP_EVENT_PATH . 'inc/' );
 			$this->set_define( 'WP_EVENT_INC_URI', WP_EVENT_URI . 'inc/' );
-			$this->set_define( 'WP_EVENT_ASSETS_URI', WP_EVENT_URI . 'assets' );
+			$this->set_define( 'WP_EVENT_ASSETS_URI', WP_EVENT_URI . 'assets/' );
 			$this->set_define( 'WP_EVENT_LIB_URI', WP_EVENT_INC_URI . 'libraries/' );
 			$this->set_define( 'WP_EVENT_VER', '2.0' );
 			$this->set_define( 'WP_EVENT_MAIN_FILE', __FILE__ );

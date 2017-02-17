@@ -24,6 +24,7 @@ if ( !function_exists( 'tp_event_get_timezone_string' ) ) {
 //function tp_event_set_timezones( $gmt_offset ) {
 //    $tzstring = get_option( 'timezone_string' );
 //    if ( $tzstring ) {
+//    if ( $tzstring ) {
 //        date_default_timezone_set( $tzstring );
 //    } else {
 //        $timezones = timezone_identifiers_list();
@@ -320,11 +321,13 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 			'width'    => '100%',
 			'map_id'   => md5( tp_event_location() ),
 			'map_data' => array(
-				'address'     => tp_event_location(),
-				'zoom'        => 14,
-				'scroll-zoom' => true,
-				'draggable'   => false,
-				'api-key'     => tp_event_get_option( 'google_map_api_key' ),
+				'address'          => tp_event_location(),
+				'zoom'             => 14,
+				'scroll-zoom'      => true,
+				'draggable'        => false,
+				'api-key'          => tp_event_get_option( 'google_map_api_key' ),
+				'marker-icon'      => apply_filters( 'tp-event-map-marker', WP_EVENT_ASSETS_URI . 'images/map-marker.png' ),
+				'marker-at-center' => true,
 			)
 		) );
 
