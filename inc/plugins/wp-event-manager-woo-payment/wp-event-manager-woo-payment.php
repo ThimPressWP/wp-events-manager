@@ -76,7 +76,9 @@ class TP_Event_Woo {
 		// disable paypal when activate woo
 		add_filter( 'tp_event_enable_paypal_payment', array( $this, 'disable_paypal_checkout' ), 10, 1 );
 
-		add_filter( 'tp_event_get_currency', array( $this, 'tp_event_get_currency' ), 50 );
+		if ( get_option( 'thimpress_events_woo_payment_enable' ) == 'yes' ) {
+			add_filter( 'tp_event_get_currency', array( $this, 'tp_event_get_currency' ), 50 );
+		}
 
 		add_filter( 'thimpress_event_l18n', array( $this, 'tp_event_woo_l18n' ), 1 );
 
