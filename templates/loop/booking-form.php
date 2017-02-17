@@ -19,13 +19,13 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 		<?php } else { ?>
             <div class="event_auth_form_field">
                 <label for="event_register_qty"><?php _e( 'Quantity', 'wp-event-manager' ) ?></label>
-                <input type="number" name="qty" value="1" min="1" max="<?php echo $event->get_slot_available()?>" id="event_register_qty" />
+                <input type="number" name="qty" value="1" min="1" max="<?php echo $event->get_slot_available() ?>" id="event_register_qty" />
             </div>
 		<?php } ?>
 
+		<?php $payments = tp_event_gateways_enable(); ?>
         <!--Hide payment option when cost is 0-->
 		<?php if ( !$event->is_free() ) {
-			$payments = tp_event_gateways_enable();
 			if ( $payments ) { ?>
                 <ul class="event_auth_payment_methods">
 					<?php $i = 0; ?>

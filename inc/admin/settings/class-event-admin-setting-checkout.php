@@ -42,7 +42,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 			),
 			array(
 				'type'    => 'select',
-				'title'   => __( 'Booking times free/email', 'wp-event-manager' ),
+				'title'   => __( 'Booking times free event/email', 'wp-event-manager' ),
 				'desc'    => __( 'This controls how many time booking free event of an email', 'wp-event-manager' ),
 				'id'      => $prefix . 'email_register_times',
 				'options' => array(

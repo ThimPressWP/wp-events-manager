@@ -49,10 +49,6 @@ class TP_Event_Booking {
 	// create booking
 	public function create_booking( $args = array(), $payment ) {
 
-		if ( !$payment ) {
-			return '';
-		}
-
 		// current user
 		$user = wp_get_current_user();
 		// merge argument
