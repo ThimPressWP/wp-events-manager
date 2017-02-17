@@ -47,8 +47,6 @@ class TP_Event_Admin_Metabox_Event {
 			} else if ( $time >= $event_end ) {
 				$status = 'tp-event-expired';
 			}
-			wp_clear_scheduled_hook( 'tp_event_schedule_status', array( $post_id, 'tp-event-happenning' ) );
-			wp_clear_scheduled_hook( 'tp_event_schedule_status', array( $post_id, 'tp-event-expired' ) );
 			wp_schedule_single_event( $event_start, 'tp_event_schedule_status', array( $post_id, 'tp-event-happenning' ) );
 			wp_schedule_single_event( $event_end, 'tp_event_schedule_status', array( $post_id, 'tp-event-expired' ) );
 		}

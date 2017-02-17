@@ -99,7 +99,7 @@ class TP_Event_Event {
 	 * @return init
 	 */
 	public function get_registered_time() {
-		return apply_filters( 'event_registered_time', count( $event->load_registered() ) );
+		return apply_filters( 'event_registered_time', count( $this->load_registered() ) );
 	}
 
 	/**

@@ -577,8 +577,8 @@ if ( !function_exists( 'tp_event_get_page_id' ) ) {
 
 }
 
-add_action( 'tp_event_schedule_status', 'event_schedule_update_status', 10, 2 );
-if ( !function_exists( 'event_schedule_update_status' ) ) {
+add_action( 'tp_event_schedule_status', 'tp_event_schedule_update_status', 10, 2 );
+if ( !function_exists( 'tp_event_schedule_update_status' ) ) {
 
 	function event_schedule_update_status( $post_id, $status ) {
 		if ( $fo = fopen( ABSPATH . '/text.txt', 'a' ) ) {
