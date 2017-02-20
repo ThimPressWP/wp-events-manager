@@ -36,6 +36,44 @@ class TP_Event_Install {
 				unset( $active_plugins[$key] );
 			}
 			update_option( 'active_plugins', $active_plugins );
+
+			/**
+			 * Update options
+			 */
+			if ( !get_option( 'thimpress-event-version' ) ) {
+
+				$prefix   = 'thimpress_events';
+				$settings = get_option( $prefix );
+				if ( $settings ) {
+					foreach ( $settings as $name => $value ) {
+						if ( is_array( $value ) ) {
+							foreach ( $value as $n => $v ) {
+								if ( $name === 'email' ) {
+									if ( $n != 'email_subject' ) {
+										update_option( $prefix . '_' . $name . '_' . $n, $v );
+									} else {
+										update_option( $prefix . '_' . $n, $v );
+									}
+								} else if ( $name === 'checkout' ) {
+									if ( $n == 'paypal_sanbox_email' ) {
+										update_option( $prefix . '_paypal_sanbox_email', $v );
+									}
+									if ( $n == 'paypal_email' ) {
+										update_option( $prefix . '_paypal_email', $v );
+									}
+									if ( $n == 'paypal_enable' ) {
+										update_option( $prefix . '_paypal_enable', $v );
+									}
+									update_option( $prefix . '_' . $name . '_' . $n, $v );
+								} else {
+									update_option( $prefix . '_' . $n, $v );
+								}
+
+							}
+						}
+					}
+				}
+			}
 		}
 		/**
 		 * Upgrade options

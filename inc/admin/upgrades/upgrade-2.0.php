@@ -1,33 +1,7 @@
 <?php
-//die('y');
+
 if ( !defined( 'ABSPATH' ) || !defined( 'TP_EVENT_INSTALLING' ) || !TP_EVENT_INSTALLING ) {
 	exit();
-}
-
-/**
- * Update options
- */
-$prefix   = 'thimpress_events';
-$settings = get_option( $prefix );
-if ( $settings ) {
-	foreach ( $settings as $name => $value ) {
-		if ( is_array( $value ) ) {
-			foreach ( $value as $n => $v ) {
-				if ( $name === 'email' ) {
-					if ( $n != 'email_subject' ) {
-						update_option( $prefix . '_' . $name . '_' . $n, $v );
-					} else {
-						update_option( $prefix . '_' . $n, $v );
-					}
-				} else if ( $name === 'checkout' ) {
-					update_option( $prefix . '_' . $name . '_' . $n, $v );
-				} else {
-					update_option( $prefix . '_' . $n, $v );
-				}
-
-			}
-		}
-	}
 }
 
 /**
