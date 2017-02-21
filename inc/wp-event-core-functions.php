@@ -1,26 +1,5 @@
 <?php
 
-if ( !function_exists( 'tp_event_get_timezone_string' ) ) {
-
-	function tp_event_get_timezone_string() {
-		$tzstring   = get_option( 'timezone_string' );
-		$gmt_offset = get_option( 'gmt_offset' );
-		if ( !$tzstring ) {
-			$timezones = timezone_identifiers_list();
-			foreach ( $timezones as $key => $zone ) {
-				$origin_dtz = new DateTimeZone( $zone );
-				$origin_dt  = new DateTime( 'now', $origin_dtz );
-				$offset     = $origin_dtz->getOffset( $origin_dt ) / 3600;
-				if ( $offset == $gmt_offset ) {
-					$tzstring = $zone;
-				}
-			}
-		}
-		return $tzstring;
-	}
-
-}
-
 add_action( 'widgets_init', 'tp_event_register_countdown_widget' );
 if ( !function_exists( 'tp_event_register_countdown_widget' ) ) {
 
@@ -432,7 +411,7 @@ if ( !function_exists( 'tp_event_l18n' ) ) {
 	function tp_event_l18n() {
 		return apply_filters( 'thimpress_event_l18n', array(
 			'gmt_offset'      => esc_js( get_option( 'gmt_offset' ) ),
-			'current_time'    => esc_js( date( 'M j, Y H:i:s O', current_time( 'timestamp', 1 ) ) ),
+			'current_time'    => esc_js( date( 'M j, Y H:i:s O', strtotime( date( 'Y-m-d H:i' ) ) ) ),
 			'l18n'            => array(
 				'labels'  => array(
 					__( 'Years', 'wp-event-manager' ),

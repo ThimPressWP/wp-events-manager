@@ -17,7 +17,7 @@ if ( $args['event_id'] ) {
 		$current_time = date( 'Y-m-d H:i' );
 		$time         = tp_event_get_time( 'Y-m-d H:i', $event, false ); ?>
         <div class="event-countdown">
-			<?php $date = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ), new DateTimeZone( tp_event_get_timezone_string() ) ); ?>
+			<?php $date = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ) ); ?>
             <div class="tp_event_counter" data-time="<?php echo esc_attr( $date->format( 'M j, Y H:i:s O' ) ) ?>"></div>
         </div>
 		<?php

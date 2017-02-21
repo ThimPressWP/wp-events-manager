@@ -36,7 +36,7 @@ class TP_Event_Admin_Metabox_Event {
 		$event_start = strtotime( $start );
 		$event_end   = strtotime( $end );
 
-		$time = current_time( 'timestamp' );
+		$time = strtotime(date( 'Y-m-d H:i' ));
 
 		$status = 'publish';
 		if ( $event_start && $event_end ) {
