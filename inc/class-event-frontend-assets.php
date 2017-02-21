@@ -24,7 +24,9 @@ class TP_Event_Frontend_Assets {
 		TP_Event_Assets::localize_script( 'tp-event-countdown-js', 'TP_Event', tp_event_l18n() );
 
 		// google map
-		TP_Event_Assets::register_script( 'tp-event-google-map', WP_EVENT_ASSETS_URI . '/js/frontend/google-map.js' );
+		if ( is_singular( 'tp_event' ) ) {
+			TP_Event_Assets::register_script( 'tp-event-google-map', WP_EVENT_ASSETS_URI . '/js/frontend/google-map.js' );
+		}
 
 		// owl-carousel
 		TP_Event_Assets::register_script( 'tp-event-owl-carousel-js', WP_EVENT_LIB_URI . '/owl-carousel/js/owl.carousel.min.js' );
