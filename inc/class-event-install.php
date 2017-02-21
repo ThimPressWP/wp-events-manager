@@ -37,6 +37,13 @@ class TP_Event_Install {
 			}
 			update_option( 'active_plugins', $active_plugins );
 
+			if ( !function_exists( 'delete_plugins' ) ) {
+				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				include_once( ABSPATH . 'wp-includes/pluggable.php' );
+				include_once( ABSPATH . 'wp-admin/includes/file.php' );
+			}
+			delete_plugins( array( 'tp-event-auth/tp-event-auth.php' ) );
+
 			/**
 			 * Update options
 			 */
