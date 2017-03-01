@@ -12,7 +12,7 @@ if ( $args['event_id'] ) {
 	$ids = explode( ',', $args['event_id'] );
 	foreach ( $ids as $id ) {
 		$event = get_post( $id );
-		echo get_the_title( $id );
+		echo '<h2><a href="' . get_permalink( $id ) . '"> ' . get_the_title( $id ) . '</a></h2>';
 
 		$current_time = date( 'Y-m-d H:i' );
 		$time         = tp_event_get_time( 'Y-m-d H:i', $event, false ); ?>
