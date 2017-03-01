@@ -1284,3 +1284,17 @@ function tp_event_admin_table_tabs() {
 		<?php
 	}
 }
+
+
+if ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) && !get_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
+	add_action( 'admin_notices', 'tp_event_show_remove_event_auth_notice' );
+}
+/**
+ * Show notice required remove event auth add-on
+ */
+
+function tp_event_show_remove_event_auth_notice() { ?>
+    <div class="notice notice-error tp-event-dismiss-notice is-dismissible">
+        <p><?php echo __( wp_kses( '<strong>WP Event Manager</strong> plugin version ' . WP_EVENT_VER . ' already included <strong>Thim Event Authentication</strong> add-on. Please delete the add-on.', array( 'strong' => array() ) ), 'wp-event-manager' ); ?></p>
+    </div>
+<?php }

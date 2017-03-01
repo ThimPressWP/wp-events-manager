@@ -14,6 +14,7 @@ class TP_Event_Ajax {
 		// key is action ajax: wp_ajax_{action}
 		// value is allow ajax nopriv: wp_ajax_nopriv_{action}
 		$actions = array(
+			'event_remove_notice' => true,
 			'event_auth_register' => false,
 			'event_login_action'  => true,
 			'load_form_register'  => true
@@ -28,6 +29,19 @@ class TP_Event_Ajax {
 			}
 		}
 	}
+
+	/**
+	 * Remove admin notice
+	 */
+	public function event_remove_notice() {
+
+		update_option( 'thimpress_events_show_remove_event_auth_notice', 1 );
+		wp_send_json( array(
+			'status'  => true,
+			'message' => __( 'Remove admin notice successful', 'wp-event-manager' )
+		) );
+	}
+
 
 	/**
 	 * load form register
@@ -102,8 +116,8 @@ class TP_Event_Ajax {
 			}
 			// End sanitize, validate data
 			// load booking module
-			$booking  = TP_Event_Booking::instance();
-			$event = TP_Event_Event::instance( $event_id );
+			$booking = TP_Event_Booking::instance();
+			$event   = TP_Event_Event::instance( $event_id );
 
 			$user       = wp_get_current_user();
 			$registered = $event->booked_quantity( $user->ID );
@@ -135,7 +149,7 @@ class TP_Event_Ajax {
 			if ( $payment->id == 'woo_payment' ) {
 
 				do_action( 'tp_event_register_event_action', $args );
-				$return = $payment->process($event_id);
+				$return = $payment->process( $event_id );
 				wp_send_json( $return );
 
 			} else {

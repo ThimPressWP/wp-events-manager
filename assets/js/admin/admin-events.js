@@ -41,6 +41,21 @@
 			$('.setting-currency, .setting-currency-position, .setting-currency-thousand, .setting-currency-separator, .setting-number-decimals').toggleClass('hide-if-js', toggle);
 		});
 
+		$(document).on('click', '.tp-event-dismiss-notice button', function (event) {
+			var parent = $(this).closest('.tp-event-dismiss-notice');
+			if (parent.length) {
+				event.preventDefault();
+				$.ajax({
+					url : ajaxurl,
+					type: 'POST',
+					data: {
+						action: 'event_remove_notice'
+					}
+				})
+			}
+		});
+
+
 		TP_Event_Admin.admin_meta_boxes.init();
 	};
 
