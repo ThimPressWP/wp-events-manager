@@ -1,3 +1,6 @@
+**2.0.1**
+- Update event category template
+
 **2.0**
 - Rebuild Core
 - Add event note
