@@ -5,7 +5,7 @@
   Plugin URI: http://thimpress.com/
   Description: A complete plugin for Event management and online booking system
   Author: ThimPress
-  Version: 2.0
+  Version: 2.0.1
   Author URI: http://thimpress.com
  */
 
@@ -42,7 +42,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->set_define( 'WP_EVENT_INC_URI', WP_EVENT_URI . 'inc/' );
 			$this->set_define( 'WP_EVENT_ASSETS_URI', WP_EVENT_URI . 'assets/' );
 			$this->set_define( 'WP_EVENT_LIB_URI', WP_EVENT_INC_URI . 'libraries/' );
-			$this->set_define( 'WP_EVENT_VER', '2.0' );
+			$this->set_define( 'WP_EVENT_VER', '2.0.1' );
 			$this->set_define( 'WP_EVENT_MAIN_FILE', __FILE__ );
 		}
 

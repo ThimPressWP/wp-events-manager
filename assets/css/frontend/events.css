@@ -179,24 +179,24 @@
 	margin-bottom: 0;
 }
 
-.post-type-archive-tp_event .entry-title, .entry-summary .entry-countdown, .entry-summary .entry-content {
+.post-type-archive-tp_event .entry-title, .tax-tp_event_category .entry-title, .entry-summary .entry-countdown, .entry-summary .entry-content {
 	margin-top: 20px;
 }
 
-.post-type-archive-tp_event ul {
+.post-type-archive-tp_event ul, .tax-tp_event_category ul {
 	list-style-type: none;
 }
 
-.post-type-archive-tp_event ul li.tp_event {
+.post-type-archive-tp_event ul li.tp_event, .tax-tp_event_category ul li.tp_event {
 	width: calc(50% - 30px);
 	float: left;
 }
 
-.post-type-archive-tp_event ul li.tp_event:nth-child(2n) {
+.post-type-archive-tp_event ul li.tp_event:nth-child(2n), .tax-tp_event_category ul li.tp_event:nth-child(2n) {
 	margin-left: 15px;
 }
 
-.post-type-archive-tp_event ul li.tp_event:nth-child(2n+1) {
+.post-type-archive-tp_event ul li.tp_event:nth-child(2n+1), .tax-tp_event_category ul li.tp_event:nth-child(2n+1) {
 	margin-right: 15px;
 	clear: both;
 }
