@@ -570,9 +570,10 @@ if ( !function_exists( 'tp_event_schedule_update_status' ) ) {
 		if ( $old_status !== $status && in_array( $status, array( 'tp-event-upcoming', 'tp-event-happenning', 'tp-event-expired' ) ) ) {
 			$post = tp_event_add_property_countdown( get_post( $post_id ) );
 
-			$current_time = current_time( 'timestamp' );
+			$current_time = strtotime( current_time( 'Y-m-d H:i' ) );
 			$event_start  = strtotime( $post->event_start );
 			$event_end    = strtotime( $post->event_end );
+
 			if ( $status === 'tp-event-expired' && $current_time < $event_end ) {
 				return;
 			}

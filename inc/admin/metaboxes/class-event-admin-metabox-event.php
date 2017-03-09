@@ -13,7 +13,6 @@ class TP_Event_Admin_Metabox_Event {
 		if ( empty( $posted ) )
 			return;
 
-		remove_action( 'tp_event_process_update_tp_event_meta', array( __CLASS__, 'save' ), 10, 3 );
 		foreach ( $posted as $name => $value ) {
 			if ( strpos( $name, 'tp_event_' ) !== 0 ) {
 				continue;
@@ -36,7 +35,7 @@ class TP_Event_Admin_Metabox_Event {
 		$event_start = strtotime( $start );
 		$event_end   = strtotime( $end );
 
-		$time = strtotime( date( 'Y-m-d H:i' ) );
+		$time = strtotime( current_time( 'Y-m-d H:i' ) );
 
 		$status = 'publish';
 		if ( $event_start && $event_end ) {
@@ -47,16 +46,13 @@ class TP_Event_Admin_Metabox_Event {
 			} else if ( $time >= $event_end ) {
 				$status = 'tp-event-expired';
 			}
-
-			wp_schedule_single_event( $event_start, 'tp_event_schedule_status', array( $post_id, 'tp-event-happenning' ) );
-			wp_schedule_single_event( $event_end, 'tp_event_schedule_status', array( $post_id, 'tp-event-expired' ) );
+			wp_schedule_single_event( $event_end, 'tp_event_schedule_status', array( $post_id, $status ) );
 		}
 
 		if ( !in_array( get_post_status( $post_id ), array( 'tp-event-upcoming', 'tp-event-happenning', 'tp-event-expired' ) ) ) {
 			wp_update_post( array( 'ID' => $post_id, 'post_status' => $status ) );
 		}
 
-		add_action( 'tp_event_process_update_tp_event_meta', array( __CLASS__, 'save' ), 10, 3 );
 	}
 
 	public static function schedule_status( $post_id, $status ) {
