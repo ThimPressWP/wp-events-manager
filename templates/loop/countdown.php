@@ -3,8 +3,10 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$current_time = date( 'Y-m-d H:i' );
-$time         = tp_event_get_time( 'Y-m-d H:i', null, false ); ?>
+$current_time = current_time( 'Y-m-d H:i' );
+$time         = tp_event_get_time( 'Y-m-d H:i', null, false );
+
+?>
 <div class="entry-countdown">
 
 	<?php if ( $time > $current_time ) { ?>
