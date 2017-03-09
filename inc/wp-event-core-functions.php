@@ -216,9 +216,18 @@ if ( !function_exists( 'tp_event_add_property_countdown' ) ) {
 	 * @return string
 	 */
 	function tp_event_get_time( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
-		$current_time = current_time( 'timestamp', 1 );
+		$current_time = current_time( 'timestamp' );
 		$start        = tp_event_start( 'Y-m-d H:i', $post );
 		$end          = tp_event_end( 'Y-m-d H:i', $post );
+//		echo '<pre>';
+//		var_dump( $current_time );
+//		echo '</pre>';
+//		echo '<pre>';
+//		var_dump( ( $start ) );
+//		echo '</pre>';
+//		echo '<pre>';
+//		var_dump( ( $end ) );
+//		echo '</pre>';
 		if ( $current_time < strtotime( $start ) ) {
 			return tp_event_start( $format, $post, $l10 );
 		} else {
@@ -411,7 +420,7 @@ if ( !function_exists( 'tp_event_l18n' ) ) {
 	function tp_event_l18n() {
 		return apply_filters( 'thimpress_event_l18n', array(
 			'gmt_offset'      => esc_js( get_option( 'gmt_offset' ) ),
-			'current_time'    => esc_js( date( 'M j, Y H:i:s O', strtotime( date( 'Y-m-d H:i' ) ) ) ),
+			'current_time'    => esc_js( date( 'M j, Y H:i:s O', strtotime( current_time( 'Y-m-d H:i' ) ) ) ),
 			'l18n'            => array(
 				'labels'  => array(
 					__( 'Years', 'wp-event-manager' ),

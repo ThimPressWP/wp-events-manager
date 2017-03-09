@@ -14,7 +14,7 @@ if ( $args['event_id'] ) {
 		$event = get_post( $id );
 		echo '<h2><a href="' . get_permalink( $id ) . '"> ' . get_the_title( $id ) . '</a></h2>';
 
-		$current_time = date( 'Y-m-d H:i' );
+		$current_time = current_time( 'Y-m-d H:i' );
 		$time         = tp_event_get_time( 'Y-m-d H:i', $event, false ); ?>
         <div class="event-countdown">
 			<?php $date = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ) ); ?>

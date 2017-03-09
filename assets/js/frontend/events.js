@@ -221,10 +221,12 @@
 			var time = $(counts[i]).attr('data-time');
 			time = new Date(time);
 
+			var current_time = new Date(time - TP_Event.gmt_offset * 60 * 60 * 1000);
+
 			$(counts[i]).countdown({
 				labels    : TP_Event.l18n.labels,
 				labels1   : TP_Event.l18n.label1,
-				until     : time,
+				until     : current_time,
 				serverSync: TP_Event.current_time
 			});
 		}
