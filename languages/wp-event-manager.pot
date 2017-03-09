@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-16 13:18+0700\n"
+"POT-Creation-Date: 2017-03-09 15:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,123 +18,127 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: inc/class-event-ajax.php:44
+#: inc/class-event-ajax.php:41
+msgid "Remove admin notice successful"
+msgstr ""
+
+#: inc/class-event-ajax.php:58
 msgid "Event not found."
 msgstr ""
 
-#: inc/class-event-ajax.php:50
+#: inc/class-event-ajax.php:64
 msgid "You must login before register "
 msgstr ""
 
-#: inc/class-event-ajax.php:57
+#: inc/class-event-ajax.php:71
 msgid "has been expired"
 msgstr ""
 
-#: inc/class-event-ajax.php:59
+#: inc/class-event-ajax.php:73
 msgid "You have registered this event before"
 msgstr ""
 
-#: inc/class-event-ajax.php:61
+#: inc/class-event-ajax.php:75
 msgid "The event is full, the registration is closed"
 msgstr ""
 
-#: inc/class-event-ajax.php:83 inc/class-event-ajax.php:87
+#: inc/class-event-ajax.php:97 inc/class-event-ajax.php:101
 msgid "Invalid request"
 msgstr ""
 
-#: inc/class-event-ajax.php:92
+#: inc/class-event-ajax.php:106
 msgid "Invalid event request"
 msgstr ""
 
-#: inc/class-event-ajax.php:99
+#: inc/class-event-ajax.php:113
 msgid "Quantity must integer"
 msgstr ""
 
-#: inc/class-event-ajax.php:112
+#: inc/class-event-ajax.php:126
 msgid "You are registered this event."
 msgstr ""
 
-#: inc/class-event-ajax.php:133
+#: inc/class-event-ajax.php:147
 msgid "is not ready. Please contact administrator to setup payment gateways"
 msgstr ""
 
-#: inc/class-event-ajax.php:155
+#: inc/class-event-ajax.php:169
 #, php-format
 msgid ""
 "Book ID <strong>%s</strong> completed! We'll send mail to <strong>%s</"
 "strong> when it is approve."
 msgstr ""
 
-#: inc/class-event-ajax.php:169
+#: inc/class-event-ajax.php:183
 msgid "Payment method is not available"
 msgstr ""
 
-#: inc/class-event-ajax.php:193
+#: inc/class-event-ajax.php:207
 #, php-format
 msgid "You Must <a href=\"%s\">Login</a>"
 msgstr ""
 
-#: inc/class-event-booking.php:67
+#: inc/class-event-booking.php:63
 #, php-format
 msgid "%s booking event %s"
 msgstr ""
 
-#: inc/class-event-booking.php:68 inc/class-event-booking.php:69
+#: inc/class-event-booking.php:64 inc/class-event-booking.php:65
 #, php-format
 msgid "%s booking event %s with %s slot"
 msgstr ""
 
-#: inc/class-event-booking.php:92
+#: inc/class-event-booking.php:88
 #, php-format
 msgid "Booking ID #%s is not exists."
 msgstr ""
 
-#: inc/class-event-install.php:79
+#: inc/class-event-install.php:117
 msgctxt "Page slug"
 msgid "user-register"
 msgstr ""
 
-#: inc/class-event-install.php:80
+#: inc/class-event-install.php:118
 msgctxt "Page title"
 msgid "User Register"
 msgstr ""
 
-#: inc/class-event-install.php:84
+#: inc/class-event-install.php:122
 msgctxt "Page slug"
 msgid "user-login"
 msgstr ""
 
-#: inc/class-event-install.php:85
+#: inc/class-event-install.php:123
 msgctxt "Page title"
 msgid "User Login"
 msgstr ""
 
-#: inc/class-event-install.php:89
+#: inc/class-event-install.php:127
 msgctxt "Page slug"
 msgid "forgot-password"
 msgstr ""
 
-#: inc/class-event-install.php:90
+#: inc/class-event-install.php:128
 msgctxt "Page title"
 msgid "Forgot Password"
 msgstr ""
 
-#: inc/class-event-install.php:94
+#: inc/class-event-install.php:132
 msgctxt "Page slug"
 msgid "reset-password"
 msgstr ""
 
-#: inc/class-event-install.php:95
+#: inc/class-event-install.php:133
 msgctxt "Page title"
 msgid "Reset Password"
 msgstr ""
 
-#: inc/class-event-install.php:99
+#: inc/class-event-install.php:137
 msgctxt "Page slug"
 msgid "user-account"
 msgstr ""
 
-#: inc/class-event-install.php:100
+#: inc/class-event-install.php:138
 msgctxt "Page title"
 msgid "User Account"
 msgstr ""
@@ -180,7 +184,7 @@ msgstr ""
 msgid "View Event"
 msgstr ""
 
-#: inc/class-event-post-types.php:57 inc/tp-event-core-functions.php:1288
+#: inc/class-event-post-types.php:57 inc/wp-event-core-functions.php:1261
 #: templates/shortcodes/user-account.php:21
 msgid "Events"
 msgstr ""
@@ -537,7 +541,7 @@ msgstr ""
 msgid "Preview event"
 msgstr ""
 
-#: inc/class-event-roles.php:15
+#: inc/class-event-roles.php:15 inc/admin/class-event-admin-menu.php:33
 msgid "Event Manager"
 msgstr ""
 
@@ -574,146 +578,142 @@ msgstr ""
 msgid "You have logged in"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:454
+#: inc/wp-event-core-functions.php:426
 msgid "Years"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:455
+#: inc/wp-event-core-functions.php:427
 msgid "Months"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:456
+#: inc/wp-event-core-functions.php:428
 msgid "Weeks"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:457
+#: inc/wp-event-core-functions.php:429
 msgid "Days"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:458
+#: inc/wp-event-core-functions.php:430
 msgid "Hours"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:459
+#: inc/wp-event-core-functions.php:431
 msgid "Minutes"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:460
+#: inc/wp-event-core-functions.php:432
 msgid "Seconds"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:463
+#: inc/wp-event-core-functions.php:435
 msgid "Year"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:464
+#: inc/wp-event-core-functions.php:436
 msgid "Month"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:465
+#: inc/wp-event-core-functions.php:437
 msgid "Week"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:466
+#: inc/wp-event-core-functions.php:438
 msgid "Day"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:467
+#: inc/wp-event-core-functions.php:439
 msgid "Hour"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:468
+#: inc/wp-event-core-functions.php:440
 msgid "Minute"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:469
+#: inc/wp-event-core-functions.php:441
 msgid "Second"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:473
+#: inc/wp-event-core-functions.php:445
 msgid "Something went wrong"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1066 inc/tp-event-core-functions.php:1095
+#: inc/wp-event-core-functions.php:1039 inc/wp-event-core-functions.php:1068
 #, php-format
 msgid "<span class=\"event_booking_status cancelled\">%s</span>"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1070 inc/tp-event-core-functions.php:1096
+#: inc/wp-event-core-functions.php:1043 inc/wp-event-core-functions.php:1069
 #, php-format
 msgid "<span class=\"event_booking_status pending\">%s</span>"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1074 inc/tp-event-core-functions.php:1097
+#: inc/wp-event-core-functions.php:1047 inc/wp-event-core-functions.php:1070
 #, php-format
 msgid "<span class=\"event_booking_status processing\">%s</span>"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1078 inc/tp-event-core-functions.php:1098
+#: inc/wp-event-core-functions.php:1051 inc/wp-event-core-functions.php:1071
 #, php-format
 msgid "<span class=\"event_booking_status completed\">%s</span>"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1095
+#: inc/wp-event-core-functions.php:1068
 msgid "Cancelled"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1096
+#: inc/wp-event-core-functions.php:1069
 msgid "Pending"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1097
+#: inc/wp-event-core-functions.php:1070
 msgid "Processing"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1098
+#: inc/wp-event-core-functions.php:1071
 msgid "Completed"
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1139
+#: inc/wp-event-core-functions.php:1112
 msgid "Confirm Password is not match."
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1146 inc/tp-event-core-functions.php:1155
-#: inc/tp-event-core-functions.php:1157 inc/tp-event-core-functions.php:1161
-#: inc/tp-event-core-functions.php:1180
+#: inc/wp-event-core-functions.php:1119 inc/wp-event-core-functions.php:1128
+#: inc/wp-event-core-functions.php:1130 inc/wp-event-core-functions.php:1134
+#: inc/wp-event-core-functions.php:1153
 msgid "ERROR: "
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1146
+#: inc/wp-event-core-functions.php:1119
 msgid "Username is required field."
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1148
+#: inc/wp-event-core-functions.php:1121
 msgid "Username is already exists."
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1155
+#: inc/wp-event-core-functions.php:1128
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1157
+#: inc/wp-event-core-functions.php:1130
 msgid "An account is already registered with your email address. Please login."
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1161
+#: inc/wp-event-core-functions.php:1134
 msgid "Password is required field."
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1180
+#: inc/wp-event-core-functions.php:1153
 msgid "Couldn't register."
 msgstr ""
 
-#: inc/tp-event-core-functions.php:1293
+#: inc/wp-event-core-functions.php:1266
 msgid "Categories"
 msgstr ""
 
 #: inc/abstracts/class-event-abstract-payment-gateway.php:105
 msgid "Payment completed. We will send you email when payment method verify."
-msgstr ""
-
-#: inc/admin/class-event-admin-menu.php:33
-msgid "TP Events"
 msgstr ""
 
 #: inc/admin/class-event-admin-menu.php:39
@@ -791,7 +791,7 @@ msgstr ""
 msgid "Event Users"
 msgstr ""
 
-#: inc/admin/metaboxes/class-event-admin-metabox-event.php:32
+#: inc/admin/metaboxes/class-event-admin-metabox-event.php:27
 msgid "Please make sure event time is validate"
 msgstr ""
 
@@ -808,7 +808,7 @@ msgid "General options for system"
 msgstr ""
 
 #: inc/admin/settings/class-event-admin-setting-checkout.php:45
-msgid "Booking times free/email"
+msgid "Booking times free event/email"
 msgstr ""
 
 #: inc/admin/settings/class-event-admin-setting-checkout.php:46
@@ -1117,6 +1117,7 @@ msgid "Make payment via Paypal"
 msgstr ""
 
 #: inc/gateways/paypal/class-event-payment-gateway-paypal.php:144
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:74
 msgid "Enable"
 msgstr ""
 
@@ -1140,6 +1141,43 @@ msgstr ""
 msgid ""
 "Email Business PayPal is invalid. Please contact administrator to setup "
 "PayPal email."
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/wp-event-manager-woo-payment.php:118
+msgid " has been added to your cart."
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/wp-event-manager-woo-payment.php:119
+msgid "View Cart"
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:35
+msgid "Woocommerce"
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:69
+msgid "Woocommerce Payment Settings"
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:70
+msgid "Make a payment with WooCommerce payment methods"
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:75
+msgid ""
+"If WooCommerce Payment is enabled you can not use other payment gateways"
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:81
+msgid "Register event process"
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:84
+msgid "Add to cart"
+msgstr ""
+
+#: inc/plugins/wp-event-manager-woo-payment/inc/class-event-wc-payment.php:85
+msgid "Go to checkout"
 msgstr ""
 
 #: inc/widgets/class-event-widget-countdown.php:14
@@ -1197,7 +1235,7 @@ msgstr ""
 msgid "Register Now"
 msgstr ""
 
-#: templates/loop/countdown.php:14
+#: templates/loop/countdown.php:16
 msgid "This event has expired"
 msgstr ""
 
