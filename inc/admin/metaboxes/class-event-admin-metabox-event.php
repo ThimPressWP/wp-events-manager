@@ -5,10 +5,6 @@ if ( !defined( 'ABSPATH' ) ) {
 
 class TP_Event_Admin_Metabox_Event {
 
-	public static function init() {
-//        add_action( 'tp_event_schedule_status', array( __CLASS__, 'schedule_status' ), 10, 2 );
-	}
-
 	public static function save( $post_id, $posted ) {
 		if ( empty( $posted ) )
 			return;
@@ -37,6 +33,8 @@ class TP_Event_Admin_Metabox_Event {
 
 		$time = strtotime( current_time( 'Y-m-d H:i' ) );
 
+		$offset_time = get_option( 'gmt_offset' ) * 60 * 60;
+
 		$status = 'publish';
 		if ( $event_start && $event_end ) {
 			if ( $event_start > $time ) {
@@ -46,7 +44,9 @@ class TP_Event_Admin_Metabox_Event {
 			} else if ( $time >= $event_end ) {
 				$status = 'tp-event-expired';
 			}
-			wp_schedule_single_event( $event_end, 'tp_event_schedule_status', array( $post_id, $status ) );
+
+			wp_schedule_single_event( $event_start - $offset_time, 'tp_event_schedule_status', array( $post_id, 'tp-event-happenning' ) );
+			wp_schedule_single_event( $event_end - $offset_time, 'tp_event_schedule_status', array( $post_id, 'tp-event-expired' ) );
 		}
 
 		if ( !in_array( get_post_status( $post_id ), array( 'tp-event-upcoming', 'tp-event-happenning', 'tp-event-expired' ) ) ) {
@@ -55,32 +55,8 @@ class TP_Event_Admin_Metabox_Event {
 
 	}
 
-	public static function schedule_status( $post_id, $status ) {
-		wp_clear_scheduled_hook( 'tp_event_schedule_status', array( $post_id, $status ) );
-		$old_status = get_post_status( $post_id );
-
-		if ( $old_status !== $status && in_array( $status, array( 'tp-event-upcoming', 'tp-event-happenning', 'tp-event-expired' ) ) ) {
-			$post = tp_event_add_property_countdown( get_post( $post_id ) );
-
-			$current_time = current_time( 'timestamp' );
-			$event_start  = strtotime( $post->event_start );
-			$event_end    = strtotime( $post->event_end );
-			if ( $status === 'tp-event-expired' && $current_time < $event_end ) {
-				return;
-			}
-
-			if ( $status === 'tp-event-happenning' && $current_time < $event_start ) {
-				return;
-			}
-
-			wp_update_post( array( 'ID' => $post_id, 'post_status' => $status ) );
-		}
-	}
-
 	public static function render() {
 		require_once( WP_EVENT_INC . 'admin/views/metaboxes/event-settings.php' );
 	}
 
 }
-
-TP_Event_Admin_Metabox_Event::init();
