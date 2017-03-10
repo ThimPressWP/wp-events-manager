@@ -64,7 +64,7 @@ class TP_Event_Shortcodes {
 	 * Shortcode wrapper end
 	 */
 	public static function shortcode_wrapper_end() {
-		echo '<div>';
+		echo '</div>';
 	}
 
 	/**
