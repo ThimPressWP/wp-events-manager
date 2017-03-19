@@ -55,7 +55,7 @@ class TP_Event_Admin_Settings {
 		do_action( 'event_admin_setting_update_' . $current_tab );
 		do_action( 'event_admin_setting_update', $current_tab );
 
-		self::add_message( __( 'Your settings have been saved.', 'wp-event-manager' ) );
+		self::add_message( __( 'Your settings have been saved.', 'wp-events-manager' ) );
 		do_action( 'event_admin_settings_updated', $_POST );
 	}
 
@@ -90,7 +90,7 @@ class TP_Event_Admin_Settings {
                     </div>
                     <p class="submit">
 						<?php wp_nonce_field( 'tp-event-settings', 'tp-event-settings-nonce' ); ?>
-                        <input name="save" class="button-primary" type="submit" value="<?php esc_attr_e( 'Save changes', 'wp-event-manager' ); ?>" />
+                        <input name="save" class="button-primary" type="submit" value="<?php esc_attr_e( 'Save changes', 'wp-events-manager' ); ?>" />
                     </p>
                 </form>
             </div>

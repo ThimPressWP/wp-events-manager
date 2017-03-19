@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-09 15:37+0700\n"
+"POT-Creation-Date: 2017-03-19 16:03+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -332,7 +332,7 @@ msgid "Category"
 msgstr ""
 
 #: inc/class-event-post-types.php:173
-msgctxt "wp-event-manager"
+msgctxt "wp-events-manager"
 msgid "Upcoming"
 msgstr ""
 
@@ -344,7 +344,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/class-event-post-types.php:182
-msgctxt "wp-event-manager"
+msgctxt "wp-events-manager"
 msgid "Happening"
 msgstr ""
 
@@ -356,7 +356,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/class-event-post-types.php:191
-msgctxt "wp-event-manager"
+msgctxt "wp-events-manager"
 msgid "Expired"
 msgstr ""
 

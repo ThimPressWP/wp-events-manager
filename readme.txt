@@ -1,10 +1,24 @@
-###What is WP Events Manager?
+=== WP Events Manager ===
+Contributors: thimpress, leehld
+Donate link: https://thimpress.com/
+Tags: event, event management, events, registration, bookings, tickets, locations, google maps
+Requires at least: 4.6
+Tested up to: 4.7
+Stable tag: trunk
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+The all in one Event Manager for WordPress: create and manage events, sell event tickets online easily. No Coding Required.
+
+== Description ==
+
+###What is WP Events Manager?###
 
 WP Events Manager is a powerful Events Manager plugin with all of the most important features of an Event Website.
 
 It helps you easier manage all of your events and even help you sell your tickets online.
 
-###What can WP Events Manager do?
+###What can WP Events Manager do?###
 
 * Set up events with:
  * Quantity (number of tickets)
@@ -21,7 +35,7 @@ It helps you easier manage all of your events and even help you sell your ticket
  * Set up Cancel Payment status 
  * Limit number of times people register 
 
-###WordPress Themes for Events
+###WordPress Themes for Events###
 
 To best use this theme, we suggest you use premium high quality themes made by ThimPress:
 
@@ -32,13 +46,13 @@ To best use this theme, we suggest you use premium high quality themes made by T
 **[Best Hotel WordPress Theme](http://themeforest.net/item/hotel-wordpress-theme-sailing/13321455?utm_source=wporg&utm_medium=wphotelbooking&ref=thimpress&utm_campaign=wphotelbooking)**
 
 
-###Connect with us
+###Connect with us###
 To stay in touch and update about FundPress's future releases and features, you can connect with us via:
 - [Facebook](https://www.facebook.com/ThimPress/)
 - [Twitter](http://twitter.com/thimpress)
 - [Website](http://thimpress.com/). On this website, we even have an exclusive support section for premium products. But we always want to help, so feel free to ask.
 
-###Installation
+== Installation ==
 
 **From your WordPress dashboard**
 1. Visit 'Plugin > Add new'.
@@ -50,4 +64,35 @@ To stay in touch and update about FundPress's future releases and features, you 
 2. Activate the plugin through the 'Plugins' menu in WordPress Dashboard.
 
 
+== Frequently Asked Questions ==
+
+== Screenshots ==
+
+1. Single Event Page
+2. Create A New Event
+3. Archive Event Page
+4. General Settings
+5. Page Settings
+6. Email Settings
+7. Checkout Settings
+
+== Changelog ==
+
+= 1.0 =
+- An amazing Events Manager plugin for WordPress was born
+
+= 2.0 =
+- Fix timezone countdown
+- Rebuild Core
+- Update booking detail page
+- Update event countdown widget
+- Update event category template
+- Add event note
+- Add booking note
+- Add map location for event
+- Add setting for set up Google map API key
+- Add event category taxonomy
+- Add woocommerce payment add-on
+
+== Upgrade Notice ==
 

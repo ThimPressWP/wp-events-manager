@@ -20,7 +20,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 
 	public function __construct() {
 		$this->id    = 'event_emails';
-		$this->label = __( 'Emails', 'wp-event-manager' );
+		$this->label = __( 'Emails', 'wp-events-manager' );
 		parent::__construct();
 	}
 
@@ -37,18 +37,18 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 			array(
 				'type'  => 'section_start',
 				'id'    => 'email_settings',
-				'title' => __( 'Email Notifications', 'wp-event-manager' ),
+				'title' => __( 'Email Notifications', 'wp-events-manager' ),
 			),
 			array(
 				'type'    => 'yes_no',
-				'title'   => __( 'Event register', 'wp-event-manager' ),
-				'desc'    => __( 'Send notify when user register event', 'wp-event-manager' ),
+				'title'   => __( 'Event register', 'wp-events-manager' ),
+				'desc'    => __( 'Send notify when user register event', 'wp-events-manager' ),
 				'id'      => $prefix . 'email_enable',
 				'default' => 'yes'
 			),
 			array(
 				'type'        => 'text',
-				'title'       => __( 'From name', 'wp-event-manager' ),
+				'title'       => __( 'From name', 'wp-events-manager' ),
 				'placeholder' => get_option( 'blogname' ),
 				'id'          => $prefix . 'email_from_name',
 				'default'     => get_option( 'blog_name' ),
@@ -56,7 +56,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 			),
 			array(
 				'type'        => 'email',
-				'title'       => __( 'Email from', 'wp-event-manager' ),
+				'title'       => __( 'Email from', 'wp-events-manager' ),
 				'placeholder' => get_option( 'admin_email' ),
 				'id'          => $prefix . 'admin_email',
 				'default'     => get_option( 'admin_email' ),
@@ -64,16 +64,16 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 			),
 			array(
 				'type'        => 'text',
-				'title'       => __( 'Subject', 'wp-event-manager' ),
-				'placeholder' => __( 'Register event', 'wp-event-manager' ),
+				'title'       => __( 'Subject', 'wp-events-manager' ),
+				'placeholder' => __( 'Register event', 'wp-events-manager' ),
 				'id'          => $prefix . 'email_subject',
 				'default'     => '',
 				'class'       => 'email-setting-subject' . ( $register_event_mail == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
 				'type'    => 'checkbox',
-				'title'   => __( 'Account register', 'wp-event-manager' ),
-				'desc'    => __( 'Send notify when user register account', 'wp-event-manager' ),
+				'title'   => __( 'Account register', 'wp-events-manager' ),
+				'desc'    => __( 'Send notify when user register account', 'wp-events-manager' ),
 				'id'      => $prefix . 'register_notify',
 				'default' => false
 			),

@@ -102,7 +102,7 @@ abstract class TP_Event_Abstract_Payment_Gateway {
 	 */
 	public function completed_process_message() {
 		if ( !tp_event_has_notice( 'success' ) ) {
-			tp_event_has_notice( 'success', __( 'Payment completed. We will send you email when payment method verify.', 'wp-event-manager' ) );
+			tp_event_has_notice( 'success', __( 'Payment completed. We will send you email when payment method verify.', 'wp-events-manager' ) );
 		}
 	}
 

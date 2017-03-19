@@ -127,7 +127,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function text_domain() {
 			// Get mo file
-			$text_domain = 'wp-event-manager';
+			$text_domain = 'wp-events-manager';
 			$locale      = apply_filters( 'plugin_locale', get_locale(), $text_domain );
 			$mo_file     = $text_domain . '-' . $locale . '.mo';
 			// Check mo file global

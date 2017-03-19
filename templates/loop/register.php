@@ -19,19 +19,19 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
 
     <ul class="event-info">
         <li class="total">
-            <span class="label"><?php _e( 'Total Slot:', 'wp-event-manager' ) ?></span>
+            <span class="label"><?php _e( 'Total Slot:', 'wp-events-manager' ) ?></span>
             <span clsas="detail"><?php echo esc_html( absint( $event->qty ) ) ?></span>
         </li>
         <li class="booking_slot">
-            <span class="label"><?php _e( 'Booked Slot:', 'wp-event-manager' ) ?></span>
+            <span class="label"><?php _e( 'Booked Slot:', 'wp-events-manager' ) ?></span>
             <span clsas="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ) ?></span>
         </li>
         <li class="price">
-            <span class="label"><?php _e( 'Cost:', 'wp-event-manager' ) ?></span>
-            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'wp-event-manager' ) : tp_event_format_price( $event->get_price() ) ) ?></span>
+            <span class="label"><?php _e( 'Cost:', 'wp-events-manager' ) ?></span>
+            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'wp-events-manager' ) : tp_event_format_price( $event->get_price() ) ) ?></span>
         </li>
     </ul>
 
-    <a class="event_register_submit event_auth_button event-load-booking-form" data-event="<?php echo esc_attr( get_the_ID() ) ?>"><?php _e( 'Register Now', 'wp-event-manager' ); ?></a>
+    <a class="event_register_submit event_auth_button event-load-booking-form" data-event="<?php echo esc_attr( get_the_ID() ) ?>"><?php _e( 'Register Now', 'wp-events-manager' ); ?></a>
 
 </div>

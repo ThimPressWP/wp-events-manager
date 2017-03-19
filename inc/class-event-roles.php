@@ -12,7 +12,7 @@ class TP_Event_Roles {
      */
     public static function add_roles() {
         global $wp_roles;
-        $wp_roles->add_role( 'event_manager', __( 'Event Manager', 'wp-event-manager' ), array(
+        $wp_roles->add_role( 'event_manager', __( 'Event Manager', 'wp-events-manager' ), array(
             'read' => true,
             'edit_posts' => true,
             'delete_posts' => true,
@@ -42,7 +42,7 @@ class TP_Event_Roles {
             'read_private_pages' => true,
             'read_private_posts' => true
         ) );
-        $wp_roles->add_role( 'event_editor', __( 'Event Editor', 'wp-event-manager' ), array(
+        $wp_roles->add_role( 'event_editor', __( 'Event Editor', 'wp-events-manager' ), array(
             'read' => true
         ) );
     }

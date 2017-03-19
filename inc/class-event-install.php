@@ -114,28 +114,28 @@ class TP_Event_Install {
 	public static function create_pages() {
 		$pages = array(
 			'register'        => array(
-				'name'    => _x( 'user-register', 'Page slug', 'wp-event-manager' ),
-				'title'   => _x( 'User Register', 'Page title', 'wp-event-manager' ),
+				'name'    => _x( 'user-register', 'Page slug', 'wp-events-manager' ),
+				'title'   => _x( 'User Register', 'Page title', 'wp-events-manager' ),
 				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'tp_event_register' ) . ']'
 			),
 			'login'           => array(
-				'name'    => _x( 'user-login', 'Page slug', 'wp-event-manager' ),
-				'title'   => _x( 'User Login', 'Page title', 'wp-event-manager' ),
+				'name'    => _x( 'user-login', 'Page slug', 'wp-events-manager' ),
+				'title'   => _x( 'User Login', 'Page title', 'wp-events-manager' ),
 				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'tp_event_login' ) . ']'
 			),
 			'forgot_password' => array(
-				'name'    => _x( 'forgot-password', 'Page slug', 'wp-event-manager' ),
-				'title'   => _x( 'Forgot Password', 'Page title', 'wp-event-manager' ),
+				'name'    => _x( 'forgot-password', 'Page slug', 'wp-events-manager' ),
+				'title'   => _x( 'Forgot Password', 'Page title', 'wp-events-manager' ),
 				'content' => '[' . apply_filters( 'tp_event_forgot_password_shortcode_tag', 'tp_event_forgot_password' ) . ']'
 			),
 			'reset_password'  => array(
-				'name'    => _x( 'reset-password', 'Page slug', 'wp-event-manager' ),
-				'title'   => _x( 'Reset Password', 'Page title', 'wp-event-manager' ),
+				'name'    => _x( 'reset-password', 'Page slug', 'wp-events-manager' ),
+				'title'   => _x( 'Reset Password', 'Page title', 'wp-events-manager' ),
 				'content' => '[' . apply_filters( 'tp_event_reset_password_shortcode_tag', 'tp_event_reset_password' ) . ']'
 			),
 			'account'         => array(
-				'name'    => _x( 'user-account', 'Page slug', 'wp-event-manager' ),
-				'title'   => _x( 'User Account', 'Page title', 'wp-event-manager' ),
+				'name'    => _x( 'user-account', 'Page slug', 'wp-events-manager' ),
+				'title'   => _x( 'User Account', 'Page title', 'wp-events-manager' ),
 				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'tp_event_account' ) . ']'
 			),
 		);
