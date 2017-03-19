@@ -44,6 +44,7 @@ To best use this theme, we suggest you use premium high quality themes made by T
 2. Activate the plugin through the 'Plugins' menu in WordPress Dashboard.
 
 ##Connect with us
+
 To stay in touch and update about FundPress's future releases and features, you can connect with us via:
 - [Facebook](https://www.facebook.com/ThimPress/)
 - [Twitter](http://twitter.com/thimpress)
