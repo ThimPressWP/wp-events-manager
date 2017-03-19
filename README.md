@@ -1,10 +1,10 @@
-###What is WP Events Manager?
+##What is WP Events Manager?
 
 WP Events Manager is a powerful Events Manager plugin with all of the most important features of an Event Website.
 
 It helps you easier manage all of your events and even help you sell your tickets online.
 
-###What can WP Events Manager do?
+##What can WP Events Manager do?
 
 * Set up events with:
  * Quantity (number of tickets)
@@ -21,7 +21,7 @@ It helps you easier manage all of your events and even help you sell your ticket
  * Set up Cancel Payment status 
  * Limit number of times people register 
 
-###WordPress Themes for Events
+##WordPress Themes for Events
 
 To best use this theme, we suggest you use premium high quality themes made by ThimPress:
 
@@ -32,13 +32,7 @@ To best use this theme, we suggest you use premium high quality themes made by T
 **[Best Hotel WordPress Theme](http://themeforest.net/item/hotel-wordpress-theme-sailing/13321455?utm_source=wporg&utm_medium=wphotelbooking&ref=thimpress&utm_campaign=wphotelbooking)**
 
 
-###Connect with us
-To stay in touch and update about FundPress's future releases and features, you can connect with us via:
-- [Facebook](https://www.facebook.com/ThimPress/)
-- [Twitter](http://twitter.com/thimpress)
-- [Website](http://thimpress.com/). On this website, we even have an exclusive support section for premium products. But we always want to help, so feel free to ask.
-
-###Installation
+##Installation
 
 **From your WordPress dashboard**
 1. Visit 'Plugin > Add new'.
@@ -49,5 +43,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 1. Search, select and download WP Events Manager.
 2. Activate the plugin through the 'Plugins' menu in WordPress Dashboard.
 
-
+##Connect with us
+To stay in touch and update about FundPress's future releases and features, you can connect with us via:
+- [Facebook](https://www.facebook.com/ThimPress/)
+- [Twitter](http://twitter.com/thimpress)
+- [Website](http://thimpress.com/). On this website, we even have an exclusive support section for premium products. But we always want to help, so feel free to ask.
 
