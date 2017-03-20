@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TP_Event_Template {
+class WPEMS_Template {
 
 	/**
 	 * Path to the includes directory
@@ -49,4 +49,4 @@ class TP_Event_Template {
 	}
 }
 
-new TP_Event_Template();
+new WPEMS_Template();

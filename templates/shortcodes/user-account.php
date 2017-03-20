@@ -28,7 +28,7 @@ if ( $query->have_posts() ) :
         <tbody>
 		<?php foreach ( $query->posts as $post ): ?>
 
-			<?php $booking = TP_Event_Booking::instance( $post->ID ) ?>
+			<?php $booking = WPEMS_Booking::instance( $post->ID ) ?>
             <tr>
                 <td><?php printf( '%s', wpems_format_ID( $post->ID ) ) ?></td>
                 <td><?php printf( '<a href="%s">%s</a>', get_the_permalink( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>

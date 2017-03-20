@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
+class WPEMS_Admin_Setting_General extends WPEMS_Abstract_Setting {
 
 	/**
 	 * ID
@@ -107,4 +107,4 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 
 }
 
-return new TP_Event_Admin_Setting_General();
+return new WPEMS_Admin_Setting_General();

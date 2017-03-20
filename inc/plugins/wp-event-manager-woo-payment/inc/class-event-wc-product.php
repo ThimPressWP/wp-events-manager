@@ -36,7 +36,7 @@ class  TP_Event_WC_Product extends WC_Product_Simple {
 	 * @return mixed
 	 */
 	public function get_price() {
-		$event = TP_Event_Event::instance( $this->post, $this->data );
+		$event = WPEMS_Event::instance( $this->post, $this->data );
 		return $event->get_price();
 	}
 
@@ -55,7 +55,7 @@ class  TP_Event_WC_Product extends WC_Product_Simple {
 	 * @return mixed
 	 */
 	public function get_stock_quantity() {
-		$event = TP_Event_Event::instance( $this->post );
+		$event = WPEMS_Event::instance( $this->post );
 		return $event->get_slot_available();
 	}
 

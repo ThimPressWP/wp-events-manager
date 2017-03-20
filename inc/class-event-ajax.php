@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  * Ajax Process
  */
-class TP_Event_Ajax {
+class WPEMS_Ajax {
 
 	public function __construct() {
 		// actions with
@@ -62,7 +62,7 @@ class TP_Event_Ajax {
 			wpems_print_notices( 'error', __( 'You must login before register ', 'wp-events-manager' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			die();
 		} else {
-			$event           = new TP_Event_Event( $event_id );
+			$event           = new WPEMS_Event( $event_id );
 			$registered_time = $event->booked_quantity( get_current_user_id() );
 			ob_start();
 			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
@@ -83,7 +83,7 @@ class TP_Event_Ajax {
 	 * Login Ajax
 	 */
 	public function event_login_action() {
-		TP_Event_User_Process::process_login();
+		WPEMS_User_Process::process_login();
 		die();
 	}
 
@@ -115,8 +115,8 @@ class TP_Event_Ajax {
 
 			// End sanitize, validate data
 			// load booking module
-			$booking = TP_Event_Booking::instance();
-			$event   = TP_Event_Event::instance( $event_id );
+			$booking = WPEMS_Booking::instance();
+			$event   = WPEMS_Event::instance( $event_id );
 
 			$user       = wp_get_current_user();
 			$registered = $event->booked_quantity( $user->ID );
@@ -161,7 +161,7 @@ class TP_Event_Ajax {
 				} else {
 					if ( $args['price'] == 0 ) {
 						// update booking status
-						$book = TP_Event_Booking::instance( $booking_id );
+						$book = WPEMS_Booking::instance( $booking_id );
 						$book->update_status( 'pending' );
 
 						// user booking
@@ -211,4 +211,4 @@ class TP_Event_Ajax {
 }
 
 // initialize ajax class process
-new TP_Event_Ajax();
+new WPEMS_Ajax();

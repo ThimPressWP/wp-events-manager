@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class TP_Event_Roles {
+class WPEMS_Roles {
 
     /**
      * Add Roles

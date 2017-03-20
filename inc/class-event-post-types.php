@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  * register all post type
  */
-class TP_Event_Custom_Post_Types {
+class WPEMS_Custom_Post_Types {
 
 	public function __construct() {
 
@@ -264,7 +264,7 @@ class TP_Event_Custom_Post_Types {
 	 * @param type $post_id
 	 */
 	public function event_column_content( $column, $post_id ) {
-		$event = TP_Event_Event::instance( $post_id );
+		$event = WPEMS_Event::instance( $post_id );
 		switch ( $column ) {
 			case 'status' :
 				$status = get_post_status_object( get_post_status( $post_id ) );
@@ -332,7 +332,7 @@ class TP_Event_Custom_Post_Types {
 	 * @param $booking_id
 	 */
 	public function booking_column_content( $column, $booking_id ) {
-		$booking = TP_Event_Booking::instance( $booking_id );
+		$booking = WPEMS_Booking::instance( $booking_id );
 		switch ( $column ) {
 			case 'ID':
 				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->ID ), wpems_format_ID( $booking_id ) );
@@ -467,4 +467,4 @@ class TP_Event_Custom_Post_Types {
 
 }
 
-new TP_Event_Custom_Post_Types();
+new WPEMS_Custom_Post_Types();

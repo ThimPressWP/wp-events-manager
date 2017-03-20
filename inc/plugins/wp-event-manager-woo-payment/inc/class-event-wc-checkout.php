@@ -11,10 +11,10 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'TP_Event_Booking' ) )
+if ( !class_exists( 'WPEMS_Booking' ) )
 	return;
 
-class TP_Event_WC_Checkout extends TP_Event_Booking {
+class TP_Event_WC_Checkout extends WPEMS_Booking {
 
 	function __construct( $id = null ) {
 		parent::__construct( $id );
@@ -52,13 +52,13 @@ class TP_Event_WC_Checkout extends TP_Event_Booking {
 		}
 
 		if ( $create === true ) {
-			$old_order = get_post_meta( $order_id, '_tp_event_event_order', true );
+			$old_order = get_post_meta( $order_id, '_WPEMS_Event_order', true );
 			if ( $old_order ) {
 				wp_delete_post( $old_order, true );
 			}
 			if ( $booking = $this->create_booking( $args, 'woo_payment' ) ) {
 				update_post_meta( $booking, '_tp_event_woo_order', $order_id );
-				update_post_meta( $order_id, '_tp_event_event_order', $booking );
+				update_post_meta( $order_id, '_WPEMS_Event_order', $booking );
 				return true;
 			}
 		}

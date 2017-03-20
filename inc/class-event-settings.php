@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class TP_Event_Settings {
+class WPEMS_Settings {
 
 	/**
 	 * $_options

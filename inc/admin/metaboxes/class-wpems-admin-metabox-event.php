@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class TP_Event_Admin_Metabox_Event {
+class WPEMS_Admin_Metabox_Event {
 
 	public static function save( $post_id, $posted ) {
 		if ( empty( $posted ) )
@@ -24,7 +24,7 @@ class TP_Event_Admin_Metabox_Event {
 		$end .= $end && !empty( $_POST['tp_event_time_end'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_end'] ) : '';
 
 		if ( ( $start && !$end ) || ( strtotime( $start ) >= strtotime( $end ) ) ) {
-			TP_Event_Admin_Metaboxes::add_error( __( 'Please make sure event time is validate', 'wp-events-manager' ) );
+			WPEMS_Admin_Metaboxes::add_error( __( 'Please make sure event time is validate', 'wp-events-manager' ) );
 			wp_update_post( array( 'ID' => $post_id, 'post_status' => 'publish' ) );
 		}
 

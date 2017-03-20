@@ -9,9 +9,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * TP_Event_Shortcodes class
+ * WPEMS_Shortcodes class
  */
-class TP_Event_Shortcodes {
+class WPEMS_Shortcodes {
 
 	/**
 	 * Init shortcodes
@@ -31,7 +31,7 @@ class TP_Event_Shortcodes {
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
-			add_shortcode( apply_filters( "tp_event_{$shortcode}_shortcode_tag", 'tp_event_' . $shortcode ), $function );
+			add_shortcode( apply_filters( "wp_event_{$shortcode}_shortcode_tag", 'wp_event_' . $shortcode ), $function );
 		}
 
 		add_action( 'template_redirect', array( __CLASS__, 'auto_shortcode' ) );
@@ -93,7 +93,7 @@ class TP_Event_Shortcodes {
 	 */
 	public static function list_event( $atts ) {
 		$args = array( 'post_type' => 'tp_event' );
-		return TP_Event_Shortcodes::render( 'list-event', 'event-list.php', array( 'args' => $args ) );
+		return WPEMS_Shortcodes::render( 'list-event', 'event-list.php', array( 'args' => $args ) );
 	}
 
 
@@ -110,21 +110,21 @@ class TP_Event_Shortcodes {
 			return '';
 		}
 		if ( !get_option( 'users_can_register' ) ) {
-			return TP_Event_Shortcodes::render( 'user-register', 'user-cannot-register.php' );
+			return WPEMS_Shortcodes::render( 'user-register', 'user-cannot-register.php' );
 		} elseif ( !empty( $_REQUEST['registered'] ) ) {
 			$email = sanitize_email( $_REQUEST['registered'] );
 			$user  = get_user_by( 'email', $email );
 			if ( $user && $user->ID ) {
 				wp_new_user_notification( $user->ID );
 				// register completed
-				return TP_Event_Shortcodes::render( 'user-register', 'register-completed.php' );
+				return WPEMS_Shortcodes::render( 'user-register', 'register-completed.php' );
 			} else {
 				// error
-				return TP_Event_Shortcodes::render( 'user-register', 'register-error.php' );
+				return WPEMS_Shortcodes::render( 'user-register', 'register-error.php' );
 			}
 		} elseif ( !is_user_logged_in() ) {
 			// show register form
-			return TP_Event_Shortcodes::render( 'user-register', 'form-register.php' );
+			return WPEMS_Shortcodes::render( 'user-register', 'form-register.php' );
 		}
 
 		return '';
@@ -142,7 +142,7 @@ class TP_Event_Shortcodes {
 			return '';
 		}
 
-		return TP_Event_Shortcodes::render( 'user-login', 'form-login.php' );
+		return WPEMS_Shortcodes::render( 'user-login', 'form-login.php' );
 	}
 
 	/**
@@ -161,7 +161,7 @@ class TP_Event_Shortcodes {
 		if ( $checkemail ) {
 			wpems_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
 		} else {
-			return TP_Event_Shortcodes::render( 'forgot-password', 'forgot-password.php' );
+			return WPEMS_Shortcodes::render( 'forgot-password', 'forgot-password.php' );
 		}
 		return '';
 	}
@@ -192,7 +192,7 @@ class TP_Event_Shortcodes {
 		if ( $atts['checkemail'] ) {
 			wpems_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
 		}
-		return TP_Event_Shortcodes::render( 'reset-password', 'reset-password.php', array( 'atts' => $atts ) );
+		return WPEMS_Shortcodes::render( 'reset-password', 'reset-password.php', array( 'atts' => $atts ) );
 
 	}
 
@@ -214,7 +214,7 @@ class TP_Event_Shortcodes {
 				),
 			),
 		);
-		return TP_Event_Shortcodes::render( 'user-account', 'user-account.php', array( 'args' => $args ) );
+		return WPEMS_Shortcodes::render( 'user-account', 'user-account.php', array( 'args' => $args ) );
 	}
 
 	/**
@@ -231,9 +231,9 @@ class TP_Event_Shortcodes {
 			), $atts
 		);
 
-		return TP_Event_Shortcodes::render( 'event-countdown', 'event-countdown.php', array( 'args' => $atts ) );
+		return WPEMS_Shortcodes::render( 'event-countdown', 'event-countdown.php', array( 'args' => $atts ) );
 	}
 
 }
 
-TP_Event_Shortcodes::init();
+WPEMS_Shortcodes::init();

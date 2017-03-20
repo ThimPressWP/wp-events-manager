@@ -9,7 +9,7 @@
   Requires at least: 3.8
   Tested up to: 4.7.2
 
-  Text Domain: tp-event-woo
+  Text Domain: wp-events-woo
   Domain Path: /languages/
  */
 
@@ -155,12 +155,12 @@ class TP_Event_Woo {
 	 * @param $new_status
 	 */
 	public function woocommerce_order_status_changed( $order_id, $old_status, $new_status ) {
-		$event_booking_id = get_post_meta( $order_id, '_tp_event_event_order', true );
+		$event_booking_id = get_post_meta( $order_id, '_WPEMS_Event_order', true );
 		if ( $event_booking_id ) {
 			if ( in_array( $new_status, array( 'completed', 'pending', 'processing', 'cancelled' ) ) ) {
-				TP_Event_Booking::instance( $event_booking_id )->update_status( 'ea-' . $new_status );
+				WPEMS_Booking::instance( $event_booking_id )->update_status( 'ea-' . $new_status );
 			} else {
-				TP_Event_Booking::instance( $event_booking_id )->update_status( 'ea-pending' );
+				WPEMS_Booking::instance( $event_booking_id )->update_status( 'ea-pending' );
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit();
 
-class TP_Event_Admin_Settings {
+class WPEMS_Admin_Settings {
 
 	private static $messages = array();
 
@@ -199,4 +199,4 @@ class TP_Event_Admin_Settings {
 
 }
 
-TP_Event_Admin_Settings::init();
+WPEMS_Admin_Settings::init();

@@ -11,10 +11,10 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'TP_Event_Settings' ) )
+if ( !class_exists( 'WPEMS_Settings' ) )
 	return;
 
-class TP_Event_WC_Settings extends TP_Event_Settings {
+class TP_Event_WC_Settings extends WPEMS_Settings {
 
 	/**
 	 * TP_Event_WC_Settings constructor

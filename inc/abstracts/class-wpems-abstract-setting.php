@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-abstract class TP_Event_Abstract_Setting {
+abstract class WPEMS_Abstract_Setting {
 
 	/**
 	 * Setting page id
@@ -77,7 +77,7 @@ abstract class TP_Event_Abstract_Setting {
 	 */
 	public function output( $tab ) {
 		$settings = $this->get_settings();
-		TP_Event_Admin_Settings::render_fields( $settings );
+		WPEMS_Admin_Settings::render_fields( $settings );
 	}
 
 	/**
@@ -86,7 +86,7 @@ abstract class TP_Event_Abstract_Setting {
 	 */
 	public function save() {
 		$settings = $this->get_settings();
-		TP_Event_Admin_Settings::save_fields( $settings );
+		WPEMS_Admin_Settings::save_fields( $settings );
 	}
 
 }

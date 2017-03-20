@@ -6,7 +6,7 @@
  * @author ducnvtt
  */
 
-class TP_Event_Session {
+class WPEMS_Session {
 
 	/**
 	 * array key of session or cookie

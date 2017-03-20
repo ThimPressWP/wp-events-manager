@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
+class WPEMS_Admin_Setting_Emails extends WPEMS_Abstract_Setting {
 
 	/**
 	 * ID
@@ -86,4 +86,4 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 
 }
 
-return new TP_Event_Admin_Setting_Emails();
+return new WPEMS_Admin_Setting_Emails();

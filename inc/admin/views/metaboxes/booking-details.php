@@ -9,7 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 global $post;
-$booking = TP_Event_Booking::instance( $post->ID );
+$booking = WPEMS_Booking::instance( $post->ID );
 $user    = get_userdata( $booking->user_id );
 $prefix  = 'tp_event_';
 ?>
@@ -51,7 +51,7 @@ $prefix  = 'tp_event_';
             </thead>
             <tbody>
             <tr data-item_id="<?php echo esc_attr( $booking->event_id ); ?>">
-				<?php $event = TP_Event_Event::instance( $booking->event_id ); ?>
+				<?php $event = WPEMS_Event::instance( $booking->event_id ); ?>
                 <td><?php echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
                 <td><?php echo sprintf( '%s', wpems_format_price( floatval( $event->price ) ) ) ?></td>
                 <td><?php echo sprintf( '%s', $booking->qty ) ?></td>

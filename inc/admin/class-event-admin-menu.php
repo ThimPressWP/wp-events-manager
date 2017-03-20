@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class TP_Event_Admin_Menu {
+class WPEMS_Admin_Menu {
 
 	/**
 	 * menus
@@ -36,8 +36,8 @@ class TP_Event_Admin_Menu {
 				call_user_func_array( 'add_submenu_page', $menu );
 			}
 		}
-		add_submenu_page( 'tp-event-setting', __( 'TP Event Users', 'wp-events-manager' ), __( 'Users', 'wp-events-manager' ), 'edit_others_tp_events', 'tp-event-users', array( 'TP_Event_Admin_Users', 'output' ) );
-		add_submenu_page( 'tp-event-setting', __( 'TP Event Settings', 'wp-events-manager' ), __( 'Settings', 'wp-events-manager' ), 'event_manage_settings', 'tp-event-setting', array( 'TP_Event_Admin_Settings', 'output' ) );
+		add_submenu_page( 'tp-event-setting', __( 'TP Event Users', 'wp-events-manager' ), __( 'Users', 'wp-events-manager' ), 'edit_others_tp_events', 'tp-event-users', array( 'WPEMS_Admin_Users', 'output' ) );
+		add_submenu_page( 'tp-event-setting', __( 'TP Event Settings', 'wp-events-manager' ), __( 'Settings', 'wp-events-manager' ), 'event_manage_settings', 'tp-event-setting', array( 'WPEMS_Admin_Settings', 'output' ) );
 	}
 
 	/**
@@ -62,4 +62,4 @@ class TP_Event_Admin_Menu {
 
 }
 
-TP_Event_Admin_Menu::instance();
+WPEMS_Admin_Menu::instance();

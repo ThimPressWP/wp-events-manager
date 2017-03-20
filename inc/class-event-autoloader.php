@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TP_Event_Autoloader {
+class WPEMS_Autoloader {
 
 	/**
 	 * Path to the includes directory
@@ -52,7 +52,7 @@ class TP_Event_Autoloader {
 	}
 
 	/**
-	 * Auto-load HB classes on demand to reduce memory consumption.
+	 * Auto-load WPEMS classes on demand to reduce memory consumption.
 	 *
 	 * @param string $class
 	 */
@@ -63,26 +63,26 @@ class TP_Event_Autoloader {
 		$path = $this->include_path;
 
 		// payment gateways
-		if ( strpos( $class, 'tp_event_payment_gateway_' ) === 0 ) {
-			$path = $this->include_path . 'gateways/' . substr( str_replace( '_', '-', $class ), strlen( 'tp_event_payment_gateway_' ) ) . '/';
+		if ( strpos( $class, 'wpems_payment_gateway_' ) === 0 ) {
+			$path = $this->include_path . 'gateways/' . substr( str_replace( '_', '-', $class ), strlen( 'wpems_payment_gateway_' ) ) . '/';
 		}
 		// abstract class
-		if ( strpos( $class, 'tp_event_abstract_' ) === 0 ) {
+		if ( strpos( $class, 'wpems_abstract_' ) === 0 ) {
 			$path = $this->include_path . 'abstracts/';
 		}
 
-		// widgets
-		if ( stripos( $class, 'tp_event_widget_' ) === 0 ) {
-			$path = $this->include_path . '/widgets/';
+		// admin metaboxs
+		if ( strpos( $class, 'wpems_admin_metabox_' ) === 0 ) {
+			$path = $this->include_path . 'admin/metaboxes/';
 		}
 
-		// admin metaboxs
-		if ( strpos( $class, '_event_admin_metabox_' ) ) {
-			$path = $this->include_path . 'admin/metaboxes/';
+		// widgets
+		if ( stripos( $class, 'wpems_widget_' ) === 0 ) {
+			$path = $this->include_path . '/widgets/';
 		}
 
 		$this->load_file( $path . $file );
 	}
 }
 
-new TP_Event_Autoloader();
+new WPEMS_Autoloader();

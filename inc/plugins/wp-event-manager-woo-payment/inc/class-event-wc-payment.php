@@ -11,10 +11,10 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'TP_Event_Abstract_Payment_Gateway' ) )
+if ( !class_exists( 'WPEMS_Abstract_Payment_Gateway' ) )
 	return;
 
-class TP_Event_WC_Payment extends TP_Event_Abstract_Payment_Gateway {
+class TP_Event_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 
 	/**
 	 * id of payment

@@ -5,9 +5,9 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 /**
- * TP_Event_Booking
+ * WPEMS_Booking
  */
-class TP_Event_Booking {
+class WPEMS_Booking {
 
 	private static $instance = null;
 	public $post = null;

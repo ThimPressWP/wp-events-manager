@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-abstract class TP_Event_Abstract_Payment_Gateway {
+abstract class WPEMS_Abstract_Payment_Gateway {
 
 	/**
 	 * id of payment

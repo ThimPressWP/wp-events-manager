@@ -3,15 +3,15 @@
 /**
  * Adds Foo_Widget widget.
  */
-class TP_Event_Widget_Countdown extends WP_Widget {
+class WPEMS_Widget_Countdown extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress.
 	 */
 	function __construct() {
 		parent::__construct(
-			'tp_event_widget_countdown', // Base ID
-			__( 'TP Event Countdown', 'wp-events-manager' ), // Name
+			'wpems_widget_countdown', // Base ID
+			__( 'WP Event Countdown', 'wp-events-manager' ), // Name
 			array( 'description' => __( 'Countdown timer for event', 'wp-events-manager' ), ) // Args
 		);
 	}
@@ -33,10 +33,10 @@ class TP_Event_Widget_Countdown extends WP_Widget {
 		unset( $instance['title'] );
 
 		$html   = array();
-		$html[] = '[tp_event_countdown';
+		$html[] = '[wp_event_countdown';
 
 		foreach ( $instance as $key => $value ) {
-			if ( strpos( $key, 'tp_' ) !== 0 )
+			if ( strpos( $key, 'wp_' ) !== 0 )
 				continue;
 
 			$key = substr( $key, 3 );
@@ -62,29 +62,29 @@ class TP_Event_Widget_Countdown extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$title      = !empty( $instance['title'] ) ? $instance['title'] : '';
-		$selected   = !empty( $instance['tp_events'] ) ? $instance['tp_events'] : array();
-		$nav        = isset( $instance['tp_navigation'] ) ? $instance['tp_navigation'] : false;
-		$pagination = isset( $instance['tp_pagination'] ) ? $instance['tp_pagination'] : false;
-		$slide      = isset( $instance['tp_slide'] ) ? $instance['tp_slide'] : false;
+		$selected   = !empty( $instance['wp_events'] ) ? $instance['wp_events'] : array();
+		$nav        = isset( $instance['wp_navigation'] ) ? $instance['wp_navigation'] : false;
+		$pagination = isset( $instance['wp_pagination'] ) ? $instance['wp_pagination'] : false;
+		$slide      = isset( $instance['wp_slide'] ) ? $instance['wp_slide'] : false;
 		?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'tp_slide' ); ?>"><?php _e( 'Carousel Slide:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'tp_slide' ); ?>" name="<?php echo $this->get_field_name( 'tp_slide' ); ?>" type="checkbox" value="true"<?php echo $slide == 'true' ? ' checked' : '' ?>>
+            <label for="<?php echo $this->get_field_id( 'wp_slide' ); ?>"><?php _e( 'Carousel Slide:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'wp_slide' ); ?>" name="<?php echo $this->get_field_name( 'wp_slide' ); ?>" type="checkbox" value="true"<?php echo $slide == 'true' ? ' checked' : '' ?>>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'tp_navigation' ); ?>"><?php _e( 'Navigation:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'tp_navigation' ); ?>" name="<?php echo $this->get_field_name( 'tp_navigation' ); ?>" type="checkbox" value="true"<?php echo $nav == 'true' ? ' checked' : '' ?>>
+            <label for="<?php echo $this->get_field_id( 'wp_navigation' ); ?>"><?php _e( 'Navigation:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'wp_navigation' ); ?>" name="<?php echo $this->get_field_name( 'wp_navigation' ); ?>" type="checkbox" value="true"<?php echo $nav == 'true' ? ' checked' : '' ?>>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'tp_pagination' ); ?>"><?php _e( 'Pagiantion:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'tp_pagination' ); ?>" name="<?php echo $this->get_field_name( 'tp_pagination' ); ?>" type="checkbox" value="true"<?php echo $pagination == 'true' ? ' checked' : '' ?>>
+            <label for="<?php echo $this->get_field_id( 'wp_pagination' ); ?>"><?php _e( 'Pagiantion:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'wp_pagination' ); ?>" name="<?php echo $this->get_field_name( 'wp_pagination' ); ?>" type="checkbox" value="true"<?php echo $pagination == 'true' ? ' checked' : '' ?>>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'tp_events' ); ?>"><?php _e( 'Events:' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'wp_events' ); ?>"><?php _e( 'Events:' ); ?></label>
 			<?php echo $this->events( $selected ) ?>
         </p>
 		<?php
@@ -104,13 +104,13 @@ class TP_Event_Widget_Countdown extends WP_Widget {
 		$instance          = array();
 		$instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 
-		$instance['tp_events'] = isset( $new_instance['tp_events'] ) ? $new_instance['tp_events'] : array();
+		$instance['wp_events'] = isset( $new_instance['wp_events'] ) ? $new_instance['wp_events'] : array();
 
-		$instance['tp_slide'] = isset( $new_instance['tp_slide'] ) ? $new_instance['tp_slide'] : false;
+		$instance['wp_slide'] = isset( $new_instance['wp_slide'] ) ? $new_instance['wp_slide'] : false;
 
-		$instance['tp_navigation'] = isset( $new_instance['tp_navigation'] ) ? $new_instance['tp_navigation'] : false;
+		$instance['wp_navigation'] = isset( $new_instance['wp_navigation'] ) ? $new_instance['wp_navigation'] : false;
 
-		$instance['tp_pagination'] = isset( $new_instance['tp_pagination'] ) ? $new_instance['tp_pagination'] : false;
+		$instance['wp_pagination'] = isset( $new_instance['wp_pagination'] ) ? $new_instance['wp_pagination'] : false;
 		return $instance;
 	}
 
@@ -155,7 +155,7 @@ class TP_Event_Widget_Countdown extends WP_Widget {
 
                             <li>
                                 <p>
-                                    <input id="<?php echo esc_attr( $this->id . '-' . get_the_ID() ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'tp_events' ) ?>[]" value="<?php echo esc_attr( get_the_ID() ); ?>" <?php echo ( in_array( get_the_ID(), $selected ) ) ? 'checked="checked"' : ''; ?>/>
+                                    <input id="<?php echo esc_attr( $this->id . '-' . get_the_ID() ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'wp_events' ) ?>[]" value="<?php echo esc_attr( get_the_ID() ); ?>" <?php echo ( in_array( get_the_ID(), $selected ) ) ? 'checked="checked"' : ''; ?>/>
                                     <label for="<?php echo esc_attr( $this->id . '-' . get_the_ID() ); ?>"><?php the_title(); ?></label>
                                 </p>
                             </li>

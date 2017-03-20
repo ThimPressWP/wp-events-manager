@@ -4,7 +4,7 @@ add_action( 'widgets_init', 'wpems_register_countdown_widget' );
 if ( !function_exists( 'wpems_register_countdown_widget' ) ) {
 
 	function wpems_register_countdown_widget() {
-		register_widget( 'TP_Event_Widget_Countdown' );
+		register_widget( 'WPEMS_Widget_Countdown' );
 	}
 
 }
@@ -980,7 +980,7 @@ if ( !function_exists( 'wpems_payment_gateways' ) ) {
 
 	// List payment gateways
 	function wpems_payment_gateways() {
-		return wpems_payment_gateways::instance()->get_payment_gateways();
+		return WPEMS_Payment_Gateways::instance()->get_payment_gateways();
 
 	}
 }
@@ -989,7 +989,7 @@ if ( !function_exists( 'wpems_gateways_enable' ) ) {
 
 	// List payment gateways
 	function wpems_gateways_enable() {
-		return wpems_payment_gateways::instance()->get_payment_gateways_enable();
+		return WPEMS_Payment_Gateways::instance()->get_payment_gateways_enable();
 
 	}
 }
@@ -1158,10 +1158,10 @@ if ( !function_exists( 'tp_event_get_booking' ) ) {
 	 *
 	 * @param type $booking_id
 	 *
-	 * @return TP_Event_Booking
+	 * @return WPEMS_Booking
 	 */
 	function wpems_get_booking( $booking_id ) {
-		return TP_Event_Booking::instance( $booking_id );
+		return WPEMS_Booking::instance( $booking_id );
 	}
 
 }

@@ -67,7 +67,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function loaded() {
 			// load text domain
 			$this->text_domain();
-			$this->_session = new TP_Event_Session();
+			$this->_session = new WPEMS_Session();
 
 			do_action( 'tp_event_init', $this );
 		}
@@ -89,7 +89,11 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/emails/class-event-register-event.php' );
 			$this->_include( 'inc/class-event-payment-gateways.php' );
 			$this->_include( 'inc/class-event-install.php' );
-			$this->settings = TP_Event_Settings::instance();
+			$this->_include( 'inc/class-event-settings.php' );
+			$this->_include( 'inc/class-event-session.php' );
+			$this->_include( 'inc/class-event-booking.php' );
+			$this->_include( 'inc/class-event-event.php' );
+			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {
 				$this->_include( 'inc/admin/class-event-admin.php' );

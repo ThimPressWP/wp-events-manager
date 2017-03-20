@@ -13,7 +13,7 @@ if ( !class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
-class TP_Event_Admin_Users extends WP_List_Table {
+class WPEMS_Admin_Users extends WP_List_Table {
 
 	public $items = null;
 
@@ -235,7 +235,7 @@ class TP_Event_Admin_Users extends WP_List_Table {
 	}
 
 	public static function output() {
-		$user_table = new TP_Event_Admin_Users();
+		$user_table = new WPEMS_Admin_Users();
 		?>
         <div class="wrap">
 

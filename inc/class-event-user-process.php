@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TP_Event_User_Process {
+class WPEMS_User_Process {
 
 	private static $login_url = null;
 	private static $register_url = null;
@@ -222,4 +222,4 @@ class TP_Event_User_Process {
 
 }
 
-TP_Event_User_Process::init();
+WPEMS_User_Process::init();

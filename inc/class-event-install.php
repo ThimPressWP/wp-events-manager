@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TP_Event_Install {
+class WPEMS_Install {
 
 	/**
 	 * upgrade store
@@ -25,8 +25,8 @@ class TP_Event_Install {
 	 * register_activation_hook callback
 	 */
 	public static function install() {
-		if ( !defined( 'TP_EVENT_INSTALLING' ) ) {
-			define( 'TP_EVENT_INSTALLING', true );
+		if ( !defined( 'WPEMS_INSTALLING' ) ) {
+			define( 'WPEMS_INSTALLING', true );
 			if ( !function_exists( 'get_plugin_data' ) ) {
 				require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			}
@@ -82,11 +82,11 @@ class TP_Event_Install {
 		/**
 		 * Add new roles
 		 */
-		TP_Event_Roles::add_roles();
+		WPEMS_Roles::add_roles();
 		/**
 		 * Add new caps
 		 */
-		TP_Event_Roles::add_caps();
+		WPEMS_Roles::add_caps();
 		/**
 		 * Create Pages
 		 */
@@ -104,7 +104,7 @@ class TP_Event_Install {
 		/**
 		 * Remove Caps and Roles
 		 */
-		TP_Event_Roles::remove_roles();
+		WPEMS_Roles::remove_roles();
 	}
 
 
@@ -158,8 +158,8 @@ class TP_Event_Install {
 
 }
 
-TP_Event_Install::init();
+WPEMS_Install::init();
 
 // active plugin
-register_activation_hook( WP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'install' ) );
-register_deactivation_hook( WP_EVENT_MAIN_FILE, array( 'TP_Event_Install', 'uninstall' ) );
+register_activation_hook( WP_EVENT_MAIN_FILE, array( 'WPEMS_Install', 'install' ) );
+register_deactivation_hook( WP_EVENT_MAIN_FILE, array( 'WPEMS_Install', 'uninstall' ) );

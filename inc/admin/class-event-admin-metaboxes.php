@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class TP_Event_Admin_Metaboxes {
+class WPEMS_Admin_Metaboxes {
 
 	public static function init() {
 		add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ), 0 );
@@ -12,8 +12,8 @@ class TP_Event_Admin_Metaboxes {
 		/**
 		 * Save post meta
 		 */
-		add_action( 'tp_event_process_update_tp_event_meta', array( 'TP_Event_Admin_Metabox_Event', 'save' ), 10, 2 );
-		add_action( 'tp_event_process_update_event_auth_book_meta', array( 'TP_Event_Admin_Metabox_Booking', 'save' ), 10, 2 );
+		add_action( 'tp_event_process_update_tp_event_meta', array( 'WPEMS_Admin_Metabox_Event', 'save' ), 10, 2 );
+		add_action( 'tp_event_process_update_event_auth_book_meta', array( 'WPEMS_Admin_Metabox_Booking', 'save' ), 10, 2 );
 	}
 
 	/**
@@ -21,13 +21,13 @@ class TP_Event_Admin_Metaboxes {
 	 */
 	public static function add_meta_boxes() {
 		add_meta_box(
-			'event-settings-metabox', __( 'Event Settings', 'wp-events-manager' ), array( 'TP_Event_Admin_Metabox_Event', 'render' ), 'tp_event', 'normal', 'high'
+			'event-settings-metabox', __( 'Event Settings', 'wp-events-manager' ), array( 'WPEMS_Admin_Metabox_Event', 'render' ), 'tp_event', 'normal', 'high'
 		);
 		add_meta_box(
-			'booking-information-metabox', __( 'Booking Information', 'wp-events-manager' ), array( 'TP_Event_Admin_Metabox_Booking', 'render' ), 'event_auth_book', 'normal', 'default'
+			'booking-information-metabox', __( 'Booking Information', 'wp-events-manager' ), array( 'WPEMS_Admin_Metabox_Booking', 'render' ), 'event_auth_book', 'normal', 'default'
 		);
 		add_meta_box(
-			'booking-status-side', __( 'Booking Actions', 'wp-events-manager' ), array( 'TP_Event_Admin_Metabox_Booking', 'side' ), 'event_auth_book', 'side', 'high'
+			'booking-status-side', __( 'Booking Actions', 'wp-events-manager' ), array( 'WPEMS_Admin_Metabox_Booking', 'side' ), 'event_auth_book', 'side', 'high'
 		);
 	}
 
@@ -89,4 +89,4 @@ class TP_Event_Admin_Metaboxes {
 
 }
 
-TP_Event_Admin_Metaboxes::init();
+WPEMS_Admin_Metaboxes::init();

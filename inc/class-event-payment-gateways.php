@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class wpems_payment_gateways {
+class WPEMS_Payment_Gateways {
 
 	/**
 	 * gateways method
@@ -16,7 +16,7 @@ class wpems_payment_gateways {
 	}
 
 	public function init() {
-		$payment_gateways = array( 'TP_Event_Payment_Gateway_Paypal' );
+		$payment_gateways = array( 'WPEMS_Payment_Gateway_Paypal' );
 
 		foreach ( $payment_gateways as $gateway ) {
 			$gateway                      = is_string( $gateway ) ? new $gateway : $gateway;
@@ -71,4 +71,4 @@ class wpems_payment_gateways {
 
 }
 
-wpems_payment_gateways::instance();
+WPEMS_Payment_Gateways::instance();

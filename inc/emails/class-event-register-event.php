@@ -29,7 +29,7 @@ class TP_Event_Email_Register_Event {
             return;
         }
 
-        $booking = TP_Event_Booking::instance( $booking_id );
+        $booking = WPEMS_Booking::instance( $booking_id );
 
         if ( $booking ) {
             $user_id = $booking->user_id;

@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
+class WPEMS_Admin_Setting_Checkout extends WPEMS_Abstract_Setting {
 
 	/**
 	 * ID
@@ -91,7 +91,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 			foreach ( $gateways as $gateway ) {
 				if ( $current_section === $gateway->id ) {
 					$fields = $gateway->admin_fields();
-					TP_Event_Admin_Settings::render_fields( $fields );
+					WPEMS_Admin_Settings::render_fields( $fields );
 					break;
 				}
 			}
@@ -107,7 +107,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 			foreach ( $gateways as $gateway ) {
 				if ( $current_section === $gateway->id ) {
 					$fields = $gateway->admin_fields();
-					TP_Event_Admin_Settings::save_fields( $fields );
+					WPEMS_Admin_Settings::save_fields( $fields );
 					break;
 				}
 			}
@@ -118,4 +118,4 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 
 }
 
-return new TP_Event_Admin_Setting_Checkout();
+return new WPEMS_Admin_Setting_Checkout();

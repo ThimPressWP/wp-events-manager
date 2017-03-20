@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit();
 /**
  * DN_Assets class
  */
-class TP_Event_Assets {
+class WPEMS_Assets {
 
 	/**
 	 * styles
@@ -146,4 +146,4 @@ class TP_Event_Assets {
 /**
  * init
  */
-TP_Event_Assets::init();
+WPEMS_Assets::init();
