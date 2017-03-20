@@ -1,9 +1,9 @@
 <?php
 
 /*
-  Plugin Name: WP Event Manager
+  Plugin Name: WP Events Manager
   Plugin URI: http://thimpress.com/
-  Description: A complete plugin for Event management and online booking system
+  Description: A complete plugin for Events management and online booking system
   Author: ThimPress
   Version: 2.0.0
   Author URI: http://thimpress.com

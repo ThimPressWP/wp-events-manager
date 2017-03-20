@@ -12,7 +12,7 @@ class TP_Event_Roles {
      */
     public static function add_roles() {
         global $wp_roles;
-        $wp_roles->add_role( 'event_manager', __( 'Event Manager', 'wp-events-manager' ), array(
+        $wp_roles->add_role( 'event_manager', __( 'Events Manager', 'wp-events-manager' ), array(
             'read' => true,
             'edit_posts' => true,
             'delete_posts' => true,

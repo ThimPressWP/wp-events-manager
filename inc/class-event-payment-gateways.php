@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class TP_Event_Payment_Gateways {
+class wpems_payment_gateways {
 
 	/**
 	 * gateways method
@@ -34,7 +34,7 @@ class TP_Event_Payment_Gateways {
 	public function get_payment_gateways() {
 		$gateways = $this->gateways;
 
-		$gateways = apply_filters( 'tp_event_payment_gateways', $gateways );
+		$gateways = apply_filters( 'wpems_payment_gateways', $gateways );
 
 		$available = array();
 		foreach ( $gateways as $id => $gateway ) {
@@ -71,4 +71,4 @@ class TP_Event_Payment_Gateways {
 
 }
 
-TP_Event_Payment_Gateways::instance();
+wpems_payment_gateways::instance();

@@ -294,7 +294,7 @@ class TP_Event_Custom_Post_Types {
 				if ( $event->is_free() ) {
 					echo '<span class="event_auth_event_type">' . __( 'Free', 'wp-events-manager' ) . '</span>';
 				} else {
-					echo sprintf( __( '<span class="event_auth_event_type">%s/%s</span>', 'wp-events-manager' ), tp_event_format_price( $event->get_price() ), __( 'slot', 'wp-events-manager' ) );
+					echo sprintf( __( '<span class="event_auth_event_type">%s/%s</span>', 'wp-events-manager' ), wpems_format_price( $event->get_price() ), __( 'slot', 'wp-events-manager' ) );
 				}
 				break;
 			case 'booked_slot':
@@ -335,7 +335,7 @@ class TP_Event_Custom_Post_Types {
 		$booking = TP_Event_Booking::instance( $booking_id );
 		switch ( $column ) {
 			case 'ID':
-				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->ID ), tp_event_format_ID( $booking_id ) );
+				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->ID ), wpems_format_ID( $booking_id ) );
 				break;
 			case 'event':
 				echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) );
@@ -348,15 +348,15 @@ class TP_Event_Custom_Post_Types {
 				echo $return;
 				break;
 			case 'cost':
-				echo $booking->price > 0 ? tp_event_format_price( $booking->price ) : __( 'Free', 'wp-events-manager' );
+				echo $booking->price > 0 ? wpems_format_price( $booking->price ) : __( 'Free', 'wp-events-manager' );
 				break;
 			case 'slot':
 				echo $booking->qty;
 				break;
 			case 'status':
 				$return   = array();
-				$return[] = sprintf( '%s', tp_event_booking_status( $booking_id ) );
-				$return[] = $booking->payment_id ? '<p>' . __( sprintf( '(via %s)', tp_event_get_payment_title( $booking->payment_id ) ), 'wp-events-manager' ) . '</p>' : '';
+				$return[] = sprintf( '%s', wpems_booking_status( $booking_id ) );
+				$return[] = $booking->payment_id ? '<p>' . __( sprintf( '(via %s)', wpems_get_payment_title( $booking->payment_id ) ), 'wp-events-manager' ) . '</p>' : '';
 				$return   = implode( '', $return );
 				echo $return;
 				break;

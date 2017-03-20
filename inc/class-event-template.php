@@ -30,15 +30,15 @@ class TP_Event_Template {
 		if ( is_post_type_archive( 'tp_event' ) || is_tax( 'tp_event_category' ) ) {
 			$file   = 'archive-event.php';
 			$find[] = $file;
-			$find[] = tp_event_template_path() . '/' . $file;
+			$find[] = wpems_template_path() . '/' . $file;
 		} else if ( is_single() ) {
 			$file   = 'single-event.php';
 			$find[] = $file;
-			$find[] = tp_event_template_path() . '/' . $file;
+			$find[] = wpems_template_path() . '/' . $file;
 		}
 
 		if ( $file ) {
-			$find[]   = tp_event_template_path() . $file;
+			$find[]   = wpems_template_path() . $file;
 			$template = locate_template( array_unique( $find ) );
 			if ( !$template ) {
 				$template = untrailingslashit( WP_EVENT_PATH ) . '/templates/' . $file;

@@ -31,7 +31,7 @@ $prefix  = 'tp_event_';
             </div>
         </div>
         <div class="booking-data">
-            <h3 class="booking-data-number"><?php echo sprintf( esc_attr__( 'Order %s', 'wp-events-manager' ), tp_event_format_ID( $post->ID ) ); ?></h3>
+            <h3 class="booking-data-number"><?php echo sprintf( esc_attr__( 'Order %s', 'wp-events-manager' ), wpems_format_ID( $post->ID ) ); ?></h3>
             <div class="booking-date">
 				<?php echo sprintf( __( 'Date %s', 'wp-events-manager' ), $post->post_date ); ?>
             </div>
@@ -53,10 +53,10 @@ $prefix  = 'tp_event_';
             <tr data-item_id="<?php echo esc_attr( $booking->event_id ); ?>">
 				<?php $event = TP_Event_Event::instance( $booking->event_id ); ?>
                 <td><?php echo sprintf( '<a href="%s">%s</a>', get_edit_post_link( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
-                <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $event->price ) ) ) ?></td>
+                <td><?php echo sprintf( '%s', wpems_format_price( floatval( $event->price ) ) ) ?></td>
                 <td><?php echo sprintf( '%s', $booking->qty ) ?></td>
-                <td><?php echo sprintf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-events-manager' ) ) ?></td>
-                <td><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ) ) ) ?></td>
+                <td><?php echo sprintf( '%s', $booking->payment_id ? wpems_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-events-manager' ) ) ?></td>
+                <td><?php echo sprintf( '%s', wpems_format_price( floatval( $booking->price ) ) ) ?></td>
             </tr>
             </tbody>
             <tfoot>
@@ -66,7 +66,7 @@ $prefix  = 'tp_event_';
             </tr>
             <tr>
                 <td colspan="4"><?php _e( 'Total', 'wp-events-manager' ); ?></td>
-                <td class="booking-total"><?php echo sprintf( '%s', tp_event_format_price( floatval( $booking->price ) ) ) ?></td>
+                <td class="booking-total"><?php echo sprintf( '%s', wpems_format_price( floatval( $booking->price ) ) ) ?></td>
             </tr>
             </tfoot>
 			<?php wp_nonce_field( 'event_booking_nonce', 'event-booking-nonce' ); ?>

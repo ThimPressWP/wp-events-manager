@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 <div id="event-booking-actions" class="booking-actions">
     <label for="booking-status"><?php echo esc_html__( 'Booking Status', 'wp-events-manager' ); ?></label>
     <select name="booking-status" id="booking-status">
-		<?php foreach ( tp_event_get_payment_status() as $key => $text ) : ?>
+		<?php foreach ( wpems_get_payment_status() as $key => $text ) : ?>
             <option value="<?php echo esc_attr( $key ) ?>"<?php echo get_post_status( $post->ID ) === $key ? ' selected' : '' ?>><?php printf( '%s', $text ) ?></option>
 		<?php endforeach; ?>
     </select>

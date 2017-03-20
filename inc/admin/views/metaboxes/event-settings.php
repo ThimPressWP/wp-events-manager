@@ -35,7 +35,7 @@ $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
         </div>
         <div class="option_group">
             <p class="form-field">
-                <label for="_price"><?php printf( '%s(%s)', __( 'Price', 'wp-events-manager' ), tp_event_get_currency_symbol() ) ?></label>
+                <label for="_price"><?php printf( '%s(%s)', __( 'Price', 'wp-events-manager' ), wpems_get_currency_symbol() ) ?></label>
                 <input type="number" step="any" min="0" class="short" name="<?php echo esc_attr( $prefix ) ?>price" id="_price" value="<?php echo esc_attr( floatval( $price ) ) ?>" />
             </p>
             <p class="event-meta-notice">
@@ -66,7 +66,7 @@ $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
                 <label for="_location"><?php _e( 'Location', 'wp-events-manager' ) ?></label>
                 <input type="text" class="short" name="<?php echo esc_attr( $prefix ) ?>location" id="_location" value="<?php echo esc_attr( $location ) ?>">
             </p>
-			<?php if ( !tp_event_get_option( 'google_map_api_key' ) ): ?>
+			<?php if ( !wpems_get_option( 'google_map_api_key' ) ): ?>
                 <p class="event-meta-notice">
 					<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
                     <a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=general' ); ?>"><?php echo esc_html__( 'Set up here' ) ?></a>

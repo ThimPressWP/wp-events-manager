@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: WP Event Manager - WooCommerce Payment Methods Integration
+  Plugin Name: WP Events Manager - WooCommerce Payment Methods Integration
   Plugin URI: http://thimpress.com/
   Description: Support paying for a booking with the payment methods provided by Woocommerce
   Author: ThimPress
@@ -77,16 +77,16 @@ class TP_Event_Woo {
 		add_filter( 'tp_event_enable_paypal_payment', array( $this, 'disable_paypal_checkout' ), 10, 1 );
 
 		if ( get_option( 'thimpress_events_woo_payment_enable' ) == 'yes' ) {
-			add_filter( 'tp_event_get_currency', array( $this, 'tp_event_get_currency' ), 50 );
+			add_filter( 'tp_event_get_currency', array( $this, 'wpemswc_get_currency' ), 50 );
 		}
 
-		add_filter( 'thimpress_event_l18n', array( $this, 'tp_event_woo_l18n' ), 1 );
+		add_filter( 'thimpress_event_l18n', array( $this, 'wpems_woo_l18n' ), 1 );
 
 
 	}
 
 	// filter woo currency
-	public function tp_event_get_currency( $currency ) {
+	public function wpemswc_get_currency( $currency ) {
 		return get_woocommerce_currency();
 	}
 
@@ -113,7 +113,7 @@ class TP_Event_Woo {
 	 *
 	 * @return array
 	 */
-	public function tp_event_woo_l18n( $args ) {
+	public function wpems_woo_l18n( $args ) {
 		$l18n = array(
 			'add_to_cart'  => __( ' has been added to your cart.', 'wp-event-woo' ),
 			'woo_cart_url' => sprintf( '<a href="%s" class="button wc-forward">%s</a>', esc_url( wc_get_page_permalink( 'cart' ) ), esc_html__( 'View Cart', 'wp-event-woo' ) )
@@ -244,13 +244,13 @@ class TP_Event_Woo {
 			<?php
 			switch ( self::$_notice ) {
 				case 'required_active_tp_event':
-					echo '<p>' . __( wp_kses( '<strong>WP Event Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Event Manager</strong> is activated. Please install and active it before you can using this add-on.', array( 'strong' => array() ) ), 'wp-event-woo' ) . '</p>';
+					echo '<p>' . __( wp_kses( '<strong>WP Events Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Events Manager</strong> is activated. Please install and active it before you can using this add-on.', array( 'strong' => array() ) ), 'wp-event-woo' ) . '</p>';
 					break;
 				case 'required_update_tp_event':
-					echo '<p>' . sprintf( __( wp_kses( '<strong>WP Event Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Event Manager</strong> version <strong>%s</strong> or higher.', array( 'strong' => array() ), 'wp-event-woo' ) ), WP_EVENT_WOO_REQUIRE_VER ) . '</p>';
+					echo '<p>' . sprintf( __( wp_kses( '<strong>WP Events Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Events Manager</strong> version <strong>%s</strong> or higher.', array( 'strong' => array() ), 'wp-event-woo' ) ), WP_EVENT_WOO_REQUIRE_VER ) . '</p>';
 					break;
 				case'required_active_woo':
-					echo '<p>' . sprintf( __( wp_kses( 'WP Event Manager - WooCommerce Payment Methods Integration requires <a href="%s">WooCommerce</a> is activated. Please install and active it before you can using this add-on.', array( 'a' => array( 'href' => array() ) ) ), 'wp-event-woo' ), 'http://wordpress.org/plugins/woocommerce' ) . '</p>';
+					echo '<p>' . sprintf( __( wp_kses( 'WP Events Manager - WooCommerce Payment Methods Integration requires <a href="%s">WooCommerce</a> is activated. Please install and active it before you can using this add-on.', array( 'a' => array( 'href' => array() ) ) ), 'wp-event-woo' ), 'http://wordpress.org/plugins/woocommerce' ) . '</p>';
 					break;
 			} ?>
         </div>

@@ -31,7 +31,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 	public function get_settings() {
 		$prefix = 'thimpress_events_';
 
-		$allow_register_event = tp_event_get_option( 'allow_register_event' );
+		$allow_register_event = wpems_get_option( 'allow_register_event' );
 
 		return apply_filters( 'event_admin_setting_page_' . $this->id, array(
 			// Currency
@@ -52,7 +52,7 @@ class TP_Event_Admin_Setting_General extends TP_Event_Abstract_Setting {
 				'title'   => __( 'Currency', 'wp-events-manager' ),
 				'desc'    => __( 'This controls what the currency prices', 'wp-events-manager' ),
 				'id'      => $prefix . 'currency',
-				'options' => tp_event_currencies(),
+				'options' => wpems_currencies(),
 				'default' => 'USD',
 				'class'   => 'setting-currency' . ( $allow_register_event == 'no' ? ' hide-if-js' : '' ) . apply_filters( 'tp_event_currency_setting_fields_class', '' )
 			),

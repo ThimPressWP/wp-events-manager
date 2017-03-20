@@ -32,20 +32,20 @@ class TP_Event_User_Process {
 
 	public static function user_process_init() {
 
-		self::$login_url = tp_event_login_url();
+		self::$login_url = wpems_login_url();
 
-		self::$register_url = tp_event_register_url();
+		self::$register_url = wpems_register_url();
 
-		self::$forgot_url = tp_event_forgot_password_url();
+		self::$forgot_url = wpems_forgot_password_url();
 
-		self::$account_url = tp_event_account_url();
+		self::$account_url = wpems_account_url();
 
-		self::$reset_url = tp_event_reset_password_url();
+		self::$reset_url = wpems_reset_password_url();
 	}
 
 	// redirect logout
 	public static function wp_logout() {
-		tp_event_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'wp-events-manager' ) ) );
+		wpems_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'wp-events-manager' ) ) );
 		wp_safe_redirect( self::$login_url );
 		exit();
 	}
@@ -62,7 +62,7 @@ class TP_Event_User_Process {
 		$password  = !empty( $_POST['user_pass'] ) ? sanitize_text_field($_POST['user_pass']) : '';
 		$password1 = !empty( $_POST['confirm_password'] ) ? sanitize_text_field($_POST['confirm_password']) : '';
 
-		$user_id = tp_event_create_new_user( apply_filters( 'event_auth_user_process_register_data', array(
+		$user_id = wpems_create_new_user( apply_filters( 'event_auth_user_process_register_data', array(
 			'username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $password1
 		) ) );
 
@@ -71,13 +71,13 @@ class TP_Event_User_Process {
 			foreach ( $user_id->errors as $code => $message ) {
 				if ( !$message[0] )
 					continue;
-				if ( tp_event_is_ajax() ) {
+				if ( wpems_is_ajax() ) {
 					$fields[$code] = $message[0];
 				} else {
-					tp_event_add_notice( 'error', $message[0] );
+					wpems_add_notice( 'error', $message[0] );
 				}
 			}
-			if ( tp_event_is_ajax() ) {
+			if ( wpems_is_ajax() ) {
 				wp_send_json( array( 'status' => false, 'fields' => $fields ) );
 			}
 		} else {
@@ -88,14 +88,14 @@ class TP_Event_User_Process {
 			}
 
 			// not enable option 'register_notify' login user now
-			$send_notify = tp_event_get_option( 'register_notify', true );
+			$send_notify = wpems_get_option( 'register_notify', true );
 			if ( !$send_notify ) {
 				wp_set_auth_cookie( $user_id, true, is_ssl() );
 			} else {
 				$url = add_query_arg( 'registered', $email, self::$register_url );
 			}
 
-			if ( tp_event_is_ajax() ) {
+			if ( wpems_is_ajax() ) {
 				wp_send_json( array( 'status' => true, 'redirect' => $url ) );
 			} else {
 				wp_safe_redirect( $url );
@@ -134,15 +134,15 @@ class TP_Event_User_Process {
 			$validation_error = apply_filters( 'event_auth_process_login_errors', $validation_error, $username, $password );
 
 			if ( $validation_error->get_error_code() ) {
-				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . $validation_error->get_error_message() );
+				wpems_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . $validation_error->get_error_message() );
 			}
 
 			if ( empty( $username ) ) {
-				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'Username is required.', 'wp-events-manager' ) );
+				wpems_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'Username is required.', 'wp-events-manager' ) );
 			}
 
 			if ( empty( $_POST['user_pass'] ) ) {
-				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'Password is required.', 'wp-events-manager' ) );
+				wpems_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'Password is required.', 'wp-events-manager' ) );
 			}
 
 			if ( is_email( $username ) && apply_filters( 'event_auth_get_username_from_email', true ) ) {
@@ -151,7 +151,7 @@ class TP_Event_User_Process {
 				if ( isset( $user->user_login ) ) {
 					$creds['user_login'] = $user->user_login;
 				} else {
-					tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'wp-events-manager' ) );
+					wpems_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'wp-events-manager' ) );
 				}
 			} else {
 				$creds['user_login'] = $username;
@@ -161,19 +161,19 @@ class TP_Event_User_Process {
 			$creds['remember']      = isset( $_POST['rememberme'] );
 			$secure_cookie          = is_ssl() ? true : false;
 
-			if ( !tp_event_has_notice( 'error' ) ) {
+			if ( !wpems_has_notice( 'error' ) ) {
 				$user = wp_signon( apply_filters( 'event_auth_login_credentials', $creds ), $secure_cookie );
 
 				if ( is_wp_error( $user ) ) {
 					$message = $user->get_error_message();
 					$message = str_replace( wp_lostpassword_url(), self::$forgot_url, $message );
 					$message = str_replace( '<strong>' . esc_html( $creds['user_login'] ) . '</strong>', '<strong>' . esc_html( $username ) . '</strong>', $message );
-					tp_event_add_notice( 'error', $message );
+					wpems_add_notice( 'error', $message );
 
 					// break
 					throw new Exception;
 				} else {
-					tp_event_add_notice( 'success', __( 'You have logged in', 'wp-events-manager' ) );
+					wpems_add_notice( 'success', __( 'You have logged in', 'wp-events-manager' ) );
 
 					if ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) {
 						wp_redirect( apply_filters( 'event_auth_login_redirect', $redirect, $user ) );
@@ -183,7 +183,7 @@ class TP_Event_User_Process {
 						$response['status']   = true;
 						$response['redirect'] = apply_filters( 'event_auth_ajax_login_redirect', $redirect );
 						ob_start();
-						tp_event_print_notices();
+						wpems_print_notices();
 						$response['notices'] = ob_get_clean();
 						wp_send_json( $response );
 					}
@@ -191,7 +191,7 @@ class TP_Event_User_Process {
 			}
 		} catch ( Exception $ex ) {
 			if ( $ex ) {
-				tp_event_add_notice( 'error', $ex->getMessage() );
+				wpems_add_notice( 'error', $ex->getMessage() );
 			}
 		}
 
@@ -200,7 +200,7 @@ class TP_Event_User_Process {
 			$response['status']   = false;
 			$response['redirect'] = apply_filters( 'event_auth_ajax_login_redirect', $redirect );
 			ob_start();
-			tp_event_print_notices();
+			wpems_print_notices();
 			$response['notices'] = ob_get_clean();
 			wp_send_json( $response );
 		}

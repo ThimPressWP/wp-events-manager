@@ -75,7 +75,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 	 */
 	public function get_sections() {
 		$sections['']     = __( 'Checkout General', 'wp-events-manager' );
-		$payment_gateways = tp_event_payment_gateways();
+		$payment_gateways = wpems_payment_gateways();
 		if ( $payment_gateways ) {
 			foreach ( $payment_gateways as $id => $gateway ) {
 				$sections[$id] = $gateway->title;
@@ -87,7 +87,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 	public function output( $tab ) {
 		global $current_section;
 		if ( $current_section ) {
-			$gateways = tp_event_payment_gateways();
+			$gateways = wpems_payment_gateways();
 			foreach ( $gateways as $gateway ) {
 				if ( $current_section === $gateway->id ) {
 					$fields = $gateway->admin_fields();
@@ -103,7 +103,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 	public function save() {
 		global $current_section;
 		if ( $current_section ) {
-			$gateways = tp_event_payment_gateways();
+			$gateways = wpems_payment_gateways();
 			foreach ( $gateways as $gateway ) {
 				if ( $current_section === $gateway->id ) {
 					$fields = $gateway->admin_fields();

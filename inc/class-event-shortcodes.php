@@ -46,7 +46,7 @@ class TP_Event_Shortcodes {
 		}
 
 		global $post;
-		if ( is_user_logged_in() && in_array( $post->ID, array( tp_event_get_page_id( 'register' ), tp_event_get_page_id( 'login' ) ) ) ) {
+		if ( is_user_logged_in() && in_array( $post->ID, array( wpems_get_page_id( 'register' ), wpems_get_page_id( 'login' ) ) ) ) {
 			wp_safe_redirect( home_url( '/' ) );
 		}
 	}
@@ -79,7 +79,7 @@ class TP_Event_Shortcodes {
 	public static function render( $shortcode = '', $template = '', $atts = array() ) {
 		ob_start();
 		do_action( 'tp_event_shortcode_wrapper_start', $shortcode );
-		tp_event_get_template( 'shortcodes/' . $template, $atts );
+		wpems_get_template( 'shortcodes/' . $template, $atts );
 		do_action( 'tp_event_shortcode_wrapper_end', $shortcode );
 		return ob_get_clean();
 	}
@@ -106,7 +106,7 @@ class TP_Event_Shortcodes {
 	 */
 	public static function register( $atts ) {
 
-		if ( !tp_event_get_page_id( 'register' ) ) {
+		if ( !wpems_get_page_id( 'register' ) ) {
 			return '';
 		}
 		if ( !get_option( 'users_can_register' ) ) {
@@ -138,7 +138,7 @@ class TP_Event_Shortcodes {
 	 * @return string
 	 */
 	public static function login( $atts ) {
-		if ( !tp_event_get_page_id( 'login' ) || is_user_logged_in() ) {
+		if ( !wpems_get_page_id( 'login' ) || is_user_logged_in() ) {
 			return '';
 		}
 
@@ -153,13 +153,13 @@ class TP_Event_Shortcodes {
 	 * @return string
 	 */
 	public static function forgot_password( $atts ) {
-		if ( !tp_event_get_page_id( 'forgot_password' ) ) {
+		if ( !wpems_get_page_id( 'forgot_password' ) ) {
 			return '';
 		}
 
 		$checkemail = isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false;
 		if ( $checkemail ) {
-			tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
+			wpems_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
 		} else {
 			return TP_Event_Shortcodes::render( 'forgot-password', 'forgot-password.php' );
 		}
@@ -174,7 +174,7 @@ class TP_Event_Shortcodes {
 	 * @return string
 	 */
 	public static function reset_password( $atts ) {
-		if ( !tp_event_get_page_id( 'reset_password' ) ) {
+		if ( !wpems_get_page_id( 'reset_password' ) ) {
 			return '';
 		}
 
@@ -190,7 +190,7 @@ class TP_Event_Shortcodes {
 		) );
 
 		if ( $atts['checkemail'] ) {
-			tp_event_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
+			wpems_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
 		}
 		return TP_Event_Shortcodes::render( 'reset-password', 'reset-password.php', array( 'atts' => $atts ) );
 

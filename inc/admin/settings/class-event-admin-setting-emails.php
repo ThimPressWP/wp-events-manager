@@ -31,7 +31,7 @@ class TP_Event_Admin_Setting_Emails extends TP_Event_Abstract_Setting {
 	public function get_settings() {
 		$prefix = 'thimpress_events_';
 
-		$register_event_mail = tp_event_get_option( 'email_enable' );
+		$register_event_mail = wpems_get_option( 'email_enable' );
 
 		return apply_filters( 'event_admin_setting_page_' . $this->id, array(
 			array(

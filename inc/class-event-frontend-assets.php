@@ -21,7 +21,7 @@ class TP_Event_Frontend_Assets {
 		TP_Event_Assets::register_script( 'tp-countdown-plugin-js', WP_EVENT_LIB_URI . '/countdown/js/jquery.plugin.min.js' );
 		TP_Event_Assets::register_script( 'tp-event-countdown-js', WP_EVENT_LIB_URI . '/countdown/js/jquery.countdown.min.js' );
 		TP_Event_Assets::register_style( 'tp-event-countdown-css', WP_EVENT_LIB_URI . '/countdown/css/jquery.countdown.css' );
-		TP_Event_Assets::localize_script( 'tp-event-countdown-js', 'TP_Event', tp_event_l18n() );
+		TP_Event_Assets::localize_script( 'tp-event-countdown-js', 'TP_Event', wpems_l18n() );
 
 		// google map
 		if ( is_singular( 'tp_event' ) ) {

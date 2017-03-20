@@ -21,7 +21,7 @@ class TP_Event_WC_Settings extends TP_Event_Settings {
 	 *
 	 */
 	public function __construct( $prefix = null ) {
-		add_filter( 'tp_event_payment_gateways', array( $this, 'add_wc_checkout_section' ) );
+		add_filter( 'wpems_payment_gateways', array( $this, 'add_wc_checkout_section' ) );
 
 		parent::__construct();
 	}
