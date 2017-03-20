@@ -93,6 +93,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->_include( 'inc/class-event-session.php' );
 			$this->_include( 'inc/class-event-booking.php' );
 			$this->_include( 'inc/class-event-event.php' );
+			$this->_include( 'inc/class-event-roles.php' );
 			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {
