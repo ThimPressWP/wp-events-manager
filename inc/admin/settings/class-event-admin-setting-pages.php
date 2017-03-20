@@ -24,7 +24,7 @@ class TP_Event_Admin_Setting_Pages extends TP_Event_Abstract_Setting {
 
 	public function __construct() {
 		$this->id    = 'event_pages';
-		$this->label = __( 'Pages', 'wp-event-manager' );
+		$this->label = __( 'Pages', 'wp-events-manager' );
 		add_action( 'event_admin_setting_update_' . $this->id, array( $this, 'save' ) );
 		parent::__construct();
 	}
@@ -44,36 +44,36 @@ class TP_Event_Admin_Setting_Pages extends TP_Event_Abstract_Setting {
 			array(
 				'type'  => 'section_start',
 				'id'    => 'pages_settings',
-				'title' => __( 'Pages Settings', 'wp-event-manager' ),
+				'title' => __( 'Pages Settings', 'wp-events-manager' ),
 			),
 			array(
 				'type'  => 'select_page',
-				'title' => __( 'Register Page', 'wp-event-manager' ),
-				'desc'  => __( 'This controls which the register page', 'wp-event-manager' ),
+				'title' => __( 'Register Page', 'wp-events-manager' ),
+				'desc'  => __( 'This controls which the register page', 'wp-events-manager' ),
 				'id'    => $prefix . 'register_page_id',
 			),
 			array(
 				'type'  => 'select_page',
-				'title' => __( 'Login Page', 'wp-event-manager' ),
-				'desc'  => __( 'This controls which the login page', 'wp-event-manager' ),
+				'title' => __( 'Login Page', 'wp-events-manager' ),
+				'desc'  => __( 'This controls which the login page', 'wp-events-manager' ),
 				'id'    => $prefix . 'login_page_id',
 			),
 			array(
 				'type'  => 'select_page',
-				'title' => __( 'Forgot Password', 'wp-event-manager' ),
-				'desc'  => __( 'This controls which the forgot password page', 'wp-event-manager' ),
+				'title' => __( 'Forgot Password', 'wp-events-manager' ),
+				'desc'  => __( 'This controls which the forgot password page', 'wp-events-manager' ),
 				'id'    => $prefix . 'forgot_password_page_id',
 			),
 			array(
 				'type'  => 'select_page',
-				'title' => __( 'Reset Password', 'wp-event-manager' ),
-				'desc'  => __( 'This controls which the reset password page', 'wp-event-manager' ),
+				'title' => __( 'Reset Password', 'wp-events-manager' ),
+				'desc'  => __( 'This controls which the reset password page', 'wp-events-manager' ),
 				'id'    => $prefix . 'reset_password_page_id',
 			),
 			array(
 				'type'  => 'select_page',
-				'title' => __( 'My Account', 'wp-event-manager' ),
-				'desc'  => __( 'This controls which the user account page', 'wp-event-manager' ),
+				'title' => __( 'My Account', 'wp-events-manager' ),
+				'desc'  => __( 'This controls which the user account page', 'wp-events-manager' ),
 				'id'    => $prefix . 'account_page_id',
 			),
 			array(

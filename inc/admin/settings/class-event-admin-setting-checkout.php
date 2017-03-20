@@ -20,7 +20,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 
 	public function __construct() {
 		$this->id    = 'event_checkout';
-		$this->label = __( 'Checkout', 'wp-event-manager' );
+		$this->label = __( 'Checkout', 'wp-events-manager' );
 		add_filter( 'event_admin_settings_tabs_array', array( $this, 'add_setting_tab' ) );
 		add_action( 'event_admin_setting_sections_' . $this->id, array( $this, 'output_section' ) );
 		add_action( 'event_admin_setting_update_' . $this->id, array( $this, 'save' ) );
@@ -37,24 +37,24 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 			array(
 				'type'  => 'section_start',
 				'id'    => 'general_settings',
-				'title' => __( 'Checkout Process', 'wp-event-manager' ),
-				'desc'  => __( 'General options for system', 'wp-event-manager' )
+				'title' => __( 'Checkout Process', 'wp-events-manager' ),
+				'desc'  => __( 'General options for system', 'wp-events-manager' )
 			),
 			array(
 				'type'    => 'select',
-				'title'   => __( 'Booking times free event/email', 'wp-event-manager' ),
-				'desc'    => __( 'This controls how many time booking free event of an email', 'wp-event-manager' ),
+				'title'   => __( 'Booking times free event/email', 'wp-events-manager' ),
+				'desc'    => __( 'This controls how many time booking free event of an email', 'wp-events-manager' ),
 				'id'      => $prefix . 'email_register_times',
 				'options' => array(
-					'once' => __( 'Once', 'wp-event-manager' ),
-					'many' => __( 'Many', 'wp-event-manager' )
+					'once' => __( 'Once', 'wp-events-manager' ),
+					'many' => __( 'Many', 'wp-events-manager' )
 				),
 				'default' => 'many'
 			),
 			array(
 				'type'        => 'number',
-				'title'       => __( 'Cancel payment status', 'wp-event-manager' ),
-				'desc'        => __( 'How long cancel a payment (hour)', 'wp-event-manager' ),
+				'title'       => __( 'Cancel payment status', 'wp-events-manager' ),
+				'desc'        => __( 'How long cancel a payment (hour)', 'wp-events-manager' ),
 				'atts'        => array(
 					'min'  => 0,
 					'step' => 'any'
@@ -74,7 +74,7 @@ class TP_Event_Admin_Setting_Checkout extends TP_Event_Abstract_Setting {
 	 * Add Sections
 	 */
 	public function get_sections() {
-		$sections['']     = __( 'Checkout General', 'wp-event-manager' );
+		$sections['']     = __( 'Checkout General', 'wp-events-manager' );
 		$payment_gateways = tp_event_payment_gateways();
 		if ( $payment_gateways ) {
 			foreach ( $payment_gateways as $id => $gateway ) {

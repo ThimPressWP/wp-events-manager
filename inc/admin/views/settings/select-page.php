@@ -22,7 +22,7 @@ $selected = tp_event_get_option( $field['id'], 0 );
 		<?php if ( isset( $field['id'] ) ) : ?>
 			<?php wp_dropdown_pages(
 				array(
-					'show_option_none'  => __( 'Select Page', 'wp-event-manager' ),
+					'show_option_none'  => __( 'Select Page', 'wp-events-manager' ),
 					'option_none_value' => 0,
 					'name'              => $field['id'],
 					'selected'          => $selected

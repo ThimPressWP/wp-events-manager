@@ -45,7 +45,7 @@ class TP_Event_User_Process {
 
 	// redirect logout
 	public static function wp_logout() {
-		tp_event_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'wp-event-manager' ) ) );
+		tp_event_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'wp-events-manager' ) ) );
 		wp_safe_redirect( self::$login_url );
 		exit();
 	}
@@ -134,15 +134,15 @@ class TP_Event_User_Process {
 			$validation_error = apply_filters( 'event_auth_process_login_errors', $validation_error, $username, $password );
 
 			if ( $validation_error->get_error_code() ) {
-				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-event-manager' ) . ':</strong> ' . $validation_error->get_error_message() );
+				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . $validation_error->get_error_message() );
 			}
 
 			if ( empty( $username ) ) {
-				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-event-manager' ) . ':</strong> ' . __( 'Username is required.', 'wp-event-manager' ) );
+				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'Username is required.', 'wp-events-manager' ) );
 			}
 
 			if ( empty( $_POST['user_pass'] ) ) {
-				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-event-manager' ) . ':</strong> ' . __( 'Password is required.', 'wp-event-manager' ) );
+				tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'Password is required.', 'wp-events-manager' ) );
 			}
 
 			if ( is_email( $username ) && apply_filters( 'event_auth_get_username_from_email', true ) ) {
@@ -151,7 +151,7 @@ class TP_Event_User_Process {
 				if ( isset( $user->user_login ) ) {
 					$creds['user_login'] = $user->user_login;
 				} else {
-					tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-event-manager' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'wp-event-manager' ) );
+					tp_event_add_notice( 'error', '<strong>' . __( 'ERROR', 'wp-events-manager' ) . ':</strong> ' . __( 'A user could not be found with this email address.', 'wp-events-manager' ) );
 				}
 			} else {
 				$creds['user_login'] = $username;
@@ -173,7 +173,7 @@ class TP_Event_User_Process {
 					// break
 					throw new Exception;
 				} else {
-					tp_event_add_notice( 'success', __( 'You have logged in', 'wp-event-manager' ) );
+					tp_event_add_notice( 'success', __( 'You have logged in', 'wp-events-manager' ) );
 
 					if ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) {
 						wp_redirect( apply_filters( 'event_auth_login_redirect', $redirect, $user ) );

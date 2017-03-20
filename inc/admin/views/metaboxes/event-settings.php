@@ -29,30 +29,30 @@ $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
 		<?php do_action( 'tp_event_admin_event_metabox_before_fields', $post, $prefix ); ?>
         <div class="option_group">
             <p class="form-field">
-                <label for="_qty"><?php _e( 'Quantity', 'wp-event-manager' ) ?></label>
+                <label for="_qty"><?php _e( 'Quantity', 'wp-events-manager' ) ?></label>
                 <input type="number" min="0" step="1" class="short" name="<?php echo esc_attr( $prefix ) ?>qty" id="_qty" value="<?php echo esc_attr( absint( $qty ) ) ?>">
             </p>
         </div>
         <div class="option_group">
             <p class="form-field">
-                <label for="_price"><?php printf( '%s(%s)', __( 'Price', 'wp-event-manager' ), tp_event_get_currency_symbol() ) ?></label>
+                <label for="_price"><?php printf( '%s(%s)', __( 'Price', 'wp-events-manager' ), tp_event_get_currency_symbol() ) ?></label>
                 <input type="number" step="any" min="0" class="short" name="<?php echo esc_attr( $prefix ) ?>price" id="_price" value="<?php echo esc_attr( floatval( $price ) ) ?>" />
             </p>
             <p class="event-meta-notice">
-				<?php echo esc_html__( 'Set 0 to make it becomes free event', 'wp-event-manager' ); ?>
+				<?php echo esc_html__( 'Set 0 to make it becomes free event', 'wp-events-manager' ); ?>
             </p>
         </div>
 
         <div class="option_group">
             <div class="form-field" id="event-time-metabox">
-                <label><?php echo esc_html__( 'Start/End', 'wp-event-manager' ); ?></label>
+                <label><?php echo esc_html__( 'Start/End', 'wp-events-manager' ); ?></label>
                 <label hidden for="_date_start"></label>
                 <input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ) ?>date_start" id="_date_start"
                        value="<?php echo $date_start ? esc_attr( $date_start ) : esc_attr( $today ); ?>">
                 <label hidden for="_time_start"></label>
                 <input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ) ?>time_start" id="_time_start"
                        value="<?php echo $time_start ? esc_attr( $time_start ) : '' ?>">
-                <span class="time-connect"> <?php echo esc_html__( 'to', 'wp-event-manager' ); ?></span>
+                <span class="time-connect"> <?php echo esc_html__( 'to', 'wp-events-manager' ); ?></span>
                 <label hidden for="_date_end"></label>
                 <input type="text" class="short date-end" name="<?php echo esc_attr( $prefix ) ?>date_end" id="_date_end"
                        value="<?php echo $date_end ? esc_attr( $date_end ) : esc_attr( $tomorrow ); ?>">
@@ -63,25 +63,25 @@ $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
         </div>
         <div class="option_group">
             <p class="form-field">
-                <label for="_location"><?php _e( 'Location', 'wp-event-manager' ) ?></label>
+                <label for="_location"><?php _e( 'Location', 'wp-events-manager' ) ?></label>
                 <input type="text" class="short" name="<?php echo esc_attr( $prefix ) ?>location" id="_location" value="<?php echo esc_attr( $location ) ?>">
             </p>
 			<?php if ( !tp_event_get_option( 'google_map_api_key' ) ): ?>
                 <p class="event-meta-notice">
-					<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-event-manager' ); ?>
+					<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
                     <a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=general' ); ?>"><?php echo esc_html__( 'Set up here' ) ?></a>
                 </p>
 			<?php endif; ?>
         </div>
         <div class="option_group">
             <p class="form-field">
-                <label for="_note"><?php _e( 'Note', 'wp-event-manager' ) ?></label>
+                <label for="_note"><?php _e( 'Note', 'wp-events-manager' ) ?></label>
                 <textarea rows="4" class="short" name="<?php echo esc_attr( $prefix ) ?>note" id="_note"><?php echo esc_html( $note ); ?></textarea>
             </p>
         </div>
         <div class="option_group">
             <p class="form-field">
-                <label for="_shortcode"><?php _e( 'Shortcode', 'wp-event-manager' ) ?></label>
+                <label for="_shortcode"><?php _e( 'Shortcode', 'wp-events-manager' ) ?></label>
                 <input type="text" class="short" id="_shortcode" value="<?php echo esc_attr( '[tp_event_countdown event_id="' . $post->ID . '"]' ); ?>" readonly>
             </p>
         </div>
