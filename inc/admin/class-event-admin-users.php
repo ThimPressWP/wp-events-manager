@@ -118,9 +118,9 @@ class TP_Event_Admin_Users extends WP_List_Table {
 	}
 
 	public function sort_data( $a, $b ) {
-		$orderby = ( !empty( $_GET['orderby'] ) ) ? $_GET['orderby'] : 'user_login';
+		$orderby = ( !empty( $_GET['orderby'] ) ) ? sanitize_text_field($_GET['orderby']) : 'user_login';
 
-		$order = ( !empty( $_GET['order'] ) ) ? $_GET['order'] : 'asc';
+		$order = ( !empty( $_GET['order'] ) ) ? sanitize_text_field($_GET['order']) : 'asc';
 
 		$result = strcmp( $a[$orderby], $b[$orderby] );
 		return ( $order === 'asc' ) ? $result : - $result;
@@ -144,7 +144,7 @@ class TP_Event_Admin_Users extends WP_List_Table {
 			}
 
 			$action = sanitize_text_field( $_POST['action'] );
-			$users  = $_POST['users'];
+			$users  = absint($_POST['users']);
 
 			foreach ( $users as $user ) {
 				$status = get_user_meta( $user, 'ea_user_approved', true );

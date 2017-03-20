@@ -70,7 +70,7 @@ class TP_Event_Payment_Gateway_Paypal extends TP_Event_Abstract_Payment_Gateway 
 				tp_event_add_notice( 'success', sprintf( __( 'Booking is cancel.', 'wp-events-manager' ) ) );
 			}
 			// redirect
-			$url = add_query_arg( array( 'tp-event-paypal-nonce' => $_GET['tp-event-paypal-nonce'] ), tp_event_account_url() );
+			$url = add_query_arg( array( 'tp-event-paypal-nonce' => esc_url( $_GET['tp-event-paypal-nonce'] )), tp_event_account_url() );
 			wp_redirect( $url );
 			exit();
 		}

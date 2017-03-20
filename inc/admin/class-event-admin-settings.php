@@ -67,8 +67,8 @@ class TP_Event_Admin_Settings {
 		global $current_tab, $current_section;
 		self::get_setting_pages();
 		$tabs            = apply_filters( 'event_admin_settings_tabs_array', array() );
-		$current_tab     = isset( $_GET['tab'] ) && $_GET['tab'] ? $_GET['tab'] : current( array_keys( $tabs ) );
-		$current_section = isset( $_GET['section'] ) && $_GET['section'] ? $_GET['section'] : '';
+		$current_tab     = isset( $_GET['tab'] ) && $_GET['tab'] ? sanitize_text_field($_GET['tab']) : current( array_keys( $tabs ) );
+		$current_section = isset( $_GET['section'] ) && $_GET['section'] ? sanitize_text_field($_GET['section']) : '';
 		if ( !empty( $_POST ) ) {
 			self::save();
 		}
@@ -188,7 +188,7 @@ class TP_Event_Admin_Settings {
 	public static function save_fields( $settings = array() ) {
 		foreach ( $settings as $setting ) {
 			if ( isset( $setting['id'] ) && array_key_exists( $setting['id'], $_POST ) ) {
-				update_option( $setting['id'], $_POST[$setting['id']] );
+				update_option( $setting['id'], sanitize_text_field($_POST[$setting['id']]) );
 			}
 		}
 	}

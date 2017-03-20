@@ -21,7 +21,7 @@ tp_event_print_notices();
         </p>
         <p class="form-row required">
             <label for="user_login" ><?php _e( 'Username or Email:', 'wp-events-manager' ) ?>
-                <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( !empty( $_POST['user_login'] ) ? $_POST['user_login'] : '' ); ?>" size="20" /></label>
+                <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( !empty( $_POST['user_login'] ) ? sanitize_text_field($_POST['user_login']) : '' ); ?>" size="20" /></label>
         </p>
     <?php
     /**
