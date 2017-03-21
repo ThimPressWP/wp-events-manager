@@ -58,7 +58,7 @@ class WPEMS_WC_Checkout extends WPEMS_Booking {
 			}
 			if ( $booking = $this->create_booking( $args, 'woo_payment' ) ) {
 				update_post_meta( $booking, '_tp_event_woo_order', $order_id );
-				update_post_meta( $order_id, '_WPEMS_Event_order', $booking );
+				update_post_meta( $order_id, '_tp_event_event_order', $booking );
 				return true;
 			}
 		}

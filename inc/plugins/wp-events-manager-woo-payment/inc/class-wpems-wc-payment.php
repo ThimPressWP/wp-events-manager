@@ -32,7 +32,7 @@ class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 	 * WPEMS_WC_Payment constructor
 	 */
 	public function __construct() {
-		$this->title = __( 'Woocommerce', 'wp-event-woo' );
+		$this->title = __( 'Woocommerce', 'wp-events-manager-woo' );
 		$this->icon  = WPEMS_WOO_INC_URI . '/' . $this->id . '.png';
 
 		parent::__construct();
@@ -66,23 +66,23 @@ class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 			array(
 				'type'  => 'section_start',
 				'id'    => 'woo_payment_settings',
-				'title' => __( 'Woocommerce Payment Settings', 'wp-event-woo' ),
-				'desc'  => esc_html__( 'Make a payment with WooCommerce payment methods', 'wp-event-woo' )
+				'title' => __( 'Woocommerce Payment Settings', 'wp-events-manager-woo' ),
+				'desc'  => esc_html__( 'Make a payment with WooCommerce payment methods', 'wp-events-manager-woo' )
 			),
 			array(
 				'type'    => 'yes_no',
-				'title'   => __( 'Enable', 'wp-event-woo' ),
-				'desc'    => __( 'If WooCommerce Payment is enabled you can not use other payment gateways', 'wp-event-woo' ),
+				'title'   => __( 'Enable', 'wp-events-manager-woo' ),
+				'desc'    => __( 'If WooCommerce Payment is enabled you can not use other payment gateways', 'wp-events-manager-woo' ),
 				'id'      => $prefix . 'woo_payment_enable',
 				'default' => 'yes'
 			),
 			array(
 				'type'    => 'select',
-				'title'   => __( 'Register event process', 'wp-event-woo' ),
+				'title'   => __( 'Register event process', 'wp-events-manager-woo' ),
 				'id'      => $prefix . 'woo_event_register_process',
 				'options' => array(
-					'cart'     => __( 'Add to cart', 'wp-event-woo' ),
-					'checkout' => __( 'Go to checkout', 'wp-event-woo' ),
+					'cart'     => __( 'Add to cart', 'wp-events-manager-woo' ),
+					'checkout' => __( 'Go to checkout', 'wp-events-manager-woo' ),
 				),
 				'default' => 'cart'
 
