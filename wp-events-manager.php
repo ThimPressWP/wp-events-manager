@@ -36,14 +36,14 @@ if ( !class_exists( 'WPEMS' ) ) {
 		 * Define Plugins Constants
 		 */
 		public function define_constants() {
-			$this->set_define( 'WP_EVENT_PATH', plugin_dir_path( __FILE__ ) );
-			$this->set_define( 'WP_EVENT_URI', plugin_dir_url( __FILE__ ) );
-			$this->set_define( 'WP_EVENT_INC', WP_EVENT_PATH . 'inc/' );
-			$this->set_define( 'WP_EVENT_INC_URI', WP_EVENT_URI . 'inc/' );
-			$this->set_define( 'WP_EVENT_ASSETS_URI', WP_EVENT_URI . 'assets/' );
-			$this->set_define( 'WP_EVENT_LIB_URI', WP_EVENT_INC_URI . 'libraries/' );
-			$this->set_define( 'WP_EVENT_VER', '2.0.0' );
-			$this->set_define( 'WP_EVENT_MAIN_FILE', __FILE__ );
+			$this->set_define( 'WPEMS_PATH', plugin_dir_path( __FILE__ ) );
+			$this->set_define( 'WPEMS_URI', plugin_dir_url( __FILE__ ) );
+			$this->set_define( 'WPEMS_INC', WPEMS_PATH . 'inc/' );
+			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
+			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
+			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
+			$this->set_define( 'WPEMS_VER', '2.0.0' );
+			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}
 
 		public function set_define( $name = '', $value = '' ) {
@@ -115,12 +115,12 @@ if ( !class_exists( 'WPEMS' ) ) {
 		public function _include( $file = null ) {
 			if ( is_array( $file ) ) {
 				foreach ( $file as $key => $f ) {
-					if ( file_exists( WP_EVENT_PATH . $f ) )
-						require_once WP_EVENT_PATH . $f;
+					if ( file_exists( WPEMS_PATH . $f ) )
+						require_once WPEMS_PATH . $f;
 				}
 			} else {
-				if ( file_exists( WP_EVENT_PATH . $file ) )
-					require_once WP_EVENT_PATH . $file;
+				if ( file_exists( WPEMS_PATH . $file ) )
+					require_once WPEMS_PATH . $file;
 				elseif ( file_exists( $file ) )
 					require_once $file;
 			}
@@ -141,7 +141,7 @@ if ( !class_exists( 'WPEMS' ) ) {
 			if ( file_exists( $mo_global ) ) {
 				load_textdomain( $text_domain, $mo_global );
 			} else {
-				load_textdomain( $text_domain, WP_EVENT_PATH . '/languages/' . $mo_file );
+				load_textdomain( $text_domain, WPEMS_PATH . '/languages/' . $mo_file );
 			}
 		}
 

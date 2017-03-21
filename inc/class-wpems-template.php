@@ -41,7 +41,7 @@ class WPEMS_Template {
 			$find[]   = wpems_template_path() . $file;
 			$template = locate_template( array_unique( $find ) );
 			if ( !$template ) {
-				$template = untrailingslashit( WP_EVENT_PATH ) . '/templates/' . $file;
+				$template = untrailingslashit( WPEMS_PATH ) . '/templates/' . $file;
 			}
 		}
 

@@ -14,10 +14,10 @@ class WPEMS_Admin_Settings {
 	 */
 	public static function get_setting_pages() {
 		$settings   = array();
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-general.php';
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-pages.php';
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-emails.php';
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-checkout.php';
+		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-general.php';
+		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-pages.php';
+		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-emails.php';
+		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-checkout.php';
 		return apply_filters( 'event_admin_setting_pages', $settings );
 	}
 
@@ -129,46 +129,46 @@ class WPEMS_Admin_Settings {
 			}
 			switch ( $field['type'] ) {
 				case 'section_start':
-					include( WP_EVENT_INC . 'admin/views/settings/section-start.php' );
+					include( WPEMS_INC . 'admin/views/settings/section-start.php' );
 					break;
 				case 'section_end':
-					include( WP_EVENT_INC . 'admin/views/settings/section-end.php' );
+					include( WPEMS_INC . 'admin/views/settings/section-end.php' );
 					break;
 
 				case 'select':
 				case 'multiselect':
-					include( WP_EVENT_INC . 'admin/views/settings/select.php' );
+					include( WPEMS_INC . 'admin/views/settings/select.php' );
 					break;
 
 				case 'text':
 				case 'number':
 				case 'email':
 				case 'password':
-					include( WP_EVENT_INC . 'admin/views/settings/text.php' );
+					include( WPEMS_INC . 'admin/views/settings/text.php' );
 					break;
 
 				case 'checkbox':
-					include( WP_EVENT_INC . 'admin/views/settings/checkbox.php' );
+					include( WPEMS_INC . 'admin/views/settings/checkbox.php' );
 					break;
 
 				case 'yes_no':
-					include( WP_EVENT_INC . 'admin/views/settings/yes-no.php' );
+					include( WPEMS_INC . 'admin/views/settings/yes-no.php' );
 					break;
 
 				case 'radio':
-					include( WP_EVENT_INC . 'admin/views/settings/radio.php' );
+					include( WPEMS_INC . 'admin/views/settings/radio.php' );
 					break;
 
 				case 'image_size':
-					include( WP_EVENT_INC . 'admin/views/settings/image-size.php' );
+					include( WPEMS_INC . 'admin/views/settings/image-size.php' );
 					break;
 
 				case 'textarea':
-					include( WP_EVENT_INC . 'admin/views/settings/textarea.php' );
+					include( WPEMS_INC . 'admin/views/settings/textarea.php' );
 					break;
 
 				case 'select_page':
-					include( WP_EVENT_INC . 'admin/views/settings/select-page.php' );
+					include( WPEMS_INC . 'admin/views/settings/select-page.php' );
 					break;
 
 				default:

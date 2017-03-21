@@ -18,10 +18,10 @@ class WPEMS_Admin_Assets {
 	 * @param type $hook
 	 */
 	public static function register_scripts( $hook ) {
-		WPEMS_Assets::register_script( 'wpems-admin-js', WP_EVENT_ASSETS_URI . '/js/admin/admin-events.js' );
-		WPEMS_Assets::register_style( 'wpems-admin-css', WP_EVENT_ASSETS_URI . '/css/admin/admin.css' );
-		WPEMS_Assets::register_script( 'wpems-admin-datetimepicker-full', WP_EVENT_ASSETS_URI . '/js/datetimepicker/jquery.datetimepicker.full.min.js' );
-		WPEMS_Assets::register_style( 'wpems-admin-datetimepicker-min', WP_EVENT_ASSETS_URI . '/css/datetimepicker/jquery.datetimepicker.min.css' );
+		WPEMS_Assets::register_script( 'wpems-admin-js', WPEMS_ASSETS_URI . '/js/admin/admin-events.js' );
+		WPEMS_Assets::register_style( 'wpems-admin-css', WPEMS_ASSETS_URI . '/css/admin/admin.css' );
+		WPEMS_Assets::register_script( 'wpems-admin-datetimepicker-full', WPEMS_ASSETS_URI . '/js/datetimepicker/jquery.datetimepicker.full.min.js' );
+		WPEMS_Assets::register_style( 'wpems-admin-datetimepicker-min', WPEMS_ASSETS_URI . '/css/datetimepicker/jquery.datetimepicker.min.css' );
 	}
 
 }

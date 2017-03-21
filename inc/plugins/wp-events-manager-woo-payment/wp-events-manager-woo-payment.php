@@ -206,7 +206,7 @@ class WPEMS_Woo {
 		}
 		// check TP Event plugin activated
 		if ( class_exists( 'WPEMS' ) && is_plugin_active( 'wp-events-manager/wp-events-manager.php' ) ) {
-			if ( WP_EVENT_VER < 2 || !WP_EVENT_VER ) {
+			if ( WPEMS_VER < 2 || !WPEMS_VER ) {
 				self::$_wc_loaded = false;
 				self::$_notice    = 'required_update_wpems';
 			} else {

@@ -17,7 +17,7 @@ class WPEMS_Install {
 	 */
 	public static function init() {
 		self::$db_upgrade = array(
-			'2.0' => WP_EVENT_INC . 'admin/upgrades/upgrade-2.0.php'
+			'2.0' => WPEMS_INC . 'admin/upgrades/upgrade-2.0.php'
 		);
 	}
 
@@ -94,7 +94,7 @@ class WPEMS_Install {
 		/**
 		 * Update current version
 		 */
-		update_option( 'thimpress-event-version', WP_EVENT_VER );
+		update_option( 'thimpress-event-version', WPEMS_VER );
 	}
 
 	/**
@@ -161,5 +161,5 @@ class WPEMS_Install {
 WPEMS_Install::init();
 
 // active plugin
-register_activation_hook( WP_EVENT_MAIN_FILE, array( 'WPEMS_Install', 'install' ) );
-register_deactivation_hook( WP_EVENT_MAIN_FILE, array( 'WPEMS_Install', 'uninstall' ) );
+register_activation_hook( WPEMS_MAIN_FILE, array( 'WPEMS_Install', 'install' ) );
+register_deactivation_hook( WPEMS_MAIN_FILE, array( 'WPEMS_Install', 'uninstall' ) );

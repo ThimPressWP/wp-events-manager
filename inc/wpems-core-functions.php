@@ -53,8 +53,8 @@ if ( !function_exists( 'wpems_get_template_part' ) ) {
 		}
 
 		// Get default slug-name.php
-		if ( !$template && $name && file_exists( WP_EVENT_PATH . "/templates/{$slug}-{$name}.php" ) ) {
-			$template = WP_EVENT_PATH . "/templates/{$slug}-{$name}.php";
+		if ( !$template && $name && file_exists( WPEMS_PATH . "/templates/{$slug}-{$name}.php" ) ) {
+			$template = WPEMS_PATH . "/templates/{$slug}-{$name}.php";
 		}
 
 		// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/courses-manage/slug.php
@@ -92,7 +92,7 @@ if ( !function_exists( 'wpems_locate_template' ) ) {
 		}
 
 		if ( !$default_path ) {
-			$default_path = WP_EVENT_PATH . '/templates/';
+			$default_path = WPEMS_PATH . '/templates/';
 		}
 
 		$template = null;
@@ -286,7 +286,7 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 				'scroll-zoom'      => true,
 				'draggable'        => false,
 				'api-key'          => wpems_get_option( 'google_map_api_key' ),
-				'marker-icon'      => apply_filters( 'tp-event-map-marker', WP_EVENT_ASSETS_URI . 'images/map-marker.png' ),
+				'marker-icon'      => apply_filters( 'tp-event-map-marker', WPEMS_ASSETS_URI . 'images/map-marker.png' ),
 				'marker-at-center' => true,
 			)
 		) );
@@ -1295,6 +1295,6 @@ if ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php'
 
 function wpems_show_remove_event_auth_notice() { ?>
     <div class="notice notice-error tp-event-dismiss-notice is-dismissible">
-        <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WP_EVENT_VER . ' already included <strong>Thim Event Authentication</strong> add-on. Please delete the add-on.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
+        <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' already included <strong>Thim Event Authentication</strong> add-on. Please delete the add-on.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
     </div>
 <?php }

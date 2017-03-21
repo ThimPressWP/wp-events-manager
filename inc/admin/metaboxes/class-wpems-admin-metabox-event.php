@@ -56,7 +56,7 @@ class WPEMS_Admin_Metabox_Event {
 	}
 
 	public static function render() {
-		require_once( WP_EVENT_INC . 'admin/views/metaboxes/event-settings.php' );
+		require_once( WPEMS_INC . 'admin/views/metaboxes/event-settings.php' );
 	}
 
 }
