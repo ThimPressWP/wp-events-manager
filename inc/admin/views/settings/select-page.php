@@ -8,7 +8,7 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-$selected = tp_event_get_option( $field['id'], 0 );
+$selected = wpems_get_option( $field['id'], 0 );
 ?>
 <tr valign="top" <?php echo $field['class'] ? 'class="' . $field['class'] . '"' : ''; ?>>
     <th scope="row">

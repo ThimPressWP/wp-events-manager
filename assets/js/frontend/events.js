@@ -22,13 +22,13 @@
 				_event_id = _this.attr('data-event');
 
 			$.ajax({
-				url       : TP_Event.ajaxurl,
+				url       : WPEMS.ajaxurl,
 				type      : 'POST',
 				dataType  : 'html',
 				async     : false,
 				data      : {
 					event_id: _event_id,
-					nonce   : TP_Event.register_button,
+					nonce   : WPEMS.register_button,
 					action  : 'load_form_register'
 				},
 				beforeSend: function () {
@@ -58,7 +58,7 @@
 				_notices = _self.find('.tp-event-notice');
 
 			$.ajax({
-				url       : TP_Event.ajaxurl,
+				url       : WPEMS.ajaxurl,
 				type      : 'POST',
 				data      : _data,
 				dataType  : 'json',
@@ -70,7 +70,7 @@
 			}).done(function (res) {
 				button.removeClass('event-register-loading');
 				if (typeof res.status === 'undefined') {
-					TP_Event_Frontend.set_message(_self, TP_Event.something_wrong);
+					TP_Event_Frontend.set_message(_self, WPEMS.something_wrong);
 					return;
 				}
 
@@ -84,8 +84,8 @@
 					setTimeout(function () {
 						$('.entry-register, .event_register_foot').append(
 							'<div class="woocommerce-message">' +
-							TP_Event.woo_cart_url +
-							'<p>' + '“' + res.event + '”' + TP_Event.add_to_cart + '</p>' +
+							WPEMS.woo_cart_url +
+							'<p>' + '“' + res.event + '”' + WPEMS.add_to_cart + '</p>' +
 							'</div>'
 						)
 					}, 100);
@@ -98,7 +98,7 @@
 
 			}).fail(function () {
 				button.removeClass('event-register-loading');
-				TP_Event_Frontend.set_message(_self, TP_Event.something_wrong);
+				TP_Event_Frontend.set_message(_self, WPEMS.something_wrong);
 				return;
 			}).always(function () {
 				_self.removeClass('active');
@@ -176,7 +176,7 @@
 				_data = _this.serializeArray();
 
 			$.ajax({
-				url       : TP_Event.ajaxurl,
+				url       : WPEMS.ajaxurl,
 				type      : 'POST',
 				data      : _data,
 				async     : false,
@@ -221,13 +221,13 @@
 			var time = $(counts[i]).attr('data-time');
 			time = new Date(time);
 
-			var current_time = new Date(time - TP_Event.gmt_offset * 60 * 60 * 1000);
+			var current_time = new Date(time - WPEMS.gmt_offset * 60 * 60 * 1000);
 
 			$(counts[i]).countdown({
-				labels    : TP_Event.l18n.labels,
-				labels1   : TP_Event.l18n.label1,
+				labels    : WPEMS.l18n.labels,
+				labels1   : WPEMS.l18n.label1,
 				until     : current_time,
-				serverSync: TP_Event.current_time
+				serverSync: WPEMS.current_time
 			});
 		}
 

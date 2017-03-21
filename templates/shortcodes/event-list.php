@@ -52,7 +52,7 @@ do_action( 'tp_event_archive_description' );
 
 		<?php while ( $list_event->have_posts() ) : $list_event->the_post(); ?>
 
-			<?php tp_event_get_template_part( 'content', 'event' ); ?>
+			<?php wpems_get_template_part( 'content', 'event' ); ?>
 
 		<?php endwhile; // end of the loop. ?>
 

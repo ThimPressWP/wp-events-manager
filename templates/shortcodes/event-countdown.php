@@ -15,7 +15,7 @@ if ( $args['event_id'] ) {
 		echo '<h2><a href="' . get_permalink( $id ) . '"> ' . get_the_title( $id ) . '</a></h2>';
 
 		$current_time = current_time( 'Y-m-d H:i' );
-		$time         = tp_event_get_time( 'Y-m-d H:i', $event, false ); ?>
+		$time         = wpems_get_time( 'Y-m-d H:i', $event, false ); ?>
         <div class="event-countdown">
 			<?php $date = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ) ); ?>
             <div class="tp_event_counter" data-time="<?php echo esc_attr( $date->format( 'M j, Y H:i:s O' ) ) ?>"></div>

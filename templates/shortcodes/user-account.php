@@ -5,7 +5,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 $query = new WP_Query( $args );
 
-tp_event_print_notices();
+wpems_print_notices();
 
 if ( !is_user_logged_in() ) {
 	printf( __( 'You are not <a href="%s">login</a>', 'wp-events-manager' ), tp_event_login_url() );
@@ -28,15 +28,15 @@ if ( $query->have_posts() ) :
         <tbody>
 		<?php foreach ( $query->posts as $post ): ?>
 
-			<?php $booking = TP_Event_Booking::instance( $post->ID ) ?>
+			<?php $booking = WPEMS_Booking::instance( $post->ID ) ?>
             <tr>
-                <td><?php printf( '%s', tp_event_format_ID( $post->ID ) ) ?></td>
+                <td><?php printf( '%s', wpems_format_ID( $post->ID ) ) ?></td>
                 <td><?php printf( '<a href="%s">%s</a>', get_the_permalink( $booking->event_id ), get_the_title( $booking->event_id ) ) ?></td>
                 <td><?php printf( '%s', floatval( $booking->price ) == 0 ? __( 'Free', 'wp-events-manager' ) : __( 'Cost', 'wp-events-manager' ) ) ?></td>
-                <td><?php printf( '%s', tp_event_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
+                <td><?php printf( '%s', wpems_format_price( floatval( $booking->price ), $booking->currency ) ) ?></td>
                 <td><?php printf( '%s', $booking->qty ) ?></td>
-                <td><?php printf( '%s', $booking->payment_id ? tp_event_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-events-manager' ) ) ?></td>
-                <th><?php printf( '%s', tp_event_booking_status( $booking->ID ) ); ?></th>
+                <td><?php printf( '%s', $booking->payment_id ? wpems_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-events-manager' ) ) ?></td>
+                <th><?php printf( '%s', wpems_booking_status( $booking->ID ) ); ?></th>
             </tr>
 
 		<?php endforeach; ?>

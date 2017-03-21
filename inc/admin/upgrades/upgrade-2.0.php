@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined( 'ABSPATH' ) || !defined( 'TP_EVENT_INSTALLING' ) || !TP_EVENT_INSTALLING ) {
+if ( !defined( 'ABSPATH' ) || !defined( 'WPEMS_INSTALLING' ) || !WPEMS_INSTALLING ) {
 	exit();
 }
 

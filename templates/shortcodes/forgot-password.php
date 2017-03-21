@@ -9,7 +9,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-tp_event_print_notices();
+wpems_print_notices();
 ?>
 
 <?php if ( empty ( $_REQUEST['checkemail'] ) ) : ?>
@@ -21,7 +21,7 @@ tp_event_print_notices();
         </p>
         <p class="form-row required">
             <label for="user_login" ><?php _e( 'Username or Email:', 'wp-events-manager' ) ?>
-                <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( !empty( $_POST['user_login'] ) ? $_POST['user_login'] : '' ); ?>" size="20" /></label>
+                <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( !empty( $_POST['user_login'] ) ? sanitize_text_field($_POST['user_login']) : '' ); ?>" size="20" /></label>
         </p>
     <?php
     /**
@@ -39,12 +39,12 @@ tp_event_print_notices();
     </form>
 
     <div class="event_auth_lost_pass_footer">
-        <a href="<?php echo esc_attr( tp_event_login_url() ) ?>">
+        <a href="<?php echo esc_attr( wpems_login_url() ) ?>">
             <?php _e( 'Login', 'wp-events-manager' ); ?>
         </a> | 
         <?php if ( !is_user_logged_in() ) : ?>
 
-            <a href="<?php echo esc_attr( tp_event_register_url() ) ?>">
+            <a href="<?php echo esc_attr( wpems_register_url() ) ?>">
                 <?php _e( 'Create new user', 'wp-events-manager' ); ?>
             </a>
 
