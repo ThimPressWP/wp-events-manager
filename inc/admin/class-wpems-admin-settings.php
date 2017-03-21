@@ -14,10 +14,10 @@ class WPEMS_Admin_Settings {
 	 */
 	public static function get_setting_pages() {
 		$settings   = array();
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-event-admin-setting-general.php';
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-event-admin-setting-pages.php';
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-event-admin-setting-emails.php';
-		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-event-admin-setting-checkout.php';
+		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-general.php';
+		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-pages.php';
+		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-emails.php';
+		$settings[] = require_once WP_EVENT_INC . 'admin/settings/class-wpems-admin-setting-checkout.php';
 		return apply_filters( 'event_admin_setting_pages', $settings );
 	}
 

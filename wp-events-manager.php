@@ -81,28 +81,28 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function includes() {
 
-			$this->_include( 'inc/wp-event-core-functions.php' );
-			$this->_include( 'inc/class-event-autoloader.php' );
-			$this->_include( 'inc/class-event-assets.php' );
-			$this->_include( 'inc/class-event-ajax.php' );
-			$this->_include( 'inc/class-event-post-types.php' );
-			$this->_include( 'inc/emails/class-event-register-event.php' );
-			$this->_include( 'inc/class-event-payment-gateways.php' );
-			$this->_include( 'inc/class-event-install.php' );
-			$this->_include( 'inc/class-event-settings.php' );
-			$this->_include( 'inc/class-event-session.php' );
-			$this->_include( 'inc/class-event-booking.php' );
-			$this->_include( 'inc/class-event-event.php' );
-			$this->_include( 'inc/class-event-roles.php' );
+			$this->_include( 'inc/wpems-core-functions.php' );
+			$this->_include( 'inc/class-wpems-autoloader.php' );
+			$this->_include( 'inc/class-wpems-assets.php' );
+			$this->_include( 'inc/class-wpems-ajax.php' );
+			$this->_include( 'inc/class-wpems-post-types.php' );
+			$this->_include( 'inc/emails/class-wpems-register-event.php' );
+			$this->_include( 'inc/class-wpems-payment-gateways.php' );
+			$this->_include( 'inc/class-wpems-install.php' );
+			$this->_include( 'inc/class-wpems-settings.php' );
+			$this->_include( 'inc/class-wpems-session.php' );
+			$this->_include( 'inc/class-wpems-booking.php' );
+			$this->_include( 'inc/class-wpems-event.php' );
+			$this->_include( 'inc/class-wpems-roles.php' );
 			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {
-				$this->_include( 'inc/admin/class-event-admin.php' );
+				$this->_include( 'inc/admin/class-wpems-admin.php' );
 			} else {
-				$this->_include( 'inc/class-event-template.php' );
-				$this->_include( 'inc/class-event-frontend-assets.php' );
-				$this->_include( 'inc/class-event-user-process.php' );
-				$this->_include( 'inc/class-event-shortcodes.php' );
+				$this->_include( 'inc/class-wpems-template.php' );
+				$this->_include( 'inc/class-wpems-frontend-assets.php' );
+				$this->_include( 'inc/class-wpems-user-process.php' );
+				$this->_include( 'inc/class-wpems-shortcodes.php' );
 			}
 
 		}
