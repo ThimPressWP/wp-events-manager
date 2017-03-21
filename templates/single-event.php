@@ -14,7 +14,7 @@ get_header( ); ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php tp_event_get_template_part( 'content', 'single-event' ); ?>
+			<?php wpems_get_template_part( 'content', 'single-event' ); ?>
 
 		<?php endwhile; // end of the loop. ?>
 

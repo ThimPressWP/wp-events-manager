@@ -1,9 +1,9 @@
 <?php
 
 /*
-  Plugin Name: WP Event Manager
+  Plugin Name: WP Events Manager
   Plugin URI: http://thimpress.com/
-  Description: A complete plugin for Event management and online booking system
+  Description: A complete plugin for Events management and online booking system
   Author: ThimPress
   Version: 2.0.0
   Author URI: http://thimpress.com
@@ -13,18 +13,18 @@ if ( !defined( 'ABSPATH' ) )
 	exit();
 
 /**
- * Event class
+ * WPEMS class
  */
-if ( !class_exists( 'TP_Event' ) ) {
+if ( !class_exists( 'WPEMS' ) ) {
 
-	final class TP_Event {
+	final class WPEMS {
 
 		private static $_instance = null;
 
 		public $_session = null;
 
 		/**
-		 * TP_Event constructor.
+		 * WPEMS constructor.
 		 */
 		public function __construct() {
 			$this->define_constants();
@@ -36,14 +36,14 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 * Define Plugins Constants
 		 */
 		public function define_constants() {
-			$this->set_define( 'WP_EVENT_PATH', plugin_dir_path( __FILE__ ) );
-			$this->set_define( 'WP_EVENT_URI', plugin_dir_url( __FILE__ ) );
-			$this->set_define( 'WP_EVENT_INC', WP_EVENT_PATH . 'inc/' );
-			$this->set_define( 'WP_EVENT_INC_URI', WP_EVENT_URI . 'inc/' );
-			$this->set_define( 'WP_EVENT_ASSETS_URI', WP_EVENT_URI . 'assets/' );
-			$this->set_define( 'WP_EVENT_LIB_URI', WP_EVENT_INC_URI . 'libraries/' );
-			$this->set_define( 'WP_EVENT_VER', '2.0.0' );
-			$this->set_define( 'WP_EVENT_MAIN_FILE', __FILE__ );
+			$this->set_define( 'WPEMS_PATH', plugin_dir_path( __FILE__ ) );
+			$this->set_define( 'WPEMS_URI', plugin_dir_url( __FILE__ ) );
+			$this->set_define( 'WPEMS_INC', WPEMS_PATH . 'inc/' );
+			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
+			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
+			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
+			$this->set_define( 'WPEMS_VER', '2.0.0' );
+			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}
 
 		public function set_define( $name = '', $value = '' ) {
@@ -67,9 +67,9 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function loaded() {
 			// load text domain
 			$this->text_domain();
-			$this->_session = new TP_Event_Session();
+			$this->_session = new WPEMS_Session();
 
-			do_action( 'tp_event_init', $this );
+			do_action( 'wpems_init', $this );
 		}
 
 		/**
@@ -81,23 +81,28 @@ if ( !class_exists( 'TP_Event' ) ) {
 		 */
 		public function includes() {
 
-			$this->_include( 'inc/wp-event-core-functions.php' );
-			$this->_include( 'inc/class-event-autoloader.php' );
-			$this->_include( 'inc/class-event-assets.php' );
-			$this->_include( 'inc/class-event-ajax.php' );
-			$this->_include( 'inc/class-event-post-types.php' );
-			$this->_include( 'inc/emails/class-event-register-event.php' );
-			$this->_include( 'inc/class-event-payment-gateways.php' );
-			$this->_include( 'inc/class-event-install.php' );
-			$this->settings = TP_Event_Settings::instance();
+			$this->_include( 'inc/wpems-core-functions.php' );
+			$this->_include( 'inc/class-wpems-autoloader.php' );
+			$this->_include( 'inc/class-wpems-assets.php' );
+			$this->_include( 'inc/class-wpems-ajax.php' );
+			$this->_include( 'inc/class-wpems-post-types.php' );
+			$this->_include( 'inc/emails/class-wpems-register-event.php' );
+			$this->_include( 'inc/class-wpems-payment-gateways.php' );
+			$this->_include( 'inc/class-wpems-install.php' );
+			$this->_include( 'inc/class-wpems-settings.php' );
+			$this->_include( 'inc/class-wpems-session.php' );
+			$this->_include( 'inc/class-wpems-booking.php' );
+			$this->_include( 'inc/class-wpems-event.php' );
+			$this->_include( 'inc/class-wpems-roles.php' );
+			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {
-				$this->_include( 'inc/admin/class-event-admin.php' );
+				$this->_include( 'inc/admin/class-wpems-admin.php' );
 			} else {
-				$this->_include( 'inc/class-event-template.php' );
-				$this->_include( 'inc/class-event-frontend-assets.php' );
-				$this->_include( 'inc/class-event-user-process.php' );
-				$this->_include( 'inc/class-event-shortcodes.php' );
+				$this->_include( 'inc/class-wpems-template.php' );
+				$this->_include( 'inc/class-wpems-frontend-assets.php' );
+				$this->_include( 'inc/class-wpems-user-process.php' );
+				$this->_include( 'inc/class-wpems-shortcodes.php' );
 			}
 
 		}
@@ -110,12 +115,12 @@ if ( !class_exists( 'TP_Event' ) ) {
 		public function _include( $file = null ) {
 			if ( is_array( $file ) ) {
 				foreach ( $file as $key => $f ) {
-					if ( file_exists( WP_EVENT_PATH . $f ) )
-						require_once WP_EVENT_PATH . $f;
+					if ( file_exists( WPEMS_PATH . $f ) )
+						require_once WPEMS_PATH . $f;
 				}
 			} else {
-				if ( file_exists( WP_EVENT_PATH . $file ) )
-					require_once WP_EVENT_PATH . $file;
+				if ( file_exists( WPEMS_PATH . $file ) )
+					require_once WPEMS_PATH . $file;
 				elseif ( file_exists( $file ) )
 					require_once $file;
 			}
@@ -136,13 +141,13 @@ if ( !class_exists( 'TP_Event' ) ) {
 			if ( file_exists( $mo_global ) ) {
 				load_textdomain( $text_domain, $mo_global );
 			} else {
-				load_textdomain( $text_domain, WP_EVENT_PATH . '/languages/' . $mo_file );
+				load_textdomain( $text_domain, WPEMS_PATH . '/languages/' . $mo_file );
 			}
 		}
 
 		/**
 		 * get instance class
-		 * @return TP_Event
+		 * @return WPEMS
 		 */
 		public static function instance() {
 			if ( !empty( self::$_instance ) ) {
@@ -153,15 +158,15 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 	}
 
-	if ( !function_exists( 'TP_EVENT' ) ) {
+	if ( !function_exists( 'WPEMS' ) ) {
 
-		function TP_EVENT() {
-			return TP_Event::instance();
+		function WPEMS() {
+			return WPEMS::instance();
 		}
 
 	}
-	TP_EVENT();
+	WPEMS();
 }
 
 
-$GLOBALS['TP_Event'] = TP_EVENT();
+$GLOBALS['WPEMS'] = WPEMS();

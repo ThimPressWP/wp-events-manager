@@ -12,9 +12,9 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<?php if ( tp_event_get_event_note() ): ?>
+<?php if ( wpems_get_event_note() ): ?>
     <div class="entry-note">
-        <h4><?php echo esc_html__('Event note:') ?></h4>
-		<?php echo tp_event_get_event_note(); ?>
+        <h4><?php echo esc_html__('Event note:', 'wp-events-manager'); ?></h4>
+		<?php echo wpems_get_event_note(); ?>
     </div>
 <?php endif; ?>

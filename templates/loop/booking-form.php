@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$event    = new TP_Event_Event( $event_id );
+$event    = new WPEMS_Event( $event_id );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 ?>
 
@@ -14,7 +14,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 
     <form name="event_register" class="event_register" method="POST">
 
-		<?php if ( $user_reg == 0 && $event->is_free() && tp_event_get_option( 'email_register_times' ) === 'once' ) { ?>
+		<?php if ( $user_reg == 0 && $event->is_free() && wpems_get_option( 'email_register_times' ) === 'once' ) { ?>
             <input type="hidden" name="qty" value="1" min="1" />
 		<?php } else { ?>
             <div class="event_auth_form_field">
@@ -23,7 +23,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
             </div>
 		<?php } ?>
 
-		<?php $payments = tp_event_gateways_enable(); ?>
+		<?php $payments = wpems_gateways_enable(); ?>
         <!--Hide payment option when cost is 0-->
 		<?php if ( !$event->is_free() ) {
 			if ( $payments ) { ?>
@@ -38,7 +38,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 					<?php endforeach; ?>
                 </ul>
 			<?php } else {
-				tp_event_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'wp-events-manager' ) );
+				wpems_print_notice( 'error', esc_html__( 'There are no payment gateway available. Please contact administrator to setup it.', 'wp-events-manager' ) );
 			}
 		} ?>
         <!--End hide payment option when cost is 0-->

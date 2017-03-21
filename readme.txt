@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The all in one Event Manager for WordPress: create and manage events, sell event tickets online easily. No Coding Required.
+The all in one Events Manager for WordPress: create and manage events, sell event tickets online easily. No Coding Required.
 
 == Description ==
 

@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 $current_time = current_time( 'Y-m-d H:i' );
-$time         = tp_event_get_time( 'Y-m-d H:i', null, false );
+$time         = wpems_get_time( 'Y-m-d H:i', null, false );
 
 ?>
 <div class="entry-countdown">
