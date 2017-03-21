@@ -75,5 +75,3 @@ $prefix  = 'tp_event_';
 
 
 <?php do_action( 'tp_event_admin_booking_metabox_after_fields', $post, $prefix ); ?>
-
-<?php
