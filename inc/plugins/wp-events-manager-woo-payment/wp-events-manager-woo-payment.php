@@ -56,10 +56,10 @@ class WPEMS_Woo {
 		$this->load_text_domain();
 
 		if ( self::$_wc_loaded ) {
-			require_once WP_EVENT_WOO_INC . "/class-wpems-wc-settings.php";
-			require_once WP_EVENT_WOO_INC . "/class-wpems-wc-product.php";
-			require_once WP_EVENT_WOO_INC . "/class-wpems-wc-checkout.php";
-			require_once WP_EVENT_WOO_INC . "/class-wpems-wc-payment.php";
+			require_once WPEMS_WOO_INC . "/class-wpems-wc-settings.php";
+			require_once WPEMS_WOO_INC . "/class-wpems-wc-product.php";
+			require_once WPEMS_WOO_INC . "/class-wpems-wc-checkout.php";
+			require_once WPEMS_WOO_INC . "/class-wpems-wc-payment.php";
 
 			$this->init_hook();
 		}
@@ -169,13 +169,13 @@ class WPEMS_Woo {
 	 * Define Plugins Constants
 	 */
 	public function define_constants() {
-		define( 'WP_EVENT_WOO_PATH', plugin_dir_path( __FILE__ ) );
-		define( 'WP_EVENT_WOO_URI', plugin_dir_url( __FILE__ ) );
-		define( 'WP_EVENT_WOO_INC', WP_EVENT_WOO_PATH . 'inc/' );
-		define( 'WP_EVENT_WOO_INC_URI', WP_EVENT_WOO_URI . 'inc/' );
-		define( 'WP_EVENT_WOO_VER', '1.0' );
-		define( 'WP_EVENT_WOO_REQUIRE_VER', '2.0' );
-		define( 'WP_EVENT_WOO_MAIN_FILE', __FILE__ );
+		define( 'WPEMS_WOO_PATH', plugin_dir_path( __FILE__ ) );
+		define( 'WPEMS_WOO_URI', plugin_dir_url( __FILE__ ) );
+		define( 'WPEMS_WOO_INC', WPEMS_WOO_PATH . 'inc/' );
+		define( 'WPEMS_WOO_INC_URI', WPEMS_WOO_URI . 'inc/' );
+		define( 'WPEMS_WOO_VER', '2.0' );
+		define( 'WPEMS_WOO_REQUIRE_VER', '2.0' );
+		define( 'WPEMS_WOO_MAIN_FILE', __FILE__ );
 	}
 
 	/**
@@ -192,7 +192,7 @@ class WPEMS_Woo {
 		if ( file_exists( $mo_global ) ) {
 			load_textdomain( $text_domain, $mo_global );
 		} else {
-			load_textdomain( $text_domain, WP_EVENT_WOO_PATH . '/languages/' . $mo_file );
+			load_textdomain( $text_domain, WPEMS_WOO_PATH . '/languages/' . $mo_file );
 		}
 	}
 
@@ -205,7 +205,7 @@ class WPEMS_Woo {
 			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 		// check TP Event plugin activated
-		if ( class_exists( 'WPEMS' ) && is_plugin_active( 'wp-events-manager/wp-events-manager.php' ) ) {
+		if ( class_exists( 'WPEMS' ) && is_plugin_active( 'WP-Events-Manager/wp-events-manager.php' ) ) {
 			if ( WPEMS_VER < 2 || !WPEMS_VER ) {
 				self::$_wc_loaded = false;
 				self::$_notice    = 'required_update_wpems';
@@ -247,7 +247,7 @@ class WPEMS_Woo {
 					echo '<p>' . __( wp_kses( '<strong>WP Events Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Events Manager</strong> is activated. Please install and active it before you can using this add-on.', array( 'strong' => array() ) ), 'wp-event-woo' ) . '</p>';
 					break;
 				case 'required_update_wpems':
-					echo '<p>' . sprintf( __( wp_kses( '<strong>WP Events Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Events Manager</strong> version <strong>%s</strong> or higher.', array( 'strong' => array() ), 'wp-event-woo' ) ), WP_EVENT_WOO_REQUIRE_VER ) . '</p>';
+					echo '<p>' . sprintf( __( wp_kses( '<strong>WP Events Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Events Manager</strong> version <strong>%s</strong> or higher.', array( 'strong' => array() ), 'wp-event-woo' ) ), WPEMS_WOO_REQUIRE_VER ) . '</p>';
 					break;
 				case'required_active_woo':
 					echo '<p>' . sprintf( __( wp_kses( 'WP Events Manager - WooCommerce Payment Methods Integration requires <a href="%s">WooCommerce</a> is activated. Please install and active it before you can using this add-on.', array( 'a' => array( 'href' => array() ) ) ), 'wp-event-woo' ), 'http://wordpress.org/plugins/woocommerce' ) . '</p>';

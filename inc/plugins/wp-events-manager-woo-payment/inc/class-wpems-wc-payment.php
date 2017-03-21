@@ -33,7 +33,7 @@ class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 	 */
 	public function __construct() {
 		$this->title = __( 'Woocommerce', 'wp-event-woo' );
-		$this->icon  = WP_EVENT_WOO_INC_URI . '/' . $this->id . '.png';
+		$this->icon  = WPEMS_WOO_INC_URI . '/' . $this->id . '.png';
 
 		parent::__construct();
 	}
