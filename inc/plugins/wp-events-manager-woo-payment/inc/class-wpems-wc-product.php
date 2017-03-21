@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 if ( !class_exists( 'WC_Product_Simple' ) )
 	return;
 
-class  TP_Event_WC_Product extends WC_Product_Simple {
+class  WPEMS_WC_Product extends WC_Product_Simple {
 
 	/*
 	 * Event product data
@@ -22,7 +22,7 @@ class  TP_Event_WC_Product extends WC_Product_Simple {
 	public $data = null;
 
 	/**
-	 * TP_Event_WC_Product constructor
+	 * WPEMS_WC_Product constructor
 	 *
 	 * @param mixed $product
 	 */

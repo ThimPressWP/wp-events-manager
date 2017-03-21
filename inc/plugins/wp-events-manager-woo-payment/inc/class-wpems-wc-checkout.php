@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 if ( !class_exists( 'WPEMS_Booking' ) )
 	return;
 
-class TP_Event_WC_Checkout extends WPEMS_Booking {
+class WPEMS_WC_Checkout extends WPEMS_Booking {
 
 	function __construct( $id = null ) {
 		parent::__construct( $id );
@@ -65,4 +65,4 @@ class TP_Event_WC_Checkout extends WPEMS_Booking {
 	}
 }
 
-new TP_Event_WC_Checkout();
+new WPEMS_WC_Checkout();

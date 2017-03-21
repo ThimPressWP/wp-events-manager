@@ -27,7 +27,7 @@ class TP_Event_WC_Settings extends WPEMS_Settings {
 	}
 
 	public function add_wc_checkout_section( $sections ) {
-		$sections['woo_payment'] = new TP_Event_WC_Payment();
+		$sections['woo_payment'] = new WPEMS_WC_Payment();
 
 		return $sections;
 	}

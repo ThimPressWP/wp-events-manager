@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 if ( !class_exists( 'WPEMS_Abstract_Payment_Gateway' ) )
 	return;
 
-class TP_Event_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
+class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 
 	/**
 	 * id of payment
@@ -29,7 +29,7 @@ class TP_Event_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 	public $icon = null;
 
 	/**
-	 * TP_Event_WC_Payment constructor
+	 * WPEMS_WC_Payment constructor
 	 */
 	public function __construct() {
 		$this->title = __( 'Woocommerce', 'wp-event-woo' );
@@ -125,4 +125,4 @@ class TP_Event_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 	}
 }
 
-return new TP_Event_WC_Payment();
+return new WPEMS_WC_Payment();
