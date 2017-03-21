@@ -19,13 +19,13 @@
 defined( 'ABSPATH' ) || exit;
 
 /*
- * Class TP_Event_Woo
+ * Class WPEMS_Woo
  */
 
-class TP_Event_Woo {
+class WPEMS_Woo {
 
 	/**
-	 * Hold the instance of TP_Event_Woo
+	 * Hold the instance of WPEMS_Woo
 	 *
 	 * @var null
 	 */
@@ -46,7 +46,7 @@ class TP_Event_Woo {
 	protected static $_notice;
 
 	/**
-	 * TP_Event_Woo constructor
+	 * WPEMS_Woo constructor
 	 */
 	public function __construct() {
 
@@ -205,7 +205,7 @@ class TP_Event_Woo {
 			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 		// check TP Event plugin activated
-		if ( class_exists( 'TP_Event' ) && is_plugin_active( 'WP-Events-Manager/wp-events-manager.php' ) ) {
+		if ( class_exists( 'WPEMS' ) && is_plugin_active( 'wp-events-manager/wp-events-manager.php' ) ) {
 			if ( WP_EVENT_VER < 2 || !WP_EVENT_VER ) {
 				self::$_wc_loaded = false;
 				self::$_notice    = 'required_update_wpems';
@@ -226,7 +226,7 @@ class TP_Event_Woo {
 			}
 		}
 
-		TP_Event_Woo::instance();
+		WPEMS_Woo::instance();
 
 		if ( !self::$_wc_loaded ) {
 			add_action( 'admin_notices', array( __CLASS__, 'admin_notice' ) );
@@ -258,9 +258,9 @@ class TP_Event_Woo {
 	}
 
 	/**
-	 * TP_Event_Woo instance
+	 * WPEMS_Woo instance
 	 *
-	 * @return null|TP_Event_Woo
+	 * @return null|WPEMS_Woo
 	 */
 	public static function instance() {
 		if ( !self::$_instance ) {
@@ -271,4 +271,4 @@ class TP_Event_Woo {
 
 }
 
-add_action( 'plugins_loaded', array( 'TP_Event_Woo', 'load' ) );
+add_action( 'plugins_loaded', array( 'WPEMS_Woo', 'load' ) );

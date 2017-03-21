@@ -14,10 +14,10 @@ defined( 'ABSPATH' ) || exit;
 if ( !class_exists( 'WPEMS_Settings' ) )
 	return;
 
-class TP_Event_WC_Settings extends WPEMS_Settings {
+class WPEMS_WC_Settings extends WPEMS_Settings {
 
 	/**
-	 * TP_Event_WC_Settings constructor
+	 * WPEMS_WC_Settings constructor
 	 *
 	 */
 	public function __construct( $prefix = null ) {
@@ -35,4 +35,4 @@ class TP_Event_WC_Settings extends WPEMS_Settings {
 
 }
 
-return new TP_Event_WC_Settings();
+return new WPEMS_WC_Settings();

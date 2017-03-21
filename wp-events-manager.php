@@ -13,18 +13,18 @@ if ( !defined( 'ABSPATH' ) )
 	exit();
 
 /**
- * Event class
+ * WPEMS class
  */
-if ( !class_exists( 'TP_Event' ) ) {
+if ( !class_exists( 'WPEMS' ) ) {
 
-	final class TP_Event {
+	final class WPEMS {
 
 		private static $_instance = null;
 
 		public $_session = null;
 
 		/**
-		 * TP_Event constructor.
+		 * WPEMS constructor.
 		 */
 		public function __construct() {
 			$this->define_constants();
@@ -69,7 +69,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 			$this->text_domain();
 			$this->_session = new WPEMS_Session();
 
-			do_action( 'tp_event_init', $this );
+			do_action( 'wpems_init', $this );
 		}
 
 		/**
@@ -147,7 +147,7 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 		/**
 		 * get instance class
-		 * @return TP_Event
+		 * @return WPEMS
 		 */
 		public static function instance() {
 			if ( !empty( self::$_instance ) ) {
@@ -158,15 +158,15 @@ if ( !class_exists( 'TP_Event' ) ) {
 
 	}
 
-	if ( !function_exists( 'TP_EVENT' ) ) {
+	if ( !function_exists( 'WPEMS' ) ) {
 
-		function TP_EVENT() {
-			return TP_Event::instance();
+		function WPEMS() {
+			return WPEMS::instance();
 		}
 
 	}
-	TP_EVENT();
+	WPEMS();
 }
 
 
-$GLOBALS['TP_Event'] = TP_EVENT();
+$GLOBALS['WPEMS'] = WPEMS();
