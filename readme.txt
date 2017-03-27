@@ -78,10 +78,10 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 - An amazing Events Manager plugin for WordPress was born
 
-= 2.0 =
+= 2.0.0 =
 - Fix timezone countdown
 - Rebuild Core
 - Update booking detail page
@@ -93,6 +93,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 - Add setting for set up Google map API key
 - Add event category taxonomy
 - Add woocommerce payment add-on
+
+= 2.0.1 =
+- Remove unnecessary caps and roles
 
 == Upgrade Notice ==
 

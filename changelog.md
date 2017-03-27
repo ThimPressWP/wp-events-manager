@@ -1,4 +1,7 @@
-**2.0**
+**2.0.1**
+- Remove unnecessary caps and roles 
+
+**2.0.0**
 - Fix timezone countdown
 - Rebuild Core
 - Update booking detail page
@@ -12,7 +15,7 @@
 - Add woocommerce payment add-on
 
 
-**1.0**
+**1.0.0**
 - Update database
 - Setting update
 - Update Register, Login
