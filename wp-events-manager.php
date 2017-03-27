@@ -93,7 +93,6 @@ if ( !class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/class-wpems-session.php' );
 			$this->_include( 'inc/class-wpems-booking.php' );
 			$this->_include( 'inc/class-wpems-event.php' );
-			$this->_include( 'inc/class-wpems-roles.php' );
 			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {

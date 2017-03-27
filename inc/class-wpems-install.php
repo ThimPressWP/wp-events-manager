@@ -80,14 +80,6 @@ class WPEMS_Install {
 		 */
 		self::upgrade_database();
 		/**
-		 * Add new roles
-		 */
-		WPEMS_Roles::add_roles();
-		/**
-		 * Add new caps
-		 */
-		WPEMS_Roles::add_caps();
-		/**
 		 * Create Pages
 		 */
 		self::create_pages();
@@ -101,10 +93,7 @@ class WPEMS_Install {
 	 * register_deactivation_hook callback
 	 */
 	public static function uninstall() {
-		/**
-		 * Remove Caps and Roles
-		 */
-		WPEMS_Roles::remove_roles();
+
 	}
 
 
