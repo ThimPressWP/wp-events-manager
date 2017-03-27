@@ -504,7 +504,7 @@ if ( !function_exists( 'wpems_create_page' ) ) {
 
 		if ( $valid_page_found ) {
 			if ( $option ) {
-				tp_event_update_option( $option, $valid_page_found );
+				wpems_update_option( $option, $valid_page_found );
 			}
 			return $valid_page_found;
 		}
@@ -540,7 +540,7 @@ if ( !function_exists( 'wpems_create_page' ) ) {
 		}
 
 		if ( $option ) {
-			tp_event_update_option( $option, $page_id );
+			wpems_update_option( $option, $page_id );
 		}
 
 		return $page_id;
