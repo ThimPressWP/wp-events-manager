@@ -71,7 +71,7 @@ class WPEMS_Custom_Post_Types {
 			'query_var'          => true,
 			'rewrite'            => array( 'slug' => _x( 'events', 'URL slug', 'wp-events-manager' ) ),
 			'taxonomies'         => array( 'tp_event_category' ),
-			'capability_type'    => 'tp_event',
+			'capability_type'    => 'post',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
 			'hierarchical'       => true,
