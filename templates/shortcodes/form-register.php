@@ -46,6 +46,6 @@ wpems_print_notices();
 </form>
 
 <p id="nav">
-    <a href="<?php echo esc_url( tp_event_login_url() ); ?>"><?php _e( 'Log in', 'wp-events-manager' ); ?></a> |
+    <a href="<?php echo esc_url( wpems_login_url() ); ?>"><?php _e( 'Log in', 'wp-events-manager' ); ?></a> |
     <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'wp-events-manager' ) ?>"><?php _e( 'Forgot password?', 'wp-events-manager' ); ?></a>
 </p>

@@ -664,12 +664,12 @@ if ( !function_exists( 'wpems_get_current_url' ) ) {
 if ( !function_exists( 'wpems_add_notice' ) ) {
 	function wpems_add_notice( $type = 'error', $msg = '' ) {
 		if ( !$msg ) return;
-		$notices = TP_Event()->_session->get( 'notices', array() );
+		$notices = WPEMS()->_session->get( 'notices', array() );
 		if ( !isset( $notices[$type] ) ) {
 			$notices[$type] = array();
 		}
 		$notices[$type][] = $msg;
-		TP_Event()->_session->set( 'notices', $notices );
+		WPEMS()->_session->set( 'notices', $notices );
 	}
 
 }
@@ -678,7 +678,7 @@ if ( !function_exists( 'wpems_get_notice' ) ) {
 
 	function wpems_get_notice( $type = null ) {
 		if ( $type ) {
-			$notices = TP_Event()->_session->get( 'notices', array() );
+			$notices = WPEMS()->_session->get( 'notices', array() );
 			return isset( $notices[$type] ) ? $notices[$type] : array();
 		}
 	}
@@ -689,7 +689,7 @@ if ( !function_exists( 'wpems_has_notice' ) ) {
 
 	function wpems_has_notice( $type = null ) {
 		if ( $type ) {
-			$notices = TP_Event()->_session->get( 'notices', array() );
+			$notices = WPEMS()->_session->get( 'notices', array() );
 			return isset( $notices[$type] );
 		}
 	}
@@ -699,12 +699,12 @@ if ( !function_exists( 'wpems_has_notice' ) ) {
 if ( !function_exists( 'wpems_print_notices' ) ) {
 
 	function wpems_print_notices() {
-		if ( $notices = TP_Event()->_session->get( 'notices', array() ) ) {
+		if ( $notices = WPEMS()->_session->get( 'notices', array() ) ) {
 			ob_start();
 			wpems_get_template( 'notices/messages.php', array( 'messages' => $notices ) );
 			$html = ob_get_clean();
 			echo $html;
-			TP_Event()->_session->set( 'notices', array() );
+			WPEMS()->_session->set( 'notices', array() );
 		}
 
 	}
@@ -1171,15 +1171,15 @@ add_filter( 'the_content', 'wpems_content_filter', 1 );
 if ( !function_exists( 'wpems_content_filter' ) ) {
 	function wpems_content_filter( $content ) {
 		if ( ( $login_page_id = wpems_get_page_id( 'login' ) ) && is_page( $login_page_id ) ) {
-			$content = do_shortcode( '[tp_event_login]' );
+			$content = do_shortcode( '[wp_event_login]' );
 		} else if ( ( $register_page_id = wpems_get_page_id( 'register' ) ) && is_page( $register_page_id ) ) {
-			$content = do_shortcode( '[tp_event_register]' );
+			$content = do_shortcode( '[wp_event_register]' );
 		} else if ( ( $forgot_page_id = wpems_get_page_id( 'forgot_password' ) ) && is_page( $forgot_page_id ) ) {
-			$content = do_shortcode( '[tp_event_forgot_password]' );
+			$content = do_shortcode( '[wp_event_forgot_password]' );
 		} else if ( ( $reset_page_id = wpems_get_page_id( 'reset_password' ) ) && is_page( $reset_page_id ) ) {
-			$content = do_shortcode( '[tp_event_reset_password]' );
+			$content = do_shortcode( '[wp_event_reset_password]' );
 		} else if ( ( $account_page_id = wpems_get_page_id( 'account' ) ) && is_page( $account_page_id ) ) {
-			$content = do_shortcode( '[tp_event_account]' );
+			$content = do_shortcode( '[wp_event_account]' );
 		}
 
 		return $content;
@@ -1295,6 +1295,6 @@ if ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php'
 
 function wpems_show_remove_event_auth_notice() { ?>
     <div class="notice notice-error tp-event-dismiss-notice is-dismissible">
-        <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' already included <strong>Thim Event Authentication</strong> add-on. Please delete the add-on.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
+        <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' is an upgrade of <strong>Thim Events</strong> plugin and already included <strong>Thim Event Authentication</strong> add-on. Please deactivate and delete <strong>Thim Events/Thim Event Authentication</strong>.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
     </div>
 <?php }
