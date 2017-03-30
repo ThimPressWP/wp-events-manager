@@ -30,7 +30,7 @@ class WPEMS_Admin_Menu {
 		 * @var array
 		 */
 		$menus = apply_filters( 'tp_event_admin_menu', $this->_menus );
-		add_menu_page( __( 'Events Manager', 'wp-events-manager' ), __( 'Events Manager', 'wp-events-manager' ), 'administrator', 'tp-event-setting', null, 'dashicons-calendar', 9 );
+		add_menu_page( __( 'Events Manager', 'wp-events-manager' ), __( 'Events Manager', 'wp-events-manager' ), 'administrator', 'tp-event-setting', null, 'dashicons-calendar', 4 );
 		if ( $menus ) {
 			foreach ( $menus as $menu ) {
 				call_user_func_array( 'add_submenu_page', $menu );
