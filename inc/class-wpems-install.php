@@ -32,8 +32,16 @@ class WPEMS_Install {
 			}
 
 			$active_plugins = get_option( 'active_plugins', true );
-			if ( ( $key = array_search( 'tp-event-auth/tp-event-auth.php', $active_plugins ) ) !== false ) {
-				unset( $active_plugins[$key] );
+
+			$plugins = array(
+				'tp-event-auth/tp-event-auth.php',
+				'tp-event/tp-event.php'
+			);
+
+			foreach ( $plugins as $plugin ) {
+				if ( ( $key = array_search( $plugin, $active_plugins ) ) !== false ) {
+					unset( $active_plugins[$key] );
+				}
 			}
 			update_option( 'active_plugins', $active_plugins );
 
@@ -93,7 +101,7 @@ class WPEMS_Install {
 	 * register_deactivation_hook callback
 	 */
 	public static function uninstall() {
-
+		delete_option('thimpress_events_show_remove_event_auth_notice');
 	}
 
 

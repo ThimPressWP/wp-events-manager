@@ -1295,6 +1295,6 @@ if ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php'
 
 function wpems_show_remove_event_auth_notice() { ?>
     <div class="notice notice-error tp-event-dismiss-notice is-dismissible">
-        <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' already included <strong>Thim Event Authentication</strong> add-on. Please delete the add-on.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
+        <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' is an upgrade of <strong>Thim Events</strong> plugin and already included <strong>Thim Event Authentication</strong> add-on. Please deactivate and delete <strong>Thim Events/Thim Event Authentication</strong>.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
     </div>
 <?php }
