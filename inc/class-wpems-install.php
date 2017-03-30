@@ -113,31 +113,31 @@ class WPEMS_Install {
 			'register'        => array(
 				'name'    => _x( 'user-register', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'User Register', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'tp_event_register' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'wp_event_register' ) . ']'
 			),
 			'login'           => array(
 				'name'    => _x( 'user-login', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'User Login', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'tp_event_login' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'wp_event_login' ) . ']'
 			),
 			'forgot_password' => array(
 				'name'    => _x( 'forgot-password', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'Forgot Password', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_forgot_password_shortcode_tag', 'tp_event_forgot_password' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_forgot_password_shortcode_tag', 'wp_event_forgot_password' ) . ']'
 			),
 			'reset_password'  => array(
 				'name'    => _x( 'reset-password', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'Reset Password', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_reset_password_shortcode_tag', 'tp_event_reset_password' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_reset_password_shortcode_tag', 'wp_event_reset_password' ) . ']'
 			),
 			'account'         => array(
 				'name'    => _x( 'user-account', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'User Account', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'tp_event_account' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'wp_event_account' ) . ']'
 			),
 		);
 		foreach ( $pages as $name => $page ) {
-			wpems_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? tp_event_get_page_id( $page['parent'] ) : '' );
+			wpems_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? wpems_get_page_id( $page['parent'] ) : '' );
 		}
 	}
 
