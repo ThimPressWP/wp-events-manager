@@ -8,7 +8,7 @@ $query = new WP_Query( $args );
 wpems_print_notices();
 
 if ( !is_user_logged_in() ) {
-	printf( __( 'You are not <a href="%s">login</a>', 'wp-events-manager' ), tp_event_login_url() );
+	printf( __( 'You are not <a href="%s">login</a>', 'wp-events-manager' ), wpems_login_url() );
 	return;
 }
 
