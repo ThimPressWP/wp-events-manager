@@ -237,7 +237,7 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 		if ( !$post )
 			$post = get_post();
 
-		return get_post_meta( $post->ID, 'wpems_event_location', true );
+		return get_post_meta( $post->ID, 'tp_event_location', true );
 	}
 
 	/**
