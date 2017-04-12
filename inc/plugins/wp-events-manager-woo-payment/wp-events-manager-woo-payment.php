@@ -141,7 +141,7 @@ class WPEMS_Woo {
 	 * @return string
 	 */
 	public function event_product_class( $classname, $product_type, $post_type, $product_id ) {
-		if ( $post_type == 'tp_event' ) {
+		if ( get_post_type( $product_id ) == 'tp_event' ) {
 			$classname = 'WPEMS_WC_Product';
 		}
 		return $classname;
@@ -240,7 +240,7 @@ class WPEMS_Woo {
 	 */
 	public static function admin_notice() {
 		?>
-        <div class="error">
+		<div class="error">
 			<?php
 			switch ( self::$_notice ) {
 				case 'required_active_wpems':
@@ -253,7 +253,7 @@ class WPEMS_Woo {
 					echo '<p>' . sprintf( __( wp_kses( 'WP Events Manager - WooCommerce Payment Methods Integration requires <a href="%s">WooCommerce</a> is activated. Please install and active it before you can using this add-on.', array( 'a' => array( 'href' => array() ) ) ), 'wp-events-manager-woo' ), 'http://wordpress.org/plugins/woocommerce' ) . '</p>';
 					break;
 			} ?>
-        </div>
+		</div>
 		<?php
 	}
 
