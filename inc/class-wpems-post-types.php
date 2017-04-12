@@ -315,13 +315,14 @@ class WPEMS_Custom_Post_Types {
 	public function booking_columns() {
 		$columns = array();
 		// set
-		$columns['cb']     = __( '<label class="screen-reader-text __web-inspector-hide-shortcut__" for="cb-select-all-1">Select All</label><input id="cb-select-all-1" type="checkbox">' );
-		$columns['ID']     = __( 'ID', 'wp-events-manager' );
-		$columns['event']  = __( 'Event', 'wp-events-manager' );
-		$columns['user']   = __( 'User', 'wp-events-manager' );
-		$columns['cost']   = __( 'Cost', 'wp-events-manager' );
-		$columns['slot']   = __( 'Slot', 'wp-events-manager' );
-		$columns['status'] = __( 'Status', 'wp-events-manager' );
+		$columns['cb']           = __( '<label class="screen-reader-text __web-inspector-hide-shortcut__" for="cb-select-all-1">Select All</label><input id="cb-select-all-1" type="checkbox">' );
+		$columns['ID']           = __( 'ID', 'wp-events-manager' );
+		$columns['event']        = __( 'Event', 'wp-events-manager' );
+		$columns['user']         = __( 'User', 'wp-events-manager' );
+		$columns['booking_date'] = __( 'Date', 'wp-events-manager' );
+		$columns['cost']         = __( 'Cost', 'wp-events-manager' );
+		$columns['slot']         = __( 'Slot', 'wp-events-manager' );
+		$columns['status']       = __( 'Status', 'wp-events-manager' );
 		return $columns;
 	}
 
@@ -346,6 +347,9 @@ class WPEMS_Custom_Post_Types {
 				$return[] = sprintf( __( '<a href="%s">%s</a>', 'wp-events-manager' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
 				$return   = implode( '', $return );
 				echo $return;
+				break;
+			case 'booking_date':
+				echo get_the_date( '', $booking->ID );
 				break;
 			case 'cost':
 				echo $booking->price > 0 ? wpems_format_price( $booking->price ) : __( 'Free', 'wp-events-manager' );
@@ -452,14 +456,14 @@ class WPEMS_Custom_Post_Types {
 		if ( $post_type_object->publicly_queryable ) {
 			$permalink = get_permalink( $post->ID );
 
-			$view_link = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'wp-events-manager' ) );
+			$view_link               = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'wp-events-manager' ) );
 			$messages[$post_type][1] .= $view_link;
 			$messages[$post_type][6] .= $view_link;
 			$messages[$post_type][9] .= $view_link;
 
-			$preview_permalink = add_query_arg( 'preview', 'true', $permalink );
-			$preview_link      = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'wp-events-manager' ) );
-			$messages[$post_type][8] .= $preview_link;
+			$preview_permalink        = add_query_arg( 'preview', 'true', $permalink );
+			$preview_link             = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'wp-events-manager' ) );
+			$messages[$post_type][8]  .= $preview_link;
 			$messages[$post_type][10] .= $preview_link;
 		}
 		return $messages;
