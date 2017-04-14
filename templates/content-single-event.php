@@ -32,11 +32,6 @@
 		do_action( 'tp_event_single_event_content' );
 
 		/**
-		 * tp_event_loop_event_note hook
-		 */
-		do_action( 'tp_event_loop_event_note' );
-
-		/**
 		 * tp_event_loop_event_location hook
 		 */
 		do_action( 'tp_event_loop_event_location' );

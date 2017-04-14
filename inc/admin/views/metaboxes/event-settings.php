@@ -20,7 +20,6 @@ $time_end = get_post_meta( $post->ID, $prefix . 'time_end', true ) ? date( 'H:i'
 $qty      = get_post_meta( $post_id, $prefix . 'qty', true );
 $price    = get_post_meta( $post_id, $prefix . 'price', true );
 $location = get_post_meta( $post_id, $prefix . 'location', true );
-$note     = get_post_meta( $post_id, $prefix . 'note', true );
 $today    = date( "Y-m-d", strtotime( 'today' ) );
 $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
 ?>
@@ -72,12 +71,6 @@ $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
                     <a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here' ) ?></a>
                 </p>
 			<?php endif; ?>
-        </div>
-        <div class="option_group">
-            <p class="form-field">
-                <label for="_note"><?php _e( 'Note', 'wp-events-manager' ) ?></label>
-                <textarea rows="4" class="short" name="<?php echo esc_attr( $prefix ) ?>note" id="_note"><?php echo esc_html( $note ); ?></textarea>
-            </p>
         </div>
         <div class="option_group">
             <p class="form-field">

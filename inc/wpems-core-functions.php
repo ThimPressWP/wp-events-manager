@@ -241,20 +241,6 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 	}
 
 	/**
-	 * get event note
-	 *
-	 * @param  string $format
-	 *
-	 * @return string
-	 */
-	function wpems_get_event_note( $post = null ) {
-		if ( !$post )
-			$post = get_post();
-
-		return get_post_meta( $post->ID, 'tp_event_note', true );
-	}
-
-	/**
 	 * get event booking note
 	 *
 	 * @param  string $format
@@ -375,15 +361,6 @@ if ( !function_exists( 'wpems_single_event_content' ) ) {
 			wpems_get_template( 'loop/excerpt.php' );
 		else
 			wpems_get_template( 'loop/content.php' );
-	}
-
-}
-
-add_action( 'tp_event_loop_event_note', 'wpems_loop_event_note' );
-if ( !function_exists( 'wpems_loop_event_note' ) ) {
-
-	function wpems_loop_event_note() {
-		wpems_get_template( 'loop/note.php' );
 	}
 
 }
