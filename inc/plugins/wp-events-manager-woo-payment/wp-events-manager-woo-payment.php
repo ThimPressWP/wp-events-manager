@@ -205,7 +205,7 @@ class WPEMS_Woo {
 			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 		// check TP Event plugin activated
-		if ( class_exists( 'WPEMS' ) && is_plugin_active( 'wp-events-manager/wp-events-manager.php' ) ) {
+		if ( class_exists( 'WPEMS' ) && (is_plugin_active( 'wp-events-manager/wp-events-manager.php' ) || is_plugin_active( 'WP-Events-Manager/wp-events-manager.php' )  )) {
 			if ( WPEMS_VER < 2 || !WPEMS_VER ) {
 				self::$_wc_loaded = false;
 				self::$_notice    = 'required_update_wpems';
