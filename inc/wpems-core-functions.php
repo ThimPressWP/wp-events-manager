@@ -1275,3 +1275,20 @@ function wpems_show_remove_event_auth_notice() { ?>
         <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' is an upgrade of <strong>Thim Events</strong> plugin and already included <strong>Thim Event Authentication</strong> add-on. Please deactivate and delete <strong>Thim Events/Thim Event Authentication</strong>.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
     </div>
 <?php }
+
+/*
+ * Post type admin order
+ */
+if ( !function_exists( 'wpems_post_type_admin_order' ) ) {
+	function wpems_post_type_admin_order( $wp_query ) {
+		if ( is_admin() && !isset( $_GET['orderby'] ) ) {
+			// Get the post type from the query
+			$post_type = $wp_query->query['post_type'];
+			if ( in_array( $post_type, array( 'tp_event', 'event_auth_book' ) ) ) {
+				$wp_query->set( 'orderby', 'date' );
+				$wp_query->set( 'order', 'DESC' );
+			}
+		}
+	}
+}
+add_filter( 'pre_get_posts', 'wpems_post_type_admin_order' );
