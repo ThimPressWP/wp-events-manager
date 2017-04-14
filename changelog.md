@@ -1,4 +1,8 @@
 **2.0.1**
+- Fix register user process
+- Remove event note
+
+**2.0.1**
 - Remove unnecessary caps and roles 
 
 **2.0.0**

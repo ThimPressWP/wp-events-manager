@@ -5,7 +5,7 @@
   Plugin URI: http://thimpress.com/
   Description: A complete plugin for Events management and online booking system
   Author: ThimPress
-  Version: 2.0.1
+  Version: 2.0.2
   Author URI: http://thimpress.com
  */
 

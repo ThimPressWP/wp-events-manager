@@ -4,7 +4,7 @@
   Plugin URI: http://thimpress.com/
   Description: Support paying for a booking with the payment methods provided by Woocommerce
   Author: ThimPress
-  Version: 2.0
+  Version: 2.2
   Author URI: http://thimpress.com/
   Requires at least: 3.8
   Tested up to: 4.7.2
@@ -173,7 +173,7 @@ class WPEMS_Woo {
 		define( 'WPEMS_WOO_URI', plugin_dir_url( __FILE__ ) );
 		define( 'WPEMS_WOO_INC', WPEMS_WOO_PATH . 'inc/' );
 		define( 'WPEMS_WOO_INC_URI', WPEMS_WOO_URI . 'inc/' );
-		define( 'WPEMS_WOO_VER', '2.0' );
+		define( 'WPEMS_WOO_VER', '2.2' );
 		define( 'WPEMS_WOO_REQUIRE_VER', '2.0' );
 		define( 'WPEMS_WOO_MAIN_FILE', __FILE__ );
 	}
