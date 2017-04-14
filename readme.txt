@@ -97,5 +97,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 = 2.0.1 =
 - Remove unnecessary caps and roles
 
+= 2.0.2 =
+- Fix register user process
+- Remove event note
+
 == Upgrade Notice ==
 

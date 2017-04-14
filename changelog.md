@@ -1,4 +1,4 @@
-**2.0.1**
+**2.0.2**
 - Fix register user process
 - Remove event note
 
