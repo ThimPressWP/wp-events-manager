@@ -21,7 +21,7 @@ printf(
             <th style="border: 1px solid #eee"><?php _e( 'ID', 'wp-events-manager' ) ?></th>
             <th style="border: 1px solid #eee"><?php _e( 'Event', 'wp-events-manager' ) ?></th>
             <th style="border: 1px solid #eee"><?php _e( 'Type', 'wp-events-manager' ) ?></th>
-            <th style="border: 1px solid #eee"><?php _e( 'Slot', 'wp-events-manager' ) ?></th>
+            <th style="border: 1px solid #eee"><?php _e( 'Quantity', 'wp-events-manager' ) ?></th>
             <th style="border: 1px solid #eee"><?php _e( 'Cost', 'wp-events-manager' ) ?></th>
             <th style="border: 1px solid #eee"><?php _e( 'Payment Method', 'wp-events-manager' ) ?></th>
             <th style="border: 1px solid #eee"><?php _e( 'Status', 'wp-events-manager' ) ?></th>

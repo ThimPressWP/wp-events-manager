@@ -321,7 +321,7 @@ class WPEMS_Custom_Post_Types {
 		$columns['user']         = __( 'User', 'wp-events-manager' );
 		$columns['booking_date'] = __( 'Date', 'wp-events-manager' );
 		$columns['cost']         = __( 'Cost', 'wp-events-manager' );
-		$columns['slot']         = __( 'Slot', 'wp-events-manager' );
+		$columns['slot']         = __( 'Quantity', 'wp-events-manager' );
 		$columns['status']       = __( 'Status', 'wp-events-manager' );
 		return $columns;
 	}
