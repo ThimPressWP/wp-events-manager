@@ -1265,6 +1265,7 @@ function wpems_admin_table_tabs() {
 if ( is_multisite() ) {
 	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && !get_site_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
 		add_action( 'network_admin_notices', 'wpems_show_remove_tp_event_notice' );
+		add_action( 'admin_notices', 'wpems_show_remove_tp_event_notice' );
 	}
 } else {
 	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && !get_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
