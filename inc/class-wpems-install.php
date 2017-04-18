@@ -31,8 +31,13 @@ class WPEMS_Install {
 				require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			}
 
+			$active_plugins = array();
+
 			if ( is_multisite() ) {
-				$active_plugins = wp_get_active_network_plugins();
+				$network_active = wp_get_active_network_plugins();
+				foreach ( $network_active as $plugin ) {
+					$active_plugins[] = str_replace( WP_PLUGIN_DIR, '', $plugin );
+				}
 			} else {
 				$active_plugins = get_option( 'active_plugins', true );
 			}
