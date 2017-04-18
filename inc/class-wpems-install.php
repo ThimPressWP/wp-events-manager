@@ -102,7 +102,11 @@ class WPEMS_Install {
 	 * register_deactivation_hook callback
 	 */
 	public static function uninstall() {
-		delete_option( 'thimpress_events_show_remove_event_auth_notice' );
+		if ( is_multisite() ) {
+			delete_site_option( 'thimpress_events_show_remove_event_auth_notice' );
+		} else {
+			delete_option( 'thimpress_events_show_remove_event_auth_notice' );
+		}
 	}
 
 
