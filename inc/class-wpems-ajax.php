@@ -35,7 +35,11 @@ class WPEMS_Ajax {
 	 */
 	public function event_remove_notice() {
 
-		update_option( 'thimpress_events_show_remove_event_auth_notice', 1 );
+		if ( is_multisite() ) {
+			update_site_option( 'thimpress_events_show_remove_event_auth_notice', 1 );
+		} else {
+			update_option( 'thimpress_events_show_remove_event_auth_notice', 1 );
+		}
 		wp_send_json( array(
 			'status'  => true,
 			'message' => __( 'Remove admin notice successful', 'wp-events-manager' )

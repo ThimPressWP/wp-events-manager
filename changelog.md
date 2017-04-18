@@ -1,3 +1,7 @@
+**2.0.3**
+- Fix deactive previous version process for multisite
+- Add woocommerce payment add-on
+
 **2.0.2**
 - Fix register user process
 - Remove event note
@@ -16,7 +20,6 @@
 - Add map location for event
 - Add setting for set up Google map API key
 - Add event category taxonomy
-- Add woocommerce payment add-on
 
 
 **1.0.0**

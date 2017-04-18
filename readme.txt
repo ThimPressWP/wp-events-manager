@@ -101,5 +101,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 - Fix register user process
 - Remove event note
 
+= 2.0.3 =
+- Fix deactive previous version process for multisite
+- Update Woocomerce payment add-on for Woocommerce version 3.x
+
 == Upgrade Notice ==
 

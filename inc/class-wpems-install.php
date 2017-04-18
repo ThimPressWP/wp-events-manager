@@ -46,24 +46,6 @@ class WPEMS_Install {
 				}
 			}
 
-
-//			if ( is_multisite() ) {
-//				$network_active = wp_get_active_network_plugins();
-//				foreach ( $network_active as $plugin ) {
-//					$active_plugins[] = str_replace( WP_PLUGIN_DIR, '', $plugin );
-//				}
-//			} else {
-//				$active_plugins = get_option( 'active_plugins', true );
-//
-//				foreach ( $plugins as $plugin ) {
-//					if ( ( $key = array_search( $plugin, $active_plugins ) ) !== false ) {
-//						unset( $active_plugins[$key] );
-//					}
-//				}
-//				update_option( 'active_plugins', $active_plugins );
-//			}
-
-
 			/**
 			 * Update options
 			 */

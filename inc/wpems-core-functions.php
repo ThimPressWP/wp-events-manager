@@ -1262,15 +1262,21 @@ function wpems_admin_table_tabs() {
 	}
 }
 
-
-if ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) && !get_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
-	add_action( 'admin_notices', 'wpems_show_remove_event_auth_notice' );
+if ( is_multisite() ) {
+	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && !get_site_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
+		add_action( 'network_admin_notices', 'wpems_show_remove_tp_event_notice' );
+	}
+} else {
+	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && !get_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
+		add_action( 'admin_notices', 'wpems_show_remove_tp_event_notice' );
+	}
 }
+
 /**
  * Show notice required remove event auth add-on
  */
 
-function wpems_show_remove_event_auth_notice() { ?>
+function wpems_show_remove_tp_event_notice() { ?>
     <div class="notice notice-error tp-event-dismiss-notice is-dismissible">
         <p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' is an upgrade of <strong>Thim Events</strong> plugin and already included <strong>Thim Event Authentication</strong> add-on. Please deactivate and delete <strong>Thim Events/Thim Event Authentication</strong>.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
     </div>
