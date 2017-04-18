@@ -31,7 +31,11 @@ class WPEMS_Install {
 				require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			}
 
-			$active_plugins = get_option( 'active_plugins', true );
+			if ( is_multisite() ) {
+				$active_plugins = wp_get_active_network_plugins();
+			} else {
+				$active_plugins = get_option( 'active_plugins', true );
+			}
 
 			$plugins = array(
 				'tp-event-auth/tp-event-auth.php',
@@ -101,7 +105,7 @@ class WPEMS_Install {
 	 * register_deactivation_hook callback
 	 */
 	public static function uninstall() {
-		delete_option('thimpress_events_show_remove_event_auth_notice');
+		delete_option( 'thimpress_events_show_remove_event_auth_notice' );
 	}
 
 
