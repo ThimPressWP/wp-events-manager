@@ -33,26 +33,36 @@ class WPEMS_Install {
 
 			$active_plugins = array();
 
-			if ( is_multisite() ) {
-				$network_active = wp_get_active_network_plugins();
-				foreach ( $network_active as $plugin ) {
-					$active_plugins[] = str_replace( WP_PLUGIN_DIR, '', $plugin );
-				}
-			} else {
-				$active_plugins = get_option( 'active_plugins', true );
-			}
-
 			$plugins = array(
 				'tp-event-auth/tp-event-auth.php',
 				'tp-event/tp-event.php'
 			);
 
 			foreach ( $plugins as $plugin ) {
-				if ( ( $key = array_search( $plugin, $active_plugins ) ) !== false ) {
-					unset( $active_plugins[$key] );
+				if ( is_multisite() ) {
+					deactivate_plugins( $plugin, false, true );
+				} else {
+					deactivate_plugins( $plugin, false, false );
 				}
 			}
-			update_option( 'active_plugins', $active_plugins );
+
+
+//			if ( is_multisite() ) {
+//				$network_active = wp_get_active_network_plugins();
+//				foreach ( $network_active as $plugin ) {
+//					$active_plugins[] = str_replace( WP_PLUGIN_DIR, '', $plugin );
+//				}
+//			} else {
+//				$active_plugins = get_option( 'active_plugins', true );
+//
+//				foreach ( $plugins as $plugin ) {
+//					if ( ( $key = array_search( $plugin, $active_plugins ) ) !== false ) {
+//						unset( $active_plugins[$key] );
+//					}
+//				}
+//				update_option( 'active_plugins', $active_plugins );
+//			}
+
 
 			/**
 			 * Update options
