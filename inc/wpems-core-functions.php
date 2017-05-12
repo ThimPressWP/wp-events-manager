@@ -1,7 +1,7 @@
 <?php
 
 add_action( 'widgets_init', 'wpems_register_countdown_widget' );
-if ( !function_exists( 'wpems_register_countdown_widget' ) ) {
+if ( ! function_exists( 'wpems_register_countdown_widget' ) ) {
 
 	function wpems_register_countdown_widget() {
 		register_widget( 'WPEMS_Widget_Countdown' );
@@ -9,7 +9,7 @@ if ( !function_exists( 'wpems_register_countdown_widget' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_get_template' ) ) {
+if ( ! function_exists( 'wpems_get_template' ) ) {
 
 	function wpems_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 		if ( $args && is_array( $args ) ) {
@@ -18,8 +18,9 @@ if ( !function_exists( 'wpems_get_template' ) ) {
 
 		$located = wpems_locate_template( $template_name, $template_path, $default_path );
 
-		if ( !file_exists( $located ) ) {
+		if ( ! file_exists( $located ) ) {
 			_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $located ), '2.1' );
+
 			return;
 		}
 		// Allow 3rd party plugin filter template file from their plugin
@@ -34,7 +35,7 @@ if ( !function_exists( 'wpems_get_template' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_template_path' ) ) {
+if ( ! function_exists( 'wpems_template_path' ) ) {
 
 	function wpems_template_path() {
 		return apply_filters( 'wpems_template_path', 'wp-events-manager' );
@@ -42,23 +43,26 @@ if ( !function_exists( 'wpems_template_path' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_get_template_part' ) ) {
+if ( ! function_exists( 'wpems_get_template_part' ) ) {
 
 	function wpems_get_template_part( $slug, $name = '' ) {
 		$template = '';
 
 		// Look in yourtheme/slug-name.php and yourtheme/courses-manage/slug-name.php
 		if ( $name ) {
-			$template = locate_template( array( "{$slug}-{$name}.php", wpems_template_path() . "/{$slug}-{$name}.php" ) );
+			$template = locate_template( array(
+				"{$slug}-{$name}.php",
+				wpems_template_path() . "/{$slug}-{$name}.php"
+			) );
 		}
 
 		// Get default slug-name.php
-		if ( !$template && $name && file_exists( WPEMS_PATH . "/templates/{$slug}-{$name}.php" ) ) {
+		if ( ! $template && $name && file_exists( WPEMS_PATH . "/templates/{$slug}-{$name}.php" ) ) {
 			$template = WPEMS_PATH . "/templates/{$slug}-{$name}.php";
 		}
 
 		// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/courses-manage/slug.php
-		if ( !$template ) {
+		if ( ! $template ) {
 			$template = locate_template( array( "{$slug}.php", wpems_template_path() . "{$slug}.php" ) );
 		}
 
@@ -75,23 +79,24 @@ if ( !function_exists( 'wpems_get_template_part' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_get_template_content' ) ) {
+if ( ! function_exists( 'wpems_get_template_content' ) ) {
 	function wpems_get_template_content( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 		ob_start();
 		wpems_get_template( $template_name, $args, $template_path, $default_path );
+
 		return ob_get_clean();
 	}
 }
 
-if ( !function_exists( 'wpems_locate_template' ) ) {
+if ( ! function_exists( 'wpems_locate_template' ) ) {
 
 	function wpems_locate_template( $template_name, $template_path = '', $default_path = '' ) {
 
-		if ( !$template_path ) {
+		if ( ! $template_path ) {
 			$template_path = wpems_template_path();
 		}
 
-		if ( !$default_path ) {
+		if ( ! $default_path ) {
 			$default_path = WPEMS_PATH . '/templates/';
 		}
 
@@ -104,7 +109,7 @@ if ( !function_exists( 'wpems_locate_template' ) ) {
 			)
 		);
 		// Get default template
-		if ( !$template ) {
+		if ( ! $template ) {
 			$template = $default_path . $template_name;
 		}
 
@@ -113,7 +118,7 @@ if ( !function_exists( 'wpems_locate_template' ) ) {
 	}
 
 }
-if ( !function_exists( 'is_event_taxonomy' ) ) {
+if ( ! function_exists( 'is_event_taxonomy' ) ) {
 
 	/**
 	 * Returns true when viewing a room taxonomy archive.
@@ -129,7 +134,7 @@ if ( !function_exists( 'is_event_taxonomy' ) ) {
  * template hook function
  */
 add_filter( 'the_content', 'wpems_the_content' );
-if ( !function_exists( 'wpems_the_content' ) ) {
+if ( ! function_exists( 'wpems_the_content' ) ) {
 
 	function wpems_the_content( $content ) {
 		return do_shortcode( $content );
@@ -137,7 +142,7 @@ if ( !function_exists( 'wpems_the_content' ) ) {
 
 }
 add_filter( 'the_post', 'wpems_add_property_countdown' );
-if ( !function_exists( 'wpems_add_property_countdown' ) ) {
+if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 
 	/**
 	 * add property inside the loop
@@ -178,7 +183,7 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 	 * @return [type]         [description]
 	 */
 	function wpems_event_start( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
-		if ( !$post ) {
+		if ( ! $post ) {
 			$post = get_post();
 		}
 
@@ -197,7 +202,7 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 	 * @return
 	 */
 	function wpems_event_end( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
-		if ( !$post ) {
+		if ( ! $post ) {
 			$post = get_post();
 		}
 
@@ -234,8 +239,9 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 	 * @return string
 	 */
 	function wpems_event_location( $post = null ) {
-		if ( !$post )
+		if ( ! $post ) {
 			$post = get_post();
+		}
 
 		return get_post_meta( $post->ID, 'tp_event_location', true );
 	}
@@ -248,8 +254,9 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 	 * @return string
 	 */
 	function wpems_get_booking_note( $post = null ) {
-		if ( !$post )
+		if ( ! $post ) {
 			$post = get_post();
+		}
 
 		return get_post_meta( $post->ID, 'ea_booking_note', true );
 	}
@@ -258,7 +265,7 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 	 * get event location map
 	 */
 	function wpems_get_location_map() {
-		if ( !wpems_get_option( 'google_map_api_key' ) || !wpems_event_location() ) {
+		if ( ! wpems_get_option( 'google_map_api_key' ) || ! wpems_event_location() ) {
 			return;
 		}
 
@@ -280,7 +287,7 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 		?>
         <div class="event-google-map-canvas" style="height: <?php echo $map_args['height']; ?>; width: <?php echo $map_args['width']; ?>" id="map-canvas-<?php echo $map_args['map_id']; ?>"
 			<?php foreach ( $map_args['map_data'] as $key => $val ) : ?>
-				<?php if ( !empty( $val ) ) : ?>
+				<?php if ( ! empty( $val ) ) : ?>
                     data-<?php echo esc_attr( $key ) . '="' . esc_attr( $val ) . '"' ?>
 				<?php endif ?>
 			<?php endforeach; ?>
@@ -290,7 +297,7 @@ if ( !function_exists( 'wpems_add_property_countdown' ) ) {
 
 }
 add_action( 'tp_event_before_main_content', 'wpems_before_main_content' );
-if ( !function_exists( 'wpems_before_main_content' ) ) {
+if ( ! function_exists( 'wpems_before_main_content' ) ) {
 
 	function wpems_before_main_content() {
 
@@ -299,7 +306,7 @@ if ( !function_exists( 'wpems_before_main_content' ) ) {
 }
 
 add_action( 'tp_event_after_main_content', 'wpems_after_main_content' );
-if ( !function_exists( 'wpems_after_main_content' ) ) {
+if ( ! function_exists( 'wpems_after_main_content' ) ) {
 
 	function wpems_after_main_content() {
 
@@ -308,7 +315,7 @@ if ( !function_exists( 'wpems_after_main_content' ) ) {
 }
 
 add_action( 'tp_event_before_single_event', 'wpems_before_single_event' );
-if ( !function_exists( 'wpems_before_single_event' ) ) {
+if ( ! function_exists( 'wpems_before_single_event' ) ) {
 
 	function wpems_before_single_event() {
 
@@ -317,7 +324,7 @@ if ( !function_exists( 'wpems_before_single_event' ) ) {
 }
 
 add_action( 'tp_event_after_single_event', 'wpems_after_single_event' );
-if ( !function_exists( 'wpems_after_single_event' ) ) {
+if ( ! function_exists( 'wpems_after_single_event' ) ) {
 
 	function wpems_after_single_event() {
 
@@ -327,7 +334,7 @@ if ( !function_exists( 'wpems_after_single_event' ) ) {
 
 /* template hook */
 add_action( 'tp_event_single_event_title', 'wpems_single_event_title' );
-if ( !function_exists( 'wpems_single_event_title' ) ) {
+if ( ! function_exists( 'wpems_single_event_title' ) ) {
 
 	function wpems_single_event_title() {
 		wpems_get_template( 'loop/title.php' );
@@ -336,7 +343,7 @@ if ( !function_exists( 'wpems_single_event_title' ) ) {
 }
 
 add_action( 'tp_event_single_event_thumbnail', 'wpems_single_event_thumbnail' );
-if ( !function_exists( 'wpems_single_event_thumbnail' ) ) {
+if ( ! function_exists( 'wpems_single_event_thumbnail' ) ) {
 
 	function wpems_single_event_thumbnail() {
 		wpems_get_template( 'loop/thumbnail.php' );
@@ -345,7 +352,7 @@ if ( !function_exists( 'wpems_single_event_thumbnail' ) ) {
 }
 
 add_action( 'tp_event_loop_event_countdown', 'wpems_loop_event_countdown' );
-if ( !function_exists( 'wpems_loop_event_countdown' ) ) {
+if ( ! function_exists( 'wpems_loop_event_countdown' ) ) {
 
 	function wpems_loop_event_countdown() {
 		wpems_get_template( 'loop/countdown.php' );
@@ -354,19 +361,20 @@ if ( !function_exists( 'wpems_loop_event_countdown' ) ) {
 }
 
 add_action( 'tp_event_single_event_content', 'wpems_single_event_content' );
-if ( !function_exists( 'wpems_single_event_content' ) ) {
+if ( ! function_exists( 'wpems_single_event_content' ) ) {
 
 	function wpems_single_event_content() {
-		if ( !is_singular( 'tp_event' ) || !in_the_loop() )
+		if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
 			wpems_get_template( 'loop/excerpt.php' );
-		else
+		} else {
 			wpems_get_template( 'loop/content.php' );
+		}
 	}
 
 }
 
 add_action( 'tp_event_after_single_event', 'wpems_single_event_register' );
-if ( !function_exists( 'wpems_single_event_register' ) ) {
+if ( ! function_exists( 'wpems_single_event_register' ) ) {
 
 	function wpems_single_event_register() {
 		wpems_get_template( 'loop/register.php' );
@@ -375,7 +383,7 @@ if ( !function_exists( 'wpems_single_event_register' ) ) {
 }
 
 add_action( 'tp_event_loop_event_location', 'wpems_loop_event_location' );
-if ( !function_exists( 'wpems_loop_event_location' ) ) {
+if ( ! function_exists( 'wpems_loop_event_location' ) ) {
 
 	function wpems_loop_event_location() {
 		wpems_get_template( 'loop/location.php' );
@@ -384,7 +392,7 @@ if ( !function_exists( 'wpems_loop_event_location' ) ) {
 }
 
 // l18n
-if ( !function_exists( 'wpems_l18n' ) ) {
+if ( ! function_exists( 'wpems_l18n' ) ) {
 	function wpems_l18n() {
 		return apply_filters( 'thimpress_event_l18n', array(
 			'gmt_offset'      => esc_js( get_option( 'gmt_offset' ) ),
@@ -416,7 +424,7 @@ if ( !function_exists( 'wpems_l18n' ) ) {
 	}
 }
 
-if ( !function_exists( 'wpems_get_option' ) ) {
+if ( ! function_exists( 'wpems_get_option' ) ) {
 
 	/**
 	 * wpems_get_option
@@ -430,12 +438,13 @@ if ( !function_exists( 'wpems_get_option' ) ) {
 		if ( strpos( $name, 'thimpress_events_' ) !== 0 ) {
 			$name = 'thimpress_events_' . $name;
 		}
+
 		return get_option( $name, $default );
 	}
 
 }
 
-if ( !function_exists( 'wpems_update_option' ) ) {
+if ( ! function_exists( 'wpems_update_option' ) ) {
 
 	/**
 	 * wpems_get_option
@@ -454,7 +463,7 @@ if ( !function_exists( 'wpems_update_option' ) ) {
 /**
  * Create Wordpress Page
  */
-if ( !function_exists( 'wpems_create_page' ) ) {
+if ( ! function_exists( 'wpems_create_page' ) ) {
 	function wpems_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
 		global $wpdb;
 
@@ -463,7 +472,13 @@ if ( !function_exists( 'wpems_create_page' ) ) {
 		if ( $option_value > 0 ) {
 			$page_object = get_post( $option_value );
 
-			if ( $page_object && 'page' === $page_object->post_type && !in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ) ) ) {
+			if ( $page_object && 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array(
+					'pending',
+					'trash',
+					'future',
+					'auto-draft'
+				) )
+			) {
 				// Valid page is already in place
 				return $page_object->ID;
 			}
@@ -483,6 +498,7 @@ if ( !function_exists( 'wpems_create_page' ) ) {
 			if ( $option ) {
 				wpems_update_option( $option, $valid_page_found );
 			}
+
 			return $valid_page_found;
 		}
 
@@ -524,17 +540,18 @@ if ( !function_exists( 'wpems_create_page' ) ) {
 	}
 }
 
-if ( !function_exists( 'wpems_get_page_id' ) ) {
+if ( ! function_exists( 'wpems_get_page_id' ) ) {
 
 	function wpems_get_page_id( $name = null ) {
 		$prefix = 'thimpress_events_';
+
 		return apply_filters( 'tp_event_get_page_id', wpems_get_option( $prefix . $name . '_page_id' ) );
 	}
 
 }
 
 add_action( 'tp_event_schedule_status', 'wpems_schedule_update_status', 10, 2 );
-if ( !function_exists( 'wpems_schedule_update_status' ) ) {
+if ( ! function_exists( 'wpems_schedule_update_status' ) ) {
 
 	function wpems_schedule_update_status( $post_id, $status ) {
 		if ( $fo = fopen( ABSPATH . '/text.txt', 'a' ) ) {
@@ -544,7 +561,12 @@ if ( !function_exists( 'wpems_schedule_update_status' ) ) {
 		wp_clear_scheduled_hook( 'tp_event_schedule_status', array( $post_id, $status ) );
 		$old_status = get_post_status( $post_id );
 
-		if ( $old_status !== $status && in_array( $status, array( 'tp-event-upcoming', 'tp-event-happenning', 'tp-event-expired' ) ) ) {
+		if ( $old_status !== $status && in_array( $status, array(
+				'tp-event-upcoming',
+				'tp-event-happenning',
+				'tp-event-expired'
+			) )
+		) {
 			$post = wpems_add_property_countdown( get_post( $post_id ) );
 
 			$current_time = strtotime( current_time( 'Y-m-d H:i' ) );
@@ -564,11 +586,11 @@ if ( !function_exists( 'wpems_schedule_update_status' ) ) {
 	}
 }
 
-if ( !function_exists( 'wpems_login_url' ) ) {
+if ( ! function_exists( 'wpems_login_url' ) ) {
 
 	function wpems_login_url() {
 		$url = get_permalink( wpems_get_page_id( 'login' ) );
-		if ( !$url ) {
+		if ( ! $url ) {
 			$url = wp_login_url();
 		}
 
@@ -577,11 +599,11 @@ if ( !function_exists( 'wpems_login_url' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_register_url' ) ) {
+if ( ! function_exists( 'wpems_register_url' ) ) {
 
 	function wpems_register_url() {
 		$url = get_permalink( wpems_get_page_id( 'register' ) );
-		if ( !$url ) {
+		if ( ! $url ) {
 			$url = wp_registration_url();
 		}
 
@@ -590,11 +612,11 @@ if ( !function_exists( 'wpems_register_url' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_forgot_password_url' ) ) {
+if ( ! function_exists( 'wpems_forgot_password_url' ) ) {
 
 	function wpems_forgot_password_url() {
 		$url = get_permalink( wpems_get_page_id( 'forgot_password' ) );
-		if ( !$url ) {
+		if ( ! $url ) {
 			$url = wp_lostpassword_url();
 		}
 
@@ -604,11 +626,11 @@ if ( !function_exists( 'wpems_forgot_password_url' ) ) {
 }
 
 
-if ( !function_exists( 'wpems_reset_password_url' ) ) {
+if ( ! function_exists( 'wpems_reset_password_url' ) ) {
 
 	function wpems_reset_password_url() {
 		$url = get_permalink( wpems_get_page_id( 'reset_password' ) );
-		if ( !$url ) {
+		if ( ! $url ) {
 			$url = add_query_arg( 'action', 'rp', wp_login_url() );
 		}
 
@@ -617,11 +639,11 @@ if ( !function_exists( 'wpems_reset_password_url' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_account_url' ) ) {
+if ( ! function_exists( 'wpems_account_url' ) ) {
 
 	function wpems_account_url() {
 		$url = get_permalink( wpems_get_page_id( 'account' ) );
-		if ( !$url ) {
+		if ( ! $url ) {
 			$url = home_url();
 		}
 
@@ -630,7 +652,7 @@ if ( !function_exists( 'wpems_account_url' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_get_current_url' ) ) {
+if ( ! function_exists( 'wpems_get_current_url' ) ) {
 
 	function wpems_get_current_url() {
 		return ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -638,42 +660,46 @@ if ( !function_exists( 'wpems_get_current_url' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_add_notice' ) ) {
+if ( ! function_exists( 'wpems_add_notice' ) ) {
 	function wpems_add_notice( $type = 'error', $msg = '' ) {
-		if ( !$msg ) return;
-		$notices = WPEMS()->_session->get( 'notices', array() );
-		if ( !isset( $notices[$type] ) ) {
-			$notices[$type] = array();
+		if ( ! $msg ) {
+			return;
 		}
-		$notices[$type][] = $msg;
+		$notices = WPEMS()->_session->get( 'notices', array() );
+		if ( ! isset( $notices[ $type ] ) ) {
+			$notices[ $type ] = array();
+		}
+		$notices[ $type ][] = $msg;
 		WPEMS()->_session->set( 'notices', $notices );
 	}
 
 }
 
-if ( !function_exists( 'wpems_get_notice' ) ) {
+if ( ! function_exists( 'wpems_get_notice' ) ) {
 
 	function wpems_get_notice( $type = null ) {
 		if ( $type ) {
 			$notices = WPEMS()->_session->get( 'notices', array() );
-			return isset( $notices[$type] ) ? $notices[$type] : array();
+
+			return isset( $notices[ $type ] ) ? $notices[ $type ] : array();
 		}
 	}
 
 }
 
-if ( !function_exists( 'wpems_has_notice' ) ) {
+if ( ! function_exists( 'wpems_has_notice' ) ) {
 
 	function wpems_has_notice( $type = null ) {
 		if ( $type ) {
 			$notices = WPEMS()->_session->get( 'notices', array() );
-			return isset( $notices[$type] );
+
+			return isset( $notices[ $type ] );
 		}
 	}
 
 }
 
-if ( !function_exists( 'wpems_print_notices' ) ) {
+if ( ! function_exists( 'wpems_print_notices' ) ) {
 
 	function wpems_print_notices() {
 		if ( $notices = WPEMS()->_session->get( 'notices', array() ) ) {
@@ -688,7 +714,7 @@ if ( !function_exists( 'wpems_print_notices' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_print_notice' ) ) {
+if ( ! function_exists( 'wpems_print_notice' ) ) {
 
 	function wpems_print_notice( $type = 'success', $message ) {
 		if ( 'success' === $type ) {
@@ -702,7 +728,7 @@ if ( !function_exists( 'wpems_print_notice' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_get_currency' ) ) {
+if ( ! function_exists( 'wpems_get_currency' ) ) {
 
 	function wpems_get_currency() {
 		return apply_filters( 'tp_event_get_currency', wpems_get_option( 'currency', 'USD' ) );
@@ -715,7 +741,7 @@ if ( !function_exists( 'wpems_get_currency' ) ) {
  *
  * @return mixed
  */
-if ( !function_exists( 'wpems_currencies' ) ) {
+if ( ! function_exists( 'wpems_currencies' ) ) {
 
 	function wpems_currencies() {
 		$currencies = array(
@@ -771,10 +797,10 @@ if ( !function_exists( 'wpems_currencies' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_get_currency_symbol' ) ) {
+if ( ! function_exists( 'wpems_get_currency_symbol' ) ) {
 
 	function wpems_get_currency_symbol( $currency = '' ) {
-		if ( !$currency ) {
+		if ( ! $currency ) {
 			$currency = wpems_get_currency();
 		}
 
@@ -910,13 +936,13 @@ if ( !function_exists( 'wpems_get_currency_symbol' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_format_price' ) ) {
+if ( ! function_exists( 'wpems_format_price' ) ) {
 	function wpems_format_price( $price, $with_currency = true ) {
 		$position                  = wpems_get_option( 'currency_position', 'left_space' );
 		$price_thousands_separator = wpems_get_option( 'currency_thousand', '.' );
 		$price_decimals_separator  = wpems_get_option( 'currency_separator', ',' );
 		$price_number_of_decimal   = wpems_get_option( 'currency_num_decimal', 2 );
-		if ( !is_numeric( $price ) ) {
+		if ( ! is_numeric( $price ) ) {
 			$price = 0;
 		}
 
@@ -945,15 +971,15 @@ if ( !function_exists( 'wpems_format_price' ) ) {
 		}
 
 		$price_format = $before
-			. number_format(
-				$price, $price_number_of_decimal, $price_decimals_separator, $price_thousands_separator
-			) . $after;
+		                . number_format(
+			                $price, $price_number_of_decimal, $price_decimals_separator, $price_thousands_separator
+		                ) . $after;
 
 		return apply_filters( 'tp_event_price_format', $price_format, $price, $with_currency );
 	}
 }
 
-if ( !function_exists( 'wpems_payment_gateways' ) ) {
+if ( ! function_exists( 'wpems_payment_gateways' ) ) {
 
 	// List payment gateways
 	function wpems_payment_gateways() {
@@ -962,7 +988,7 @@ if ( !function_exists( 'wpems_payment_gateways' ) ) {
 	}
 }
 
-if ( !function_exists( 'wpems_gateways_enable' ) ) {
+if ( ! function_exists( 'wpems_gateways_enable' ) ) {
 
 	// List payment gateways
 	function wpems_gateways_enable() {
@@ -971,17 +997,18 @@ if ( !function_exists( 'wpems_gateways_enable' ) ) {
 	}
 }
 
-if ( !function_exists( 'wpems_get_payment_title' ) ) {
+if ( ! function_exists( 'wpems_get_payment_title' ) ) {
 
 // List payments gateway title
 	function wpems_get_payment_title( $payment_id = null ) {
 		$payments = wpems_payment_gateways();
-		return isset( $payments[$payment_id] ) ? $payments[$payment_id]->title : '';
+
+		return isset( $payments[ $payment_id ] ) ? $payments[ $payment_id ]->title : '';
 	}
 
 }
 
-if ( !function_exists( 'wpems_format_ID' ) ) {
+if ( ! function_exists( 'wpems_format_ID' ) ) {
 
 	// format ID
 	function wpems_format_ID( $id = null ) {
@@ -990,7 +1017,7 @@ if ( !function_exists( 'wpems_format_ID' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_booking_status' ) ) {
+if ( ! function_exists( 'wpems_booking_status' ) ) {
 
 	// booking status title
 	function wpems_booking_status( $id = null ) {
@@ -1029,7 +1056,7 @@ if ( !function_exists( 'wpems_booking_status' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_get_payment_status' ) ) {
+if ( ! function_exists( 'wpems_get_payment_status' ) ) {
 
 	function wpems_get_payment_status() {
 		return apply_filters( 'wpems_get_payment_status', array(
@@ -1042,7 +1069,7 @@ if ( !function_exists( 'wpems_get_payment_status' ) ) {
 
 }
 
-if ( !function_exists( 'wpems_is_ajax' ) ) {
+if ( ! function_exists( 'wpems_is_ajax' ) ) {
 	/**
 	 * is processing ajax request
 	 */
@@ -1051,7 +1078,7 @@ if ( !function_exists( 'wpems_is_ajax' ) ) {
 	}
 }
 
-if ( !function_exists( 'tp_event_create_new_user' ) ) {
+if ( ! function_exists( 'tp_event_create_new_user' ) ) {
 
 	/**
 	 * create new user
@@ -1073,7 +1100,7 @@ if ( !function_exists( 'tp_event_create_new_user' ) ) {
 		$password = $cred['password'];
 
 		$errors = new WP_Error();
-		if ( !empty( $cred['confirm_password'] ) ) {
+		if ( ! empty( $cred['confirm_password'] ) ) {
 			$confirm_password = $cred['confirm_password'];
 			if ( $password && $confirm_password && $confirm_password !== $confirm_password ) {
 				$errors->add( 'confirm_password', __( 'Confirm Password is not match.', 'wp-events-manager' ) );
@@ -1082,7 +1109,7 @@ if ( !function_exists( 'tp_event_create_new_user' ) ) {
 		/**
 		 * Validate username
 		 */
-		if ( !$username ) {
+		if ( ! $username ) {
 			$errors->add( 'user_login', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-events-manager' ), __( 'Username is required field.', 'wp-events-manager' ) ) );
 		} else if ( username_exists( $username ) ) {
 			$errors->add( 'user_login', __( 'Username is already exists.', 'wp-events-manager' ) );
@@ -1091,7 +1118,7 @@ if ( !function_exists( 'tp_event_create_new_user' ) ) {
 		/**
 		 * Validate email
 		 */
-		if ( !$email || !is_email( $email ) ) {
+		if ( ! $email || ! is_email( $email ) ) {
 			$errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-events-manager' ), __( 'Please provide a valid email address.', 'wp-events-manager' ) ) );
 		} else if ( email_exists( $email ) ) {
 			$errors->add( 'user_email', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-events-manager' ), __( 'An account is already registered with your email address. Please login.', 'wp-events-manager' ) ) );
@@ -1118,6 +1145,7 @@ if ( !function_exists( 'tp_event_create_new_user' ) ) {
 		 */
 		if ( is_wp_error( $user_id ) ) {
 			$errors->add( 'insert_user_error', sprintf( '<strong>%s</strong>%s', __( 'ERROR: ', 'wp-events-manager' ), __( 'Couldn\'t register.', 'wp-events-manager' ) ) );
+
 			return $errors;
 		}
 
@@ -1128,7 +1156,7 @@ if ( !function_exists( 'tp_event_create_new_user' ) ) {
 
 }
 
-if ( !function_exists( 'tp_event_get_booking' ) ) {
+if ( ! function_exists( 'tp_event_get_booking' ) ) {
 
 	/**
 	 * Get Booking
@@ -1145,19 +1173,33 @@ if ( !function_exists( 'tp_event_get_booking' ) ) {
 
 // filter shortcode
 add_filter( 'the_content', 'wpems_content_filter', 1 );
-if ( !function_exists( 'wpems_content_filter' ) ) {
+if ( ! function_exists( 'wpems_content_filter' ) ) {
 	function wpems_content_filter( $content ) {
+
 		if ( ( $login_page_id = wpems_get_page_id( 'login' ) ) && is_page( $login_page_id ) ) {
-			$content = do_shortcode( '[wp_event_login]' );
+			if ( ! preg_match( '/\[wp_event_login\s?(.*)\]/', $content ) ) {
+				$content = $content . '[wp_event_login]';
+			}
 		} else if ( ( $register_page_id = wpems_get_page_id( 'register' ) ) && is_page( $register_page_id ) ) {
-			$content = do_shortcode( '[wp_event_register]' );
+			if ( ! preg_match( '/\[wp_event_register\s?(.*)\]/', $content ) ) {
+				$content = $content . '[wp_event_register]';
+			}
 		} else if ( ( $forgot_page_id = wpems_get_page_id( 'forgot_password' ) ) && is_page( $forgot_page_id ) ) {
-			$content = do_shortcode( '[wp_event_forgot_password]' );
+			if ( ! preg_match( '/\[wp_event_forgot_password\s?(.*)\]/', $content ) ) {
+				$content = $content . '[wp_event_forgot_password]';
+			}
+
 		} else if ( ( $reset_page_id = wpems_get_page_id( 'reset_password' ) ) && is_page( $reset_page_id ) ) {
-			$content = do_shortcode( '[wp_event_reset_password]' );
+			if ( ! preg_match( '/\[wp_event_reset_password\s?(.*)\]/', $content ) ) {
+				$content = $content . '[wp_event_reset_password]';
+			}
 		} else if ( ( $account_page_id = wpems_get_page_id( 'account' ) ) && is_page( $account_page_id ) ) {
-			$content = do_shortcode( '[wp_event_account]' );
+			if ( ! preg_match( '/\[wp_event_account\s?(.*)\]/', $content ) ) {
+				$content = $content . '[wp_event_account]';
+			}
 		}
+
+		$content = do_shortcode( $content );
 
 		return $content;
 	}
@@ -1166,7 +1208,7 @@ if ( !function_exists( 'wpems_content_filter' ) ) {
 
 add_action( 'tp_event_create_new_booking', 'wpems_cancel_booking', 10, 1 );
 add_action( 'tp_event_updated_status', 'wpems_cancel_booking', 10, 1 );
-if ( !function_exists( 'wpems_cancel_booking' ) ) {
+if ( ! function_exists( 'wpems_cancel_booking' ) ) {
 
 	function wpems_cancel_booking( $booking_id ) {
 		$post_status = get_post_status( $booking_id );
@@ -1181,7 +1223,7 @@ if ( !function_exists( 'wpems_cancel_booking' ) ) {
 
 // cancel payment order
 add_action( 'tp_event_cancel_payment_booking', 'wpems_cancel_payment_booking' );
-if ( !function_exists( 'wpems_cancel_payment_booking' ) ) {
+if ( ! function_exists( 'wpems_cancel_payment_booking' ) ) {
 
 	function wpems_cancel_payment_booking( $booking_id ) {
 		$post_status = get_post_status( $booking_id );
@@ -1197,7 +1239,7 @@ if ( !function_exists( 'wpems_cancel_payment_booking' ) ) {
 }
 
 // Update functions from version 1.4
-if ( !function_exists( 'event_get_option' ) ) {
+if ( ! function_exists( 'event_get_option' ) ) {
 
 	/**
 	 * event_get_option
@@ -1211,6 +1253,7 @@ if ( !function_exists( 'event_get_option' ) ) {
 		if ( strpos( $name, 'thimpress_events_' ) !== 0 ) {
 			$name = 'thimpress_events_' . $name;
 		}
+
 		return get_option( $name, $default );
 	}
 
@@ -1219,7 +1262,9 @@ if ( !function_exists( 'event_get_option' ) ) {
 // Add event category tab in admin table page
 add_action( 'all_admin_notices', 'wpems_admin_table_tabs' );
 function wpems_admin_table_tabs() {
-	if ( !is_admin() ) return;
+	if ( ! is_admin() ) {
+		return;
+	}
 	$admin_tabs = apply_filters(
 		'tp_event_admin_event_tab_info',
 		array(
@@ -1241,21 +1286,27 @@ function wpems_admin_table_tabs() {
 		array_push( $tabs, $key );
 	}
 
-	$pages = apply_filters( 'tp-event_admin_tabs_on_pages', array( 'edit-tp_event', 'edit-tp_event_category', 'tp_event' ) );
+	$pages = apply_filters( 'tp-event_admin_tabs_on_pages', array(
+		'edit-tp_event',
+		'edit-tp_event_category',
+		'tp_event'
+	) );
 
 	$admin_tabs_on_page = array();
 	foreach ( $pages as $page ) {
-		$admin_tabs_on_page[$page] = $tabs;
+		$admin_tabs_on_page[ $page ] = $tabs;
 	}
 
 	$current_page_id = get_current_screen()->id;
 	$current_user    = wp_get_current_user();
-	if ( !in_array( 'administrator', $current_user->roles ) ) return;
-	if ( !empty( $admin_tabs_on_page[$current_page_id] ) && count( $admin_tabs_on_page[$current_page_id] ) ) { ?>
+	if ( ! in_array( 'administrator', $current_user->roles ) ) {
+		return;
+	}
+	if ( ! empty( $admin_tabs_on_page[ $current_page_id ] ) && count( $admin_tabs_on_page[ $current_page_id ] ) ) { ?>
         <h2 class="nav-tab-wrapper event-nav-tab-wrapper">
-			<?php foreach ( $admin_tabs_on_page[$current_page_id] as $admin_tab_id ) {
-				$class = ( $admin_tabs[$admin_tab_id]['id'] == $current_page_id ? 'nav-tab nav-tab-active' : 'nav-tab' );
-				echo '<a href="' . admin_url( $admin_tabs[$admin_tab_id]["link"] ) . '" class="' . $class . ' nav-tab-' . $admin_tabs[$admin_tab_id]["id"] . '">' . $admin_tabs[$admin_tab_id]["name"] . '</a>';
+			<?php foreach ( $admin_tabs_on_page[ $current_page_id ] as $admin_tab_id ) {
+				$class = ( $admin_tabs[ $admin_tab_id ]['id'] == $current_page_id ? 'nav-tab nav-tab-active' : 'nav-tab' );
+				echo '<a href="' . admin_url( $admin_tabs[ $admin_tab_id ]["link"] ) . '" class="' . $class . ' nav-tab-' . $admin_tabs[ $admin_tab_id ]["id"] . '">' . $admin_tabs[ $admin_tab_id ]["name"] . '</a>';
 			} ?>
         </h2>
 		<?php
@@ -1263,12 +1314,12 @@ function wpems_admin_table_tabs() {
 }
 
 if ( is_multisite() ) {
-	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && !get_site_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
+	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && ! get_site_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
 		add_action( 'network_admin_notices', 'wpems_show_remove_tp_event_notice' );
 		add_action( 'admin_notices', 'wpems_show_remove_tp_event_notice' );
 	}
 } else {
-	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && !get_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
+	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && ! get_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
 		add_action( 'admin_notices', 'wpems_show_remove_tp_event_notice' );
 	}
 }
@@ -1286,9 +1337,9 @@ function wpems_show_remove_tp_event_notice() { ?>
 /*
  * Post type admin order
  */
-if ( !function_exists( 'wpems_post_type_admin_order' ) ) {
+if ( ! function_exists( 'wpems_post_type_admin_order' ) ) {
 	function wpems_post_type_admin_order( $wp_query ) {
-		if ( is_admin() && !isset( $_GET['orderby'] ) ) {
+		if ( is_admin() && ! isset( $_GET['orderby'] ) ) {
 			// Get the post type from the query
 			$post_type = $wp_query->query['post_type'];
 			if ( in_array( $post_type, array( 'tp_event', 'event_auth_book' ) ) ) {

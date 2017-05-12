@@ -105,5 +105,8 @@ To stay in touch and update about FundPress's future releases and features, you 
 - Fix deactive previous version process for multisite
 - Update Woocomerce payment add-on for Woocommerce version 3.x
 
+= 2.0.4 =
+- Update do shortcodes in default pages
+
 == Upgrade Notice ==
 
