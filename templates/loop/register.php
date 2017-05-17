@@ -20,15 +20,15 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
     <ul class="event-info">
         <li class="total">
             <span class="label"><?php _e( 'Total Slot:', 'wp-events-manager' ) ?></span>
-            <span clsas="detail"><?php echo esc_html( absint( $event->qty ) ) ?></span>
+            <span class="detail"><?php echo esc_html( absint( $event->qty ) ) ?></span>
         </li>
         <li class="booking_slot">
             <span class="label"><?php _e( 'Booked Slot:', 'wp-events-manager' ) ?></span>
-            <span clsas="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ) ?></span>
+            <span class="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ) ?></span>
         </li>
         <li class="price">
             <span class="label"><?php _e( 'Cost:', 'wp-events-manager' ) ?></span>
-            <span clsas="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'wp-events-manager' ) : wpems_format_price( $event->get_price() ) ) ?></span>
+            <span class="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'wp-events-manager' ) : wpems_format_price( $event->get_price() ) ) ?></span>
         </li>
     </ul>
 
