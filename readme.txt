@@ -108,5 +108,8 @@ To stay in touch and update about FundPress's future releases and features, you 
 = 2.0.4 =
 - Update do shortcodes in default pages
 
+= 2.0.5 =
+- Fix revolution slider with content filter
+
 == Upgrade Notice ==
 

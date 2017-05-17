@@ -1,5 +1,11 @@
+**2.0.5**
+- Fix revolution slider with content filter
+
+**2.0.4**
+- Update do shortcodes in default pages
+
 **2.0.3**
-- Fix deactive previous version process for multisite
+- Fix deactivate previous version process for multisite
 - Add woocommerce payment add-on
 
 **2.0.2**
@@ -20,7 +26,6 @@
 - Add map location for event
 - Add setting for set up Google map API key
 - Add event category taxonomy
-
 
 **1.0.0**
 - Update database
