@@ -1203,7 +1203,17 @@ if ( ! function_exists( 'wpems_content_filter' ) ) {
 			}
 		}
 
+		$has_filter = false;
+		if ( has_filter( 'the_content', 'wpautop' ) ) {
+			$has_filter = true;
+			remove_filter( 'the_content', 'wpautop' );
+		}
+
 		$content = do_shortcode( $content );
+
+		if ( $has_filter ) {
+			add_filter( 'the_content', 'wpautop' );
+		}
 
 		return $content;
 	}

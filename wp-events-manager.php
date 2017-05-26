@@ -5,17 +5,18 @@
   Plugin URI: http://thimpress.com/
   Description: A complete plugin for Events management and online booking system
   Author: ThimPress
-  Version: 2.0.5
+  Version: 2.0.6
   Author URI: http://thimpress.com
  */
 
-if ( !defined( 'ABSPATH' ) )
+if ( ! defined( 'ABSPATH' ) ) {
 	exit();
+}
 
 /**
  * WPEMS class
  */
-if ( !class_exists( 'WPEMS' ) ) {
+if ( ! class_exists( 'WPEMS' ) ) {
 
 	final class WPEMS {
 
@@ -42,12 +43,12 @@ if ( !class_exists( 'WPEMS' ) ) {
 			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
 			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
 			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
-			$this->set_define( 'WPEMS_VER', '2.0.5' );
+			$this->set_define( 'WPEMS_VER', '2.0.6' );
 			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}
 
 		public function set_define( $name = '', $value = '' ) {
-			if ( $name && !defined( $name ) ) {
+			if ( $name && ! defined( $name ) ) {
 				define( $name, $value );
 			}
 		}
@@ -114,14 +115,16 @@ if ( !class_exists( 'WPEMS' ) ) {
 		public function _include( $file = null ) {
 			if ( is_array( $file ) ) {
 				foreach ( $file as $key => $f ) {
-					if ( file_exists( WPEMS_PATH . $f ) )
+					if ( file_exists( WPEMS_PATH . $f ) ) {
 						require_once WPEMS_PATH . $f;
+					}
 				}
 			} else {
-				if ( file_exists( WPEMS_PATH . $file ) )
+				if ( file_exists( WPEMS_PATH . $file ) ) {
 					require_once WPEMS_PATH . $file;
-				elseif ( file_exists( $file ) )
+				} elseif ( file_exists( $file ) ) {
 					require_once $file;
+				}
 			}
 		}
 
@@ -149,15 +152,16 @@ if ( !class_exists( 'WPEMS' ) ) {
 		 * @return WPEMS
 		 */
 		public static function instance() {
-			if ( !empty( self::$_instance ) ) {
+			if ( ! empty( self::$_instance ) ) {
 				return self::$_instance;
 			}
+
 			return self::$_instance = new self();
 		}
 
 	}
 
-	if ( !function_exists( 'WPEMS' ) ) {
+	if ( ! function_exists( 'WPEMS' ) ) {
 
 		function WPEMS() {
 			return WPEMS::instance();
