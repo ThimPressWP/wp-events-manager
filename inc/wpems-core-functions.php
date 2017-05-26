@@ -1176,39 +1176,48 @@ add_filter( 'the_content', 'wpems_content_filter', 1 );
 if ( ! function_exists( 'wpems_content_filter' ) ) {
 	function wpems_content_filter( $content ) {
 
+		$filter = false;
+
 		if ( ( $login_page_id = wpems_get_page_id( 'login' ) ) && is_page( $login_page_id ) ) {
 			if ( ! preg_match( '/\[wp_event_login\s?(.*)\]/', $content ) ) {
+				$filter  = true;
 				$content = $content . '[wp_event_login]';
 			}
 		} else if ( ( $register_page_id = wpems_get_page_id( 'register' ) ) && is_page( $register_page_id ) ) {
 			if ( ! preg_match( '/\[wp_event_register\s?(.*)\]/', $content ) ) {
+				$filter  = true;
 				$content = $content . '[wp_event_register]';
 			}
 		} else if ( ( $forgot_page_id = wpems_get_page_id( 'forgot_password' ) ) && is_page( $forgot_page_id ) ) {
 			if ( ! preg_match( '/\[wp_event_forgot_password\s?(.*)\]/', $content ) ) {
+				$filter  = true;
 				$content = $content . '[wp_event_forgot_password]';
 			}
 
 		} else if ( ( $reset_page_id = wpems_get_page_id( 'reset_password' ) ) && is_page( $reset_page_id ) ) {
 			if ( ! preg_match( '/\[wp_event_reset_password\s?(.*)\]/', $content ) ) {
+				$filter  = true;
 				$content = $content . '[wp_event_reset_password]';
 			}
 		} else if ( ( $account_page_id = wpems_get_page_id( 'account' ) ) && is_page( $account_page_id ) ) {
 			if ( ! preg_match( '/\[wp_event_account\s?(.*)\]/', $content ) ) {
+				$filter  = true;
 				$content = $content . '[wp_event_account]';
 			}
 		}
 
-		$has_filter = false;
-		if ( has_filter( 'the_content', 'wpautop' ) ) {
-			$has_filter = true;
-			remove_filter( 'the_content', 'wpautop' );
-		}
+		if ( $filter ) {
+			$has_filter = false;
+			if ( has_filter( 'the_content', 'wpautop' ) ) {
+				$has_filter = true;
+				remove_filter( 'the_content', 'wpautop' );
+			}
 
-		$content = do_shortcode( $content );
+			$content = do_shortcode( $content );
 
-		if ( $has_filter ) {
-			add_filter( 'the_content', 'wpautop' );
+			if ( $has_filter ) {
+				add_filter( 'the_content', 'wpautop' );
+			}
 		}
 
 		return $content;
