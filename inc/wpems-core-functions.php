@@ -1172,13 +1172,9 @@ if ( ! function_exists( 'tp_event_get_booking' ) ) {
 }
 
 // filter shortcode
-add_filter( 'the_content', 'wpems_content_filter' );
+add_filter( 'the_content', 'wpems_content_filter', 1 );
 if ( ! function_exists( 'wpems_content_filter' ) ) {
-	function wpems_content_filter() {
-
-		global $wp_query;
-
-		$content = $wp_query->post->post_content;
+	function wpems_content_filter( $content ) {
 
 		if ( ( $login_page_id = wpems_get_page_id( 'login' ) ) && is_page( $login_page_id ) ) {
 			if ( ! preg_match( '/\[wp_event_login\s?(.*)\]/', $content ) ) {
