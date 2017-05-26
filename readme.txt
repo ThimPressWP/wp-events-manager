@@ -114,5 +114,8 @@ To stay in touch and update about FundPress's future releases and features, you 
 = 2.0.6 =
 - Fix content filter
 
+= 2.0.7 =
+- Support some functions of old versions
+
 == Upgrade Notice ==
 

@@ -1369,3 +1369,157 @@ if ( ! function_exists( 'wpems_post_type_admin_order' ) ) {
 	}
 }
 add_filter( 'pre_get_posts', 'wpems_post_type_admin_order' );
+
+
+//=============================================================================================================================================
+
+/**
+ * Support old functions
+ */
+
+
+/**
+ * get event start datetime
+ *
+ * @param  string $format [description]
+ *
+ * @return [type]         [description]
+ */
+
+if ( ! function_exists( 'tp_event_start' ) ) {
+	function tp_event_start( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
+		if ( ! $post ) {
+			$post = get_post();
+		}
+
+		if ( $l10 ) {
+			return date_i18n( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
+		} else {
+			return date( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
+		}
+	}
+}
+
+/**
+ * get event end datetime same as function
+ *
+ * @param  string $format
+ *
+ * @return
+ */
+if ( ! function_exists( 'tp_event_end' ) ) {
+	function tp_event_end( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
+		if ( ! $post ) {
+			$post = get_post();
+		}
+
+		if ( $l10 ) {
+			return date_i18n( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
+		} else {
+			return date( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
+		}
+	}
+}
+
+/**
+ * get time event countdown
+ *
+ * @param  string $format
+ *
+ * @return string
+ */
+if ( ! function_exists( 'tp_event_get_time' ) ) {
+	function tp_event_get_time( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
+		$current_time = current_time( 'timestamp' );
+		$start        = wpems_event_start( 'Y-m-d H:i', $post );
+		$end          = wpems_event_end( 'Y-m-d H:i', $post );
+		if ( $current_time < strtotime( $start ) ) {
+			return wpems_event_start( $format, $post, $l10 );
+		} else {
+			return wpems_event_end( $format, $post, $l10 );
+		}
+	}
+}
+
+/**
+ * get event location
+ *
+ * @param  string $format
+ *
+ * @return string
+ */
+if ( ! function_exists( 'tp_event_location' ) ) {
+	function tp_event_location( $post = null ) {
+		if ( ! $post ) {
+			$post = get_post();
+		}
+
+		return get_post_meta( $post->ID, 'tp_event_location', true );
+	}
+}
+
+
+if ( ! function_exists( 'tp_event_get_template' ) ) {
+
+	function tp_event_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+		if ( $args && is_array( $args ) ) {
+			extract( $args );
+		}
+
+		$located = tp_event_locate_template( $template_name, $template_path, $default_path );
+
+		if ( ! file_exists( $located ) ) {
+			_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $located ), '2.1' );
+
+			return;
+		}
+		// Allow 3rd party plugin filter template file from their plugin
+		$located = apply_filters( 'tp_event_get_template', $located, $template_name, $args, $template_path, $default_path );
+
+		do_action( 'tp_event_before_template_part', $template_name, $template_path, $located, $args );
+
+		include( $located );
+
+		do_action( 'tp_event_after_template_part', $template_name, $template_path, $located, $args );
+	}
+
+}
+
+if ( ! function_exists( 'tp_event_template_path' ) ) {
+
+	function tp_event_template_path() {
+		return apply_filters( 'tp_event_template_path', 'wp-events-manager' );
+	}
+
+}
+
+if ( !function_exists( 'tp_event_locate_template' ) ) {
+
+	function tp_event_locate_template( $template_name, $template_path = '', $default_path = '' ) {
+
+		if ( !$template_path ) {
+			$template_path = tp_event_template_path();
+		}
+
+		if ( !$default_path ) {
+			$default_path = WPEMS_PATH . '/templates/';
+		}
+
+		$template = null;
+		// Look within passed path within the theme - this is priority
+		$template = locate_template(
+			array(
+				trailingslashit( $template_path ) . $template_name,
+				$template_name
+			)
+		);
+		// Get default template
+		if ( !$template ) {
+			$template = $default_path . $template_name;
+		}
+
+		// Return what we found
+		return apply_filters( 'tp_event_locate_template', $template, $template_name, $template_path );
+	}
+
+}
