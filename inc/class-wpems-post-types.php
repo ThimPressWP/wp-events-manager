@@ -1,5 +1,5 @@
 <?php
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
@@ -25,6 +25,8 @@ class WPEMS_Custom_Post_Types {
 		add_filter( 'manage_tp_event_posts_columns', array( $this, 'event_columns' ) );
 		add_action( 'manage_tp_event_posts_custom_column', array( $this, 'event_column_content' ), 10, 2 );
 		add_filter( 'manage_edit-tp_event_sortable_columns', array( $this, 'sortable_columns' ) );
+
+		add_filter( 'manage_edit-tp_event_category_columns', array( $this, 'event_category_columns' ) );
 
 		add_filter( 'manage_event_auth_book_posts_columns', array( $this, 'booking_columns' ) );
 		add_action( 'manage_event_auth_book_posts_custom_column', array( $this, 'booking_column_content' ), 10, 2 );
@@ -241,11 +243,11 @@ class WPEMS_Custom_Post_Types {
 	}
 
 	/**
-	 * Add event custom columns
+	 * Custom event columns.
 	 *
-	 * @param type $columns
+	 * @param $columns
 	 *
-	 * @return array
+	 * @return mixed
 	 */
 	public function event_columns( $columns ) {
 		unset( $columns['comments'], $columns['date'] );
@@ -254,6 +256,21 @@ class WPEMS_Custom_Post_Types {
 		$columns['status']      = __( 'Status', 'wp-events-manager' );
 		$columns['price']       = __( 'Price', 'wp-events-manager' );
 		$columns['booked_slot'] = __( 'Booked / Total', 'wp-events-manager' );
+
+		return $columns;
+	}
+
+
+	/**
+	 * Custom event category columns.
+	 *
+	 * @param $columns
+	 *
+	 * @return mixed
+	 */
+	public function event_category_columns( $columns ) {
+		unset( $columns['posts'] );
+
 		return $columns;
 	}
 
@@ -323,6 +340,7 @@ class WPEMS_Custom_Post_Types {
 		$columns['cost']         = __( 'Cost', 'wp-events-manager' );
 		$columns['slot']         = __( 'Quantity', 'wp-events-manager' );
 		$columns['status']       = __( 'Status', 'wp-events-manager' );
+
 		return $columns;
 	}
 
@@ -395,6 +413,7 @@ class WPEMS_Custom_Post_Types {
 			$query->query_vars['meta_key']   = 'ea_booking_user_id';
 			$query->query_vars['meta_value'] = absint( sanitize_text_field( $_GET['user_id'] ) );
 		}
+
 		return $query;
 	}
 
@@ -456,16 +475,17 @@ class WPEMS_Custom_Post_Types {
 		if ( $post_type_object->publicly_queryable ) {
 			$permalink = get_permalink( $post->ID );
 
-			$view_link               = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'wp-events-manager' ) );
-			$messages[$post_type][1] .= $view_link;
-			$messages[$post_type][6] .= $view_link;
-			$messages[$post_type][9] .= $view_link;
+			$view_link                 = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'wp-events-manager' ) );
+			$messages[ $post_type ][1] .= $view_link;
+			$messages[ $post_type ][6] .= $view_link;
+			$messages[ $post_type ][9] .= $view_link;
 
-			$preview_permalink        = add_query_arg( 'preview', 'true', $permalink );
-			$preview_link             = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'wp-events-manager' ) );
-			$messages[$post_type][8]  .= $preview_link;
-			$messages[$post_type][10] .= $preview_link;
+			$preview_permalink          = add_query_arg( 'preview', 'true', $permalink );
+			$preview_link               = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'wp-events-manager' ) );
+			$messages[ $post_type ][8]  .= $preview_link;
+			$messages[ $post_type ][10] .= $preview_link;
 		}
+
 		return $messages;
 	}
 

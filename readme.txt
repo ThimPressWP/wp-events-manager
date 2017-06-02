@@ -3,7 +3,7 @@ Contributors: thimpress, leehld
 Donate link: https://thimpress.com/
 Tags: event, event management, events, registration, bookings, tickets, locations, google maps
 Requires at least: 4.6
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -116,6 +116,7 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 = 2.0.7 =
 - Support some functions of old versions
+- Add custom event category columns
 
 == Upgrade Notice ==
 
