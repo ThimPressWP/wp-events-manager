@@ -118,5 +118,8 @@ To stay in touch and update about FundPress's future releases and features, you 
 - Support some functions of old versions
 - Add custom event category columns
 
+= 2.0.8 =
+- Sync event date in database
+
 == Upgrade Notice ==
 

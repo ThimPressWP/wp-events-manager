@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -17,7 +17,8 @@ class WPEMS_Install {
 	 */
 	public static function init() {
 		self::$db_upgrade = array(
-			'2.0' => WPEMS_INC . 'admin/upgrades/upgrade-2.0.php'
+			'2.0'   => WPEMS_INC . 'admin/upgrades/upgrade-2.0.php',
+			'2.0.8' => WPEMS_INC . 'admin/upgrades/upgrade-2.0.8.php'
 		);
 	}
 
@@ -25,9 +26,9 @@ class WPEMS_Install {
 	 * register_activation_hook callback
 	 */
 	public static function install() {
-		if ( !defined( 'WPEMS_INSTALLING' ) ) {
+		if ( ! defined( 'WPEMS_INSTALLING' ) ) {
 			define( 'WPEMS_INSTALLING', true );
-			if ( !function_exists( 'get_plugin_data' ) ) {
+			if ( ! function_exists( 'get_plugin_data' ) ) {
 				require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			}
 
@@ -49,7 +50,7 @@ class WPEMS_Install {
 			/**
 			 * Update options
 			 */
-			if ( !get_option( 'thimpress-event-version' ) ) {
+			if ( ! get_option( 'thimpress-event-version' ) ) {
 
 				$prefix   = 'thimpress_events';
 				$settings = get_option( $prefix );
@@ -142,7 +143,7 @@ class WPEMS_Install {
 			),
 		);
 		foreach ( $pages as $name => $page ) {
-			wpems_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? wpems_get_page_id( $page['parent'] ) : '' );
+			wpems_create_page( esc_sql( $page['name'] ), $name . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wpems_get_page_id( $page['parent'] ) : '' );
 		}
 	}
 
@@ -152,7 +153,7 @@ class WPEMS_Install {
 	public static function upgrade_database() {
 		$old_version = get_option( 'thimpress-event-version' );
 		foreach ( self::$db_upgrade as $ver => $file ) {
-			if ( !$old_version || version_compare( $old_version, $ver, '<' ) ) {
+			if ( ! $old_version || version_compare( $old_version, $ver, '<' ) ) {
 				require_once $file;
 			}
 		}
