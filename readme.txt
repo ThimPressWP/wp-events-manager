@@ -122,6 +122,7 @@ To stay in touch and update about FundPress's future releases and features, you 
 - Sync event date in database
 
 = 2.1 =
+- Add option to config number events in archive page
 - Update archive event pagination
 
 == Upgrade Notice ==

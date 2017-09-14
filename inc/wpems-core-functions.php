@@ -1381,6 +1381,20 @@ if ( ! function_exists( 'wpems_post_type_admin_order' ) ) {
 }
 add_filter( 'pre_get_posts', 'wpems_post_type_admin_order' );
 
+/**
+ *  Set number events in archive page.
+ */
+if ( ! function_exists( 'wpems_number_events_archive' ) ) {
+	function wpems_number_events_archive( $query ) {
+		if ( ! is_admin() && isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] === 'tp_event' && is_archive() ) {
+			global $hb_settings;
+			$query->set( 'posts_per_page', wpems_get_option( 'num_events_archive', 10 ) );
+		}
+
+		return $query;
+	}
+}
+add_filter( 'pre_get_posts', 'wpems_number_events_archive' );
 
 //=============================================================================================================================================
 

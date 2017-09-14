@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
@@ -91,6 +91,14 @@ class WPEMS_Admin_Setting_General extends WPEMS_Abstract_Setting {
 				'atts'    => array( 'step' => 'any' ),
 				'default' => '2',
 				'class'   => 'setting-number-decimals' . ( $allow_register_event == 'no' ? ' hide-if-js' : '' ) . apply_filters( 'tp_event_currency_setting_fields_class', '' )
+			),
+			array(
+				'type'    => 'number',
+				'title'   => __( 'Events in Archive page', 'wp-events-manager' ),
+				'id'      => $prefix . 'num_events_archive',
+				'atts'    => array( 'step' => 'any' ),
+				'default' => '10',
+				'min'     => '1'
 			),
 			array(
 				'type'  => 'text',
