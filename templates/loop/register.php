@@ -1,5 +1,5 @@
 <?php
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -10,7 +10,7 @@ if ( wpems_get_option( 'allow_register_event' ) == 'no' ) {
 $event    = new WPEMS_Event( get_the_ID() );
 $user_reg = $event->booked_quantity( get_current_user_id() );
 
-if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expired' ) {
+if ( absint( $event->qty ) == 0 || get_post_meta( get_the_ID(), 'tp_event_status', true ) === 'expired' ) {
 	return;
 }
 ?>
@@ -32,6 +32,7 @@ if ( absint( $event->qty ) == 0 || $event->post->post_status === 'tp-event-expir
         </li>
     </ul>
 
-    <a class="event_register_submit event_auth_button event-load-booking-form" data-event="<?php echo esc_attr( get_the_ID() ) ?>"><?php _e( 'Register Now', 'wp-events-manager' ); ?></a>
+    <a class="event_register_submit event_auth_button event-load-booking-form"
+       data-event="<?php echo esc_attr( get_the_ID() ) ?>"><?php _e( 'Register Now', 'wp-events-manager' ); ?></a>
 
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -52,29 +52,29 @@ class WPEMS_Ajax {
 	 * @return html login form if user not logged in || @return html register event form
 	 */
 	public function load_form_register() {
-		if ( empty( $_POST['nonce'] ) || !wp_verify_nonce( $_POST['nonce'], 'event-auth-register-nonce' ) ) {
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'event-auth-register-nonce' ) ) {
 			return;
 		}
 
-		$event_id = !empty( $_POST['event_id'] ) ? absint( $_POST['event_id'] ) : 0;
+		$event_id = ! empty( $_POST['event_id'] ) ? absint( $_POST['event_id'] ) : 0;
 
-		if ( !$event_id ) {
+		if ( ! $event_id ) {
 			wpems_add_notice( 'error', __( 'Event not found.', 'wp-events-manager' ) );
 			wpems_print_notices();
 			die();
-		} else if ( !is_user_logged_in() ) {
+		} else if ( ! is_user_logged_in() ) {
 			wpems_print_notices( 'error', __( 'You must login before register ', 'wp-events-manager' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			die();
 		} else {
 			$event           = new WPEMS_Event( $event_id );
 			$registered_time = $event->booked_quantity( get_current_user_id() );
 			ob_start();
-			if ( get_post_status( $event_id ) === 'tp-event-expired' ) {
-				wpems_print_notices( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'wp-events-manager' ) ) );
+			if ( get_post_meta( $event_id, 'tp_event_status', true ) === 'expired' ) {
+				wpems_add_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'wp-events-manager' ) ) );
 			} else if ( $registered_time && wpems_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) {
-				wpems_print_notices( 'error', __( 'You have registered this event before', 'wp-events-manager' ) );
-			} else if ( !$event->get_slot_available() ) {
-				wpems_print_notices( 'error', __( 'The event is full, the registration is closed', 'wp-events-manager' ) );
+				wpems_add_notice( 'error', __( 'You have registered this event before', 'wp-events-manager' ) );
+			} else if ( ! $event->get_slot_available() ) {
+				wpems_add_notice( 'error', __( 'The event is full, the registration is closed', 'wp-events-manager' ) );
 			} else {
 				wpems_get_template( 'loop/booking-form.php', array( 'event_id' => $event_id ) );
 			}
@@ -99,19 +99,19 @@ class WPEMS_Ajax {
 				throw new Exception( __( 'Invalid request', 'wp-events-manager' ) );
 			}
 
-			if ( !isset( $_POST['action'] ) || !check_ajax_referer( 'event_auth_register_nonce', 'event_auth_register_nonce' ) ) {
+			if ( ! isset( $_POST['action'] ) || ! check_ajax_referer( 'event_auth_register_nonce', 'event_auth_register_nonce' ) ) {
 				throw new Exception( __( 'Invalid request', 'wp-events-manager' ) );
 			}
 
 			$event_id = false;
-			if ( !isset( $_POST['event_id'] ) || !is_numeric( $_POST['event_id'] ) ) {
+			if ( ! isset( $_POST['event_id'] ) || ! is_numeric( $_POST['event_id'] ) ) {
 				throw new Exception( __( 'Invalid event request', 'wp-events-manager' ) );
 			} else {
 				$event_id = absint( sanitize_text_field( $_POST['event_id'] ) );
 			}
 
 			$qty = 0;
-			if ( !isset( $_POST['qty'] ) || !is_numeric( $_POST['qty'] ) ) {
+			if ( ! isset( $_POST['qty'] ) || ! is_numeric( $_POST['qty'] ) ) {
 				throw new Exception( __( 'Quantity must integer', 'wp-events-manager' ) );
 			} else {
 				$qty = absint( sanitize_text_field( $_POST['qty'] ) );
@@ -142,11 +142,11 @@ class WPEMS_Ajax {
 				'currency'   => wpems_get_currency()
 			) );
 
-			$payment = !empty( $payment_methods[$payment] ) ? $payment_methods[$payment] : false;
+			$payment = ! empty( $payment_methods[ $payment ] ) ? $payment_methods[ $payment ] : false;
 
 			$return = array();
 
-			if ( $args['price'] > 0 && $payment && !$payment->is_available() ) {
+			if ( $args['price'] > 0 && $payment && ! $payment->is_available() ) {
 				throw new Exception( sprintf( '%s %s', get_title(), __( 'is not ready. Please contact administrator to setup payment gateways', 'wp-events-manager' ) ) );
 			}
 
@@ -208,7 +208,10 @@ class WPEMS_Ajax {
 
 	// ajax nopriv: user is not signin
 	public function must_login() {
-		wp_send_json( array( 'status' => false, 'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'wp-events-manager' ), tp_event_login_url() ) ) );
+		wp_send_json( array(
+			'status'  => false,
+			'message' => sprintf( __( 'You Must <a href="%s">Login</a>', 'wp-events-manager' ), tp_event_login_url() )
+		) );
 		die();
 	}
 

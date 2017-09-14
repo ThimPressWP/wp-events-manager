@@ -570,29 +570,25 @@ if ( ! function_exists( 'wpems_schedule_update_status' ) ) {
 			fclose( $fo );
 		}
 		wp_clear_scheduled_hook( 'tp_event_schedule_status', array( $post_id, $status ) );
-		$old_status = get_post_status( $post_id );
+		$old_status = get_post_meta( $post_id, 'tp_event_status', true );
 
-		if ( $old_status !== $status && in_array( $status, array(
-				'tp-event-upcoming',
-				'tp-event-happenning',
-				'tp-event-expired'
-			) )
-		) {
+
+		if ( $old_status !== $status && in_array( $status, array( 'upcoming', 'happening', 'expired' ) ) ) {
 			$post = wpems_add_property_countdown( get_post( $post_id ) );
 
 			$current_time = strtotime( current_time( 'Y-m-d H:i' ) );
 			$event_start  = strtotime( $post->event_start );
 			$event_end    = strtotime( $post->event_end );
 
-			if ( $status === 'tp-event-expired' && $current_time < $event_end ) {
+			if ( $status === 'expired' && $current_time < $event_end ) {
 				return;
 			}
 
-			if ( $status === 'tp-event-happenning' && $current_time < $event_start ) {
+			if ( $status === 'happenning' && $current_time < $event_start ) {
 				return;
 			}
 
-			wp_update_post( array( 'ID' => $post_id, 'post_status' => $status ) );
+			update_post_meta( $post_id, 'tp_event_status', $status );
 		}
 	}
 }

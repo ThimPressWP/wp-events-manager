@@ -18,7 +18,6 @@ class WPEMS_Custom_Post_Types {
 		add_action( 'init', array( $this, 'register_event_category_tax' ) );
 
 		// register post type status
-		add_action( 'init', array( $this, 'register_event_status' ) );
 		add_action( 'init', array( $this, 'register_booking_status' ) );
 
 		// custom event post type column
@@ -32,8 +31,6 @@ class WPEMS_Custom_Post_Types {
 		add_action( 'manage_event_auth_book_posts_custom_column', array( $this, 'booking_column_content' ), 10, 2 );
 
 		add_filter( 'post_updated_messages', array( $this, 'update_message' ) );
-		// filter nav-menu
-		add_filter( 'nav_menu_meta_box_object', array( $this, 'nav_menu_event' ) );
 
 		if ( is_admin() ) {
 			// filter booking event by user ID
@@ -166,40 +163,6 @@ class WPEMS_Custom_Post_Types {
 	}
 
 	/**
-	 * Register event status
-	 */
-	public function register_event_status() {
-		// post status // upcoming // expired // happening
-
-		register_post_status( 'tp-event-upcoming', apply_filters( 'tp_event_register_upcoming_status_args', array(
-			'label'                     => _x( 'Upcoming', 'wp-events-manager' ),
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Upcoming <span class="count">(%s)</span>', 'Upcoming <span class="count">(%s)</span>' ),
-		) ) );
-
-		register_post_status( 'tp-event-happenning', apply_filters( 'tp_event_register_happening_status_args', array(
-			'label'                     => _x( 'Happening', 'wp-events-manager' ),
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Happening <span class="count">(%s)</span>', 'Happening <span class="count">(%s)</span>' ),
-		) ) );
-
-		register_post_status( 'tp-event-expired', apply_filters( 'tp_event_register_expired_status_args', array(
-			'label'                     => _x( 'Expired', 'wp-events-manager' ),
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>' ),
-		) ) );
-	}
-
-	/**
 	 * Register booking status
 	 */
 	public function register_booking_status() {
@@ -284,8 +247,7 @@ class WPEMS_Custom_Post_Types {
 		$event = WPEMS_Event::instance( $post_id );
 		switch ( $column ) {
 			case 'status' :
-				$status = get_post_status_object( get_post_status( $post_id ) );
-				echo $status->label;
+				echo $status = get_post_meta( $post_id, 'tp_event_status', true );
 				break;
 			case 'start' :
 				$date_start = get_post_meta( $post_id, 'tp_event_date_start', true );
@@ -415,28 +377,6 @@ class WPEMS_Custom_Post_Types {
 		}
 
 		return $query;
-	}
-
-	/**
-	 * Filter nav-menu
-	 *
-	 * @param null $object
-	 *
-	 * @return null
-	 */
-	public function nav_menu_event( $object = null ) {
-		if ( isset( $object->name ) && $object->name === 'tp_event' ) {
-			// default query
-			$object->_default_query = array(
-				'post_status' => array(
-					'tp-event-upcoming',
-					'tp-event-happenning',
-					'tp-event-expired'
-				)
-			);
-		}
-
-		return $object;
 	}
 
 	/**
