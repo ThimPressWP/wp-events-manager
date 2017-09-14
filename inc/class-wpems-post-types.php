@@ -25,8 +25,6 @@ class WPEMS_Custom_Post_Types {
 		add_action( 'manage_tp_event_posts_custom_column', array( $this, 'event_column_content' ), 10, 2 );
 		add_filter( 'manage_edit-tp_event_sortable_columns', array( $this, 'sortable_columns' ) );
 
-		add_filter( 'manage_edit-tp_event_category_columns', array( $this, 'event_category_columns' ) );
-
 		add_filter( 'manage_event_auth_book_posts_columns', array( $this, 'booking_columns' ) );
 		add_action( 'manage_event_auth_book_posts_custom_column', array( $this, 'booking_column_content' ), 10, 2 );
 
@@ -219,20 +217,6 @@ class WPEMS_Custom_Post_Types {
 		$columns['status']      = __( 'Status', 'wp-events-manager' );
 		$columns['price']       = __( 'Price', 'wp-events-manager' );
 		$columns['booked_slot'] = __( 'Booked / Total', 'wp-events-manager' );
-
-		return $columns;
-	}
-
-
-	/**
-	 * Custom event category columns.
-	 *
-	 * @param $columns
-	 *
-	 * @return mixed
-	 */
-	public function event_category_columns( $columns ) {
-		unset( $columns['posts'] );
 
 		return $columns;
 	}
