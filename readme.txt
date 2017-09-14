@@ -121,5 +121,8 @@ To stay in touch and update about FundPress's future releases and features, you 
 = 2.0.8 =
 - Sync event date in database
 
+= 2.1 =
+- Update archive event pagination
+
 == Upgrade Notice ==
 

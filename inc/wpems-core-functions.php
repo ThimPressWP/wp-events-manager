@@ -285,7 +285,9 @@ if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 		) );
 
 		?>
-        <div class="event-google-map-canvas" style="height: <?php echo $map_args['height']; ?>; width: <?php echo $map_args['width']; ?>" id="map-canvas-<?php echo $map_args['map_id']; ?>"
+        <div class="event-google-map-canvas"
+             style="height: <?php echo $map_args['height']; ?>; width: <?php echo $map_args['width']; ?>"
+             id="map-canvas-<?php echo $map_args['map_id']; ?>"
 			<?php foreach ( $map_args['map_data'] as $key => $val ) : ?>
 				<?php if ( ! empty( $val ) ) : ?>
                     data-<?php echo esc_attr( $key ) . '="' . esc_attr( $val ) . '"' ?>
@@ -387,6 +389,15 @@ if ( ! function_exists( 'wpems_loop_event_location' ) ) {
 
 	function wpems_loop_event_location() {
 		wpems_get_template( 'loop/location.php' );
+	}
+
+}
+
+add_action( 'tp_event_after_event_loop', 'wpems_loop_event_pagination' );
+if ( ! function_exists( 'wpems_loop_event_pagination' ) ) {
+
+	function wpems_loop_event_pagination() {
+		wpems_get_template( 'loop/pagination.php' );
 	}
 
 }
@@ -1493,15 +1504,15 @@ if ( ! function_exists( 'tp_event_template_path' ) ) {
 
 }
 
-if ( !function_exists( 'tp_event_locate_template' ) ) {
+if ( ! function_exists( 'tp_event_locate_template' ) ) {
 
 	function tp_event_locate_template( $template_name, $template_path = '', $default_path = '' ) {
 
-		if ( !$template_path ) {
+		if ( ! $template_path ) {
 			$template_path = tp_event_template_path();
 		}
 
-		if ( !$default_path ) {
+		if ( ! $default_path ) {
 			$default_path = WPEMS_PATH . '/templates/';
 		}
 
@@ -1514,7 +1525,7 @@ if ( !function_exists( 'tp_event_locate_template' ) ) {
 			)
 		);
 		// Get default template
-		if ( !$template ) {
+		if ( ! $template ) {
 			$template = $default_path . $template_name;
 		}
 
