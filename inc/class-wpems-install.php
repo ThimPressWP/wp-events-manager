@@ -8,17 +8,18 @@ class WPEMS_Install {
 
 	/**
 	 * upgrade store
-	 * @var type null || array
+	 * @var null || array
 	 */
-	public static $db_upgrade = null;
+	public static $upgrade = null;
 
 	/**
 	 * Init
 	 */
 	public static function init() {
-		self::$db_upgrade = array(
+		self::$upgrade = array(
 			'2.0'   => WPEMS_INC . 'admin/upgrades/upgrade-2.0.php',
-			'2.0.8' => WPEMS_INC . 'admin/upgrades/upgrade-2.0.8.php'
+			'2.0.8' => WPEMS_INC . 'admin/upgrades/upgrade-2.0.8.php',
+			'2.1'   => WPEMS_INC . 'admin/upgrades/upgrade-2.1.php'
 		);
 	}
 
@@ -31,8 +32,6 @@ class WPEMS_Install {
 			if ( ! function_exists( 'get_plugin_data' ) ) {
 				require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			}
-
-			$active_plugins = array();
 
 			$plugins = array(
 				'tp-event-auth/tp-event-auth.php',
@@ -152,8 +151,8 @@ class WPEMS_Install {
 	 */
 	public static function upgrade_database() {
 		$old_version = get_option( 'thimpress-event-version' );
-		foreach ( self::$db_upgrade as $ver => $file ) {
-			if ( ! $old_version || version_compare( $old_version, $ver, '<' ) ) {
+		foreach ( self::$upgrade as $version => $file ) {
+			if ( ! $old_version || version_compare( $old_version, $version, '<' ) ) {
 				require_once $file;
 			}
 		}
