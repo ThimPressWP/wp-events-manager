@@ -179,6 +179,18 @@
     margin-bottom: 0;
 }
 
+.post-type-archive-tp_event .search-events-form {
+    margin-bottom: 30px;
+}
+
+.post-type-archive-tp_event .search-events-form .search-events-input {
+    width: 50%;
+}
+
+.post-type-archive-tp_event ul.archive-event {
+    margin: 0;
+}
+
 .post-type-archive-tp_event .entry-title, .tax-tp_event_category .entry-title, .entry-summary .entry-countdown, .entry-summary .entry-content {
     margin-top: 20px;
 }

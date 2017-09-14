@@ -302,7 +302,13 @@ add_action( 'tp_event_before_main_content', 'wpems_before_main_content' );
 if ( ! function_exists( 'wpems_before_main_content' ) ) {
 
 	function wpems_before_main_content() {
+		if ( ! empty( $_REQUEST['s'] ) && ! empty( $_REQUEST['ref'] ) && 'events' == $_REQUEST['ref'] ) {
+			$s = $_REQUEST['s'];
+		} else {
+			$s = '';
+		}
 
+		wpems_get_template( 'search-form.php', array( 's' => $s ) );
 	}
 
 }
