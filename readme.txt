@@ -123,6 +123,7 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 = 2.1 =
 - Add option to config number events in archive page
+- Add search event box
 - Update archive event pagination
 
 == Upgrade Notice ==
