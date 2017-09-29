@@ -63,7 +63,7 @@ class WPEMS_Ajax {
 			wpems_print_notices();
 			die();
 		} else if ( ! is_user_logged_in() ) {
-			wpems_print_notices( 'error', __( 'You must login before register ', 'wp-events-manager' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
+			wpems_print_notice( 'error', __( 'You must login before register ', 'wp-events-manager' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			die();
 		} else {
 			$event           = new WPEMS_Event( $event_id );
