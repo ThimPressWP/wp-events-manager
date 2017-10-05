@@ -4,7 +4,7 @@
   Plugin URI: http://thimpress.com/
   Description: Support paying for a booking with the payment methods provided by Woocommerce
   Author: ThimPress
-  Version: 2.2
+  Version: 2.3
   Author URI: http://thimpress.com/
   Requires at least: 3.8
   Tested up to: 4.7.2
@@ -99,10 +99,7 @@ class WPEMS_Woo {
 	 * @return bool
 	 */
 	public function disable_paypal_checkout( $enable ) {
-		if ( get_option( 'thimpress_events_woo_payment_enable' ) == 'yes' ) {
-			return false;
-		}
-		return true;
+		return false;
 	}
 
 
@@ -118,6 +115,7 @@ class WPEMS_Woo {
 			'add_to_cart'  => __( ' has been added to your cart.', 'wp-events-manager-woo' ),
 			'woo_cart_url' => sprintf( '<a href="%s" class="button wc-forward">%s</a>', esc_url( wc_get_page_permalink( 'cart' ) ), esc_html__( 'View Cart', 'wp-events-manager-woo' ) )
 		);
+
 		return array_merge( $args, $l18n );
 	}
 
@@ -144,6 +142,7 @@ class WPEMS_Woo {
 		if ( get_post_type( $product_id ) == 'tp_event' ) {
 			$classname = 'WPEMS_WC_Product';
 		}
+
 		return $classname;
 	}
 
@@ -173,7 +172,7 @@ class WPEMS_Woo {
 		define( 'WPEMS_WOO_URI', plugin_dir_url( __FILE__ ) );
 		define( 'WPEMS_WOO_INC', WPEMS_WOO_PATH . 'inc/' );
 		define( 'WPEMS_WOO_INC_URI', WPEMS_WOO_URI . 'inc/' );
-		define( 'WPEMS_WOO_VER', '2.2' );
+		define( 'WPEMS_WOO_VER', '2.3' );
 		define( 'WPEMS_WOO_REQUIRE_VER', '2.0' );
 		define( 'WPEMS_WOO_MAIN_FILE', __FILE__ );
 	}
@@ -201,12 +200,12 @@ class WPEMS_Woo {
 	 */
 	public static function load() {
 
-		if ( !function_exists( 'is_plugin_active' ) ) {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
 			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 		// check TP Event plugin activated
-		if ( class_exists( 'WPEMS' ) && (is_plugin_active( 'wp-events-manager/wp-events-manager.php' ) || is_plugin_active( 'WP-Events-Manager/wp-events-manager.php' )  )) {
-			if ( WPEMS_VER < 2 || !WPEMS_VER ) {
+		if ( class_exists( 'WPEMS' ) && ( is_plugin_active( 'wp-events-manager/wp-events-manager.php' ) || is_plugin_active( 'WP-Events-Manager/wp-events-manager.php' ) ) ) {
+			if ( WPEMS_VER < 2 || ! WPEMS_VER ) {
 				self::$_wc_loaded = false;
 				self::$_notice    = 'required_update_wpems';
 			} else {
@@ -221,14 +220,14 @@ class WPEMS_Woo {
 			self::$_wc_loaded = true;
 		} else {
 			self::$_wc_loaded = false;
-			if ( !self::$_notice ) {
+			if ( ! self::$_notice ) {
 				self::$_notice = 'required_active_woo';
 			}
 		}
 
 		WPEMS_Woo::instance();
 
-		if ( !self::$_wc_loaded ) {
+		if ( ! self::$_wc_loaded ) {
 			add_action( 'admin_notices', array( __CLASS__, 'admin_notice' ) );
 		}
 
@@ -240,7 +239,7 @@ class WPEMS_Woo {
 	 */
 	public static function admin_notice() {
 		?>
-		<div class="error">
+        <div class="error">
 			<?php
 			switch ( self::$_notice ) {
 				case 'required_active_wpems':
@@ -253,7 +252,7 @@ class WPEMS_Woo {
 					echo '<p>' . sprintf( __( wp_kses( 'WP Events Manager - WooCommerce Payment Methods Integration requires <a href="%s">WooCommerce</a> is activated. Please install and active it before you can using this add-on.', array( 'a' => array( 'href' => array() ) ) ), 'wp-events-manager-woo' ), 'http://wordpress.org/plugins/woocommerce' ) . '</p>';
 					break;
 			} ?>
-		</div>
+        </div>
 		<?php
 	}
 
@@ -263,9 +262,10 @@ class WPEMS_Woo {
 	 * @return null|WPEMS_Woo
 	 */
 	public static function instance() {
-		if ( !self::$_instance ) {
+		if ( ! self::$_instance ) {
 			self::$_instance = new self();
 		}
+
 		return self::$_instance;
 	}
 
