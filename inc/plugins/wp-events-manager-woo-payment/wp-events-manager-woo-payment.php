@@ -4,7 +4,7 @@
   Plugin URI: http://thimpress.com/
   Description: Support paying for a booking with the payment methods provided by Woocommerce
   Author: ThimPress
-  Version: 2.3
+  Version: 2.4
   Author URI: http://thimpress.com/
   Requires at least: 3.8
   Tested up to: 4.7.2
@@ -73,10 +73,12 @@ class WPEMS_Woo {
 		add_action( 'tp_event_register_event_action', array( $this, 'add_event_to_woo_cart' ), 1 );
 		// update booking event status
 		add_action( 'woocommerce_order_status_changed', array( $this, 'woocommerce_order_status_changed' ), 10, 3 );
-		// disable paypal when activate woo
-		add_filter( 'tp_event_enable_paypal_payment', array( $this, 'disable_paypal_checkout' ), 10, 1 );
 
 		if ( get_option( 'thimpress_events_woo_payment_enable' ) == 'yes' ) {
+
+			// disable paypal when activate woo
+			add_filter( 'tp_event_enable_paypal_payment', array( $this, 'disable_paypal_checkout' ), 10, 1 );
+
 			add_filter( 'tp_event_get_currency', array( $this, 'wpemswc_get_currency' ), 50 );
 		}
 
@@ -172,7 +174,7 @@ class WPEMS_Woo {
 		define( 'WPEMS_WOO_URI', plugin_dir_url( __FILE__ ) );
 		define( 'WPEMS_WOO_INC', WPEMS_WOO_PATH . 'inc/' );
 		define( 'WPEMS_WOO_INC_URI', WPEMS_WOO_URI . 'inc/' );
-		define( 'WPEMS_WOO_VER', '2.3' );
+		define( 'WPEMS_WOO_VER', '2.4' );
 		define( 'WPEMS_WOO_REQUIRE_VER', '2.0' );
 		define( 'WPEMS_WOO_MAIN_FILE', __FILE__ );
 	}
