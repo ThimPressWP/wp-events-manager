@@ -17,11 +17,11 @@ class WPEMS_Admin_Metabox_Event {
 			update_post_meta( $post_id, $name, $value );
 		}
 		// Start
-		$start = ! empty( $_POST['tp_event_date_start'] ) ? sanitize_text_field( $_POST['tp_event_date_start'] ) : '';
+		$start = ! empty( $_POST['tp_event_date_start'] ) ? sanitize_text_field( $_POST['tp_event_date_start'] ) : date( "Y-m-d", strtotime( 'today' ) );
 		$start .= $start && ! empty( $_POST['tp_event_time_start'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_start'] ) : '';
 
 		// End
-		$end = ! empty( $_POST['tp_event_date_end'] ) ? sanitize_text_field( $_POST['tp_event_date_end'] ) : '';
+		$end = ! empty( $_POST['tp_event_date_end'] ) ? sanitize_text_field( $_POST['tp_event_date_end'] ) : ( empty( $_POST['tp_event_date_start'] ) ? date( "Y-m-d", strtotime( 'tomorrow' ) ) : '' );
 		$end .= $end && ! empty( $_POST['tp_event_time_end'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_end'] ) : '';
 
 		if ( ( $start && ! $end ) || ( strtotime( $start ) >= strtotime( $end ) ) ) {
