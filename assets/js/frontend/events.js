@@ -225,7 +225,7 @@
 
 			$(counts[i]).countdown({
 				labels    : WPEMS.l18n.labels,
-				labels1   : WPEMS.l18n.label1,
+				labels1   : WPEMS.l18n.labels1,
 				until     : current_time,
 				serverSync: WPEMS.current_time
 			});
