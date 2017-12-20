@@ -166,7 +166,7 @@ class WPEMS_Ajax {
 					if ( $args['price'] == 0 ) {
 						// update booking status
 						$book = WPEMS_Booking::instance( $booking_id );
-						$book->update_status( 'pending' );
+						$book->update_status( 'completed' );
 
 						// user booking
 						$user = get_userdata( $book->user_id );
