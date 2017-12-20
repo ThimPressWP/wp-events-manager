@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -74,17 +74,27 @@ class WPEMS_Booking {
 				update_post_meta( $booking_id, 'ea_booking_' . $key, $val );
 			}
 
+			if ( get_post_type( $args['event_id'] ) != 'tp_event' ) {
+				return;
+			}
+
+			$event = new WPEMS_Event( $args['event_id'] );
+
+			if ( ! $event->is_free() ) {
+				do_action( 'tp_event_updated_status', $booking_id, '', 'ea-completed' );
+			}
 			do_action( 'tp_event_create_new_booking', $booking_id, $args );
+
 			return $booking_id;
 		}
 	}
 
 	// update status
 	public function update_status( $status = 'ea-completed' ) {
-		if ( !$this->post || $this->post->post_type !== 'event_auth_book' ) {
+		if ( ! $this->post || $this->post->post_type !== 'event_auth_book' ) {
 			return;
 		}
-		if ( !$this->post || !$this->ID ) {
+		if ( ! $this->post || ! $this->ID ) {
 			throw new Exception( sprintf( __( 'Booking ID #%s is not exists.', 'wp-events-manager' ), $this->ID ) );
 		}
 		$old_status = get_post_status( $this->ID );
@@ -95,7 +105,7 @@ class WPEMS_Booking {
 
 		$id = wp_update_post( array( 'ID' => $this->ID, 'post_status' => $status ) );
 
-		if ( $id && !is_wp_error( $id ) ) {
+		if ( $id && ! is_wp_error( $id ) ) {
 			// send email or anythings
 			do_action( 'tp_event_updated_status', $id, $old_status, $status );
 
@@ -112,11 +122,11 @@ class WPEMS_Booking {
 			$booking_id = $id->ID;
 		}
 
-		if ( !empty( self::$instance[$booking_id] ) ) {
-			return self::$instance[$booking_id];
+		if ( ! empty( self::$instance[ $booking_id ] ) ) {
+			return self::$instance[ $booking_id ];
 		}
 
-		return self::$instance[$booking_id] = new self( $booking_id );
+		return self::$instance[ $booking_id ] = new self( $booking_id );
 	}
 
 }

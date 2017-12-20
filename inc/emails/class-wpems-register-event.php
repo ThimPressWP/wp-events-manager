@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -14,14 +14,27 @@ class WPEMS_Email_Register_Event {
 		add_action( 'tp_event_updated_status', array( $this, 'email_register' ), 10, 3 );
 	}
 
-	// send email
+	/**
+	 * Send email.
+	 *
+	 * @param $booking_id
+	 * @param $old_status
+	 * @param $status
+	 *
+	 * @return bool|void
+	 * @throws Exception
+	 */
 	public function email_register( $booking_id, $old_status, $status ) {
 
 		if ( $old_status === $status ) {
 			return;
 		}
 
-		if ( !$booking_id ) {
+		if ( $status != 'ea-completed' ) {
+			return;
+		}
+
+		if ( ! $booking_id ) {
 			throw new Exception( sprintf( __( 'Error %s booking ID', 'wp-events-manager' ), $booking_id ) );
 		}
 
@@ -32,14 +45,14 @@ class WPEMS_Email_Register_Event {
 		$booking = WPEMS_Booking::instance( $booking_id );
 
 		if ( $booking ) {
+
 			$user_id = $booking->user_id;
-			if ( !$user_id ) {
+			if ( ! $user_id ) {
 				throw new Exception( __( 'User is not exists!', 'wp-events-manager' ) );
-				die();
 			}
 			$user = get_userdata( $user_id );
 
-			$email_subject = wpems_get_option( 'email_subject', '' );
+			$email_subject = wpems_get_option( 'email_subject', __( 'Register Event', 'wp-events-manager' ) );
 
 			$headers[] = 'Content-Type: text/html; charset=UTF-8';
 			// set mail from email
@@ -48,7 +61,11 @@ class WPEMS_Email_Register_Event {
 			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 
 			if ( $user && $to = $user->data->user_email ) {
-				$email_content = wpems_get_template_content( 'emails/register-event.php', array( 'booking' => $booking, 'user' => $user ) );
+
+				$email_content = wpems_get_template_content( 'emails/register-event.php', array(
+					'booking' => $booking,
+					'user'    => $user
+				) );
 
 				return wp_mail( $to, $email_subject, stripslashes( $email_content ), $headers );
 			}
@@ -62,6 +79,7 @@ class WPEMS_Email_Register_Event {
 				return $email;
 			}
 		}
+
 		return $email;
 	}
 
@@ -70,6 +88,7 @@ class WPEMS_Email_Register_Event {
 		if ( $name = wpems_get_option( 'email_from_name' ) ) {
 			return $name;
 		}
+
 		return $name;
 	}
 

@@ -3,7 +3,7 @@ Contributors: thimpress, leehld
 Donate link: https://thimpress.com/
 Tags: event, event management, events, registration, bookings, tickets, locations, google maps
 Requires at least: 4.6
-Tested up to: 4.8
+Tested up to: 4.9.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -78,8 +78,40 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 == Changelog ==
 
-= 1.0.0 =
-- An amazing Events Manager plugin for WordPress was born
+= 2.1 =
+- Add option to config number events in archive page
+- Add search event box
+- Update archive event pagination
+- Update booking status when user register free event
+- Update send email for user when register event
+- Remove default event Start and end date
+
+= 2.0.8 =
+- Sync event date in database
+
+= 2.0.7 =
+- Support some functions of old versions
+- Add custom event category columns
+
+= 2.0.6 =
+- Fix content filter
+
+= 2.0.5 =
+- Fix revolution slider with content filter
+
+= 2.0.4 =
+- Update do shortcodes in default pages
+
+= 2.0.3 =
+- Fix deactive previous version process for multisite
+- Update Woocomerce payment add-on for Woocommerce version 3.x
+
+= 2.0.2 =
+- Fix register user process
+- Remove event note
+
+= 2.0.1 =
+- Remove unnecessary caps and roles
 
 = 2.0.0 =
 - Fix timezone countdown
@@ -94,38 +126,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 - Add event category taxonomy
 - Add woocommerce payment add-on
 
-= 2.0.1 =
-- Remove unnecessary caps and roles
+= 1.0.0 =
+- An amazing Events Manager plugin for WordPress was born
 
-= 2.0.2 =
-- Fix register user process
-- Remove event note
-
-= 2.0.3 =
-- Fix deactive previous version process for multisite
-- Update Woocomerce payment add-on for Woocommerce version 3.x
-
-= 2.0.4 =
-- Update do shortcodes in default pages
-
-= 2.0.5 =
-- Fix revolution slider with content filter
-
-= 2.0.6 =
-- Fix content filter
-
-= 2.0.7 =
-- Support some functions of old versions
-- Add custom event category columns
-
-= 2.0.8 =
-- Sync event date in database
-
-= 2.1 =
-- Add option to config number events in archive page
-- Add search event box
-- Update archive event pagination
-- Remove default event Start and end date
 
 == Upgrade Notice ==
 
