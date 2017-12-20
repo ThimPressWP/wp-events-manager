@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-18 09:04+0700\n"
+"POT-Creation-Date: 2017-12-20 11:29+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "%s booking event %s with %s slot"
 msgstr ""
 
-#: inc/class-wpems-booking.php:88
+#: inc/class-wpems-booking.php:98
 #, php-format
 msgid "Booking ID #%s is not exists."
 msgstr ""
@@ -1048,13 +1048,17 @@ msgstr ""
 msgid "Select Page"
 msgstr ""
 
-#: inc/emails/class-wpems-register-event.php:25
+#: inc/emails/class-wpems-register-event.php:38
 #, php-format
 msgid "Error %s booking ID"
 msgstr ""
 
-#: inc/emails/class-wpems-register-event.php:37
+#: inc/emails/class-wpems-register-event.php:51
 msgid "User is not exists!"
+msgstr ""
+
+#: inc/emails/class-wpems-register-event.php:55
+msgid "Register Event"
 msgstr ""
 
 #: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:25
@@ -1105,11 +1109,11 @@ msgid ""
 "PayPal email."
 msgstr ""
 
-#: inc/plugins/wp-events-manager-woo-payment/wp-events-manager-woo-payment.php:118
+#: inc/plugins/wp-events-manager-woo-payment/wp-events-manager-woo-payment.php:117
 msgid " has been added to your cart."
 msgstr ""
 
-#: inc/plugins/wp-events-manager-woo-payment/wp-events-manager-woo-payment.php:119
+#: inc/plugins/wp-events-manager-woo-payment/wp-events-manager-woo-payment.php:118
 msgid "View Cart"
 msgstr ""
 
