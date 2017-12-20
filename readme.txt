@@ -80,7 +80,7 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 = 2.1 =
 - Add option to config number events in archive page
-- Add search event box
+- Add search event box in archive page
 - Update archive event pagination
 - Update booking status when user register free event
 - Update send email for user when register event
