@@ -4,7 +4,7 @@ Donate link: https://thimpress.com/
 Tags: event, event management, events, registration, bookings, tickets, locations, google maps
 Requires at least: 4.6
 Tested up to: 4.9.1
-Stable tag: 2.1
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 7. Checkout Settings
 
 == Changelog ==
+
+= 2.1.1 =
+- Fix bug show admin events page
 
 = 2.1 =
 - Add option to config number events in archive page
