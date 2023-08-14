@@ -1,11 +1,11 @@
 <?php
-/*
-  Plugin Name: WP Events Manager
-  Plugin URI: http://thimpress.com/
-  Description: A complete plugin for Events management and online booking system
-  Author: ThimPress
-  Version: 2.1.10
-  Author URI: http://thimpress.com
+/**
+ * Plugin Name: WP Events Manager
+ * Plugin URI: http://thimpress.com/
+ * Description: A complete plugin for Events management and online booking system
+ * Author: ThimPress
+ * Version: 2.1.10
+ * Author URI: http://thimpress.com
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
