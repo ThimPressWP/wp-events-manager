@@ -14,14 +14,14 @@ defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Event {
 
-	public $post = null;
-	public $ID = null;
+	public $post     = null;
+	public $ID       = null;
 	static $instance = null;
 
 	public function __construct( $id = null ) {
 		if ( is_numeric( $id ) && $id && get_post_type( $id ) === 'tp_event' ) {
 			$this->post = get_post( $id );
-		} else if ( $id instanceof WP_Post || is_object( $id ) ) {
+		} elseif ( $id instanceof WP_Post || is_object( $id ) ) {
 			$this->post = $id;
 		}
 
@@ -60,7 +60,7 @@ class WPEMS_Event {
 	 * @return type boolean
 	 */
 	public function is_free() {
-		return ( !$this->get_price() ) ? true : false;
+		return ( ! $this->get_price() ) ? true : false;
 	}
 
 	/**
@@ -78,7 +78,8 @@ class WPEMS_Event {
 	 */
 	public function load_registered() {
 		global $wpdb;
-		$query = $wpdb->prepare( "
+		$query = $wpdb->prepare(
+			"
 				SELECT booked.* FROM $wpdb->posts AS booked
 					LEFT JOIN $wpdb->postmeta AS event ON event.post_id = booked.ID
 					LEFT JOIN $wpdb->postmeta AS book_quanity ON book_quanity.post_id = booked.ID
@@ -89,7 +90,13 @@ class WPEMS_Event {
 					AND event.meta_value = %d
 					AND user_booked.meta_key = %s
 					AND book_quanity.meta_key = %s
-			", 'event_auth_book', 'ea_booking_event_id', $this->ID, 'ea_booking_user_id', 'ea_booking_qty' );
+			",
+			'event_auth_book',
+			'ea_booking_event_id',
+			$this->ID,
+			'ea_booking_user_id',
+			'ea_booking_qty'
+		);
 
 		return $wpdb->get_results( $query );
 	}
@@ -122,7 +129,8 @@ class WPEMS_Event {
 		global $wpdb;
 
 		if ( $user_id && is_numeric( $user_id ) ) {
-			$query = $wpdb->prepare( "
+			$query = $wpdb->prepare(
+				"
 					SELECT SUM( pm.meta_value ) AS qty FROM $wpdb->postmeta AS pm
 						INNER JOIN $wpdb->posts AS book ON book.ID = pm.post_id
 						INNER JOIN $wpdb->postmeta AS pm2 ON pm2.post_id = book.ID
@@ -137,9 +145,18 @@ class WPEMS_Event {
 						AND event.ID = %d
 						AND event.post_type = %s
 						AND user.ID = %d
-				", 'ea_booking_qty', 'event_auth_book', 'ea_booking_user_id', 'ea_booking_event_id', $this->ID, 'tp_event', $user_id );
+				",
+				'ea_booking_qty',
+				'event_auth_book',
+				'ea_booking_user_id',
+				'ea_booking_event_id',
+				$this->ID,
+				'tp_event',
+				$user_id
+			);
 		} else {
-			$query = $wpdb->prepare( "
+			$query = $wpdb->prepare(
+				"
 					SELECT SUM( pm.meta_value ) AS qty FROM $wpdb->postmeta AS pm
 						INNER JOIN $wpdb->posts AS book ON book.ID = pm.post_id
 						INNER JOIN $wpdb->postmeta AS pm2 ON pm2.post_id = book.ID
@@ -154,7 +171,15 @@ class WPEMS_Event {
 						AND pm3.meta_key = %s
 						AND event.ID = %d
 						AND event.post_type = %s
-				", 'ea_booking_qty', 'event_auth_book', 'ea-completed', 'ea_booking_user_id', 'ea_booking_event_id', $this->ID, 'tp_event' );
+				",
+				'ea_booking_qty',
+				'event_auth_book',
+				'ea-completed',
+				'ea_booking_user_id',
+				'ea_booking_event_id',
+				$this->ID,
+				'tp_event'
+			);
 		}
 
 		return apply_filters( 'event_auth_booked_quanity', (int) $wpdb->get_var( $query ) );
@@ -172,15 +197,15 @@ class WPEMS_Event {
 		if ( is_numeric( $id ) && $id && get_post_type( $id ) === 'tp_event' ) {
 			$post     = get_post( $id );
 			$event_id = $post->ID;
-		} else if ( $id instanceof WP_Post || is_object( $id ) ) {
+		} elseif ( $id instanceof WP_Post || is_object( $id ) ) {
 			$event_id = $id->ID;
 		}
 
-		if ( !empty( self::$instance[$event_id] ) ) {
-			return self::$instance[$event_id];
+		if ( ! empty( self::$instance[ $event_id ] ) ) {
+			return self::$instance[ $event_id ];
 		}
 
-		return self::$instance[$event_id] = new self( $event_id );
+		return self::$instance[ $event_id ] = new self( $event_id );
 	}
 
 }

@@ -135,7 +135,7 @@ class WPEMS_Shortcodes {
 			$email = sanitize_email( $_REQUEST['registered'] );
 			$user  = get_user_by( 'email', $email );
 			if ( $user && $user->ID ) {
-				wp_new_user_notification( $user->ID, null ,'user'  );
+				wp_new_user_notification( $user->ID, null, 'user' );
 
 				// register completed
 				return WPEMS_Shortcodes::render( 'user-register', 'register-completed.php' );
@@ -200,16 +200,22 @@ class WPEMS_Shortcodes {
 			return '';
 		}
 
-		$atts = wp_parse_args( $atts, array(
-			'key'   => isset( $_REQUEST['key'] ) ? sanitize_text_field( $_REQUEST['key'] ) : '',
-			'login' => isset( $_REQUEST['login'] ) ? sanitize_text_field( $_REQUEST['login'] ) : ''
-		) );
+		$atts = wp_parse_args(
+			$atts,
+			array(
+				'key'   => isset( $_REQUEST['key'] ) ? sanitize_text_field( $_REQUEST['key'] ) : '',
+				'login' => isset( $_REQUEST['login'] ) ? sanitize_text_field( $_REQUEST['login'] ) : '',
+			)
+		);
 
-		$atts = wp_parse_args( $atts, array(
-			'user_login'  => '',
-			'redirect_to' => '',
-			'checkemail'  => isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false
-		) );
+		$atts = wp_parse_args(
+			$atts,
+			array(
+				'user_login'  => '',
+				'redirect_to' => '',
+				'checkemail'  => isset( $_REQUEST['checkemail'] ) && $_REQUEST['checkemail'] === 'confirm' ? true : false,
+			)
+		);
 
 		if ( $atts['checkemail'] ) {
 			wpems_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
@@ -233,7 +239,7 @@ class WPEMS_Shortcodes {
 			'meta_query'    => array(
 				array(
 					'key'   => 'ea_booking_user_id',
-					'value' => $user->ID
+					'value' => $user->ID,
 				),
 			),
 		);
@@ -251,8 +257,9 @@ class WPEMS_Shortcodes {
 	public static function countdown( $atts ) {
 		$atts = shortcode_atts(
 			array(
-				'event_id' => ''
-			), $atts
+				'event_id' => '',
+			),
+			$atts
 		);
 
 		return WPEMS_Shortcodes::render( 'event-countdown', 'event-countdown.php', array( 'args' => $atts ) );

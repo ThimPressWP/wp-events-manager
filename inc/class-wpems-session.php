@@ -71,7 +71,7 @@ class WPEMS_Session {
 	 * @return type bool
 	 */
 	public function __isset( $name ) {
-		return isset( $this->_data[$name] );
+		return isset( $this->_data[ $name ] );
 	}
 
 	/**
@@ -80,8 +80,8 @@ class WPEMS_Session {
 	 * @param type $name
 	 */
 	public function __unset( $name ) {
-		if ( isset( $this->_data[$name] ) ) {
-			unset( $this->_data[$name] );
+		if ( isset( $this->_data[ $name ] ) ) {
+			unset( $this->_data[ $name ] );
 			$this->_is_changed = true;
 		}
 	}
@@ -95,7 +95,7 @@ class WPEMS_Session {
 	 * @return type
 	 */
 	public function get( $name = null, $default = null ) {
-		return isset( $this->_data[$name] ) ? maybe_unserialize( $this->_data[$name] ) : $default;
+		return isset( $this->_data[ $name ] ) ? maybe_unserialize( $this->_data[ $name ] ) : $default;
 	}
 
 	/**
@@ -106,8 +106,8 @@ class WPEMS_Session {
 	 */
 	public function set( $name = '', $value = '' ) {
 		if ( $name && $value !== $this->get( $name ) ) {
-			$this->_data[$name] = maybe_serialize( $value );
-			$this->_is_changed  = true;
+			$this->_data[ $name ] = maybe_serialize( $value );
+			$this->_is_changed    = true;
 			$this->maybe_save_data();
 		}
 	}
@@ -117,7 +117,7 @@ class WPEMS_Session {
 	 */
 	public function maybe_save_data() {
 		if ( $this->_is_changed ) {
-			$_SESSION[$this->_name] = maybe_serialize( $this->_data );
+			$_SESSION[ $this->_name ] = maybe_serialize( $this->_data );
 		}
 	}
 
@@ -126,7 +126,7 @@ class WPEMS_Session {
 	 * @return array
 	 */
 	private function get_session_data() {
-		return isset( $_SESSION[$this->_name] ) ? maybe_unserialize( $_SESSION[$this->_name] ) : array();
+		return isset( $_SESSION[ $this->_name ] ) ? maybe_unserialize( $_SESSION[ $this->_name ] ) : array();
 	}
 
 }

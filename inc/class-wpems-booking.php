@@ -18,14 +18,14 @@ defined( 'ABSPATH' ) || exit;
 class WPEMS_Booking {
 
 	private static $instance = null;
-	public $post = null;
-	public $ID = null;
+	public $post             = null;
+	public $ID               = null;
 
 	public function __construct( $id = null ) {
 
 		if ( is_numeric( $id ) && get_post_type( $id ) === 'event_auth_book' ) {
 			$this->post = get_post( $id );
-		} else if ( $id instanceof WP_Post || is_object( $id ) ) {
+		} elseif ( $id instanceof WP_Post || is_object( $id ) ) {
 			$this->post = $id;
 		}
 
@@ -60,20 +60,25 @@ class WPEMS_Booking {
 		// current user
 		$user = wp_get_current_user();
 		// merge argument
-		$args       = wp_parse_args( $args, array(
-			'user_id'    => $user->ID,
-			'event_id'   => 0,
-			'qty'        => 1,
-			'cost'       => 0,
-			'payment_id' => false
-		) );
-		$booking_id = wp_insert_post( array(
-			'post_title'   => sprintf( __( '%s booking event %s', 'wp-events-manager' ), $user->user_nicename, $args['event_id'] ),
-			'post_content' => sprintf( __( '%s booking event %s with %s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
-			'post_exceprt' => sprintf( __( '%s booking event %s with %s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
-			'post_status'  => 'ea-pending',
-			'post_type'    => 'event_auth_book'
-		) );
+		$args       = wp_parse_args(
+			$args,
+			array(
+				'user_id'    => $user->ID,
+				'event_id'   => 0,
+				'qty'        => 1,
+				'cost'       => 0,
+				'payment_id' => false,
+			)
+		);
+		$booking_id = wp_insert_post(
+			array(
+				'post_title'   => sprintf( __( '%1$s booking event %2$s', 'wp-events-manager' ), $user->user_nicename, $args['event_id'] ),
+				'post_content' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+				'post_exceprt' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+				'post_status'  => 'ea-pending',
+				'post_type'    => 'event_auth_book',
+			)
+		);
 
 		if ( is_wp_error( $booking_id ) ) {
 			return $booking_id;
@@ -89,10 +94,10 @@ class WPEMS_Booking {
 
 	// update status
 	public function update_status( $status = 'ea-completed' ) {
-		if ( !$this->post || $this->post->post_type !== 'event_auth_book' ) {
+		if ( ! $this->post || $this->post->post_type !== 'event_auth_book' ) {
 			return;
 		}
-		if ( !$this->post || !$this->ID ) {
+		if ( ! $this->post || ! $this->ID ) {
 			throw new Exception( sprintf( __( 'Booking ID #%s is not exists.', 'wp-events-manager' ), $this->ID ) );
 		}
 		$old_status = get_post_status( $this->ID );
@@ -101,9 +106,14 @@ class WPEMS_Booking {
 			$status = 'ea-' . $status;
 		}
 
-		$id = wp_update_post( array( 'ID' => $this->ID, 'post_status' => $status ) );
+		$id = wp_update_post(
+			array(
+				'ID'          => $this->ID,
+				'post_status' => $status,
+			)
+		);
 
-		if ( $id && !is_wp_error( $id ) ) {
+		if ( $id && ! is_wp_error( $id ) ) {
 			// send email or anythings
 			do_action( 'tp_event_updated_status', $id, $old_status, $status );
 
@@ -116,15 +126,15 @@ class WPEMS_Booking {
 		if ( is_numeric( $id ) && get_post_type( $id ) === 'event_auth_book' ) {
 			$post       = get_post( $id );
 			$booking_id = $post->ID;
-		} else if ( $id instanceof WP_Post || is_object( $id ) ) {
+		} elseif ( $id instanceof WP_Post || is_object( $id ) ) {
 			$booking_id = $id->ID;
 		}
 
-		if ( !empty( self::$instance[$booking_id] ) ) {
-			return self::$instance[$booking_id];
+		if ( ! empty( self::$instance[ $booking_id ] ) ) {
+			return self::$instance[ $booking_id ];
 		}
 
-		return self::$instance[$booking_id] = new self( $booking_id );
+		return self::$instance[ $booking_id ] = new self( $booking_id );
 	}
 
 }

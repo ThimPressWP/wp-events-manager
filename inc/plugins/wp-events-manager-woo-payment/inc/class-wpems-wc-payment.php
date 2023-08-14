@@ -11,8 +11,9 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'WPEMS_Abstract_Payment_Gateway' ) )
+if ( ! class_exists( 'WPEMS_Abstract_Payment_Gateway' ) ) {
 	return;
+}
 
 class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 
@@ -43,7 +44,7 @@ class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 	 */
 	public function is_enable() {
 		$prefix = 'thimpress_events_';
-		if ( !get_option( $prefix . 'woo_payment_enable', true ) || get_option( $prefix . 'woo_payment_enable', true ) === 'yes' ) {
+		if ( ! get_option( $prefix . 'woo_payment_enable', true ) || get_option( $prefix . 'woo_payment_enable', true ) === 'yes' ) {
 			self::$enable = true;
 		}
 		return self::$enable;
@@ -62,36 +63,39 @@ class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 	 */
 	public function admin_fields() {
 		$prefix = 'thimpress_events_';
-		return apply_filters( 'tp_event_woo_payment_admin_fields', array(
+		return apply_filters(
+			'tp_event_woo_payment_admin_fields',
 			array(
-				'type'  => 'section_start',
-				'id'    => 'woo_payment_settings',
-				'title' => __( 'Woocommerce Payment Settings', 'wp-events-manager-woo' ),
-				'desc'  => esc_html__( 'Make a payment with WooCommerce payment methods', 'wp-events-manager-woo' )
-			),
-			array(
-				'type'    => 'yes_no',
-				'title'   => __( 'Enable', 'wp-events-manager-woo' ),
-				'desc'    => __( 'If WooCommerce Payment is enabled you can not use other payment gateways', 'wp-events-manager-woo' ),
-				'id'      => $prefix . 'woo_payment_enable',
-				'default' => 'yes'
-			),
-			array(
-				'type'    => 'select',
-				'title'   => __( 'Register event process', 'wp-events-manager-woo' ),
-				'id'      => $prefix . 'woo_event_register_process',
-				'options' => array(
-					'cart'     => __( 'Add to cart', 'wp-events-manager-woo' ),
-					'checkout' => __( 'Go to checkout', 'wp-events-manager-woo' ),
+				array(
+					'type'  => 'section_start',
+					'id'    => 'woo_payment_settings',
+					'title' => __( 'Woocommerce Payment Settings', 'wp-events-manager-woo' ),
+					'desc'  => esc_html__( 'Make a payment with WooCommerce payment methods', 'wp-events-manager-woo' ),
 				),
-				'default' => 'cart'
+				array(
+					'type'    => 'yes_no',
+					'title'   => __( 'Enable', 'wp-events-manager-woo' ),
+					'desc'    => __( 'If WooCommerce Payment is enabled you can not use other payment gateways', 'wp-events-manager-woo' ),
+					'id'      => $prefix . 'woo_payment_enable',
+					'default' => 'yes',
+				),
+				array(
+					'type'    => 'select',
+					'title'   => __( 'Register event process', 'wp-events-manager-woo' ),
+					'id'      => $prefix . 'woo_event_register_process',
+					'options' => array(
+						'cart'     => __( 'Add to cart', 'wp-events-manager-woo' ),
+						'checkout' => __( 'Go to checkout', 'wp-events-manager-woo' ),
+					),
+					'default' => 'cart',
 
-			),
-			array(
-				'type' => 'section_end',
-				'id'   => 'woo_payment_settings'
+				),
+				array(
+					'type' => 'section_end',
+					'id'   => 'woo_payment_settings',
+				),
 			)
-		) );
+		);
 	}
 
 	/**
@@ -103,7 +107,7 @@ class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 		return array(
 			'status' => true,
 			'url'    => $this->checkout_url(),
-			'event'  => get_the_title( $event_id )
+			'event'  => get_the_title( $event_id ),
 		);
 	}
 
@@ -112,11 +116,12 @@ class WPEMS_WC_Payment extends WPEMS_Abstract_Payment_Gateway {
 	 */
 	public function checkout_url() {
 		global $woocommerce;
-		if ( !$woocommerce->cart )
+		if ( ! $woocommerce->cart ) {
 			return '';
+		}
 
 		$process = get_option( 'thimpress_events_woo_event_register_process', true );
-		if ( $process == 'cart' || !$process ) {
+		if ( $process == 'cart' || ! $process ) {
 			return '';
 		} else {
 			return $woocommerce->cart->get_checkout_url() ? $woocommerce->cart->get_checkout_url() : '';

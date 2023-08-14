@@ -58,7 +58,7 @@ class WPEMS_Admin_Settings {
 	 * @since 2.0
 	 */
 	public static function save() {
-		if ( empty( $_POST['tp-event-settings-nonce'] ) || !wp_verify_nonce( $_POST['tp-event-settings-nonce'], 'tp-event-settings' ) ) {
+		if ( empty( $_POST['tp-event-settings-nonce'] ) || ! wp_verify_nonce( $_POST['tp-event-settings-nonce'], 'tp-event-settings' ) ) {
 			return false;
 		}
 		global $current_tab;
@@ -78,34 +78,35 @@ class WPEMS_Admin_Settings {
 		global $current_tab, $current_section;
 		self::get_setting_pages();
 		$tabs            = apply_filters( 'event_admin_settings_tabs_array', array() );
-		$current_tab     = isset( $_GET['tab'] ) && $_GET['tab'] ? sanitize_text_field($_GET['tab']) : current( array_keys( $tabs ) );
-		$current_section = isset( $_GET['section'] ) && $_GET['section'] ? sanitize_text_field($_GET['section']) : '';
-		if ( !empty( $_POST ) ) {
+		$current_tab     = isset( $_GET['tab'] ) && $_GET['tab'] ? sanitize_text_field( $_GET['tab'] ) : current( array_keys( $tabs ) );
+		$current_section = isset( $_GET['section'] ) && $_GET['section'] ? sanitize_text_field( $_GET['section'] ) : '';
+		if ( ! empty( $_POST ) ) {
 			self::save();
 		}
-		if ( $tabs ): ?>
-            <div class="wrap">
-                <form method="POST" name="tp_event_options" action="">
-                    <h2 class="nav-tab-wrapper">
-						<?php foreach ( $tabs as $key => $title ): ?>
-                            <a href="<?php echo esc_url( admin_url( 'admin.php?page=tp-event-setting&tab=' . $key ) ); ?>" class="nav-tab<?php echo $current_tab === $key ? ' nav-tab-active' : '' ?>" data-tab="<?php echo esc_attr( $key ) ?>">
-								<?php printf( '%s', $title ) ?>
-                            </a>
+		if ( $tabs ) : ?>
+			<div class="wrap">
+				<form method="POST" name="tp_event_options" action="">
+					<h2 class="nav-tab-wrapper">
+						<?php foreach ( $tabs as $key => $title ) : ?>
+							<a href="<?php echo esc_url( admin_url( 'admin.php?page=tp-event-setting&tab=' . $key ) ); ?>" class="nav-tab<?php echo $current_tab === $key ? ' nav-tab-active' : ''; ?>" data-tab="<?php echo esc_attr( $key ); ?>">
+								<?php printf( '%s', $title ); ?>
+							</a>
 						<?php endforeach; ?>
-                    </h2>
-                    <div class="tp_event_wrapper_content">
+					</h2>
+					<div class="tp_event_wrapper_content">
 						<?php do_action( 'event_admin_setting_sections_' . $current_tab ); ?>
-                        <!--Display message updated || error-->
+						<!--Display message updated || error-->
 						<?php self::show_messages(); ?>
 						<?php do_action( 'event_admin_setting_' . $current_tab ); ?>
-                    </div>
-                    <p class="submit">
+					</div>
+					<p class="submit">
 						<?php wp_nonce_field( 'tp-event-settings', 'tp-event-settings-nonce' ); ?>
-                        <input name="save" class="button-primary" type="submit" value="<?php esc_attr_e( 'Save changes', 'wp-events-manager' ); ?>" />
-                    </p>
-                </form>
-            </div>
-		<?php endif;
+						<input name="save" class="button-primary" type="submit" value="<?php esc_attr_e( 'Save changes', 'wp-events-manager' ); ?>" />
+					</p>
+				</form>
+			</div>
+			<?php
+		endif;
 	}
 
 	/**
@@ -120,20 +121,23 @@ class WPEMS_Admin_Settings {
 			return;
 		}
 		foreach ( $fields as $k => $field ) {
-			$field = wp_parse_args( $field, array(
-				'id'          => '',
-				'class'       => '',
-				'title'       => '',
-				'desc'        => '',
-				'default'     => '',
-				'type'        => '',
-				'placeholder' => '',
-				'options'     => '',
-				'atts'        => array()
-			) );
+			$field = wp_parse_args(
+				$field,
+				array(
+					'id'          => '',
+					'class'       => '',
+					'title'       => '',
+					'desc'        => '',
+					'default'     => '',
+					'type'        => '',
+					'placeholder' => '',
+					'options'     => '',
+					'atts'        => array(),
+				)
+			);
 
 			$custom_attr = '';
-			if ( !empty( $field['atts'] ) ) {
+			if ( ! empty( $field['atts'] ) ) {
 				foreach ( $field['atts'] as $k => $val ) {
 					$custom_attr .= $k . '="' . $val . '"';
 				}
@@ -199,11 +203,11 @@ class WPEMS_Admin_Settings {
 	public static function save_fields( $settings = array() ) {
 		foreach ( $settings as $setting ) {
 			if ( isset( $setting['id'] ) && array_key_exists( $setting['id'], $_POST ) ) {
-			    if($setting['type'] == 'textarea'){
-				    update_option( $setting['id'], htmlentities( stripslashes( $_POST[$setting['id']] ) ) );
-                }else{
-				    update_option( $setting['id'], sanitize_text_field( $_POST[$setting['id']] ) );
-                }
+				if ( $setting['type'] == 'textarea' ) {
+					update_option( $setting['id'], htmlentities( stripslashes( $_POST[ $setting['id'] ] ) ) );
+				} else {
+					update_option( $setting['id'], sanitize_text_field( $_POST[ $setting['id'] ] ) );
+				}
 			}
 		}
 	}

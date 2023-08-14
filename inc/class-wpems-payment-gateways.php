@@ -18,7 +18,7 @@ class WPEMS_Payment_Gateways {
 	 * gateways method
 	 * @var type array
 	 */
-	public $gateways = array();
+	public $gateways        = array();
 	public static $instance = null;
 
 	public function __construct() {
@@ -29,8 +29,8 @@ class WPEMS_Payment_Gateways {
 		$payment_gateways = array( 'WPEMS_Payment_Gateway_Paypal' );
 
 		foreach ( $payment_gateways as $gateway ) {
-			$gateway                      = is_string( $gateway ) ? new $gateway : $gateway;
-			$this->gateways[$gateway->id] = $gateway;
+			$gateway                        = is_string( $gateway ) ? new $gateway : $gateway;
+			$this->gateways[ $gateway->id ] = $gateway;
 		}
 
 		return $this->gateways;
@@ -49,7 +49,7 @@ class WPEMS_Payment_Gateways {
 		$available = array();
 		foreach ( $gateways as $id => $gateway ) {
 			if ( $gateway->is_available() ) {
-				$available[$id] = $gateway;
+				$available[ $id ] = $gateway;
 			}
 		}
 		return $available;
@@ -66,14 +66,14 @@ class WPEMS_Payment_Gateways {
 		$enable = array();
 		foreach ( $gateways as $id => $gateway ) {
 			if ( $gateway->is_enable() ) {
-				$enable[$id] = $gateway;
+				$enable[ $id ] = $gateway;
 			}
 		}
 		return $enable;
 	}
 
 	public static function instance() {
-		if ( !self::$instance ) {
+		if ( ! self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;

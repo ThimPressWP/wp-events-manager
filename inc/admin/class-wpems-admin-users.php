@@ -13,7 +13,7 @@
 defined( 'ABSPATH' ) || exit;
 
 
-if ( !class_exists( 'WP_List_Table' ) ) {
+if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
@@ -22,17 +22,20 @@ class WPEMS_Admin_Users extends WP_List_Table {
 	public $items = null;
 
 	public function __construct() {
-		parent::__construct( array(
-			'singular' => __( 'user', 'wp-events-manager' ),
-			'plural'   => __( 'users', 'wp-events-manager' ),
-			'ajax'     => false
-		) );
+		parent::__construct(
+			array(
+				'singular' => __( 'user', 'wp-events-manager' ),
+				'plural'   => __( 'users', 'wp-events-manager' ),
+				'ajax'     => false,
+			)
+		);
 	}
 
 	public function load_users() {
 		global $wpdb;
 		if ( isset( $_GET['user_id'] ) && $_GET['user_id'] ) {
-			$query = $wpdb->prepare( "
+			$query = $wpdb->prepare(
+				"
 					SELECT user.* FROM $wpdb->users AS user
 					LEFT JOIN $wpdb->postmeta AS pm ON user.ID = pm.meta_value
 					LEFT JOIN $wpdb->posts AS book ON pm.post_id = book.ID
@@ -42,9 +45,18 @@ class WPEMS_Admin_Users extends WP_List_Table {
 						AND book.post_status IN (%s,%s,%s,%s)
 						AND user.ID = %d
 					GROUP BY user.ID
-				", 'ea_booking_user_id', 'event_auth_book', 'ea-cancelled', 'ea-pending', 'ea-processing', 'ea-completed', absint( $_GET['user_id'] ) );
+				",
+				'ea_booking_user_id',
+				'event_auth_book',
+				'ea-cancelled',
+				'ea-pending',
+				'ea-processing',
+				'ea-completed',
+				absint( $_GET['user_id'] )
+			);
 		} else {
-			$query = $wpdb->prepare( "
+			$query = $wpdb->prepare(
+				"
 					SELECT user.* FROM $wpdb->users AS user
 					LEFT JOIN $wpdb->postmeta AS pm ON user.ID = pm.meta_value
 					LEFT JOIN $wpdb->posts AS book ON pm.post_id = book.ID
@@ -53,7 +65,14 @@ class WPEMS_Admin_Users extends WP_List_Table {
 						AND book.post_type = %s
 						AND book.post_status IN (%s,%s,%s,%s)
 					GROUP BY user.ID
-				", 'ea_booking_user_id', 'event_auth_book', 'ea-cancelled', 'ea-pending', 'ea-processing', 'ea-completed' );
+				",
+				'ea_booking_user_id',
+				'event_auth_book',
+				'ea-cancelled',
+				'ea-pending',
+				'ea-processing',
+				'ea-completed'
+			);
 		}
 
 		$users = $wpdb->get_results( $query );
@@ -91,10 +110,10 @@ class WPEMS_Admin_Users extends WP_List_Table {
 			case 'user_login':
 			case 'user_nicename':
 			case 'user_email':
-				return $item[$column];
+				return $item[ $column ];
 				break;
 			case 'bookings':
-				return $item[$column];
+				return $item[ $column ];
 				break;
 			default:
 				return print_r( $item, true );
@@ -105,7 +124,7 @@ class WPEMS_Admin_Users extends WP_List_Table {
 	// sort columns
 	public function get_sortable_columns() {
 		$sortable = array(
-			'user_login' => array( 'user_login', false )
+			'user_login' => array( 'user_login', false ),
 		);
 		return $sortable;
 	}
@@ -116,17 +135,17 @@ class WPEMS_Admin_Users extends WP_List_Table {
 			'user_login'    => __( 'Username', 'wp-events-manager' ),
 			'user_nicename' => __( 'Name', 'wp-events-manager' ),
 			'user_email'    => __( 'Email', 'wp-events-manager' ),
-			'bookings'      => __( 'Event Booking', 'wp-events-manager' )
+			'bookings'      => __( 'Event Booking', 'wp-events-manager' ),
 		);
 		return $columns;
 	}
 
 	public function sort_data( $a, $b ) {
-		$orderby = ( !empty( $_GET['orderby'] ) ) ? sanitize_text_field($_GET['orderby']) : 'user_login';
+		$orderby = ( ! empty( $_GET['orderby'] ) ) ? sanitize_text_field( $_GET['orderby'] ) : 'user_login';
 
-		$order = ( !empty( $_GET['order'] ) ) ? sanitize_text_field($_GET['order']) : 'asc';
+		$order = ( ! empty( $_GET['order'] ) ) ? sanitize_text_field( $_GET['order'] ) : 'asc';
 
-		$result = strcmp( $a[$orderby], $b[$orderby] );
+		$result = strcmp( $a[ $orderby ], $b[ $orderby ] );
 		return ( $order === 'asc' ) ? $result : - $result;
 	}
 
@@ -143,31 +162,31 @@ class WPEMS_Admin_Users extends WP_List_Table {
 	public function process_bulk_action() {
 		return;
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-			if ( !isset( $_POST['action'] ) || !$_POST['action'] || !isset( $_POST['users'] ) || empty( $_POST['users'] ) ) {
+			if ( ! isset( $_POST['action'] ) || ! $_POST['action'] || ! isset( $_POST['users'] ) || empty( $_POST['users'] ) ) {
 				return;
 			}
 
 			$action = sanitize_text_field( $_POST['action'] );
-			$users  = absint($_POST['users']);
+			$users  = absint( $_POST['users'] );
 
 			foreach ( $users as $user ) {
 				$status = get_user_meta( $user, 'ea_user_approved', true );
 				if ( $action === 'approve' || is_super_admin( $user ) ) {
 					update_user_meta( $user, 'ea_user_approved', true );
-				} else if ( $action === 'unapprove' ) {
+				} elseif ( $action === 'unapprove' ) {
 					delete_user_meta( $user, 'ea_user_approved' );
 				}
 			}
 		} else {
-			if ( !isset( $_REQUEST['page'] ) || $_REQUEST['page'] !== 'tp-event-users' ) {
+			if ( ! isset( $_REQUEST['page'] ) || $_REQUEST['page'] !== 'tp-event-users' ) {
 				return;
 			}
 
-			if ( !isset( $_REQUEST['event_nonce'] ) || !wp_verify_nonce( $_REQUEST['event_nonce'], 'event_auth_user_action' ) ) {
+			if ( ! isset( $_REQUEST['event_nonce'] ) || ! wp_verify_nonce( $_REQUEST['event_nonce'], 'event_auth_user_action' ) ) {
 				return;
 			}
 
-			if ( !isset( $_REQUEST['action'] ) || !$_REQUEST['action'] || !isset( $_REQUEST['user_id'] ) || !$_REQUEST['user_id'] ) {
+			if ( ! isset( $_REQUEST['action'] ) || ! $_REQUEST['action'] || ! isset( $_REQUEST['user_id'] ) || ! $_REQUEST['user_id'] ) {
 				return;
 			}
 
@@ -186,7 +205,7 @@ class WPEMS_Admin_Users extends WP_List_Table {
 		// $status = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ;
 		// $status = wp_nonce_url( $status, 'event_auth_user_action', 'event_nonce' );
 		$actions = array();
-		if ( isset( $item['approved'] ) && !$item['approved'] ) {
+		if ( isset( $item['approved'] ) && ! $item['approved'] ) {
 			// $status_name = __( 'Approve', 'wp-events-manager' );
 			// $status = add_query_arg( array(
 			// 			'action' 	=> 'approve',
@@ -207,7 +226,8 @@ class WPEMS_Admin_Users extends WP_List_Table {
 
 	public function column_cb( $item ) {
 		return sprintf(
-			'<input type="checkbox" name="users[]" value="%s" />', $item['ID']
+			'<input type="checkbox" name="users[]" value="%s" />',
+			$item['ID']
 		);
 	}
 
@@ -230,10 +250,12 @@ class WPEMS_Admin_Users extends WP_List_Table {
 		if ( $total_items > $per_page ) {
 			$this->items = array_slice( $this->items, ( $this->get_pagenum() - 1 ) * $per_page, $per_page );
 		}
-		$this->set_pagination_args( array(
-			'total_items' => $total_items,
-			'per_page'    => $per_page
-		) );
+		$this->set_pagination_args(
+			array(
+				'total_items' => $total_items,
+				'per_page'    => $per_page,
+			)
+		);
 
 		$this->items = $this->items;
 	}
@@ -241,16 +263,16 @@ class WPEMS_Admin_Users extends WP_List_Table {
 	public static function output() {
 		$user_table = new WPEMS_Admin_Users();
 		?>
-        <div class="wrap">
+		<div class="wrap">
 
-            <h2><?php _e( 'Event Users', 'wp-events-manager' ); ?></h2>
+			<h2><?php _e( 'Event Users', 'wp-events-manager' ); ?></h2>
 
 			<?php $user_table->prepare_items(); ?>
-            <form method="post">
+			<form method="post">
 				<?php $user_table->display(); ?>
-            </form>
+			</form>
 
-        </div>
+		</div>
 		<?php
 	}
 

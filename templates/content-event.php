@@ -22,10 +22,10 @@ defined( 'ABSPATH' ) || exit();
 	 */
 	 do_action( 'tp_event_before_loop_event' );
 
-	 if ( post_password_required() ) {
-	 	echo get_the_password_form();
-	 	return;
-	 }
+if ( post_password_required() ) {
+	echo get_the_password_form();
+	return;
+}
 ?>
 
 <li id="event-<?php the_ID(); ?>" <?php post_class(); ?>>

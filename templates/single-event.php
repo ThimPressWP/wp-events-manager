@@ -14,7 +14,7 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-get_header( ); ?>
+get_header(); ?>
 
 	<?php
 		/**
@@ -23,7 +23,10 @@ get_header( ); ?>
 		do_action( 'tp_event_before_main_content' );
 	?>
 
-		<?php while ( have_posts() ) : the_post(); ?>
+		<?php
+		while ( have_posts() ) :
+			the_post();
+			?>
 
 			<?php wpems_get_template_part( 'content', 'single-event' ); ?>
 
@@ -38,4 +41,5 @@ get_header( ); ?>
 		do_action( 'tp_event_after_main_content' );
 	?>
 
-<?php get_footer( );
+<?php
+get_footer();

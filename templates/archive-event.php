@@ -50,7 +50,10 @@ get_header(); ?>
 
 			<ul>
 
-				<?php while ( have_posts() ) : the_post(); ?>
+				<?php
+				while ( have_posts() ) :
+					the_post();
+					?>
 
 					<?php wpems_get_template_part( 'content', 'event' ); ?>
 

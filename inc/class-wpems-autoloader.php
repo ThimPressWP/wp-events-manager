@@ -24,8 +24,8 @@ class WPEMS_Autoloader {
 	 * The Constructor
 	 */
 	public function __construct() {
-		if ( function_exists( "__autoload" ) ) {
-			spl_autoload_register( "__autoload" );
+		if ( function_exists( '__autoload' ) ) {
+			spl_autoload_register( '__autoload' );
 		}
 
 		spl_autoload_register( array( $this, 'autoload' ) );

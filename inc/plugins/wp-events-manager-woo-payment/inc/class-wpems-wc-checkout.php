@@ -11,8 +11,9 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'WPEMS_Booking' ) )
+if ( ! class_exists( 'WPEMS_Booking' ) ) {
 	return;
+}
 
 class WPEMS_WC_Checkout extends WPEMS_Booking {
 
@@ -45,7 +46,7 @@ class WPEMS_WC_Checkout extends WPEMS_Booking {
 					'event_id'   => $cart_content['product_id'],
 					'qty'        => $cart_content['quantity'],
 					'price'      => $cart_content['line_total'],
-					'payment_id' => 'woo_payment'
+					'payment_id' => 'woo_payment',
 				);
 				break;
 			}

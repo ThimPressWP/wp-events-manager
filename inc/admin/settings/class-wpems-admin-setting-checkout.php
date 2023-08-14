@@ -41,41 +41,44 @@ class WPEMS_Admin_Setting_Checkout extends WPEMS_Abstract_Setting {
 	 */
 	public function get_settings() {
 		$prefix = 'thimpress_events_';
-		return apply_filters( 'event_admin_setting_page_' . $this->id, array(
+		return apply_filters(
+			'event_admin_setting_page_' . $this->id,
 			array(
-				'type'  => 'section_start',
-				'id'    => 'general_settings',
-				'title' => __( 'Checkout Process', 'wp-events-manager' ),
-				'desc'  => __( 'General options for system', 'wp-events-manager' )
-			),
-			array(
-				'type'    => 'select',
-				'title'   => __( 'Booking times free event/email', 'wp-events-manager' ),
-				'desc'    => __( 'This controls how many time booking free event of an email', 'wp-events-manager' ),
-				'id'      => $prefix . 'email_register_times',
-				'options' => array(
-					'once' => __( 'Once', 'wp-events-manager' ),
-					'many' => __( 'Many', 'wp-events-manager' )
+				array(
+					'type'  => 'section_start',
+					'id'    => 'general_settings',
+					'title' => __( 'Checkout Process', 'wp-events-manager' ),
+					'desc'  => __( 'General options for system', 'wp-events-manager' ),
 				),
-				'default' => 'many'
-			),
-			array(
-				'type'        => 'number',
-				'title'       => __( 'Cancel payment status', 'wp-events-manager' ),
-				'desc'        => __( 'How long cancel a payment (hour)', 'wp-events-manager' ),
-				'atts'        => array(
-					'min'  => 0,
-					'step' => 'any'
+				array(
+					'type'    => 'select',
+					'title'   => __( 'Booking times free event/email', 'wp-events-manager' ),
+					'desc'    => __( 'This controls how many time booking free event of an email', 'wp-events-manager' ),
+					'id'      => $prefix . 'email_register_times',
+					'options' => array(
+						'once' => __( 'Once', 'wp-events-manager' ),
+						'many' => __( 'Many', 'wp-events-manager' ),
+					),
+					'default' => 'many',
 				),
-				'id'          => $prefix . 'cancel_payment',
-				'default'     => 12,
-				'placeholder' => 12
-			),
-			array(
-				'type' => 'section_end',
-				'id'   => 'general_settings'
+				array(
+					'type'        => 'number',
+					'title'       => __( 'Cancel payment status', 'wp-events-manager' ),
+					'desc'        => __( 'How long cancel a payment (hour)', 'wp-events-manager' ),
+					'atts'        => array(
+						'min'  => 0,
+						'step' => 'any',
+					),
+					'id'          => $prefix . 'cancel_payment',
+					'default'     => 12,
+					'placeholder' => 12,
+				),
+				array(
+					'type' => 'section_end',
+					'id'   => 'general_settings',
+				),
 			)
-		) );
+		);
 	}
 
 	/**
@@ -86,7 +89,7 @@ class WPEMS_Admin_Setting_Checkout extends WPEMS_Abstract_Setting {
 		$payment_gateways = wpems_payment_gateways();
 		if ( $payment_gateways ) {
 			foreach ( $payment_gateways as $id => $gateway ) {
-				$sections[$id] = $gateway->title;
+				$sections[ $id ] = $gateway->title;
 			}
 		}
 		return $sections;

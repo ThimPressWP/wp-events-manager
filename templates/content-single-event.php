@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit();
 	do_action( 'tp_event_before_single_event' );
 	?>
 
-    <div class="summary entry-summary">
+	<div class="summary entry-summary">
 
 		<?php
 		/**
@@ -54,7 +54,7 @@ defined( 'ABSPATH' ) || exit();
 		do_action( 'tp_event_loop_event_location' );
 		?>
 
-    </div><!-- .summary -->
+	</div><!-- .summary -->
 
 	<?php
 	/**

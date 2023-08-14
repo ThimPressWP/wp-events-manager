@@ -25,9 +25,9 @@ class WPEMS_Install {
 	 */
 	public static function init() {
 		self::$db_upgrade = array(
-			'2.0'   => WPEMS_INC . 'admin/upgrades/upgrade-2.0.php',
-			'2.0.8' => WPEMS_INC . 'admin/upgrades/upgrade-2.0.8.php',
-			'2.1.7.2' => WPEMS_INC . 'admin/upgrades/upgrade-2.1.7.2.php'
+			'2.0'     => WPEMS_INC . 'admin/upgrades/upgrade-2.0.php',
+			'2.0.8'   => WPEMS_INC . 'admin/upgrades/upgrade-2.0.8.php',
+			'2.1.7.2' => WPEMS_INC . 'admin/upgrades/upgrade-2.1.7.2.php',
 		);
 	}
 
@@ -45,7 +45,7 @@ class WPEMS_Install {
 
 			$plugins = array(
 				'tp-event-auth/tp-event-auth.php',
-				'tp-event/tp-event.php'
+				'tp-event/tp-event.php',
 			);
 
 			foreach ( $plugins as $plugin ) {
@@ -73,7 +73,7 @@ class WPEMS_Install {
 									} else {
 										update_option( $prefix . '_' . $n, $v );
 									}
-								} else if ( $name === 'checkout' ) {
+								} elseif ( $name === 'checkout' ) {
 									if ( $n == 'paypal_sanbox_email' ) {
 										update_option( $prefix . '_paypal_sanbox_email', $v );
 									}
@@ -87,7 +87,6 @@ class WPEMS_Install {
 								} else {
 									update_option( $prefix . '_' . $n, $v );
 								}
-
 							}
 						}
 					}
@@ -105,7 +104,7 @@ class WPEMS_Install {
 		/**
 		 * Update current version
 		 */
-//		update_option( 'thimpress-event-version', WPEMS_VER );
+		//      update_option( 'thimpress-event-version', WPEMS_VER );
 	}
 
 	/**
@@ -128,27 +127,27 @@ class WPEMS_Install {
 			'register'        => array(
 				'name'    => _x( 'user-register', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'User Register', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'wp_event_register' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_register_shortcode_tag', 'wp_event_register' ) . ']',
 			),
 			'login'           => array(
 				'name'    => _x( 'user-login', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'User Login', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'wp_event_login' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_login_shortcode_tag', 'wp_event_login' ) . ']',
 			),
 			'forgot_password' => array(
 				'name'    => _x( 'forgot-password', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'Forgot Password', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_forgot_password_shortcode_tag', 'wp_event_forgot_password' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_forgot_password_shortcode_tag', 'wp_event_forgot_password' ) . ']',
 			),
 			'reset_password'  => array(
 				'name'    => _x( 'reset-password', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'Reset Password', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_reset_password_shortcode_tag', 'wp_event_reset_password' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_reset_password_shortcode_tag', 'wp_event_reset_password' ) . ']',
 			),
 			'account'         => array(
 				'name'    => _x( 'user-account', 'Page slug', 'wp-events-manager' ),
 				'title'   => _x( 'User Account', 'Page title', 'wp-events-manager' ),
-				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'wp_event_account' ) . ']'
+				'content' => '[' . apply_filters( 'tp_event_account_shortcode_tag', 'wp_event_account' ) . ']',
 			),
 		);
 		foreach ( $pages as $name => $page ) {

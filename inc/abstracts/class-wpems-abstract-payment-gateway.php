@@ -36,7 +36,7 @@ abstract class WPEMS_Abstract_Payment_Gateway {
 	}
 
 	public function add_sections( $sections ) {
-		$sections[$this->id] = $this->title;
+		$sections[ $this->id ] = $this->title;
 		return $sections;
 	}
 
@@ -109,7 +109,7 @@ abstract class WPEMS_Abstract_Payment_Gateway {
 	 * @return null
 	 */
 	public function completed_process_message() {
-		if ( !tp_event_has_notice( 'success' ) ) {
+		if ( ! tp_event_has_notice( 'success' ) ) {
 			tp_event_has_notice( 'success', __( 'Payment completed. We will send you email when payment method verify.', 'wp-events-manager' ) );
 		}
 	}

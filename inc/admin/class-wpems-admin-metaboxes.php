@@ -31,13 +31,28 @@ class WPEMS_Admin_Metaboxes {
 	 */
 	public static function add_meta_boxes() {
 		add_meta_box(
-			'event-settings-metabox', __( 'Event Settings', 'wp-events-manager' ), array( 'WPEMS_Admin_Metabox_Event', 'render' ), 'tp_event', 'normal', 'high'
+			'event-settings-metabox',
+			__( 'Event Settings', 'wp-events-manager' ),
+			array( 'WPEMS_Admin_Metabox_Event', 'render' ),
+			'tp_event',
+			'normal',
+			'high'
 		);
 		add_meta_box(
-			'booking-information-metabox', __( 'Booking Information', 'wp-events-manager' ), array( 'WPEMS_Admin_Metabox_Booking', 'render' ), 'event_auth_book', 'normal', 'default'
+			'booking-information-metabox',
+			__( 'Booking Information', 'wp-events-manager' ),
+			array( 'WPEMS_Admin_Metabox_Booking', 'render' ),
+			'event_auth_book',
+			'normal',
+			'default'
 		);
 		add_meta_box(
-			'booking-status-side', __( 'Booking Actions', 'wp-events-manager' ), array( 'WPEMS_Admin_Metabox_Booking', 'side' ), 'event_auth_book', 'side', 'high'
+			'booking-status-side',
+			__( 'Booking Actions', 'wp-events-manager' ),
+			array( 'WPEMS_Admin_Metabox_Booking', 'side' ),
+			'event_auth_book',
+			'side',
+			'high'
 		);
 	}
 
@@ -54,13 +69,13 @@ class WPEMS_Admin_Metaboxes {
 		}
 
 		$post_type = get_post_type( $post_id );
-		if ( !in_array( $post_type, array( 'tp_event', 'event_auth_book' ) ) ) {
+		if ( ! in_array( $post_type, array( 'tp_event', 'event_auth_book' ) ) ) {
 			return false;
 		}
 
-		if ( $post_type == 'tp_event' && ( empty( $_POST['event-nonce'] ) || !wp_verify_nonce( $_POST['event-nonce'], 'event_nonce' ) ) ) {
+		if ( $post_type == 'tp_event' && ( empty( $_POST['event-nonce'] ) || ! wp_verify_nonce( $_POST['event-nonce'], 'event_nonce' ) ) ) {
 			return false;
-		} elseif ( $post_type == 'event_auth_book' && ( empty( $_POST['event-booking-nonce'] ) || !wp_verify_nonce( $_POST['event-booking-nonce'], 'event_booking_nonce' ) ) ) {
+		} elseif ( $post_type == 'event_auth_book' && ( empty( $_POST['event-booking-nonce'] ) || ! wp_verify_nonce( $_POST['event-booking-nonce'], 'event_booking_nonce' ) ) ) {
 			return false;
 		}
 
@@ -84,7 +99,7 @@ class WPEMS_Admin_Metaboxes {
 	 */
 	public static function print_errors() {
 		$errors = get_option( 'tp_event_meta_box_error_messages' );
-		if ( !$errors ) {
+		if ( ! $errors ) {
 			return;
 		}
 		echo '<div id="event_error" class="error notice is-dismissible">';

@@ -56,10 +56,10 @@ class WPEMS_Woo {
 		$this->load_text_domain();
 
 		if ( self::$_wc_loaded ) {
-			require_once WPEMS_WOO_INC . "/class-wpems-wc-settings.php";
-			require_once WPEMS_WOO_INC . "/class-wpems-wc-product.php";
-			require_once WPEMS_WOO_INC . "/class-wpems-wc-checkout.php";
-			require_once WPEMS_WOO_INC . "/class-wpems-wc-payment.php";
+			require_once WPEMS_WOO_INC . '/class-wpems-wc-settings.php';
+			require_once WPEMS_WOO_INC . '/class-wpems-wc-product.php';
+			require_once WPEMS_WOO_INC . '/class-wpems-wc-checkout.php';
+			require_once WPEMS_WOO_INC . '/class-wpems-wc-payment.php';
 
 			$this->init_hook();
 		}
@@ -83,7 +83,6 @@ class WPEMS_Woo {
 		}
 
 		add_filter( 'thimpress_event_l18n', array( $this, 'wpems_woo_l18n' ), 1 );
-
 
 	}
 
@@ -115,7 +114,7 @@ class WPEMS_Woo {
 	public function wpems_woo_l18n( $args ) {
 		$l18n = array(
 			'add_to_cart'  => __( ' has been added to your cart.', 'wp-events-manager-woo' ),
-			'woo_cart_url' => sprintf( '<a href="%s" class="button wc-forward">%s</a>', esc_url( wc_get_page_permalink( 'cart' ) ), esc_html__( 'View Cart', 'wp-events-manager-woo' ) )
+			'woo_cart_url' => sprintf( '<a href="%s" class="button wc-forward">%s</a>', esc_url( wc_get_page_permalink( 'cart' ) ), esc_html__( 'View Cart', 'wp-events-manager-woo' ) ),
 		);
 
 		return array_merge( $args, $l18n );
@@ -241,7 +240,7 @@ class WPEMS_Woo {
 	 */
 	public static function admin_notice() {
 		?>
-        <div class="error">
+		<div class="error">
 			<?php
 			switch ( self::$_notice ) {
 				case 'required_active_wpems':
@@ -250,11 +249,12 @@ class WPEMS_Woo {
 				case 'required_update_wpems':
 					echo '<p>' . sprintf( __( wp_kses( '<strong>WP Events Manager - WooCommerce Payment Methods Integration</strong> requires <strong>WP Events Manager</strong> version <strong>%s</strong> or higher.', array( 'strong' => array() ), 'wp-events-manager-woo' ) ), WPEMS_WOO_REQUIRE_VER ) . '</p>';
 					break;
-				case'required_active_woo':
+				case 'required_active_woo':
 					echo '<p>' . sprintf( __( wp_kses( 'WP Events Manager - WooCommerce Payment Methods Integration requires <a href="%s">WooCommerce</a> is activated. Please install and active it before you can using this add-on.', array( 'a' => array( 'href' => array() ) ) ), 'wp-events-manager-woo' ), 'http://wordpress.org/plugins/woocommerce' ) . '</p>';
 					break;
-			} ?>
-        </div>
+			}
+			?>
+		</div>
 		<?php
 	}
 

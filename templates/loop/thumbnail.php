@@ -14,16 +14,16 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-if ( has_post_thumbnail() ): ?>
+if ( has_post_thumbnail() ) : ?>
 
-    <div class="entry-thumbnail">
-		<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ): ?>
-        <a href="<?php the_permalink() ?>">
+	<div class="entry-thumbnail">
+		<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) : ?>
+		<a href="<?php the_permalink(); ?>">
 			<?php endif; ?>
 			<?php the_post_thumbnail(); ?>
-			<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ): ?>
-        </a>
+			<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) : ?>
+		</a>
 	<?php endif; ?>
-    </div>
+	</div>
 
 <?php endif; ?>

@@ -11,8 +11,9 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'WC_Product_Simple' ) )
+if ( ! class_exists( 'WC_Product_Simple' ) ) {
 	return;
+}
 
 class  WPEMS_WC_Product extends WC_Product_Simple {
 
@@ -66,7 +67,7 @@ class  WPEMS_WC_Product extends WC_Product_Simple {
 	 * @return bool
 	 */
 	public function is_sold_individually() {
-		if ( get_option( 'thimpress_events_email_register_times', true ) == 'once' && !$this->get_price() ) {
+		if ( get_option( 'thimpress_events_email_register_times', true ) == 'once' && ! $this->get_price() ) {
 			return true;
 		} else {
 			return false;

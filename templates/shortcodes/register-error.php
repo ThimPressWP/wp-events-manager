@@ -16,5 +16,5 @@ defined( 'ABSPATH' ) || exit();
 ?>
 
 <ul class="tp-event-notice error">
-    <li><?php _e( 'Oops! Something went wrong.', 'wp-events-manager' ); ?></li>
+	<li><?php _e( 'Oops! Something went wrong.', 'wp-events-manager' ); ?></li>
 </ul>

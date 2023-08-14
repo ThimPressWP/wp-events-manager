@@ -26,16 +26,16 @@ class WPEMS_Admin_Metabox_Event {
 			update_post_meta( $post_id, $name, $value );
 		}
 		// Start
-		$start = ! empty( $_POST['tp_event_date_start'] ) ? sanitize_text_field( $_POST['tp_event_date_start'] ) : '';
+		$start  = ! empty( $_POST['tp_event_date_start'] ) ? sanitize_text_field( $_POST['tp_event_date_start'] ) : '';
 		$start .= $start && ! empty( $_POST['tp_event_time_start'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_start'] ) : '';
 
 		// End
-		$end = ! empty( $_POST['tp_event_date_end'] ) ? sanitize_text_field( $_POST['tp_event_date_end'] ) : '';
+		$end  = ! empty( $_POST['tp_event_date_end'] ) ? sanitize_text_field( $_POST['tp_event_date_end'] ) : '';
 		$end .= $end && ! empty( $_POST['tp_event_time_end'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_end'] ) : '';
 
 		$event_start = strtotime( $start );
 		$event_end   = strtotime( $end );
-		if( strtotime( $start ) == strtotime( $end ) ){
+		if ( strtotime( $start ) == strtotime( $end ) ) {
 			$event_end++;
 		}
 		if ( ( $start && ! $end ) || ( strtotime( $start ) > strtotime( $end ) ) ) {
@@ -50,20 +50,28 @@ class WPEMS_Admin_Metabox_Event {
 		if ( $event_start && $event_end ) {
 			if ( $event_start > $time ) {
 				$status = 'upcoming';
-			} else if ( $event_start <= $time && $time < $event_end ) {
+			} elseif ( $event_start <= $time && $time < $event_end ) {
 				$status = 'happening';
-			} else if ( $time >= $event_end ) {
+			} elseif ( $time >= $event_end ) {
 				$status = 'expired';
 			}
 
-			wp_schedule_single_event( $event_start - $offset_time, 'tp_event_schedule_status', array(
-				$post_id,
-				'happening'
-			) );
-			wp_schedule_single_event( $event_end - $offset_time, 'tp_event_schedule_status', array(
-				$post_id,
-				'expired'
-			) );
+			wp_schedule_single_event(
+				$event_start - $offset_time,
+				'tp_event_schedule_status',
+				array(
+					$post_id,
+					'happening',
+				)
+			);
+			wp_schedule_single_event(
+				$event_end - $offset_time,
+				'tp_event_schedule_status',
+				array(
+					$post_id,
+					'expired',
+				)
+			);
 		}
 
 		update_post_meta( $post_id, 'tp_event_status', $status );

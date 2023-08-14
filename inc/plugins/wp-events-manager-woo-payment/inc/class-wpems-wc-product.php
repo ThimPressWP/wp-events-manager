@@ -11,8 +11,9 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'WC_Product_Simple' ) )
+if ( ! class_exists( 'WC_Product_Simple' ) ) {
 	return;
+}
 global $woocommerce;
 
 if ( $woocommerce && version_compare( $woocommerce->version, '3.0.0', '<' ) ) {
@@ -37,7 +38,7 @@ if ( $woocommerce && version_compare( $woocommerce->version, '3.0.0', '<' ) ) {
 				$this->set_id( $product );
 			} elseif ( $product instanceof self ) {
 				$this->set_id( absint( $product->get_id() ) );
-			} elseif ( !empty( $product->ID ) ) {
+			} elseif ( ! empty( $product->ID ) ) {
 				$this->set_id( absint( $product->ID ) );
 			}
 		}
@@ -81,7 +82,7 @@ if ( $woocommerce && version_compare( $woocommerce->version, '3.0.0', '<' ) ) {
 		 * @return bool
 		 */
 		public function is_sold_individually() {
-			if ( get_option( 'thimpress_events_email_register_times', true ) == 'once' && !$this->get_price() ) {
+			if ( get_option( 'thimpress_events_email_register_times', true ) == 'once' && ! $this->get_price() ) {
 				return true;
 			} else {
 				return false;
@@ -94,7 +95,7 @@ if ( $woocommerce && version_compare( $woocommerce->version, '3.0.0', '<' ) ) {
 		 * @return bool
 		 */
 		public function exists( $context = 'view' ) {
-			return $this->get_id() && ( get_post_type( $this->get_id() ) == 'tp_event' ) && ( !in_array( get_post_status( $this->get_id() ), array( 'draft', 'auto-draft' ) ) );
+			return $this->get_id() && ( get_post_type( $this->get_id() ) == 'tp_event' ) && ( ! in_array( get_post_status( $this->get_id() ), array( 'draft', 'auto-draft' ) ) );
 		}
 
 		public function is_virtual() {

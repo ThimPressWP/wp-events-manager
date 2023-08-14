@@ -16,15 +16,15 @@ defined( 'ABSPATH' ) || exit();
 ?>
 
 <div class="entry-title">
-	<?php if( ! is_singular( 'tp_event' ) || ! in_the_loop() ): ?>
-		<h4><a href="<?php the_permalink() ?>">
-	<?php else: ?>
+	<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) : ?>
+		<h4><a href="<?php the_permalink(); ?>">
+	<?php else : ?>
 		<h1>
 	<?php endif; ?>
 			<?php the_title(); ?>
-	<?php if( ! is_singular( 'tp_event' ) || ! in_the_loop() ): ?>
+	<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) : ?>
 		</a></h4>
-	<?php else: ?>
+	<?php else : ?>
 		</h1>
 	<?php endif; ?>
 </div>

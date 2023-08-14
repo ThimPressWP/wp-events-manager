@@ -62,8 +62,9 @@ class WPEMS_Admin_Menu {
 	 * @return object class
 	 */
 	public static function instance() {
-		if ( self::$_instance )
+		if ( self::$_instance ) {
 			return self::$_instance;
+		}
 
 		return new self();
 	}

@@ -57,46 +57,52 @@ class WPEMS_Email_Register_Event {
 
 			if ( $user && $to = $user->data->user_email ) {
 
-				$email_body = wpems_get_option( 'email_body' ) ? html_entity_decode( wpems_get_option( 'email_body' ) ) : wpems_get_template_content('emails/register-event-body.php');
+				$email_body = wpems_get_option( 'email_body' ) ? html_entity_decode( wpems_get_option( 'email_body' ) ) : wpems_get_template_content( 'emails/register-event-body.php' );
 
-				$find = array(
-					'user-displayname'   => '{user_displayname}',
-					'user-link' => '{user_link}',
-					'event-link' => '{event_link}',
-					'event-type' => '{event_type}',
-					'booking-id' => '{booking_id}',
+				$find       = array(
+					'user-displayname' => '{user_displayname}',
+					'user-link'        => '{user_link}',
+					'event-link'       => '{event_link}',
+					'event-type'       => '{event_type}',
+					'booking-id'       => '{booking_id}',
 					'booking-quantity' => '{booking_quantity}',
-					'booking-price' => '{booking_price}',
-					'booking-payment' => '{booking_payment_method}',
-					'booking-status' => '{booking_status}',
-					'event-title'     => '{event_title}'
+					'booking-price'    => '{booking_price}',
+					'booking-payment'  => '{booking_payment_method}',
+					'booking-status'   => '{booking_status}',
+					'event-title'      => '{event_title}',
 				);
-				$return   = array();
-				$return[] = sprintf( '%s', wpems_booking_status( $booking->ID ) );
-				$return[] = $booking->payment_id ? sprintf( '(%s)', wpems_get_payment_title( $booking->payment_id ) ) : '';
-				$replace = array(
-					'user-displayname'   => $user->data->display_name,
-					'user-link' => wpems_account_url(),
-					'event-link' => get_permalink( $booking->event_id ),
-					'event-type' => floatval( $booking->price ) == 0 ? __( 'Free', 'wp-events-manager' ) : __( 'Cost', 'wp-events-manager' ),
-					'booking-id' => $booking->ID,
+				$return     = array();
+				$return[]   = sprintf( '%s', wpems_booking_status( $booking->ID ) );
+				$return[]   = $booking->payment_id ? sprintf( '(%s)', wpems_get_payment_title( $booking->payment_id ) ) : '';
+				$replace    = array(
+					'user-displayname' => $user->data->display_name,
+					'user-link'        => wpems_account_url(),
+					'event-link'       => get_permalink( $booking->event_id ),
+					'event-type'       => floatval( $booking->price ) == 0 ? __( 'Free', 'wp-events-manager' ) : __( 'Cost', 'wp-events-manager' ),
+					'booking-id'       => $booking->ID,
 					'booking-quantity' => $booking->qty,
-					'booking-price' => wpems_format_price( floatval( $booking->price ), true ),
-					'booking-payment' => $booking->payment_id ? wpems_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-events-manager' ),
-					'booking-status' => implode( '', $return ),
-					'event-title'     => get_the_title( $booking->event_id )
+					'booking-price'    => wpems_format_price( floatval( $booking->price ), true ),
+					'booking-payment'  => $booking->payment_id ? wpems_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-events-manager' ),
+					'booking-status'   => implode( '', $return ),
+					'event-title'      => get_the_title( $booking->event_id ),
 				);
 				$email_body = str_replace( $find, $replace, $email_body );
 
-				$email_user_content  = wpems_get_template_content( 'emails/register-event.php', array(
-					'booking' => $booking,
-					'email_body' => $email_body,
-					'user'    => $user
-				) );
-				$email_admin_content = wpems_get_template_content( 'emails/register-admin-event.php', array(
-					'booking' => $booking,
-					'user'    => $user
-				) );
+				$email_user_content  = wpems_get_template_content(
+					'emails/register-event.php',
+					array(
+						'booking'    => $booking,
+						'email_body' => $email_body,
+						'user'       => $user,
+					)
+				);
+				$email_admin_content = wpems_get_template_content(
+					'emails/register-admin-event.php',
+					array(
+						'booking' => $booking,
+						'user'    => $user,
+					)
+				);
 
 				wp_mail( get_option( 'admin_email' ), $email_subject, stripslashes( $email_admin_content ), $headers );
 

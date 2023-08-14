@@ -20,13 +20,13 @@ You have been registered successful <a href="{event_link}">our event</a>. Please
 <table class="event_auth_admin_table_booking">
 	<thead>
 	<tr>
-		<th><?php _e( 'ID', 'wp-events-manager' ) ?></th>
-		<th><?php _e( 'Event', 'wp-events-manager' ) ?></th>
-		<th><?php _e( 'Type', 'wp-events-manager' ) ?></th>
-		<th><?php _e( 'Quantity', 'wp-events-manager' ) ?></th>
-		<th><?php _e( 'Cost', 'wp-events-manager' ) ?></th>
-		<th><?php _e( 'Payment Method', 'wp-events-manager' ) ?></th>
-		<th><?php _e( 'Status', 'wp-events-manager' ) ?></th>
+		<th><?php _e( 'ID', 'wp-events-manager' ); ?></th>
+		<th><?php _e( 'Event', 'wp-events-manager' ); ?></th>
+		<th><?php _e( 'Type', 'wp-events-manager' ); ?></th>
+		<th><?php _e( 'Quantity', 'wp-events-manager' ); ?></th>
+		<th><?php _e( 'Cost', 'wp-events-manager' ); ?></th>
+		<th><?php _e( 'Payment Method', 'wp-events-manager' ); ?></th>
+		<th><?php _e( 'Status', 'wp-events-manager' ); ?></th>
 	</tr>
 	</thead>
 	<tbody>

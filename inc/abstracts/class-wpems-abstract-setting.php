@@ -57,7 +57,7 @@ abstract class WPEMS_Abstract_Setting {
 	 * @return type
 	 */
 	public function add_setting_tab( $tabs ) {
-		$tabs[$this->id] = $this->label;
+		$tabs[ $this->id ] = $this->label;
 		return $tabs;
 	}
 

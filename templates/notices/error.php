@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit();
 
 	<?php foreach ( $messages as $message ) { ?>
 
-        <li><?php echo sprintf( '%s', $message ) ?></li>
+		<li><?php echo sprintf( '%s', $message ); ?></li>
 
 	<?php } ?>
 

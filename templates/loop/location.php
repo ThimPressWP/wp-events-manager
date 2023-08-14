@@ -15,8 +15,8 @@
 defined( 'ABSPATH' ) || exit();
 ?>
 
-<?php if ( wpems_event_location() ): ?>
-    <div class="entry-location">
+<?php if ( wpems_event_location() ) : ?>
+	<div class="entry-location">
 		<?php wpems_get_location_map(); ?>
-    </div>
+	</div>
 <?php endif; ?>

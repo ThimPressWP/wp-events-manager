@@ -71,7 +71,7 @@ class WPEMS_Custom_Post_Types {
 			'search_items'       => __( 'Search Events', 'wp-events-manager' ),
 			'parent_item_colon'  => __( 'Parent Events:', 'wp-events-manager' ),
 			'not_found'          => __( 'No events found.', 'wp-events-manager' ),
-			'not_found_in_trash' => __( 'No events found in Trash.', 'wp-events-manager' )
+			'not_found_in_trash' => __( 'No events found in Trash.', 'wp-events-manager' ),
 		);
 
 		$args = array(
@@ -82,14 +82,17 @@ class WPEMS_Custom_Post_Types {
 			'show_ui'            => true,
 			'show_in_menu'       => 'tp-event-setting',
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => _x( 'events', 'URL slug', 'wp-events-manager' ), 'with_front' => false ),
+			'rewrite'            => array(
+				'slug'       => _x( 'events', 'URL slug', 'wp-events-manager' ),
+				'with_front' => false,
+			),
 			'taxonomies'         => array( 'tp_event_category' ),
 			'capability_type'    => 'post',
 			'map_meta_cap'       => true,
 			'has_archive'        => true,
 			'hierarchical'       => true,
 			'menu_position'      => 8,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
 		);
 
 		$args = apply_filters( 'tp_event_register_event_post_type_args', $args );
@@ -116,7 +119,7 @@ class WPEMS_Custom_Post_Types {
 			'search_items'       => __( 'Search Books', 'wp-events-manager' ),
 			'parent_item_colon'  => __( 'Parent Books:', 'wp-events-manager' ),
 			'not_found'          => __( 'No books found.', 'wp-events-manager' ),
-			'not_found_in_trash' => __( 'No books found in Trash.', 'wp-events-manager' )
+			'not_found_in_trash' => __( 'No books found in Trash.', 'wp-events-manager' ),
 		);
 
 		$args = array(
@@ -135,9 +138,9 @@ class WPEMS_Custom_Post_Types {
 			'menu_position'      => null,
 			'supports'           => false,
 			'capabilities'       => array(
-				'create_posts' => 'do_not_allow'
+				'create_posts' => 'do_not_allow',
 			),
-			'map_meta_cap'       => true
+			'map_meta_cap'       => true,
 		);
 
 		$args = apply_filters( 'event_auth_book_args', $args );
@@ -212,41 +215,65 @@ class WPEMS_Custom_Post_Types {
 	 */
 	public function register_booking_status() {
 
-		register_post_status( 'ea-cancelled', apply_filters( 'event_auth_register_status_cancelled', array(
-			'label'                     => _x( 'Cancelled', 'Booking status', 'wp-events-manager' ),
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Cancelled <span class="count">(%s)</span>', 'Cancelled <span class="count">(%s)</span>' ),
-		) ) );
+		register_post_status(
+			'ea-cancelled',
+			apply_filters(
+				'event_auth_register_status_cancelled',
+				array(
+					'label'                     => _x( 'Cancelled', 'Booking status', 'wp-events-manager' ),
+					'public'                    => true,
+					'exclude_from_search'       => false,
+					'show_in_admin_all_list'    => true,
+					'show_in_admin_status_list' => true,
+					'label_count'               => _n_noop( 'Cancelled <span class="count">(%s)</span>', 'Cancelled <span class="count">(%s)</span>' ),
+				)
+			)
+		);
 
-		register_post_status( 'ea-pending', apply_filters( 'event_auth_register_status_pending', array(
-			'label'                     => _x( 'Pending', 'Booking status', 'wp-events-manager' ),
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>' ),
-		) ) );
+		register_post_status(
+			'ea-pending',
+			apply_filters(
+				'event_auth_register_status_pending',
+				array(
+					'label'                     => _x( 'Pending', 'Booking status', 'wp-events-manager' ),
+					'public'                    => true,
+					'exclude_from_search'       => false,
+					'show_in_admin_all_list'    => true,
+					'show_in_admin_status_list' => true,
+					'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>' ),
+				)
+			)
+		);
 
-		register_post_status( 'ea-processing', apply_filters( 'event_auth_register_status_processing', array(
-			'label'                     => _x( 'Processing', 'Booking status', 'wp-events-manager' ),
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Processing <span class="count">(%s)</span>', 'Processing <span class="count">(%s)</span>' ),
-		) ) );
+		register_post_status(
+			'ea-processing',
+			apply_filters(
+				'event_auth_register_status_processing',
+				array(
+					'label'                     => _x( 'Processing', 'Booking status', 'wp-events-manager' ),
+					'public'                    => true,
+					'exclude_from_search'       => false,
+					'show_in_admin_all_list'    => true,
+					'show_in_admin_status_list' => true,
+					'label_count'               => _n_noop( 'Processing <span class="count">(%s)</span>', 'Processing <span class="count">(%s)</span>' ),
+				)
+			)
+		);
 
-		register_post_status( 'ea-completed', apply_filters( 'event_auth_register_status_completed', array(
-			'label'                     => _x( 'Completed', 'Booking status', 'wp-events-manager' ),
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>' ),
-		) ) );
+		register_post_status(
+			'ea-completed',
+			apply_filters(
+				'event_auth_register_status_completed',
+				array(
+					'label'                     => _x( 'Completed', 'Booking status', 'wp-events-manager' ),
+					'public'                    => true,
+					'exclude_from_search'       => false,
+					'show_in_admin_all_list'    => true,
+					'show_in_admin_status_list' => true,
+					'label_count'               => _n_noop( 'Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>' ),
+				)
+			)
+		);
 
 	}
 
@@ -291,10 +318,10 @@ class WPEMS_Custom_Post_Types {
 	public function event_column_content( $column, $post_id ) {
 		$event = WPEMS_Event::instance( $post_id );
 		switch ( $column ) {
-			case 'status' :
+			case 'status':
 				echo $status = get_post_meta( $post_id, 'tp_event_status', true );
 				break;
-			case 'start' :
+			case 'start':
 				$date_start = get_post_meta( $post_id, 'tp_event_date_start', true );
 				$time_start = get_post_meta( $post_id, 'tp_event_time_start', true );
 				if ( $date_start ) {
@@ -304,7 +331,7 @@ class WPEMS_Custom_Post_Types {
 					printf( ' %s', date( get_option( 'time_format' ), strtotime( $time_start ) ) );
 				}
 				break;
-			case 'end' :
+			case 'end':
 				$date_end = get_post_meta( $post_id, 'tp_event_date_end', true );
 				$time_end = get_post_meta( $post_id, 'tp_event_time_end', true );
 				if ( $date_end ) {
@@ -318,7 +345,7 @@ class WPEMS_Custom_Post_Types {
 				if ( $event->is_free() ) {
 					echo '<span class="event_auth_event_type">' . __( 'Free', 'wp-events-manager' ) . '</span>';
 				} else {
-					echo sprintf( __( '<span class="event_auth_event_type">%s/%s</span>', 'wp-events-manager' ), wpems_format_price( $event->get_price() ), __( 'slot', 'wp-events-manager' ) );
+					echo sprintf( __( '<span class="event_auth_event_type">%1$s/%2$s</span>', 'wp-events-manager' ), wpems_format_price( $event->get_price() ), __( 'slot', 'wp-events-manager' ) );
 				}
 				break;
 			case 'booked_slot':
@@ -369,7 +396,7 @@ class WPEMS_Custom_Post_Types {
 			case 'user':
 				$user     = get_userdata( $booking->user_id );
 				$return   = array();
-				$return[] = sprintf( __( '<a href="%s">%s</a>', 'wp-events-manager' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
+				$return[] = sprintf( __( '<a href="%1$s">%2$s</a>', 'wp-events-manager' ), admin_url( 'admin.php?page=tp-event-users&user_id=' . $booking->user_id ), $user->display_name );
 				$return   = implode( '', $return );
 				echo $return;
 				break;
@@ -402,7 +429,13 @@ class WPEMS_Custom_Post_Types {
 	 * @return array
 	 */
 	public function sortable_columns( $columns ) {
-		return wp_parse_args( $columns, array( 'start' => 'event_start_date', 'end' => 'event_end_date' ) );
+		return wp_parse_args(
+			$columns,
+			array(
+				'start' => 'event_start_date',
+				'end'   => 'event_end_date',
+			)
+		);
 	}
 
 	/**
@@ -413,10 +446,13 @@ class WPEMS_Custom_Post_Types {
 			return false;
 		}
 
-		if ( ! isset( $_REQUEST['orderby'] ) || ! in_array( $_REQUEST['orderby'], array(
+		if ( ! isset( $_REQUEST['orderby'] ) || ! in_array(
+			$_REQUEST['orderby'],
+			array(
 				'event_start_date',
-				'event_end_date'
-			) ) ) {
+				'event_end_date',
+			)
+		) ) {
 			return false;
 		}
 
@@ -513,19 +549,19 @@ class WPEMS_Custom_Post_Types {
 				// translators: Publish box date format, see http://php.net/date
 				date_i18n( __( 'M j, Y @ G:i', 'wp-events-manager' ), strtotime( $post->post_date ) )
 			),
-			10 => __( 'Event draft updated.', 'wp-events-manager' )
+			10 => __( 'Event draft updated.', 'wp-events-manager' ),
 		);
 
 		if ( $post_type_object->publicly_queryable ) {
 			$permalink = get_permalink( $post->ID );
 
-			$view_link                 = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'wp-events-manager' ) );
+			$view_link                  = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'View event', 'wp-events-manager' ) );
 			$messages[ $post_type ][1] .= $view_link;
 			$messages[ $post_type ][6] .= $view_link;
 			$messages[ $post_type ][9] .= $view_link;
 
-			$preview_permalink          = add_query_arg( 'preview', 'true', $permalink );
-			$preview_link               = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'wp-events-manager' ) );
+			$preview_permalink           = add_query_arg( 'preview', 'true', $permalink );
+			$preview_link                = sprintf( ' <a target="_blank" href="%s">%s</a>', esc_url( $preview_permalink ), __( 'Preview event', 'wp-events-manager' ) );
 			$messages[ $post_type ][8]  .= $preview_link;
 			$messages[ $post_type ][10] .= $preview_link;
 		}
@@ -533,8 +569,10 @@ class WPEMS_Custom_Post_Types {
 		return $messages;
 	}
 
-	public function wpems_events_archive($query){
-		echo'<pre>';print_r($query);die;
+	public function wpems_events_archive( $query ) {
+		echo'<pre>';
+		print_r( $query );
+		die;
 	}
 
 }

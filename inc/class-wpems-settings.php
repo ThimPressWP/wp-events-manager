@@ -33,19 +33,21 @@ class WPEMS_Settings {
 	static $_instance = null;
 
 	public function __construct( $prefix = null ) {
-		if ( $prefix )
+		if ( $prefix ) {
 			$this->_prefix = $prefix;
+		}
 
 		// load options
-		if ( !$this->_options )
+		if ( ! $this->_options ) {
 			$this->_options = $this->options();
+		}
 	}
 
 	public function __get( $id = null ) {
 		$settings = apply_filters( 'tp_event_settings_field', array() );
 
-		if ( isset( $settings[$id] ) ) {
-			return $settings[$id];
+		if ( isset( $settings[ $id ] ) ) {
+			return $settings[ $id ];
 		}
 	}
 
@@ -70,8 +72,9 @@ class WPEMS_Settings {
 	 * @return string name field
 	 */
 	public function get_field_name( $name = null ) {
-		if ( !$this->_prefix || !$name )
+		if ( ! $this->_prefix || ! $name ) {
 			return;
+		}
 
 		return $this->_prefix . '[' . $name . ']';
 	}
@@ -84,8 +87,9 @@ class WPEMS_Settings {
 	 * @return string name field
 	 */
 	public function get_field_id( $name = null, $default = null ) {
-		if ( !$this->_prefix || !$name )
+		if ( ! $this->_prefix || ! $name ) {
 			return;
+		}
 
 		return $this->_prefix . '_' . $name;
 	}
@@ -98,11 +102,13 @@ class WPEMS_Settings {
 	 * @return option value. array, string, boolean
 	 */
 	public function get( $name = null, $default = null ) {
-		if ( !$this->_options )
+		if ( ! $this->_options ) {
 			$this->_options = $this->options();
+		}
 
-		if ( $name && isset( $this->_options[$name] ) )
-			return $this->_options[$name];
+		if ( $name && isset( $this->_options[ $name ] ) ) {
+			return $this->_options[ $name ];
+		}
 
 		return $default;
 	}
@@ -115,11 +121,13 @@ class WPEMS_Settings {
 	 * @return option value. array, string, boolean
 	 */
 	public function set( $name = null, $default = null ) {
-		if ( !$this->_options )
+		if ( ! $this->_options ) {
 			$this->_options = $this->options();
+		}
 
-		if ( $name && isset( $this->_options[$name] ) )
-			return $this->_options[$name];
+		if ( $name && isset( $this->_options[ $name ] ) ) {
+			return $this->_options[ $name ];
+		}
 
 		return $default;
 	}
@@ -133,12 +141,12 @@ class WPEMS_Settings {
 	 */
 	public static function instance( $prefix = null ) {
 
-		if ( !empty( self::$_instance[$prefix] ) ) {
+		if ( ! empty( self::$_instance[ $prefix ] ) ) {
 
-			return $GLOBALS['event_auth_settings'] = self::$_instance[$prefix];
+			return $GLOBALS['event_auth_settings'] = self::$_instance[ $prefix ];
 		}
 
-		return $GLOBALS['event_auth_settings'] = self::$_instance[$prefix] = new self( $prefix );
+		return $GLOBALS['event_auth_settings'] = self::$_instance[ $prefix ] = new self( $prefix );
 	}
 
 }

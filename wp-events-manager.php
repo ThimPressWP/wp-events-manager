@@ -163,7 +163,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		function WPEMS() {
 			return WPEMS::instance();
 		}
-
 	}
 	WPEMS();
 }

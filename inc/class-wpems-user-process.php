@@ -14,12 +14,12 @@ defined( 'ABSPATH' ) || exit;
 
 class WPEMS_User_Process {
 
-	private static $login_url = null;
+	private static $login_url    = null;
 	private static $register_url = null;
-	private static $forgot_url = null;
-	private static $account_url = null;
-	private static $reset_url = null;
-	private static $session = null;
+	private static $forgot_url   = null;
+	private static $account_url  = null;
+	private static $reset_url    = null;
+	private static $session      = null;
 
 	public static function init() {
 		/**
@@ -35,7 +35,7 @@ class WPEMS_User_Process {
 		add_action( 'init', array( __CLASS__, 'process_reset_password' ), 50 );
 		// process
 		add_action( 'wp_logout', array( __CLASS__, 'wp_logout' ) );
-		add_filter( 'logout_redirect', array( __CLASS__, 'logout_redirect' ), 10,3 );
+		add_filter( 'logout_redirect', array( __CLASS__, 'logout_redirect' ), 10, 3 );
 	}
 
 	public static function user_process_init() {
@@ -56,7 +56,7 @@ class WPEMS_User_Process {
 		wpems_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'wp-events-manager' ) ) );
 	}
 
-	public static function logout_redirect( $redirect_to, $requested_redirect_to, $user){
+	public static function logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
 		return self::$login_url;
 	}
 
@@ -64,50 +64,69 @@ class WPEMS_User_Process {
 	 * Process Register
 	 */
 	public static function process_register() {
-		if ( empty( $_POST['auth-nonce'] ) || !wp_verify_nonce( $_POST['auth-nonce'], 'auth-reigter-nonce' ) ) {
+		if ( empty( $_POST['auth-nonce'] ) || ! wp_verify_nonce( $_POST['auth-nonce'], 'auth-reigter-nonce' ) ) {
 			return;
 		}
 
-		$username  = !empty( $_POST['user_login'] ) ? $_POST['user_login'] : '';
-		$email     = !empty( $_POST['user_email'] ) ? $_POST['user_email'] : '';
-		$password  = !empty( $_POST['user_pass'] ) ? $_POST['user_pass'] : '';
-		$password1 = !empty( $_POST['confirm_password'] ) ? $_POST['confirm_password'] : '';
+		$username  = ! empty( $_POST['user_login'] ) ? $_POST['user_login'] : '';
+		$email     = ! empty( $_POST['user_email'] ) ? $_POST['user_email'] : '';
+		$password  = ! empty( $_POST['user_pass'] ) ? $_POST['user_pass'] : '';
+		$password1 = ! empty( $_POST['confirm_password'] ) ? $_POST['confirm_password'] : '';
 
-		$user_id = wpems_create_new_user( apply_filters( 'event_auth_user_process_register_data', array(
-			'username' => $username, 'email' => $email, 'password' => $password, 'confirm_password' => $password1
-		) ) );
+		$user_id = wpems_create_new_user(
+			apply_filters(
+				'event_auth_user_process_register_data',
+				array(
+					'username'         => $username,
+					'email'            => $email,
+					'password'         => $password,
+					'confirm_password' => $password1,
+				)
+			)
+		);
 
 		if ( is_wp_error( $user_id ) ) {
 			$fields = array();
 			foreach ( $user_id->errors as $code => $message ) {
-				if ( !$message[0] )
+				if ( ! $message[0] ) {
 					continue;
+				}
 				if ( wpems_is_ajax() ) {
-					$fields[$code] = $message[0];
+					$fields[ $code ] = $message[0];
 				} else {
 					wpems_add_notice( 'error', $message[0] );
 				}
 			}
 			if ( wpems_is_ajax() ) {
-				wp_send_json( array( 'status' => false, 'fields' => $fields ) );
+				wp_send_json(
+					array(
+						'status' => false,
+						'fields' => $fields,
+					)
+				);
 			}
 		} else {
 
 			$url = wp_get_referer();
-			if ( !$url ) {
+			if ( ! $url ) {
 				$url = self::$register_url;
 			}
 
 			// not enable option 'register_notify' login user now
 			$send_notify = wpems_get_option( 'register_notify', true );
-			if ( !$send_notify ) {
+			if ( ! $send_notify ) {
 				wp_set_auth_cookie( $user_id, true, is_ssl() );
 			} else {
 				$url = add_query_arg( 'registered', $email, self::$register_url );
 			}
 
 			if ( wpems_is_ajax() ) {
-				wp_send_json( array( 'status' => true, 'redirect' => $url ) );
+				wp_send_json(
+					array(
+						'status'   => true,
+						'redirect' => $url,
+					)
+				);
 			} else {
 				wp_safe_redirect( $url );
 				exit();
@@ -123,11 +142,11 @@ class WPEMS_User_Process {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( $_POST['_wpnonce'] ) : '';
 		$nonce_value = isset( $_POST['auth-nonce'] ) ? sanitize_text_field( $_POST['auth-nonce'] ) : $nonce_value;
 
-		if ( !wp_verify_nonce( $nonce_value, 'auth-login-nonce' ) ) {
+		if ( ! wp_verify_nonce( $nonce_value, 'auth-login-nonce' ) ) {
 			return;
 		}
 		$redirect = self::$account_url;
-		if ( !empty( $_POST['redirect_to'] ) && $_POST['redirect_to'] !== '/wp-admin/admin-ajax.php' ) {
+		if ( ! empty( $_POST['redirect_to'] ) && $_POST['redirect_to'] !== '/wp-admin/admin-ajax.php' ) {
 			$redirect = esc_url( $_POST['redirect_to'] );
 		} elseif ( wp_get_referer() ) {
 			$redirect = wp_get_referer();
@@ -138,8 +157,8 @@ class WPEMS_User_Process {
 		try {
 
 			$creds    = array();
-			$username = !empty( $_POST['user_login'] ) ? sanitize_text_field( trim( $_POST['user_login'] ) ) : '';
-			$password = !empty( $_POST['user_pass'] ) ? sanitize_text_field( trim( $_POST['user_pass'] ) ) : '';
+			$username = ! empty( $_POST['user_login'] ) ? sanitize_text_field( trim( $_POST['user_login'] ) ) : '';
+			$password = ! empty( $_POST['user_pass'] ) ? sanitize_text_field( trim( $_POST['user_pass'] ) ) : '';
 
 			$validation_error = new WP_Error();
 			$validation_error = apply_filters( 'event_auth_process_login_errors', $validation_error, $username, $password );
@@ -172,7 +191,7 @@ class WPEMS_User_Process {
 			$creds['remember']      = isset( $_POST['rememberme'] );
 			$secure_cookie          = is_ssl() ? true : false;
 
-			if ( !wpems_has_notice( 'error' ) ) {
+			if ( ! wpems_has_notice( 'error' ) ) {
 				$user = wp_signon( apply_filters( 'event_auth_login_credentials', $creds ), $secure_cookie );
 
 				if ( is_wp_error( $user ) ) {
@@ -186,7 +205,7 @@ class WPEMS_User_Process {
 				} else {
 					wpems_add_notice( 'success', __( 'You have logged in', 'wp-events-manager' ) );
 
-					if ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) {
+					if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
 						wp_redirect( apply_filters( 'event_auth_login_redirect', $redirect, $user ) );
 						exit;
 					} else {

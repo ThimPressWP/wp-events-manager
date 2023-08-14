@@ -49,15 +49,18 @@ do_action( 'tp_event_archive_description' );
 	do_action( 'tp_event_before_event_loop' );
 	?>
 
-    <ul>
+	<ul>
 
-		<?php while ( $list_event->have_posts() ) : $list_event->the_post(); ?>
+		<?php
+		while ( $list_event->have_posts() ) :
+			$list_event->the_post();
+			?>
 
 			<?php wpems_get_template_part( 'content', 'event' ); ?>
 
 		<?php endwhile; // end of the loop. ?>
 
-    </ul>
+	</ul>
 
 	<?php
 	/**

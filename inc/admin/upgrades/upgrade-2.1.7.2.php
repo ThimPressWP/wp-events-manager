@@ -20,7 +20,7 @@ update_option( 'thimpress-event-version', '2.1.7.2' );
 $event_args = array(
 	'post_type'      => 'tp_event',
 	'posts_per_page' => - 1,
-	'post_status'    => 'any'
+	'post_status'    => 'any',
 );
 $events     = new WP_Query( $event_args );
 if ( $events->have_posts() ) {
@@ -46,9 +46,13 @@ if ( $events->have_posts() ) {
 
 		if ( $meta ) {
 			update_post_meta( get_the_ID(), 'tp_event_status', $meta );
-			wp_update_post( array( 'ID' => get_the_ID(), 'post_status' => 'publish' ) );
+			wp_update_post(
+				array(
+					'ID'          => get_the_ID(),
+					'post_status' => 'publish',
+				)
+			);
 		}
-
 	}
 	wp_reset_query();
 }

@@ -11,8 +11,9 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( !class_exists( 'WPEMS_Settings' ) )
+if ( ! class_exists( 'WPEMS_Settings' ) ) {
 	return;
+}
 
 class WPEMS_WC_Settings extends WPEMS_Settings {
 
