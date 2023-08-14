@@ -1,19 +1,30 @@
 <?php
-if ( !defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * The Template for displaying shortcode user account.
+ *
+ * Override this template by copying it to yourtheme/wp-events-manager/shortcodes/user-account.php
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7.4
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit();
 
 $query = new WP_Query( $args );
 
 wpems_print_notices();
 
-if ( !is_user_logged_in() ) {
+if ( ! is_user_logged_in() ) {
 	printf( __( 'You are not <a href="%s">login</a>', 'wp-events-manager' ), wpems_login_url() );
+
 	return;
 }
 
-if ( $query->have_posts() ) :
-	?>
+if ( $query->have_posts() ) { ?>
 
     <table>
         <thead>
@@ -25,9 +36,9 @@ if ( $query->have_posts() ) :
         <th><?php _e( 'Method', 'wp-events-manager' ); ?></th>
         <th><?php _e( 'Status', 'wp-events-manager' ); ?></th>
         </thead>
-        <tbody>
-		<?php foreach ( $query->posts as $post ): ?>
 
+        <tbody>
+		<?php foreach ( $query->posts as $post ) { ?>
 			<?php $booking = WPEMS_Booking::instance( $post->ID ) ?>
             <tr>
                 <td><?php printf( '%s', wpems_format_ID( $post->ID ) ) ?></td>
@@ -38,8 +49,7 @@ if ( $query->have_posts() ) :
                 <td><?php printf( '%s', $booking->payment_id ? wpems_get_payment_title( $booking->payment_id ) : __( 'No payment', 'wp-events-manager' ) ) ?></td>
                 <th><?php printf( '%s', wpems_booking_status( $booking->ID ) ); ?></th>
             </tr>
-
-		<?php endforeach; ?>
+		<?php } ?>
         </tbody>
     </table>
 
@@ -72,6 +82,10 @@ if ( $query->have_posts() ) :
 	) );
 	?>
 
-<?php endif; ?>
+<?php } else { ?>
+    <p><?php esc_html_e( 'No event booking has been made yet.', 'wp-events-manager' ); ?></p>
+    <a class="button"
+       href="<?php echo get_post_type_archive_link( 'tp_event' ); ?>"><?php esc_html_e( 'Go to Events', 'wp-events-manager' ); ?></a>
+<?php } ?>
 
 <?php wp_reset_postdata(); ?>

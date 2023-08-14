@@ -1,6 +1,16 @@
 <?php
+/**
+ * WP Events Manager Abstract Setting class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
 
-defined( 'ABSPATH' ) || exit();
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 abstract class WPEMS_Abstract_Setting {
 

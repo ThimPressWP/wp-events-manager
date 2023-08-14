@@ -1,12 +1,18 @@
 <?php
-/*
- * @author leehld
+/**
+ * The Template for displaying shortcode event countdown.
+ *
+ * Override this template by copying it to yourtheme/wp-events-manager/shortcodes/event-countdown.php
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
  */
 
 /**
  * Prevent loading this file directly
  */
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit();
 
 if ( $args['event_id'] ) {
 	$ids = explode( ',', $args['event_id'] );

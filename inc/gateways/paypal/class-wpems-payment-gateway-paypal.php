@@ -1,7 +1,16 @@
 <?php
-if ( !defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * WP Events Manager Paypal Payment Gateway class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Payment_Gateway_Paypal extends WPEMS_Abstract_Payment_Gateway {
 

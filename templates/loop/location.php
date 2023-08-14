@@ -1,9 +1,18 @@
 <?php
+/**
+ * The Template for displaying location in single event page.
+ *
+ * Override this template by copying it to yourtheme/wp-events-manager/loop/location.php
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
+ */
 
-if ( !defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
-
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit();
 ?>
 
 <?php if ( wpems_event_location() ): ?>

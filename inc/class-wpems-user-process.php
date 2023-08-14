@@ -1,8 +1,16 @@
 <?php
+/**
+ * WP Events Manager User Process class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
 
-if ( !defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_User_Process {
 
@@ -25,9 +33,9 @@ class WPEMS_User_Process {
 		add_action( 'init', array( __CLASS__, 'process_login' ), 50 );
 		add_action( 'init', array( __CLASS__, 'process_lost_password' ), 50 );
 		add_action( 'init', array( __CLASS__, 'process_reset_password' ), 50 );
-
 		// process
 		add_action( 'wp_logout', array( __CLASS__, 'wp_logout' ) );
+		add_filter( 'logout_redirect', array( __CLASS__, 'logout_redirect' ), 10,3 );
 	}
 
 	public static function user_process_init() {
@@ -46,8 +54,10 @@ class WPEMS_User_Process {
 	// redirect logout
 	public static function wp_logout() {
 		wpems_add_notice( 'success', sprintf( '%s', __( 'You have been sign out!', 'wp-events-manager' ) ) );
-		wp_safe_redirect( self::$login_url );
-		exit();
+	}
+
+	public static function logout_redirect( $redirect_to, $requested_redirect_to, $user){
+		return self::$login_url;
 	}
 
 	/**

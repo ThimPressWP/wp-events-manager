@@ -1,6 +1,10 @@
 <?php
-/*
- * @author leehld
+/**
+ * WP Events Manager Section Start setting view
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/View
+ * @version       2.1.7
  */
 
 /**

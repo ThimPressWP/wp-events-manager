@@ -1,8 +1,16 @@
 <?php
+/**
+ * WP Events Manager Admin Setting Emails class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
 
-if ( !defined( 'ABSPATH' ) ) {
-	exit();
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Admin_Setting_Emails extends WPEMS_Abstract_Setting {
 
@@ -42,7 +50,7 @@ class WPEMS_Admin_Setting_Emails extends WPEMS_Abstract_Setting {
 			array(
 				'type'    => 'yes_no',
 				'title'   => __( 'Event register', 'wp-events-manager' ),
-				'desc'    => __( 'Send notify when user register event', 'wp-events-manager' ),
+				'desc'    => __( 'Send email to admin and user when user registers event', 'wp-events-manager' ),
 				'id'      => $prefix . 'email_enable',
 				'default' => 'yes'
 			),
@@ -71,6 +79,29 @@ class WPEMS_Admin_Setting_Emails extends WPEMS_Abstract_Setting {
 				'class'       => 'email-setting-subject' . ( $register_event_mail == 'no' ? ' hide-if-js' : '' )
 			),
 			array(
+				'type'        => 'textarea',
+				'title'       => __( 'Message Body', 'wp-events-manager' ),
+				//'placeholder' => __( 'Register event', 'wp-events-manager' ),
+				'id'          => $prefix . 'email_body',
+				'default'     => $this->wpems_render(),
+				'class'       => 'email-setting-body' . ( $register_event_mail == 'no' ? ' hide-if-js' : '' ),
+				'options'            => array(
+					'media_buttons' => false
+				),
+				'allow_tags'  => array(
+					'{user_displayname}',
+					'{user_link}',
+					'{event_title}',
+					'{event_link}',
+					'{event_type}',
+					'{booking_id}',
+					'{booking_quantity}',
+					'{booking_price}',
+					'{booking_payment_method}',
+					'{booking_status}',
+				)
+			),
+			array(
 				'type'    => 'checkbox',
 				'title'   => __( 'Account register', 'wp-events-manager' ),
 				'desc'    => __( 'Send notify when user register account', 'wp-events-manager' ),
@@ -82,6 +113,12 @@ class WPEMS_Admin_Setting_Emails extends WPEMS_Abstract_Setting {
 				'id'   => 'email_settings'
 			)
 		) );
+	}
+
+	function wpems_render() {
+		$content = wpems_get_template_content('emails/register-event-body.php');
+
+		return $content;
 	}
 
 }

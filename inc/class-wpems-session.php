@@ -1,9 +1,16 @@
 <?php
 /**
- * Description of session
+ * WP Events Manager Session class
  *
- * @author ducnvtt
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
  */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Session {
 

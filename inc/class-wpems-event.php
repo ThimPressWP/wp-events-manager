@@ -1,8 +1,16 @@
 <?php
+/**
+ * WP Events Manager Event class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Event {
 
@@ -36,7 +44,6 @@ class WPEMS_Event {
 				$result = get_post_meta( $this->ID, 'tp_event_' . $key, true );
 				break;
 		}
-
 		return $result;
 	}
 
@@ -53,7 +60,7 @@ class WPEMS_Event {
 	 * @return type boolean
 	 */
 	public function is_free() {
-		return ( ! $this->get_price() ) ? true : false;
+		return ( !$this->get_price() ) ? true : false;
 	}
 
 	/**
@@ -107,7 +114,7 @@ class WPEMS_Event {
 	 * get booked quantity
 	 * @global type $wpdb
 	 *
-	 * @param type $user_id
+	 * @param type  $user_id
 	 *
 	 * @return init
 	 */
@@ -134,15 +141,15 @@ class WPEMS_Event {
 		} else {
 			$query = $wpdb->prepare( "
 					SELECT SUM( pm.meta_value ) AS qty FROM $wpdb->postmeta AS pm
-						INNER JOIN $wpdb->posts AS booking ON booking.ID = pm.post_id
-						INNER JOIN $wpdb->postmeta AS pm2 ON pm2.post_id = booking.ID
-						INNER JOIN $wpdb->postmeta AS pm3 ON pm3.post_id = booking.ID
+						INNER JOIN $wpdb->posts AS book ON book.ID = pm.post_id
+						INNER JOIN $wpdb->postmeta AS pm2 ON pm2.post_id = book.ID
+						INNER JOIN $wpdb->postmeta AS pm3 ON pm3.post_id = book.ID
 						INNER JOIN $wpdb->posts AS event ON event.ID = pm3.meta_value
-						INNER JOIN $wpdb->users AS customer ON customer.ID = pm2.meta_value
+						INNER JOIN $wpdb->users AS user ON user.ID = pm2.meta_value
 					WHERE
 						pm.meta_key = %s
-						AND booking.post_type = %s
-						AND booking.post_status = %s
+						AND book.post_type = %s
+						AND book.post_status = %s
 						AND pm2.meta_key = %s
 						AND pm3.meta_key = %s
 						AND event.ID = %d
@@ -169,11 +176,11 @@ class WPEMS_Event {
 			$event_id = $id->ID;
 		}
 
-		if ( ! empty( self::$instance[ $event_id ] ) ) {
-			return self::$instance[ $event_id ];
+		if ( !empty( self::$instance[$event_id] ) ) {
+			return self::$instance[$event_id];
 		}
 
-		return self::$instance[ $event_id ] = new self( $event_id );
+		return self::$instance[$event_id] = new self( $event_id );
 	}
 
 }

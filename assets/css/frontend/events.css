@@ -179,18 +179,6 @@
     margin-bottom: 0;
 }
 
-.post-type-archive-tp_event .search-events-form {
-    margin-bottom: 30px;
-}
-
-.post-type-archive-tp_event .search-events-form .search-events-input {
-    width: 50%;
-}
-
-.post-type-archive-tp_event ul.archive-event {
-    margin: 0;
-}
-
 .post-type-archive-tp_event .entry-title, .tax-tp_event_category .entry-title, .entry-summary .entry-countdown, .entry-summary .entry-content {
     margin-top: 20px;
 }
@@ -213,6 +201,15 @@
     clear: both;
 }
 
+.post-type-archive-tp_event .events-pagination {
+    clear: both;
+}
+
+.post-type-archive-tp_event .events-pagination ul.page-numbers li {
+    display: inline-block;
+    padding: 0 5px;
+}
+
 #content article.tp_single_event .entry-content {
     float: none;
     width: 100%;
@@ -224,70 +221,6 @@
     margin-bottom: 20px;
 }
 
-/** Rooms pagination **/
-.events-pagination {
-    clear: both;
-}
-
-.events-pagination .page-numbers {
-    list-style: none;
-    margin: 15px 0 5px;
-    text-align: center;
-}
-
-.events-pagination .page-numbers li {
-    display: inline-block;
-    line-height: 30px;
-    padding: 0 13px;
-}
-
-.events-pagination .page-numbers li span {
-    font-size: 13px;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    display: inline-block;
-    overflow: hidden;
-    color: #5a5a5a;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    text-transform: uppercase;
-}
-
-.events-pagination .page-numbers li span.current {
-    background: #ffb606;
-    color: #2a2a2a;
-}
-
-.events-pagination .page-numbers li a {
-    font-size: 13px;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    display: inline-block;
-    color: #5a5a5a;
-    overflow: hidden;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    text-transform: uppercase;
-    text-decoration: none;
-}
-
-.events-pagination .page-numbers li a:hover {
-    background: #ffb606;
-    color: #2a2a2a;
-}
-
-.events-pagination .page-numbers li a.next, .events-pagination .page-numbers li a.prev {
-    width: auto;
-    background: transparent;
-}
-
-.events-pagination .page-numbers li a.next:hover, .events-pagination .page-numbers li a.prev:hover {
-    background: transparent;
-    color: #ffb606;
+.wpems_g_calendar_url{
+    display: block !important;
 }

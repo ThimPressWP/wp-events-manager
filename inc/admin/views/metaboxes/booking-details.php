@@ -1,6 +1,10 @@
 <?php
-/*
- * @author leehld
+/**
+ * WP Events Manager Booking Details meta box view
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/View
+ * @version       2.1.7
  */
 
 /**
@@ -72,5 +76,6 @@ $prefix  = 'tp_event_';
 			<?php wp_nonce_field( 'event_booking_nonce', 'event-booking-nonce' ); ?>
         </table>
     </div>
+
 
 <?php do_action( 'tp_event_admin_booking_metabox_after_fields', $post, $prefix ); ?>

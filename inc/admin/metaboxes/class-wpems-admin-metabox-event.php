@@ -1,7 +1,16 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+/**
+ * WP Events Manager Admin Metabox Event class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Admin_Metabox_Event {
 
@@ -17,26 +26,27 @@ class WPEMS_Admin_Metabox_Event {
 			update_post_meta( $post_id, $name, $value );
 		}
 		// Start
-		$start = ! empty( $_POST['tp_event_date_start'] ) ? sanitize_text_field( $_POST['tp_event_date_start'] ) : date( "Y-m-d", strtotime( 'today' ) );
+		$start = ! empty( $_POST['tp_event_date_start'] ) ? sanitize_text_field( $_POST['tp_event_date_start'] ) : '';
 		$start .= $start && ! empty( $_POST['tp_event_time_start'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_start'] ) : '';
 
 		// End
-		$end = ! empty( $_POST['tp_event_date_end'] ) ? sanitize_text_field( $_POST['tp_event_date_end'] ) : ( empty( $_POST['tp_event_date_start'] ) ? date( "Y-m-d", strtotime( 'tomorrow' ) ) : '' );
+		$end = ! empty( $_POST['tp_event_date_end'] ) ? sanitize_text_field( $_POST['tp_event_date_end'] ) : '';
 		$end .= $end && ! empty( $_POST['tp_event_time_end'] ) ? ' ' . sanitize_text_field( $_POST['tp_event_time_end'] ) : '';
-
-		if ( ( $start && ! $end ) || ( strtotime( $start ) >= strtotime( $end ) ) ) {
-			WPEMS_Admin_Metaboxes::add_error( __( 'Please make sure event time is validate', 'wp-events-manager' ) );
-			wp_update_post( array( 'ID' => $post_id, 'post_status' => 'publish' ) );
-		}
 
 		$event_start = strtotime( $start );
 		$event_end   = strtotime( $end );
+		if( strtotime( $start ) == strtotime( $end ) ){
+			$event_end++;
+		}
+		if ( ( $start && ! $end ) || ( strtotime( $start ) > strtotime( $end ) ) ) {
+			WPEMS_Admin_Metaboxes::add_error( __( 'Please make sure event time is validate! The end time must be in future of the start time!', 'wp-events-manager' ) );
+			//wp_update_post( array( 'ID' => $post_id, 'post_status' => 'publish' ) );
+		}
 
-		$time = strtotime( current_time( 'Y-m-d H:i' ) );
-
+		$time        = strtotime( current_time( 'Y-m-d H:i' ) );
 		$offset_time = get_option( 'gmt_offset' ) * 60 * 60;
 
-		$status = 'publish';
+		$status = 'expired';
 		if ( $event_start && $event_end ) {
 			if ( $event_start > $time ) {
 				$status = 'upcoming';
@@ -56,13 +66,7 @@ class WPEMS_Admin_Metabox_Event {
 			) );
 		}
 
-		if ( ! in_array( get_post_meta( $post_id, 'tp_event_status', true ), array(
-			'upcoming',
-			'happening',
-			'expired'
-		) ) ) {
-			update_post_meta( $post_id, 'tp_event_status', $status );
-		}
+		update_post_meta( $post_id, 'tp_event_status', $status );
 
 	}
 

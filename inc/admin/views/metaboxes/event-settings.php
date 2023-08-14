@@ -1,6 +1,10 @@
 <?php
-/*
- * @author leehld
+/**
+ * WP Events Manager Event Settings meta box view
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/View
+ * @version       2.1.7
  */
 
 /**
@@ -47,14 +51,14 @@ $tomorrow = date( "Y-m-d", strtotime( 'tomorrow' ) );
                 <label><?php echo esc_html__( 'Start/End', 'wp-events-manager' ); ?></label>
                 <label hidden for="_date_start"></label>
                 <input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ) ?>date_start" id="_date_start"
-                       value="<?php echo $date_start ? esc_attr( $date_start ) : ''; ?>">
+                       value="<?php echo $date_start ? esc_attr( $date_start ) : esc_attr( $today ); ?>">
                 <label hidden for="_time_start"></label>
                 <input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ) ?>time_start" id="_time_start"
                        value="<?php echo $time_start ? esc_attr( $time_start ) : '' ?>">
                 <span class="time-connect"> <?php echo esc_html__( 'to', 'wp-events-manager' ); ?></span>
                 <label hidden for="_date_end"></label>
                 <input type="text" class="short date-end" name="<?php echo esc_attr( $prefix ) ?>date_end" id="_date_end"
-                       value="<?php echo $date_end ? esc_attr( $date_end ) : ''; ?>">
+                       value="<?php echo $date_end ? esc_attr( $date_end ) : esc_attr( $tomorrow ); ?>">
                 <label hidden for="_time_end"></label>
                 <input type="text" class="short time-end" name="<?php echo esc_attr( $prefix ) ?>time_end" id="_time_end"
                        value="<?php echo $time_end ? esc_attr( $time_end ) : '' ?>">

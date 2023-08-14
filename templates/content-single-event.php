@@ -1,19 +1,18 @@
 <?php
 /**
- * The template for displaying single event content in single event page.
+ * The Template for displaying content single event.
  *
  * Override this template by copying it to yourtheme/wp-events-manager/content-single-event.php
  *
- * @version     2.1
- * @package     WPEMS/Templates
- * @category    Templates
- * @author      Thimpress, leehld
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
  */
 
 /**
  * Prevent loading this file directly
  */
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit();
 ?>
 
 <article id="tp_event-<?php the_ID(); ?>" <?php post_class( 'tp_single_event' ); ?>>

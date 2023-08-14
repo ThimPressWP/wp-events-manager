@@ -1,6 +1,10 @@
 <?php
-/*
- * @author leehld
+/**
+ * WP Events Manager Booking Actions meta box view
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/View
+ * @version       2.1.7
  */
 
 /**

@@ -1,8 +1,16 @@
 <?php
+/**
+ * WP Events Manager Ajax class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Ajax Process
@@ -63,18 +71,18 @@ class WPEMS_Ajax {
 			wpems_print_notices();
 			die();
 		} else if ( ! is_user_logged_in() ) {
-			wpems_print_notice( 'error', __( 'You must login before register ', 'wp-events-manager' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
+			wpems_print_notices( 'error', __( 'You must login before register ', 'wp-events-manager' ) . sprintf( ' <strong>%s</strong>', get_the_title( $event_id ) ) );
 			die();
 		} else {
 			$event           = new WPEMS_Event( $event_id );
 			$registered_time = $event->booked_quantity( get_current_user_id() );
 			ob_start();
 			if ( get_post_meta( $event_id, 'tp_event_status', true ) === 'expired' ) {
-				wpems_add_notice( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'wp-events-manager' ) ) );
+				wpems_print_notices( 'error', sprintf( '%s %s', get_the_title( $event_id ), __( 'has been expired', 'wp-events-manager' ) ) );
 			} else if ( $registered_time && wpems_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) {
-				wpems_add_notice( 'error', __( 'You have registered this event before', 'wp-events-manager' ) );
+				wpems_print_notices( 'error', __( 'You have registered this event before', 'wp-events-manager' ) );
 			} else if ( ! $event->get_slot_available() ) {
-				wpems_add_notice( 'error', __( 'The event is full, the registration is closed', 'wp-events-manager' ) );
+				wpems_print_notices( 'error', __( 'The event is full, the registration is closed', 'wp-events-manager' ) );
 			} else {
 				wpems_get_template( 'loop/booking-form.php', array( 'event_id' => $event_id ) );
 			}
@@ -129,6 +137,10 @@ class WPEMS_Ajax {
 				throw new Exception( __( 'You are registered this event.', 'wp-events-manager' ) );
 			}
 
+			if ( $event->booked_quantity() >= get_post_meta( $event_id, 'tp_event_qty', true ) ) {
+				throw new Exception( __( 'There is not any slots now. Please try with next future events!', 'wp-events-manager' ) );
+			}
+
 			$payment_methods = wpems_payment_gateways();
 
 			$payment = isset( $_POST['payment_method'] ) ? sanitize_text_field( $_POST['payment_method'] ) : false;
@@ -166,7 +178,7 @@ class WPEMS_Ajax {
 					if ( $args['price'] == 0 ) {
 						// update booking status
 						$book = WPEMS_Booking::instance( $booking_id );
-						$book->update_status( 'completed' );
+						$book->update_status();
 
 						// user booking
 						$user = get_userdata( $book->user_id );

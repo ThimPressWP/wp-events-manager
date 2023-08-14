@@ -1,10 +1,20 @@
 <?php
-if ( !defined( 'ABSPATH' ) ) {
-    exit;
-}
+/**
+ * The Template for displaying shortcode form login.
+ *
+ * Override this template by copying it to yourtheme/wp-events-manager/shortcodes/form-login.php
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit();
 
 wpems_print_notices();
-
 ?>
 
 <form name="event_auth_login_form" action="" method="post" class="event-auth-form">

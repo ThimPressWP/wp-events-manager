@@ -1,8 +1,16 @@
 <?php
+/**
+ * WP Events Manager Upgrade version 2.0.8 action
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Action
+ * @version       2.1.7
+ */
 
-if ( ! defined( 'ABSPATH' ) || ! defined( 'WPEMS_INSTALLING' ) || ! WPEMS_INSTALLING ) {
-	exit();
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Update event date meta

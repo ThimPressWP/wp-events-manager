@@ -1,6 +1,10 @@
 <?php
-/*
- * @author leehld
+/**
+ * WP Events Manager Shortcodes class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
  */
 
 /**
@@ -41,12 +45,26 @@ class WPEMS_Shortcodes {
 	 * Redirect page
 	 */
 	public static function auto_shortcode() {
-		if ( !is_page() ) {
+		if ( ! is_page() ) {
 			return;
 		}
 
 		global $post;
-		if ( is_user_logged_in() && in_array( $post->ID, array( wpems_get_page_id( 'register' ), wpems_get_page_id( 'login' ) ) ) ) {
+
+		if ( ! isset( $post->ID ) ) {
+			return;
+		}
+
+		$page_id = array();
+
+		if ( $register_id = wpems_get_page_id( 'register' ) ) {
+			$page_id[] = $register_id;
+		}
+		if ( $login_id = wpems_get_page_id( 'login' ) ) {
+			$page_id[] = $login_id;
+		}
+
+		if ( is_user_logged_in() && in_array( $post->ID, $page_id ) ) {
 			wp_safe_redirect( home_url( '/' ) );
 		}
 	}
@@ -72,7 +90,7 @@ class WPEMS_Shortcodes {
 	 *
 	 * @param string $shortcode
 	 * @param string $template
-	 * @param array  $atts
+	 * @param array $atts
 	 *
 	 * @return string
 	 */
@@ -81,6 +99,7 @@ class WPEMS_Shortcodes {
 		do_action( 'tp_event_shortcode_wrapper_start', $shortcode );
 		wpems_get_template( 'shortcodes/' . $template, $atts );
 		do_action( 'tp_event_shortcode_wrapper_end', $shortcode );
+
 		return ob_get_clean();
 	}
 
@@ -93,6 +112,7 @@ class WPEMS_Shortcodes {
 	 */
 	public static function list_event( $atts ) {
 		$args = array( 'post_type' => 'tp_event' );
+
 		return WPEMS_Shortcodes::render( 'list-event', 'event-list.php', array( 'args' => $args ) );
 	}
 
@@ -106,23 +126,24 @@ class WPEMS_Shortcodes {
 	 */
 	public static function register( $atts ) {
 
-		if ( !wpems_get_page_id( 'register' ) ) {
+		if ( ! wpems_get_page_id( 'register' ) ) {
 			return '';
 		}
-		if ( !get_option( 'users_can_register' ) ) {
+		if ( ! get_option( 'users_can_register' ) ) {
 			return WPEMS_Shortcodes::render( 'user-register', 'user-cannot-register.php' );
-		} elseif ( !empty( $_REQUEST['registered'] ) ) {
+		} elseif ( ! empty( $_REQUEST['registered'] ) ) {
 			$email = sanitize_email( $_REQUEST['registered'] );
 			$user  = get_user_by( 'email', $email );
 			if ( $user && $user->ID ) {
-				wp_new_user_notification( $user->ID );
+				wp_new_user_notification( $user->ID, null ,'user'  );
+
 				// register completed
 				return WPEMS_Shortcodes::render( 'user-register', 'register-completed.php' );
 			} else {
 				// error
 				return WPEMS_Shortcodes::render( 'user-register', 'register-error.php' );
 			}
-		} elseif ( !is_user_logged_in() ) {
+		} elseif ( ! is_user_logged_in() ) {
 			// show register form
 			return WPEMS_Shortcodes::render( 'user-register', 'form-register.php' );
 		}
@@ -138,7 +159,7 @@ class WPEMS_Shortcodes {
 	 * @return string
 	 */
 	public static function login( $atts ) {
-		if ( !wpems_get_page_id( 'login' ) || is_user_logged_in() ) {
+		if ( ! wpems_get_page_id( 'login' ) || is_user_logged_in() ) {
 			return '';
 		}
 
@@ -153,7 +174,7 @@ class WPEMS_Shortcodes {
 	 * @return string
 	 */
 	public static function forgot_password( $atts ) {
-		if ( !wpems_get_page_id( 'forgot_password' ) ) {
+		if ( ! wpems_get_page_id( 'forgot_password' ) ) {
 			return '';
 		}
 
@@ -163,6 +184,7 @@ class WPEMS_Shortcodes {
 		} else {
 			return WPEMS_Shortcodes::render( 'forgot-password', 'forgot-password.php' );
 		}
+
 		return '';
 	}
 
@@ -174,7 +196,7 @@ class WPEMS_Shortcodes {
 	 * @return string
 	 */
 	public static function reset_password( $atts ) {
-		if ( !wpems_get_page_id( 'reset_password' ) ) {
+		if ( ! wpems_get_page_id( 'reset_password' ) ) {
 			return '';
 		}
 
@@ -192,6 +214,7 @@ class WPEMS_Shortcodes {
 		if ( $atts['checkemail'] ) {
 			wpems_add_notice( 'success', __( 'Check your email for a link to reset your password.', 'wp-events-manager' ) );
 		}
+
 		return WPEMS_Shortcodes::render( 'reset-password', 'reset-password.php', array( 'atts' => $atts ) );
 
 	}
@@ -214,6 +237,7 @@ class WPEMS_Shortcodes {
 				),
 			),
 		);
+
 		return WPEMS_Shortcodes::render( 'user-account', 'user-account.php', array( 'args' => $args ) );
 	}
 

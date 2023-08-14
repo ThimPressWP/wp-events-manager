@@ -1,7 +1,18 @@
 <?php
-if ( !defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * The Template for displaying booking form in single event page.
+ *
+ * Override this template by copying it to yourtheme/wp-events-manager/loop/booking-form.php
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit();
 
 $event    = new WPEMS_Event( $event_id );
 $user_reg = $event->booked_quantity( get_current_user_id() );

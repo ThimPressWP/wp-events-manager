@@ -1,13 +1,18 @@
 <?php
 /**
- * @Author: ducnvtt
- * @Date:   2016-03-02 14:46:31
- * @Last Modified by:   ducnvtt
- * @Last Modified time: 2016-03-30 11:09:14
+ * The Template for displaying shortcode reset password.
+ *
+ * Override this template by copying it to yourtheme/wp-events-manager/shortcodes/reset-password.php
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
  */
-if ( !defined( 'ABSPATH' ) ) {
-    exit;
-}
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit();
 
 wpems_print_notices();
 ?>

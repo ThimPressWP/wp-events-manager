@@ -1,17 +1,18 @@
 <?php
 /**
- * The Template for displaying all event.
+ * The Template for displaying shortcode list events.
  *
- * Override this template by copying it to yourtheme/tp-event/templates/shortcode/event-list.php
+ * Override this template by copying it to yourtheme/wp-events-manager/shortcodes/event-list.php
  *
- * @author        ThimPress
- * @package       tp-event
- * @version       2.0
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
  */
 
-if ( !defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit();
 
 $list_event = new WP_Query( $args );
 ?>

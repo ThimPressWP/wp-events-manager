@@ -1,8 +1,16 @@
 <?php
+/**
+ * WP Events Manager Admin Menu class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
 
-if ( !defined( 'ABSPATH' ) ) {
-	exit();
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Admin_Menu {
 
@@ -36,8 +44,8 @@ class WPEMS_Admin_Menu {
 				call_user_func_array( 'add_submenu_page', $menu );
 			}
 		}
-		add_submenu_page( 'tp-event-setting', __( 'WPEMS Users', 'wp-events-manager' ), __( 'Users', 'wp-events-manager' ), 'administrator', 'tp-event-users', array( 'WPEMS_Admin_Users', 'output' ) );
-		add_submenu_page( 'tp-event-setting', __( 'WPEMS Settings', 'wp-events-manager' ), __( 'Settings', 'wp-events-manager' ), 'administrator', 'tp-event-setting', array( 'WPEMS_Admin_Settings', 'output' ) );
+		add_submenu_page( 'tp-event-setting', __( 'WP Event Users', 'wp-events-manager' ), __( 'Users', 'wp-events-manager' ), 'administrator', 'tp-event-users', array( 'WPEMS_Admin_Users', 'output' ) );
+		add_submenu_page( 'tp-event-setting', __( 'WP Event Settings', 'wp-events-manager' ), __( 'Settings', 'wp-events-manager' ), 'administrator', 'tp-event-setting', array( 'WPEMS_Admin_Settings', 'output' ) );
 	}
 
 	/**

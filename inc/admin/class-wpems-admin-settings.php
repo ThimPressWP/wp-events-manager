@@ -1,5 +1,16 @@
 <?php
-defined( 'ABSPATH' ) || exit();
+/**
+ * WP Events Manager Admin Settings class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Admin_Settings {
 
@@ -188,7 +199,11 @@ class WPEMS_Admin_Settings {
 	public static function save_fields( $settings = array() ) {
 		foreach ( $settings as $setting ) {
 			if ( isset( $setting['id'] ) && array_key_exists( $setting['id'], $_POST ) ) {
-				update_option( $setting['id'], sanitize_text_field($_POST[$setting['id']]) );
+			    if($setting['type'] == 'textarea'){
+				    update_option( $setting['id'], htmlentities( stripslashes( $_POST[$setting['id']] ) ) );
+                }else{
+				    update_option( $setting['id'], sanitize_text_field( $_POST[$setting['id']] ) );
+                }
 			}
 		}
 	}

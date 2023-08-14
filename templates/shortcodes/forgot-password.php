@@ -1,13 +1,19 @@
 <?php
 /**
- * @Author: ducnvtt
- * @Date:   2016-02-22 17:03:48
- * @Last Modified by:     ducnvtt
- * @Last Modified time: 2 2016-03-02 14:10:16
+ * The Template for displaying shortcode forgot password.
+ *
+ * Override this template by copying it to yourtheme/wp-events-manager/shortcodes/forgot-password.php
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Template
+ * @version       2.1.7
  */
-if ( !defined( 'ABSPATH' ) ) {
-    exit;
-}
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit();
+?>
 
 wpems_print_notices();
 ?>

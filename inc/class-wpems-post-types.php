@@ -1,7 +1,16 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit();
-}
+/**
+ * WP Events Manager Post Types class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7.3
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 /**
  * register all post type
@@ -11,11 +20,13 @@ class WPEMS_Custom_Post_Types {
 	public function __construct() {
 
 		// register post types
-		add_action( 'init', array( $this, 'register_event_post_type' ) );
+		add_action( 'after_setup_theme', array( $this, 'register_event_post_type' ) );
 		add_action( 'init', array( $this, 'register_booking_post_type' ) );
 
 		// register event category
 		add_action( 'init', array( $this, 'register_event_category_tax' ) );
+		// register event tag
+		add_action( 'init', array( $this, 'register_event_tag_tax' ) );
 
 		// register post type status
 		add_action( 'init', array( $this, 'register_booking_status' ) );
@@ -23,7 +34,12 @@ class WPEMS_Custom_Post_Types {
 		// custom event post type column
 		add_filter( 'manage_tp_event_posts_columns', array( $this, 'event_columns' ) );
 		add_action( 'manage_tp_event_posts_custom_column', array( $this, 'event_column_content' ), 10, 2 );
+
 		add_filter( 'manage_edit-tp_event_sortable_columns', array( $this, 'sortable_columns' ) );
+		add_filter( 'posts_join_paged', array( $this, 'posts_join_paged' ) );
+		add_filter( 'posts_orderby', array( $this, 'posts_orderby' ) );
+
+		add_filter( 'manage_edit-tp_event_category_columns', array( $this, 'event_category_columns' ) );
 
 		add_filter( 'manage_event_auth_book_posts_columns', array( $this, 'booking_columns' ) );
 		add_action( 'manage_event_auth_book_posts_custom_column', array( $this, 'booking_column_content' ), 10, 2 );
@@ -66,7 +82,7 @@ class WPEMS_Custom_Post_Types {
 			'show_ui'            => true,
 			'show_in_menu'       => 'tp-event-setting',
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => _x( 'events', 'URL slug', 'wp-events-manager' ) ),
+			'rewrite'            => array( 'slug' => _x( 'events', 'URL slug', 'wp-events-manager' ), 'with_front' => false ),
 			'taxonomies'         => array( 'tp_event_category' ),
 			'capability_type'    => 'post',
 			'map_meta_cap'       => true,
@@ -161,6 +177,37 @@ class WPEMS_Custom_Post_Types {
 	}
 
 	/**
+	 * Register event tag taxonomy
+	 */
+	public function register_event_tag_tax() {
+		$labels = array(
+			'name'              => _x( 'Event Tags', 'taxonomy general name', 'wp-events-manager' ),
+			'singular_name'     => _x( 'Event Tag', 'taxonomy singular name', 'wp-events-manager' ),
+			'search_items'      => __( 'Search Tags', 'wp-events-manager' ),
+			'all_items'         => __( 'All Tags', 'wp-events-manager' ),
+			'parent_item'       => __( 'Parent Tag', 'wp-events-manager' ),
+			'parent_item_colon' => __( 'Parent Tag:', 'wp-events-manager' ),
+			'edit_item'         => __( 'Edit Tag', 'wp-events-manager' ),
+			'update_item'       => __( 'Update Tag', 'wp-events-manager' ),
+			'add_new_item'      => __( 'Add New Tag', 'wp-events-manager' ),
+			'new_item_name'     => __( 'New Tag Name', 'wp-events-manager' ),
+			'menu_name'         => __( 'Tag', 'wp-events-manager' ),
+		);
+
+		$args = array(
+			'public'            => true,
+			'hierarchical'      => false,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'tp-event-tag' ),
+		);
+
+		register_taxonomy( 'tp_event_tag', array( 'tp_event' ), $args );
+	}
+
+	/**
 	 * Register booking status
 	 */
 	public function register_booking_status() {
@@ -217,6 +264,20 @@ class WPEMS_Custom_Post_Types {
 		$columns['status']      = __( 'Status', 'wp-events-manager' );
 		$columns['price']       = __( 'Price', 'wp-events-manager' );
 		$columns['booked_slot'] = __( 'Booked / Total', 'wp-events-manager' );
+
+		return $columns;
+	}
+
+
+	/**
+	 * Custom event category columns.
+	 *
+	 * @param $columns
+	 *
+	 * @return mixed
+	 */
+	public function event_category_columns( $columns ) {
+		unset( $columns['posts'] );
 
 		return $columns;
 	}
@@ -341,7 +402,66 @@ class WPEMS_Custom_Post_Types {
 	 * @return array
 	 */
 	public function sortable_columns( $columns ) {
-		return wp_parse_args( $columns, array( 'start' => 'start', 'end' => 'end' ) );
+		return wp_parse_args( $columns, array( 'start' => 'event_start_date', 'end' => 'event_end_date' ) );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function _is_admin_sort() {
+		if ( ! ( is_admin() && isset( $_REQUEST['post_type'] ) && $_REQUEST['post_type'] == 'tp_event' ) ) {
+			return false;
+		}
+
+		if ( ! isset( $_REQUEST['orderby'] ) || ! in_array( $_REQUEST['orderby'], array(
+				'event_start_date',
+				'event_end_date'
+			) ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param $join
+	 *
+	 * @return string
+	 */
+	public function posts_join_paged( $join ) {
+		if ( ! $this->_is_admin_sort() ) {
+			return $join;
+		}
+
+		global $wpdb;
+
+		$order_by = $_REQUEST['orderby'];
+
+		if ( $order_by == 'event_start_date' ) {
+			$join .= " INNER JOIN {$wpdb->prefix}postmeta AS event_date ON event_date.post_id = {$wpdb->prefix}posts.ID AND event_date.meta_key = 'tp_event_date_start' ";
+		}
+
+		if ( $order_by == 'event_end_date' ) {
+			$join .= " INNER JOIN {$wpdb->prefix}postmeta AS event_date ON event_date.post_id = {$wpdb->prefix}posts.ID AND event_date.meta_key = 'tp_event_date_end' ";
+		}
+
+		return $join;
+	}
+
+	/**
+	 * @param $order_by
+	 *
+	 * @return string
+	 */
+	public function posts_orderby( $order_by ) {
+		if ( ! $this->_is_admin_sort() ) {
+			return $order_by;
+		}
+
+		$order = isset( $_REQUEST['order'] ) ? $_REQUEST['order'] : 'asc';
+
+		return "event_date.meta_value {$order}";
+
 	}
 
 	/**
@@ -411,6 +531,10 @@ class WPEMS_Custom_Post_Types {
 		}
 
 		return $messages;
+	}
+
+	public function wpems_events_archive($query){
+		echo'<pre>';print_r($query);die;
 	}
 
 }

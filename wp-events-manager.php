@@ -1,11 +1,10 @@
 <?php
-
 /*
   Plugin Name: WP Events Manager
   Plugin URI: http://thimpress.com/
   Description: A complete plugin for Events management and online booking system
   Author: ThimPress
-  Version: 2.1.1
+  Version: 2.1.10
   Author URI: http://thimpress.com
  */
 
@@ -43,7 +42,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
 			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
 			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
-			$this->set_define( 'WPEMS_VER', '2.1' );
+			$this->set_define( 'WPEMS_VER', '2.1.8' );
 			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}
 
@@ -74,11 +73,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		}
 
 		/**
-		 * include file
-		 *
-		 * @param  array || string
-		 *
-		 * @return null
+		 * Include files.
 		 */
 		public function includes() {
 
@@ -104,6 +99,8 @@ if ( ! class_exists( 'WPEMS' ) ) {
 				$this->_include( 'inc/class-wpems-user-process.php' );
 				$this->_include( 'inc/class-wpems-shortcodes.php' );
 			}
+
+			$this->_include( 'inc/class-wpems-gdpr.php' );
 
 		}
 

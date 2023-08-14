@@ -1,10 +1,10 @@
 === WP Events Manager ===
-Contributors: thimpress, leehld
+Contributors: thimpress, leehld, phamtungpth
 Donate link: https://thimpress.com/
 Tags: event, event management, events, registration, bookings, tickets, locations, google maps
 Requires at least: 4.6
-Tested up to: 4.9.1
-Stable tag: 2.1.1
+Tested up to: 6.0
+Stable tag: 2.1.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,43 +78,8 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 == Changelog ==
 
-= 2.1.1 =
-- Fix bug show admin events page
-
-= 2.1 =
-- Add option to config number events in archive page
-- Add search event box in archive page
-- Update archive event pagination
-- Update booking status when user register free event
-- Update send email for user when register event
-- Remove default event Start and end date
-
-= 2.0.8 =
-- Sync event date in database
-
-= 2.0.7 =
-- Support some functions of old versions
-- Add custom event category columns
-
-= 2.0.6 =
-- Fix content filter
-
-= 2.0.5 =
-- Fix revolution slider with content filter
-
-= 2.0.4 =
-- Update do shortcodes in default pages
-
-= 2.0.3 =
-- Fix deactive previous version process for multisite
-- Update Woocomerce payment add-on for Woocommerce version 3.x
-
-= 2.0.2 =
-- Fix register user process
-- Remove event note
-
-= 2.0.1 =
-- Remove unnecessary caps and roles
+= 1.0.0 =
+- An amazing Events Manager plugin for WordPress was born
 
 = 2.0.0 =
 - Fix timezone countdown
@@ -129,9 +94,83 @@ To stay in touch and update about FundPress's future releases and features, you 
 - Add event category taxonomy
 - Add woocommerce payment add-on
 
-= 1.0.0 =
-- An amazing Events Manager plugin for WordPress was born
+= 2.0.1 =
+- Remove unnecessary caps and roles
 
+= 2.0.2 =
+- Fix register user process
+- Remove event note
+
+= 2.0.3 =
+- Fix deactive previous version process for multisite
+- Update Woocomerce payment add-on for Woocommerce version 3.x
+
+= 2.0.4 =
+- Update do shortcodes in default pages
+
+= 2.0.5 =
+- Fix revolution slider with content filter
+
+= 2.0.6 =
+- Fix content filter
+
+= 2.0.7 =
+- Support some functions of old versions
+- Add custom event category columns
+
+= 2.0.8 =
+- Sync event date in database
+
+= 2.1.3 =
+- Fix event status and admin archive event page
+
+= 2.1.4 =
+- Fix update booking status with PHP 7
+- Update auto shortcode redirect
+
+= 2.1.5 =
+- Fix notice single event with Siteorigin page builder
+
+= 2.1.6 =
+- Fix update event status
+- Update booking completed status when book free event
+- Add booking mail for admin
+
+= 2.1.7 =
+- Update admin sortable events by date
+
+= 2.1.7.1 =
+- Fix upgrade process
+
+= 2.1.7.2 =
+- GDPR compliance
+
+= 2.1.7.3 =
+- Update pagination for archive event page
+- Add feature event tag
+
+= 2.1.7.4 =
+- Update User Account template
+
+= 2.1.7.5 =
+- Added new feature to customize the email body.
+- Tried to check and auto update events status.
+- Added link to add events into Google Calendar in Single view.
+
+= 2.1.7.6 =
+- Updated and corrected language texts.
+
+= 2.1.7.7 =
+- Fixed issue makes site die when saving events with start date equals with end date.
+
+= 2.1.8 =
+- Fixed bug of being able to book even when the slots are full.
+
+= 2.1.9 =
+- Fixed not send email when user register
+
+= 2.1.10 =
+- Fixed error with PHP8
 
 == Upgrade Notice ==
 

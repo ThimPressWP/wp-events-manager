@@ -1,25 +1,33 @@
 <?php
+/**
+ * WP Events Manager Install class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
+ */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Install {
 
 	/**
 	 * upgrade store
-	 * @var null || array
+	 * @var type null || array
 	 */
-	public static $upgrade = null;
+	public static $db_upgrade = null;
 
 	/**
 	 * Init
 	 */
 	public static function init() {
-		self::$upgrade = array(
+		self::$db_upgrade = array(
 			'2.0'   => WPEMS_INC . 'admin/upgrades/upgrade-2.0.php',
 			'2.0.8' => WPEMS_INC . 'admin/upgrades/upgrade-2.0.8.php',
-			'2.1'   => WPEMS_INC . 'admin/upgrades/upgrade-2.1.php'
+			'2.1.7.2' => WPEMS_INC . 'admin/upgrades/upgrade-2.1.7.2.php'
 		);
 	}
 
@@ -32,6 +40,8 @@ class WPEMS_Install {
 			if ( ! function_exists( 'get_plugin_data' ) ) {
 				require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			}
+
+			$active_plugins = array();
 
 			$plugins = array(
 				'tp-event-auth/tp-event-auth.php',
@@ -95,7 +105,7 @@ class WPEMS_Install {
 		/**
 		 * Update current version
 		 */
-		update_option( 'thimpress-event-version', WPEMS_VER );
+//		update_option( 'thimpress-event-version', WPEMS_VER );
 	}
 
 	/**
@@ -151,9 +161,12 @@ class WPEMS_Install {
 	 */
 	public static function upgrade_database() {
 		$old_version = get_option( 'thimpress-event-version' );
-		foreach ( self::$upgrade as $version => $file ) {
-			if ( ! $old_version || version_compare( $old_version, $version, '<' ) ) {
-				require_once $file;
+
+		if ( ! $old_version || $old_version != WPEMS_VER ) {
+			foreach ( self::$db_upgrade as $ver => $file ) {
+				if ( ! $old_version || version_compare( $old_version, $ver, '<' ) ) {
+					require_once $file;
+				}
 			}
 		}
 	}
@@ -161,6 +174,8 @@ class WPEMS_Install {
 }
 
 WPEMS_Install::init();
+
+//add_action( 'admin_init', array( 'WPEMS_Install', 'upgrade_database' ) );
 
 // active plugin
 register_activation_hook( WPEMS_MAIN_FILE, array( 'WPEMS_Install', 'install' ) );

@@ -1,6 +1,10 @@
 <?php
-/*
- * @author leehld
+/**
+ * WP Events Manager Admin Users class
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Class
+ * @version       2.1.7
  */
 
 /**
@@ -31,11 +35,11 @@ class WPEMS_Admin_Users extends WP_List_Table {
 			$query = $wpdb->prepare( "
 					SELECT user.* FROM $wpdb->users AS user
 					LEFT JOIN $wpdb->postmeta AS pm ON user.ID = pm.meta_value
-					LEFT JOIN $wpdb->posts AS booking ON pm.post_id = booking.ID
+					LEFT JOIN $wpdb->posts AS book ON pm.post_id = book.ID
 					WHERE
 						pm.meta_key = %s
-						AND booking.post_type = %s
-						AND booking.post_status IN (%s,%s,%s,%s)
+						AND book.post_type = %s
+						AND book.post_status IN (%s,%s,%s,%s)
 						AND user.ID = %d
 					GROUP BY user.ID
 				", 'ea_booking_user_id', 'event_auth_book', 'ea-cancelled', 'ea-pending', 'ea-processing', 'ea-completed', absint( $_GET['user_id'] ) );
@@ -43,11 +47,11 @@ class WPEMS_Admin_Users extends WP_List_Table {
 			$query = $wpdb->prepare( "
 					SELECT user.* FROM $wpdb->users AS user
 					LEFT JOIN $wpdb->postmeta AS pm ON user.ID = pm.meta_value
-					LEFT JOIN $wpdb->posts AS booking ON pm.post_id = booking.ID
+					LEFT JOIN $wpdb->posts AS book ON pm.post_id = book.ID
 					WHERE
 						pm.meta_key = %s
-						AND booking.post_type = %s
-						AND booking.post_status IN (%s,%s,%s,%s)
+						AND book.post_type = %s
+						AND book.post_status IN (%s,%s,%s,%s)
 					GROUP BY user.ID
 				", 'ea_booking_user_id', 'event_auth_book', 'ea-cancelled', 'ea-pending', 'ea-processing', 'ea-completed' );
 		}

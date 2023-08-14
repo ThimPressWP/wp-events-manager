@@ -1,4 +1,16 @@
 <?php
+/**
+ * WP Events Manager functions
+ *
+ * @author        ThimPress, leehld
+ * @package       WP-Events-Manager/Function
+ * @version       2.1.7
+ */
+
+/**
+ * Prevent loading this file directly
+ */
+defined( 'ABSPATH' ) || exit;
 
 add_action( 'widgets_init', 'wpems_register_countdown_widget' );
 if ( ! function_exists( 'wpems_register_countdown_widget' ) ) {
@@ -302,13 +314,7 @@ add_action( 'tp_event_before_main_content', 'wpems_before_main_content' );
 if ( ! function_exists( 'wpems_before_main_content' ) ) {
 
 	function wpems_before_main_content() {
-		if ( ! empty( $_REQUEST['s'] ) && ! empty( $_REQUEST['ref'] ) && 'events' == $_REQUEST['ref'] ) {
-			$s = $_REQUEST['s'];
-		} else {
-			$s = '';
-		}
 
-		wpems_get_template( 'search-form.php', array( 's' => $s ) );
 	}
 
 }
@@ -368,6 +374,15 @@ if ( ! function_exists( 'wpems_loop_event_countdown' ) ) {
 
 }
 
+add_action( 'tp_event_after_event_loop', 'wpems_archive_event_pagination' );
+
+if ( ! function_exists( 'wpems_archive_event_pagination' ) ) {
+
+	function wpems_archive_event_pagination() {
+		wpems_get_template( 'pagination.php' );
+	}
+}
+
 add_action( 'tp_event_single_event_content', 'wpems_single_event_content' );
 if ( ! function_exists( 'wpems_single_event_content' ) ) {
 
@@ -395,15 +410,6 @@ if ( ! function_exists( 'wpems_loop_event_location' ) ) {
 
 	function wpems_loop_event_location() {
 		wpems_get_template( 'loop/location.php' );
-	}
-
-}
-
-add_action( 'tp_event_after_event_loop', 'wpems_loop_event_pagination' );
-if ( ! function_exists( 'wpems_loop_event_pagination' ) ) {
-
-	function wpems_loop_event_pagination() {
-		wpems_get_template( 'loop/pagination.php' );
 	}
 
 }
@@ -442,14 +448,11 @@ if ( ! function_exists( 'wpems_l18n' ) ) {
 }
 
 if ( ! function_exists( 'wpems_get_option' ) ) {
-
 	/**
-	 * wpems_get_option
+	 * @param      $name
+	 * @param null $default
 	 *
-	 * @param type $name
-	 * @param type $default
-	 *
-	 * @return type
+	 * @return mixed
 	 */
 	function wpems_get_option( $name, $default = null ) {
 		if ( strpos( $name, 'thimpress_events_' ) !== 0 ) {
@@ -578,7 +581,6 @@ if ( ! function_exists( 'wpems_schedule_update_status' ) ) {
 		wp_clear_scheduled_hook( 'tp_event_schedule_status', array( $post_id, $status ) );
 		$old_status = get_post_meta( $post_id, 'tp_event_status', true );
 
-
 		if ( $old_status !== $status && in_array( $status, array( 'upcoming', 'happening', 'expired' ) ) ) {
 			$post = wpems_add_property_countdown( get_post( $post_id ) );
 
@@ -590,7 +592,7 @@ if ( ! function_exists( 'wpems_schedule_update_status' ) ) {
 				return;
 			}
 
-			if ( $status === 'happenning' && $current_time < $event_start ) {
+			if ( $status === 'happening' && $current_time < $event_start ) {
 				return;
 			}
 
@@ -729,7 +731,7 @@ if ( ! function_exists( 'wpems_print_notices' ) ) {
 
 if ( ! function_exists( 'wpems_print_notice' ) ) {
 
-	function wpems_print_notice( $type = 'success', $message ) {
+	function wpems_print_notice( $type = 'success', $message = '' ) {
 		if ( 'success' === $type ) {
 			$message = apply_filters( 'tp_event_add_message', $message );
 		}
@@ -1309,6 +1311,11 @@ function wpems_admin_table_tabs() {
 				'link' => 'edit-tags.php?taxonomy=tp_event_category&post_type=tp_event',
 				'name' => __( 'Categories', 'wp-events-manager' ),
 				'id'   => 'edit-tp_event_category'
+			),
+			30 => array(
+				'link' => 'edit-tags.php?taxonomy=tp_event_tag&post_type=tp_event',
+				'name' => __( 'Tags', 'wp-events-manager' ),
+				'id'   => 'edit-tp_event_tag'
 			)
 		)
 	);
@@ -1373,30 +1380,18 @@ if ( ! function_exists( 'wpems_post_type_admin_order' ) ) {
 	function wpems_post_type_admin_order( $wp_query ) {
 		if ( is_admin() && ! isset( $_GET['orderby'] ) ) {
 			// Get the post type from the query
-			$post_type = $wp_query->query['post_type'];
-			if ( in_array( $post_type, array( 'tp_event', 'event_auth_book' ) ) ) {
-				$wp_query->set( 'orderby', 'date' );
-				$wp_query->set( 'order', 'DESC' );
+			if ( isset( $wp_query->query['post_type'] ) ) {
+				$post_type = $wp_query->query['post_type'];
+				if ( in_array( $post_type, array( 'tp_event', 'event_auth_book' ) ) ) {
+					$wp_query->set( 'orderby', 'date' );
+					$wp_query->set( 'order', 'DESC' );
+				}
 			}
 		}
 	}
 }
 add_filter( 'pre_get_posts', 'wpems_post_type_admin_order' );
 
-/**
- *  Set number events in archive page.
- */
-if ( ! function_exists( 'wpems_number_events_archive' ) ) {
-	function wpems_number_events_archive( $query ) {
-		if ( ! is_admin() && isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] === 'tp_event' && is_archive() ) {
-			global $hb_settings;
-			$query->set( 'posts_per_page', wpems_get_option( 'num_events_archive', 10 ) );
-		}
-
-		return $query;
-	}
-}
-add_filter( 'pre_get_posts', 'wpems_number_events_archive' );
 
 //=============================================================================================================================================
 
@@ -1550,3 +1545,29 @@ if ( ! function_exists( 'tp_event_locate_template' ) ) {
 	}
 
 }
+
+function wpems_update_status( $post ) {
+	if ( is_int( $post ) ) {
+		$post = get_post( $post );
+	}
+
+	if ( ! $post ) {
+		$post = $GLOBALS['post'];
+	}
+
+	if ( $post->post_type === 'tp_event' ) {
+		$post         = wpems_add_property_countdown( get_post( $post->ID ) );
+		$old_status   = get_post_meta( $post->ID, 'tp_event_status', true );
+		$event_start  = strtotime( $post->event_start );
+		$event_end    = strtotime( $post->event_end );
+		$current_time = strtotime( current_time( 'Y-m-d H:i' ) );
+		if ( $old_status === 'upcoming' && $current_time <= $event_end && $current_time > $event_start ) {
+			update_post_meta( $post->ID, 'tp_event_status', 'happening' );
+		} elseif ( $current_time > $event_end ) {
+			update_post_meta( $post->ID, 'tp_event_status', 'expired' );
+		}
+	}
+	//if(isset($_GET['debug'])){echo'<pre>';print_r(get_option( 'cron' ));die;}
+}
+
+add_action( 'the_post', 'wpems_update_status' );
