@@ -44,14 +44,24 @@ class WPEMS_Assets {
 	 * register script
 	 */
 	public static function register_script( $handle = '', $src = '', $deps = array(), $ver = false, $in_footer = true ) {
-		self::$_scripts[$handle] = array( $handle, self::_get_file_uri( $src ), $deps, $ver, $in_footer );
+		self::$_scripts[$handle] = array( $handle, self::_load_file_min( $src ), $deps, $ver, $in_footer );
 	}
 
 	/**
 	 * register style
 	 */
 	public static function register_style( $handle, $src, $deps = array(), $ver = false, $media = 'all' ) {
-		self::$_styles[$handle] = array( $handle, self::_get_file_uri( $src ), $deps, $ver, $media );
+		$uri = $src;
+		
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			$ver = uniqid();
+			
+		} else {
+			$ver = VERION_OF_PLUGIN;
+			$uri = self::_load_file_min( $src );
+		}
+
+		self::$_styles[$handle] = array( $handle, $uri, $deps, $ver, $media );
 	}
 
 	/**
@@ -108,10 +118,8 @@ class WPEMS_Assets {
 	 * Get file uri.
 	 * if WP_DEBUG is FALSE will load minify file
 	 */
-	public static function _get_file_uri( $uri = '' ) {
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			return $uri;
-		}
+	public static function _load_file_min( $uri = '' ) {
+
 		$file      = self::_get_path_by_uri( $uri );
 		$file_name = basename( $file );
 		$parse     = explode( '.', $file_name );

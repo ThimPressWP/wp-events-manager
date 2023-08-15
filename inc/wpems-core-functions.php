@@ -1299,6 +1299,11 @@ function wpems_admin_table_tabs() {
 				'name' => __( 'Tags', 'wp-events-manager' ),
 				'id'   => 'edit-tp_event_tag',
 			),
+			40 => array(
+				'link' => 'edit-tags.php?taxonomy=tp_event_type&post_type=tp_event',
+				'name' => __( 'Types', 'wp-events-manager' ),
+				'id'   => 'edit-tp_event_type',
+			),
 		)
 	);
 	ksort( $admin_tabs );

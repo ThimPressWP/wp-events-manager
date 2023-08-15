@@ -21,6 +21,9 @@ $time_start = get_post_meta( $post->ID, $prefix . 'time_start', true ) ? date( '
 $date_end = get_post_meta( $post->ID, $prefix . 'date_end', true ) ? date( 'Y-m-d', strtotime( get_post_meta( $post->ID, $prefix . 'date_end', true ) ) ) : '';
 $time_end = get_post_meta( $post->ID, $prefix . 'time_end', true ) ? date( 'H:i', strtotime( get_post_meta( $post->ID, $prefix . 'time_end', true ) ) ) : '';
 
+$registration_end_date = get_post_meta( $post->ID, $prefix . 'registration_end_date', true ) ? date( 'Y-m-d', strtotime( get_post_meta( $post->ID, $prefix . 'registration_end_date', true ) ) ) : '';
+$registration_end_time = get_post_meta( $post->ID, $prefix . 'registration_end_time', true ) ? date( 'H:i', strtotime( get_post_meta( $post->ID, $prefix . 'registration_end_time', true ) ) ) : '';
+
 $qty      = get_post_meta( $post_id, $prefix . 'qty', true );
 $price    = get_post_meta( $post_id, $prefix . 'price', true );
 $location = get_post_meta( $post_id, $prefix . 'location', true );
@@ -64,6 +67,42 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 					   value="<?php echo $time_end ? esc_attr( $time_end ) : ''; ?>">
 			</div>
 		</div>
+
+		<!-- Registration End Date -->
+		<div class="option_group">
+			<div class="form-field" id="event-registration-time-metabox">
+				<label><?php echo esc_html__( 'Registration End Date', 'wp-events-manager' ); ?></label>
+				<label hidden for="_registration_end_date"></label>
+				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_date" id="_registration_end_date"
+					   value="<?php echo $registration_end_date ? esc_attr( $registration_end_date ) : esc_attr( $today ); ?>">
+				<label hidden for="_registration_end_time"></label>
+				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_time" id="_registration_end_time"
+					   value="<?php echo $registration_end_time ? esc_attr( $registration_end_time ) : ''; ?>">
+			</div>
+		</div>
+		<!-- End Registration End Date -->
+
+		<!-- Schedule -->
+		<div class="option_group">
+			<p class="form-field">
+				<label for="_schedule"><?php _e( 'Schedule', 'wp-events-manager' ); ?></label>
+					<input type="checkbox" class="short" name="schedule_check" id="_schedule_check">
+					<span>Enable/Disable Schedule section on the frontend</span>
+			</p>
+			<!-- <div class="form-field">
+				<div class="form_day">
+					<div class="form_day-header">
+
+					</div>
+					<div class="form_day-content">
+
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<!-- End Schedule -->
+
+		<!-- Location -->
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_location"><?php _e( 'Location', 'wp-events-manager' ); ?></label>
@@ -75,7 +114,18 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 					<a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here' ); ?></a>
 				</p>
 			<?php endif; ?>
+			<p class="form-field">
+				<label for="_location"></label>
+				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="4"></textarea>
+			</p>
+			<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
+				<p class="event-meta-notice">
+					<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
+				</p>
+			<?php endif; ?>
 		</div>
+		<!-- End Location -->
+
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_shortcode"><?php _e( 'Shortcode', 'wp-events-manager' ); ?></label>

@@ -27,6 +27,8 @@ class WPEMS_Custom_Post_Types {
 		add_action( 'init', array( $this, 'register_event_category_tax' ) );
 		// register event tag
 		add_action( 'init', array( $this, 'register_event_tag_tax' ) );
+		// register event type
+		add_action( 'init', array( $this, 'register_event_type_tax' ) );
 
 		// register post type status
 		add_action( 'init', array( $this, 'register_booking_status' ) );
@@ -208,6 +210,36 @@ class WPEMS_Custom_Post_Types {
 		);
 
 		register_taxonomy( 'tp_event_tag', array( 'tp_event' ), $args );
+	}
+
+	/**
+	 * Register event type taxonomy
+	 */
+	public function register_event_type_tax() {
+		$labels = array(
+			'name'              => _x( 'Event Types', 'taxonomy general name', 'wp-events-manager' ),
+			'singular_name'     => _x( 'Event Type', 'taxonomy singular name', 'wp-events-manager' ),
+			'search_items'      => __( 'Search Types', 'wp-events-manager' ),
+			'all_items'         => __( 'All Types', 'wp-events-manager' ),
+			'parent_item'       => __( 'Parent Type', 'wp-events-manager' ),
+			'parent_item_colon' => __( 'Parent Type:', 'wp-events-manager' ),
+			'edit_item'         => __( 'Edit Type', 'wp-events-manager' ),
+			'update_item'       => __( 'Update Type', 'wp-events-manager' ),
+			'add_new_item'      => __( 'Add New Type', 'wp-events-manager' ),
+			'new_item_name'     => __( 'New Type Name', 'wp-events-manager' ),
+			'menu_name'         => __( 'Types', 'wp-events-manager' ),
+		);
+
+		$args = array(
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'tp-event-type' ),
+		);
+
+		register_taxonomy( 'tp_event_type', array( 'tp_event' ), $args );
 	}
 
 	/**

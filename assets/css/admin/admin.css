@@ -283,12 +283,14 @@
 	display: inline-block;
 }
 
-#event-time-metabox #_date_start, #event-time-metabox #_date_end {
+#event-time-metabox #_date_start, #event-time-metabox #_date_end,
+#event-registration-time-metabox #_registration_end_date {
 	width: 100px;
 	margin-right: 4px;
 }
 
-#event-time-metabox #_time_start, #event-time-metabox #_time_end {
+#event-time-metabox #_time_start, #event-time-metabox #_time_end,
+#event-registration-time-metabox #_registration_end_date {
 	width: 75px;
 }
 
@@ -299,4 +301,8 @@
 
 .post-type-event_auth_book #postbox-container-2{
 	margin-top: -20px;
+}
+
+.ml-150 {
+	margin-left: 150px;
 }
