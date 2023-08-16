@@ -38,6 +38,7 @@ class WPEMS_Assets {
 	public static function init() {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
+		
 	}
 
 	/**
@@ -57,7 +58,7 @@ class WPEMS_Assets {
 			$ver = uniqid();
 			
 		} else {
-			$ver = VERION_OF_PLUGIN;
+			// $ver = VERION_OF_PLUGIN;
 			$uri = self::_load_file_min( $src );
 		}
 
@@ -90,8 +91,6 @@ class WPEMS_Assets {
 		wp_enqueue_script( 'wp-util' );
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'underscore' );
-		// Calendar
-		wp_enqueue_script('wpems-calendar-js');
 
 		if ( self::$_scripts ) {
 			foreach ( self::$_scripts as $handle => $param ) {

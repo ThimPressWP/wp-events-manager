@@ -29,8 +29,9 @@ class WPEMS_Frontend_Assets {
 	 */
 	public static function register_scripts( $hook ) {
 		// Calendar
-		WPEMS_Assets::register_script( 'wpems-calendar-js', WPEMS_LIB_URI . '/fullCalendars/index.global.min.js' );
-
+		WPEMS_Assets::register_script( 'wpems-fullcalendar-lb-js', WPEMS_LIB_URI . '/fullCalendars/index.global.min.js' );
+		WPEMS_Assets::register_script( 'calendar-event', WPEMS_ASSETS_URI . '/js/admin/calendar-event.js' );
+		
 		WPEMS_Assets::register_script( 'wpems-countdown-plugin-js', WPEMS_LIB_URI . '/countdown/js/jquery.plugin.min.js' );
 		WPEMS_Assets::register_script( 'wpems-countdown-js', WPEMS_LIB_URI . '/countdown/js/jquery.countdown.min.js' );
 		WPEMS_Assets::register_style( 'wpems-countdown-css', WPEMS_LIB_URI . '/countdown/css/jquery.countdown.css' );

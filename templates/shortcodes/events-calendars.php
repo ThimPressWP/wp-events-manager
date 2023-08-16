@@ -1,23 +1,18 @@
 <?php
-include_once  WPEMS_INC . 'admin/class-wpems-admin-events-calendars.php';
+include_once  WPEMS_INC . 'database/class-wpems-calendar-data.php';
 
-$events_table = new WPEMS_Admin_Event_Calendar();
+$event        = new WPEMS_Admin_Calendar_Data();
+$events_table = $event->load_events();
+
+array_unshift( $events_table, [ 'url' => WPEMS_ASSETS_URI . '/js/admin/calendar-event.js' ] );
+
+
+if ( empty( $events_table ) ) {
+	return;
+}
+
+wp_localize_script( 'calendar-event', 'passedData', $events_table );
+
 ?>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			timeZone: 'UTC',
-			events: <?php echo ( json_encode( $events_table->load_events() ) ); ?>
-		});
-		calendar.render();
-
-	});
-</script>
-
-<div id='calendar'>
-
-</div>
-<br>
+<div id='calendar'></div>
+<?php
