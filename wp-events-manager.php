@@ -42,6 +42,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
 			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
 			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
+			$this->set_define( 'WPEMS_TEMPLATES', WPEMS_PATH . 'templates/' );
 			$this->set_define( 'WPEMS_VER', '2.1.8' );
 			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}

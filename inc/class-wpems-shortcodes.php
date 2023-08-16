@@ -32,6 +32,7 @@ class WPEMS_Shortcodes {
 			'reset_password'  => __CLASS__ . '::reset_password',
 			'account'         => __CLASS__ . '::account',
 			'countdown'       => __CLASS__ . '::countdown',
+			'calendars'       => __CLASS__ . '::event_calendars',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
@@ -263,6 +264,16 @@ class WPEMS_Shortcodes {
 		);
 
 		return WPEMS_Shortcodes::render( 'event-countdown', 'event-countdown.php', array( 'args' => $atts ) );
+	}
+		/**
+	 * Event Calendar
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	public static function event_calendars() {
+		return WPEMS_Shortcodes::render( 'event-calendars', 'events-calendars.php' );
 	}
 
 }

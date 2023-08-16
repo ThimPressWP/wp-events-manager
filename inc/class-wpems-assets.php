@@ -90,6 +90,8 @@ class WPEMS_Assets {
 		wp_enqueue_script( 'wp-util' );
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'underscore' );
+		// Calendar
+		wp_enqueue_script('wpems-calendar-js');
 
 		if ( self::$_scripts ) {
 			foreach ( self::$_scripts as $handle => $param ) {

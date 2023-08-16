@@ -306,3 +306,18 @@
 .ml-150 {
 	margin-left: 150px;
 }
+
+#shortcode-eventCalendars .shortcode-event-calendar {
+	border: 1px solid #ccc;
+	background-color: white;
+	text-align: center;
+
+}
+
+#shortcode-eventCalendars .shortcode-event-calendar-input {
+	border: none;
+}
+
+#shortcode-eventCalendars .shortcode-event-calendar-input:focus {
+	border: none;
+}
