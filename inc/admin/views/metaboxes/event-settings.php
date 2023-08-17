@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WP Events Manager Event Settings meta box view
  *
@@ -53,18 +54,14 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 			<div class="form-field" id="event-time-metabox">
 				<label><?php echo esc_html__( 'Start/End', 'wp-events-manager' ); ?></label>
 				<label hidden for="_date_start"></label>
-				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>date_start" id="_date_start"
-					   value="<?php echo $date_start ? esc_attr( $date_start ) : esc_attr( $today ); ?>">
+				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>date_start" id="_date_start" value="<?php echo $date_start ? esc_attr( $date_start ) : esc_attr( $today ); ?>">
 				<label hidden for="_time_start"></label>
-				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>time_start" id="_time_start"
-					   value="<?php echo $time_start ? esc_attr( $time_start ) : ''; ?>">
+				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>time_start" id="_time_start" value="<?php echo $time_start ? esc_attr( $time_start ) : ''; ?>">
 				<span class="time-connect"> <?php echo esc_html__( 'to', 'wp-events-manager' ); ?></span>
 				<label hidden for="_date_end"></label>
-				<input type="text" class="short date-end" name="<?php echo esc_attr( $prefix ); ?>date_end" id="_date_end"
-					   value="<?php echo $date_end ? esc_attr( $date_end ) : esc_attr( $tomorrow ); ?>">
+				<input type="text" class="short date-end" name="<?php echo esc_attr( $prefix ); ?>date_end" id="_date_end" value="<?php echo $date_end ? esc_attr( $date_end ) : esc_attr( $tomorrow ); ?>">
 				<label hidden for="_time_end"></label>
-				<input type="text" class="short time-end" name="<?php echo esc_attr( $prefix ); ?>time_end" id="_time_end"
-					   value="<?php echo $time_end ? esc_attr( $time_end ) : ''; ?>">
+				<input type="text" class="short time-end" name="<?php echo esc_attr( $prefix ); ?>time_end" id="_time_end" value="<?php echo $time_end ? esc_attr( $time_end ) : ''; ?>">
 			</div>
 		</div>
 
@@ -73,11 +70,9 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 			<div class="form-field" id="event-registration-time-metabox">
 				<label><?php echo esc_html__( 'Registration End Date', 'wp-events-manager' ); ?></label>
 				<label hidden for="_registration_end_date"></label>
-				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_date" id="_registration_end_date"
-					   value="<?php echo $registration_end_date ? esc_attr( $registration_end_date ) : esc_attr( $today ); ?>">
+				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_date" id="_registration_end_date" value="<?php echo $registration_end_date ? esc_attr( $registration_end_date ) : esc_attr( $today ); ?>">
 				<label hidden for="_registration_end_time"></label>
-				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_time" id="_registration_end_time"
-					   value="<?php echo $registration_end_time ? esc_attr( $registration_end_time ) : ''; ?>">
+				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_time" id="_registration_end_time" value="<?php echo $registration_end_time ? esc_attr( $registration_end_time ) : ''; ?>">
 			</div>
 		</div>
 		<!-- End Registration End Date -->
@@ -86,19 +81,13 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_schedule"><?php _e( 'Schedule', 'wp-events-manager' ); ?></label>
-					<input type="checkbox" class="short" name="schedule_check" id="_schedule_check">
-					<span>Enable/Disable Schedule section on the frontend</span>
+				<input type="checkbox" class="short" name="schedule_check" id="_schedule_check">
+				<span>Enable/Disable Schedule section on the frontend</span>
 			</p>
-			<!-- <div class="form-field">
-				<div class="form_day">
-					<div class="form_day-header">
-
-					</div>
-					<div class="form_day-content">
-
-					</div>
-				</div>
-			</div> -->
+			<div class="form_info-container">
+				<button id="add_form_info-btn">+ Add more</button>
+				<?php //include WPEMS_INC . 'admin/views/template/form_info_event.php' ?>
+			</div>
 		</div>
 		<!-- End Schedule -->
 

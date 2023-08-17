@@ -55,6 +55,18 @@
 			}
 		});
 
+		// $('#add_info_field-btn').click(function() {
+		// 	// Sao chép một group field mới từ template
+		// 	var newField = $('.form_info .form_day-field:first').clone();
+		
+		// 	// Xóa nội dung của trường title và description trong group field mới
+		// 	newField.find('input[name="field_label[]"]').val('');
+		// 	newField.find('.mce-tinymce').html('');
+		
+		// 	// Thêm group field mới vào sau group field cuối cùng
+		// 	$('.form_info').append(newField);
+		// });
+		
 
 		TP_Event_Admin.admin_meta_boxes.init();
 	};

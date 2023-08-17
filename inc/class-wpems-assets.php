@@ -44,7 +44,19 @@ class WPEMS_Assets {
 	 * register script
 	 */
 	public static function register_script( $handle = '', $src = '', $deps = array(), $ver = false, $in_footer = true ) {
-		self::$_scripts[$handle] = array( $handle, self::_load_file_min( $src ), $deps, $ver, $in_footer );
+		// self::$_scripts[$handle] = array( $handle, self::_load_file_min( $src ), $deps, $ver, $in_footer );
+
+		$uri = $src;
+		
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			$ver = uniqid();
+			
+		} else {
+			$ver = VERSION_OF_PLUGIN;
+			$uri = self::_load_file_min( $src );
+		}
+
+		self::$_scripts[$handle] = array( $handle, $uri, $deps, $ver, $in_footer );
 	}
 
 	/**
@@ -57,7 +69,7 @@ class WPEMS_Assets {
 			$ver = uniqid();
 			
 		} else {
-			$ver = VERION_OF_PLUGIN;
+			$ver = VERSION_OF_PLUGIN;
 			$uri = self::_load_file_min( $src );
 		}
 
@@ -90,6 +102,7 @@ class WPEMS_Assets {
 		wp_enqueue_script( 'wp-util' );
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'underscore' );
+		
 
 		if ( self::$_scripts ) {
 			foreach ( self::$_scripts as $handle => $param ) {
@@ -165,3 +178,5 @@ class WPEMS_Assets {
  * init
  */
 WPEMS_Assets::init();
+WPEMS_Assets::register_script( 'admin-events-settings', WPEMS_ASSETS_URI . '/js/admin/admin-events-setting.js' );
+WPEMS_Assets::register_script( 'sort-table', WPEMS_ASSETS_URI . '/js/admin/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js' );

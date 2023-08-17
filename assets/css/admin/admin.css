@@ -290,7 +290,7 @@
 }
 
 #event-time-metabox #_time_start, #event-time-metabox #_time_end,
-#event-registration-time-metabox #_registration_end_date {
+#event-registration-time-metabox #_registration_end_time {
 	width: 75px;
 }
 
@@ -305,4 +305,83 @@
 
 .ml-150 {
 	margin-left: 150px;
+}
+
+/* schedule */
+.form_info-container {
+	height: auto;
+	width: 76%;
+	margin-left: 170px;
+	padding: 20px;
+	border: 1px solid #ccc;
+	margin-bottom: 16px;
+}
+
+.form_info-container .form_info {
+	border: 1px solid #2ca6f1;
+	height: auto;
+	margin-top: 16px;
+}
+
+.form_info-container .form_info .form_info-header {
+	height: 28px;
+	background: #2ca6f1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: #fff;
+}
+
+
+
+.form_info-header-left, .form_info-header-right {
+	display: flex;
+	align-items: center;
+}
+
+.form_info-header-right button {
+	background: transparent;
+	cursor: pointer;
+	color: #fff;
+	border: 0;
+	border-left: 1px solid #fff;
+}
+
+.form_info-header-left .dashicons-before,
+.form_info .form_info-content {
+	padding: 16px;
+}
+
+.hidden {
+	display: none;
+}
+
+.form_info .form_info-content .field-content-title,
+.form_info .form_info-content .field-content-desc {
+	display: flex;
+	flex-direction: column;
+}
+
+.form_info .form_info-content .field-content-title {
+	padding-bottom: 12px;
+}
+
+.form_info .form_info-content .field-content-desc textarea {
+	width: 100%;
+}
+
+
+.form_info-container #add_form_info-btn {
+	color: #2ca6f1;
+	border: 1.5px solid #2ca6f1;
+	background: transparent;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	font-weight: 500;
+}
+
+.form_info-container #add_form_info-btn:hover {
+	background: #2ca6f1;
+	color: #fff;
 }

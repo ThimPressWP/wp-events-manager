@@ -49,6 +49,7 @@ class WPEMS_Frontend_Assets {
 		// events
 		WPEMS_Assets::register_script( 'wpems-frontend-js', WPEMS_ASSETS_URI . '/js/frontend/events.js' );
 		WPEMS_Assets::register_style( 'wpems-fronted-css', WPEMS_ASSETS_URI . '/css/frontend/events.css' );
+
 	}
 
 }
