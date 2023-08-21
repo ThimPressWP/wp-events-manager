@@ -30,7 +30,8 @@ class WPEMS_Frontend_Assets {
 	public static function register_scripts( $hook ) {
 		// Calendar
 		WPEMS_Assets::register_script( 'wpems-fullcalendar-lb-js', WPEMS_LIB_URI . '/fullCalendars/index.global.min.js' );
-		WPEMS_Assets::register_script( 'calendar-event', WPEMS_ASSETS_URI . '/js/admin/calendar-event.js' );
+		WPEMS_Assets::register_script( 'calendar', WPEMS_ASSETS_URI . '/js/frontend/calendar.js' );
+		WPEMS_Assets::register_script( 'inset_calendar', WPEMS_ASSETS_URI . '/js/frontend/insert_calendar.js' );
 		
 		WPEMS_Assets::register_script( 'wpems-countdown-plugin-js', WPEMS_LIB_URI . '/countdown/js/jquery.plugin.min.js' );
 		WPEMS_Assets::register_script( 'wpems-countdown-js', WPEMS_LIB_URI . '/countdown/js/jquery.countdown.min.js' );

@@ -33,6 +33,7 @@ class WPEMS_Shortcodes {
 			'account'         => __CLASS__ . '::account',
 			'countdown'       => __CLASS__ . '::countdown',
 			'calendars'       => __CLASS__ . '::event_calendars',
+			'sync_booking'    => __CLASS__ . '::sync_booking',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
@@ -274,6 +275,16 @@ class WPEMS_Shortcodes {
 	 */
 	public static function event_calendars() {
 		return WPEMS_Shortcodes::render( 'event-calendars', 'events-calendars.php' );
+	}
+		/**
+	 * Sync booking
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	public static function sync_booking() {
+		return WPEMS_Shortcodes::render( 'event-sync-booking', 'event-booking.php' );
 	}
 
 }
