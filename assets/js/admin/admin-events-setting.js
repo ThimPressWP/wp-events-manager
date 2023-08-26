@@ -20,10 +20,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let formInfoContainer = document.querySelector('.form_info-container');
     let customEditors = formInfoContainer.querySelectorAll('.custom-editor');
 
-    customEditors.forEach(function(editor) {
-        let formInfoId = editor.getAttribute('data-form-id');
-        createEditor(`#${formInfoId}`, formInfoId);
-    });
+    function reinitEditor() {
+        customEditors.forEach(function (editor) {
+            let formInfoId = editor.getAttribute('data-form-id');
+            createEditor(`#${formInfoId}`, formInfoId);
+        });
+    }
+    reinitEditor();
 
     function initSortable() {
         new Sortable(formInfoContainer, {
@@ -33,11 +36,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 tinymce.remove();
             },
             onEnd: function (e) {
-                let formInfoId = editor.getAttribute('data-form-id');
-                createEditor(`#${formInfoId}`, formInfoId);
+                let formInfoIds = Array.from(formInfoContainer.querySelectorAll('.form_info')).map(formInfo => formInfo.getAttribute('id'));
+                // Update the form data object with the new order
+                let newFormData = {};
+                formInfoIds.forEach((formInfoId, index) => {
+                    newFormData[formInfoId] = formData[formInfoId];
+                });
+                formData = newFormData;
+                updateHiddenInput();
+                reinitEditor();
             }
         });
     }
+
     initSortable();
 
     function handleFormInfo() {
@@ -73,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
         createEditor(customEditor, formInfoId);
 
         let inputTitle = newFormInfo.querySelector('.field-content-title input');
-        inputTitle.addEventListener('input', function() {
-            formData[formInfoId].title = inputTitle.value; // Lưu giá trị title vào formData
+        inputTitle.addEventListener('input', function () {
+            formData[formInfoId].title = inputTitle.value;
             updateHiddenInput();
         });
 

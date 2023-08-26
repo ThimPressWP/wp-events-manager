@@ -34,12 +34,6 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 $schedules_event	= get_post_meta($post_id, 'tp_event_schedules', true);
 $schedules 			= json_decode($schedules_event, true);
 
-// echo '<pre>';
-// print_r($schedules_event);
-
-
-// echo '</pre>';die;
-
 ?>
 <div class="event_meta_box_container">
 	<div class="event_meta_panel">
@@ -116,7 +110,7 @@ $schedules 			= json_decode($schedules_event, true);
 									</div>
 									<div class="field-content-desc">
 										<label>Description:</label>
-										<div class="custom-editor"><?php echo $schedule_value['description'] ? wp_kses_post( $schedule_value['description'] ) : ''; ?></div>
+										<div class="custom-editor" data-form-id="<?php echo $schedule_id; ?>"><?php echo $schedule_value['description'] ? wp_kses_post( $schedule_value['description'] ) : ''; ?></div>
 									</div>
 								</div>
 							</div>
