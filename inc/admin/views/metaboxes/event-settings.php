@@ -30,6 +30,16 @@ $price    = get_post_meta( $post_id, $prefix . 'price', true );
 $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
+
+$schedules_event	= get_post_meta($post_id, 'tp_event_schedules', true);
+$schedules 			= json_decode($schedules_event, true);
+
+// echo '<pre>';
+// print_r($schedules_event);
+
+
+// echo '</pre>';die;
+
 ?>
 <div class="event_meta_box_container">
 	<div class="event_meta_panel">
@@ -81,13 +91,42 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_schedule"><?php _e( 'Schedule', 'wp-events-manager' ); ?></label>
-				<input type="checkbox" class="short" name="schedule_check" id="_schedule_check">
+				<input type="checkbox" class="short" name="<?php echo esc_attr( $prefix ); ?>schedule_checkbox" id="_schedule_checkbox">
 				<span>Enable/Disable Schedule section on the frontend</span>
+				<div class="form_info-container">
+					<button id="add_form_info-btn">+ Add more</button>
+					<?php
+					if( !empty($schedules) ):
+						foreach($schedules as $schedule_id => $schedule_value):
+							?>
+							<div class="form_info" id="<?php echo $schedule_id; ?>">
+								<div class="form_info-header">
+									<div class="form_info-header-left">
+										<div class="dashicons-before dashicons-move"></div>
+									</div>
+									<div class="form_info-header-right">
+										<button class="dashicons-before dashicons-no"></button>
+										<button class="dashicons-before dashicons-minus"></button>
+									</div>
+								</div>
+								<div class="form_info-content">
+									<div class="field-content-title">
+										<label>Title:</label>
+										<input type="text" value="<?php echo $schedule_value['title'] ? wp_kses_post( $schedule_value['title'] ) : ''; ?>">
+									</div>
+									<div class="field-content-desc">
+										<label>Description:</label>
+										<div class="custom-editor"><?php echo $schedule_value['description'] ? wp_kses_post( $schedule_value['description'] ) : ''; ?></div>
+									</div>
+								</div>
+							</div>
+							<?php
+						endforeach;
+					endif;
+					?>
+				</div>
+				<input type="hidden" name="tp_event_schedules" id="tp_event_schedules" value="<?php echo isset($schedules) ? esc_html(json_encode($schedules)) : ''; ?>">
 			</p>
-			<div class="form_info-container">
-				<button id="add_form_info-btn">+ Add more</button>
-				<?php //include WPEMS_INC . 'admin/views/template/form_info_event.php' ?>
-			</div>
 		</div>
 		<!-- End Schedule -->
 
@@ -106,12 +145,12 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 			<p class="form-field">
 				<label for="_location"></label>
 				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="4"></textarea>
+				<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
+					<p class="event-meta-notice">
+						<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
+					</p>
+				<?php endif; ?>
 			</p>
-			<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
-				<p class="event-meta-notice">
-					<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
-				</p>
-			<?php endif; ?>
 		</div>
 		<!-- End Location -->
 

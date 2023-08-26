@@ -332,11 +332,13 @@
 	color: #fff;
 }
 
-
-
 .form_info-header-left, .form_info-header-right {
 	display: flex;
 	align-items: center;
+}
+
+.form_info-header-left {
+	cursor: pointer;
 }
 
 .form_info-header-right button {
