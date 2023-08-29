@@ -1,59 +1,96 @@
 document.addEventListener('DOMContentLoaded', function () {
     let formData = {};
-    // function create tinymce editor
-    function createEditor(container, formInfoId) {
-        let editorSettings = {
-            selector: '.custom-editor',
+
+    const schedulesInput = document.getElementById('tp_event_schedules');
+    if (schedulesInput.value) {
+        try {
+            formData = JSON.parse(schedulesInput.value);
+        } catch (error) {
+            console.error("Error parsing existing schedules:", error);
+        }
+    }
+
+    function createEditor(container, formInfoId, initialContent) {
+        tinymce.init({
+            selector: container,
             media_buttons: false,
             height: 100,
             setup: function (editor) {
+                editor.setContent(initialContent);
                 editor.on('input', function () {
-                    let editorContent = editor.getContent();
-                    formData[formInfoId].description = editorContent
+                    formData[formInfoId].description = editor.getContent();
                     updateHiddenInput();
                 });
             }
-        };
-        tinymce.init(editorSettings, { target: container });
-    }
-
-    let formInfoContainer = document.querySelector('.form_info-container');
-    let customEditors = formInfoContainer.querySelectorAll('.custom-editor');
-
-    function reinitEditor() {
-        customEditors.forEach(function (editor) {
-            let formInfoId = editor.getAttribute('data-form-id');
-            createEditor(`#${formInfoId}`, formInfoId);
-        });
-    }
-    reinitEditor();
-
-    function initSortable() {
-        new Sortable(formInfoContainer, {
-            animation: 150,
-            handle: '.form_info-header-left',
-            onStart: function (e) {
-                tinymce.remove();
-            },
-            onEnd: function (e) {
-                let formInfoIds = Array.from(formInfoContainer.querySelectorAll('.form_info')).map(formInfo => formInfo.getAttribute('id'));
-                // Update the form data object with the new order
-                let newFormData = {};
-                formInfoIds.forEach((formInfoId, index) => {
-                    newFormData[formInfoId] = formData[formInfoId];
-                });
-                formData = newFormData;
-                updateHiddenInput();
-                reinitEditor();
-            }
         });
     }
 
-    initSortable();
+    function updateFormData(formInfoId,inputTitle) {
+        formData[formInfoId].title = inputTitle.value;
+        const editor = tinymce.get(formInfoId);
+        if (editor) {
+            formData[formInfoId].description = editor.getContent();
+        }
+        updateHiddenInput();
+    }
 
-    function handleFormInfo() {
-        let newFormInfo = document.createElement('div');
-        let formInfoId = Date.now();
+    function deleteFormInfo(formInfoId) {
+        delete formData[formInfoId];
+        updateHiddenInput();
+    }
+
+    function toggleFormInfoContent(formInfoId) {
+        const contentSection = document.getElementById(formInfoId).querySelector('.form_info-content');
+        contentSection.classList.toggle('hidden');
+    }
+
+    function handleFormInfo(formInfoId) {
+        if (!formData[formInfoId]) {
+            formData[formInfoId] = {
+                title: "",
+                description: ""
+            };
+        }
+        createEditor(`#${formInfoId} .custom-editor`, formInfoId, formData[formInfoId].description);
+        updateHiddenInput();
+
+        const inputTitle = document.getElementById(formInfoId).querySelector('.field-content-title input');
+        inputTitle.value = formData[formInfoId].title;
+        inputTitle.addEventListener('input', function () {
+            updateFormData(formInfoId, inputTitle);
+        });
+
+        const deleteButton = document.getElementById(formInfoId).querySelector('.dashicons-no');
+        deleteButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            const formInfoElement = document.getElementById(formInfoId);
+            formInfoElement.remove();
+            deleteFormInfo(formInfoId);
+        });
+
+        const hiddenButton = document.getElementById(formInfoId).querySelector('.dashicons-minus');
+        hiddenButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            toggleFormInfoContent(formInfoId);
+        });
+    }
+
+    function updateHiddenInput() {
+        const filteredData = Object.fromEntries(
+            Object.entries(formData).filter(([key, value]) => value.title !== '' || value.description !== '')
+        );
+
+        const input = document.getElementById('tp_event_schedules');
+        input.value = JSON.stringify(filteredData);
+    }
+
+    const formInfoContainer = document.querySelector('.form_info-container');
+    const customEditors = formInfoContainer.querySelectorAll('.custom-editor');
+
+    document.getElementById('add_form_info-btn').addEventListener('click', function (e) {
+        e.preventDefault();
+        const formInfoId = Date.now();
+        const newFormInfo = document.createElement('div');
         newFormInfo.className = 'form_info';
         newFormInfo.setAttribute('id', formInfoId);
         newFormInfo.innerHTML = `
@@ -73,57 +110,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <div class="field-content-desc">
                     <label>Description:</label>
-                    <div class="custom-editor"></div>
+                    <div class="custom-editor" data-form-id="${formInfoId}"></div>
                 </div>
             </div>
         `;
         formInfoContainer.appendChild(newFormInfo);
+        handleFormInfo(formInfoId);
+    });
 
-        // initialize tinymce editor
-        let customEditor = newFormInfo.querySelector('.custom-editor');
-        createEditor(customEditor, formInfoId);
-
-        let inputTitle = newFormInfo.querySelector('.field-content-title input');
-        inputTitle.addEventListener('input', function () {
-            formData[formInfoId].title = inputTitle.value;
-            updateHiddenInput();
-        });
-
-        // delete form_info
-        let deleteButton = newFormInfo.querySelector('.dashicons-no');
-        deleteButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            newFormInfo.remove();
-            delete formData[formInfoId];
-            updateHiddenInput();
-        });
-
-        // visibility form_info content
-        let hiddenButton = newFormInfo.querySelector('.dashicons-minus');
-        let contentSection = newFormInfo.querySelector('.form_info-content');
-        hiddenButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            contentSection.classList.toggle('hidden');
-        });
-
-        formData[formInfoId] = {
-            title: "",
-            description: ""
-        };
-        updateHiddenInput();
-    }
-
-    function updateHiddenInput() {
-        let filteredData = Object.fromEntries(
-            Object.entries(formData).filter(([key, value]) => value.title !== '' || value.description !== '')
-        );
-
-        let input = document.getElementById('tp_event_schedules');
-        input.value = JSON.stringify(filteredData);
-    }
-
-    document.getElementById('add_form_info-btn').addEventListener('click', function (e) {
-        e.preventDefault();
-        handleFormInfo();
+    // Restore existing form info elements
+    const existingFormInfos = formInfoContainer.querySelectorAll('.form_info');
+    existingFormInfos.forEach(formInfo => {
+        const formInfoId = formInfo.getAttribute('id');
+        handleFormInfo(formInfoId);
     });
 });
