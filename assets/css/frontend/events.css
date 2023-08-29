@@ -634,7 +634,7 @@ margin: 0;
 }
 #clientID, #apiKey {
     padding: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #969090;
 }
 
 #authorize_button, #signout_button {

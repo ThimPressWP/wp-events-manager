@@ -11,7 +11,7 @@ class WPEMS_Admin_Calendar_Data {
 
 		$posts = get_posts( $args );
 
-		$posts = \Wpems_Model_Event\WPEMS_Model_Event_List::get_postMeta( $posts );
+		$posts = WPEMS_Data_Pattern::get_postMeta( $posts );
 
 		$calendar_events = array();
 		foreach ( $posts as $key => $value ) {

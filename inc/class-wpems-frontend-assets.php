@@ -28,9 +28,11 @@ class WPEMS_Frontend_Assets {
 	 * @param type $hook
 	 */
 	public static function register_scripts( $hook ) {
+		// Sync to google calendar
+		WPEMS_Assets::register_script( 'google-calendar-js', WPEMS_ASSETS_URI . '/js/frontend/google-calendar.js' );
+
 		// Calendar
 		WPEMS_Assets::register_script('wpems-fullcalendar-lb', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js');
-		WPEMS_Assets::register_script( 'google-calendar-js', WPEMS_ASSETS_URI . '/js/frontend/google-calendar.js' );
 		WPEMS_Assets::register_script( 'wpems-calendar-js', WPEMS_ASSETS_URI . '/js/admin/calendar-event.js' );
 
 		// Event List

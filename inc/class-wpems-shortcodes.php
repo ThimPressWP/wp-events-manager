@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Shortcodes {
 
-	public static $pageSize = 2;
+	public static $pageSize = 9;
 	/**
 	 * Init shortcodes
 	 */
@@ -37,9 +37,8 @@ class WPEMS_Shortcodes {
 			'account'         => __CLASS__ . '::account',
 			'countdown'       => __CLASS__ . '::countdown',
 			'list'            => __CLASS__ . '::event_list',
-			// 'sync_calendars'  => __CLASS__ . '::sync_calendars',
 			'calendars'       => __CLASS__ . '::event_calendars',
-			'test'            => __CLASS__ . '::sync_calendars',
+			'sync'            => __CLASS__ . '::google_sync',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
@@ -287,17 +286,17 @@ class WPEMS_Shortcodes {
 		// Get value from frontend
 		if ( isset( $_GET['search_event_list'] ) ) {
 			// Retrieve form input values
-			$filter_by_input_search = WPEMS_Event_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_CHAR, 'GET' );
-			$filter_by_status       = WPEMS_Event_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_STATUS, 'GET' );
-			$filter_by_type         = WPEMS_Event_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_TYPE, 'GET' );
-			$filter_by_category     = WPEMS_Event_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_CATEGORY, 'GET' );
-			$getDateInput           = WPEMS_Event_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_DATE, 'GET' );
+			$filter_by_input_search = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_CHAR, 'GET' );
+			$filter_by_status       = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_STATUS, 'GET' );
+			$filter_by_type         = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_TYPE, 'GET' );
+			$filter_by_category     = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_CATEGORY, 'GET' );
+			$getDateInput           = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_DATE, 'GET' );
 			$filter_by_date         = explode( ' - ', $getDateInput );
-			$getPriceMin            = WPEMS_Event_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_PRICE_MIN, 'GET' );
-			$getPriceMax            = WPEMS_Event_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_PRICE_MAX, 'GET' );
+			$getPriceMin            = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_PRICE_MIN, 'GET' );
+			$getPriceMax            = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_PRICE_MAX, 'GET' );
 			$filter_by_price        = [ $getPriceMin, $getPriceMax ];
 		}
-		$order_by = WPEMS_Event_Pattern::get_param( 'tp_event_order_by', 'GET' );
+		$order_by = WPEMS_Request_Pattern::get_param( 'tp_event_order_by', 'GET' );
 
 		// Give arguments to database
 		$get_posts = WPEMS_Frontend_Event_List_Data::get_posts_data(
@@ -313,11 +312,11 @@ class WPEMS_Shortcodes {
 		);
 
 		$posts = $get_posts->posts;
-		$posts = \Wpems_Model_Event\WPEMS_Model_Event_List::get_postMeta( $posts );
+		$posts = WPEMS_Data_Pattern::get_postMeta( $posts );
 
 		// Get data from database to send to frontend
-		$get_types      = \Wpems_Model_Event\WPEMS_Model_Event_List::get_filter( 'tp_event_type' );
-		$get_categories = \Wpems_Model_Event\WPEMS_Model_Event_List::get_filter( 'tp_event_category' );
+		$get_types      = WPEMS_Data_Pattern::get_filter( 'tp_event_type' );
+		$get_categories = WPEMS_Data_Pattern::get_filter( 'tp_event_category' );
 
 		// Create an array of number for price input
 		$number_array = array();
@@ -356,7 +355,7 @@ class WPEMS_Shortcodes {
 	 *
 
 	 */
-	public static function sync_calendars( $atts ) {
+	public static function google_sync( $atts ) {
 		$eventData   = WPEMS_Google_Calendar::event_data();
 		$bookingData = array();
 
@@ -382,7 +381,7 @@ class WPEMS_Shortcodes {
 			),
 			$atts
 		);
-		return WPEMS_Shortcodes::render( 'event-sync-calendars', 'google-calendars.php', array( 'args' => $atts ) );
+		return WPEMS_Shortcodes::render( 'google-sync', 'google-calendars.php', array( 'args' => $atts ) );
 	}
 
 		/**
@@ -393,6 +392,7 @@ class WPEMS_Shortcodes {
 	public static function event_calendars() {
 		return WPEMS_Shortcodes::render( 'event', 'event-calendar.php' );
 	}
+
 }
 
 WPEMS_Shortcodes::init();

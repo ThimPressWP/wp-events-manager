@@ -37,8 +37,6 @@ class WPEMS_Ajax {
 				add_action( 'wp_ajax_nopriv_' . $action, array( $this, 'must_login' ) );
 			}
 		}
-		add_action( 'wp_ajax_save_api_key_and_client_id', array( $this, 'save_api_key_and_client_id' ) );
-		add_action( 'wp_ajax_nopriv_save_api_key_and_client_id', array( $this, 'save_api_key_and_client_id' ) );
 	}
 
 	/**
@@ -248,23 +246,31 @@ class WPEMS_Ajax {
 
 	// To save user information of google calendar to usermeta
 	public function save_api_key_and_client_id() {
-		if ( isset( $_POST['wpems_google_clientID'] ) && isset( $_POST['wpems_google_apiKey'] ) ) {
-			$user_id = get_current_user_id();
-			if ( $user_id ) {
-				$client_id = sanitize_text_field( $_POST['wpems_google_clientID'] );
-				$api_key   = sanitize_text_field( $_POST['wpems_google_apiKey'] );
+		// Check nonce for security
+		if ( ! isset( $_POST['api_key_client_id_nonce'] ) || wp_verify_nonce( $_POST['api_key_client_id_nonce'], 'api_key_and_client_id_action' ) ) {
+			wp_send_json_error( array( 'message' => 'Nonce verification failed.' ) );
 
-				// Lưu vào user meta
+			// error_log( array( 'message' => 'Nonce verification failed.' ) );
+
+		} else {
+			$user_id = get_current_user_id();
+
+			if ( $user_id ) {
+
+				$client_id = $_POST['clientId'];
+				$api_key   = $_POST['apiKey'];
+
+				// Update user meta with the values
 				update_user_meta( $user_id, 'google_client_id', $client_id );
 				update_user_meta( $user_id, 'google_api_key', $api_key );
 
-				wp_send_json_success();
+				wp_send_json_success( array( 'message' => 'API key and Client ID saved successfully.' ) );
 			} else {
-				wp_send_json_error();
+				wp_send_json_error( array( 'message' => 'User not logged in.' ) );
 			}
 		}
-		wp_send_json_error();
 	}
+
 
 }
 

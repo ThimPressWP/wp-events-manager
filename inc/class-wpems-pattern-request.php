@@ -1,6 +1,6 @@
 <?php
 
-class WPEMS_Event_Pattern {
+class WPEMS_Request_Pattern {
 
 	public static function get_param( string $key, $default = '', string $sanitize_type = 'text', string $method = '' ) {
 		switch ( strtolower( $method ) ) {
@@ -49,5 +49,7 @@ class WPEMS_Event_Pattern {
 		return $value;
 	}
 
+
+
 }
-new Wpems_Event_Pattern();
+new WPEMS_Request_Pattern();

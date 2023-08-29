@@ -11,7 +11,6 @@ class WPEMS_Google_Calendar {
 		);
 		return $bookingData;
 	}
-
 }
 
 new WPEMS_Google_Calendar();
