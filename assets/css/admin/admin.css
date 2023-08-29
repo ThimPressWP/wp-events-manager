@@ -387,3 +387,8 @@
 	background: #2ca6f1;
 	color: #fff;
 }
+
+/* location */
+.show_map_iframe iframe {
+	margin-left: 170px;
+}

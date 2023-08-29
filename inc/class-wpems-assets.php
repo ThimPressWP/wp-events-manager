@@ -178,5 +178,5 @@ class WPEMS_Assets {
  * init
  */
 WPEMS_Assets::init();
-WPEMS_Assets::register_script( 'admin-events-settings', WPEMS_ASSETS_URI . '/js/admin/admin-events-setting.js' );
+WPEMS_Assets::register_script( 'admin-events-settings', WPEMS_ASSETS_URI . '/js/admin/admin-events-schedules.js' );
 WPEMS_Assets::register_script( 'sort-table', WPEMS_ASSETS_URI . '/js/admin/libraries/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js' );
