@@ -22,10 +22,11 @@ class WPEMS_Ajax {
 		// key is action ajax: wp_ajax_{action}
 		// value is allow ajax nopriv: wp_ajax_nopriv_{action}
 		$actions = array(
-			'event_remove_notice' => true,
-			'event_auth_register' => false,
-			'event_login_action'  => true,
-			'load_form_register'  => true,
+			'event_remove_notice'        => true,
+			'event_auth_register'        => false,
+			'event_login_action'         => true,
+			'load_form_register'         => true,
+			'save_api_key_and_client_id' => true,
 		);
 
 		foreach ( $actions as $action => $nopriv ) {
@@ -36,6 +37,8 @@ class WPEMS_Ajax {
 				add_action( 'wp_ajax_nopriv_' . $action, array( $this, 'must_login' ) );
 			}
 		}
+		add_action( 'wp_ajax_save_api_key_and_client_id', array( $this, 'save_api_key_and_client_id' ) );
+		add_action( 'wp_ajax_nopriv_save_api_key_and_client_id', array( $this, 'save_api_key_and_client_id' ) );
 	}
 
 	/**
@@ -240,6 +243,27 @@ class WPEMS_Ajax {
 			)
 		);
 		die();
+	}
+
+
+	// To save user information of google calendar to usermeta
+	public function save_api_key_and_client_id() {
+		if ( isset( $_POST['wpems_google_clientID'] ) && isset( $_POST['wpems_google_apiKey'] ) ) {
+			$user_id = get_current_user_id();
+			if ( $user_id ) {
+				$client_id = sanitize_text_field( $_POST['wpems_google_clientID'] );
+				$api_key   = sanitize_text_field( $_POST['wpems_google_apiKey'] );
+
+				// Lưu vào user meta
+				update_user_meta( $user_id, 'google_client_id', $client_id );
+				update_user_meta( $user_id, 'google_api_key', $api_key );
+
+				wp_send_json_success();
+			} else {
+				wp_send_json_error();
+			}
+		}
+		wp_send_json_error();
 	}
 
 }

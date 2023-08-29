@@ -29,10 +29,16 @@ class WPEMS_Frontend_Assets {
 	 */
 	public static function register_scripts( $hook ) {
 		// Calendar
-		WPEMS_Assets::register_script( 'wpems-fullcalendar-lb-js', WPEMS_LIB_URI . '/fullCalendars/index.global.min.js' );
-		WPEMS_Assets::register_script( 'calendar', WPEMS_ASSETS_URI . '/js/frontend/calendar.js' );
-		WPEMS_Assets::register_script( 'inset_calendar', WPEMS_ASSETS_URI . '/js/frontend/insert_calendar.js' );
+		WPEMS_Assets::register_script('wpems-fullcalendar-lb', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js');
+		WPEMS_Assets::register_script( 'google-calendar-js', WPEMS_ASSETS_URI . '/js/frontend/google-calendar.js' );
+		WPEMS_Assets::register_script( 'wpems-calendar-js', WPEMS_ASSETS_URI . '/js/admin/calendar-event.js' );
+
+		// Event List
+		WPEMS_Assets::register_script( 'wpems-litepicker-lb', 'https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js' );
+		WPEMS_Assets::register_script( 'wpems-ranges-lb', 'https://cdn.jsdelivr.net/npm/litepicker/dist/plugins/ranges.js' );
+		WPEMS_Assets::register_script( 'wpems-event-list-display-js', WPEMS_ASSETS_URI . '/js/frontend/event-list-display.js' );
 		
+		// Countdown
 		WPEMS_Assets::register_script( 'wpems-countdown-plugin-js', WPEMS_LIB_URI . '/countdown/js/jquery.plugin.min.js' );
 		WPEMS_Assets::register_script( 'wpems-countdown-js', WPEMS_LIB_URI . '/countdown/js/jquery.countdown.min.js' );
 		WPEMS_Assets::register_style( 'wpems-countdown-css', WPEMS_LIB_URI . '/countdown/css/jquery.countdown.css' );

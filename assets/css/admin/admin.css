@@ -321,3 +321,15 @@
 #shortcode-eventCalendars .shortcode-event-calendar-input:focus {
 	border: none;
 }
+.event-tooltip {
+	position: absolute;
+	padding: 5px 10px;
+	background-color: white;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	display: none;
+	z-index: 1000;
+}
+.fc-event-title-container:hover {
+	cursor: pointer;
+}

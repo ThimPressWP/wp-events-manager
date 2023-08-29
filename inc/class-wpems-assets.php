@@ -37,9 +37,9 @@ class WPEMS_Assets {
 
 	public static function init() {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
-		
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );		
 	}
+	
 
 	/**
 	 * register script
@@ -84,13 +84,14 @@ class WPEMS_Assets {
 		 * Before enqueue scripts
 		 */
 		do_action( 'tp_event_before_enqueue_scripts', $hook );
-
+		
 		wp_enqueue_script( 'jquery' );
 		// wp_dequeue_script( 'jquery-ui-datepicker' );
 		wp_enqueue_script( 'jquery-ui-core' );
 		wp_enqueue_script( 'wp-util' );
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'underscore' );
+		wp_enqueue_style('dashicons');
 
 		if ( self::$_scripts ) {
 			foreach ( self::$_scripts as $handle => $param ) {

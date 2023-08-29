@@ -224,3 +224,460 @@
 .wpems_g_calendar_url{
     display: block !important;
 }
+/* ======================================================================== */
+/* ======================================================================== */
+/* ======================== EVENT LIST DISPLAY ============================ */
+
+body .entry-content > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator) {
+    max-width: 100vw;
+    background-color: white;
+}
+
+.entry-content .eventListDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75vw;
+    margin: auto;
+    padding: 50px 0;
+    position: relative;
+    font-size: 16px;
+ }
+
+.search-filter {
+    width: 100%;
+    border: 1px solid #494848;;
+    padding: 20px;
+}
+.search-filter form{
+margin: 0;
+}
+.search_status_type_category {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin: 0 0 10px 0;
+}
+.wrapper_input_search {
+    flex:2;
+}
+.wrapper_status, .wrapper_type, .wrapper_type {
+    flex: 1;
+}
+#input_search, #date{
+    width: 97%;
+    padding: 8px;
+    margin: 0;
+    border: 1px solid #494848;
+}
+#status , #category, #type{
+    width: 97%;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid #494848;
+}
+
+/*  Date range - price - submit button */
+.date_price_submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wrapper_date {
+    flex: 4;
+}
+/* Start Price range */
+.wrapper_price {
+    flex: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#price_max, #price_min {
+    width: 100%;
+    padding: 8px;
+    margin: 0;
+    border: 1px solid #494848;
+}
+.wrapper_min, .wrapper_max{
+    position: relative;
+}
+
+.lowTohigh {
+    text-align: center;
+}
+.priceOfMin , .priceOfMax{
+    display: none;
+    position: absolute;
+    top:98%;
+    height: 150px;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: white;
+}
+.priceOfMin ul , .priceOfMax ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.priceOfMin li , .priceOfMax li {
+    padding: 0 20px ;
+}
+
+.priceOfMin li:hover , .priceOfMax li:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+/* For scroll */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+#priceOfMin li:hover, #priceOfMax li:hover{
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+/* End Price range */
+
+#event-search-btn{
+    flex: 1;
+    border: 1px solid #494848;
+    background-color: #3c70e7;
+    color: white;
+    padding: 10px 0;
+    margin: 0 3px;
+    font-size: 16px;
+}
+
+.eventListDisplay .showResult{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 50px 0 10px 0;
+}
+#orderby{
+    width: 100%;
+    margin: 0;
+    padding: 8px 25px;
+    border: 1px solid #494848;
+}
+
+.date-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    margin: 10px 0 40px 0;
+    height: 30%;
+}
+.listEvent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+    box-shadow: 0px 0px 34px -22px #000000; 
+    height: 35vh;
+}
+.left {
+    padding: 10px 10px 10px 20px;
+    flex: 1;
+    height: 100%;
+}
+.date_month {
+    flex: 1;
+    background-color: #ccc;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+.date_month h3{
+    font-weight: 500;
+    margin: 0;
+}
+.title {
+    flex: 6;
+} 
+.title h4 {
+    margin: 0;
+}
+.title h4:hover {
+    color: #3c70e7;
+}
+
+.right {
+    flex: 1;
+    position: relative;
+    height: 100%;
+}
+.rightImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.rightImage img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Pagination */
+.event-pagination {
+    display: flex;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 20px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a,
+.pagination span {
+    padding: 5px 15px;
+    margin: 0 5px;
+    background-color: #f5f5f5;
+    color: #333;
+    text-decoration: none;
+}
+
+.page-numbers {
+    z-index: 10;
+}
+.page-numbers:hover {
+    background-color:  #0073e5;
+    color: white;
+}
+
+.pagination .current {
+    background-color: #0073e5;
+    color: #fff;
+    border-color: #0073e5;
+}
+
+.pagination a:hover {
+    background-color: #0073e5;
+    color: #fff;
+    border-color: #0073e5;
+    text-decoration: none;
+}
+.event-pagination .pagination, .comments-pagination {
+    border: none;
+    margin: 15px 0;
+}
+.event-pagination .pagination .next , 
+.event-pagination .pagination .prev 
+{
+    padding: 0;
+    margin: 0;
+    width: 38px;
+}
+.event-pagination .dashicons-arrow-right-alt, .event-pagination .dashicons-arrow-left-alt{
+    display: inline-block;
+    text-align: center;
+    padding: 10px 0px 28px 0px;
+    width: 100%;
+    margin: 0;
+}
+.event-pagination .dashicons-arrow-right-alt:hover, .event-pagination .dashicons-arrow-left-alt:hover{
+    background-color: #0073e5;
+    color: #fff;
+    border-color: #0073e5;
+}
+/* ============================================================ */
+/* ============================================================ */
+/*================ OVERWRITE COUNTDOWN ======================== */
+
+.totalTime{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 90%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.time-remaining {
+    color: #000;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.time-remaining #countdown_title{
+    display: none;
+}
+.event-list-counter{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+}
+
+.event-list-counter .countdown-row {
+    clear: both;
+    width: 10%;
+    padding: 0px 2px;
+    text-align: center;
+}
+.event-list-counter  .totalTime {
+    width: 100%;
+}
+.event-list-counter  .countdown-row{
+    padding: 0;
+}
+
+.event-list-counter  .countdown-section{
+	font-size: 50%;
+	text-align: center;
+    padding: 0;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+    width: 20%;
+    background-color: white;
+
+}
+
+.event-list-counter  .countdown-rtl {
+	direction: rtl;
+}
+.event-list-counter  .countdown-holding span {
+	color: #888;
+}
+.event-list-counter  .countdown-row {
+	clear: both;
+	width: 100%;
+	padding: 0px 2px;
+	text-align: center;
+}
+.event-list-countdown .is-countdown {
+    border: none;
+}
+.event-list-counter  .countdown-show1 .countdown-section {
+	width: 80%;
+}
+.event-list-counter  .countdown-show2 .countdown-section {
+	width: 40%;
+}
+.event-list-counter  .countdown-show3 .countdown-section {
+	width: 25%;
+}
+.event-list-counter  .countdown-show4 .countdown-section {
+	width: 18%;
+}
+.event-list-counter  .countdown-show5 .countdown-section {
+	width: 15%;
+}
+.event-list-counter  .countdown-show6 .countdown-section {
+	width: 14%;
+}
+.event-list-counter  .countdown-show7 .countdown-section {
+	width: 12%;
+}
+.event-list-counter  .countdown-amount {
+    font-size: 250%;
+    font-weight: 500;
+}
+.event-list-counter  .countdown-period {
+    font-size: 200%;
+    display: block;
+}
+.event-list-counter  .countdown-descr {
+	display: block;
+	width: 90%;
+}
+.site .button:not(:hover):not(:active):not(.has-background), button:not(:hover):not(:active):not(.has-background){
+
+    background-color: #3498db;
+}
+
+/* ======================================================== */
+/* ======================================================== */
+/* ====================== GOOGLE CALENDAR =================*/
+
+#syncCalendar {
+    margin: auto;
+}
+.event-calendars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 50px; */
+}
+#google-api td {
+    border: none;
+}
+#clientID, #apiKey {
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
+#authorize_button, #signout_button {
+    padding: 7px 15px;
+    margin: 0 20px;
+    background-color: #0073e5;
+    border: 1px solid #0073e5;
+}
+#authorize_button:hover, #signout_button:hover {
+    border: 1px solid #0073e5;
+    color: white;
+}
+
+
+/* ===================================================== */
+/* ===================================================== */
+/* ================= SHORT CODE CALENDAR =============== */
+#calendar {
+    padding: 50px;
+}
+#shortcode-eventCalendars .shortcode-event-calendar {
+	border: 1px solid #ccc;
+	background-color: white;
+	text-align: center;
+
+}
+
+#shortcode-eventCalendars .shortcode-event-calendar-input {
+	border: none;
+}
+
+#shortcode-eventCalendars .shortcode-event-calendar-input:focus {
+	border: none;
+}
+.event-tooltip {
+	position: absolute;
+	padding: 5px 10px;
+	background-color: white;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	display: none;
+	z-index: 1000;
+}
+.fc-event-title-container:hover {
+	cursor: pointer;
+}
