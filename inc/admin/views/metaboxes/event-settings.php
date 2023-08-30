@@ -35,6 +35,8 @@ $schedules_event	= get_post_meta($post_id, 'tp_event_schedules', true);
 $schedules 			= json_decode($schedules_event, true);
 
 $location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
+
+
 ?>
 <div class="event_meta_box_container">
 	<div class="event_meta_panel">
@@ -139,13 +141,14 @@ $location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
 			<?php endif; ?>
 			<p class="form-field">
 				<label for="_location"></label>
-				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="1"><?php echo isset($location_iframe) ? esc_attr($location_iframe) : ''; ?></textarea>
+				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset($location_iframe) ? esc_attr($location_iframe) : ''; ?></textarea>
 				<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
 					<p class="event-meta-notice">
 						<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
 					</p>
 				<?php endif; ?>
-				<div class="show_map_iframe"><?php echo isset($location_iframe) ? $location_iframe : ''; ?></div>
+				<div class="show_map_iframe"></div>
+				<div class="error_message" style="color: red;"></div>
 			</p>
 		</div>
 		<!-- End Location -->

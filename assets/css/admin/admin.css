@@ -389,6 +389,7 @@
 }
 
 /* location */
-.show_map_iframe iframe {
+.show_map_iframe iframe,
+.error_message {
 	margin-left: 170px;
 }
