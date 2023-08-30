@@ -38,7 +38,7 @@ class WPEMS_Shortcodes {
 			'countdown'       => __CLASS__ . '::countdown',
 			'list'            => __CLASS__ . '::event_list',
 			'calendars'       => __CLASS__ . '::event_calendars',
-			'sync'            => __CLASS__ . '::google_sync',
+			'sync_event'      => __CLASS__ . '::google_sync',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
