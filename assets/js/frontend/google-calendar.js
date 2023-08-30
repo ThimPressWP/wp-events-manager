@@ -1,4 +1,4 @@
-console.log(ROUTER.bookingData);
+
 
 (function ($) {
     $(document).ready(function () {

@@ -18,7 +18,12 @@ class WPEMS_Admin_Event_Calendar {
 
 		?>
 		<div id='calendar'></div>
+		<div class='wrapper_event'>
+			<div class="showEvent">
 
+				<p class='show'></p>
+			</div>
+		</div>
 		<br>
 		<table id="shortcode-eventCalendars">
 			<tr>

@@ -52,14 +52,10 @@ const events = () => {
         const price_min = document.querySelector('.price_min');
         const price_max = document.querySelector('.price_max');
         const orderby = document.querySelector('.orderby');
-        const pagination = document.querySelector('.pagination');
 
         if (priceOfMin && !priceOfMin.contains(target)) {
             priceOfMin.style.display = 'none';
         }
-        
-
-
         if (priceOfMax && !priceOfMax.contains(target)) {
             priceOfMax.style.display = 'none';
         }

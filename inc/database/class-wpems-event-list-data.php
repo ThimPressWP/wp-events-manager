@@ -39,29 +39,56 @@ class WPEMS_Frontend_Event_List_Data {
 			$start_date = $filter_by_date[0];
 			$end_date   = $filter_by_date[1];
 
-			// Only for happing events
 			$query_args['meta_query'] = array(
 				'relation' => 'AND',
+				// ====IN 1
 				array(
-					'key'     => 'tp_event_date_start',
-					'value'   => $start_date,
-					'compare' => '>=',
-					'type'    => 'DATE',
-				),
+					'relation' => 'AND',
+					array(
+						'relation' => 'OR',
+						array(
+							'key'     => 'tp_event_date_start',
+							'value'   => $start_date,
+							'compare' => '>=',
+							'type'    => 'DATE',
+						),
+						array(
+							'key'     => 'tp_event_date_start',
+							'value'   => $start_date,
+							'compare' => '<=',
+							'type'    => 'DATE', // done
+						),
+					),
+					array(
+						'key'     => 'tp_event_date_end',
+						'value'   => $start_date,
+						'compare' => '>=',
+						'type'    => 'DATE', // done
+					),
+				),              // =========== IN 2
 				array(
-					'key'     => 'tp_event_date_end',
-					'value'   => $end_date,
-					'compare' => '<=',
-					'type'    => 'DATE',
-				),
-			);
-
-			$query_args['date_query'] = array(
-				array(
-					'column'    => 'post_date',
-					'after'     => $start_date,
-					'before'    => date( 'Y-m-d', strtotime( $end_date ) ),
-					'inclusive' => true,
+					'relation' => 'AND',
+					array(
+						'relation' => 'OR',
+						array(
+							'key'     => 'tp_event_date_end',
+							'value'   => $end_date,
+							'compare' => '<=',
+							'type'    => 'DATE',
+						),
+						array(
+							'key'     => 'tp_event_date_end',
+							'value'   => $end_date,
+							'compare' => '>=',
+							'type'    => 'DATE', // done
+						),
+					),
+					array(
+						'key'     => 'tp_event_date_start',
+						'value'   => $end_date,
+						'compare' => '<=',
+						'type'    => 'DATE', // done
+					),
 				),
 			);
 		}

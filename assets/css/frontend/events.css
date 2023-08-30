@@ -288,6 +288,12 @@ margin: 0;
 .wrapper_date {
     flex: 4;
 }
+.litepicker[data-plugins*="ranges"][data-ranges-position="left"] > 
+.container__main > .container__predefined-ranges button, 
+.litepicker[data-plugins*="ranges"][data-ranges-position="right"] > 
+.container__main > .container__predefined-ranges button {
+    display: none;
+}
 /* Start Price range */
 .wrapper_price {
     flex: 3;
@@ -652,32 +658,36 @@ margin: 0;
 /* ===================================================== */
 /* ===================================================== */
 /* ================= SHORT CODE CALENDAR =============== */
-#calendar {
+ #calendar {
     padding: 50px;
 }
-#shortcode-eventCalendars .shortcode-event-calendar {
-	border: 1px solid #ccc;
-	background-color: white;
-	text-align: center;
-
+.wrapper_event {
+	position: fixed; 
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+	width: auto;
+	
 }
-
-#shortcode-eventCalendars .shortcode-event-calendar-input {
-	border: none;
-}
-
-#shortcode-eventCalendars .shortcode-event-calendar-input:focus {
-	border: none;
-}
-.event-tooltip {
-	position: absolute;
-	padding: 5px 10px;
-	background-color: white;
-	border: 1px solid #ccc;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.showEvent {
+	padding: 30px;
+	background-color: rgb(126, 123, 123);
 	display: none;
-	z-index: 1000;
+    color: white;
+    border-radius: 8px;
+    /* text-align: center; */
 }
-.fc-event-title-container:hover {
+
+
+
+.showEvent .closeEvent {
 	cursor: pointer;
+	float:right;
+	padding: 5px;
+	color: rgba(255, 255, 255, 0.562);
+	font-size: 25px;
+}
+.showEvent .closeEvent:hover {
+    color: white;
 }

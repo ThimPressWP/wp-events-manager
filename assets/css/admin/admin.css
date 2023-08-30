@@ -307,29 +307,32 @@
 	margin-left: 150px;
 }
 
-#shortcode-eventCalendars .shortcode-event-calendar {
-	border: 1px solid #ccc;
-	background-color: white;
-	text-align: center;
 
-}
-
-#shortcode-eventCalendars .shortcode-event-calendar-input {
-	border: none;
-}
-
-#shortcode-eventCalendars .shortcode-event-calendar-input:focus {
-	border: none;
-}
-.event-tooltip {
-	position: absolute;
-	padding: 5px 10px;
-	background-color: white;
-	border: 1px solid #ccc;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	display: none;
-	z-index: 10000;
-}
 .fc-event-title-container:hover {
 	cursor: pointer;
+	z-index: 2;
+} 
+.wrapper_event {
+	position: fixed; 
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+	width: auto;
+	
 }
+.showEvent {
+	padding: 20px;
+	background-color: white;
+	display: none;
+	border-radius: 8px;
+}
+
+.showEvent .closeEvent {
+	cursor: pointer;
+	float:right;
+	padding: 5px;
+	color: red;
+	font-size: 20px;
+}
+

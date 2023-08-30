@@ -1,45 +1,50 @@
-document.addEventListener('DOMContentLoaded', function () {
-    let calendarEl = document.getElementById('calendar');
-    if(calendarEl) {
-            let calendar = new FullCalendar.Calendar(calendarEl, {
-              initialView: 'dayGridMonth',
-              events: eventCalendarData, // Pass from class-wpems-calendar-data.php
 
-              eventDidMount: function (info) {
-                    let event = info.event;
-                    
-                    let tooltip = document.createElement('div');
-                    tooltip.className = 'event-tooltip';
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+  
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        eventDidMount: function(info) {
+        var event = info.event;
+        const container = info.el.querySelector('.fc-event-title-container');
+        container.setAttribute('data-id', event.id);             
+      },
+      events: eventCalendarData
+    });
 
-                    // Give the information to tooltip
-                    tooltip.innerHTML = `
-                        <p><strong>${event.title}</strong></p>
-                        <p>Time: ${event.extendedProps.date_start} ${event.extendedProps.time_start} - ${event.extendedProps.date_end} ${event.extendedProps.time_end}</p>
-                        <p>Location: ${event.extendedProps.location}</p>
-                        <p>Total tickets: ${event.extendedProps.totalTicket }</p>
-                        <p>Price: ${event.extendedProps.price }</p>
-                        <p>Type: ${event.extendedProps.type}</p>
-                        <p>Category: ${event.extendedProps.category}</p>
-                    `;
-        
-                    // Add to the screen
-                    info.el.appendChild(tooltip);
-        
-                    // Display the tooltip when mouse enter
-                    info.el.addEventListener('mouseenter', function () {
-                        tooltip.style.display = 'block';
-                    });
-        
-                    // Hidden the tooltip when mouse leave
-                    info.el.addEventListener('mouseleave', function () {
-                        tooltip.style.display = 'none';
-                    });
-                }
-            });
-            calendar.render();
+    document.addEventListener('click', function(e) {
+        const target = e.target;
+        const showEvent = document.querySelector('.showEvent');
+        const wrapper = document.querySelector('.fc-event-title-container');
+        const id = target.getAttribute('data-id');
+
+        for(let i = 0; i < eventCalendarData.length; i++) {
+            if(Number(id) !== null && Number(id) === Number(eventCalendarData[i].id)) {
+                showEvent.innerHTML = `
+                <span class="dashicons dashicons-no closeEvent"></span>
+                <p><strong>${eventCalendarData[i].title}</strong></p>
+                <p>Time: ${eventCalendarData[i].date_start} ${eventCalendarData[i].time_start} - ${eventCalendarData[i].date_end} ${eventCalendarData[i].time_end}</p>
+                <p>Location: ${eventCalendarData[i].location}</p>
+                <p>Total tickets: ${eventCalendarData[i].totalTicket }</p>
+                <p>Price: $${eventCalendarData[i].price }</p>
+                <p>Type: ${eventCalendarData[i].type}</p>
+                <p>Category: ${eventCalendarData[i].category}</p>
+            `;
+            }
         }
-    }
-);
-        
-      
-    //   console.log(eventCalendarData)
+        if(target.classList.contains('closeEvent')) {
+          showEvent.style.display  = 'none';
+        }
+        else {
+          showEvent.style.display = 'block';
+        }
+    
+        // if(!target.contains(wrapper)) {
+        //     showEvent.style.display = 'none';
+        // }else {
+        //     showEvent.style.display = 'block';
+        // }
+     
+    })
+  
+    calendar.render();
+});

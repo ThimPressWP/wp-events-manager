@@ -13,3 +13,9 @@ wp_localize_script( 'wpems-calendar-js', 'eventCalendarData', $events );
 
 ?>
 <div id='calendar'></div>
+		<div class='wrapper_event'>
+			<div class="showEvent">
+
+				<p class='show'></p>
+			</div>
+		</div>

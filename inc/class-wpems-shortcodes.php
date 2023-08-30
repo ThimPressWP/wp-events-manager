@@ -283,6 +283,9 @@ class WPEMS_Shortcodes {
 		$filter_by_date         = '';
 		$filter_by_price        = '';
 		$order_by               = '';
+		$getDateInput           = '';
+		$getPriceMin            = '';
+		$getPriceMax            = '';
 		// Get value from frontend
 		if ( isset( $_GET['search_event_list'] ) ) {
 			// Retrieve form input values
@@ -334,15 +337,23 @@ class WPEMS_Shortcodes {
 		// Give data to fronted to display on the screen
 		$atts = shortcode_atts(
 			array(
-				'query_posts'        => $get_posts,
-				'posts'              => $posts,
-				'types'              => $get_types,
-				'categories'         => $get_categories,
-				'numbers'            => $number_array,
-				'totalPost'          => $totalPost,
-				'pageIndex'          => $pageIndex,
-				'current_item_start' => $current_item_start,
-				'current_item_end'   => $current_item_end,
+				'query_posts'            => $get_posts,
+				'posts'                  => $posts,
+				'types'                  => $get_types,
+				'categories'             => $get_categories,
+				'numbers'                => $number_array,
+				'totalPost'              => $totalPost,
+				'pageIndex'              => $pageIndex,
+				'current_item_start'     => $current_item_start,
+				'current_item_end'       => $current_item_end,
+				'dateInput'              => $getDateInput,
+				'filter_by_input_search' => $filter_by_input_search,
+				'filter_by_status'       => $filter_by_status,
+				'filter_by_type'         => $filter_by_type,
+				'filter_by_category'     => $filter_by_category,
+				'getPriceMin'            => $getPriceMin,
+				'getPriceMax'            => $getPriceMax,
+				'order_by'               => $order_by,
 			),
 			$atts,
 		);
