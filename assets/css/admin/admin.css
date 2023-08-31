@@ -393,3 +393,7 @@
 .error_message {
 	margin-left: 170px;
 }
+
+.error_message {
+	color: red;
+}
