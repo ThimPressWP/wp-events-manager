@@ -33,7 +33,7 @@ class WPEMS_Frontend_Assets {
 
 		// Calendar
 		WPEMS_Assets::register_script('wpems-fullcalendar-lb', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js');
-		WPEMS_Assets::register_script( 'wpems-calendar-js', WPEMS_ASSETS_URI . '/js/admin/calendar-event.js' );
+		WPEMS_Assets::register_script( 'wpems-calendar-js', WPEMS_ASSETS_URI . '/js/frontend/event-calendar.js', array('wpems-fullcalendar-lb') );
 
 		// Event List
 		WPEMS_Assets::register_script( 'wpems-litepicker-lb', 'https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js' );

@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+    var calendarEl = document.getElementById('calendar-frontend');
   
     if(calendarEl) {
       var calendar = new FullCalendar.Calendar(calendarEl, {

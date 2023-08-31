@@ -5,7 +5,6 @@ class WPEMS_Admin_Event_Calendar {
 
 	public static function output() {
 		// Calendar
-		wp_enqueue_script( 'wpems-admin-fullcalendar-lb' );
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
 		$events = new WPEMS_Admin_Calendar_Data();
@@ -17,7 +16,7 @@ class WPEMS_Admin_Event_Calendar {
 		wp_localize_script( 'wpems-admin-calendar-js', 'eventCalendarData', $events );
 
 		?>
-		<div id='calendar'></div>
+		<div id='calendar-admin'></div>
 		<div class='wrapper_event'>
 			<div class="showEvent"></div>
 		</div>
