@@ -12,18 +12,23 @@ class WPEMS_Admin_Calendar_Data {
 		$posts = get_posts( $args );
 
 		$posts = WPEMS_Data_Pattern::get_postMeta( $posts );
-		
+
 		$calendar_events = array();
-		$type = '';
-		$category = '';
+		$type            = '';
+		$category        = '';
 		foreach ( $posts as $key => $value ) {
 			$getType = wp_get_post_terms( $value->ID, 'tp_event_type' );
-			if(isset($getType) && isset($getType[0]->name)) {
-				$type = $getType[0]->name;
+			if ( isset( $getType ) ) {
+				foreach ( $getType as $item ) {
+					$type = $item->name;
+				}
 			}
+
 			$getCategory = wp_get_post_terms( $value->ID, 'tp_event_category' );
-			if(isset($getCategory) && isset($getCategory[0]->name)) {
-				$category = $getCategory[0]->name;
+			if ( isset( $getCategory ) ) {
+				foreach ( $getCategory as $item ) {
+					$category = $item->name;
+				}
 			}
 
 			$calendar_events[] = array(

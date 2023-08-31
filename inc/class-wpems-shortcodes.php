@@ -355,7 +355,7 @@ class WPEMS_Shortcodes {
 				'getPriceMax'            => $getPriceMax,
 				'order_by'               => $order_by,
 			),
-			$atts,
+			$atts
 		);
 
 		return WPEMS_Shortcodes::render( 'event-list', 'event-list-display.php', array( 'args' => $atts ) );
