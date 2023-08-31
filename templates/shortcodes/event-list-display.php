@@ -21,7 +21,6 @@ $getPriceMin = isset($args['getPriceMin']) ? $args['getPriceMin'] : '';
 $getPriceMax = isset($args['getPriceMax']) ? $args['getPriceMax'] : '';
 $order_by = isset($args['order_by']) ? $args['order_by'] : '';
 
-
 ?>
 
 <div class="eventListDisplay ">

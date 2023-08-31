@@ -1,6 +1,5 @@
 <?php
 
-wp_enqueue_script( 'wpems-fullcalendar-lb' );
 wp_enqueue_script( 'wpems-calendar-js' );
 
 $events = new WPEMS_Admin_Calendar_Data();
@@ -12,10 +11,7 @@ if ( ! is_array( $events ) ) {
 wp_localize_script( 'wpems-calendar-js', 'eventCalendarData', $events );
 
 ?>
-<div id='calendar'></div>
-		<div class='wrapper_event'>
-			<div class="showEvent">
-
-				<p class='show'></p>
-			</div>
-		</div>
+<div id='calendar-frontend'></div>
+<div class='wrapper_event'>
+	<div class="showEvent"></div>
+</div>
