@@ -12,9 +12,20 @@ class WPEMS_Admin_Calendar_Data {
 		$posts = get_posts( $args );
 
 		$posts = WPEMS_Data_Pattern::get_postMeta( $posts );
-
+		
 		$calendar_events = array();
+		$type = '';
+		$category = '';
 		foreach ( $posts as $key => $value ) {
+			$getType = wp_get_post_terms( $value->ID, 'tp_event_type' );
+			if(isset($getType) && isset($getType[0]->name)) {
+				$type = $getType[0]->name;
+			}
+			$getCategory = wp_get_post_terms( $value->ID, 'tp_event_category' );
+			if(isset($getCategory) && isset($getCategory[0]->name)) {
+				$category = $getCategory[0]->name;
+			}
+
 			$calendar_events[] = array(
 				'id'          => $value->ID,
 				'title'       => $value->post_title,
@@ -27,12 +38,12 @@ class WPEMS_Admin_Calendar_Data {
 				'location'    => $value->location,
 				'price'       => floatval( $value->price ),
 				'totalTicket' => floatval( $value->totalTicket ),
-				'type'        => wp_get_post_terms( $value->ID, 'tp_event_type' )[0]->name,
-				'category'    => wp_get_post_terms( $value->ID, 'tp_event_category' )[0]->name,
+				'type'        => $type,
+				'category'    => $category,
 			);
 		}
 		return $calendar_events;
 	}
 }
-new WPEMS_Admin_Calendar_Data;
+
 
