@@ -1,13 +1,13 @@
 <?php
 
-class WPEMS_Frontend_Event_List_Data {
+class WPEMS_Event_DB {
 
 	// Deal with status
-	public static function status_handler( $key, $filter_by_status, $query_args ) {
+	public static function status_handler( $filter_by_status, $query_args ) {
 		if ( isset( $filter_by_status ) && ! empty( $filter_by_status ) ) {
 			$query_args['meta_query'] = array(
 				array(
-					'key'     => $key,
+					'key'     => 'tp_event_status',
 					'value'   => $filter_by_status,
 					'compare' => '=',
 				),
@@ -41,7 +41,6 @@ class WPEMS_Frontend_Event_List_Data {
 
 			$query_args['meta_query'] = array(
 				'relation' => 'AND',
-				// ====IN 1
 				array(
 					'relation' => 'AND',
 					array(
@@ -56,16 +55,16 @@ class WPEMS_Frontend_Event_List_Data {
 							'key'     => 'tp_event_date_start',
 							'value'   => $start_date,
 							'compare' => '<=',
-							'type'    => 'DATE', // done
+							'type'    => 'DATE',
 						),
 					),
 					array(
 						'key'     => 'tp_event_date_end',
 						'value'   => $start_date,
 						'compare' => '>=',
-						'type'    => 'DATE', // done
+						'type'    => 'DATE',
 					),
-				),              // =========== IN 2
+				),
 				array(
 					'relation' => 'AND',
 					array(
@@ -80,14 +79,14 @@ class WPEMS_Frontend_Event_List_Data {
 							'key'     => 'tp_event_date_end',
 							'value'   => $end_date,
 							'compare' => '>=',
-							'type'    => 'DATE', // done
+							'type'    => 'DATE',
 						),
 					),
 					array(
 						'key'     => 'tp_event_date_start',
 						'value'   => $end_date,
 						'compare' => '<=',
-						'type'    => 'DATE', // done
+						'type'    => 'DATE',
 					),
 				),
 			);
@@ -152,13 +151,6 @@ class WPEMS_Frontend_Event_List_Data {
 		}
 	}
 
-	public static function filter_condition( $filter_var, $function, $key, $args ) {
-		if ( ! empty( $filter_var ) && $filter_var !== 'GET' ) {
-			$args = call_user_func( $function, $key, $filter_var, $args );
-		}
-		return $args;
-	}
-
 	// To get posts after filter
 	public static function get_posts_data( $arguments ) {
 
@@ -174,18 +166,18 @@ class WPEMS_Frontend_Event_List_Data {
 		$args = array();
 
 		// Search
-		if ( ! empty( $filter_by_input_search ) && $filter_by_input_search !== 'GET' ) {
+		if ( ! empty( $filter_by_input_search ) ) {
 			$args['s']              = $filter_by_input_search;
 			$args['search_columns'] = array( 'post_content', 'post_excerpt', 'post_title' );
 		}
 		// Status
-		$args = self::filter_condition( $filter_by_status, array( __Class__, 'status_handler' ), 'tp_event_status', $args );
+		$args = self::status_handler( $filter_by_status, $args );
 
 		// Type
-		$args = self::filter_condition( $filter_by_type, array( __Class__, 'add_taxonomy_filter' ), 'tp_event_type', $args );
+		$args = self::add_taxonomy_filter( 'tp_event_type', $filter_by_type, $args );
 
 		// Category
-		$args = self::filter_condition( $filter_by_category, array( __Class__, 'add_taxonomy_filter' ), 'tp_event_category', $args );
+		$args = self::add_taxonomy_filter( 'tp_event_category', $filter_by_category, $args );
 
 		// Date
 		if ( isset( $filter_by_date ) ) {
@@ -202,17 +194,14 @@ class WPEMS_Frontend_Event_List_Data {
 			$args = self::orderby_handler( $order_by, $args );
 		}
 
-		$pageIndex = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-
-		$args['post_type']      = 'tp_event';
-		$args['post_status']    = 'publish';
+		$pageIndex              = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 		$args['posts_per_page'] = WPEMS_Shortcodes::$pageSize;
 		$args['paged']          = $pageIndex;
 
-		$array = new WP_Query( $args );
+		$array = WPEMS_Data_Pattern::get_posts( $args );
 
 		return $array;
 	}
 }
-new WPEMS_Frontend_Event_List_Data;
+
 

@@ -2,8 +2,7 @@
 
 wp_enqueue_script( 'wpems-calendar-js' );
 
-$events = new WPEMS_Admin_Calendar_Data();
-$events = $events->load_events();
+$events = WPEMS_Calendar_DB::load_events();
 
 if ( ! is_array( $events ) ) {
 	return;

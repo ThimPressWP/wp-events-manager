@@ -7,7 +7,7 @@ class WPEMS_Admin_Event_Calendar {
 		// Calendar
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
-		$events = new WPEMS_Admin_Calendar_Data();
+		$events = new WPEMS_Calendar_DB();
 		$events = $events->load_events();
 
 		if ( ! is_array( $events ) ) {

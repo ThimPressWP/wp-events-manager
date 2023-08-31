@@ -3,23 +3,23 @@ wp_enqueue_script( 'wpems-litepicker-lb' );
 wp_enqueue_script( 'wpems-ranges-lb' );
 wp_enqueue_script( 'wpems-event-list-display-js' );
 
-$get_posts = isset($args['query_posts']) ?  $args['query_posts'] : '';
-$posts = isset($args['posts']) ?  $args['posts'] : '';
-$types = isset($args['types']) ?  $args['types'] : '';
-$categories = isset($args['categories']) ?  $args['categories']: '';
-$numbers = isset($args['numbers']) ?   $args['numbers']: '';
-$totalPost = isset($args['totalPost']) ?  $args['totalPost'] : '';
-$pageIndex = isset($args['pageIndex']) ?  $args['pageIndex']: '';
-$current_item_start = isset($args['current_item_start']) ? $args['current_item_start'] : '';
-$current_item_end = isset($args['current_item_end']) ? $args['current_item_end'] : '';
-$filter_by_input_search = isset($args['filter_by_input_search']) ? $args['filter_by_input_search'] : '';
-$selected_status = isset($args['filter_by_status']) ? $args['filter_by_status'] : '';
-$filter_by_type = isset($args['filter_by_type']) ? $args['filter_by_type'] : '';
-$filter_by_category = isset($args['filter_by_category']) ? $args['filter_by_category'] : '';
-$dateInput = isset($args['dateInput']) ? $args['dateInput'] : '';
-$getPriceMin = isset($args['getPriceMin']) ? $args['getPriceMin'] : '';
-$getPriceMax = isset($args['getPriceMax']) ? $args['getPriceMax'] : '';
-$order_by = isset($args['order_by']) ? $args['order_by'] : '';
+$get_posts              = isset( $args['query_posts'] ) ? $args['query_posts'] : '';
+$posts                  = isset( $args['posts'] ) ? $args['posts'] : '';
+$types                  = isset( $args['types'] ) ? $args['types'] : '';
+$categories             = isset( $args['categories'] ) ? $args['categories'] : '';
+$numbers                = isset( $args['numbers'] ) ? $args['numbers'] : '';
+$totalPost              = isset( $args['totalPost'] ) ? $args['totalPost'] : '';
+$pageIndex              = isset( $args['pageIndex'] ) ? $args['pageIndex'] : '';
+$current_item_start     = isset( $args['current_item_start'] ) ? $args['current_item_start'] : '';
+$current_item_end       = isset( $args['current_item_end'] ) ? $args['current_item_end'] : '';
+$filter_by_input_search = isset( $args['filter_by_input_search'] ) ? $args['filter_by_input_search'] : '';
+$selected_status        = isset( $args['filter_by_status'] ) ? $args['filter_by_status'] : '';
+$filter_by_type         = isset( $args['filter_by_type'] ) ? $args['filter_by_type'] : '';
+$filter_by_category     = isset( $args['filter_by_category'] ) ? $args['filter_by_category'] : '';
+$dateInput              = isset( $args['dateInput'] ) ? $args['dateInput'] : '';
+$getPriceMin            = isset( $args['getPriceMin'] ) ? $args['getPriceMin'] : '';
+$getPriceMax            = isset( $args['getPriceMax'] ) ? $args['getPriceMax'] : '';
+$order_by               = isset( $args['order_by'] ) ? $args['order_by'] : '';
 
 ?>
 
@@ -38,9 +38,9 @@ $order_by = isset($args['order_by']) ? $args['order_by'] : '';
 				<div class="wrapper_status">
 					<select name='<?php echo esc_attr( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_STATUS ); ?>' class="status" id="status" >
 						<option value="">Status</option>
-						<option value="expired"  <?php echo !empty($selected_status) && $selected_status === 'expired' ? 'selected' :  "" ;?>>Expired</option>
-						<option value="upcoming" <?php echo !empty($selected_status) && $selected_status === 'upcoming' ? 'selected' :  "" ;?>>Upcoming</option>
-						<option value="happening" <?php echo !empty($selected_status) && $selected_status === 'happening' ? 'selected' :  "" ;?>>Happening</option>
+						<option value="expired"  <?php echo ! empty( $selected_status ) && $selected_status === 'expired' ? 'selected' : ''; ?>>Expired</option>
+						<option value="upcoming" <?php echo ! empty( $selected_status ) && $selected_status === 'upcoming' ? 'selected' : ''; ?>>Upcoming</option>
+						<option value="happening" <?php echo ! empty( $selected_status ) && $selected_status === 'happening' ? 'selected' : ''; ?>>Happening</option>
 					</select>
 				</div>
 
@@ -51,14 +51,14 @@ $order_by = isset($args['order_by']) ? $args['order_by'] : '';
 
 				<!-- Category -->
 				<div class="wrapper_type">				
-					<?php echo WPEMS_Event_Template::select_template( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_CATEGORY, 'category', 'Event Category', $categories , $filter_by_category); ?>			
+					<?php echo WPEMS_Event_Template::select_template( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_CATEGORY, 'category', 'Event Category', $categories, $filter_by_category ); ?>			
 				</div>
 			</div>
 	
 			<div class="date_price_submit">
 				<!-- Date Ranger -->		
 				<div class="wrapper_date">
-					<?php echo WPEMS_Event_Template::input_text_template( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_DATE, 'date', 'Select Date Ranger' , $dateInput ); ?>
+					<?php echo WPEMS_Event_Template::input_text_template( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_DATE, 'date', 'Select Date Ranger', $dateInput ); ?>
 				</div>	
 				
 				<!-- Price Ranger -->
@@ -100,10 +100,10 @@ $order_by = isset($args['order_by']) ? $args['order_by'] : '';
 		<div>		
 			<select name="<?php echo esc_attr( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_ORDER_BY ); ?>" class="orderby" id='orderby'>
 				<option  >Release Date (newest first)</option>
-				<option <?php echo !empty($order_by) && $order_by === 'a-z' ? 'selected' :  "" ;?> value="a-z">A - Z</option>
-				<option <?php echo !empty($order_by) && $order_by === 'z-a' ? 'selected' :  "" ;?> value="z-a">Z - A</option>
-				<option <?php echo !empty($order_by) && $order_by === 'high-low' ? 'selected' :  "" ;?> value="high-low">Price: High - Low</option>
-				<option <?php echo !empty($order_by) && $order_by === 'low-high' ? 'selected' :  "" ;?> value="low-high">Price: Low - High</option>
+				<option <?php echo ! empty( $order_by ) && $order_by === 'a-z' ? 'selected' : ''; ?> value="a-z">A - Z</option>
+				<option <?php echo ! empty( $order_by ) && $order_by === 'z-a' ? 'selected' : ''; ?> value="z-a">Z - A</option>
+				<option <?php echo ! empty( $order_by ) && $order_by === 'high-low' ? 'selected' : ''; ?> value="high-low">Price: High - Low</option>
+				<option <?php echo ! empty( $order_by ) && $order_by === 'low-high' ? 'selected' : ''; ?> value="low-high">Price: Low - High</option>
 			</select>
 		</div>
 	</div>
@@ -167,9 +167,6 @@ $order_by = isset($args['order_by']) ? $args['order_by'] : '';
 					);
 					?>
 			</div> 
-			<?php
-;
-			?>
 	</div>
 </div>
 

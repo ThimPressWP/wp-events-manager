@@ -27,6 +27,24 @@ class WPEMS_Data_Pattern {
 		);
 		return $filter_data;
 	}
+
+	public static function get_posts( $args ) {
+		$posts = array();
+
+		$default_args = [
+			'post_type'      => 'tp_event',
+			'post_status'    => 'publish',
+			'numberposts'    => -1,
+			'posts_per_page' => 9,
+			'paged'          => 1,
+		];
+
+		$args = wp_parse_args( $args, $default_args );
+
+		$posts = new WP_Query( $args );
+
+		return $posts;
+	}
 }
 
-new WPEMS_Data_Pattern();
+

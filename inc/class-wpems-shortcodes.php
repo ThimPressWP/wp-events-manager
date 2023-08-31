@@ -302,7 +302,7 @@ class WPEMS_Shortcodes {
 		$order_by = WPEMS_Request_Pattern::get_param( 'tp_event_order_by', 'GET' );
 
 		// Give arguments to database
-		$get_posts = WPEMS_Frontend_Event_List_Data::get_posts_data(
+		$get_posts = WPEMS_Event_DB::get_posts_data(
 			[
 				'filter_by_input_search' => $filter_by_input_search,
 				'filter_by_status'       => $filter_by_status,

@@ -1,17 +1,11 @@
 <?php
 
-class WPEMS_Admin_Calendar_Data {
+class WPEMS_Calendar_DB {
 
 	public static function load_events() {
-		$args = [
-			'post_type'   => 'tp_event',
-			'post_status' => 'publish',
-			'numberposts' => -1,
-		];
-
-		$posts = get_posts( $args );
-
-		$posts = WPEMS_Data_Pattern::get_postMeta( $posts );
+		$args      = array();
+		$get_posts = WPEMS_Data_Pattern::get_posts( $args )->posts;
+		$posts     = WPEMS_Data_Pattern::get_postMeta( $get_posts );
 
 		$calendar_events = array();
 		$type            = '';

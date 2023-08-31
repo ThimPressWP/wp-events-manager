@@ -13,4 +13,4 @@ class WPEMS_Google_Calendar {
 	}
 }
 
-new WPEMS_Google_Calendar();
+

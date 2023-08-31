@@ -51,5 +51,6 @@ class WPEMS_Request_Pattern {
 
 
 
+
 }
-new WPEMS_Request_Pattern();
+
