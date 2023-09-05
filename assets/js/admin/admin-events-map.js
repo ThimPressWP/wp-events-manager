@@ -6,7 +6,7 @@ function updateMap() {
     let iframeContent       = iframeTextarea.value.trim();
     mapContainer.innerHTML  = iframeContent;
 
-    if (iframeContent.toLowerCase().indexOf('<iframe') === 0) {
+    if (iframeContent.toLowerCase().indexOf('<iframe') === 0 || iframeContent === '') {
         errorMessage.textContent = '';
     } else {
         mapContainer.innerHTML   = '';

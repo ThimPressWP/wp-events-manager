@@ -29,6 +29,7 @@ class WPEMS_Admin_Assets {
 	 */
 	public static function register_scripts( $hook ) {
 
+		global $post;
 		// Calendar
 		WPEMS_Assets::register_script('wpems-fullcalendar-lb', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js');
 		WPEMS_Assets::register_script( 'wpems-admin-calendar-js', WPEMS_ASSETS_URI . '/js/admin/admin-calendar.js', array('wpems-fullcalendar-lb'  ));
@@ -37,8 +38,14 @@ class WPEMS_Admin_Assets {
 		WPEMS_Assets::register_style( 'wpems-admin-css', WPEMS_ASSETS_URI . '/css/admin/admin.css' );
 		WPEMS_Assets::register_script( 'wpems-admin-datetimepicker-full', WPEMS_ASSETS_URI . '/js/datetimepicker/jquery.datetimepicker.full.min.js' );
 		WPEMS_Assets::register_style( 'wpems-admin-datetimepicker-min', WPEMS_ASSETS_URI . '/css/datetimepicker/jquery.datetimepicker.min.css' );
-	}
 
+		if( $post && $post->post_type == 'tp_event' ){
+			WPEMS_Assets::register_script( 'admin-events-settings', WPEMS_ASSETS_URI . '/js/admin/admin-events-schedules.js' );
+			WPEMS_Assets::register_script( 'admin-events-map', WPEMS_ASSETS_URI . '/js/admin/admin-events-map.js' );
+			WPEMS_Assets::register_script( 'sortable', WPEMS_ASSETS_URI . '/js/admin/libraries/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js' );
+		}
+	}
+	
 }
 
 WPEMS_Admin_Assets::init();

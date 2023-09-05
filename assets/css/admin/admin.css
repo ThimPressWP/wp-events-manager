@@ -388,11 +388,19 @@
 	color: #fff;
 }
 
+/* end schedule */
+
 /* location */
 .show_map_iframe iframe,
 .error_message {
 	margin-left: 170px;
 }
+
+.error_message {
+	color: red;
+}
+
+/* end location */
 
 .fc-event-title-container:hover {
 	cursor: pointer;

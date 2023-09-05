@@ -31,10 +31,10 @@ $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 
-$schedules_event	= get_post_meta($post_id, 'tp_event_schedules', true);
-$schedules 			= json_decode($schedules_event, true);
+$schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
+$schedules       = json_decode( $schedules_event, true );
 
-$location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
+$location_iframe = get_post_meta( $post_id, 'tp_event_iframe', true );
 
 
 ?>
@@ -93,8 +93,8 @@ $location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
 				<div class="form_info-container">
 					<button id="add_form_info-btn">+ Add more</button>
 					<?php
-					if( !empty($schedules) ):
-						foreach($schedules as $schedule_id => $schedule_value):
+					if ( ! empty( $schedules ) ) :
+						foreach ( $schedules as $schedule_id => $schedule_value ) :
 							?>
 							<div class="form_info" id="<?php echo $schedule_id; ?>">
 								<div class="form_info-header">
@@ -122,7 +122,7 @@ $location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
 					endif;
 					?>
 				</div>
-				<input type="hidden" name="tp_event_schedules" id="tp_event_schedules" value="<?php echo isset($schedules) ? esc_html(json_encode($schedules)) : ''; ?>">
+				<input type="hidden" name="tp_event_schedules" id="tp_event_schedules" value="<?php echo isset( $schedules ) ? esc_html( json_encode( $schedules ) ) : ''; ?>">
 			</p>
 		</div>
 		<!-- End Schedule -->
@@ -131,7 +131,7 @@ $location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_location"><?php _e( 'Location', 'wp-events-manager' ); ?></label>
-				<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>">
+				<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>" placeholder="Use Google API Key to show map">
 			</p>
 			<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
 				<p class="event-meta-notice">
@@ -141,14 +141,12 @@ $location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
 			<?php endif; ?>
 			<p class="form-field">
 				<label for="_location"></label>
-				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset($location_iframe) ? esc_attr($location_iframe) : ''; ?></textarea>
-				<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
-					<p class="event-meta-notice">
-						<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
-					</p>
-				<?php endif; ?>
+				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset( $location_iframe ) ? esc_attr( $location_iframe ) : ''; ?></textarea>
+				<p class="event-meta-notice">
+					<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
+				</p>
 				<div class="show_map_iframe"></div>
-				<div class="error_message" style="color: red;"></div>
+				<div class="error_message"></div>
 			</p>
 		</div>
 		<!-- End Location -->
