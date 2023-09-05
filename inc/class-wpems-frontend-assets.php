@@ -28,8 +28,6 @@ class WPEMS_Frontend_Assets {
 	 * @param type $hook
 	 */
 	public static function register_scripts( $hook ) {
-		// Sync to google calendar
-		WPEMS_Assets::register_script( 'google-calendar-js', WPEMS_ASSETS_URI . '/js/frontend/google-calendar.js' );
 
 		// Calendar
 		WPEMS_Assets::register_script('wpems-fullcalendar-lb', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js');
@@ -38,7 +36,7 @@ class WPEMS_Frontend_Assets {
 		// Event List
 		WPEMS_Assets::register_script( 'wpems-litepicker-lb', 'https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js' );
 		WPEMS_Assets::register_script( 'wpems-ranges-lb', 'https://cdn.jsdelivr.net/npm/litepicker/dist/plugins/ranges.js' );
-		WPEMS_Assets::register_script( 'wpems-event-list-display-js', WPEMS_ASSETS_URI . '/js/frontend/event-list-display.js' );
+		WPEMS_Assets::register_script( 'wpems-event-list-js', WPEMS_ASSETS_URI . '/js/frontend/event-list.js' );
 		
 		// Countdown
 		WPEMS_Assets::register_script( 'wpems-countdown-plugin-js', WPEMS_LIB_URI . '/countdown/js/jquery.plugin.min.js' );

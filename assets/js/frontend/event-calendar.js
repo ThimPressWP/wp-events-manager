@@ -1,43 +1,56 @@
-
 document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar-frontend');
-  
-    if(calendarEl) {
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-          eventDidMount: function(info) {
-          var event = info.event;
+  if (typeof events !== 'undefined') {
+    let calendarEl = document.getElementById('calendar-frontend');
+    let showEvent = document.querySelector('.show-event-frontend');
+
+    if (calendarEl && showEvent) {
+      let calendar = new FullCalendar.Calendar(calendarEl, {
+        eventDidMount: function(info) {
+          let event = info.event;
           const container = info.el.querySelector('.fc-event-title-container');
-          container.setAttribute('data-id', event.id);             
+          container.setAttribute('data-id', event.id);
+
+          container.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = container.getAttribute('data-id');
+
+            if (events) {
+              for (let i = 0; i < events.length; i++) {
+                const eventsId = Number(events[i]?.id);
+
+                if (id !== null && Number(id) === eventsId) {
+                  showEvent.innerHTML = `
+                    <h3>${events[i]?.title.charAt(0).toUpperCase() + events[i]?.title.slice(1)}</h3>
+                    <p><strong>Time:</strong> ${events[i]?.date_start} ${events[i]?.time_start} - ${events[i]?.date_end} ${events[i]?.time_end}</p>
+                    <p><strong>Location:</strong> ${events[i]?.location.charAt(0).toUpperCase() + events[i]?.location.slice(1) }</p>
+                    <p><strong>Total tickets:</strong> ${events[i]?.totalTicket}</p>
+                    <p><strong>Price:</strong> $${events[i]?.price}</p>
+                    <p><strong>Type:</strong> ${events[i]?.type.charAt(0).toUpperCase() + events[i]?.type.slice(1) }</p>
+                    <p><strong>Category:</strong> ${(events[i]?.category.charAt(0).toUpperCase() + events[i]?.category.slice(1) )}</p>
+                  `;
+                  showEvent.style.display = 'block';
+                  showEvent.style.padding = '20px';
+                  container.style.color = 'white';
+                  container.style.backgroundColor = '#5f85db';
+                }
+              }
+            }
+          });
         },
-        events: eventCalendarData
+        events: events
       });
+
+      // For hiding the showEvent
+      document.body.addEventListener('click', function(e) {
+        if (!e.target.closest('.fc-event-title-container')) {
+          showEvent.style.display = 'none';
+        }
+      });
+
       calendar.render();
     }
-
-    document.addEventListener('click', function(e) {
-        const target = e.target;
-        const showEvent = document.querySelector('.showEvent');
-        const container = target.closest('.fc-event-title-container'); 
-        const id = container ? container.getAttribute('data-id') : null;
-
-        for(let i = 0; i < eventCalendarData.length; i++) {
-            if(Number(id) !== null && Number(id) === Number(eventCalendarData[i].id)) {
-                showEvent.innerHTML = `
-                <span class="dashicons dashicons-no closeEvent"></span>
-                <p><strong>${eventCalendarData[i].title}</strong></p>
-                <p>Time: ${eventCalendarData[i].date_start} ${eventCalendarData[i].time_start} - ${eventCalendarData[i].date_end} ${eventCalendarData[i].time_end}</p>
-                <p>Location: ${eventCalendarData[i].location}</p>
-                <p>Total tickets: ${eventCalendarData[i].totalTicket }</p>
-                <p>Price: $${eventCalendarData[i].price }</p>
-                <p>Type: ${eventCalendarData[i].type}</p>
-                <p>Category: ${eventCalendarData[i].category}</p>
-            `;
-            }
-            if(!target.contains(container) && Number(target.getAttribute('data-id')) !== Number(eventCalendarData[i].id)) {
-              showEvent.style.display = 'none';
-            }else {
-                showEvent.style.display = 'block';
-            }
-        }
-    })
+  } else {
+    // Handle the case when events are not defined
+    console.log('events are not defined');
+  }
 });

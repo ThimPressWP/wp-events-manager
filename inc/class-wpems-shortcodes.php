@@ -11,12 +11,8 @@
  * Prevent loading this file directly
  */
 defined( 'ABSPATH' ) || exit;
-// use Wpems_Model_Event;
 
-/**
- * WPEMS_Shortcodes class
- */
-
+use WPEMS\Event_Db as Db;
 
 class WPEMS_Shortcodes {
 
@@ -38,7 +34,6 @@ class WPEMS_Shortcodes {
 			'countdown'       => __CLASS__ . '::countdown',
 			'list'            => __CLASS__ . '::event_list',
 			'calendars'       => __CLASS__ . '::event_calendars',
-			'sync_event'      => __CLASS__ . '::google_sync',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
@@ -270,39 +265,48 @@ class WPEMS_Shortcodes {
 
 		return WPEMS_Shortcodes::render( 'event-countdown', 'event-countdown.php', array( 'args' => $atts ) );
 	}
-		/**
-	 * Event list
-	 *
 
+	/**
+	 * Event list
+	 * @param $atts
+	 * @return string
 	 */
 	public static function event_list( $atts ) {
 		$filter_by_input_search = '';
 		$filter_by_status       = '';
 		$filter_by_type         = '';
 		$filter_by_category     = '';
-		$filter_by_date         = '';
-		$filter_by_price        = '';
+		$filter_by_date         = array();
+		$filter_by_price        = array();
 		$order_by               = '';
 		$getDateInput           = '';
 		$getPriceMin            = '';
 		$getPriceMax            = '';
+
+		$pageIndex          = 1;
+		$totalPost          = 0;
+		$current_item_start = 1;
+		$current_item_end   = 0;
+		$max_num_pages      = 0;
+
+		$events = new Db\WPEMS_Event_DB();
 		// Get value from frontend
 		if ( isset( $_GET['search_event_list'] ) ) {
 			// Retrieve form input values
-			$filter_by_input_search = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_CHAR, 'GET' );
-			$filter_by_status       = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_STATUS, 'GET' );
-			$filter_by_type         = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_TYPE, 'GET' );
-			$filter_by_category     = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_CATEGORY, 'GET' );
-			$getDateInput           = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_SEARCH_DATE, 'GET' );
+			$filter_by_input_search = $events->get_param( 'wpems_keyword', 'GET' );
+			$filter_by_status       = $events->get_param( 'wpems_status', 'GET' );
+			$filter_by_type         = $events->get_param( 'wpems_type', 'GET' );
+			$filter_by_category     = $events->get_param( 'wpems_category', 'GET' );
+			$getDateInput           = $events->get_param( 'wpems_date', 'GET' );
 			$filter_by_date         = explode( ' - ', $getDateInput );
-			$getPriceMin            = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_PRICE_MIN, 'GET' );
-			$getPriceMax            = WPEMS_Request_Pattern::get_param( \Wpems_Model_Event\WPEMS_Model_Event_List::$_FILTER_PRICE_MAX, 'GET' );
+			$getPriceMin            = $events->get_param( 'wpems_price_min', 'GET' );
+			$getPriceMax            = $events->get_param( 'wpems_price_max', 'GET' );
 			$filter_by_price        = [ $getPriceMin, $getPriceMax ];
 		}
-		$order_by = WPEMS_Request_Pattern::get_param( 'tp_event_order_by', 'GET' );
+		$order_by = $events->get_param( 'tp_event_order_by', 'GET' );
 
 		// Give arguments to database
-		$get_posts = WPEMS_Event_DB::get_posts_data(
+		$get_posts = $events->get_posts_data(
 			[
 				'filter_by_input_search' => $filter_by_input_search,
 				'filter_by_status'       => $filter_by_status,
@@ -314,12 +318,11 @@ class WPEMS_Shortcodes {
 			]
 		);
 
-		$posts = $get_posts->posts;
-		$posts = WPEMS_Data_Pattern::get_postMeta( $posts );
+		$posts = $events->get_postMeta( $get_posts->posts );
 
 		// Get data from database to send to frontend
-		$get_types      = WPEMS_Data_Pattern::get_filter( 'tp_event_type' );
-		$get_categories = WPEMS_Data_Pattern::get_filter( 'tp_event_category' );
+		$get_types      = $events->get_filter( 'tp_event_type' );
+		$get_categories = $events->get_filter( 'tp_event_category' );
 
 		// Create an array of number for price input
 		$number_array = array();
@@ -327,33 +330,34 @@ class WPEMS_Shortcodes {
 			$number_array[] = $i;
 		}
 
-		$pageIndex          = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-		$current_item_start = 0;
-		$current_item_end   = 0;
-		$totalPost          = $get_posts->found_posts;
-		$current_item_start = ( $pageIndex - 1 ) * self::$pageSize + 1;
-		$current_item_end   = min( $current_item_start + $get_posts->post_count - 1, $totalPost );
+		// Pagination information
+		$pageIndex          = get_query_var( 'paged' );
+		$totalPost          = $get_posts->found_posts; // The total posts that match the query condition
+		$current_item_start = ( ( $pageIndex - 1 ) * self::$pageSize + 1 ) <= 0 ? 1 : ( ( $pageIndex - 1 ) * self::$pageSize + 1 );
+		// post_count return the real number of posts that display on current page.
+		$current_item_end = ( min( $current_item_start + $get_posts->post_count - 1, $totalPost ) ) === 1 ? 1 : ( min( $current_item_start + $get_posts->post_count - 1, $totalPost ) );
+		$max_num_pages    = $get_posts->max_num_pages;
 
 		// Give data to fronted to display on the screen
 		$atts = shortcode_atts(
 			array(
-				'query_posts'            => $get_posts,
 				'posts'                  => $posts,
-				'types'                  => $get_types,
-				'categories'             => $get_categories,
-				'numbers'                => $number_array,
-				'totalPost'              => $totalPost,
-				'pageIndex'              => $pageIndex,
-				'current_item_start'     => $current_item_start,
-				'current_item_end'       => $current_item_end,
-				'dateInput'              => $getDateInput,
 				'filter_by_input_search' => $filter_by_input_search,
-				'filter_by_status'       => $filter_by_status,
+				'types'                  => $get_types,
 				'filter_by_type'         => $filter_by_type,
+				'categories'             => $get_categories,
 				'filter_by_category'     => $filter_by_category,
+				'filter_by_status'       => $filter_by_status,
+				'dateInput'              => $getDateInput,
+				'numbers'                => $number_array,
 				'getPriceMin'            => $getPriceMin,
 				'getPriceMax'            => $getPriceMax,
+				'totalPost'              => $totalPost,
+				'current_item_start'     => $current_item_start,
+				'current_item_end'       => $current_item_end,
 				'order_by'               => $order_by,
+				'max_num_pages'          => $max_num_pages,
+				'pageIndex'              => $pageIndex,
 			),
 			$atts
 		);
@@ -361,47 +365,14 @@ class WPEMS_Shortcodes {
 		return WPEMS_Shortcodes::render( 'event-list', 'event-list-display.php', array( 'args' => $atts ) );
 	}
 
-		/**
-	 * Sync to google calendar
-	 *
 
-	 */
-	public static function google_sync( $atts ) {
-		$eventData   = WPEMS_Google_Calendar::event_data();
-		$bookingData = array();
-
-		if ( ! empty( $eventData ) ) {
-			foreach ( $eventData as $key => $value ) {
-				$bookingData[] = array(
-					'summary' => $value->post_content,
-					'start'   => array(
-						'dateTime' => str_replace( ' ', 'T', $value->post_date ),
-						'timeZone' => 'UTC',
-					),
-					'end'     => array(
-						'dateTime' => str_replace( ' ', 'T', $value->post_date ),
-						'timeZone' => 'UTC',
-					),
-				);
-			}
-		}
-
-		$atts = shortcode_atts(
-			array(
-				'bookingData' => $bookingData,
-			),
-			$atts
-		);
-		return WPEMS_Shortcodes::render( 'google-sync', 'google-calendars.php', array( 'args' => $atts ) );
-	}
-
-		/**
+	/**
 	 * Event calendar
-	 *
-
+	 * @param $atts
+	 * @return string
 	 */
 	public static function event_calendars() {
-		return WPEMS_Shortcodes::render( 'event', 'event-calendar.php' );
+		return WPEMS_Shortcodes::render( 'event-calendar', 'event-calendar.php' );
 	}
 
 }

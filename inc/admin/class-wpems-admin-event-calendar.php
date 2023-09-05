@@ -1,24 +1,25 @@
 <?php
 
-class WPEMS_Admin_Event_Calendar {
+use WPEMS\Event_Db as Db;
 
+class WPEMS_Admin_Event_Calendar {
 
 	public static function output() {
 		// Calendar
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
-		$events = new WPEMS_Calendar_DB();
-		$events = $events->load_events();
+		$eventDB = new Db\WPEMS_Event_DB();
+		$events  = $eventDB->calendar_data();
 
 		if ( ! is_array( $events ) ) {
 			return;
 		}
-		wp_localize_script( 'wpems-admin-calendar-js', 'eventCalendarData', $events );
+		wp_localize_script( 'wpems-admin-calendar-js', 'eventData', $events );
 
 		?>
 		<div id='calendar-admin'></div>
-		<div class='wrapper_event'>
-			<div class="showEvent"></div>
+		<div class='wrapper-event'>
+			<div class="show-event-admin"></div>
 		</div>
 		<br>
 		<table id="shortcode-eventCalendars">
@@ -28,7 +29,7 @@ class WPEMS_Admin_Event_Calendar {
 				</td>
 				<td class="shortcode-event-calendar">
 					<input class="shortcode-event-calendar-input" type="text" value="[wp_event_calendars]">
-					<i class="dashicons dashicons-admin-page"></i>
+					<!-- <i class="dashicons dashicons-admin-page"></i> -->
 				</td>
 			</tr>
 			<tr>
@@ -42,4 +43,3 @@ class WPEMS_Admin_Event_Calendar {
 		<?php
 	}
 }
-new WPEMS_Admin_Event_Calendar();

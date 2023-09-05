@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
     const dateElement = document.querySelector('.date');
     if (dateElement) {
         const picker = new Litepicker({ 
@@ -10,41 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
             },
         });
     }
-});
 
-
-const lpAddQueryArgs = ( endpoint, args ) => {
-	const url = new URL( endpoint );
-
-	Object.keys( args ).forEach( ( arg ) => {
-		url.searchParams.set( arg, args[ arg ] );
-	} );
-
-	return url;
-};
-
-
-const lpGetCurrentURLNoParam = () => {
-	let currentUrl = window.location.href;
-	const hasParams = currentUrl.includes( '?' );
-	if ( hasParams ) {
-		currentUrl = currentUrl.split( '?' )[ 0 ];
-	}
-
-	return currentUrl;
-};
-// Pagination
-const next = document.querySelector('.next');
-if(next) {
-    next.innerHTML = '<span class="dashicons dashicons-arrow-right-alt"></span>';
-}
-
-const prev = document.querySelector('.prev');
-if(prev) {
-    prev.innerHTML = '<span class="dashicons dashicons-arrow-left-alt"></span>';
-}
-
-const events = () => {
+    
     document.addEventListener('click', (e) => {
         const target = e.target;
         const priceOfMin = document.querySelector('.priceOfMin');
@@ -93,9 +61,42 @@ const events = () => {
         }
 
     });
+});
+
+
+const lpAddQueryArgs = ( endpoint, args ) => {
+	const url = new URL( endpoint );
+
+	Object.keys( args ).forEach( ( arg ) => {
+		url.searchParams.set( arg, args[ arg ] );
+	} );
+
+	return url;
+};
+
+
+const lpGetCurrentURLNoParam = () => {
+	let currentUrl = window.location.href;
+	const hasParams = currentUrl.includes( '?' );
+	if ( hasParams ) {
+		currentUrl = currentUrl.split( '?' )[ 0 ];
+	}
+
+	return currentUrl;
+};
+// Pagination
+const next = document.querySelector('.next');
+if(next) {
+    next.innerHTML = '<span class="dashicons dashicons-arrow-right-alt"></span>';
 }
 
-events();
+const prev = document.querySelector('.prev');
+if(prev) {
+    prev.innerHTML = '<span class="dashicons dashicons-arrow-left-alt"></span>';
+}
+
+
+
 
 
 
