@@ -391,10 +391,48 @@
 /* end schedule */
 
 /* location */
-.show_map_iframe iframe,
-.error_message {
-	margin-left: 170px;
+.option_group-location {
+	display: flex;
+	padding-bottom: 16px;
 }
+
+.location_label {
+	padding: 16px 0 0 20px;
+}
+
+.contain_field {
+	width: 84%;
+}
+
+
+.use_api input,
+.use_iframe input,
+.use_api h4,
+.use_iframe h4 {
+	display: inline-block;
+}
+
+.use_iframe {
+	margin-top: -20px;
+}
+
+.use_api input,
+.use_iframe input {
+	margin-right: 10px;
+}
+
+.contain_field .iframe_field,
+.contain_field .api_field {
+	width: 115%;
+	margin-bottom: 5px;
+}
+
+.contain_field .iframe_field textarea {
+	margin-bottom: 16px;
+}
+
+
+
 
 .error_message {
 	color: red;

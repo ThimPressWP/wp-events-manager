@@ -31,10 +31,11 @@ $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 
-$schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
-$schedules       = json_decode( $schedules_event, true );
+$schedules_event 	= get_post_meta( $post_id, 'tp_event_schedules', true );
+$schedules       	= json_decode( $schedules_event, true );
 
-$location_iframe = get_post_meta( $post_id, 'tp_event_iframe', true );
+$location_iframe 	= get_post_meta( $post_id, 'tp_event_iframe', true );
+$location 			= get_post_meta( $post_id, 'tp_event_location', true );
 
 
 ?>
@@ -128,26 +129,32 @@ $location_iframe = get_post_meta( $post_id, 'tp_event_iframe', true );
 		<!-- End Schedule -->
 
 		<!-- Location -->
-		<div class="option_group">
-			<p class="form-field">
-				<label for="_location"><?php _e( 'Location', 'wp-events-manager' ); ?></label>
-				<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>" placeholder="Use Google API Key to show map">
-			</p>
-			<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
-				<p class="event-meta-notice">
-					<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
-					<a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here' ); ?></a>
-				</p>
-			<?php endif; ?>
-			<p class="form-field">
-				<label for="_location"></label>
-				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset( $location_iframe ) ? esc_attr( $location_iframe ) : ''; ?></textarea>
-				<p class="event-meta-notice">
-					<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
-				</p>
-				<div class="show_map_iframe"></div>
-				<div class="error_message"></div>
-			</p>
+		<div class="option_group option_group-location">
+			<label class="location_label"><?php _e( 'Location', 'wp-events-manager' ); ?></label>
+			<div class="contain_field">
+				<div class="use_api">
+					<input type="radio" name="radio_input"><h4><?php _e( 'Use Google API Key to show map', 'wp-events-manager' ); ?></h4>
+				</div>
+				<div class="use_iframe">
+					<input type="radio" name="radio_input"><h4><?php _e( 'Use Iframe to show map', 'wp-events-manager' ); ?></h4>
+				</div>
+
+				<div class="api_field">
+					<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>">
+					<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
+					<p class="event-meta-notice">
+						<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
+						<a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here' ); ?></a>
+					</p>
+					<?php endif; ?>
+				</div>
+				
+				<!-- <div class="iframe_field">
+					<textarea class="short" name="<?php //echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php //echo isset( $location_iframe ) ? esc_attr( $location_iframe ) : ''; ?></textarea>
+					<div class="show_map_iframe"></div>
+					<div class="error_message"></div>
+				</div> -->
+			</div>
 		</div>
 		<!-- End Location -->
 
