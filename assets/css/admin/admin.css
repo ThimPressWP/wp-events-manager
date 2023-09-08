@@ -421,6 +421,11 @@
 	margin-right: 10px;
 }
 
+.api_field,
+.iframe_field {
+	display: none;
+}
+
 .contain_field .iframe_field,
 .contain_field .api_field {
 	width: 115%;
@@ -430,9 +435,6 @@
 .contain_field .iframe_field textarea {
 	margin-bottom: 16px;
 }
-
-
-
 
 .error_message {
 	color: red;

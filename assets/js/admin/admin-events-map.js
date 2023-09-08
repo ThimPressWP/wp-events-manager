@@ -1,63 +1,84 @@
-// show map by iframe
-// let iframeTextarea  = document.getElementById('_iframe');
-// let mapContainer    = document.querySelector('.show_map_iframe');
-// let errorMessage    = document.querySelector('.error_message');
+//show map by iframe
 
-// function updateMap() {
-//     let iframeContent       = iframeTextarea.value.trim();
-//     mapContainer.innerHTML  = iframeContent;
+let iframeTextarea = document.getElementById('_iframe');
+let mapContainer = document.querySelector('.show_map_iframe');
+let errorMessage = document.querySelector('.error_message');
 
-//     if (iframeContent.toLowerCase().indexOf('<iframe') === 0 || iframeContent === '') {
-//         errorMessage.textContent = '';
-//     } else {
-//         mapContainer.innerHTML   = '';
-//         errorMessage.textContent = 'Invalid or missing iframe.';
-//     }
+function updateMap() {
+    let iframeContent = iframeTextarea.value.trim();
+    mapContainer.innerHTML = iframeContent;
+
+    if (iframeContent.toLowerCase().indexOf('<iframe') === 0 || iframeContent === '') {
+        errorMessage.textContent = '';
+    } else {
+        mapContainer.innerHTML = '';
+        errorMessage.textContent = 'Invalid or missing iframe.';
+    }
+}
+iframeTextarea.addEventListener('input', updateMap);
+
+
+// show map by api
+
+// function initMap() {
+//     const map = new google.maps.Map(document.getElementById("map"), {
+//         center: { lat: 40.749933, lng: -73.98633 },
+//         zoom: 13,
+//         mapTypeControl: false,
+//     });
+//     const card = document.getElementById("pac-card");
+//     const input = document.getElementById("pac-input");
 // }
 
-// iframeTextarea.addEventListener('input', updateMap);
+document.addEventListener('DOMContentLoaded', function () {
+    updateMap();
 
-// document.addEventListener('DOMContentLoaded', updateMap);
+    // toggle show api_field or show iframe_field
+    function showApiField() {
+        document.querySelector('.api_field').style.display = 'block';
+        document.querySelector('.iframe_field').style.display = 'none';
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
-    var locationInput = document.getElementById("_location"); // Lấy tham chiếu đến ô input
+    function showIframeField() {
+        document.querySelector('.api_field').style.display = 'none';
+        document.querySelector('.iframe_field').style.display = 'block';
+    }
 
-    locationInput.addEventListener("change", function () {
-        var location = locationInput.value;
-        get_location_map(location);
+    // listen for events when radio input changes
+    const radioInputs = document.querySelectorAll('input[name="radio_input"]');
+    radioInputs.forEach(function (radioInput) {
+        radioInput.addEventListener('change', function () {
+            if (radioInput.value === 'api') {
+                showApiField();
+            } else {
+                showIframeField();
+            }
+        });
     });
+
+    const selectedRadioValue = document.querySelector('#selected_radio_value').value;
+    // Kiểm tra giá trị của hidden input và kiểm tra radio button tương ứng
+    if (selectedRadioValue === 'api') {
+        showApiField();
+        document.querySelector('input[name="radio_input"][value="api"]').checked = true;
+    } else if (selectedRadioValue === 'iframe') {
+        showIframeField();
+        document.querySelector('input[name="radio_input"][value="iframe"]').checked = true;
+    }
+
+    // function that update value of input when value changes
+    function updateSelectedRadioValue() {
+        const selectedRadio = document.querySelector('input[name="radio_input"]:checked');
+        if (selectedRadio) {
+            document.querySelector('#selected_radio_value').value = selectedRadio.value;
+        }
+    }
+
+    // event when value changes
+    radioInputs.forEach(function (radioInput) {
+        radioInput.addEventListener('change', updateSelectedRadioValue);
+    });
+
+    updateSelectedRadioValue();
 });
 
-function get_location_map(address) {
-    if (!address || !wpems_get_option('google_map_api_key')) {
-      return;
-    }
-  
-    var geocoder = new google.maps.Geocoder();
-  
-    geocoder.geocode({ address: address }, function (results, status) {
-      if (status === google.maps.GeocoderStatus.OK) {
-        var location = results[0].geometry.location;
-        var lat = location.lat(); // Lấy latitude
-        var lng = location.lng(); // Lấy longitude
-  
-        // Bây giờ bạn có lat và lng, có thể sử dụng chúng để hiển thị bản đồ hoặc làm gì đó khác bạn cần.
-        // Ví dụ: Hiển thị bản đồ bằng mã HTML
-        var mapHtml = '<div id="map"></div>';
-        document.getElementById("map-canvas").innerHTML = mapHtml;
-  
-        var map = new google.maps.Map(document.getElementById("map"), {
-          center: location,
-          zoom: 14
-        });
-  
-        var marker = new google.maps.Marker({
-          map: map,
-          position: location
-        });
-      } else {
-        // Xử lý trường hợp không tìm thấy địa chỉ
-        console.log("Không thể tìm thấy địa chỉ.");
-      }
-    });
-  }

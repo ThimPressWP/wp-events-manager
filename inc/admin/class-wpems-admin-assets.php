@@ -43,6 +43,7 @@ class WPEMS_Admin_Assets {
 			WPEMS_Assets::register_script( 'admin-events-settings', WPEMS_ASSETS_URI . '/js/admin/admin-events-schedules.js' );
 			WPEMS_Assets::register_script( 'admin-events-map', WPEMS_ASSETS_URI . '/js/admin/admin-events-map.js' );
 			WPEMS_Assets::register_script( 'sortable', WPEMS_ASSETS_URI . '/js/admin/libraries/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js' );
+			// WPEMS_Assets::register_script( 'sortable', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC1YtKgyk-HgkoB2rJXLfNZYezUvlyXWX0&callback=initMap&libraries=places&v=weekly' );
 		}
 	}
 	

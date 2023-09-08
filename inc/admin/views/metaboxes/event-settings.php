@@ -31,12 +31,12 @@ $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 
-$schedules_event 	= get_post_meta( $post_id, 'tp_event_schedules', true );
-$schedules       	= json_decode( $schedules_event, true );
+$schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
+$schedules       = json_decode( $schedules_event, true );
 
-$location_iframe 	= get_post_meta( $post_id, 'tp_event_iframe', true );
-$location 			= get_post_meta( $post_id, 'tp_event_location', true );
-
+$location_iframe      = get_post_meta( $post_id, 'tp_event_iframe', true );
+$location             = get_post_meta( $post_id, 'tp_event_location', true );
+$selected_radio_value = get_post_meta( $post_id, 'tp_event_selected_radio_value', true );
 
 ?>
 <div class="event_meta_box_container">
@@ -123,7 +123,7 @@ $location 			= get_post_meta( $post_id, 'tp_event_location', true );
 					endif;
 					?>
 				</div>
-				<input type="hidden" name="tp_event_schedules" id="tp_event_schedules" value="<?php echo isset( $schedules ) ? esc_html( json_encode( $schedules ) ) : ''; ?>">
+				<input type="hidden" name="<?php echo esc_attr( $prefix ); ?>schedules" id="tp_event_schedules" value="<?php echo isset( $schedules ) ? esc_html( json_encode( $schedules ) ) : ''; ?>">
 			</p>
 		</div>
 		<!-- End Schedule -->
@@ -133,14 +133,15 @@ $location 			= get_post_meta( $post_id, 'tp_event_location', true );
 			<label class="location_label"><?php _e( 'Location', 'wp-events-manager' ); ?></label>
 			<div class="contain_field">
 				<div class="use_api">
-					<input type="radio" name="radio_input"><h4><?php _e( 'Use Google API Key to show map', 'wp-events-manager' ); ?></h4>
+					<input type="radio" name="radio_input" value="api"><h4><?php _e( 'Use Google API Key to show map', 'wp-events-manager' ); ?></h4>
 				</div>
 				<div class="use_iframe">
-					<input type="radio" name="radio_input"><h4><?php _e( 'Use Iframe to show map', 'wp-events-manager' ); ?></h4>
+					<input type="radio" name="radio_input" value="iframe"><h4><?php _e( 'Use Iframe to show map', 'wp-events-manager' ); ?></h4>
 				</div>
+				<input type="hidden" name="<?php echo esc_attr( $prefix ); ?>selected_radio_value" id="selected_radio_value" value="<?php echo $selected_radio_value ? esc_attr( $selected_radio_value ) : ''; ?>">
 
 				<div class="api_field">
-					<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>">
+					<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>" placeholder="Add location">
 					<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
 					<p class="event-meta-notice">
 						<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
@@ -149,11 +150,11 @@ $location 			= get_post_meta( $post_id, 'tp_event_location', true );
 					<?php endif; ?>
 				</div>
 				
-				<!-- <div class="iframe_field">
-					<textarea class="short" name="<?php //echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php //echo isset( $location_iframe ) ? esc_attr( $location_iframe ) : ''; ?></textarea>
+				<div class="iframe_field">
+					<textarea class="short" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset( $location_iframe ) ? esc_attr( $location_iframe ) : ''; ?></textarea>
 					<div class="show_map_iframe"></div>
 					<div class="error_message"></div>
-				</div> -->
+				</div>
 			</div>
 		</div>
 		<!-- End Location -->
