@@ -63,6 +63,8 @@ class WPEMS_Frontend_Assets {
 		WPEMS_Assets::register_script( 'wpems-frontend-js', WPEMS_ASSETS_URI . '/js/frontend/events.js' );
 		WPEMS_Assets::register_style( 'wpems-fronted-css', WPEMS_ASSETS_URI . '/css/frontend/events.css' );
 
+		// event single page
+		WPEMS_Assets::register_script( 'wpems-single-page-js', WPEMS_ASSETS_URI . '/js/frontend/event-single-page.js' );
 	}
 
 }

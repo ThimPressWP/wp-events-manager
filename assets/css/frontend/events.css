@@ -18,9 +18,9 @@
     overflow: hidden;
 }
 
-.countdown-period {
+/* .countdown-period {
 
-}
+} */
 
 .countdown-descr {
     font-size: 13px !important;
@@ -210,16 +210,232 @@
     padding: 0 5px;
 }
 
+article.tp_single_event {
+    display: flex;
+    margin: 0 16%;
+}
+
+.tp_single_event .entry-summary {
+    flex: 3;
+}
+
+.tp_single_event .entry-summary .entry-title,
+.tp_single_event .entry-summary .entry-thumbnail,
+.tp_single_event .entry-summary .entry-information,
+.tp_single_event .entry-summary .entry-content,
+.tp_single_event .entry-summary .entry-location,
+.tp_single_event .entry-summary .entry-schedule {
+    margin-top: 16px;
+}
+
+.tp_single_event .entry-summary .entry-title h3 {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.tp_single_event .entry-summary .entry-thumbnail img {
+    margin: 20px 0;
+}
+
+.tp_single_event .entry-summary .entry-information table td {
+    width: 33.33%;
+}
+
+.tp_single_event .entry-summary .entry-information table td .title {
+    display: flex;
+}
+
+.tp_single_event .entry-summary .entry-information table td .title .dashicons {
+    margin-right: 8px;
+    color: #ffb606;
+}
+
+.tp_single_event .entry-summary .entry-information table td .title h6 {
+    font-size: 14px;
+}
+
+.tp_single_event .entry-summary .entry-information table td .content {
+    font-size: 14px;
+}
+
+.tp_single_event .entry-summary .entry-content {
+    border: 1px solid #757575;
+}
+
+.tp_single_event .entry-summary .entry-content p {
+    padding: 12px 20px;
+    font-size: 15px;
+}
+
+.tp_single_event .entry-summary .entry-location {
+    border: 1px solid #757575;
+    padding: 12px 20px;
+}
+
+.tp_single_event .entry-summary .entry-location h6,
+.tp_single_event .entry-summary .entry-schedule h6 {
+    margin-bottom: 12px;
+}
+
+.tp_single_event .entry-summary .entry-location iframe {
+    width: 100%;
+    height: 300px;
+    box-shadow: 0px 0px 5px 0px #9e9d9d;
+}
+
+.tp_single_event .entry-summary .entry-schedule {
+    border: 1px solid #757575;
+    padding: 12px 20px;
+}
+
+.tp_single_event .entry-summary .entry-schedule .schedule_body-header {
+    display: flex;
+    background-color: #ffb606;
+    justify-content: space-between;
+    height: 32px;
+    padding: 4px 14px;
+}
+
+.tp_single_event .entry-summary .entry-schedule .schedule_body-header .schedule_title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #fff;
+    align-items: center;
+}
+
+.tp_single_event .entry-summary .entry-schedule .schedule_body-header .dashicons-minus,
+.tp_single_event .entry-summary .entry-schedule .schedule_body-header .dashicons-plus {
+    background-color: transparent;
+    color: #fff;
+    width: 20px;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+}
+
+.tp_single_event .entry-summary .entry-schedule .schedule_body-header .dashicons-plus {
+    display: none;
+}
+
+.tp_single_event .entry-summary .entry-schedule .schedule_body {
+    margin-bottom: 20px;
+}
+
+.tp_single_event .entry-summary .entry-schedule .schedule_body-content {
+    border: 1px solid #757575;
+    border-top: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px;
+}
+
+.tp_single_event .entry-register {
+    flex: 1;
+    border: 1px solid #ccc;
+    height: min-content;
+    margin: 20px 0 0 24px;
+    font-size: 16px;
+}
+
+.tp_single_event .entry-register .label_register {
+    padding: 20px;
+    background: #ffb606;
+}
+
+.tp_single_event .entry-register .label_register h3 {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tp_single_event .entry-register ul {
+    list-style-type: none;
+    padding: 0;
+    padding: 0 12px;
+}
+
+.tp_single_event .entry-register ul li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.tp_single_event .entry-register ul li span,
+.tp_single_event .entry-register ul li div {
+    padding: 12px 0;
+}
+
+.tp_single_event .entry-register ul .price .detail {
+    color: #ffb606;
+    font-weight: bold;
+}
+
+.tp_single_event .entry-register ul .edit_quantity {
+    font-weight: bold;
+}
+
+.tp_single_event .entry-register ul .quantity-btn {
+    padding: 4px;
+    cursor: pointer;
+}
+
+.tp_single_event .entry-register .payment_method {
+    padding: 12px;
+}
+
+.tp_single_event .entry-register .payment_method label {
+    color: #7a7a7a;
+}
+
+.tp_single_event .entry-register .payment_method img {
+    width: 100%;
+    margin: 16px 0;
+}
+
+.tp_single_event .entry-register .event_auth_button {
+    display: flex;
+    justify-content: center;
+    margin: 0 45px 12px;
+    font-size: 14px;
+    background-color: #ffb606
+}
+
+.tp_single_event .entry-register .media_block {
+    margin: 0 12px 20px;
+}
+
+.tp_single_event .entry-register .media_block p {
+    padding: 12px 0;
+}
+
+.tp_single_event .entry-register .media_block a {
+    text-decoration: none;
+    border: 2px solid #818181;
+    color: #818181;
+    border-radius: 50%;
+    padding: 2px;
+    align-items: center;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.tp_single_event .entry-register .media_block a span {
+    font-size: 16px;
+    padding-top: 5px;
+}
+
+
 #content article.tp_single_event .entry-content {
     float: none;
     width: 100%;
 }
 
-.single-tp_event .entry-register a {
+/* .single-tp_event .entry-register a {
     display: inline-block;
     margin-top: -10px;
     margin-bottom: 20px;
-}
+} */
 
 .wpems_g_calendar_url{
     display: block !important;
@@ -403,7 +619,7 @@ margin: 0;
     align-items: center;
     width: 100%;
     margin: 20px 0;
-    box-shadow: 0px 0px 34px -22px #000000; 
+    box-shadow: 0px 0px 34px -22px #757575; 
     height: 35vh;
 }
 .left {

@@ -253,6 +253,7 @@ if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 		return get_post_meta( $post->ID, 'tp_event_location', true );
 	}
 
+
 	/**
 	 * get event booking note
 	 *
@@ -306,6 +307,30 @@ if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 		></div>
 		<?php
 	}
+
+	function wpems_event_iframe_map( $post = null ) {
+		if ( ! $post ) {
+			$post = get_post();
+		}
+
+		return get_post_meta( $post->ID, 'tp_event_iframe', true );
+	}
+
+
+	/**
+	 * get event schedule
+	 *
+	 * @param  string $format
+	 *
+	 * @return string
+	 */
+	function wpems_event_schedule( $post = null ) {
+		if ( ! $post ) {
+			$post = get_post();
+		}
+
+		return get_post_meta( $post->ID, 'tp_event_schedules', true );
+	}
 }
 add_action( 'tp_event_before_main_content', 'wpems_before_main_content' );
 if ( ! function_exists( 'wpems_before_main_content' ) ) {
@@ -356,6 +381,14 @@ if ( ! function_exists( 'wpems_single_event_thumbnail' ) ) {
 	}
 }
 
+add_action( 'tp_event_loop_event_information', 'wpems_loop_event_information' );
+if ( ! function_exists( 'wpems_loop_event_information' ) ) {
+
+	function wpems_loop_event_information() {
+		wpems_get_template( 'loop/information.php' );
+	}
+}
+
 add_action( 'tp_event_loop_event_countdown', 'wpems_loop_event_countdown' );
 if ( ! function_exists( 'wpems_loop_event_countdown' ) ) {
 
@@ -398,6 +431,14 @@ if ( ! function_exists( 'wpems_loop_event_location' ) ) {
 
 	function wpems_loop_event_location() {
 		wpems_get_template( 'loop/location.php' );
+	}
+}
+
+add_action( 'tp_event_loop_schedule', 'wpems_loop_event_schedule' );
+if ( ! function_exists( 'wpems_loop_event_schedule' ) ) {
+
+	function wpems_loop_event_schedule() {
+		wpems_get_template( 'loop/schedule.php' );
 	}
 }
 

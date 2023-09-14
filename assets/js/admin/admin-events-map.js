@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const selectedRadioValue = document.querySelector('#selected_radio_value').value;
-    // Kiểm tra giá trị của hidden input và kiểm tra radio button tương ứng
+    // check value hidden input and radio input
     if (selectedRadioValue === 'api') {
         showApiField();
         document.querySelector('input[name="radio_input"][value="api"]').checked = true;

@@ -39,24 +39,41 @@ if ( absint( $event->qty ) == 0 || get_post_meta( get_the_ID(), 'tp_event_status
 ?>
 
 <div class="entry-register">
+	<div class="label_register">
+		<h3>BUY TICKET</h3>
+	</div>
 
 	<ul class="event-info">
 		<li class="total">
-			<span class="label"><?php _e( 'Total Slot:', 'wp-events-manager' ); ?></span>
+			<span class="label"><?php _e( 'Total Tickets:', 'wp-events-manager' ); ?></span>
 			<span class="detail"><?php echo esc_html( absint( $event->qty ) ); ?></span>
 		</li>
 		<li class="booking_slot">
-			<span class="label"><?php _e( 'Booked Slot:', 'wp-events-manager' ); ?></span>
+			<span class="label"><?php _e( 'Booked Tickets:', 'wp-events-manager' ); ?></span>
 			<span class="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ); ?></span>
 		</li>
 		<li class="price">
 			<span class="label"><?php _e( 'Cost:', 'wp-events-manager' ); ?></span>
 			<span class="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'wp-events-manager' ) : wpems_format_price( $event->get_price() ) ); ?></span>
 		</li>
+		<li class="quantity">
+			<span class="label"><?php _e( 'quantity:', 'wp-events-manager' ); ?></span>
+			<!-- <span class="detail"><?php// echo esc_html( absint( $event->booked_quantity() ) ); ?></span> -->
+			<div class="edit_quantity">
+				<span class="quantity-btn decrease-btn">-</span>
+				<span class="no_tickets">0</span>
+				<input type="hidden" name="input_no_tickets">
+				<span class="quantity-btn increase-btn">+</span>
+			</div>
+		</li>
 	</ul>
 
 	<?php if ( is_user_logged_in() ) { ?>
-		<a class="wpems_g_calendar_url" href="<?php esc_attr( $g_calendar_link ); ?>" target="_blank"><img src="https://www.google.com/calendar/images/ext/gc_button2.gif" alt="0" border="0"></a>
+		<div class="payment_method">
+
+			<label>Pay with</label>
+			<a class="wpems_g_calendar_url" href="<?php esc_attr( $g_calendar_link ); ?>" target="_blank"><img src="https://www.google.com/calendar/images/ext/gc_button2.gif" alt="0" border="0"></a>
+		</div>
 		<?php
 		$registered_time = $event->booked_quantity( get_current_user_id() );
 		if ( $registered_time && wpems_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) {
@@ -69,5 +86,13 @@ if ( absint( $event->qty ) == 0 || get_post_meta( get_the_ID(), 'tp_event_status
 	<?php } else { ?>
 		<p><?php echo sprintf( __( 'You must <a href="%s">login</a> before register event.', 'wp-events-manager' ), wpems_login_url() ); ?></p>
 	<?php } ?>
+
+	<div class="media_block">
+		<p>Share With Friends</p>
+		<a href="#"><span class="dashicons dashicons-facebook-alt"></span></a>
+		<a href="#"><span class="dashicons dashicons-twitter"></span></a>
+		<a href="#"><span class="dashicons dashicons-pinterest"></span></a>
+		<a href="#"><span class="dashicons dashicons-linkedin"></span></a>
+	</div>
 
 </div>

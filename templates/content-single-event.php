@@ -39,6 +39,11 @@ defined( 'ABSPATH' ) || exit();
 		do_action( 'tp_event_single_event_thumbnail' );
 
 		/**
+		 * tp_event_single_event_thumbnail hook
+		 */
+		do_action( 'tp_event_loop_event_information' );
+
+		/**
 		 * tp_event_loop_event_countdown hook
 		 */
 		do_action( 'tp_event_loop_event_countdown' );
@@ -52,6 +57,11 @@ defined( 'ABSPATH' ) || exit();
 		 * tp_event_loop_event_location hook
 		 */
 		do_action( 'tp_event_loop_event_location' );
+
+		/**
+		 * tp_event_loop_event_location hook
+		 */
+		do_action( 'tp_event_loop_schedule' );
 		?>
 
 	</div><!-- .summary -->

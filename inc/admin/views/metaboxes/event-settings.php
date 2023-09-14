@@ -31,6 +31,7 @@ $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 
+$is_checked      = metadata_exists( 'post', $post_id, 'tp_event_schedule_checkbox' ) ? get_post_meta( $post_id, 'tp_event_schedule_checkbox', true ) : '';
 $schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
 $schedules       = json_decode( $schedules_event, true );
 
@@ -89,7 +90,7 @@ $selected_radio_value = get_post_meta( $post_id, 'tp_event_selected_radio_value'
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_schedule"><?php _e( 'Schedule', 'wp-events-manager' ); ?></label>
-				<input type="checkbox" class="short" name="<?php echo esc_attr( $prefix ); ?>schedule_checkbox" id="_schedule_checkbox">
+				<input type="checkbox" class="short" name="<?php echo esc_attr( $prefix ); ?>schedule_checkbox" id="_schedule_checkbox" <?php echo $is_checked == 'on' ? 'checked' : ''; ?>>
 				<span>Enable/Disable Schedule section on the frontend</span>
 				<div class="form_info-container">
 					<button id="add_form_info-btn">+ Add more</button>

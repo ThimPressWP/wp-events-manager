@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit();
 	<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) : ?>
 		<h4><a href="<?php the_permalink(); ?>">
 	<?php else : ?>
-		<h1>
+		<h3>
 	<?php endif; ?>
 			<?php the_title(); ?>
 	<?php if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) : ?>
