@@ -36,6 +36,7 @@ $schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
 $schedules       = json_decode( $schedules_event, true );
 
 $location_iframe      = get_post_meta( $post_id, 'tp_event_iframe', true );
+$location_name_iframe = get_post_meta( $post_id, 'tp_event_location_iframe', true );
 $location             = get_post_meta( $post_id, 'tp_event_location', true );
 $selected_radio_value = get_post_meta( $post_id, 'tp_event_selected_radio_value', true );
 
@@ -152,6 +153,7 @@ $selected_radio_value = get_post_meta( $post_id, 'tp_event_selected_radio_value'
 				</div>
 				
 				<div class="iframe_field">
+					<input type="text" name="<?php echo esc_attr( $prefix ); ?>location_iframe" placeholder="Add location name of iframe" value="<?php echo isset( $location_name_iframe ) ? esc_attr( $location_name_iframe ) : ''; ?>">
 					<textarea class="short" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset( $location_iframe ) ? esc_attr( $location_iframe ) : ''; ?></textarea>
 					<div class="show_map_iframe"></div>
 					<div class="error_message"></div>

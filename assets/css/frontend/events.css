@@ -335,7 +335,8 @@ article.tp_single_event {
     border: 1px solid #ccc;
     height: min-content;
     margin: 20px 0 0 24px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .tp_single_event .entry-register .label_register {
@@ -373,6 +374,7 @@ article.tp_single_event {
 
 .tp_single_event .entry-register ul .edit_quantity {
     font-weight: bold;
+    font-size: 18px;
 }
 
 .tp_single_event .entry-register ul .quantity-btn {
@@ -398,7 +400,11 @@ article.tp_single_event {
     justify-content: center;
     margin: 0 45px 12px;
     font-size: 14px;
-    background-color: #ffb606
+    background-color: #ffb606;
+}
+
+.tp_single_event .entry-register p {
+    padding: 8px 12px 0 12px;
 }
 
 .tp_single_event .entry-register .media_block {

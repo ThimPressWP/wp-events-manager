@@ -22,7 +22,7 @@ $end_time          = get_post_meta( $post->ID, 'tp_event_time_end', true );
 $end_date          = get_post_meta( $post->ID, 'tp_event_date_end', true );
 $register_end_time = get_post_meta( $post->ID, 'tp_event_registration_end_time', true );
 $register_end_date = get_post_meta( $post->ID, 'tp_event_registration_end_date', true );
-$location_f        = get_post_meta( $post->ID, 'tp_event_location', true );
+$location_f        = get_post_meta( $post->ID, 'tp_event_location_iframe', true );
 
 ?>
 <div class="entry-information">

@@ -45,19 +45,19 @@ if ( absint( $event->qty ) == 0 || get_post_meta( get_the_ID(), 'tp_event_status
 
 	<ul class="event-info">
 		<li class="total">
-			<span class="label"><?php _e( 'Total Tickets:', 'wp-events-manager' ); ?></span>
+			<span class="label"><?php _e( 'Total Tickets', 'wp-events-manager' ); ?></span>
 			<span class="detail"><?php echo esc_html( absint( $event->qty ) ); ?></span>
 		</li>
 		<li class="booking_slot">
-			<span class="label"><?php _e( 'Booked Tickets:', 'wp-events-manager' ); ?></span>
+			<span class="label"><?php _e( 'Booked Tickets', 'wp-events-manager' ); ?></span>
 			<span class="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ); ?></span>
 		</li>
 		<li class="price">
-			<span class="label"><?php _e( 'Cost:', 'wp-events-manager' ); ?></span>
+			<span class="label"><?php _e( 'Cost', 'wp-events-manager' ); ?></span>
 			<span class="detail"><?php printf( '%s', $event->is_free() ? __( 'Free', 'wp-events-manager' ) : wpems_format_price( $event->get_price() ) ); ?></span>
 		</li>
 		<li class="quantity">
-			<span class="label"><?php _e( 'quantity:', 'wp-events-manager' ); ?></span>
+			<span class="label"><?php _e( 'Quantity', 'wp-events-manager' ); ?></span>
 			<!-- <span class="detail"><?php// echo esc_html( absint( $event->booked_quantity() ) ); ?></span> -->
 			<div class="edit_quantity">
 				<span class="quantity-btn decrease-btn">-</span>
