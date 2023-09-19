@@ -417,3 +417,10 @@
 	border-radius: 8px;
 	box-shadow: 5px 4px 16px 2px rgba(0,0,0,0.56);
 }
+
+#wpbody-content .wrap .submit{
+	display: none;
+}
+#authorization {
+	display: inline-block;
+}

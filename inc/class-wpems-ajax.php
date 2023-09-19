@@ -26,6 +26,7 @@ class WPEMS_Ajax {
 			'event_auth_register' => false,
 			'event_login_action'  => true,
 			'load_form_register'  => true,
+			'save_client_id'      => true,
 		);
 
 		foreach ( $actions as $action => $nopriv ) {
@@ -34,6 +35,32 @@ class WPEMS_Ajax {
 				add_action( 'wp_ajax_nopriv_' . $action, array( $this, $action ) );
 			} else {
 				add_action( 'wp_ajax_nopriv_' . $action, array( $this, 'must_login' ) );
+			}
+		}
+	}
+
+	// To save user information of google calendar to usermeta
+
+
+	public function save_client_id() {
+		// Check nonce for security
+		// var_dump( $_POST['tp-event-sync-google-calendar-nonce'] );
+		if ( ! isset( $_POST['tp-event-sync-google-calendar-nonce'] ) || ! wp_verify_nonce( $_POST['tp-event-sync-google-calendar-nonce'], 'tp-event-sync-google-calendar-action' ) ) {
+				wp_send_json_error( array( 'message' => 'Nonce verification failed.' ) );
+			exit;
+
+		} else {
+			$user_id = get_current_user_id();
+
+			if ( $user_id ) {
+
+				$client_id = $_POST['client_id'];
+
+				// Update user meta with the values
+				update_user_meta( $user_id, 'google_client_id', $client_id );
+				wp_send_json_success( array( 'message' => 'API key and Client ID saved successfully.' ) );
+			} else {
+				wp_send_json_error( array( 'message' => 'User not logged in.' ) );
 			}
 		}
 	}

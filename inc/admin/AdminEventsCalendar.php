@@ -1,21 +1,20 @@
 <?php
 
-use WPEMS\Event_Db as Db;
+use WPEMS\Model as Md;
 
-class WPEMS_Admin_Event_Calendar {
+class AdminEventCalendar {
 
 	public static function output() {
 		// Calendar
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
-		$eventDB = new Db\WPEMS_Event_DB();
+		$eventDB = new Md\WpemsEventsModel();
 		$events  = $eventDB->calendar_data();
 
 		if ( ! is_array( $events ) ) {
 			return;
 		}
 		wp_localize_script( 'wpems-admin-calendar-js', 'eventData', $events );
-
 		?>
 		<div id='calendar-admin'></div>
 		<div class='wrapper-event'>

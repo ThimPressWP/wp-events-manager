@@ -25,7 +25,8 @@ class WPEMS_Admin {
 		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-metaboxes.php' );
 		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-settings.php' );
 		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-users.php' );
-		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-event-calendar.php' );
+		include( WPEMS_PATH . 'inc/admin/AdminEventsCalendar.php' );
+		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-sync-google-calendar.php' );
 	}
 
 }

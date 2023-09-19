@@ -14,70 +14,107 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-$list_event = new WP_Query( $args );
+
+wp_enqueue_script( 'wpems-litepicker-lb' );
+wp_enqueue_script( 'wpems-ranges-lb' );
+wp_enqueue_script( 'wpems-event-list-js' );
+
+use WPEMS\Templates as Template;
+$filterTemplate      = new Template\WpemsFilterTemplate();
+$singleEventTemplate = new Template\WpemsSingleEventTemplate();
+$eventsTemplate      = new Template\WpemsEventsTemplate();
+
+
 ?>
 
-<?php
-/**
- * tp_event_before_main_content hook
- *
- * @hooked tp_event_output_content_wrapper - 10 (outputs opening divs for the content)
- * @hooked tp_event_breadcrumb - 20
- */
-do_action( 'tp_event_before_main_content' );
-?>
+<div class="eventListDisplay ">
+	<!-- Search, Filter feature -->
+	<div class='search-filter'>
+		<form action="" method='GET' > 			
+			<div class="search_status_type_category">
+				
+				<!-- Search input -->
+				<div class="wrapper_input_search">
+					<?php echo $filterTemplate->html_input_text( 'wpems_keyword', 'input_search', 'Enter Keywords', $args['filter_by_input_search'] ); ?>
+				</div>
 
-<?php
-/**
- * tp_event_archive_description hook
- *
- * @hooked tp_event_taxonomy_archive_description - 10
- * @hooked tp_event_room_archive_description - 10
- */
-do_action( 'tp_event_archive_description' );
-?>
+				<!-- Status -->
+				<div class="wrapper_status">
+					<select name='<?php echo esc_attr( 'wpems_status' ); ?>' class="status" id="status" >
+						<option value="">Status</option>
+						<option value="expired"  <?php echo selected( $args['filter_by_status'], 'expired' ); ?>>Expired</option>
+						<option value="upcoming"  <?php echo selected( $args['filter_by_status'], 'upcoming' ); ?>>Upcoming</option>
+						<option value="happening"  <?php echo selected( $args['filter_by_status'], 'happening' ); ?>>Happening</option>
+					</select>
+				</div>
 
-<?php if ( $list_event->have_posts() ) : ?>
+				<!-- Type -->
+				<div class="wrapper_type">
+					<?php echo $filterTemplate->html_select( 'wpems_type', 'type', 'Type', $args['types'], $args['filter_by_type'] ); ?>
+				</div>
 
-	<?php
-	/**
-	 * tp_event_before_event_loop hook
-	 *
-	 * @hooked tp_event_result_count - 20
-	 * @hooked tp_event_catalog_ordering - 30
-	 */
-	do_action( 'tp_event_before_event_loop' );
-	?>
+				<!-- Category -->
+				<div class="wrapper_type">				
+					<?php echo $filterTemplate->html_select( 'wpems_category', 'category', 'Event Category', $args['categories'], $args['filter_by_category'] ); ?>			
+				</div>
+			</div>
+	
+			<div class="date_price_submit">
+				<!-- Date Ranger -->		
+				<div class="wrapper_date">
+					<?php echo $filterTemplate->html_input_text( 'wpems_date', 'date', 'Select Date Ranger', $args['dateInput'] ); ?>
+				</div>	
+				
+				<!-- Price Ranger -->
+				<div class="wrapper_price">
+					<div class="wrapper_min">
+						<?php echo $filterTemplate->html_input_number( 'wpems_price_min', 'price_min', 'Min Price', $args['getPriceMin'] ); ?>
+						<?php echo $filterTemplate->html_price_filter( 'priceOfMin', $args['numbers'], 'data-min-value' ); ?>
+					</div>					
+					<div class='lowTohigh'><span class="dashicons dashicons-minus"></span></div>				
+					<div class="wrapper_max">
+						<?php echo $filterTemplate->html_input_number( 'wpems_price_max', 'price_max', 'Max Price', $args['getPriceMax'] ); ?>
+						<?php echo $filterTemplate->html_price_filter( 'priceOfMax', $args['numbers'], 'data-max-value' ); ?>				
+					</div>					
+				</div>
 
-	<ul>
+				<!-- Search button -->
+				<button name="search_event_list" type="submit" id="event-search-btn">Search</button>				
+			</div>
+		</form>
+	</div>
 
-		<?php
-		while ( $list_event->have_posts() ) :
-			$list_event->the_post();
+	<!-- Show result and release date -->
+	<div class="showResult">
+		<div>
+			<?php
+			if ( ! isset( $args['posts'] ) || count( $args['posts'] ) === 0 ) {
+				?>
+						<p><?php echo esc_html__( 'Showing 0 results.' ); ?></p>
+					<?php
+			} else {
+				?>
+						<p><?php echo esc_html( 'Showing ' . $args['current_item_start'] . ' - ' . $args['current_item_end'] . ' of ' . $args['totalPost'] . ' results ' ); ?> </p> 
+					<?php
+			};
 			?>
+							
+		</div>
+		
+		<!-- Order by -->
+		<div>		
+			<select class="orderby" id='orderby'>
+				<option value='' >Release Date (newest first)</option>
+				<option value="a-z"  <?php echo selected( $args['order_by'], 'a-z' ); ?>>A - Z</option>
+				<option value="z-a"  <?php echo selected( $args['order_by'], 'z-a' ); ?>>Z - A</option>
+				<option value="high-low"  <?php echo selected( $args['order_by'], 'high-low' ); ?>>Price: High - Low</option>
+				<option value="low-high"  <?php echo selected( $args['order_by'], 'low-high' ); ?>>Price: Low - High</option>
+			</select>
+		</div>
+	</div>
 
-			<?php wpems_get_template_part( 'content', 'event' ); ?>
 
-		<?php endwhile; // end of the loop. ?>
-
-	</ul>
-
-	<?php
-	/**
-	 * tp_event_after_event_loop hook
-	 *
-	 * @hooked tp_event_pagination - 10
-	 */
-	do_action( 'tp_event_after_event_loop' );
-	?>
-
-<?php endif; ?>
-
-<?php
-/**
- * tp_event_after_main_content hook
- *
- * @hooked tp_event_output_content_wrapper_end - 10 (outputs closing divs for the content)
- */
-do_action( 'tp_event_after_main_content' );
-?>
+	<div><?php //echo $eventsTemplate->html_single_event(59); ?></div>
+	<div><?php echo $eventsTemplate->html_events_list( $args['posts'] ); ?></div>
+	<div><?php echo $filterTemplate->html_pagination( $args['max_num_pages'], $args['pageIndex'] ); ?></div>
+</div>

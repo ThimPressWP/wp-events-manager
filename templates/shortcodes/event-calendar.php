@@ -1,9 +1,9 @@
 <?php
-use WPEMS\Event_Db as Db;
+use WPEMS\Model as Md;
 
 wp_enqueue_script( 'wpems-calendar-js' );
 
-$eventDB = new Db\WPEMS_Event_DB();
+$eventDB = new Md\WpemsEventsModel();
 $events  = $eventDB->calendar_data();
 
 if ( ! is_array( $events ) ) {
