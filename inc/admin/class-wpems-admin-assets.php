@@ -28,10 +28,6 @@ class WPEMS_Admin_Assets {
 	 * @param type $hook
 	 */
 	public static function register_scripts( $hook ) {
-		WPEMS_Assets::register_script( 'wpems-sync-google-js', WPEMS_ASSETS_URI . '/js/admin/admin-events-sync-google.js');
-	
-
-
 		// Calendar
 		WPEMS_Assets::register_script('wpems-fullcalendar-lb', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js');
 		WPEMS_Assets::register_script( 'wpems-admin-calendar-js', WPEMS_ASSETS_URI . '/js/admin/admin-events-calendar.js', array('wpems-fullcalendar-lb'  ));

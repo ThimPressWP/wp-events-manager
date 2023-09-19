@@ -24,9 +24,7 @@ $filterTemplate      = new Template\WpemsFilterTemplate();
 $singleEventTemplate = new Template\WpemsSingleEventTemplate();
 $eventsTemplate      = new Template\WpemsEventsTemplate();
 
-
 ?>
-
 <div class="eventListDisplay ">
 	<!-- Search, Filter feature -->
 	<div class='search-filter'>
@@ -113,8 +111,6 @@ $eventsTemplate      = new Template\WpemsEventsTemplate();
 		</div>
 	</div>
 
-
-	<div><?php //echo $eventsTemplate->html_single_event(59); ?></div>
 	<div><?php echo $eventsTemplate->html_events_list( $args['posts'] ); ?></div>
 	<div><?php echo $filterTemplate->html_pagination( $args['max_num_pages'], $args['pageIndex'] ); ?></div>
 </div>

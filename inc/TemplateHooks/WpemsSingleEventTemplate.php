@@ -17,9 +17,6 @@ class WpemsSingleEventTemplate {
 	 */
 	public function html_title( $event ): string {
 		$title = isset( $event ) && isset( $event->post_title ) ? $event->post_title : '';
-		// 	echo '<pre>';
-		// \print_r($event);
-		// echo '</pre>';
 		$html_template = '<div class="event-title"><span>%s</span></div>';
 		return sprintf( $html_template, esc_html( ucfirst( $title ) ) );
 	}

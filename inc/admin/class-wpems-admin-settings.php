@@ -29,7 +29,6 @@ class WPEMS_Admin_Settings {
 		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-pages.php';
 		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-emails.php';
 		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-checkout.php';
-		$settings[] = require_once WPEMS_INC . 'admin/settings/class-wpems-admin-setting-sync-google-calendar.php';
 		return apply_filters( 'event_admin_setting_pages', $settings );
 	}
 

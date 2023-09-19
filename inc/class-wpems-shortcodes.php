@@ -33,7 +33,6 @@ class WPEMS_Shortcodes {
 			'account'         => __CLASS__ . '::account',
 			'countdown'       => __CLASS__ . '::countdown',
 			'calendars'       => __CLASS__ . '::event_calendars',
-			'sync'            => __CLASS__ . '::sync_google_calendar',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
@@ -361,31 +360,6 @@ class WPEMS_Shortcodes {
 	 */
 	public static function event_calendars() {
 		return WPEMS_Shortcodes::render( 'event-calendar', 'event-calendar.php' );
-	}
-
-	/**
-	 * Sync google calendar
-	 * @param $atts
-	 * @return string
-	 */
-	public static function sync_google_calendar( $atts ) {
-		try {
-			$sync = new WPEMS_Sync_Google_Calendar();
-			$sync->sync_google_calendar();
-
-			$id           = get_current_user_id();
-			$access_token = get_user_meta( $id, 'access_token', true );
-
-			$atts = shortcode_atts(
-				array(
-					'access_token' => $access_token,
-				),
-				$atts
-			);
-			return WPEMS_Shortcodes::render( 'event-sync-google', 'sync-booked-event.php', array( 'args' => $atts ) );
-		} catch ( Throwable $e ) {
-			echo 'Something was wrong: ' . $e->getMessage();
-		}
 	}
 }
 
