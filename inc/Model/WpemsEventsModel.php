@@ -4,26 +4,6 @@ namespace WPEMS\Model;
 use Throwable;
 
 class WpemsEventsModel {
-	/**
-	 * Save client id and client secret and code to database for sync booked event to google calendar
-	 * @param string  $client_id
-	 * @param string  $client_secret
-	 * @param string  $code - get from the url of google
-	 */
-	public function save_user_info( string $client_id, string $client_secret, string $code ) {
-		$user_id = get_current_user_id();
-
-		if ( $user_id && ! empty( $client_id ) && ! empty( $client_secret ) ) {
-
-			// Update user meta with the values
-			update_user_meta( $user_id, 'google_client_id', $client_id );
-			update_user_meta( $user_id, 'google_client_secret', $client_secret );
-			update_user_meta( $user_id, 'google_client_code', $code );
-			$_SESSION['save_google_info'] = 'API key and Client ID saved successfully. ';
-		} else {
-			wp_send_json_error( array( 'message' => 'User not logged in.' ) );
-		}
-	}
 
 	/**
 	 * To get posts data when it has filter condition
