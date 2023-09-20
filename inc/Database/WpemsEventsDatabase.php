@@ -59,15 +59,16 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 		return $array;
 	}
 
+    /**
+	 * Get data form post term table
+	 * @param int $id of the post
+     * @param string $term: the name of term
+     * ret
+	 */
 	public function get_postTerms( int $id, string $term ) {
 		$item = null;
 		if ( ! empty( $id ) && ! empty( $term ) ) {
-			$getPostTerms = wp_get_post_terms( $id, $term );
-			if ( isset( $getPostTerms ) ) {
-				foreach ( $getPostTerms as $postTerm ) {
-					$item = $postTerm->name;
-				}
-			}
+			$item = wp_get_post_terms( $id, $term );
 		}
 		return $item;
 	}

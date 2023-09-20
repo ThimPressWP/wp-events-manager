@@ -18,15 +18,19 @@ document.addEventListener('DOMContentLoaded', function() {
               for (let i = 0; i < eventData.length; i++) {
                 const eventDataId = Number(eventData[i]?.id);
                 // Show this element when a click event occurs
+
                 if (id !== null && Number(id) === eventDataId) {
+                  let types = eventData[i]?.types?.map((item) => item?.name?.charAt(0).toUpperCase() + item?.name?.slice(1));
+                  let categories = eventData[i]?.categories?.map((item) => item?.name?.charAt(0).toUpperCase() + item?.name?.slice(1));
+
                   showEvent.innerHTML = `
-                    <h3>${eventData[i]?.title.charAt(0).toUpperCase() + eventData[i]?.title.slice(1)}</h3>
-                    <p><strong>Time:</strong> ${eventData[i]?.date_start} ${eventData[i]?.time_start} - ${eventData[i]?.date_end} ${eventData[i]?.time_end}</p>
-                    <p><strong>Location:</strong> ${eventData[i]?.location.charAt(0).toUpperCase() + eventData[i]?.location.slice(1) }</p>
-                    <p><strong>Total tickets:</strong> ${eventData[i]?.totalTicket}</p>
-                    <p><strong>Price:</strong> $${eventData[i]?.price}</p>
-                    <p><strong>Type:</strong> ${eventData[i]?.type.charAt(0).toUpperCase() + eventData[i]?.type.slice(1) }</p>
-                    <p><strong>Category:</strong> ${(eventData[i]?.category.charAt(0).toUpperCase() + eventData[i]?.category.slice(1) )}</p>
+                    <h3>${eventData[i]?.title.charAt(0).toUpperCase() + eventData[i]?.title?.slice(1) || ''}</h3>
+                    <p><strong>Time:</strong> ${eventData[i]?.date_start} ${eventData[i]?.time_start} - ${eventData[i]?.date_end} ${eventData[i]?.time_end }</p>
+                    <p><strong>Location:</strong> ${eventData[i]?.location?.charAt(0).toUpperCase() + eventData[i]?.location?.slice(1)  || ''}</p>
+                    <p><strong>Total tickets:</strong> ${eventData[i]?.totalTicket || ''}</p>
+                    <p><strong>Price:</strong> $${eventData[i]?.price || ''}</p>
+                    <p><strong>Type:</strong> ${ types.map(item => item) || ''} </p>
+                    <p><strong>Category:</strong> ${categories.map(item => item) || ''}</p>
                   `;
                   showEvent.style.display = 'block';
                   showEvent.style.padding = '20px';

@@ -138,9 +138,8 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 			$posts           = $this->data->get_postsMeta( $getPosts );
 
 			foreach ( $posts as $key => $value ) {
-				$type = $this->data->get_postTerms( $value->ID, 'tp_event_type' );
-
-				$category = $this->data->get_postTerms( $value->ID, 'tp_event_category' );
+				$types = $this->data->get_postTerms( $value->ID, 'tp_event_type' );
+				$categories = $this->data->get_postTerms( $value->ID, 'tp_event_category' );
 
 				$calendar_events[] = array(
 					'id'          => $value->ID,
@@ -154,8 +153,8 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 					'location'    => $value->location,
 					'price'       => floatval( $value->price ),
 					'totalTicket' => floatval( $value->totalTicket ),
-					'type'        => $type,
-					'category'    => $category,
+					'types'        => $types,
+					'categories'    => $categories,
 				);
 			}
 			return $calendar_events;

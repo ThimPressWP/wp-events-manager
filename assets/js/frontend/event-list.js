@@ -55,11 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
                 const currentUrl = lpGetCurrentURLNoParam();
                 window.location.href = lpAddQueryArgs( currentUrl, filterEvents );
-                //window.location.href = 'http://localhost:10022/event-list?tp_event_order_by=low-high';
             });
-
         }
-
     });
 });
 
