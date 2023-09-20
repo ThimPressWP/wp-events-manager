@@ -8,7 +8,7 @@ class AdminEventCalendar {
 		// Calendar
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
-		$eventDB = new Md\WpemsEventsModel();
+		$eventDB = Md\WpemsEventsModel::getInstance();
 		$events  = $eventDB->calendar_data();
 
 		if ( ! is_array( $events ) ) {

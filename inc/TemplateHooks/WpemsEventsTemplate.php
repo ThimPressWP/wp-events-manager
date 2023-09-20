@@ -6,7 +6,6 @@ use WPEMS\Model as Md;
 use WP_Post;
 
 interface EventTemplate {
-	// public function checkEvent( int | object $event );
 	public function html_single_event( int | object $event );
 	public function html_events_list( array $posts );
 }
@@ -16,10 +15,14 @@ class WpemsEventsTemplate implements EventTemplate {
 	public $singleEventTemp;
 
 	public function __construct() {
-		$this->eventModel      = new Md\WpemsEventsModel();
+		$this->eventModel      =  Md\WpemsEventsModel::getInstance();
 		$this->singleEventTemp = new WpemsSingleEventTemplate();
 	}
 
+	/**
+	 * To create a single event template
+	 * @param int | object $event  will check by checkEvent method to get the data 
+	 */
 	public function html_single_event( int | object $event ) {
 		$event = $this->eventModel->checkEvent( $event );
 		?>

@@ -6,7 +6,7 @@ use WPEMS\Model as Md;
 class WpemsFilterTemplate {
 	public $pagination;
 	public function __construct() {
-		$this->pagination = new Md\WpemPaginationModel();
+		$this->pagination =  Md\WpemPaginationModel::getInstance();
 	}
 
 	/**
@@ -96,7 +96,10 @@ class WpemsFilterTemplate {
 		return sprintf( $html_template, esc_attr( $class ), $list_items );
 	}
 
-
+	/**
+	 * For showing how many posts are storing in the database, the start and the end of quantity's posts on the screen
+	 * @param array $posts, object $getPosts from wp_query method
+	 */
 	public function showResult( array $posts, object $getPosts ) {
 		if ( isset( $this->pagination ) && ! empty( $getPosts ) ) {
 			$pag       = $this->pagination->pagination( $getPosts );

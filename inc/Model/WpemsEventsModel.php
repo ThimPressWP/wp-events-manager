@@ -15,10 +15,23 @@ interface CalendarModel {
 class WpemsEventsModel implements FilterModel, CalendarModel {
 	public $data;
 	public $pagination;
+	private static $instances = [];
 
-	public function __construct() {
+	protected function __construct( ) {
 		$this->data       = new Db\WpemsEventsDatabase();
-		$this->pagination = new WpemPaginationModel();
+		$this->pagination =  WpemPaginationModel::getInstance();
+	}
+
+	 /**
+     * Ensure only one instance is created at the moment
+     */
+	public static function getInstance() {
+		$cls = static::class;
+        if (!isset(self::$instances[$cls])) {
+            self::$instances[$cls] = new static();
+        }
+
+        return self::$instances[$cls];
 	}
 
 	/**
