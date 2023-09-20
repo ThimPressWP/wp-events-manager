@@ -97,8 +97,11 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/TemplateHooks/WpemsEventsTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsFilterTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsTemplates.php' );
+			$this->_include( 'inc/TemplateHooks/WpemsPaginationTemplate.php' );
 
+			$this->_include( 'inc/Database/WpemsEventsDatabase.php' );
 			$this->_include( 'inc/Model/WpemsEventsModel.php' );
+			$this->_include( 'inc/Model/WpemPaginationModel.php' );
 
 			$this->settings = WPEMS_Settings::instance();
 

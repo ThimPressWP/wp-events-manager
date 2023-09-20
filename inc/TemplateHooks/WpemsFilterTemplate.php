@@ -1,8 +1,14 @@
 <?php
 
 namespace WPEMS\Templates;
+use WPEMS\Model as Md;
 
 class WpemsFilterTemplate {
+	public $pagination;
+	public function __construct() {
+		$this->pagination = new Md\WpemPaginationModel();
+	}
+
 	/**
 	 * For input type=text element
 	 * @param string $name , $id_class, $placeholder, $value
@@ -90,22 +96,22 @@ class WpemsFilterTemplate {
 		return sprintf( $html_template, esc_attr( $class ), $list_items );
 	}
 
-	/**
-	 * The Pagination
-	 *
-	 * @param int $max_num_pages Total number of pages
-	 * @param int $pageIndex Current page index
-	 * @return string HTML element
-	 */
-	public function html_pagination( $max_num_pages, $pageIndex ): string {
-		$html_template = '<div class="event-pagination"><div class="pagination">%s</div></div>';
-		$pagination    = paginate_links(
-			array(
-				'total'   => $max_num_pages,
-				'current' => $pageIndex,
-			)
-		);
-		return sprintf( $html_template, $pagination );
-	}
 
+	public function showResult( array $posts, object $getPosts ) {
+		if ( isset( $this->pagination ) && ! empty( $getPosts ) ) {
+			$pag       = $this->pagination->pagination( $getPosts );
+			$start     = $pag['current_item_start'];
+			$end       = $pag['current_item_end'];
+			$totalPost = $pag['totalPost'];
+		}
+		if ( ! isset( $posts ) || count( $posts ) === 0 ) {
+			?>
+				<p><?php echo esc_html__( 'Showing 0 results.' ); ?></p>
+			<?php
+		} else {
+			?>
+				<p><?php echo esc_html( 'Showing ' . $start . ' - ' . $end . ' of ' . $totalPost . ' results ' ); ?> </p> 
+			<?php
+		};
+	}
 }

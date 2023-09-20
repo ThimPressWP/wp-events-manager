@@ -15,8 +15,6 @@ defined( 'ABSPATH' ) || exit;
 use WPEMS\Model as Md;
 
 class WPEMS_Shortcodes {
-
-	public static $pageSize = 9;
 	/**
 	 * Init shortcodes
 	 */
@@ -269,13 +267,8 @@ class WPEMS_Shortcodes {
 			$getPriceMin            = '';
 			$getPriceMax            = '';
 
-			$pageIndex          = 1;
-			$totalPost          = 0;
-			$current_item_start = 1;
-			$current_item_end   = 0;
-			$max_num_pages      = 0;
-
 			$events = new Md\WpemsEventsModel();
+
 			// Get value from frontend
 			if ( isset( $_GET['search_event_list'] ) ) {
 				// Retrieve form input values
@@ -306,8 +299,8 @@ class WPEMS_Shortcodes {
 			$posts     = $get_posts->posts;
 
 			// Get data from database to send to frontend
-			$get_types      = $events->get_filter( 'tp_event_type' );
-			$get_categories = $events->get_filter( 'tp_event_category' );
+			$get_types      = $events->data->get_filter( 'tp_event_type' );
+			$get_categories = $events->data->get_filter( 'tp_event_category' );
 
 			// Create an array of number for price input
 			$number_array = array();
@@ -315,18 +308,11 @@ class WPEMS_Shortcodes {
 				$number_array[] = $i;
 			}
 
-			// Pagination information
-			$pageIndex          = get_query_var( 'paged' );
-			$totalPost          = $get_posts->found_posts; // The total posts that match the query condition
-			$current_item_start = ( ( $pageIndex - 1 ) * self::$pageSize + 1 ) <= 0 ? 1 : ( ( $pageIndex - 1 ) * self::$pageSize + 1 );
-			// post_count return the real number of posts that display on current page.
-			$current_item_end = ( min( $current_item_start + $get_posts->post_count - 1, $totalPost ) ) === 1 ? 1 : ( min( $current_item_start + $get_posts->post_count - 1, $totalPost ) );
-			$max_num_pages    = $get_posts->max_num_pages;
-
 			// Give data to fronted to display on the screen
 			$atts = shortcode_atts(
 				array(
 					'posts'                  => $posts,
+					'getPosts'               => $get_posts,
 					'filter_by_input_search' => $filter_by_input_search,
 					'types'                  => $get_types,
 					'filter_by_type'         => $filter_by_type,
@@ -337,18 +323,13 @@ class WPEMS_Shortcodes {
 					'numbers'                => $number_array,
 					'getPriceMin'            => $getPriceMin,
 					'getPriceMax'            => $getPriceMax,
-					'totalPost'              => $totalPost,
-					'current_item_start'     => $current_item_start,
-					'current_item_end'       => $current_item_end,
 					'order_by'               => $order_by,
-					'max_num_pages'          => $max_num_pages,
-					'pageIndex'              => $pageIndex,
 				),
 				$atts
 			);
 
 			return WPEMS_Shortcodes::render( 'event-list', 'event-list.php', array( 'args' => $atts ) );
-		} catch ( Throwable $e ) {
+		} catch ( Exception $e ) {
 			echo 'Something was wrong: ' . $e->getMessage();
 		}
 	}

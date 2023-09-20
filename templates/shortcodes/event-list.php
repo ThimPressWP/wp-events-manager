@@ -20,9 +20,11 @@ wp_enqueue_script( 'wpems-ranges-lb' );
 wp_enqueue_script( 'wpems-event-list-js' );
 
 use WPEMS\Templates as Template;
+
 $filterTemplate      = new Template\WpemsFilterTemplate();
 $singleEventTemplate = new Template\WpemsSingleEventTemplate();
 $eventsTemplate      = new Template\WpemsEventsTemplate();
+$pagination          = new Template\WpemsPaginationTemplate();
 
 ?>
 <div class="eventListDisplay ">
@@ -84,20 +86,7 @@ $eventsTemplate      = new Template\WpemsEventsTemplate();
 
 	<!-- Show result and release date -->
 	<div class="showResult">
-		<div>
-			<?php
-			if ( ! isset( $args['posts'] ) || count( $args['posts'] ) === 0 ) {
-				?>
-						<p><?php echo esc_html__( 'Showing 0 results.' ); ?></p>
-					<?php
-			} else {
-				?>
-						<p><?php echo esc_html( 'Showing ' . $args['current_item_start'] . ' - ' . $args['current_item_end'] . ' of ' . $args['totalPost'] . ' results ' ); ?> </p> 
-					<?php
-			};
-			?>
-							
-		</div>
+		<?php echo $filterTemplate->showResult( $args['posts'], $args['getPosts'] ); ?>
 		
 		<!-- Order by -->
 		<div>		
@@ -112,5 +101,5 @@ $eventsTemplate      = new Template\WpemsEventsTemplate();
 	</div>
 
 	<div><?php echo $eventsTemplate->html_events_list( $args['posts'] ); ?></div>
-	<div><?php echo $filterTemplate->html_pagination( $args['max_num_pages'], $args['pageIndex'] ); ?></div>
+	<div><?php echo $pagination->html_pagination( $args['getPosts'] ); ?></div>
 </div>

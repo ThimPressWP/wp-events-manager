@@ -1,33 +1,69 @@
 <?php
 namespace WPEMS\Model;
 
-use Throwable;
+use Exception;
+use WPEMS\Database as Db;
 
-class WpemsEventsModel {
+interface FilterModel {
+	public function get_posts_filter( array $arguments );
+	public function checkEvent( int | object $event );
+}
+interface CalendarModel {
+	public  function calendar_data();
+}
+
+class WpemsEventsModel implements FilterModel, CalendarModel {
+	public $data;
+	public $pagination;
+
+	public function __construct() {
+		$this->data       = new Db\WpemsEventsDatabase();
+		$this->pagination = new WpemPaginationModel();
+	}
+
+	/**
+	 * To check the event argument when do template handling
+	 *
+	 * @param int | object of $event  that will take the post list or a single post
+	 * @return array $post
+	 */
+	public function checkEvent( int | object $event ) {
+		try {
+			$post = null;
+			if ( \is_numeric( $event ) && get_post_type( $event ) === 'tp_event' ) {
+				$posts = $this->data->getPosts()->posts;
+				foreach ( $posts as $value ) {
+					if ( $event === $value->ID ) {
+						$post = $value;
+						break;
+					}
+				}
+				// Checks if the object is of this class or has this class as one of its parents
+			} elseif ( is_object( $event ) && is_a( $event, 'WP_Post' ) ) {
+				$post = $event;
+			}
+			return $post;
+		} catch ( Exception $e ) {
+			echo 'There is a problem: ' . $e->getMessage();
+		}
+	}
 
 	/**
 	 * To get posts data when it has filter condition
+	 *
 	 * @param array $arguments that store the value of conditions
 	 * @return array $array that store all posts that match the condition
 	 */
 	public function get_posts_filter( array $arguments ) {
 		try {
-			$filter_by_input_search = '';
-			$filter_by_status       = '';
-			$filter_by_type         = '';
-			$filter_by_category     = '';
-			$filter_by_date         = '';
-			$filter_by_price        = '';
-			$order_by               = '';
-
-			if ( isset( $arguments ) && ! empty( $arguments ) ) {
-				$filter_by_input_search = $arguments['filter_by_input_search'];
-				$filter_by_status       = $arguments ['filter_by_status'];
-				$filter_by_type         = $arguments ['filter_by_type'];
-				$filter_by_category     = $arguments ['filter_by_category'];
-				$filter_by_date         = $arguments ['filter_by_date'];
-				$filter_by_price        = $arguments ['filter_by_price'];
-				$order_by               = $arguments ['order_by'];
+			if ( isset( $arguments ) && is_array( $arguments ) ) {
+				$filter_by_input_search = ! empty( $arguments['filter_by_input_search'] ) ? $arguments['filter_by_input_search'] : '';
+				$filter_by_status       = ! empty( $arguments ['filter_by_status'] ) ? $arguments ['filter_by_status'] : '';
+				$filter_by_type         = ! empty( $arguments ['filter_by_type'] ) ? $arguments ['filter_by_type'] : '';
+				$filter_by_category     = ! empty( $arguments ['filter_by_category'] ) ? $arguments ['filter_by_category'] : '';
+				$filter_by_date         = ! empty( $arguments ['filter_by_date'] ) ? $arguments ['filter_by_date'] : '';
+				$filter_by_price        = ! empty( $arguments ['filter_by_price'] ) ? $arguments ['filter_by_price'] : '';
+				$order_by               = ! empty( $arguments ['order_by'] ) ? $arguments ['order_by'] : '';
 			}
 
 			// Initialize arguments
@@ -39,38 +75,38 @@ class WpemsEventsModel {
 				$args['search_columns'] = array( 'post_content', 'post_excerpt', 'post_title' );
 			}
 			// Status
-			$args = $this->status_handler( $filter_by_status, $args );
+			$args = $this->data->status_query( $filter_by_status, $args );
 
 			// Type
-			$args = $this->add_taxonomy_filter( 'tp_event_type', $filter_by_type, $args );
+			$args = $this->data->add_taxonomy_filter( 'tp_event_type', $filter_by_type, $args );
 
 			// Category
-			$args = $this->add_taxonomy_filter( 'tp_event_category', $filter_by_category, $args );
+			$args = $this->data->add_taxonomy_filter( 'tp_event_category', $filter_by_category, $args );
 
 			// Date
-			if ( isset( $filter_by_date ) ) {
-				$args = $this->date_handler( $filter_by_date, $args );
+			if ( isset( $filter_by_date ) && is_array( $filter_by_date ) ) {
+				$args = $this->data->date_query( $filter_by_date, $args );
 			}
 
 			// Price
 			if ( ! empty( $filter_by_price ) && is_array( $filter_by_price ) && ( ! empty( $filter_by_price[0] || ! empty( $filter_by_price[1] ) ) ) ) {
-				$args = $this->price_handler( $filter_by_price, $args );
+				$args = $this->data->price_query( $filter_by_price, $args );
 			}
 
 			// Order by
 			if ( ! empty( $order_by ) && $order_by !== 'GET' ) {
-				$args = $this->orderby_handler( $order_by, $args );
+				$args = $this->data->orderby_query( $order_by, $args );
 			}
 
 			$pageIndex              = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-			$args['posts_per_page'] = \WPEMS_Shortcodes::$pageSize;
+			$args['posts_per_page'] = $this->pagination->pageSize;
 			$args['paged']          = $pageIndex;
 
-			$array = $this->get_posts( $args );
+			$array = $this->data->getPosts( $args );
 
 			return $array;
 
-		} catch ( Throwable $e ) {
+		} catch ( Exception  $e ) {
 			echo 'Something was wrong: ' . $e->getMessage();
 		}
 	}
@@ -85,23 +121,13 @@ class WpemsEventsModel {
 			$category        = '';
 			$calendar_events = array();
 			$args            = array();
-			$get_posts       = $this->get_posts( $args )->posts;
-			$posts           = $this->get_postsMeta( $get_posts );
+			$getPosts        = $this->data->getPosts( $args )->posts;
+			$posts           = $this->data->get_postsMeta( $getPosts );
 
 			foreach ( $posts as $key => $value ) {
-				$getType = wp_get_post_terms( $value->ID, 'tp_event_type' );
-				if ( isset( $getType ) ) {
-					foreach ( $getType as $item ) {
-						$type = $item->name;
-					}
-				}
+				$type = $this->data->get_postTerms( $value->ID, 'tp_event_type' );
 
-				$getCategory = wp_get_post_terms( $value->ID, 'tp_event_category' );
-				if ( isset( $getCategory ) ) {
-					foreach ( $getCategory as $item ) {
-						$category = $item->name;
-					}
-				}
+				$category = $this->data->get_postTerms( $value->ID, 'tp_event_category' );
 
 				$calendar_events[] = array(
 					'id'          => $value->ID,
@@ -120,103 +146,8 @@ class WpemsEventsModel {
 				);
 			}
 			return $calendar_events;
-		} catch ( Throwable $e ) {
+		} catch ( Exception $e ) {
 			echo 'Something was wrong: ' . $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get data form post meta table
-	 * @param array
-	 */
-
-	public  function get_postsMeta( $array ) {
-		if ( is_array( $array ) ) {
-			foreach ( $array as $key => $value ) {
-				$value->date_start  = get_post_meta( $value->ID, 'tp_event_date_start', true );
-				$value->date_end    = get_post_meta( $value->ID, 'tp_event_date_end', true );
-				$value->time_start  = get_post_meta( $value->ID, 'tp_event_time_start', true );
-				$value->time_end    = get_post_meta( $value->ID, 'tp_event_time_end', true );
-				$value->price       = get_post_meta( $value->ID, 'tp_event_price', true );
-				$value->totalTicket = get_post_meta( $value->ID, 'tp_event_qty', true );
-				$value->location    = get_post_meta( $value->ID, 'tp_event_location', true );
-			}
-		}
-		return $array;
-	}
-
-
-	/**
-	 * To get filter data to display to the screen
-	 * @param $taxonomy the taxonomy that need to get data from database
-	 * @return array $filter_data of taxonomy itself
-	 */
-	public  function get_filter( $taxonomy ) {
-		$filter_data = get_terms(
-			array(
-				'taxonomy'   => $taxonomy,
-				'hide_empty' => false,
-			)
-		);
-		return $filter_data;
-	}
-	/**
-	 * To get booked events from database
-	 * @return array
-	 */
-	public function bookingData() {
-		$bookingData = array();
-		$eventData   = get_posts(
-			[
-				'post_status' => 'ea-completed',
-				'post_type'   => 'event_auth_book',
-				'numberposts' => -1,
-			]
-		);
-
-		if ( ! empty( $eventData ) ) {
-			foreach ( $eventData as $key => $value ) {
-				$bookingData[] = array(
-					'description' => str_replace( ' ', '_', $value->post_content . '_' . str_replace( ':', '_', $value->post_date ) ),
-					'summary'     => $value->post_content,
-					'post_status' => $value->post_status,
-					'start'       => array(
-						'dateTime' => str_replace( ' ', 'T', $value->post_date ),
-						'timeZone' => 'UTC',
-					),
-					'end'         => array(
-						'dateTime' => str_replace( ' ', 'T', $value->post_date ),
-						'timeZone' => 'UTC',
-					),
-				);
-			}
-		}
-
-		return $bookingData;
-	}
-
-	/**
-	 * Get all appropriate posts from WordPress database
-	 * @param array $args that give the condition to take the data, if $args doesn't exist it will use $default_args
-	 * @return array $posts via WP_Query function
-	 */
-	public  function get_posts( array $args = null ) {
-		$user_id = \get_current_user_id();
-		$posts   = array();
-		if ( $user_id !== 0 ) {
-			$default_args = [
-				'post_type'      => 'tp_event',
-				'post_status'    => 'publish',
-				'numberposts'    => -1,
-				'posts_per_page' => 9,
-				'paged'          => 1,
-				'user_id'        => $user_id,
-			];
-
-			$args  = wp_parse_args( $args, $default_args );
-			$posts = new \WP_Query( $args );
-
-			return $posts;
 		}
 	}
 
@@ -241,7 +172,7 @@ class WpemsEventsModel {
 	/**
 	 * To sanitize parameters
 	 */
-	private function sanitize_params_submitted( $value, string $type_content = 'text' ) {
+	public function sanitize_params_submitted( $value, string $type_content = 'text' ) {
 		$value = wp_unslash( $value );
 
 		if ( is_string( $value ) ) {
@@ -273,175 +204,6 @@ class WpemsEventsModel {
 		return $value;
 	}
 
-	/**
-	 * To handle the status filter
-	 * @param string $filter_by_status that take from user
-	 * @param array $query_args is an array of condition that will filter data from database
-	 * @return array that includes conditions to filter data
-	 */
-	private function status_handler( string $filter_by_status, array $query_args ) {
-		if ( isset( $filter_by_status ) && ! empty( $filter_by_status ) ) {
-			$query_args['meta_query'] = array(
-				array(
-					'key'     => 'tp_event_status',
-					'value'   => $filter_by_status,
-					'compare' => '=',
-				),
-			);
-		}
-		return $query_args;
-	}
-
-	/**
-	 * To add the taxonomy for filter data from database
-	 * @param string $taxonomy that is the name of taxonomy
-	 * @param string $filter_value that take from user to filter data
-	 * @param array $query_args is an array of condition that will filter data from database
-	 * @return array
-	 */
-	private function add_taxonomy_filter( string $taxonomy, string $filter_value, array $query_args ) {
-		if ( isset( $filter_value ) && ! empty( $filter_value ) ) {
-			$query_args['tax_query'][] = array(
-				'taxonomy' => $taxonomy,
-				'field'    => 'slug',
-				'terms'    => $filter_value,
-			);
-		}
-		return $query_args;
-	}
-
-	/**
-	 * Date handler
-	 * @param array $filter_by_date includes the date start and date end that need for filter
-	 * @param array $query_args that store the condition for date filter
-	 * @return array of condition for date filter
-	 */
-	private function date_handler( array $filter_by_date, array $query_args ) {
-		if ( is_array( $filter_by_date ) && isset( $filter_by_date[0] ) && isset( $filter_by_date[1] ) ) {
-			$start_date = $filter_by_date[0];
-			$end_date   = $filter_by_date[1];
-
-			$query_args['meta_query'] = array(
-				'relation' => 'AND',
-				array(
-					'relation' => 'AND',
-					array(
-						'relation' => 'OR',
-						array(
-							'key'     => 'tp_event_date_start',
-							'value'   => $start_date,
-							'compare' => '>=',
-							'type'    => 'DATE',
-						),
-						array(
-							'key'     => 'tp_event_date_start',
-							'value'   => $start_date,
-							'compare' => '<=',
-							'type'    => 'DATE',
-						),
-					),
-					array(
-						'key'     => 'tp_event_date_end',
-						'value'   => $start_date,
-						'compare' => '>=',
-						'type'    => 'DATE',
-					),
-				),
-				array(
-					'relation' => 'AND',
-					array(
-						'relation' => 'OR',
-						array(
-							'key'     => 'tp_event_date_end',
-							'value'   => $end_date,
-							'compare' => '<=',
-							'type'    => 'DATE',
-						),
-						array(
-							'key'     => 'tp_event_date_end',
-							'value'   => $end_date,
-							'compare' => '>=',
-							'type'    => 'DATE',
-						),
-					),
-					array(
-						'key'     => 'tp_event_date_start',
-						'value'   => $end_date,
-						'compare' => '<=',
-						'type'    => 'DATE',
-					),
-				),
-			);
-		}
-		return $query_args;
-	}
-
-	/**
-	 * Price handler
-	 * @param array $filter_value that store the min and max price for filter
-	 * @param array $query_args that store the condition for price filter
-	 * @return array of condition for price filter
-	 */
-	private function price_handler( array $filter_value, array $query_args ) {
-		if ( is_array( $filter_value ) && isset( $filter_value[0] ) && isset( $filter_value[1] ) ) {
-			$minimum = $filter_value[0];
-			$maximum = $filter_value[1];
-
-			if ( $minimum <= $maximum ) {
-				$query_args['meta_query'] = array(
-					'relation' => 'AND',
-					array(
-						'key'     => 'tp_event_price',
-						'value'   => $minimum,
-						'compare' => '>=',
-						'type'    => 'numeric',
-					),
-					array(
-						'key'     => 'tp_event_price',
-						'value'   => $maximum,
-						'compare' => '<=',
-						'type'    => 'numeric',
-					),
-				);
-			}
-		}
-		return $query_args;
-	}
-
-	/**
-	 * Order by
-	 * @param array $order_by that store the value to reorder the order
-	 * @param array $query_args that store the condition to reorder
-	 * @return array $query_args of condition to reorder
-	 */
-	private function orderby_handler( string $order_by, array $query_args ) {
-		if ( isset( $order_by ) && ! empty( $order_by ) ) {
-			// Order by price
-			if ( strtolower( $order_by ) === 'high-low' || strtolower( $order_by ) === 'low-high' ) {
-				$query_args['orderby']  = 'meta_value_num';
-				$query_args['meta_key'] = 'tp_event_price';
-
-				if ( strtolower( $order_by ) === 'high-low' ) {
-					$query_args['order'] = 'DESC';
-				}
-				if ( strtolower( $order_by ) === 'low-high' ) {
-					$query_args['order'] = 'ASC';
-				}
-			}
-
-			// Order by the character
-			if ( strtolower( $order_by ) === 'a-z' || strtolower( $order_by ) === 'z-a' ) {
-				$query_args['orderby'] = 'title';
-				if ( strtolower( $order_by ) === 'a-z' ) {
-					$query_args['order'] = 'ASC';
-				}
-				if ( strtolower( $order_by ) === 'z-a' ) {
-					$query_args['order'] = 'DESC';
-				}
-			}
-			return $query_args;
-		}
-	}
 }
 
 
