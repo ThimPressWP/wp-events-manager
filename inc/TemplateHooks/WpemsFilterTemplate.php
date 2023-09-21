@@ -6,7 +6,7 @@ use WPEMS\Model as Md;
 class WpemsFilterTemplate {
 	public $pagination;
 	public function __construct() {
-		$this->pagination =  Md\WpemPaginationModel::getInstance();
+		$this->pagination = Md\WpemPaginationModel::getInstance();
 	}
 
 	/**

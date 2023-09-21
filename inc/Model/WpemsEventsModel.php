@@ -17,21 +17,21 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 	public $pagination;
 	private static $instances = [];
 
-	protected function __construct( ) {
+	protected function __construct() {
 		$this->data       = new Db\WpemsEventsDatabase();
-		$this->pagination =  WpemPaginationModel::getInstance();
+		$this->pagination = WpemPaginationModel::getInstance();
 	}
 
 	 /**
-     * Ensure only one instance is created at the moment
-     */
+	 * Ensure only one instance is created at the moment
+	 */
 	public static function getInstance() {
 		$cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
+		if ( ! isset( self::$instances[ $cls ] ) ) {
+			self::$instances[ $cls ] = new static();
+		}
 
-        return self::$instances[$cls];
+		return self::$instances[ $cls ];
 	}
 
 	/**
@@ -138,7 +138,7 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 			$posts           = $this->data->get_postsMeta( $getPosts );
 
 			foreach ( $posts as $key => $value ) {
-				$types = $this->data->get_postTerms( $value->ID, 'tp_event_type' );
+				$types      = $this->data->get_postTerms( $value->ID, 'tp_event_type' );
 				$categories = $this->data->get_postTerms( $value->ID, 'tp_event_category' );
 
 				$calendar_events[] = array(
@@ -153,8 +153,8 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 					'location'    => $value->location,
 					'price'       => floatval( $value->price ),
 					'totalTicket' => floatval( $value->totalTicket ),
-					'types'        => $types,
-					'categories'    => $categories,
+					'types'       => $types,
+					'categories'  => $categories,
 				);
 			}
 			return $calendar_events;

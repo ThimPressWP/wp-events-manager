@@ -15,13 +15,13 @@ class WpemsEventsTemplate implements EventTemplate {
 	public $singleEventTemp;
 
 	public function __construct() {
-		$this->eventModel      =  Md\WpemsEventsModel::getInstance();
+		$this->eventModel      = Md\WpemsEventsModel::getInstance();
 		$this->singleEventTemp = new WpemsSingleEventTemplate();
 	}
 
 	/**
 	 * To create a single event template
-	 * @param int | object $event  will check by checkEvent method to get the data 
+	 * @param int | object $event  will check by checkEvent method to get the data
 	 */
 	public function html_single_event( int | object $event ) {
 		$event = $this->eventModel->checkEvent( $event );

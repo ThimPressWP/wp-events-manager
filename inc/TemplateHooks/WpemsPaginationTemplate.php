@@ -11,7 +11,7 @@ class WpemsPaginationTemplate implements Pagination {
 
 	public $pagination;
 	public function __construct() {
-		$this->pagination =  Md\WpemPaginationModel::getInstance();
+		$this->pagination = Md\WpemPaginationModel::getInstance();
 	}
 	/**
 	 * The Pagination

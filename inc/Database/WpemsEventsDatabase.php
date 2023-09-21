@@ -59,11 +59,10 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 		return $array;
 	}
 
-    /**
+	/**
 	 * Get data form post term table
 	 * @param int $id of the post
-     * @param string $term: the name of term
-     * ret
+	 * @param string $term: the name of term
 	 */
 	public function get_postTerms( int $id, string $term ) {
 		$item = null;

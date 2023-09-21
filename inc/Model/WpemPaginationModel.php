@@ -8,31 +8,31 @@ class WpemPaginationModel {
 	public $current_item_start = 1;
 	public $current_item_end   = 0;
 	public $max_num_pages      = 0;
-    private  static $instances = [];
+	private  static $instances = [];
 
-    protected function __construct( ) {}
+	protected function __construct() {}
 
-    /**
-     * Ensure only one instance is created at the moment
-     */
+	/**
+	 * Ensure only one instance is created at the moment
+	 */
 	public static function getInstance() {
 		$cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
+		if ( ! isset( self::$instances[ $cls ] ) ) {
+			self::$instances[ $cls ] = new static();
+		}
 
-        return self::$instances[$cls];
+		return self::$instances[ $cls ];
 	}
-    
-    /**
-     * For pagination feature
-     * @param object $getPosts take from WP_Query method
-     * @return object $pagination that store properties need for setting pagination on the screen
-     */
+
+	/**
+	 * For pagination feature
+	 * @param object $getPosts take from WP_Query method
+	 * @return object $pagination that store properties need for setting pagination on the screen
+	 */
 	public function pagination( object $getPosts ) {
 		$pagination = array();
-        $start = (( $this->pageIndex - 1 ) * $this->pageSize + 1 ) <= 0 ? 1 : ( ( $this->pageIndex - 1 ) * $this->pageSize + 1 );
-		$end        = min( ($start + ( !empty($getPosts->post_count ) ? $getPosts->post_count : 1 )) - 1, $this->pageSize );
+		$start      = ( ( $this->pageIndex - 1 ) * $this->pageSize + 1 ) <= 0 ? 1 : ( ( $this->pageIndex - 1 ) * $this->pageSize + 1 );
+		$end        = min( ( $start + ( ! empty( $getPosts->post_count ) ? $getPosts->post_count : 1 ) ) - 1, $this->pageSize );
 
 		// Pagination information
 		$pagination = array(
