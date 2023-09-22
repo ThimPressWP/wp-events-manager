@@ -31,11 +31,11 @@ defined( 'ABSPATH' ) || exit();
 		/**
 		 * tp_event_single_event_title hook
 		 */
-		do_action( 'tp_event_single_event_title' );
-		// $eventModel = new WPEMS\Model\WpemsEventModel();
-		// $eventTemplate = new WPEMS\Template\WpemsEventTemplate($eventModel);
-		// $event_id = get_the_ID();
-		// $eventTemplate->displayEventTitle($event_id);
+		// do_action( 'tp_event_single_event_title' );
+		$eventModel = new WPEMS\Model\WpemsEventModel();
+		$eventTemplate = new WPEMS\Template\WpemsEventTemplate($eventModel);
+		$event_id = get_the_ID();
+		$eventTemplate->displayEventTitle($event_id);
 
 		/**
 		 * tp_event_single_event_thumbnail hook
