@@ -6,7 +6,7 @@ interface EventsData {
 	public  function getPosts( array $args = null);
 	public  function get_postsMeta( array $array );
 	public  function get_filter( string $taxonomy = null);
-	public function get_postTerms( int $id, string $term);
+	public  function get_postTerms( int $id, string $term);
 }
 
 interface FilterData {
@@ -92,7 +92,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	}
 
 	/**
-	 * To handle the status filter
+	 * To query the status filter
 	 * @param string $filter_by_status that take from user
 	 * @param array $query_args is an array of condition that will filter data from database
 	 * @return array that includes conditions to filter data
@@ -129,7 +129,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	}
 
 	/**
-	 * Date handler
+	 * Date query
 	 * @param array $filter_by_date includes the date start and date end that need for filter
 	 * @param array $query_args that store the condition for date filter
 	 * @return array of condition for date filter
@@ -196,7 +196,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 
 
 		/**
-	 * Price handler
+	 * Price query
 	 * @param array $filter_value that store the min and max price for filter
 	 * @param array $query_args that store the condition for price filter
 	 * @return array of condition for price filter

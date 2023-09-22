@@ -37,7 +37,7 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 	/**
 	 * To check the event argument when do template handling
 	 *
-	 * @param int | object of $event  that will take the post list or a single post
+	 * @param int | object of $event  that will take posts list or a single post
 	 * @return array $post
 	 */
 	public function checkEvent( int | object $event ) {

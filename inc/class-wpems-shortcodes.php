@@ -267,7 +267,6 @@ class WPEMS_Shortcodes {
 			$getPriceMin            = '';
 			$getPriceMax            = '';
 
-			// $eventModel = Md\WpemsEventsModel();
 			$events = Md\WpemsEventsModel::getInstance();
 
 			// Get value from frontend
@@ -297,7 +296,6 @@ class WPEMS_Shortcodes {
 					'order_by'               => $order_by,
 				]
 			);
-			$posts     = $get_posts->posts;
 
 			// Get data from database to send to frontend
 			$get_types      = $events->data->get_filter( 'tp_event_type' );
@@ -312,7 +310,6 @@ class WPEMS_Shortcodes {
 			// Give data to fronted to display on the screen
 			$atts = shortcode_atts(
 				array(
-					'posts'                  => $posts,
 					'getPosts'               => $get_posts,
 					'filter_by_input_search' => $filter_by_input_search,
 					'types'                  => $get_types,

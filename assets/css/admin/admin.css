@@ -424,3 +424,6 @@
 #authorization {
 	display: inline-block;
 }
+.fc-event-main:hover {
+	cursor: pointer;
+}

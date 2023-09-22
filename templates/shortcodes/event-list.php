@@ -86,7 +86,7 @@ $pagination          = new Template\WpemsPaginationTemplate();
 
 	<!-- Show result and release date -->
 	<div class="showResult">
-		<?php echo $filterTemplate->showResult( $args['posts'], $args['getPosts'] ); ?>
+		<?php echo $filterTemplate->showResult( $args['getPosts']->posts, $args['getPosts'] ); ?>
 		
 		<!-- Order by -->
 		<div>		
@@ -100,6 +100,6 @@ $pagination          = new Template\WpemsPaginationTemplate();
 		</div>
 	</div>
 
-	<div><?php echo $eventsTemplate->html_events_list( $args['posts'] ); ?></div>
+	<div><?php echo $eventsTemplate->html_events_list( $args['getPosts']->posts ); ?></div>
 	<div><?php echo $pagination->html_pagination( $args['getPosts'] ); ?></div>
 </div>
