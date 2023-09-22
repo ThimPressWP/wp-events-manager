@@ -98,9 +98,9 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/class-wpems-pattern-data.php' );
 			$this->_include( 'inc/class-wpems-pattern-request.php' );
 
-			$this->_include( 'inc/database/class-wpems-calendar-admin-data.php' );
-			$this->_include( 'inc/database/class-wpems-event-list-data.php' );
-			$this->_include( 'inc/database/class-wpems-google-calendar.php' );
+			$this->_include( 'inc/Database/class-wpems-calendar-admin-data.php' );
+			$this->_include( 'inc/Database/class-wpems-event-list-data.php' );
+			$this->_include( 'inc/Database/class-wpems-google-calendar.php' );
 
 			$this->settings = WPEMS_Settings::instance();
 

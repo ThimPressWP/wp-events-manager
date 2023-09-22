@@ -73,7 +73,7 @@ class WpemsEventTemplate extends WpemsAbstractEventModel {
         $register_end_date = $this->model->getEventRegisterEndDate( $event_id );
         $location_f        = $this->model->getEventDatabaseLoacationF( $event_id );
 
-        $html = '
+        $html = <<<HTML
         <div class="entry-information">
             <table>
                 <tr>
@@ -82,21 +82,21 @@ class WpemsEventTemplate extends WpemsAbstractEventModel {
                             <span class="dashicons dashicons-clock"></span>
                             <h6>Start Time</h6>
                         </div>
-                        <p class="content">'.$start_time.' - '.$end_time.'</p>
+                        <p class="content">$start_time - $start_date</p>
                     </td>
                     <td>
                         <div class="title">
                             <span class="dashicons dashicons-flag"></span>
                             <h6>End Time</h6>
                         </div>
-                        <p class="content"><?php echo $end_time; ?> - <?php echo $end_date; ?></p>
+                        <p class="content">$end_time - $end_date</p>
                     </td>
                     <td>
                         <div class="title">
                             <span class="dashicons dashicons-location"></span>
                             <h6>Location</h6>
                         </div>
-                        <p class="content"><?php echo $location_f; ?></p>
+                        <p class="content">$location_f</p>
                     </td>
                 </tr>
                 <tr>
@@ -105,7 +105,7 @@ class WpemsEventTemplate extends WpemsAbstractEventModel {
                             <span class="dashicons dashicons-hourglass"></span>
                             <h6>Registration End Date</h6>
                         </div>
-                        <p class="content"><?php echo $register_end_time; ?> - <?php echo $register_end_date; ?></p>
+                        <p class="content">$register_end_time - $register_end_date</p>
                     </td>
                     <td>
                         <div class="title">
@@ -124,8 +124,8 @@ class WpemsEventTemplate extends WpemsAbstractEventModel {
                 </tr>
             </table>
         </div>
-        ';
-        
+        HTML;
+        return $html;
     }
 
     public function displayEventSchedules($event_id) {
@@ -149,14 +149,11 @@ class WpemsEventTemplate extends WpemsAbstractEventModel {
             $html .= '<p>' . $value['description'] . '</p>';
             $html .= '</div>';
             $html .= '</div>';
-            
         }
 
         $html .= '</div>';
 
         return $html;
-
-        
     }
 
 }
