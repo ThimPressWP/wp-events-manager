@@ -31,7 +31,7 @@ $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 
-<<<<<<< HEAD
+<< << <<< HEAD
 $is_checked      = metadata_exists( 'post', $post_id, 'tp_event_schedule_checkbox' ) ? get_post_meta( $post_id, 'tp_event_schedule_checkbox', true ) : '';
 $schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
 $schedules       = json_decode( $schedules_event, true );

@@ -13,10 +13,14 @@
  * Prevent loading this file directly
  */
 defined( 'ABSPATH' ) || exit();
+$eventModel = new WPEMS\Model\WpemsEventModel( get_the_ID() );
+$eventTemplate = new WPEMS\Template\WpemsEventTemplate( $eventModel );
 ?>
 
 <article id="tp_event-<?php the_ID(); ?>" <?php post_class( 'tp_single_event' ); ?>>
-
+	<?php
+	$eventTemplate->displayEventTitle( get_the_ID() );
+	?>
 	<?php
 	/**
 	 * tp_event_before_single_event hook

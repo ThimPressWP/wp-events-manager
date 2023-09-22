@@ -3,18 +3,18 @@ namespace WPEMS\Database;
 
 abstract class WpemsAbstractEventDatabase {
 	protected $wpdb;
-    protected static $instance;
+	protected static $instance;
 
-	private function __construct() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
+	protected function __construct() {
+		global $wpdb;
+		$this->wpdb = $wpdb;
 	}
 
 	public static function get_instance() {
-		if ( is_null( self::$instance ) ) {
-			self::$instance = new self();
+		if ( is_null( static::$instance ) ) {
+			static::$instance = new static();
 		}
-		return self::$instance;
+		return static::$instance;
 	}
 
 	abstract public function getEventDatabaseTitle( $event_id );
@@ -26,6 +26,6 @@ abstract class WpemsAbstractEventDatabase {
 	abstract public function getEventDatabaseEndDate( $event_id );
 	abstract public function getEventDatabaseRegisterEndTime( $event_id );
 	abstract public function getEventDatabaseRegisterEndDate( $event_id );
-	abstract public function getEventDatabaseLoacationF( $event_id );
+	abstract public function getEventDatabaseLocationF( $event_id );
 	abstract public function getEventDatabaseSchedules( $event_id );
 }

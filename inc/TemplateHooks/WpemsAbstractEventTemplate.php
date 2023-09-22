@@ -14,6 +14,5 @@ abstract class WpemsAbstractEventTemplate {
 	abstract public function displayEventThumbnail( $event_id );
 	abstract public function displayEventContent( $event_id );
 	abstract public function displayEventInformation( $event_id );
-	abstract public function displayEventSchedule( $event_id );
-
+	abstract public function displayEventSchedules( $event_id );
 }

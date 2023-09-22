@@ -93,15 +93,24 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/class-wpems-booking.php' );
 			$this->_include( 'inc/class-wpems-event.php' );
 
-			$this->_include( 'inc/TemplateHooks/WpemsSingleEventTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsEventsTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsFilterTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsTemplates.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsPaginationTemplate.php' );
+			$this->_include( 'inc/TemplateHooks/WpemsSingleEventTemplate.php' );
 
+			$this->_include( 'inc/Database/WpemsAbstractEventDatabase.php' );
+			$this->_include( 'inc/Database/WpemsEventDatabase.php' );
 			$this->_include( 'inc/Database/WpemsEventsDatabase.php' );
-			$this->_include( 'inc/Model/WpemsEventsModel.php' );
+
 			$this->_include( 'inc/Model/WpemPaginationModel.php' );
+			$this->_include( 'inc/Model/WpemsAbstractEventModel.php' );
+			$this->_include( 'inc/Model/WpemsEventModel.php' );
+			$this->_include( 'inc/Model/WpemsEventsModel.php' );
+
+			$this->_include( 'inc/TemplateHooks/WpemsAbstractEventTemplate.php' );
+			$this->_include( 'inc/TemplateHooks/WpemsEventTemplate.php' );
+
 
 			$this->settings = WPEMS_Settings::instance();
 
