@@ -126,6 +126,7 @@ class WpemsEventTemplate extends WpemsAbstractEventModel {
         </div>
         ';
         
+        return $html;
     }
 
     public function displayEventSchedules($event_id) {
