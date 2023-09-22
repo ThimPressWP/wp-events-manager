@@ -540,7 +540,7 @@ margin: 0;
     display: none;
     position: absolute;
     top:98%;
-    height: 150px;
+    height: 108px;
     width: 100%;
     overflow: scroll;
     overflow-x: hidden;
@@ -592,9 +592,9 @@ margin: 0;
     border: 1px solid #494848;
     background-color: #3c70e7;
     color: white;
-    padding: 10px 0;
-    margin: 0 3px;
-    font-size: 16px;
+    padding: 12px 0;
+    margin: 0 3px 0 8px;
+    font-size: 1rem;
 }
 
 .eventListDisplay .showResult{
@@ -610,15 +610,6 @@ margin: 0;
     padding: 8px 25px;
     border: 1px solid #494848;
 }
-
-.date-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    width: 100%;
-    margin: 10px 0 40px 0;
-    height: 30%;
-}
 .listEvent {
     display: flex;
     justify-content: space-between;
@@ -628,6 +619,15 @@ margin: 0;
     box-shadow: 0px 0px 34px -22px #757575; 
     height: 35vh;
 }
+
+.date-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    height: 37%;
+}
+
 .left {
     padding: 10px 10px 10px 20px;
     flex: 1;
@@ -639,18 +639,32 @@ margin: 0;
     text-align: center;
     margin: 0 10px 0 0;
 }
-.date_month h3{
+.event-date, .event-month{
     font-weight: 500;
     margin: 0;
+    font-size: 1.4rem;
 }
 .title {
     flex: 6;
 } 
-.title h4 {
+.event-title {
     margin: 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: initial;
 }
-.title h4:hover {
+.event-title:hover {
     color: #3c70e7;
+    cursor: pointer;
+}
+.time , .dashicons-clock{
+    font-size: 1.1rem;
+    vertical-align: baseline;
+}
+.event-content {
+    margin-top: 10px;
+    height: 89px;
+    overflow: hidden;
 }
 
 .right {
@@ -658,12 +672,12 @@ margin: 0;
     position: relative;
     height: 100%;
 }
-.rightImage {
+.event-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.rightImage img {
+.event-image img {
     width: 100%;
     height: 100%;
 }
@@ -675,7 +689,7 @@ margin: 0;
     position: absolute;
     left: 0;
     bottom: 0;
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 .pagination {
@@ -691,6 +705,7 @@ margin: 0;
     background-color: #f5f5f5;
     color: #333;
     text-decoration: none;
+    font-size: 1.4rem;
 }
 
 .page-numbers {
@@ -745,19 +760,22 @@ margin: 0;
     justify-content: center;
     align-items: center;
     position: absolute;
-    width: 90%;
+    width: 100%;
     height: auto;
     top: 50%;
-    left: 50%;
+    left: 59%;
     transform: translate(-50%, -50%);
+}
+.event-get-template {
+    width: 100%;
 }
 .time-remaining {
     color: #000;
     padding: 10px;
     margin: 10px;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
 }
 .time-remaining #countdown_title{
     display: none;
@@ -765,6 +783,7 @@ margin: 0;
 .event-list-counter{
     background-color: rgba(255, 255, 255, 0);
     border: none;
+    padding: 0;
 }
 
 .event-list-counter .countdown-row {
@@ -783,12 +802,11 @@ margin: 0;
 .event-list-counter  .countdown-section{
 	font-size: 50%;
 	text-align: center;
-    padding: 0;
+    /* padding: 5px 15px ; */
     border: 1px solid #ccc;
     margin: 0 5px;
-    width: 20%;
+    width: 22%;
     background-color: white;
-
 }
 
 .event-list-counter  .countdown-rtl {
@@ -800,7 +818,7 @@ margin: 0;
 .event-list-counter  .countdown-row {
 	clear: both;
 	width: 100%;
-	padding: 0px 2px;
+	padding: 0px 8px;
 	text-align: center;
 }
 .event-list-countdown .is-countdown {
@@ -828,11 +846,11 @@ margin: 0;
 	width: 12%;
 }
 .event-list-counter  .countdown-amount {
-    font-size: 250%;
+    font-size: 230%;
     font-weight: 500;
 }
 .event-list-counter  .countdown-period {
-    font-size: 200%;
+    font-size: 150%;
     display: block;
 }
 .event-list-counter  .countdown-descr {
@@ -844,72 +862,37 @@ margin: 0;
     background-color: #3498db;
 }
 
-/* ======================================================== */
-/* ======================================================== */
-/* ====================== GOOGLE CALENDAR =================*/
-
-#syncCalendar {
-    margin: auto;
-}
-.event-calendars {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding: 50px; */
-}
-#google-api td {
-    border: none;
-}
-#clientID, #apiKey {
-    padding: 5px;
-    border: 1px solid #969090;
-}
-
-#authorize_button, #signout_button {
-    padding: 7px 15px;
-    margin: 0 20px;
-    background-color: #0073e5;
-    border: 1px solid #0073e5;
-}
-#authorize_button:hover, #signout_button:hover {
-    border: 1px solid #0073e5;
-    color: white;
-}
-
-
 /* ===================================================== */
 /* ===================================================== */
 /* ================= SHORT CODE CALENDAR =============== */
- #calendar {
+ #calendar-frontend {
     padding: 50px;
+    font-size: 20px;
 }
-.wrapper_event {
-	position: fixed; 
+.fc-event-title-container {
+    color: rgba(0, 0, 0, 0.76);
+    background: #90b8f8;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.fc-h-event {
+    border: none;
+    margin: 2px 0;
+}
+
+.wrapper-event {
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 100;
-	width: auto;
-	
 }
-.showEvent {
-	padding: 30px;
-	background-color: rgb(126, 123, 123);
-	display: none;
-    color: white;
-    border-radius: 8px;
-    /* text-align: center; */
+.show-event-frontend {
+    font-size: 16px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 5px 4px 16px 2px rgba(0,0,0,0.56);
 }
-
-
-
-.showEvent .closeEvent {
+.fc-event-main:hover {
 	cursor: pointer;
-	float:right;
-	padding: 5px;
-	color: rgba(255, 255, 255, 0.562);
-	font-size: 25px;
-}
-.showEvent .closeEvent:hover {
-    color: white;
 }

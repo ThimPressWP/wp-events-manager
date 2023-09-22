@@ -103,8 +103,8 @@ class WPEMS_Assets {
 		wp_enqueue_script( 'wp-util' );
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'underscore' );
+		wp_enqueue_script('wpems-fullcalendar-lb');
 		wp_enqueue_style('dashicons');
-		wp_enqueue_style('wpems-admin-fullcalendar-lb');
 
 		if ( self::$_scripts ) {
 			foreach ( self::$_scripts as $handle => $param ) {

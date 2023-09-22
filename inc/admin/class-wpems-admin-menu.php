@@ -45,7 +45,7 @@ class WPEMS_Admin_Menu {
 			}
 		}
 		// Add events calendars page
-		add_submenu_page( 'tp-event-setting', __( 'WPEMS Events Calendars', 'wp-events-manager' ), __( 'Events Calendars', 'wp-events-manager' ), 'administrator', 'tp-events-calendars', array( 'WPEMS_Admin_Event_Calendar', 'output' ) );
+		add_submenu_page( 'tp-event-setting', __( 'WPEMS Events Calendars', 'wp-events-manager' ), __( 'Events Calendars', 'wp-events-manager' ), 'administrator', 'tp-events-calendars', array( 'AdminEventCalendar', 'output' ) );
 
 		add_submenu_page( 'tp-event-setting', __( 'WP Event Users', 'wp-events-manager' ), __( 'Users', 'wp-events-manager' ), 'administrator', 'tp-event-users', array( 'WPEMS_Admin_Users', 'output' ) );
 		add_submenu_page( 'tp-event-setting', __( 'WP Event Settings', 'wp-events-manager' ), __( 'Settings', 'wp-events-manager' ), 'administrator', 'tp-event-setting', array( 'WPEMS_Admin_Settings', 'output' ) );

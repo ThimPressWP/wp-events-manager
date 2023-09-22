@@ -28,11 +28,10 @@ class WPEMS_Admin_Assets {
 	 * @param type $hook
 	 */
 	public static function register_scripts( $hook ) {
-
 		global $post;
 		// Calendar
 		WPEMS_Assets::register_script('wpems-fullcalendar-lb', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js');
-		WPEMS_Assets::register_script( 'wpems-admin-calendar-js', WPEMS_ASSETS_URI . '/js/admin/admin-calendar.js', array('wpems-fullcalendar-lb'  ));
+		WPEMS_Assets::register_script( 'wpems-admin-calendar-js', WPEMS_ASSETS_URI . '/js/admin/admin-events-calendar.js', array('wpems-fullcalendar-lb'  ));
 
 		WPEMS_Assets::register_script( 'wpems-admin-js', WPEMS_ASSETS_URI . '/js/admin/admin-events.js' );
 		WPEMS_Assets::register_style( 'wpems-admin-css', WPEMS_ASSETS_URI . '/css/admin/admin.css' );
