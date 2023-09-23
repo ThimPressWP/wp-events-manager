@@ -14,18 +14,12 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-$id = get_the_ID();
-
-echo gettype($id);
-
-$eventModel = new WPEMS\Model\WpemsEventModel( get_the_ID() );
-$eventTemplate = new WPEMS\Template\WpemsEventTemplate( $eventModel );
+$event_model    = new WPEMS\Model\WpemsEventModel();
+$event_template = new WPEMS\Template\WpemsEventTemplate( $event_model );
+$event_id       = get_the_ID();
 ?>
 
 <article id="tp_event-<?php the_ID(); ?>" <?php post_class( 'tp_single_event' ); ?>>
-	<?php
-	$eventTemplate->displayEventTitle( get_the_ID() );
-	?>
 	<?php
 	/**
 	 * tp_event_before_single_event hook
@@ -40,37 +34,45 @@ $eventTemplate = new WPEMS\Template\WpemsEventTemplate( $eventModel );
 		/**
 		 * tp_event_single_event_title hook
 		 */
-		do_action( 'tp_event_single_event_title' );
+		// do_action( 'tp_event_single_event_title' );
+		$event_template->displayEventTitle( $event_id );
 
 		/**
 		 * tp_event_single_event_thumbnail hook
 		 */
-		do_action( 'tp_event_single_event_thumbnail' );
+		// do_action( 'tp_event_single_event_thumbnail' );
+		$event_template->displayEventThumbnail( $event_id );
 
 		/**
 		 * tp_event_single_event_thumbnail hook
 		 */
-		do_action( 'tp_event_loop_event_information' );
+		// do_action( 'tp_event_loop_event_information' );
+		$event_template->displayEventInformation( $event_id );
 
 		/**
 		 * tp_event_loop_event_countdown hook
 		 */
-		do_action( 'tp_event_loop_event_countdown' );
+		// do_action( 'tp_event_loop_event_countdown' );
+		$event_template->displayEventCountdown( $event_id );
+
 
 		/**
 		 * tp_event_single_event_content hook
 		 */
-		do_action( 'tp_event_single_event_content' );
+		// do_action( 'tp_event_single_event_content' );
+		$event_template->displayEventContent( $event_id );
 
 		/**
 		 * tp_event_loop_event_location hook
 		 */
-		do_action( 'tp_event_loop_event_location' );
+		// do_action( 'tp_event_loop_event_location' );
+		$event_template->displayEventIframe( $event_id );
 
 		/**
 		 * tp_event_loop_event_location hook
 		 */
-		do_action( 'tp_event_loop_schedule' );
+		// do_action( 'tp_event_loop_schedule' );
+		$event_template->displayEventSchedules( $event_id );
 		?>
 
 	</div><!-- .summary -->

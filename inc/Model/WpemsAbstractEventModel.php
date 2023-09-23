@@ -1,13 +1,13 @@
 <?php
 namespace WPEMS\Model;
 
-use WPEMS\Database\WpemsAbstractEventDatabase;
+use WPEMS\Database\WpemsEventDatabase;
 
 abstract class WpemsAbstractEventModel {
-	protected WpemsAbstractEventDatabase $database;
+	protected $database;
 
-	public function __construct( WpemsAbstractEventDatabase $database ) {
-		$this->database = $database;
+	public function __construct() {
+		$this->database = WpemsEventDatabase::get_instance();
 	}
 
 	abstract public function getEventTitle( $event_id );
@@ -20,5 +20,6 @@ abstract class WpemsAbstractEventModel {
 	abstract public function getEventRegisterEndTime( $event_id );
 	abstract public function getEventRegisterEndDate( $event_id );
 	abstract public function getEventLocationF( $event_id );
+	abstract public function getEventIframe( $event_id );
 	abstract public function getEventSchedules( $event_id );
 }

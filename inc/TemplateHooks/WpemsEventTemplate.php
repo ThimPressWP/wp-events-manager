@@ -1,10 +1,11 @@
 <?php
 namespace WPEMS\Template;
 
-use WPEMS\Model\WpemsAbstractEventModel;
+use WPEMS\Model\WpemsEventModel;
+use DateTime;
 
 class WpemsEventTemplate extends WpemsAbstractEventTemplate {
-	public function __construct( WpemsAbstractEventModel $model ) {
+	public function __construct( WpemsEventModel $model ) {
 		parent::__construct( $model );
 	}
 
@@ -28,7 +29,7 @@ class WpemsEventTemplate extends WpemsAbstractEventTemplate {
 
 		$html .= '</div>';
 
-		return $html;
+		echo $html;
 	}
 
 	public function displayEventThumbnail( $event_id ) {
@@ -42,7 +43,7 @@ class WpemsEventTemplate extends WpemsAbstractEventTemplate {
 				$html .= '<a href="' . get_permalink( $event_id ) . '">';
 			}
 
-			$html .= $thumbnail;
+			$html .= get_the_post_thumbnail();
 
 			if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
 				$html .= '</a>';
@@ -51,17 +52,14 @@ class WpemsEventTemplate extends WpemsAbstractEventTemplate {
 			$html .= '</div>';
 		}
 
-		return $html;
+		echo $html;
 	}
 
 	public function displayEventContent( $event_id ) {
-		$content = $this->model->getEventContent( $event_id );
-
-		$html  = '<div class="entry-content">';
-		$html .= $content;
-		$html .= '</div>';
-
-		return $html;
+		// $content = $this->model->getEventContent( $event_id );
+		echo '<div class="entry-content">';
+		$content = the_content();
+		echo '</div>';
 	}
 
 	public function displayEventInformation( $event_id ) {
@@ -71,7 +69,7 @@ class WpemsEventTemplate extends WpemsAbstractEventTemplate {
 		$end_date          = $this->model->getEventEndDate( $event_id );
 		$register_end_time = $this->model->getEventRegisterEndTime( $event_id );
 		$register_end_date = $this->model->getEventRegisterEndDate( $event_id );
-		$location_f        = $this->model->getEventDatabaseLocationF( $event_id );
+		$location_f        = $this->model->getEventLocationF( $event_id );
 
 		$html = <<<HTML
         <div class="entry-information">
@@ -126,16 +124,49 @@ class WpemsEventTemplate extends WpemsAbstractEventTemplate {
         </div>
         HTML;
 
-		return $html;
+		echo $html;
+	}
+
+	public function displayEventCountdown( $event_id ) {
+		$current_time = current_time( 'Y-m-d H:i' );
+		$time         = wpems_get_time( 'Y-m-d H:i', null, false );
+
+		$html = '<div class="entry-countdown">';
+
+		if ( $time > $current_time ) {
+			$date  = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ) );
+			$html .= '<div class="tp_event_counter" data-time="' . esc_attr( $date->format( 'M j, Y H:i:s O' ) ) . '"></div>';
+		} else {
+			$html .= '<p class="tp-event-notice error">' . esc_html__( 'This event has expired', 'wp-events-manager' ) . '</p>';
+		}
+
+		$html .= '</div>';
+
+		echo $html;
+	}
+
+	public function displayEventIframe( $event_id ) {
+		$iframe = $this->model->getEventIframe( $event_id );
+
+		$html = '';
+		if ( ! empty( $iframe ) ) {
+			$html .= '<div class="entry-location">';
+			$html .= '<h6>Location</h6>';
+			$html .= $iframe;
+			$html .= '</div>';
+		}
+
+		echo $html;
 	}
 
 	public function displayEventSchedules( $event_id ) {
-		$schedules = $this->model->getEventSchedules( $event_id );
+		$schedules     = $this->model->getEventSchedules( $event_id );
+		$schedules_arr = json_decode( $schedules, true );
 
 		$html  = '<div class="entry-schedule">';
 		$html .= '<h6 class="schedule_header">Schedule</h6>';
 
-		foreach ( $schedules as $key => $value ) {
+		foreach ( $schedules_arr as $key => $value ) {
 			$html .= '<div class="schedule_body" id="' . $key . '">';
 			$html .= '<div class="schedule_body-header">';
 			$html .= '<p class="schedule_title">';
@@ -155,6 +186,6 @@ class WpemsEventTemplate extends WpemsAbstractEventTemplate {
 
 		$html .= '</div>';
 
-		return $html;
+		echo $html;
 	}
 }

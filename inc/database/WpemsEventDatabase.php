@@ -2,10 +2,6 @@
 namespace WPEMS\Database;
 
 class WpemsEventDatabase extends WpemsAbstractEventDatabase {
-	private function __construct() {
-		// Call the parent class's constructor
-		parent::__construct();
-	}
 
 	// Query to get the title of event
 	public function getEventDatabaseTitle( $event_id ) {
@@ -52,10 +48,15 @@ class WpemsEventDatabase extends WpemsAbstractEventDatabase {
 		$event_register_end_date = get_post_meta( $event_id, 'tp_event_registration_end_date', true );
 		return $event_register_end_date;
 	}
-	
+
 	public function getEventDatabaseLocationF( $event_id ) {
 		$event_location_f = get_post_meta( $event_id, 'tp_event_location_iframe', true );
 		return $event_location_f;
+	}
+
+	public function getEventDatabaseIframe( $event_id ) {
+		$event_iframe = get_post_meta( $event_id, 'tp_event_iframe', true );
+		return $event_iframe;
 	}
 
 	public function getEventDatabaseSchedules( $event_id ) {

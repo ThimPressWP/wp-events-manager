@@ -111,7 +111,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/TemplateHooks/WpemsAbstractEventTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsEventTemplate.php' );
 
-
 			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {

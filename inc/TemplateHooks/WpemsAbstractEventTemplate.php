@@ -1,12 +1,12 @@
 <?php
 namespace WPEMS\Template;
 
-use WPEMS\Model\WpemsAbstractEventModel;
+use WPEMS\Model\WpemsEventModel;
 
 abstract class WpemsAbstractEventTemplate {
 	protected $model;
 
-	public function __construct( WpemsAbstractEventModel $model ) {
+	public function __construct( WpemsEventModel $model ) {
 		$this->model = $model;
 	}
 
@@ -14,5 +14,7 @@ abstract class WpemsAbstractEventTemplate {
 	abstract public function displayEventThumbnail( $event_id );
 	abstract public function displayEventContent( $event_id );
 	abstract public function displayEventInformation( $event_id );
+	abstract public function displayEventCountdown( $event_id );
+	abstract public function displayEventIframe( $event_id );
 	abstract public function displayEventSchedules( $event_id );
 }

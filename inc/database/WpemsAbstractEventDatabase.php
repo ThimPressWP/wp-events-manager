@@ -11,10 +11,11 @@ abstract class WpemsAbstractEventDatabase {
 	}
 
 	public static function get_instance() {
-		if ( is_null( static::$instance ) ) {
-			static::$instance = new static();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new static();
 		}
-		return static::$instance;
+
+		return self::$instance;
 	}
 
 	abstract public function getEventDatabaseTitle( $event_id );
@@ -27,5 +28,6 @@ abstract class WpemsAbstractEventDatabase {
 	abstract public function getEventDatabaseRegisterEndTime( $event_id );
 	abstract public function getEventDatabaseRegisterEndDate( $event_id );
 	abstract public function getEventDatabaseLocationF( $event_id );
+	abstract public function getEventDatabaseIframe( $event_id );
 	abstract public function getEventDatabaseSchedules( $event_id );
 }

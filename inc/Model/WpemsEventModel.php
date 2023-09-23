@@ -45,6 +45,10 @@ class WpemsEventModel extends WpemsAbstractEventModel {
 		return $this->database->getEventDatabaseLocationF( $event_id );
 	}
 
+	public function getEventIframe( $event_id ) {
+		return $this->database->getEventDatabaseIframe( $event_id );
+	}
+
 	public function getEventSchedules( $event_id ) {
 		return $this->database->getEventDatabaseSchedules( $event_id );
 	}
