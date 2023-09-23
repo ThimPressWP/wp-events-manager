@@ -31,16 +31,15 @@ $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 
-<< << <<< HEAD
 $is_checked      = metadata_exists( 'post', $post_id, 'tp_event_schedule_checkbox' ) ? get_post_meta( $post_id, 'tp_event_schedule_checkbox', true ) : '';
 $schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
 $schedules       = json_decode( $schedules_event, true );
-=======
+
 $schedules_event = get_post_meta( $post_id, 'tp_event_schedules', true );
 $schedules       = json_decode( $schedules_event, true );
 
 $location_iframe = get_post_meta( $post_id, 'tp_event_iframe', true );
->>>>>>> feature/listEvent
+
 
 $location_iframe      = get_post_meta( $post_id, 'tp_event_iframe', true );
 $location_name_iframe = get_post_meta( $post_id, 'tp_event_location_iframe', true );
@@ -132,17 +131,12 @@ $selected_radio_value = get_post_meta( $post_id, 'tp_event_selected_radio_value'
 					endif;
 					?>
 				</div>
-<<<<<<< HEAD
 				<input type="hidden" name="<?php echo esc_attr( $prefix ); ?>schedules" id="tp_event_schedules" value="<?php echo isset( $schedules ) ? esc_html( json_encode( $schedules ) ) : ''; ?>">
-=======
-				<input type="hidden" name="tp_event_schedules" id="tp_event_schedules" value="<?php echo isset( $schedules ) ? esc_html( json_encode( $schedules ) ) : ''; ?>">
->>>>>>> feature/listEvent
 			</p>
 		</div>
 		<!-- End Schedule -->
 
 		<!-- Location -->
-<<<<<<< HEAD
 		<div class="option_group option_group-location">
 			<label class="location_label"><?php _e( 'Location', 'wp-events-manager' ); ?></label>
 			<div class="contain_field">
@@ -157,23 +151,6 @@ $selected_radio_value = get_post_meta( $post_id, 'tp_event_selected_radio_value'
 				<div class="api_field">
 					<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>" placeholder="Add location">
 					<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
-=======
-		<div class="option_group">
-			<p class="form-field">
-				<label for="_location"><?php _e( 'Location', 'wp-events-manager' ); ?></label>
-				<input type="text" class="short" name="<?php echo esc_attr( $prefix ); ?>location" id="_location" value="<?php echo esc_attr( $location ); ?>">
-			</p>
-			<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
-				<p class="event-meta-notice">
-					<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
-					<a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here' ); ?></a>
-				</p>
-			<?php endif; ?>
-			<p class="form-field">
-				<label for="_location"></label>
-				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset( $location_iframe ) ? esc_attr( $location_iframe ) : ''; ?></textarea>
-				<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
->>>>>>> feature/listEvent
 					<p class="event-meta-notice">
 						<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
 						<a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here' ); ?></a>

@@ -13,6 +13,11 @@
  * Prevent loading this file directly
  */
 defined( 'ABSPATH' ) || exit();
+
+$id = get_the_ID();
+
+echo gettype($id);
+
 $eventModel = new WPEMS\Model\WpemsEventModel( get_the_ID() );
 $eventTemplate = new WPEMS\Template\WpemsEventTemplate( $eventModel );
 ?>
