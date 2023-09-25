@@ -21,6 +21,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 
 	/**
 	 * Get all appropriate posts from WordPress database
+	 *
 	 * @param array $args that give the condition to take the data, if $args doesn't exist it will use $default_args
 	 * @return array $posts via WP_Query function
 	 */
@@ -41,9 +42,9 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	}
 	/**
 	 * Get data form post meta table
+	 *
 	 * @param array
 	 */
-
 	public  function get_postsMeta( array $array ) {
 		if ( is_array( $array ) ) {
 			foreach ( $array as $key => $value ) {
@@ -61,6 +62,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 
 	/**
 	 * Get data form post term table
+	 *
 	 * @param int $id of the post
 	 * @param string $term: the name of term
 	 */
@@ -75,6 +77,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 
 	/**
 	 * To get filter data to display to the screen
+	 *
 	 * @param $taxonomy the taxonomy that need to get data from database
 	 * @return array $filter_data of taxonomy itself
 	 */
@@ -93,6 +96,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 
 	/**
 	 * To query the status filter
+	 *
 	 * @param string $filter_by_status that take from user
 	 * @param array $query_args is an array of condition that will filter data from database
 	 * @return array that includes conditions to filter data
@@ -112,6 +116,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 
 	/**
 	 * To add the taxonomy for filter data from database
+	 *
 	 * @param string $taxonomy that is the name of taxonomy
 	 * @param string $filter_value that take from user to filter data
 	 * @param array $query_args is an array of condition that will filter data from database
@@ -130,6 +135,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 
 	/**
 	 * Date query
+	 *
 	 * @param array $filter_by_date includes the date start and date end that need for filter
 	 * @param array $query_args that store the condition for date filter
 	 * @return array of condition for date filter
@@ -195,8 +201,9 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	}
 
 
-		/**
+	/**
 	 * Price query
+	 *
 	 * @param array $filter_value that store the min and max price for filter
 	 * @param array $query_args that store the condition for price filter
 	 * @return array of condition for price filter
@@ -227,8 +234,9 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 		return $query_args;
 	}
 
-		/**
+	/**
 	 * Order by
+	 *
 	 * @param array $order_by that store the value to reorder the order
 	 * @param array $query_args that store the condition to reorder
 	 * @return array $query_args of condition to reorder

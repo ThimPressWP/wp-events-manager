@@ -6,7 +6,7 @@ use WPEMS\Database as Db;
 
 interface FilterModel {
 	public function get_posts_filter( array $arguments );
-	public function checkEvent( int | object $event );
+	public function checkEvent( object $event );
 }
 interface CalendarModel {
 	public  function calendar_data();
@@ -22,39 +22,30 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 		$this->pagination = WpemPaginationModel::getInstance();
 	}
 
-	 /**
-	 * Ensure only one instance is created at the moment
-	 */
+	/**
+	* Ensure only one instance is created at the moment
+	*/
 	public static function getInstance() {
 		$cls = static::class;
 		if ( ! isset( self::$instances[ $cls ] ) ) {
 			self::$instances[ $cls ] = new static();
 		}
-
 		return self::$instances[ $cls ];
 	}
 
 	/**
 	 * To check the event argument when do template handling
 	 *
-	 * @param int | object of $event  that will take posts list or a single post
+	 * @param object of $event  that will take posts list or a single post
 	 * @return array $post
 	 */
-	public function checkEvent( int | object $event ) {
+	public function checkEvent( object $event ) {
 		try {
 			$post = null;
-			if ( \is_numeric( $event ) && get_post_type( $event ) === 'tp_event' ) {
-				$posts = $this->data->getPosts()->posts;
-				foreach ( $posts as $value ) {
-					if ( $event === $value->ID ) {
-						$post = $value;
-						break;
-					}
-				}
-				// Checks if the object is of this class or has this class as one of its parents
-			} elseif ( is_object( $event ) && is_a( $event, 'WP_Post' ) ) {
+			if ( is_object( $event ) && get_post_type( $event->ID ) === 'tp_event' && is_a( $event, 'WP_Post' ) ) {
 				$post = $event;
 			}
+
 			return $post;
 		} catch ( Exception $e ) {
 			echo 'There is a problem: ' . $e->getMessage();

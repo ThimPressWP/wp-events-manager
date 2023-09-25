@@ -20,12 +20,12 @@ class WpemPaginationModel {
 		if ( ! isset( self::$instances[ $cls ] ) ) {
 			self::$instances[ $cls ] = new static();
 		}
-
 		return self::$instances[ $cls ];
 	}
 
 	/**
 	 * For pagination feature
+	 *
 	 * @param object $getPosts take from WP_Query method
 	 * @return object $pagination that store properties need for setting pagination on the screen
 	 */

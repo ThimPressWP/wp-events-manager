@@ -4,12 +4,14 @@ use WPEMS\Model as Md;
 
 class AdminEventCalendar {
 
+	/**
+	 * To display on the Events Calendars submenu of admin dashboard
+	 */
 	public static function output() {
-		// Calendar
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
-		$eventDB = Md\WpemsEventsModel::getInstance();
-		$events  = $eventDB->calendar_data();
+		$eventModel = Md\WpemsEventsModel::getInstance();
+		$events     = $eventModel->calendar_data();
 
 		if ( ! is_array( $events ) ) {
 			return;

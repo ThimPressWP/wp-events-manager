@@ -3,13 +3,13 @@ namespace WPEMS\Templates;
 use WPEMS\Model as Md;
 
 interface SingleEvent {
-	public function html_title( int | object $event ): string;
-	public function html_excerpt( int | object $event ): string;
-	public function html_date( int | object $event ): string;
-	public function html_month( int | object $event ): string;
-	public function html_time_start_end( int | object $event ): string;
-	public function html_img( int | object $event ): string;
-	public function html_get_template_file( string $templateFile_url, int | object $event ): string;
+	public function html_title( object $event ): string;
+	public function html_excerpt( object $event ): string;
+	public function html_date( object $event ): string;
+	public function html_month( object $event ): string;
+	public function html_time_start_end( object $event ): string;
+	public function html_img( object $event ): string;
+	public function html_get_template_file( string $templateFile_url, object $event ): string;
 }
 
 class WpemsSingleEventTemplate implements SingleEvent {
@@ -19,7 +19,7 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 * @param WP_Post $event The event post object
 	 * @return string HTML element
 	 */
-	public function html_title( int | object $event ): string {
+	public function html_title( object $event ): string {
 		$title         = isset( $event ) && isset( $event->post_title ) ? $event->post_title : '';
 		$html_template = '<div class="event-title"><span>%s</span></div>';
 		return sprintf( $html_template, esc_html( ucfirst( $title ) ) );
@@ -31,7 +31,7 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 * @param WP_Post $event The event post object
 	 * @return string HTML element
 	 */
-	public function html_excerpt( int | object $event ): string {
+	public function html_excerpt( object $event ): string {
 		$excerpt = isset( $event ) && isset( $event->post_excerpt ) ? $event->post_excerpt : '';
 
 		$html_template = '<div class="event-content"><span>%s...</span></div>';
@@ -44,7 +44,7 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 * @param WP_Post $event The event post object
 	 * @return string HTML element
 	 */
-	public function html_date( int | object $event ): string {
+	public function html_date( object $event ): string {
 		$date_start = isset( $event ) && isset( $event->ID ) ? get_post_meta( $event->ID, 'tp_event_date_start', true ) : '';
 
 		$html_template = '<div class="event-date"><span>%s</span></div>';
@@ -57,7 +57,7 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 * @param WP_Post $event The event post object
 	 * @return string HTML element
 	 */
-	public function html_month( int | object $event ): string {
+	public function html_month( object $event ): string {
 		$date_start = isset( $event ) && isset( $event->ID ) ? get_post_meta( $event->ID, 'tp_event_date_start', true ) : '';
 
 		$html_template = '<div class="event-month"><span>%s</span></div>';
@@ -70,7 +70,7 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 * @param WP_Post $event The event post object
 	 * @return string HTML element
 	 */
-	public function html_time_start_end( int | object $event ): string {
+	public function html_time_start_end( object $event ): string {
 		$time_start = isset( $event ) && isset( $event->ID ) ? get_post_meta( $event->ID, 'tp_event_time_start', true ) : '';
 		$time_end   = isset( $event ) && isset( $event->ID ) ? get_post_meta( $event->ID, 'tp_event_time_end', true ) : '';
 
@@ -88,7 +88,7 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 * @param WP_Post $event The event post object
 	 * @return string HTML element
 	 */
-	public function html_img( int | object $event ): string {
+	public function html_img( object $event ): string {
 		$event_id = isset( $event ) && isset( $event->ID ) ? $event->ID : '';
 
 		$html_template = '<div class="event-image"><img src="%s" alt="Feature image"></div>';
@@ -105,7 +105,7 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 * @param WP_Post $event The event post object
 	 * @return string HTML element
 	 */
-	public function html_get_template_file( string $templateFile_url, int | object $event ): string {
+	public function html_get_template_file( string $templateFile_url, object $event ): string {
 		$event_id = isset( $event ) && isset( $event->ID ) ? $event->ID : '';
 
 		$html_template = '<div class="event-get-template"><span class="time-remaining">%s</span></div>';
