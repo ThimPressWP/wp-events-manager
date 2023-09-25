@@ -21,8 +21,10 @@ class WpemsSingleEventTemplate implements SingleEvent {
 	 */
 	public function html_title( object $event ): string {
 		$title         = isset( $event ) && isset( $event->post_title ) ? $event->post_title : '';
-		$html_template = '<div class="event-title"><span>%s</span></div>';
-		return sprintf( $html_template, esc_html( ucfirst( $title ) ) );
+		$base_url      = site_url();
+		$link          = $base_url . '/event-list' . '/' . $event->ID;
+		$html_template = '<div class="event-title"><a href="%s">%s</a></div>';
+		return sprintf( $html_template, esc_url( $link ), esc_html( ucfirst( $title ) ) );
 	}
 
 	/**

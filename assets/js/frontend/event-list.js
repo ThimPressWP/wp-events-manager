@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
+    // Deal with date range filter
     const dateElement = document.querySelector('.date');
     if (dateElement) {
         const picker = new Litepicker({ 
@@ -12,7 +12,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    
+    // Handel hover on the title of the post and show read more button
+    const titles = document.querySelectorAll('.event-title');
+    const countdowns = document.querySelectorAll('.event-list-counter');
+    const readMores = document.querySelectorAll('.read-more');
+    if(titles && countdowns && readMores) {
+        titles.forEach((title, index) => {
+            const countdown = countdowns[index];
+            const readMore = readMores[index];
+
+            title.addEventListener('mouseover', () => {
+                countdown.style.display = 'none';
+                readMore.style.display = 'block';
+            });
+            title.addEventListener('mouseleave', () => {
+                countdown.style.display = 'block';
+                readMore.style.display = 'none';
+            });
+        });
+    }
+
+    // Deal with price 
     document.addEventListener('click', (e) => {
         const target = e.target;
         const priceOfMin = document.querySelector('.priceOfMin');
@@ -60,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
+// For order of event list
 const lpAddQueryArgs = ( endpoint, args ) => {
 	const url = new URL( endpoint );
 

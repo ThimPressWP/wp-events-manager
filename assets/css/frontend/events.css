@@ -653,7 +653,10 @@ margin: 0;
     font-weight: 500;
     line-height: initial;
 }
-.event-title:hover {
+.event-title  a {
+    text-decoration: none;
+}
+.event-title a:hover {
     color: #3c70e7;
     cursor: pointer;
 }
@@ -751,10 +754,26 @@ margin: 0;
     color: #fff;
     border-color: #0073e5;
 }
+
 /* ============================================================ */
 /* ============================================================ */
 /*================ OVERWRITE COUNTDOWN ======================== */
-
+.read-more {
+    padding: 10px 20px;
+    font-size: 1.4rem;
+    background-color: #0073e5;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* width: 50%; */
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
 .totalTime{
     display: flex;
     justify-content: center;

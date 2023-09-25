@@ -52,6 +52,7 @@ class WpemsEventsTemplate implements EventTemplate {
 					<div class="totalTime">
 						<?php echo $this->singleEventTemp->html_get_template_file( 'shortcodes/event-countdown.php', $event ); ?>
 					</div>
+					<div class="read-more">Read More</div>
 				</div>
 			</div>
 		<?php
