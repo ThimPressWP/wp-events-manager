@@ -1,17 +1,7 @@
 <?php
 namespace WPEMS\Templates;
 
-interface SingleEvent {
-	public function html_title( \WP_Post $event ): string;
-	public function html_excerpt( \WP_Post $event ): string;
-	public function html_date( \WP_Post $event ): string;
-	public function html_month( \WP_Post $event ): string;
-	public function html_time_start_end( \WP_Post $event ): string;
-	public function html_img( \WP_Post $event ): string;
-	public function html_get_template_file( string $templateFile_url, \WP_Post $event ): string;
-}
-
-class WpemsSingleEventTemplate implements SingleEvent {
+class WpemsSingleEventTemplate  {
 	/**
 	 * Get the title of the event
 	 *

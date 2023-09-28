@@ -2,22 +2,7 @@
 
 namespace  WPEMS\Database;
 
-interface EventsData {
-	public  function getPosts( array $args = null);
-	public  function get_postsMeta( array $array );
-	public  function get_filter( string $taxonomy = null);
-	public  function get_postTerms( int $id, string $term);
-}
-
-interface FilterData {
-	public function status_query( string $filter_by_status, array $query_args );
-	public function add_taxonomy_filter( string $taxonomy, string $filter_value, array $query_args );
-	public function date_query( array $filter_by_date, array $query_args );
-	public function price_query( array $filter_value, array $query_args );
-	public function orderby_query( string $order_by, array $query_args );
-}
-
-class WpemsEventsDatabase implements EventsData, FilterData {
+class WpemsEventsDatabase  {
 	private static $instances = [];
 
 	protected function __construct() {}
