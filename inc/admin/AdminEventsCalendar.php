@@ -1,7 +1,5 @@
 <?php
 
-use WPEMS\Model as Md;
-
 class AdminEventCalendar {
 
 	/**
@@ -10,7 +8,7 @@ class AdminEventCalendar {
 	public static function output() {
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
-		$eventModel = Md\WpemsEventsModel::getInstance();
+		$eventModel = \WPEMS\Model\WpemsEventsModel::getInstance();
 		$events     = $eventModel->calendar_data();
 
 		if ( ! is_array( $events ) ) {

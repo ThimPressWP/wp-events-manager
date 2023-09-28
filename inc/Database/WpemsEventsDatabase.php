@@ -12,13 +12,26 @@ interface EventsData {
 interface FilterData {
 	public function status_query( string $filter_by_status, array $query_args );
 	public function add_taxonomy_filter( string $taxonomy, string $filter_value, array $query_args );
-	public function date_query( ?array $filter_by_date, array $query_args );
+	public function date_query( array $filter_by_date, array $query_args );
 	public function price_query( array $filter_value, array $query_args );
 	public function orderby_query( string $order_by, array $query_args );
 }
 
 class WpemsEventsDatabase implements EventsData, FilterData {
+	private static $instances = [];
 
+	protected function __construct() {}
+
+	/**
+	* Ensure only one instance is created at the moment
+	*/
+	public static function getInstance() {
+		$cls = static::class;
+		if ( ! isset( self::$instances[ $cls ] ) ) {
+			self::$instances[ $cls ] = new static();
+		}
+		return self::$instances[ $cls ];
+	}
 	/**
 	 * Get all appropriate posts from WordPress database
 	 *
@@ -48,13 +61,15 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	public  function get_postsMeta( array $array ) {
 		if ( is_array( $array ) ) {
 			foreach ( $array as $key => $value ) {
-				$value->date_start  = get_post_meta( $value->ID, 'tp_event_date_start', true );
-				$value->date_end    = get_post_meta( $value->ID, 'tp_event_date_end', true );
-				$value->time_start  = get_post_meta( $value->ID, 'tp_event_time_start', true );
-				$value->time_end    = get_post_meta( $value->ID, 'tp_event_time_end', true );
-				$value->price       = get_post_meta( $value->ID, 'tp_event_price', true );
-				$value->totalTicket = get_post_meta( $value->ID, 'tp_event_qty', true );
-				$value->location    = get_post_meta( $value->ID, 'tp_event_location', true );
+				if(\is_object($value)) {
+					$value->date_start  = get_post_meta( $value->ID, 'tp_event_date_start', true );
+					$value->date_end    = get_post_meta( $value->ID, 'tp_event_date_end', true );
+					$value->time_start  = get_post_meta( $value->ID, 'tp_event_time_start', true );
+					$value->time_end    = get_post_meta( $value->ID, 'tp_event_time_end', true );
+					$value->price       = get_post_meta( $value->ID, 'tp_event_price', true );
+					$value->totalTicket = get_post_meta( $value->ID, 'tp_event_qty', true );
+					$value->location    = get_post_meta( $value->ID, 'tp_event_location', true );
+				}
 			}
 		}
 		return $array;
@@ -102,7 +117,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	 * @return array that includes conditions to filter data
 	 */
 	public function status_query( string $filter_by_status, array $query_args ) {
-		if ( isset( $filter_by_status ) && ! empty( $filter_by_status ) ) {
+		if ( ! empty( $filter_by_status ) && is_array( $query_args ) ) {
 			$query_args['meta_query'] = array(
 				array(
 					'key'     => 'tp_event_status',
@@ -123,7 +138,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	 * @return array
 	 */
 	public function add_taxonomy_filter( string $taxonomy, string $filter_value, array $query_args ) {
-		if ( isset( $filter_value ) && ! empty( $filter_value ) && ! empty( $query_args ) ) {
+		if (  ! empty( $filter_value ) && is_array( $query_args ) ) {
 			$query_args['tax_query'][] = array(
 				'taxonomy' => $taxonomy,
 				'field'    => 'slug',
@@ -140,8 +155,8 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	 * @param array $query_args that store the condition for date filter
 	 * @return array of condition for date filter
 	 */
-	public function date_query( ?array $filter_by_date, array $query_args ) {
-		if ( is_array( $filter_by_date ) && isset( $filter_by_date[0] ) && isset( $filter_by_date[1] ) ) {
+	public function date_query( array $filter_by_date, array $query_args ) {
+		if ( is_array( $filter_by_date ) && isset( $filter_by_date[0] ) && isset( $filter_by_date[1] ) && is_array($query_args) ) {
 			$start_date = $filter_by_date[0];
 			$end_date   = $filter_by_date[1];
 
@@ -209,7 +224,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	 * @return array of condition for price filter
 	 */
 	public function price_query( array $filter_value, array $query_args ) {
-		if ( is_array( $filter_value ) && isset( $filter_value[0] ) && isset( $filter_value[1] ) ) {
+		if ( is_array( $filter_value ) && isset( $filter_value[0] ) && isset( $filter_value[1] ) && is_array($query_args) ) {
 			$minimum = $filter_value[0];
 			$maximum = $filter_value[1];
 
@@ -242,7 +257,7 @@ class WpemsEventsDatabase implements EventsData, FilterData {
 	 * @return array $query_args of condition to reorder
 	 */
 	public function orderby_query( string $order_by, array $query_args ) {
-		if ( isset( $order_by ) && ! empty( $order_by ) ) {
+		if (  ! empty( $order_by ) && is_array($query_args)) {
 			// Order by price
 			if ( strtolower( $order_by ) === 'high-low' || strtolower( $order_by ) === 'low-high' ) {
 				$query_args['orderby']  = 'meta_value_num';

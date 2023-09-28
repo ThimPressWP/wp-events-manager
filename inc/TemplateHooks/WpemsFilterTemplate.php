@@ -1,12 +1,11 @@
 <?php
 
 namespace WPEMS\Templates;
-use WPEMS\Model as Md;
 
 class WpemsFilterTemplate {
 	public $pagination;
 	public function __construct() {
-		$this->pagination = Md\WpemPaginationModel::getInstance();
+		$this->pagination = \WPEMS\Model\WpemPaginationModel::getInstance();
 	}
 
 	/**
@@ -14,11 +13,12 @@ class WpemsFilterTemplate {
 	 * @param string $name , $id_class, $placeholder, $value
 	 * @return string html element
 	 */
-	public  function html_input_text( $name, $id_class, $placeholder, $value ): string {
-		$html_template = '<input name="%s" id="%s" class="%s" type="text" value="%s" placeholder="%s">';
+	public  function html_input_text($wrapper_class, $name, $id_class, $placeholder, $value ): string {
+		$html_template = '<div class="%s"><input name="%s" id="%s" class="%s" type="text" value="%s" placeholder="%s"></div>';
 
 		return sprintf(
 			$html_template,
+			esc_attr( $wrapper_class ),
 			esc_attr( $name ),
 			esc_attr( $id_class ),
 			esc_attr( $id_class ),
@@ -52,8 +52,8 @@ class WpemsFilterTemplate {
 	 * @param checked $selected_value for checking which option was selected
 	 * @return string html element
 	 */
-	public function html_select( $name, $id_class, $default, $array, $selected_value ): string {
-		$html_template = '<select name="%s" id="%s" class="%s"><option value="">%s</option>%s</select>';
+	public function html_select($wrapper_class, $name, $id_class, $default, $array, $selected_value ): string {
+		$html_template = '<div class="%s"><select name="%s" id="%s" class="%s"><option value="">%s</option>%s</select></div>';
 
 		$options = '';
 		foreach ( $array as $item ) {
@@ -67,6 +67,7 @@ class WpemsFilterTemplate {
 
 		return sprintf(
 			$html_template,
+			esc_attr( $wrapper_class ),
 			esc_attr( $name ),
 			esc_attr( $id_class ),
 			esc_attr( $id_class ),
@@ -98,20 +99,27 @@ class WpemsFilterTemplate {
 
 	/**
 	 * For showing how many posts are storing in the database, the start and the end of quantity's posts on the screen
-	 * @param array $posts, object $getPosts from wp_query method
+	 * @param \WP_Query  $getPosts from wp_query method
 	 */
-	public function showResult( array $posts, object $getPosts ) {
-		if ( isset( $this->pagination ) && ! empty( $getPosts ) ) {
+	public function showResult(  \WP_Query $getPosts ) {
+		$pag       = [];
+		$start     = 0;
+		$end       = 0;
+		$totalPost = 0;
+
+		if ( isset( $this->pagination )  &&  $getPosts !== null) {
 			$pag       = $this->pagination->pagination( $getPosts );
 			$start     = $pag['current_item_start'];
 			$end       = $pag['current_item_end'];
 			$totalPost = $pag['totalPost'];
 		}
-		if ( ! isset( $posts ) || count( $posts ) === 0 ) {
+			
+		if (  $getPosts->posts === null || count( $getPosts->posts ) === 0 ) {
 			?>
 				<p><?php echo esc_html__( 'Showing 0 results.' ); ?></p>
 			<?php
-		} else {
+		} 
+		if(is_array($getPosts->posts)) {
 			?>
 				<p><?php echo esc_html( 'Showing ' . $start . ' - ' . $end . ' of ' . $totalPost . ' results ' ); ?> </p> 
 			<?php

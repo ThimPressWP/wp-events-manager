@@ -103,7 +103,8 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/Database/WpemsEventDatabase.php' );
 			$this->_include( 'inc/Database/WpemsEventsDatabase.php' );
 
-			$this->_include( 'inc/Model/WpemPaginationModel.php' );
+			$this->_include( 'inc/Model/WpemsWPPost.php' );
+			$this->_include( 'inc/Model/WpemsPaginationModel.php' );
 			$this->_include( 'inc/Model/WpemsAbstractEventModel.php' );
 			$this->_include( 'inc/Model/WpemsEventModel.php' );
 			$this->_include( 'inc/Model/WpemsEventsModel.php' );

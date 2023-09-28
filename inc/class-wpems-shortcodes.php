@@ -12,8 +12,6 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-use WPEMS\Model as Md;
-
 class WPEMS_Shortcodes {
 	/**
 	 * Init shortcodes
@@ -267,7 +265,7 @@ class WPEMS_Shortcodes {
 			$getPriceMin            = '';
 			$getPriceMax            = '';
 
-			$events = Md\WpemsEventsModel::getInstance();
+			$events = \WPEMS\Model\WpemsEventsModel::getInstance();
 
 			// Get value from frontend
 			if ( isset( $_GET['search_event_list'] ) ) {
@@ -285,7 +283,7 @@ class WPEMS_Shortcodes {
 			$order_by = $events->get_param( 'tp_event_order_by', 'GET' );
 
 			// Give arguments to database
-			$get_posts = $events->get_posts_filter(
+			$post_filters = $events->get_posts_filter(
 				[
 					'filter_by_input_search' => $filter_by_input_search,
 					'filter_by_status'       => $filter_by_status,
@@ -298,8 +296,8 @@ class WPEMS_Shortcodes {
 			);
 
 			// Get data from database to send to frontend
-			$get_types      = $events->data->get_filter( 'tp_event_type' );
-			$get_categories = $events->data->get_filter( 'tp_event_category' );
+			$get_types      = $events->get_types_categories( 'tp_event_type' );
+			$get_categories = $events->get_types_categories( 'tp_event_category' );
 
 			// Create an array of number for price input
 			$number_array = array();
@@ -310,7 +308,7 @@ class WPEMS_Shortcodes {
 			// Give data to fronted to display on the screen
 			$atts = shortcode_atts(
 				array(
-					'getPosts'               => $get_posts,
+					'post_filters'               => $post_filters,
 					'filter_by_input_search' => $filter_by_input_search,
 					'types'                  => $get_types,
 					'filter_by_type'         => $filter_by_type,

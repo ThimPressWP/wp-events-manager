@@ -1,17 +1,10 @@
 <?php
 namespace WPEMS\Templates;
-
-use WPEMS\Model as Md;
-
-interface Pagination {
-	public function html_pagination( object $posts = null): string;
-}
-
-class WpemsPaginationTemplate implements Pagination {
+class WpemsPaginationTemplate {
 
 	public $pagination;
 	public function __construct() {
-		$this->pagination = Md\WpemPaginationModel::getInstance();
+		$this->pagination = \WPEMS\Model\WpemPaginationModel::getInstance();
 	}
 	/**
 	 * The Pagination

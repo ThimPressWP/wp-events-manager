@@ -2,29 +2,20 @@
 
 namespace WPEMS\Templates;
 
-use WPEMS\Model as Md;
-use WP_Post;
-
-interface EventTemplate {
-	public function html_single_event( object $event );
-	public function html_events_list( array $posts );
-}
-
-class WpemsEventsTemplate implements EventTemplate {
+class WpemsEventsTemplate {
 	public $eventModel;
 	public $singleEventTemp;
 
 	public function __construct() {
-		$this->eventModel      = Md\WpemsEventsModel::getInstance();
+		$this->eventModel      = \WPEMS\Model\WpemsEventsModel::getInstance();
 		$this->singleEventTemp = new WpemsSingleEventTemplate();
 	}
 
 	/**
 	 * To create a single event template
-	 * @param  object $event  will check by checkEvent method( get a single event or events list) to get the data
+	 * @param WP_Post  $event  will check by checkEvent method( get a single event or events list) to get the data
 	 */
-	public function html_single_event( object $event ) {
-		$event = $this->eventModel->checkEvent( $event );
+	public function html_single_event( \WP_Post  $event ) {
 		?>
 			<div class="listEvent">
 				<!-- Left -->
@@ -60,17 +51,29 @@ class WpemsEventsTemplate implements EventTemplate {
 
 	/**
 	 * To create an events list template
-	 * @param array $posts
+	 * @param WP_Query  $posts
 	 */
-	public function html_events_list( array $posts ) {
-		if ( ! isset( $posts ) || count( $posts ) === 0 ) {
+	public function html_events_list( \WP_Query  $query_object ) {
+		if ( ! isset( $query_object ) || count( $query_object->posts ) === 0 ) {
 			echo 'There are no events.';
 		} else {
-			foreach ( $posts as $key => $value ) {
-				$event = $this->eventModel->checkEvent( $value );
-				if ( ! is_null( $event ) ) {
-					$this->html_single_event( $event );
+			try {
+				$posts = null;
+				$event = null;
+				if ( is_array( $query_object->posts ) && count($query_object->posts) > 0  ) {
+					$posts = $query_object->posts;
+					foreach ( $posts as $key => $value ) {
+						if ( ! is_null( $value )   && get_post_type( $value->ID ) === 'tp_event' ) {
+							$event = $value;
+							if($event !== null) {
+								$this->html_single_event( $event );
+							}
+						}
+					}
 				}
+	
+			} catch ( \Exception $e ) {
+				echo 'There is a problem: ' . $e->getMessage();
 			}
 		}
 	}

@@ -1,24 +1,21 @@
 <?php
 namespace WPEMS\Model;
 
-use Exception;
-use WPEMS\Database as Db;
-
-interface FilterModel {
-	public function get_posts_filter( array $arguments );
-	public function checkEvent( object $event );
-}
-interface CalendarModel {
-	public  function calendar_data();
-}
-
-class WpemsEventsModel implements FilterModel, CalendarModel {
+class WpemsEventsModel  {
 	public $data;
 	public $pagination;
 	private static $instances = [];
 
+	public $filter_search = '';
+	public $filter_status = '';
+	public $filter_type = '';
+	public $filter_category = '';
+	public $filter_date = [];
+	public $filter_price = [];
+	public $order_by = '';
+
 	protected function __construct() {
-		$this->data       = new Db\WpemsEventsDatabase();
+		$this->data       = \WPEMS\Database\WpemsEventsDatabase::getInstance();
 		$this->pagination = WpemPaginationModel::getInstance();
 	}
 
@@ -34,72 +31,55 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 	}
 
 	/**
-	 * To check the event argument when do template handling
-	 *
-	 * @param object of $event  that will take posts list or a single post
-	 * @return array $post
-	 */
-	public function checkEvent( object $event ) {
-		try {
-			$post = null;
-			if ( is_object( $event ) && get_post_type( $event->ID ) === 'tp_event' && is_a( $event, 'WP_Post' ) ) {
-				$post = $event;
-			}
-
-			return $post;
-		} catch ( Exception $e ) {
-			echo 'There is a problem: ' . $e->getMessage();
-		}
-	}
-
-	/**
 	 * To get posts data when it has filter condition
 	 *
 	 * @param array $arguments that store the value of conditions
 	 * @return array $array that store all posts that match the condition
 	 */
-	public function get_posts_filter( array $arguments ) {
-		try {
-			if ( isset( $arguments ) && is_array( $arguments ) ) {
-				$filter_by_input_search = ! empty( $arguments['filter_by_input_search'] ) ? $arguments['filter_by_input_search'] : '';
-				$filter_by_status       = ! empty( $arguments ['filter_by_status'] ) ? $arguments ['filter_by_status'] : '';
-				$filter_by_type         = ! empty( $arguments ['filter_by_type'] ) ? $arguments ['filter_by_type'] : '';
-				$filter_by_category     = ! empty( $arguments ['filter_by_category'] ) ? $arguments ['filter_by_category'] : '';
-				$filter_by_date         = ! empty( $arguments ['filter_by_date'] ) ? $arguments ['filter_by_date'] : '';
-				$filter_by_price        = ! empty( $arguments ['filter_by_price'] ) ? $arguments ['filter_by_price'] : '';
-				$order_by               = ! empty( $arguments ['order_by'] ) ? $arguments ['order_by'] : '';
+	public function get_posts_filter( array $filter_queries ) {
+		$array = array();
+		try {	
+			if ( is_array( $filter_queries ) && count( $filter_queries ) > 0) {
+				$this->filter_search = isset( $filter_queries['filter_by_input_search'] ) ? $filter_queries['filter_by_input_search'] : '';
+				$this->filter_status       = isset( $filter_queries ['filter_by_status'] ) ? $filter_queries ['filter_by_status'] : '';
+				$this->filter_type         = isset( $filter_queries ['filter_by_type'] ) ? $filter_queries ['filter_by_type'] : '';
+				$this->filter_category     = isset( $filter_queries ['filter_by_category'] ) ? $filter_queries ['filter_by_category'] : '';
+				$this->filter_date        = isset( $filter_queries ['filter_by_date'] ) ? $filter_queries ['filter_by_date'] : '';
+				$this->filter_price       = isset( $filter_queries ['filter_by_price'] ) ? $filter_queries ['filter_by_price'] : '';
+				$this->order_by              = isset( $filter_queries ['order_by'] ) ? $filter_queries ['order_by'] : '';
 			}
-
-			// Initialize arguments
+			
+			// Initialize filter_queries
 			$args = array();
 
 			// Search
-			if ( ! empty( $filter_by_input_search ) ) {
-				$args['s']              = $filter_by_input_search;
+			if ( ! empty( $this->filter_search ) ) {
+				$args['s']              = $this->filter_search;
 				$args['search_columns'] = array( 'post_content', 'post_excerpt', 'post_title' );
 			}
 			// Status
-			$args = $this->data->status_query( $filter_by_status, $args );
+			$args = $this->data->status_query( $this->filter_status, $args );
 
 			// Type
-			$args = $this->data->add_taxonomy_filter( 'tp_event_type', $filter_by_type, $args );
+			$args = $this->data->add_taxonomy_filter( 'tp_event_type', $this->filter_type , $args );
+		
 
 			// Category
-			$args = $this->data->add_taxonomy_filter( 'tp_event_category', $filter_by_category, $args );
+			$args = $this->data->add_taxonomy_filter( 'tp_event_category', $this->filter_category, $args );
 
 			// Date
-			if ( isset( $filter_by_date ) && is_array( $filter_by_date ) ) {
-				$args = $this->data->date_query( $filter_by_date, $args );
+			if ( is_array( $this->filter_date) && count($this->filter_date) > 0) {
+				$args = $this->data->date_query( $this->filter_date, $args );
 			}
 
 			// Price
-			if ( ! empty( $filter_by_price ) && is_array( $filter_by_price ) && ( ! empty( $filter_by_price[0] || ! empty( $filter_by_price[1] ) ) ) ) {
-				$args = $this->data->price_query( $filter_by_price, $args );
+			if (  is_array( $this->filter_price) && count($this->filter_price) > 0 && ( ! empty( $this->filter_price[0] || ! empty( $this->filter_price[1] ) ) ) ) {
+				$args = $this->data->price_query( $this->filter_price, $args );
 			}
 
 			// Order by
-			if ( ! empty( $order_by ) && $order_by !== 'GET' ) {
-				$args = $this->data->orderby_query( $order_by, $args );
+			if ( ! empty( $this->order_by ) && $this->order_by !== 'GET' ) {
+				$args = $this->data->orderby_query( $this->order_by, $args );
 			}
 
 			$pageIndex              = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
@@ -110,11 +90,15 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 
 			return $array;
 
-		} catch ( Exception  $e ) {
+		} catch ( \Exception  $e ) {
 			echo 'Something was wrong: ' . $e->getMessage();
+			return $array;
 		}
 	}
 
+	public function get_types_categories($post_type) {
+		return $this->data->get_filter($post_type);
+	}
 	/**
 	 * Create a data list to send to calendar screen
 	 * @return array include properties to send to FullCalendar library to display
@@ -124,9 +108,12 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 			$type            = '';
 			$category        = '';
 			$calendar_events = array();
+			$posts = array();
 			$args            = array();
 			$getPosts        = $this->data->getPosts( $args )->posts;
-			$posts           = $this->data->get_postsMeta( $getPosts );
+			if(is_array($getPosts)) {
+				$posts           = $this->data->get_postsMeta( $getPosts );
+			}
 
 			foreach ( $posts as $key => $value ) {
 				$types      = $this->data->get_postTerms( $value->ID, 'tp_event_type' );
@@ -149,7 +136,7 @@ class WpemsEventsModel implements FilterModel, CalendarModel {
 				);
 			}
 			return $calendar_events;
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			echo 'Something was wrong: ' . $e->getMessage();
 		}
 	}
