@@ -4,9 +4,11 @@ namespace WPEMS\Template;
 use WPEMS\Model\WpemsEventModel;
 use DateTime;
 
-class WpemsEventTemplate extends WpemsAbstractEventTemplate {
+class WpemsEventTemplate {
+	protected $model;
+
 	public function __construct( WpemsEventModel $model ) {
-		parent::__construct( $model );
+		$this->model = $model;
 	}
 
 	public function displayEventTitle( $event_id ) {
