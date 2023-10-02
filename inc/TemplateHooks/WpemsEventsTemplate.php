@@ -15,7 +15,7 @@ class WpemsEventsTemplate {
 	 * To create a single event template
 	 * @param WP_Post  $event  will check by checkEvent method( get a single event or events list) to get the data
 	 */
-	public function html_single_event( \WP_Post  $event ) {
+	public function html_single_event( \WP_Post $event ) {
 		?>
 			<div class="listEvent">
 				<!-- Left -->
@@ -53,25 +53,24 @@ class WpemsEventsTemplate {
 	 * To create an events list template
 	 * @param WP_Query  $posts
 	 */
-	public function html_events_list( \WP_Query  $query_object ) {
+	public function html_events_list( \WP_Query $query_object ) {
 		if ( ! isset( $query_object ) || count( $query_object->posts ) === 0 ) {
 			echo 'There are no events.';
 		} else {
 			try {
 				$posts = null;
 				$event = null;
-				if ( is_array( $query_object->posts ) && count($query_object->posts) > 0  ) {
+				if ( is_array( $query_object->posts ) && count( $query_object->posts ) > 0 ) {
 					$posts = $query_object->posts;
 					foreach ( $posts as $key => $value ) {
-						if ( ! is_null( $value )   && get_post_type( $value->ID ) === 'tp_event' ) {
+						if ( ! is_null( $value ) && get_post_type( $value->ID ) === 'tp_event' ) {
 							$event = $value;
-							if($event !== null) {
+							if ( $event !== null ) {
 								$this->html_single_event( $event );
 							}
 						}
 					}
 				}
-	
 			} catch ( \Exception $e ) {
 				echo 'There is a problem: ' . $e->getMessage();
 			}

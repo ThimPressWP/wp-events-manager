@@ -1,7 +1,7 @@
 <?php
 namespace WPEMS\Templates;
 
-class WpemsSingleEventTemplate  {
+class WpemsSingleEventTemplate {
 	/**
 	 * Get the title of the event
 	 *

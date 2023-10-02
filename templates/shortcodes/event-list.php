@@ -47,15 +47,15 @@ $pagination          = new Template\WpemsPaginationTemplate();
 				</div>
 
 				<!-- Type -->
-				<?php echo $filterTemplate->html_select('wrapper_type','wpems_type', 'type', 'Type', $args['types'], $args['filter_by_type'] ); ?>
+				<?php echo $filterTemplate->html_select( 'wrapper_type', 'wpems_type', 'type', 'Type', $args['types'], $args['filter_by_type'] ); ?>
 
 				<!-- Category -->
-				<?php echo $filterTemplate->html_select('wrapper_type', 'wpems_category', 'category', 'Event Category', $args['categories'], $args['filter_by_category'] ); ?>			
+				<?php echo $filterTemplate->html_select( 'wrapper_type', 'wpems_category', 'category', 'Event Category', $args['categories'], $args['filter_by_category'] ); ?>			
 			</div>
 	
 			<div class="date_price_submit">
 				<!-- Date Ranger -->		
-				<?php echo $filterTemplate->html_input_text('wrapper_date', 'wpems_date', 'date', 'Select Date Ranger', $args['dateInput'] ); ?>
+				<?php echo $filterTemplate->html_input_text( 'wrapper_date', 'wpems_date', 'date', 'Select Date Ranger', $args['dateInput'] ); ?>
 				
 				<!-- Price Ranger -->
 				<div class="wrapper_price">

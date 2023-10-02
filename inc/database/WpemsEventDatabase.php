@@ -2,23 +2,10 @@
 namespace WPEMS\Database;
 
 class WpemsEventDatabase {
-	protected $wpdb;
-	protected static $instance;
+	public $ID;
+	public $filter;
 
-	protected function __construct() {
-		global $wpdb;
-		$this->wpdb = $wpdb;
-	}
-
-	public static function get_instance() {
-		if ( is_null( self::$instance ) ) {
-			self::$instance = new static();
-		}
-
-		return self::$instance;
-	}
-
-	public static function gett_instance( $post_id ) {
+	public static function get_instance( $post_id ) {
 		global $wpdb;
 
 		$post_id = (int) $post_id;
@@ -35,73 +22,20 @@ class WpemsEventDatabase {
 				return false;
 			}
 
+			// get data from wp_postmeta
+			$post_meta = get_post_meta( $post_id );
+
+			// assign values from wp_postmeta to $_post
+			foreach ( $post_meta as $meta_key => $meta_value ) {
+				$_post->{$meta_key} = $meta_value[0];
+			}
+
 			$_post = sanitize_post( $_post, 'raw' );
 			wp_cache_add( $_post->ID, $_post, 'posts' );
 		} elseif ( empty( $_post->filter ) || 'raw' !== $_post->filter ) {
 			$_post = sanitize_post( $_post, 'raw' );
 		}
 
-		return new WP_Post( $_post );
-	}
-
-	// Query to get the title of event
-	public function getEventDatabaseTitle( $event_id ) {
-		$event_title = get_the_title( $event_id );
-		return $event_title;
-	}
-
-	public function getEventDatabaseThumbnail( $event_id ) {
-		$event_thumbnail_url = get_the_post_thumbnail_url( $event_id, 'full' );
-		return $event_thumbnail_url;
-	}
-
-	public function getEventDatabaseContent( $event_id ) {
-		$event_content = get_the_content( null, false, $event_id );
-		return $event_content;
-	}
-
-	public function getEventDatabaseStartTime( $event_id ) {
-		$event_start_time = get_post_meta( $event_id, 'tp_event_time_start', true );
-		return $event_start_time;
-	}
-
-	public function getEventDatabaseEndTime( $event_id ) {
-		$event_end_time = get_post_meta( $event_id, 'tp_event_time_end', true );
-		return $event_end_time;
-	}
-
-	public function getEventDatabaseStartDate( $event_id ) {
-		$event_start_date = get_post_meta( $event_id, 'tp_event_date_start', true );
-		return $event_start_date;
-	}
-
-	public function getEventDatabaseEndDate( $event_id ) {
-		$event_end_date = get_post_meta( $event_id, 'tp_event_date_end', true );
-		return $event_end_date;
-	}
-
-	public function getEventDatabaseRegisterEndTime( $event_id ) {
-		$event_register_end_time = get_post_meta( $event_id, 'tp_event_registration_end_time', true );
-		return $event_register_end_time;
-	}
-
-	public function getEventDatabaseRegisterEndDate( $event_id ) {
-		$event_register_end_date = get_post_meta( $event_id, 'tp_event_registration_end_date', true );
-		return $event_register_end_date;
-	}
-
-	public function getEventDatabaseLocationF( $event_id ) {
-		$event_location_f = get_post_meta( $event_id, 'tp_event_location_iframe', true );
-		return $event_location_f;
-	}
-
-	public function getEventDatabaseIframe( $event_id ) {
-		$event_iframe = get_post_meta( $event_id, 'tp_event_iframe', true );
-		return $event_iframe;
-	}
-
-	public function getEventDatabaseSchedules( $event_id ) {
-		$event_schedules = get_post_meta( $event_id, 'tp_event_schedules', true );
-		return $event_schedules;
+		return $_post;
 	}
 }
