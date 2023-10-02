@@ -265,25 +265,26 @@ class WPEMS_Shortcodes {
 			$getPriceMin            = '';
 			$getPriceMax            = '';
 
-			$events = \WPEMS\Model\WpemsEventsModel::getInstance();
+			$events     = \WPEMS\Model\WpemsEventsModel::getInstance();
+			$checkParam = new \WPEMS\Helper\Helper();
 
 			// Get value from frontend
 			if ( isset( $_GET['search_event_list'] ) ) {
 				// Retrieve form input values
-				$filter_by_input_search = $events->get_param( 'wpems_keyword', 'GET' );
-				$filter_by_status       = $events->get_param( 'wpems_status', 'GET' );
-				$filter_by_type         = $events->get_param( 'wpems_type', 'GET' );
-				$filter_by_category     = $events->get_param( 'wpems_category', 'GET' );
-				$getDateInput           = $events->get_param( 'wpems_date', 'GET' );
+				$filter_by_input_search = $checkParam->get_param( 'wpems_keyword', 'GET' );
+				$filter_by_status       = $checkParam->get_param( 'wpems_status', 'GET' );
+				$filter_by_type         = $checkParam->get_param( 'wpems_type', 'GET' );
+				$filter_by_category     = $checkParam->get_param( 'wpems_category', 'GET' );
+				$getDateInput           = $checkParam->get_param( 'wpems_date', 'GET' );
 				$filter_by_date         = explode( ' - ', $getDateInput );
-				$getPriceMin            = $events->get_param( 'wpems_price_min', 'GET' );
-				$getPriceMax            = $events->get_param( 'wpems_price_max', 'GET' );
+				$getPriceMin            = $checkParam->get_param( 'wpems_price_min', 'GET' );
+				$getPriceMax            = $checkParam->get_param( 'wpems_price_max', 'GET' );
 				$filter_by_price        = [ $getPriceMin, $getPriceMax ];
 			}
-			$order_by = $events->get_param( 'tp_event_order_by', 'GET' );
+			$order_by = $checkParam->get_param( 'tp_event_order_by', 'GET' );
 
 			// Give arguments to database
-			$post_filters = $events->get_posts_filter(
+			$posts = $events->get_posts_filter(
 				[
 					'filter_by_input_search' => $filter_by_input_search,
 					'filter_by_status'       => $filter_by_status,
@@ -308,7 +309,7 @@ class WPEMS_Shortcodes {
 			// Give data to fronted to display on the screen
 			$atts = shortcode_atts(
 				array(
-					'post_filters'               => $post_filters,
+					'posts'                  => $posts,
 					'filter_by_input_search' => $filter_by_input_search,
 					'types'                  => $get_types,
 					'filter_by_type'         => $filter_by_type,

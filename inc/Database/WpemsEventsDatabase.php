@@ -1,8 +1,8 @@
 <?php
 
 namespace  WPEMS\Database;
-
-class WpemsEventsDatabase  {
+use WP_Query;
+class WpemsEventsDatabase {
 	private static $instances = [];
 
 	protected function __construct() {}
@@ -34,7 +34,7 @@ class WpemsEventsDatabase  {
 		];
 
 		$args  = wp_parse_args( $args, $default_args );
-		$posts = new \WP_Query( $args );
+		$posts = new WP_Query( $args );
 
 		return $posts;
 	}
@@ -46,7 +46,7 @@ class WpemsEventsDatabase  {
 	public  function get_postsMeta( array $array ) {
 		if ( is_array( $array ) ) {
 			foreach ( $array as $key => $value ) {
-				if(\is_object($value)) {
+				if ( \is_object( $value ) ) {
 					$value->date_start  = get_post_meta( $value->ID, 'tp_event_date_start', true );
 					$value->date_end    = get_post_meta( $value->ID, 'tp_event_date_end', true );
 					$value->time_start  = get_post_meta( $value->ID, 'tp_event_time_start', true );
@@ -123,7 +123,7 @@ class WpemsEventsDatabase  {
 	 * @return array
 	 */
 	public function add_taxonomy_filter( string $taxonomy, string $filter_value, array $query_args ) {
-		if (  ! empty( $filter_value ) && is_array( $query_args ) ) {
+		if ( ! empty( $filter_value ) && is_array( $query_args ) ) {
 			$query_args['tax_query'][] = array(
 				'taxonomy' => $taxonomy,
 				'field'    => 'slug',
@@ -141,7 +141,7 @@ class WpemsEventsDatabase  {
 	 * @return array of condition for date filter
 	 */
 	public function date_query( array $filter_by_date, array $query_args ) {
-		if ( is_array( $filter_by_date ) && isset( $filter_by_date[0] ) && isset( $filter_by_date[1] ) && is_array($query_args) ) {
+		if ( is_array( $filter_by_date ) && isset( $filter_by_date[0] ) && isset( $filter_by_date[1] ) && is_array( $query_args ) ) {
 			$start_date = $filter_by_date[0];
 			$end_date   = $filter_by_date[1];
 
@@ -209,7 +209,7 @@ class WpemsEventsDatabase  {
 	 * @return array of condition for price filter
 	 */
 	public function price_query( array $filter_value, array $query_args ) {
-		if ( is_array( $filter_value ) && isset( $filter_value[0] ) && isset( $filter_value[1] ) && is_array($query_args) ) {
+		if ( is_array( $filter_value ) && isset( $filter_value[0] ) && isset( $filter_value[1] ) && is_array( $query_args ) ) {
 			$minimum = $filter_value[0];
 			$maximum = $filter_value[1];
 
@@ -242,7 +242,7 @@ class WpemsEventsDatabase  {
 	 * @return array $query_args of condition to reorder
 	 */
 	public function orderby_query( string $order_by, array $query_args ) {
-		if (  ! empty( $order_by ) && is_array($query_args)) {
+		if ( ! empty( $order_by ) && is_array( $query_args ) ) {
 			// Order by price
 			if ( strtolower( $order_by ) === 'high-low' || strtolower( $order_by ) === 'low-high' ) {
 				$query_args['orderby']  = 'meta_value_num';

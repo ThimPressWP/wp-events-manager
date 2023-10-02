@@ -1,21 +1,23 @@
 <?php
 namespace WPEMS\Model;
+use WPEMS\Database as Database;
+use Exception;
 
-class WpemsEventsModel  {
+class WpemsEventsModel {
 	public $data;
 	public $pagination;
 	private static $instances = [];
 
-	public $filter_search = '';
-	public $filter_status = '';
-	public $filter_type = '';
+	public $filter_search   = '';
+	public $filter_status   = '';
+	public $filter_type     = '';
 	public $filter_category = '';
-	public $filter_date = [];
-	public $filter_price = [];
-	public $order_by = '';
+	public $filter_date     = [];
+	public $filter_price    = [];
+	public $order_by        = '';
 
 	protected function __construct() {
-		$this->data       = \WPEMS\Database\WpemsEventsDatabase::getInstance();
+		$this->data       = Database\WpemsEventsDatabase::getInstance();
 		$this->pagination = WpemPaginationModel::getInstance();
 	}
 
@@ -38,17 +40,17 @@ class WpemsEventsModel  {
 	 */
 	public function get_posts_filter( array $filter_queries ) {
 		$array = array();
-		try {	
-			if ( is_array( $filter_queries ) && count( $filter_queries ) > 0) {
-				$this->filter_search = isset( $filter_queries['filter_by_input_search'] ) ? $filter_queries['filter_by_input_search'] : '';
-				$this->filter_status       = isset( $filter_queries ['filter_by_status'] ) ? $filter_queries ['filter_by_status'] : '';
-				$this->filter_type         = isset( $filter_queries ['filter_by_type'] ) ? $filter_queries ['filter_by_type'] : '';
-				$this->filter_category     = isset( $filter_queries ['filter_by_category'] ) ? $filter_queries ['filter_by_category'] : '';
-				$this->filter_date        = isset( $filter_queries ['filter_by_date'] ) ? $filter_queries ['filter_by_date'] : '';
-				$this->filter_price       = isset( $filter_queries ['filter_by_price'] ) ? $filter_queries ['filter_by_price'] : '';
-				$this->order_by              = isset( $filter_queries ['order_by'] ) ? $filter_queries ['order_by'] : '';
+		try {
+			if ( is_array( $filter_queries ) && count( $filter_queries ) > 0 ) {
+				$this->filter_search   = isset( $filter_queries['filter_by_input_search'] ) ? $filter_queries['filter_by_input_search'] : '';
+				$this->filter_status   = isset( $filter_queries ['filter_by_status'] ) ? $filter_queries ['filter_by_status'] : '';
+				$this->filter_type     = isset( $filter_queries ['filter_by_type'] ) ? $filter_queries ['filter_by_type'] : '';
+				$this->filter_category = isset( $filter_queries ['filter_by_category'] ) ? $filter_queries ['filter_by_category'] : '';
+				$this->filter_date     = isset( $filter_queries ['filter_by_date'] ) ? $filter_queries ['filter_by_date'] : '';
+				$this->filter_price    = isset( $filter_queries ['filter_by_price'] ) ? $filter_queries ['filter_by_price'] : '';
+				$this->order_by        = isset( $filter_queries ['order_by'] ) ? $filter_queries ['order_by'] : '';
 			}
-			
+
 			// Initialize filter_queries
 			$args = array();
 
@@ -61,19 +63,18 @@ class WpemsEventsModel  {
 			$args = $this->data->status_query( $this->filter_status, $args );
 
 			// Type
-			$args = $this->data->add_taxonomy_filter( 'tp_event_type', $this->filter_type , $args );
-		
+			$args = $this->data->add_taxonomy_filter( 'tp_event_type', $this->filter_type, $args );
 
 			// Category
 			$args = $this->data->add_taxonomy_filter( 'tp_event_category', $this->filter_category, $args );
 
 			// Date
-			if ( is_array( $this->filter_date) && count($this->filter_date) > 0) {
+			if ( is_array( $this->filter_date ) && count( $this->filter_date ) > 0 ) {
 				$args = $this->data->date_query( $this->filter_date, $args );
 			}
 
 			// Price
-			if (  is_array( $this->filter_price) && count($this->filter_price) > 0 && ( ! empty( $this->filter_price[0] || ! empty( $this->filter_price[1] ) ) ) ) {
+			if ( is_array( $this->filter_price ) && count( $this->filter_price ) > 0 && ( ! empty( $this->filter_price[0] || ! empty( $this->filter_price[1] ) ) ) ) {
 				$args = $this->data->price_query( $this->filter_price, $args );
 			}
 
@@ -90,14 +91,14 @@ class WpemsEventsModel  {
 
 			return $array;
 
-		} catch ( \Exception  $e ) {
+		} catch ( Exception  $e ) {
 			echo 'Something was wrong: ' . $e->getMessage();
 			return $array;
 		}
 	}
 
-	public function get_types_categories($post_type) {
-		return $this->data->get_filter($post_type);
+	public function get_types_categories( $post_type ) {
+		return $this->data->get_filter( $post_type );
 	}
 	/**
 	 * Create a data list to send to calendar screen
@@ -108,11 +109,11 @@ class WpemsEventsModel  {
 			$type            = '';
 			$category        = '';
 			$calendar_events = array();
-			$posts = array();
+			$posts           = array();
 			$args            = array();
 			$getPosts        = $this->data->getPosts( $args )->posts;
-			if(is_array($getPosts)) {
-				$posts           = $this->data->get_postsMeta( $getPosts );
+			if ( is_array( $getPosts ) ) {
+				$posts = $this->data->get_postsMeta( $getPosts );
 			}
 
 			foreach ( $posts as $key => $value ) {
@@ -136,64 +137,10 @@ class WpemsEventsModel  {
 				);
 			}
 			return $calendar_events;
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			echo 'Something was wrong: ' . $e->getMessage();
 		}
 	}
-
-	/**
-	 * Check html request
-	 */
-	public function get_param( string $key, $default = '', string $sanitize_type = 'text', string $method = '' ) {
-		switch ( strtolower( $method ) ) {
-			case 'post':
-				$values = $_POST ?? [];
-				break;
-			case 'get':
-				$values = $_GET ?? [];
-				break;
-			default:
-				$values = $_REQUEST ?? [];
-		}
-
-		return $this->sanitize_params_submitted( $values[ $key ] ?? $default, $sanitize_type );
-	}
-
-	/**
-	 * To sanitize parameters
-	 */
-	public function sanitize_params_submitted( $value, string $type_content = 'text' ) {
-		$value = wp_unslash( $value );
-
-		if ( is_string( $value ) ) {
-			switch ( $type_content ) {
-				case 'html':
-					$value = wp_kses_post( $value );
-					break;
-				case 'textarea':
-					$value = sanitize_textarea_field( $value );
-					break;
-				case 'key':
-					$value = sanitize_key( $value );
-					break;
-				case 'int':
-					$value = (int) $value;
-					break;
-				case 'float':
-					$value = (float) $value;
-					break;
-				default:
-					$value = sanitize_text_field( $value );
-			}
-		} elseif ( is_array( $value ) ) {
-			foreach ( $value as $k => $v ) {
-				$value[ $k ] = $this->sanitize_params_submitted( $v, $type_content );
-			}
-		}
-
-		return $value;
-	}
-
 }
 
 

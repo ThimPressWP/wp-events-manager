@@ -32,10 +32,10 @@ class WpemPaginationModel {
 	public function pagination( \WP_Query $getPosts ) {
 		$pagination = array();
 
-		if($getPosts !== null) {
-			$start      = ( ( $this->pageIndex - 1 ) * $this->pageSize + 1 ) <= 0 ? 1 : ( ( $this->pageIndex - 1 ) * $this->pageSize + 1 );
-			$end        = min( ( $start + ( ! empty( $getPosts->post_count ) ? $getPosts->post_count : 1 ) ) - 1, $this->pageSize );
-	
+		if ( $getPosts !== null ) {
+			$start = ( ( $this->pageIndex - 1 ) * $this->pageSize + 1 ) <= 0 ? 1 : ( ( $this->pageIndex - 1 ) * $this->pageSize + 1 );
+			$end   = min( ( $start + ( ! empty( $getPosts->post_count ) ? $getPosts->post_count : 1 ) ) - 1, $this->pageSize );
+
 			// Pagination information
 			$pagination = array(
 				'pageIndex'          => get_query_var( 'paged' ) !== 1 ? get_query_var( 'paged' ) : $this->pageIndex,

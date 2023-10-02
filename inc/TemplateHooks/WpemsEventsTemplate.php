@@ -1,13 +1,16 @@
 <?php
 
 namespace WPEMS\Templates;
-
+use WPEMS\Model as Model;
+use WP_Post;
+use WP_Query;
+use Exception;
 class WpemsEventsTemplate {
 	public $eventModel;
 	public $singleEventTemp;
 
 	public function __construct() {
-		$this->eventModel      = \WPEMS\Model\WpemsEventsModel::getInstance();
+		$this->eventModel      = Model\WpemsEventsModel::getInstance();
 		$this->singleEventTemp = new WpemsSingleEventTemplate();
 	}
 
@@ -15,7 +18,7 @@ class WpemsEventsTemplate {
 	 * To create a single event template
 	 * @param WP_Post  $event  will check by checkEvent method( get a single event or events list) to get the data
 	 */
-	public function html_single_event( \WP_Post $event ) {
+	public function html_single_event( WP_Post $event ) {
 		?>
 			<div class="listEvent">
 				<!-- Left -->
@@ -53,7 +56,7 @@ class WpemsEventsTemplate {
 	 * To create an events list template
 	 * @param WP_Query  $posts
 	 */
-	public function html_events_list( \WP_Query $query_object ) {
+	public function html_events_list( WP_Query $query_object ) {
 		if ( ! isset( $query_object ) || count( $query_object->posts ) === 0 ) {
 			echo 'There are no events.';
 		} else {
@@ -71,7 +74,7 @@ class WpemsEventsTemplate {
 						}
 					}
 				}
-			} catch ( \Exception $e ) {
+			} catch ( Exception $e ) {
 				echo 'There is a problem: ' . $e->getMessage();
 			}
 		}

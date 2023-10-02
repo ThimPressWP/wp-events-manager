@@ -1,11 +1,13 @@
 <?php
 
 namespace WPEMS\Templates;
+use WPEMS\Model as Model;
+use WP_Query;
 
 class WpemsFilterTemplate {
 	public $pagination;
 	public function __construct() {
-		$this->pagination = \WPEMS\Model\WpemPaginationModel::getInstance();
+		$this->pagination = Model\WpemPaginationModel::getInstance();
 	}
 
 	/**
@@ -13,7 +15,7 @@ class WpemsFilterTemplate {
 	 * @param string $name , $id_class, $placeholder, $value
 	 * @return string html element
 	 */
-	public  function html_input_text($wrapper_class, $name, $id_class, $placeholder, $value ): string {
+	public  function html_input_text( $wrapper_class, $name, $id_class, $placeholder, $value ): string {
 		$html_template = '<div class="%s"><input name="%s" id="%s" class="%s" type="text" value="%s" placeholder="%s"></div>';
 
 		return sprintf(
@@ -52,7 +54,7 @@ class WpemsFilterTemplate {
 	 * @param checked $selected_value for checking which option was selected
 	 * @return string html element
 	 */
-	public function html_select($wrapper_class, $name, $id_class, $default, $array, $selected_value ): string {
+	public function html_select( $wrapper_class, $name, $id_class, $default, $array, $selected_value ): string {
 		$html_template = '<div class="%s"><select name="%s" id="%s" class="%s"><option value="">%s</option>%s</select></div>';
 
 		$options = '';
@@ -99,27 +101,27 @@ class WpemsFilterTemplate {
 
 	/**
 	 * For showing how many posts are storing in the database, the start and the end of quantity's posts on the screen
-	 * @param \WP_Query  $getPosts from wp_query method
+	 * @param WP_Query  $getPosts from wp_query method
 	 */
-	public function showResult(  \WP_Query $getPosts ) {
+	public function showResult( WP_Query $getPosts ) {
 		$pag       = [];
 		$start     = 0;
 		$end       = 0;
 		$totalPost = 0;
 
-		if ( isset( $this->pagination )  &&  $getPosts !== null) {
+		if ( isset( $this->pagination ) && $getPosts !== null ) {
 			$pag       = $this->pagination->pagination( $getPosts );
 			$start     = $pag['current_item_start'];
 			$end       = $pag['current_item_end'];
 			$totalPost = $pag['totalPost'];
 		}
-			
-		if (  $getPosts->posts === null || count( $getPosts->posts ) === 0 ) {
+
+		if ( $getPosts->posts === null || count( $getPosts->posts ) === 0 ) {
 			?>
 				<p><?php echo esc_html__( 'Showing 0 results.' ); ?></p>
 			<?php
-		} 
-		if(is_array($getPosts->posts)) {
+		}
+		if ( is_array( $getPosts->posts ) ) {
 			?>
 				<p><?php echo esc_html( 'Showing ' . $start . ' - ' . $end . ' of ' . $totalPost . ' results ' ); ?> </p> 
 			<?php

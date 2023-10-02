@@ -78,7 +78,7 @@ $pagination          = new Template\WpemsPaginationTemplate();
 
 	<!-- Show result and release date -->
 	<div class="showResult">
-		<?php echo $filterTemplate->showResult( $args['post_filters'] ); ?>
+		<?php echo $filterTemplate->showResult( $args['posts'] ); ?>
 		
 		<!-- Order by -->
 		<div>		
@@ -92,6 +92,6 @@ $pagination          = new Template\WpemsPaginationTemplate();
 		</div>
 	</div>
 
-	<div><?php echo $eventsTemplate->html_events_list( $args['post_filters'] ); ?></div>
-	<div><?php echo $pagination->html_pagination( $args['post_filters'] ); ?></div>
+	<div><?php echo $eventsTemplate->html_events_list( $args['posts'] ); ?></div>
+	<div><?php echo $pagination->html_pagination( $args['posts'] ); ?></div>
 </div>
