@@ -1,9 +1,15 @@
 <?php
 namespace WPEMS\Model;
 
-use WPEMS\Database\WpemsAbstractEventDatabase;
+use WPEMS\Database\WpemsEventDatabase;
 
-class WpemsEventModel extends WpemsAbstractEventModel {
+class WpemsEventModel {
+	protected $database;
+
+	public function __construct() {
+		$this->database = WpemsEventDatabase::get_instance();
+	}
+
 	// use this->database to get the title of event
 	public function getEventTitle( $event_id ) {
 		return $this->database->getEventDatabaseTitle( $event_id );
