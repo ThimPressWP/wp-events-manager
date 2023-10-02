@@ -47,15 +47,15 @@ $pagination          = new Template\WpemsPaginationTemplate();
 				</div>
 
 				<!-- Type -->
-				<?php echo $filterTemplate->html_select('wrapper_type','wpems_type', 'type', 'Type', $args['types'], $args['filter_by_type'] ); ?>
+				<?php echo $filterTemplate->html_select( 'wrapper_type', 'wpems_type', 'type', 'Type', $args['types'], $args['filter_by_type'] ); ?>
 
 				<!-- Category -->
-				<?php echo $filterTemplate->html_select('wrapper_type', 'wpems_category', 'category', 'Event Category', $args['categories'], $args['filter_by_category'] ); ?>			
+				<?php echo $filterTemplate->html_select( 'wrapper_type', 'wpems_category', 'category', 'Event Category', $args['categories'], $args['filter_by_category'] ); ?>			
 			</div>
 	
 			<div class="date_price_submit">
 				<!-- Date Ranger -->		
-				<?php echo $filterTemplate->html_input_text('wrapper_date', 'wpems_date', 'date', 'Select Date Ranger', $args['dateInput'] ); ?>
+				<?php echo $filterTemplate->html_input_text( 'wrapper_date', 'wpems_date', 'date', 'Select Date Ranger', $args['dateInput'] ); ?>
 				
 				<!-- Price Ranger -->
 				<div class="wrapper_price">
@@ -78,7 +78,7 @@ $pagination          = new Template\WpemsPaginationTemplate();
 
 	<!-- Show result and release date -->
 	<div class="showResult">
-		<?php echo $filterTemplate->showResult( $args['post_filters'] ); ?>
+		<?php echo $filterTemplate->showResult( $args['posts'] ); ?>
 		
 		<!-- Order by -->
 		<div>		
@@ -92,6 +92,6 @@ $pagination          = new Template\WpemsPaginationTemplate();
 		</div>
 	</div>
 
-	<div><?php echo $eventsTemplate->html_events_list( $args['post_filters'] ); ?></div>
-	<div><?php echo $pagination->html_pagination( $args['post_filters'] ); ?></div>
+	<div><?php echo $eventsTemplate->html_events_list( $args['posts'] ); ?></div>
+	<div><?php echo $pagination->html_pagination( $args['posts'] ); ?></div>
 </div>
