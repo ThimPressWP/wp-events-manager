@@ -7,55 +7,64 @@ class WpemsEventModel {
 	protected $database;
 
 	public function __construct() {
-		$this->database = WpemsEventDatabase::get_instance();
+		$this->database = new WpemsEventDatabase();
 	}
 
-	// use this->database to get the title of event
 	public function getEventTitle( $event_id ) {
-		return $this->database->getEventDatabaseTitle( $event_id );
+		$event_data = $this->database->get_instance( $event_id );
+		return $event_data->post_title;
 	}
 
-	public function getEventThumbnail( $event_id ) {
-		return $this->database->getEventDatabaseThumbnail( $event_id );
-	}
+	// public function getEventThumbnail( $event_id ) {
+	// 	$event_data = $this->database->get_instance( $event_id );
+	// 	return $event_data->;
+	// }
 
 	public function getEventContent( $event_id ) {
-		return $this->database->getEventDatabaseContent( $event_id );
+		$event_data = $this->database->get_instance( $event_id );
+		return $event_data->post_content;
 	}
 
 	public function getEventStartTime( $event_id ) {
-		return $this->database->getEventDatabaseStartTime( $event_id );
+		$event_data = $this->database->get_instance( $event_id );
+		return $event_data->tp_event_time_start;
 	}
 
-	public function getEventEndTime( $event_id ) {
-		return $this->database->getEventDatabaseEndTime( $event_id );
-	}
+	// public function getEventEndTime( $event_id ) {
+	// 	$event_data = $this->database->get_instance( $event_id );
+	//     return $event_data->tp_event_time_end;
+	// }
 
-	public function getEventStartDate( $event_id ) {
-		return $this->database->getEventDatabaseStartDate( $event_id );
-	}
+	// public function getEventStartDate( $event_id ) {
+	// 	$event_data = $this->database->get_instance( $event_id );
+	//     return $event_data->tp_event_date_start;
+	// }
 
-	public function getEventEndDate( $event_id ) {
-		return $this->database->getEventDatabaseEndDate( $event_id );
-	}
+	// public function getEventEndDate( $event_id ) {
+	// 	$event_data = $this->database->get_instance( $event_id );
+	//     return $event_data->tp_event_date_end;
+	// }
 
-	public function getEventRegisterEndTime( $event_id ) {
-		return $this->database->getEventDatabaseRegisterEndTime( $event_id );
-	}
+	// public function getEventRegisterEndTime( $event_id ) {
+	// 	$event_data = $this->database->get_instance( $event_id );
+	//     return $event_data->tp_event_registration_end_time;
+	// }
 
-	public function getEventRegisterEndDate( $event_id ) {
-		return $this->database->getEventDatabaseRegisterEndDate( $event_id );
-	}
+	// public function getEventRegisterEndDate( $event_id ) {
+	// 	$event_data = $this->database->get_instance( $event_id );
+	//     return $event_data->tp_event_registration_end_date;
+	// }
 
-	public function getEventLocationF( $event_id ) {
-		return $this->database->getEventDatabaseLocationF( $event_id );
-	}
+	// public function getEventLocationF( $event_id ) {
+	// 	$event_data = $this->database->get_instance( $event_id );
+	//     return $event_data->tp_event_location_iframe;
+	// }
 
-	public function getEventIframe( $event_id ) {
-		return $this->database->getEventDatabaseIframe( $event_id );
-	}
+	// public function getEventIframe( $event_id ) {
+	// 	return $this->database->getEventDatabaseIframe( $event_id );
+	// }
 
-	public function getEventSchedules( $event_id ) {
-		return $this->database->getEventDatabaseSchedules( $event_id );
-	}
+	// public function getEventSchedules( $event_id ) {
+	// 	return $this->database->getEventDatabaseSchedules( $event_id );
+	// }
 }

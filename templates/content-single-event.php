@@ -14,8 +14,7 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-$event_model    = new WPEMS\Model\WpemsEventModel();
-$event_template = new WPEMS\Template\WpemsEventTemplate( $event_model );
+$event_template = new WPEMS\Template\WpemsEventTemplate();
 $event_id       = get_the_ID();
 ?>
 
@@ -31,6 +30,12 @@ $event_id       = get_the_ID();
 	<div class="summary entry-summary">
 
 		<?php
+		echo '<pre>';
+		print_r( get_post_meta( 624 ) );
+		// foreach (get_post_meta(624) as $key => $value) {
+		// 	echo $key . '=>'. $value[0].'<br>';
+		// }
+		echo '</pre>';
 		/**
 		 * tp_event_single_event_title hook
 		 */
@@ -41,7 +46,7 @@ $event_id       = get_the_ID();
 		 * tp_event_single_event_thumbnail hook
 		 */
 		// do_action( 'tp_event_single_event_thumbnail' );
-		$event_template->displayEventThumbnail( $event_id );
+		// $event_template->displayEventThumbnail( $event_id );
 
 		/**
 		 * tp_event_single_event_thumbnail hook
@@ -53,7 +58,7 @@ $event_id       = get_the_ID();
 		 * tp_event_loop_event_countdown hook
 		 */
 		// do_action( 'tp_event_loop_event_countdown' );
-		$event_template->displayEventCountdown( $event_id );
+		// $event_template->displayEventCountdown( $event_id );
 
 
 		/**
@@ -66,13 +71,13 @@ $event_id       = get_the_ID();
 		 * tp_event_loop_event_location hook
 		 */
 		// do_action( 'tp_event_loop_event_location' );
-		$event_template->displayEventIframe( $event_id );
+		// $event_template->displayEventIframe( $event_id );
 
 		/**
 		 * tp_event_loop_event_location hook
 		 */
 		// do_action( 'tp_event_loop_schedule' );
-		$event_template->displayEventSchedules( $event_id );
+		// $event_template->displayEventSchedules( $event_id );
 		?>
 
 	</div><!-- .summary -->
