@@ -99,18 +99,15 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/TemplateHooks/WpemsPaginationTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsSingleEventTemplate.php' );
 
-			$this->_include( 'inc/Database/WpemsAbstractEventDatabase.php' );
-			$this->_include( 'inc/Database/WpemsEventDatabase.php' );
+			$this->_include( 'inc/Database/EventDatabase.php' );
 			$this->_include( 'inc/Database/WpemsEventsDatabase.php' );
 
 			$this->_include( 'inc/Model/WpemsWPPost.php' );
 			$this->_include( 'inc/Model/WpemsPaginationModel.php' );
-			$this->_include( 'inc/Model/WpemsAbstractEventModel.php' );
-			$this->_include( 'inc/Model/WpemsEventModel.php' );
+			$this->_include( 'inc/Model/EventModel.php' );
 			$this->_include( 'inc/Model/WpemsEventsModel.php' );
 
-			$this->_include( 'inc/TemplateHooks/WpemsAbstractEventTemplate.php' );
-			$this->_include( 'inc/TemplateHooks/WpemsEventTemplate.php' );
+			$this->_include( 'inc/TemplateHooks/EventTemplate.php' );
 
 			$this->settings = WPEMS_Settings::instance();
 

@@ -1,14 +1,14 @@
 <?php
 namespace WPEMS\Template;
 
-use WPEMS\Model\WpemsEventModel;
+use WPEMS\Model\EventModel;
 use DateTime;
 
-class WpemsEventTemplate {
+class EventTemplate {
 	private $model;
 
 	public function __construct( $event_id ) {
-		$this->model = new WpemsEventModel( $event_id );
+		$this->model = new EventModel( $event_id );
 	}
 
 	public function displayEventTitle( $event_id ) {
