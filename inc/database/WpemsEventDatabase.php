@@ -22,20 +22,17 @@ class WpemsEventDatabase {
         }
 
 		$event_data = false;
-		//$event_data = wp_cache_get($event_id, 'posts');
+		// $event_data = wp_cache_get($event_id, 'posts');
 
         if (!$event_data) {
             $event_data = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE ID = %d LIMIT 1", $event_id));
 
-			//var_dump($event_data);die;
             if (!$event_data) {
                 return false;
             }
 
             // Get data from wp_postmeta
             $post_meta = get_post_meta($event_id);
-
-			//var_dump($post_meta);die;
 
             // Assign values from wp_postmeta to $event_data
             foreach ($post_meta as $meta_key => $meta_value) {
@@ -45,10 +42,6 @@ class WpemsEventDatabase {
 			
             $event_data = sanitize_post($event_data, 'raw');
             // wp_cache_add($event_data->ID, $event_data, 'posts');
-
-			// echo '<pre>';
-			// var_dump($event_data);
-			// echo '</pre>';die;
 			
         } elseif (empty($event_data->filter) || 'raw' !== $event_data->filter) {
             $event_data = sanitize_post($event_data, 'raw');
@@ -56,5 +49,4 @@ class WpemsEventDatabase {
 
         return $event_data; 
     }
-
 }

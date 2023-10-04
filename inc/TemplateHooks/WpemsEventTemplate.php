@@ -12,7 +12,7 @@ class WpemsEventTemplate {
 	}
 
 	public function displayEventTitle( $event_id ) {
-		$title = $this->model->getEventTitle( $event_id );
+		$title = $this->model->title;
 
 		$html = '<div class="entry-title">';
 		if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
@@ -35,7 +35,7 @@ class WpemsEventTemplate {
 	}
 
 	public function displayEventThumbnail( $event_id ) {
-		$thumbnail = $this->model->getEventThumbnail( $event_id );
+		$thumbnail = $this->model->thumbnail;
 
 		$html = '';
 		if ( has_post_thumbnail( $event_id ) ) {
@@ -65,13 +65,13 @@ class WpemsEventTemplate {
 	}
 
 	public function displayEventInformation( $event_id ) {
-		$start_time        = $this->model->getEventStartTime( $event_id );
-		$start_date        = $this->model->getEventStartDate( $event_id );
-		$end_time          = $this->model->getEventEndTime( $event_id );
-		$end_date          = $this->model->getEventEndDate( $event_id );
-		$register_end_time = $this->model->getEventRegisterEndTime( $event_id );
-		$register_end_date = $this->model->getEventRegisterEndDate( $event_id );
-		$location_f        = $this->model->getEventLocationF( $event_id );
+		$start_time        = $this->model->startTime;
+		$start_date        = $this->model->startDate;
+		$end_time          = $this->model->endTime;
+		$end_date          = $this->model->endDate;
+		$register_end_time = $this->model->registerEndTime;
+		$register_end_date = $this->model->registerEndDate;
+		$location_f        = $this->model->locationIframe;
 
 		$html = <<<HTML
         <div class="entry-information">
@@ -148,7 +148,7 @@ class WpemsEventTemplate {
 	}
 
 	public function displayEventIframe( $event_id ) {
-		$iframe = $this->model->getEventIframe( $event_id );
+		$iframe = $this->model->iframe;
 
 		$html = '';
 		if ( ! empty( $iframe ) ) {
@@ -162,7 +162,7 @@ class WpemsEventTemplate {
 	}
 
 	public function displayEventSchedules( $event_id ) {
-		$schedules     = $this->model->getEventSchedules( $event_id );
+		$schedules     = $this->model->schedules;
 		$schedules_arr = json_decode( $schedules, true );
 
 		$html  = '<div class="entry-schedule">';
@@ -183,7 +183,6 @@ class WpemsEventTemplate {
 			$html .= '<p>' . $value['description'] . '</p>';
 			$html .= '</div>';
 			$html .= '</div>';
-
 		}
 
 		$html .= '</div>';
