@@ -80,6 +80,8 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 */
 		public function includes() {
 
+			require_once 'vendor/autoload.php';
+
 			$this->_include( 'inc/wpems-core-functions.php' );
 			$this->_include( 'inc/class-wpems-autoloader.php' );
 			$this->_include( 'inc/class-wpems-assets.php' );
@@ -99,15 +101,15 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/TemplateHooks/WpemsPaginationTemplate.php' );
 			$this->_include( 'inc/TemplateHooks/WpemsSingleEventTemplate.php' );
 
-			$this->_include( 'inc/Database/EventDatabase.php' );
+			// $this->_include( 'inc/Database/EventDatabase.php' );
 			$this->_include( 'inc/Database/WpemsEventsDatabase.php' );
 
 			$this->_include( 'inc/Model/WpemsWPPost.php' );
 			$this->_include( 'inc/Model/WpemsPaginationModel.php' );
-			$this->_include( 'inc/Model/EventModel.php' );
+			// $this->_include( 'inc/Model/EventModel.php' );
 			$this->_include( 'inc/Model/WpemsEventsModel.php' );
 
-			$this->_include( 'inc/TemplateHooks/EventTemplate.php' );
+			// $this->_include( 'inc/TemplateHooks/EventTemplate.php' );
 
 			$this->settings = WPEMS_Settings::instance();
 

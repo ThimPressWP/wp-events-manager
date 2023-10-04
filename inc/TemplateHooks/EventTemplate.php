@@ -1,5 +1,5 @@
 <?php
-namespace WPEMS\Template;
+namespace WPEMS\TemplateHooks;
 
 use WPEMS\Model\EventModel;
 use DateTime;

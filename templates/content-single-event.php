@@ -14,7 +14,7 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-use WPEMS\Template\EventTemplate;
+use WPEMS\TemplateHooks\EventTemplate;
 
 $event_id       = get_the_ID();
 $event_template = new EventTemplate( $event_id );

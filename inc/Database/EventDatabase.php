@@ -14,7 +14,6 @@ class EventDatabase {
 	}
 
 	public function getEventData( $event_id ) {
-		global $wpdb;
 
 		$event_id = (int) $event_id;
 		if ( ! $event_id ) {
@@ -25,7 +24,7 @@ class EventDatabase {
 		// $event_data = wp_cache_get($event_id, 'posts');
 
 		if ( ! $event_data ) {
-			$event_data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->posts} WHERE ID = %d LIMIT 1", $event_id ) );
+            $event_data = get_post( $event_id );
 
 			if ( ! $event_data ) {
 				return false;
@@ -37,7 +36,6 @@ class EventDatabase {
 			// Assign values from wp_postmeta to $event_data
 			foreach ( $post_meta as $meta_key => $meta_value ) {
 				$event_data->{$meta_key} = $meta_value[0];
-
 			}
 
 			$event_data = sanitize_post( $event_data, 'raw' );
