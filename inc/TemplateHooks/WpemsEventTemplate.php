@@ -5,7 +5,7 @@ use WPEMS\Model\WpemsEventModel;
 use DateTime;
 
 class WpemsEventTemplate {
-	protected $model;
+	private $model;
 
 	public function __construct() {
 		$this->model = new WpemsEventModel();
@@ -34,28 +34,28 @@ class WpemsEventTemplate {
 		echo $html;
 	}
 
-	// public function displayEventThumbnail( $event_id ) {
-	// 	$thumbnail = $this->model->getEventThumbnail( $event_id );
+	public function displayEventThumbnail( $event_id ) {
+		$thumbnail = $this->model->getEventThumbnail( $event_id );
 
-	// 	$html = '';
-	// 	if ( has_post_thumbnail( $event_id ) ) {
-	// 		$html .= '<div class="entry-thumbnail">';
+		$html = '';
+		if ( has_post_thumbnail( $event_id ) ) {
+			$html .= '<div class="entry-thumbnail">';
 
-	// 		if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
-	// 			$html .= '<a href="' . get_permalink( $event_id ) . '">';
-	// 		}
+			if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
+				$html .= '<a href="' . get_permalink( $event_id ) . '">';
+			}
 
-	// 		$html .= get_the_post_thumbnail();
+			$html .= get_the_post_thumbnail();
 
-	// 		if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
-	// 			$html .= '</a>';
-	// 		}
+			if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
+				$html .= '</a>';
+			}
 
-	// 		$html .= '</div>';
-	// 	}
+			$html .= '</div>';
+		}
 
-	// 	echo $html;
-	// }
+		echo $html;
+	}
 
 	public function displayEventContent( $event_id ) {
 		// $content = $this->model->getEventContent( $event_id );
@@ -129,65 +129,65 @@ class WpemsEventTemplate {
 		echo $html;
 	}
 
-	// public function displayEventCountdown( $event_id ) {
-	// 	$current_time = current_time( 'Y-m-d H:i' );
-	// 	$time         = wpems_get_time( 'Y-m-d H:i', null, false );
+	public function displayEventCountdown( $event_id ) {
+		$current_time = current_time( 'Y-m-d H:i' );
+		$time         = wpems_get_time( 'Y-m-d H:i', null, false );
 
-	// 	$html = '<div class="entry-countdown">';
+		$html = '<div class="entry-countdown">';
 
-	// 	if ( $time > $current_time ) {
-	// 		$date  = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ) );
-	// 		$html .= '<div class="tp_event_counter" data-time="' . esc_attr( $date->format( 'M j, Y H:i:s O' ) ) . '"></div>';
-	// 	} else {
-	// 		$html .= '<p class="tp-event-notice error">' . esc_html__( 'This event has expired', 'wp-events-manager' ) . '</p>';
-	// 	}
+		if ( $time > $current_time ) {
+			$date  = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ) );
+			$html .= '<div class="tp_event_counter" data-time="' . esc_attr( $date->format( 'M j, Y H:i:s O' ) ) . '"></div>';
+		} else {
+			$html .= '<p class="tp-event-notice error">' . esc_html__( 'This event has expired', 'wp-events-manager' ) . '</p>';
+		}
 
-	// 	$html .= '</div>';
+		$html .= '</div>';
 
-	// 	echo $html;
-	// }
+		echo $html;
+	}
 
-	// public function displayEventIframe( $event_id ) {
-	// 	$iframe = $this->model->getEventIframe( $event_id );
+	public function displayEventIframe( $event_id ) {
+		$iframe = $this->model->getEventIframe( $event_id );
 
-	// 	$html = '';
-	// 	if ( ! empty( $iframe ) ) {
-	// 		$html .= '<div class="entry-location">';
-	// 		$html .= '<h6>Location</h6>';
-	// 		$html .= $iframe;
-	// 		$html .= '</div>';
-	// 	}
+		$html = '';
+		if ( ! empty( $iframe ) ) {
+			$html .= '<div class="entry-location">';
+			$html .= '<h6>Location</h6>';
+			$html .= $iframe;
+			$html .= '</div>';
+		}
 
-	// 	echo $html;
-	// }
+		echo $html;
+	}
 
-	// public function displayEventSchedules( $event_id ) {
-	// 	$schedules     = $this->model->getEventSchedules( $event_id );
-	// 	$schedules_arr = json_decode( $schedules, true );
+	public function displayEventSchedules( $event_id ) {
+		$schedules     = $this->model->getEventSchedules( $event_id );
+		$schedules_arr = json_decode( $schedules, true );
 
-	// 	$html  = '<div class="entry-schedule">';
-	// 	$html .= '<h6 class="schedule_header">Schedule</h6>';
+		$html  = '<div class="entry-schedule">';
+		$html .= '<h6 class="schedule_header">Schedule</h6>';
 
-	// 	foreach ( $schedules_arr as $key => $value ) {
-	// 		$html .= '<div class="schedule_body" id="' . $key . '">';
-	// 		$html .= '<div class="schedule_body-header">';
-	// 		$html .= '<p class="schedule_title">';
-	// 		$html .= $value['title'];
-	// 		$html .= '</p>';
-	// 		$html .= '<div class="schedule_button">';
-	// 		$html .= '<span class="dashicons-before dashicons-minus"></span>';
-	// 		$html .= '<span class="dashicons-before dashicons-plus"></span>';
-	// 		$html .= '</div>';
-	// 		$html .= '</div>';
-	// 		$html .= '<div class="schedule_body-content">';
-	// 		$html .= '<p>' . $value['description'] . '</p>';
-	// 		$html .= '</div>';
-	// 		$html .= '</div>';
+		foreach ( $schedules_arr as $key => $value ) {
+			$html .= '<div class="schedule_body" id="' . $key . '">';
+			$html .= '<div class="schedule_body-header">';
+			$html .= '<p class="schedule_title">';
+			$html .= $value['title'];
+			$html .= '</p>';
+			$html .= '<div class="schedule_button">';
+			$html .= '<span class="dashicons-before dashicons-minus"></span>';
+			$html .= '<span class="dashicons-before dashicons-plus"></span>';
+			$html .= '</div>';
+			$html .= '</div>';
+			$html .= '<div class="schedule_body-content">';
+			$html .= '<p>' . $value['description'] . '</p>';
+			$html .= '</div>';
+			$html .= '</div>';
 
-	// 	}
+		}
 
-	// 	$html .= '</div>';
+		$html .= '</div>';
 
-	// 	echo $html;
-	// }
+		echo $html;
+	}
 }

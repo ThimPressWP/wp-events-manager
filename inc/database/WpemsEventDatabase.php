@@ -2,40 +2,59 @@
 namespace WPEMS\Database;
 
 class WpemsEventDatabase {
-	public $ID;
-	public $filter;
+	private static $instance;
 
-	public static function get_instance( $post_id ) {
+	private function __construct() {}
+
+	public static function get_instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+	public function getEventData($event_id) {
 		global $wpdb;
 
-		$post_id = (int) $post_id;
-		if ( ! $post_id ) {
-			return false;
-		}
+        $event_id = (int) $event_id;
+        if (!$event_id) {
+            return false;
+        }
 
-		$_post = wp_cache_get( $post_id, 'posts' );
+		$event_data = false;
+		//$event_data = wp_cache_get($event_id, 'posts');
 
-		if ( ! $_post ) {
-			$_post = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE ID = %d LIMIT 1", $post_id ) );
+        if (!$event_data) {
+            $event_data = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE ID = %d LIMIT 1", $event_id));
 
-			if ( ! $_post ) {
-				return false;
-			}
+			//var_dump($event_data);die;
+            if (!$event_data) {
+                return false;
+            }
 
-			// get data from wp_postmeta
-			$post_meta = get_post_meta( $post_id );
+            // Get data from wp_postmeta
+            $post_meta = get_post_meta($event_id);
 
-			// assign values from wp_postmeta to $_post
-			foreach ( $post_meta as $meta_key => $meta_value ) {
-				$_post->{$meta_key} = $meta_value[0];
-			}
+			//var_dump($post_meta);die;
 
-			$_post = sanitize_post( $_post, 'raw' );
-			wp_cache_add( $_post->ID, $_post, 'posts' );
-		} elseif ( empty( $_post->filter ) || 'raw' !== $_post->filter ) {
-			$_post = sanitize_post( $_post, 'raw' );
-		}
+            // Assign values from wp_postmeta to $event_data
+            foreach ($post_meta as $meta_key => $meta_value) {
+                $event_data->{$meta_key} = $meta_value[0];
+				
+            }
+			
+            $event_data = sanitize_post($event_data, 'raw');
+            // wp_cache_add($event_data->ID, $event_data, 'posts');
 
-		return $_post;
-	}
+			// echo '<pre>';
+			// var_dump($event_data);
+			// echo '</pre>';die;
+			
+        } elseif (empty($event_data->filter) || 'raw' !== $event_data->filter) {
+            $event_data = sanitize_post($event_data, 'raw');
+        }
+
+        return $event_data; 
+    }
+
 }
