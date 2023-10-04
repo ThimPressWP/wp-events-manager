@@ -3,9 +3,6 @@
 namespace WPEMS\Helper;
 
 class Helper {
-	public function testing() {
-		return 'testing github';
-	}
 		/**
 	 * Check html request
 	 */
