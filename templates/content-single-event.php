@@ -14,8 +14,8 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-$event_template = new WPEMS\Template\WpemsEventTemplate();
 $event_id       = get_the_ID();
+$event_template = new WPEMS\Template\WpemsEventTemplate( $event_id );
 ?>
 
 <article id="tp_event-<?php the_ID(); ?>" <?php post_class( 'tp_single_event' ); ?>>

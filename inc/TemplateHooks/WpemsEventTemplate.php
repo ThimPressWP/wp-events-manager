@@ -7,8 +7,8 @@ use DateTime;
 class WpemsEventTemplate {
 	private $model;
 
-	public function __construct() {
-		$this->model = new WpemsEventModel();
+	public function __construct( $event_id ) {
+		$this->model = new WpemsEventModel( $event_id );
 	}
 
 	public function displayEventTitle( $event_id ) {
