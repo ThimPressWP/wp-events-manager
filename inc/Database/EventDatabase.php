@@ -3,8 +3,12 @@ namespace WPEMS\Database;
 
 class EventDatabase {
 	private static $instance;
+	private $wpdb;
 
-	private function __construct() {}
+	private function __construct() {
+		global $wpdb;
+		$this->wpdb = $wpdb;
+	}
 
 	public static function get_instance() {
 		if ( self::$instance === null ) {
@@ -13,38 +17,23 @@ class EventDatabase {
 		return self::$instance;
 	}
 
-	public function getEventData( $event_id ) {
 
-		$event_id = (int) $event_id;
-		if ( ! $event_id ) {
-			return false;
-		}
-
-		$event_data = false;
-		// $event_data = wp_cache_get($event_id, 'posts');
-
-		if ( ! $event_data ) {
-            $event_data = get_post( $event_id );
-
-			if ( ! $event_data ) {
-				return false;
-			}
-
-			// Get data from wp_postmeta
-			$post_meta = get_post_meta( $event_id );
-
-			// Assign values from wp_postmeta to $event_data
-			foreach ( $post_meta as $meta_key => $meta_value ) {
-				$event_data->{$meta_key} = $meta_value[0];
-			}
-
-			$event_data = sanitize_post( $event_data, 'raw' );
-			// wp_cache_add($event_data->ID, $event_data, 'posts');
-
-		} elseif ( empty( $event_data->filter ) || 'raw' !== $event_data->filter ) {
-			$event_data = sanitize_post( $event_data, 'raw' );
-		}
+	public function get_event_data( $event_id ) {
+		$event_data = $this->wpdb->get_row(
+			$this->wpdb->prepare( "SELECT * FROM {$this->wpdb->posts} WHERE ID = %d LIMIT 1", $event_id )
+		);
 
 		return $event_data;
 	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param array $data [ 'post_title', ''];
+	 * @return void
+	 */
+	// public function insert(array $data) {
+
+	// 	$wpdb->insert('table_name', $data);
+	// }
 }

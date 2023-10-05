@@ -5,14 +5,16 @@ use WPEMS\Model\EventModel;
 use DateTime;
 
 class EventTemplate {
-	private $model;
+	public $model;
+	public $eventModel;
 
 	public function __construct( $event_id ) {
-		$this->model = new EventModel( $event_id );
+		$this->model      = EventModel::get_instance( $event_id );
+		$this->eventModel = $this->model->get_event_by_id( $event_id );
 	}
 
 	public function displayEventTitle( $event_id ) {
-		$title = $this->model->title;
+		$title = $this->eventModel->post_title;
 
 		$html = '<div class="entry-title">';
 		if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
@@ -35,7 +37,6 @@ class EventTemplate {
 	}
 
 	public function displayEventThumbnail( $event_id ) {
-		$thumbnail = $this->model->thumbnail;
 
 		$html = '';
 		if ( has_post_thumbnail( $event_id ) ) {
@@ -58,20 +59,22 @@ class EventTemplate {
 	}
 
 	public function displayEventContent( $event_id ) {
-		// $content = $this->model->getEventContent( $event_id );
+		// $content = $this->eventModel->getEventContent( $event_id );
 		echo '<div class="entry-content">';
 		$content = the_content();
+		// $content = $this->eventModel->post_content;
+		echo $content;
 		echo '</div>';
 	}
 
 	public function displayEventInformation( $event_id ) {
-		$start_time        = $this->model->startTime;
-		$start_date        = $this->model->startDate;
-		$end_time          = $this->model->endTime;
-		$end_date          = $this->model->endDate;
-		$register_end_time = $this->model->registerEndTime;
-		$register_end_date = $this->model->registerEndDate;
-		$location_f        = $this->model->locationIframe;
+		$start_time        = $this->eventModel->tp_event_time_start;
+		$start_date        = $this->eventModel->tp_event_date_start;
+		$end_time          = $this->eventModel->tp_event_time_end;
+		$end_date          = $this->eventModel->tp_event_date_end;
+		$register_end_time = $this->eventModel->tp_event_registration_end_time;
+		$register_end_date = $this->eventModel->tp_event_registration_end_date;
+		$location_f        = $this->eventModel->tp_event_location_iframe;
 
 		$html = <<<HTML
         <div class="entry-information">
@@ -148,7 +151,7 @@ class EventTemplate {
 	}
 
 	public function displayEventIframe( $event_id ) {
-		$iframe = $this->model->iframe;
+		$iframe = $this->eventModel->tp_event_iframe;
 
 		$html = '';
 		if ( ! empty( $iframe ) ) {
@@ -162,7 +165,7 @@ class EventTemplate {
 	}
 
 	public function displayEventSchedules( $event_id ) {
-		$schedules     = $this->model->schedules;
+		$schedules     = $this->eventModel->tp_event_schedules;
 		$schedules_arr = json_decode( $schedules, true );
 
 		$html  = '<div class="entry-schedule">';
