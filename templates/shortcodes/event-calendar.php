@@ -14,11 +14,10 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-use WPEMS\Model as Md;
 
 wp_enqueue_script( 'wpems-calendar-js' );
 
-$eventDB = Md\WpemsEventsModel::getInstance();
+$eventDB = WPEMS\Model\EventsModel::getInstance();
 $events  = $eventDB->calendar_data();
 
 if ( ! is_array( $events ) ) {

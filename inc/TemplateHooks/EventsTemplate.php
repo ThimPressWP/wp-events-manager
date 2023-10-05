@@ -1,17 +1,17 @@
 <?php
 
-namespace WPEMS\Templates;
+namespace WPEMS\TemplateHooks;
 use WPEMS\Model as Model;
 use WP_Post;
 use WP_Query;
 use Exception;
-class WpemsEventsTemplate {
+class EventsTemplate {
 	public $eventModel;
 	public $singleEventTemp;
 
 	public function __construct() {
-		$this->eventModel      = Model\WpemsEventsModel::getInstance();
-		$this->singleEventTemp = new WpemsSingleEventTemplate();
+		$this->eventModel      = Model\EventsModel::getInstance();
+		$this->singleEventTemp = new SingleEventTemplate();
 	}
 
 	/**

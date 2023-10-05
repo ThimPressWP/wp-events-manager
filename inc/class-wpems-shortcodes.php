@@ -265,8 +265,8 @@ class WPEMS_Shortcodes {
 			$getPriceMin            = '';
 			$getPriceMax            = '';
 
-			$events     = \WPEMS\Model\WpemsEventsModel::getInstance();
-			$checkParam = new \WPEMS\Helper\Helper();
+			$events     = \WPEMS\Model\EventsModel::getInstance();
+			$checkParam = new \WPEMS\Helper\CheckParam();
 
 			// Get value from frontend
 			if ( isset( $_GET['search_event_list'] ) ) {

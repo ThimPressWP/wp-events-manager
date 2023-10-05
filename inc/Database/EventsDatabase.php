@@ -2,7 +2,7 @@
 
 namespace  WPEMS\Database;
 use WP_Query;
-class WpemsEventsDatabase {
+class EventsDatabase {
 	private static $instances = [];
 
 	protected function __construct() {}
@@ -242,7 +242,7 @@ class WpemsEventsDatabase {
 	 * @return array $query_args of condition to reorder
 	 */
 	public function orderby_query( string $order_by, array $query_args ) {
-		if ( ! empty( $order_by ) && is_array( $query_args ) ) {
+		if ( ! empty( $order_by ) && is_string( $order_by ) && is_array( $query_args ) ) {
 			// Order by price
 			if ( strtolower( $order_by ) === 'high-low' || strtolower( $order_by ) === 'low-high' ) {
 				$query_args['orderby']  = 'meta_value_num';

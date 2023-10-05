@@ -3,7 +3,7 @@ namespace WPEMS\Model;
 use WPEMS\Database as Database;
 use Exception;
 
-class WpemsEventsModel {
+class EventsModel {
 	public $data;
 	public $pagination;
 	private static $instances = [];
@@ -17,8 +17,8 @@ class WpemsEventsModel {
 	public $order_by        = '';
 
 	protected function __construct() {
-		$this->data       = Database\WpemsEventsDatabase::getInstance();
-		$this->pagination = WpemPaginationModel::getInstance();
+		$this->data       = Database\EventsDatabase::getInstance();
+		$this->pagination = PaginationModel::getInstance();
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace WPEMS\Helper;
 
-class Helper {
+class CheckParam {
 		/**
 	 * Check html request
 	 */

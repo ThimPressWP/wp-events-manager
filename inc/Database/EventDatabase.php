@@ -24,7 +24,7 @@ class EventDatabase {
 		// $event_data = wp_cache_get($event_id, 'posts');
 
 		if ( ! $event_data ) {
-            $event_data = get_post( $event_id );
+			$event_data = get_post( $event_id );
 
 			if ( ! $event_data ) {
 				return false;
