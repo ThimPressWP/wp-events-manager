@@ -16,14 +16,7 @@ defined( 'ABSPATH' ) || exit();
 
 
 wp_enqueue_script( 'wpems-calendar-js' );
-
-$eventDB = WPEMS\Model\EventsModel::getInstance();
-$events  = $eventDB->calendar_data();
-
-if ( ! is_array( $events ) ) {
-	return;
-}
-wp_localize_script( 'wpems-calendar-js', 'events', $events );
+wp_localize_script( 'wpems-calendar-js', 'events', $args['events'] );
 
 ?>
 <div id='calendar-frontend'></div>

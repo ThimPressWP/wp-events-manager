@@ -1,7 +1,6 @@
 <?php
 
 class AdminEventCalendar {
-
 	/**
 	 * To display on the Events Calendars submenu of admin dashboard
 	 */
@@ -15,6 +14,11 @@ class AdminEventCalendar {
 			return;
 		}
 		wp_localize_script( 'wpems-admin-calendar-js', 'eventData', $events );
+		self::calendar_template();
+
+	}
+
+	public static function calendar_template() {
 		?>
 		<div id='calendar-admin'></div>
 		<div class='wrapper-event'>

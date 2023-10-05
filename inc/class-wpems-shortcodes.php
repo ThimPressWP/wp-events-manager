@@ -266,7 +266,7 @@ class WPEMS_Shortcodes {
 			$getPriceMax            = '';
 
 			$events     = \WPEMS\Model\EventsModel::getInstance();
-			$checkParam = new \WPEMS\Helper\CheckParam();
+			$checkParam = new \WPEMS\Helper\Utils();
 
 			// Get value from frontend
 			if ( isset( $_GET['search_event_list'] ) ) {
@@ -336,8 +336,22 @@ class WPEMS_Shortcodes {
 	 * @param $atts
 	 * @return string
 	 */
-	public static function event_calendars() {
-		return WPEMS_Shortcodes::render( 'event-calendar', 'event-calendar.php' );
+	public static function event_calendars( $atts ) {
+		$eventModel = WPEMS\Model\EventsModel::getInstance();
+		$events     = $eventModel->calendar_data();
+
+		if ( ! is_array( $events ) ) {
+			return;
+		}
+
+		$atts = shortcode_atts(
+			array(
+				'events' => $events,
+			),
+			$atts
+		);
+
+		return WPEMS_Shortcodes::render( 'event-calendar', 'event-calendar.php', array( 'args' => $atts ) );
 	}
 }
 
