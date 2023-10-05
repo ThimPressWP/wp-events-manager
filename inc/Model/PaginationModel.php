@@ -1,7 +1,7 @@
 <?php
 namespace WPEMS\Model;
-
-class WpemPaginationModel {
+use WP_Query;
+class PaginationModel {
 	public $pageSize           = 9;
 	public $pageIndex          = 1;
 	public $totalPost          = 0;
@@ -26,10 +26,10 @@ class WpemPaginationModel {
 	/**
 	 * For pagination feature
 	 *
-	 * @param \WP_Query $getPosts take from WP_Query method
-	 * @return \WP_Query $pagination that store properties need for setting pagination on the screen
+	 * @param WP_Query $getPosts take from WP_Query method
+	 * @return WP_Query $pagination that store properties need for setting pagination on the screen
 	 */
-	public function pagination( \WP_Query $getPosts ) {
+	public function pagination( WP_Query $getPosts ) {
 		$pagination = array();
 
 		if ( $getPosts !== null ) {

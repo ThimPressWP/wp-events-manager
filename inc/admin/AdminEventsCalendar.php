@@ -1,20 +1,24 @@
 <?php
 
 class AdminEventCalendar {
-
 	/**
 	 * To display on the Events Calendars submenu of admin dashboard
 	 */
 	public static function output() {
 		wp_enqueue_script( 'wpems-admin-calendar-js' );
 
-		$eventModel = \WPEMS\Model\WpemsEventsModel::getInstance();
+		$eventModel = \WPEMS\Model\EventsModel::getInstance();
 		$events     = $eventModel->calendar_data();
 
 		if ( ! is_array( $events ) ) {
 			return;
 		}
 		wp_localize_script( 'wpems-admin-calendar-js', 'eventData', $events );
+		self::calendar_template();
+
+	}
+
+	public static function calendar_template() {
 		?>
 		<div id='calendar-admin'></div>
 		<div class='wrapper-event'>

@@ -1,13 +1,13 @@
 <?php
 
-namespace WPEMS\Templates;
+namespace WPEMS\TemplateHooks;
 use WPEMS\Model as Model;
 use WP_Query;
 
-class WpemsFilterTemplate {
+class FilterTemplate {
 	public $pagination;
 	public function __construct() {
-		$this->pagination = Model\WpemPaginationModel::getInstance();
+		$this->pagination = Model\PaginationModel::getInstance();
 	}
 
 	/**

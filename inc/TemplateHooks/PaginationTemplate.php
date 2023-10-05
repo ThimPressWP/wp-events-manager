@@ -1,10 +1,10 @@
 <?php
-namespace WPEMS\Templates;
-class WpemsPaginationTemplate {
+namespace WPEMS\TemplateHooks;
+class PaginationTemplate {
 
 	public $pagination;
 	public function __construct() {
-		$this->pagination = \WPEMS\Model\WpemPaginationModel::getInstance();
+		$this->pagination = \WPEMS\Model\PaginationModel::getInstance();
 	}
 	/**
 	 * The Pagination

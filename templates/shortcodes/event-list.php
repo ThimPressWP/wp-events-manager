@@ -19,12 +19,12 @@ wp_enqueue_script( 'wpems-litepicker-lb' );
 wp_enqueue_script( 'wpems-ranges-lb' );
 wp_enqueue_script( 'wpems-event-list-js' );
 
-use WPEMS\Templates as Template;
+use WPEMS\TemplateHooks as Template;
 
-$filterTemplate      = new Template\WpemsFilterTemplate();
-$singleEventTemplate = new Template\WpemsSingleEventTemplate();
-$eventsTemplate      = new Template\WpemsEventsTemplate();
-$pagination          = new Template\WpemsPaginationTemplate();
+$filterTemplate      = new Template\FilterTemplate();
+$singleEventTemplate = new Template\SingleEventTemplate();
+$eventsTemplate      = new Template\EventsTemplate();
+$pagination          = new Template\PaginationTemplate();
 
 ?>
 <div class="eventListDisplay ">
