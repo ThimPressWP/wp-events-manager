@@ -5,20 +5,18 @@ use WPEMS\Model\EventModel;
 use DateTime;
 
 class EventTemplate {
-	public $model;
-	public $eventModel;
+	public $event;
 
-	public function __construct( $event_id ) {
-		$this->model      = EventModel::get_instance( $event_id );
-		$this->eventModel = $this->model->get_event_by_id( $event_id );
+	public function __construct( EventModel $eventModel ) {
+		$this->event = $eventModel;
 	}
 
-	public function displayEventTitle( $event_id ) {
-		$title = $this->eventModel->post_title;
+	public function displayEventTitle() {
+		$title = $this->event->post_title;
 
 		$html = '<div class="entry-title">';
 		if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
-			$html .= '<h4><a href="' . get_permalink( $event_id ) . '">';
+			$html .= '<h4><a href="' . get_permalink( $this->event->ID ) . '">';
 		} else {
 			$html .= '<h3>';
 		}
@@ -36,14 +34,14 @@ class EventTemplate {
 		echo $html;
 	}
 
-	public function displayEventThumbnail( $event_id ) {
+	public function displayEventThumbnail() {
 
 		$html = '';
-		if ( has_post_thumbnail( $event_id ) ) {
+		if ( has_post_thumbnail( $this->event->ID ) ) {
 			$html .= '<div class="entry-thumbnail">';
 
 			if ( ! is_singular( 'tp_event' ) || ! in_the_loop() ) {
-				$html .= '<a href="' . get_permalink( $event_id ) . '">';
+				$html .= '<a href="' . get_permalink( $this->event->ID ) . '">';
 			}
 
 			$html .= get_the_post_thumbnail();
@@ -58,23 +56,20 @@ class EventTemplate {
 		echo $html;
 	}
 
-	public function displayEventContent( $event_id ) {
-		// $content = $this->eventModel->getEventContent( $event_id );
+	public function displayEventContent() {
 		echo '<div class="entry-content">';
 		$content = the_content();
-		// $content = $this->eventModel->post_content;
-		echo $content;
 		echo '</div>';
 	}
 
-	public function displayEventInformation( $event_id ) {
-		$start_time        = $this->eventModel->tp_event_time_start;
-		$start_date        = $this->eventModel->tp_event_date_start;
-		$end_time          = $this->eventModel->tp_event_time_end;
-		$end_date          = $this->eventModel->tp_event_date_end;
-		$register_end_time = $this->eventModel->tp_event_registration_end_time;
-		$register_end_date = $this->eventModel->tp_event_registration_end_date;
-		$location_f        = $this->eventModel->tp_event_location_iframe;
+	public function displayEventInformation() {
+		$start_time        = $this->event->tp_event_time_start;
+		$start_date        = $this->event->tp_event_date_start;
+		$end_time          = $this->event->tp_event_time_end;
+		$end_date          = $this->event->tp_event_date_end;
+		$register_end_time = $this->event->tp_event_registration_end_time;
+		$register_end_date = $this->event->tp_event_registration_end_date;
+		$location_f        = $this->event->tp_event_location_iframe;
 
 		$html = <<<HTML
         <div class="entry-information">
@@ -132,7 +127,7 @@ class EventTemplate {
 		echo $html;
 	}
 
-	public function displayEventCountdown( $event_id ) {
+	public function displayEventCountdown() {
 		$current_time = current_time( 'Y-m-d H:i' );
 		$time         = wpems_get_time( 'Y-m-d H:i', null, false );
 
@@ -150,8 +145,8 @@ class EventTemplate {
 		echo $html;
 	}
 
-	public function displayEventIframe( $event_id ) {
-		$iframe = $this->eventModel->tp_event_iframe;
+	public function displayEventIframe() {
+		$iframe = $this->event->tp_event_iframe;
 
 		$html = '';
 		if ( ! empty( $iframe ) ) {
@@ -164,8 +159,8 @@ class EventTemplate {
 		echo $html;
 	}
 
-	public function displayEventSchedules( $event_id ) {
-		$schedules     = $this->eventModel->tp_event_schedules;
+	public function displayEventSchedules() {
+		$schedules     = $this->event->tp_event_schedules;
 		$schedules_arr = json_decode( $schedules, true );
 
 		$html  = '<div class="entry-schedule">';

@@ -14,10 +14,12 @@
  */
 defined( 'ABSPATH' ) || exit();
 
+use WPEMS\Model\EventModel;
 use WPEMS\TemplateHooks\EventTemplate;
 
 $event_id       = get_the_ID();
-$event_template = new EventTemplate( $event_id );
+$event_model    = EventModel::get_instance( $event_id );
+$event_template = new EventTemplate( $event_model );
 ?>
 
 <article id="tp_event-<?php the_ID(); ?>" <?php post_class( 'tp_single_event' ); ?>>
@@ -36,44 +38,44 @@ $event_template = new EventTemplate( $event_id );
 		 * tp_event_single_event_title hook
 		 */
 		// do_action( 'tp_event_single_event_title' );
-		$event_template->displayEventTitle( $event_id );
+		$event_template->displayEventTitle();
 
 		/**
 		 * tp_event_single_event_thumbnail hook
 		 */
 		// do_action( 'tp_event_single_event_thumbnail' );
-		$event_template->displayEventThumbnail( $event_id );
+		$event_template->displayEventThumbnail();
 
 		/**
 		 * tp_event_single_event_thumbnail hook
 		 */
 		// do_action( 'tp_event_loop_event_information' );
-		$event_template->displayEventInformation( $event_id );
+		$event_template->displayEventInformation();
 
 		/**
 		 * tp_event_loop_event_countdown hook
 		 */
 		// do_action( 'tp_event_loop_event_countdown' );
-		$event_template->displayEventCountdown( $event_id );
+		$event_template->displayEventCountdown();
 
 
 		/**
 		 * tp_event_single_event_content hook
 		 */
 		// do_action( 'tp_event_single_event_content' );
-		$event_template->displayEventContent( $event_id );
+		$event_template->displayEventContent();
 
 		/**
 		 * tp_event_loop_event_location hook
 		 */
 		// do_action( 'tp_event_loop_event_location' );
-		$event_template->displayEventIframe( $event_id );
+		$event_template->displayEventIframe();
 
 		/**
 		 * tp_event_loop_event_location hook
 		 */
 		// do_action( 'tp_event_loop_schedule' );
-		$event_template->displayEventSchedules( $event_id );
+		$event_template->displayEventSchedules();
 		?>
 
 	</div><!-- .summary -->

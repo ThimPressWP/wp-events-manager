@@ -17,7 +17,6 @@ class EventDatabase {
 		return self::$instance;
 	}
 
-
 	public function get_event_data( $event_id ) {
 		$event_data = $this->wpdb->get_row(
 			$this->wpdb->prepare( "SELECT * FROM {$this->wpdb->posts} WHERE ID = %d LIMIT 1", $event_id )

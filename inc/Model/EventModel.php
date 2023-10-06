@@ -192,28 +192,6 @@ class EventModel {
 	 * @return EventModel|false Post object, false otherwise.
 	 */
 	public static function get_instance( $event_id ) {
-		$event_db   = EventDatabase::get_instance();
-		$event_data = $event_db->get_event_data( $event_id );
-
-		if ( ! $event_data ) {
-			return false;
-		}
-
-		return new EventModel( $event_data );
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @param EventModel|object $event Event object.
-	 */
-	public function __construct( $event ) {
-		foreach ( get_object_vars( $event ) as $key => $value ) {
-			$this->$key = $value;
-		}
-	}
-
-	public function get_event_by_id( $event_id ) {
 		global $wpdb;
 
 		$event_id = (int) $event_id;
@@ -237,7 +215,18 @@ class EventModel {
 		}
 
 		$event_data = sanitize_post( $event_data, 'raw' );
-		// var_dump($event_data);die;
-		return $event_data;
+
+		return new EventModel( $event_data );
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @param EventModel|object $event Event object.
+	 */
+	public function __construct( $event ) {
+		foreach ( get_object_vars( $event ) as $key => $value ) {
+			$this->$key = $value;
+		}
 	}
 }
