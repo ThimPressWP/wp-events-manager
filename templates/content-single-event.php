@@ -17,9 +17,10 @@ defined( 'ABSPATH' ) || exit();
 use WPEMS\Model\EventModel;
 use WPEMS\TemplateHooks\EventTemplate;
 
-$event_id       = get_the_ID();
-$event_model    = EventModel::get_instance( $event_id );
-$event_template = new EventTemplate( $event_model );
+if ( ! isset( $event ) || ! $event instanceof EventModel ) {
+	return false;
+}
+$event_template = new EventTemplate( $event );
 ?>
 
 <article id="tp_event-<?php the_ID(); ?>" <?php post_class( 'tp_single_event' ); ?>>

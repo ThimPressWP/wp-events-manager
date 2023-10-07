@@ -47,17 +47,17 @@ $location             = get_post_meta( $post_id, 'tp_event_location', true );
 $selected_radio_value = get_post_meta( $post_id, 'tp_event_selected_radio_value', true );
 
 ?>
-<div class="event_meta_box_container">
-	<div class="event_meta_panel">
-		<?php do_action( 'tp_event_admin_event_metabox_before_fields', $post, $prefix ); ?>
-		<div class="option_group">
-			<p class="form-field">
-				<label for="_qty"><?php _e( 'Quantity', 'wp-events-manager' ); ?></label>
-				<input type="number" min="0" step="1" class="short" name="<?php echo esc_attr( $prefix ); ?>qty" id="_qty" value="<?php echo esc_attr( absint( $qty ) ); ?>">
-			</p>
-		</div>
-		<div class="option_group">
-			<p class="form-field">
+	<div class="event_meta_box_container">
+		<div class="event_meta_panel">
+			<?php do_action( 'tp_event_admin_event_metabox_before_fields', $post, $prefix ); ?>
+			<div class="option_group">
+				<p class="form-field">
+					<label for="_qty"><?php _e( 'Quantity', 'wp-events-manager' ); ?></label>
+					<input type="number" min="0" step="1" class="short" name="<?php echo esc_attr( $prefix ); ?>qty" id="_qty" value="<?php echo esc_attr( absint( $qty ) ); ?>">
+				</p>
+			</div>
+			<div class="option_group">
+				<p class="form-field">
 				<label for="_price"><?php printf( '%s(%s)', __( 'Price', 'wp-events-manager' ), wpems_get_currency_symbol() ); ?></label>
 				<input type="number" step="any" min="0" class="short" name="<?php echo esc_attr( $prefix ); ?>price" id="_price" value="<?php echo esc_attr( floatval( $price ) ); ?>" />
 			</p>

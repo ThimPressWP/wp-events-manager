@@ -18,6 +18,10 @@ class EventDatabase {
 	}
 
 	public function get_event_data( $event_id ) {
+		if ( ! is_numeric( $event_id ) || $event_id <= 0 ) {
+			return false;
+		}
+
 		$event_data = $this->wpdb->get_row(
 			$this->wpdb->prepare( "SELECT * FROM {$this->wpdb->posts} WHERE ID = %d LIMIT 1", $event_id )
 		);

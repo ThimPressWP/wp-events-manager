@@ -14,6 +14,8 @@
  */
 defined( 'ABSPATH' ) || exit();
 
+use WPEMS\Model\EventModel;
+
 get_header(); ?>
 
 	<?php
@@ -26,9 +28,12 @@ get_header(); ?>
 		<?php
 		while ( have_posts() ) :
 			the_post();
+			$post_id = get_the_ID();
+			$event   = EventModel::get_instance( $post_id );
 			?>
 
-			<?php wpems_get_template_part( 'content', 'single-event' ); ?>
+			<?php //wpems_get_template_part( 'content', 'single-event' ); ?>
+			<?php wpems_get_template( 'content-single-event.php', array( 'event' => $event ) ); ?>
 
 		<?php endwhile; // end of the loop. ?>
 

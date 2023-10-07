@@ -189,12 +189,11 @@ class EventModel {
 	 * @global wpdb $wpdb WordPress database abstraction object.
 	 *
 	 * @param int $post_id Post ID.
-	 * @return EventModel|false Post object, false otherwise.
+	 * @return EventModel|false|mixed Post object, false otherwise.
 	 */
-	public static function get_instance( $event_id ) {
+	public static function get_instance( int $event_id ) {
 		global $wpdb;
 
-		$event_id = (int) $event_id;
 		if ( ! $event_id ) {
 			return false;
 		}
@@ -211,7 +210,7 @@ class EventModel {
 
 		// Assign values from wp_postmeta to $event_data
 		foreach ( $post_meta as $meta_key => $meta_value ) {
-			$event_data->{$meta_key} = $meta_value[0];
+			$event_data->{$meta_key} = sanitize_text_field( $meta_value[0] );
 		}
 
 		$event_data = sanitize_post( $event_data, 'raw' );
