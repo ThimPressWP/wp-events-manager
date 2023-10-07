@@ -208,6 +208,7 @@ class EventModel {
 		// Get data from wp_postmeta
 		$post_meta = get_post_meta( $event_id );
 
+		
 		// Assign values from wp_postmeta to $event_data
 		foreach ( $post_meta as $meta_key => $meta_value ) {
 			$event_data->{$meta_key} = sanitize_text_field( $meta_value[0] );
