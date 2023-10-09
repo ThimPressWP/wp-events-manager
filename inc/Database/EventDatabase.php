@@ -1,6 +1,8 @@
 <?php
 namespace WPEMS\Database;
 
+use WPEMS\Model\EventModel;
+
 class EventDatabase {
 	private static $instance;
 	private $wpdb;
@@ -10,15 +12,15 @@ class EventDatabase {
 		$this->wpdb = $wpdb;
 	}
 
-	public static function get_instance() {
+	public static function get_instance(): EventDatabase {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
 	}
 
-	public function get_event_data( $event_id ) {
-		if ( ! is_numeric( $event_id ) || $event_id <= 0 ) {
+	public function get_event_data( int $event_id ): EventModel {
+		if ( $event_id <= 0 ) {
 			return false;
 		}
 
@@ -26,17 +28,7 @@ class EventDatabase {
 			$this->wpdb->prepare( "SELECT * FROM {$this->wpdb->posts} WHERE ID = %d LIMIT 1", $event_id )
 		);
 
-		return $event_data;
+		// return $event_data;
+		return new EventModel( $event_data );
 	}
-
-	/**
-	 * Undocumented function
-	 *
-	 * @param array $data [ 'post_title', ''];
-	 * @return void
-	 */
-	// public function insert(array $data) {
-
-	// 	$wpdb->insert('table_name', $data);
-	// }
 }
