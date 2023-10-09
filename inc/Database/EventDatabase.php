@@ -28,11 +28,11 @@ class EventDatabase {
 	 * get event data from the database based on the event ID
 	 *
 	 * @param integer $event_id
-	 * @return EventModel
+	 * @return mixed|array|null
 	 */
-	public function get_event_data( int $event_id ): EventModel {
+	public function get_event_data( int $event_id ) {
 		if ( $event_id <= 0 ) {
-			return false;
+			return null;
 		}
 
 		$event_data = $this->wpdb->get_row(
@@ -40,6 +40,6 @@ class EventDatabase {
 		);
 
 		// return $event_data;
-		return new EventModel( $event_data );
+		return $event_data;
 	}
 }

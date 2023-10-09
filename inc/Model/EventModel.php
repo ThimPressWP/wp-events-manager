@@ -9,7 +9,7 @@ class EventModel {
 	 *
 	 * @var int
 	 */
-	public int $ID;
+	public $ID;
 
 	/**
 	 * ID of post author.
@@ -18,126 +18,126 @@ class EventModel {
 	 *
 	 * @var string
 	 */
-	public int $post_author = 0;
+	public $post_author = 0;
 
 	/**
 	 * The post's local publication time.
 	 *
 	 * @var string
 	 */
-	public string $post_date = '0000-00-00 00:00:00';
+	public $post_date = '0000-00-00 00:00:00';
 
 	/**
 	 * The post's GMT publication time.
 	 *
 	 * @var string
 	 */
-	public string $post_date_gmt = '0000-00-00 00:00:00';
+	public $post_date_gmt = '0000-00-00 00:00:00';
 
 	/**
 	 * The post's content.
 	 *
 	 * @var string
 	 */
-	public string $post_content = '';
+	public $post_content = '';
 
 	/**
 	 * The post's title.
 	 *
 	 * @var string
 	 */
-	public string $post_title = '';
+	public $post_title = '';
 
 	/**
 	 * The post's excerpt.
 	 *
 	 * @var string
 	 */
-	public string $post_excerpt = '';
+	public $post_excerpt = '';
 
 	/**
 	 * The post's status.
 	 *
 	 * @var string
 	 */
-	public string $post_status = 'publish';
+	public $post_status = 'publish';
 
 	/**
 	 * Whether comments are allowed.
 	 *
 	 * @var string
 	 */
-	public string $comment_status = 'open';
+	public $comment_status = 'open';
 
 	/**
 	 * Whether pings are allowed.
 	 *
 	 * @var string
 	 */
-	public string $ping_status = 'open';
+	public $ping_status = 'open';
 
 	/**
 	 * The post's password in plain text.
 	 *
 	 * @var string
 	 */
-	public string $post_password = '';
+	public $post_password = '';
 
 	/**
 	 * The post's slug.
 	 *
 	 * @var string
 	 */
-	public string $post_name = '';
+	public $post_name = '';
 
 	/**
 	 * URLs queued to be pinged.
 	 *
 	 * @var string
 	 */
-	public string $to_ping = '';
+	public $to_ping = '';
 
 	/**
 	 * URLs that have been pinged.
 	 *
 	 * @var string
 	 */
-	public string $pinged = '';
+	public $pinged = '';
 
 	/**
 	 * The post's local modified time.
 	 *
 	 * @var string
 	 */
-	public string $post_modified = '0000-00-00 00:00:00';
+	public $post_modified = '0000-00-00 00:00:00';
 
 	/**
 	 * The post's GMT modified time.
 	 *
 	 * @var string
 	 */
-	public string $post_modified_gmt = '0000-00-00 00:00:00';
+	public $post_modified_gmt = '0000-00-00 00:00:00';
 
 	/**
 	 * A utility DB field for post content.
 	 *
 	 * @var string
 	 */
-	public string $post_content_filtered = '';
+	public $post_content_filtered = '';
 
 	/**
 	 * ID of a post's parent post.
 	 *
 	 * @var int
 	 */
-	public int $post_parent = 0;
+	public $post_parent = 0;
 
 	/**
 	 * The unique identifier for a post, not necessarily a URL, used as the feed GUID.
 	 *
 	 * @var string
 	 */
-	public string $guid = '';
+	public $guid = '';
 
 	/**
 	 * A field used for ordering posts.
@@ -145,7 +145,7 @@ class EventModel {
 	 * @since 3.5.0
 	 * @var int
 	 */
-	public int $menu_order = 0;
+	public $menu_order = 0;
 
 	/**
 	 * The post's type, like post or page.
@@ -153,7 +153,7 @@ class EventModel {
 	 * @since 3.5.0
 	 * @var string
 	 */
-	public string $post_type = 'post';
+	public $post_type = 'post';
 
 	/**
 	 * An attachment's mime type.
@@ -161,7 +161,7 @@ class EventModel {
 	 * @since 3.5.0
 	 * @var string
 	 */
-	public string $post_mime_type = '';
+	public $post_mime_type = '';
 
 	/**
 	 * Cached comment count.
@@ -171,7 +171,7 @@ class EventModel {
 	 * @since 3.5.0
 	 * @var string
 	 */
-	public int $comment_count = 0;
+	public $comment_count = 0;
 
 	/**
 	 * Stores the post object's sanitization level.
@@ -181,7 +181,7 @@ class EventModel {
 	 * @since 3.5.0
 	 * @var string
 	 */
-	public string $filter;
+	public $filter;
 
 	/**
 	 * Retrieve EventModel instance.
