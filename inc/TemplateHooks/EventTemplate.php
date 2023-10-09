@@ -147,7 +147,7 @@ class EventTemplate {
 
 	public function displayEventIframe() {
 		$iframe = $this->event->tp_event_iframe;
-
+		
 		$html = '';
 		if ( ! empty( $iframe ) ) {
 			$html .= '<div class="entry-location">';

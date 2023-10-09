@@ -12,6 +12,11 @@ class EventDatabase {
 		$this->wpdb = $wpdb;
 	}
 
+	/**
+	 * Get a single instance of the EventDatabase class
+	 *
+	 * @return EventDatabase
+	 */
 	public static function get_instance(): EventDatabase {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
@@ -19,6 +24,12 @@ class EventDatabase {
 		return self::$instance;
 	}
 
+	/**
+	 * get event data from the database based on the event ID
+	 *
+	 * @param integer $event_id
+	 * @return EventModel
+	 */
 	public function get_event_data( int $event_id ): EventModel {
 		if ( $event_id <= 0 ) {
 			return false;

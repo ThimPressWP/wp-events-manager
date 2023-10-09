@@ -207,15 +207,17 @@ class EventModel {
 
 		// Get data from wp_postmeta
 		$post_meta = get_post_meta( $event_id );
+		
+		if ( is_array($post_meta) ) {
+			// Assign values from wp_postmeta to $event_data
+			foreach ( $post_meta as $meta_key => $meta_value ) {
+				$event_data->{$meta_key} = $meta_value[0];
+			}
 
-		// Assign values from wp_postmeta to $event_data
-		foreach ( $post_meta as $meta_key => $meta_value ) {
-			$event_data->{$meta_key} = sanitize_text_field( $meta_value[0] );
+			$event_data = sanitize_post( $event_data, 'raw' );
+
+			return new EventModel( $event_data );
 		}
-
-		$event_data = sanitize_post( $event_data, 'raw' );
-
-		return new EventModel( $event_data );
 	}
 
 	/**
