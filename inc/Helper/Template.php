@@ -45,7 +45,7 @@ class Template {
 	 */
 	public function get_admin_template( string $file_name = '', array $args = array() ) {
 		$file_name = str_replace( '.php', '', $file_name );
-		$path_file = LP_PLUGIN_PATH . "inc/admin/views/{$file_name}.php";
+		$path_file = WPEMS_PATH . "inc/admin/views/{$file_name}.php";
 
 		$template = $this->get_template( $path_file, $args );
 
