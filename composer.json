@@ -20,13 +20,11 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^v0.7.2"
 	},
 	"scripts": {
-		"format": "phpcbf --standard=phpcs.xml --report-summary --report-source",
-		"lint": "phpcs --standard=phpcs.xml",
-		"phpcs": "phpcs --standard=phpcs.xml"
+		"format": "phpcbf --standard=phpcs.xml --report-summary --report-source"
 	},
 	"autoload": {
 		"psr-4": {
-			"LearnPress\\": "inc/"
+			"WPEMS\\": "inc/"
 		}
 	},
 	"config": {

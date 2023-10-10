@@ -4,7 +4,7 @@
  * Plugin URI: http://thimpress.com/
  * Description: A complete plugin for Events management and online booking system
  * Author: ThimPress
- * Version: 2.1.10
+ * Version: 3.0.0-beta-1
  * Author URI: http://thimpress.com
  */
 
@@ -27,6 +27,8 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 * WPEMS constructor.
 		 */
 		public function __construct() {
+			require_once 'wpems-constants.php';
+			require_once __DIR__ . '/vendor/autoload.php';
 			$this->define_constants();
 			$this->includes();
 			$this->init_hooks();

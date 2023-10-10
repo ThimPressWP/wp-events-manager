@@ -1,7 +1,10 @@
 <?php
 namespace WPEMS\Model;
 
+use stdClass;
+use Throwable;
 use WPEMS\Database\EventDatabase;
+use WPEMS\Filter\Filter;
 
 class EventModel {
 	/**
@@ -174,60 +177,58 @@ class EventModel {
 	public $comment_count = 0;
 
 	/**
-	 * Stores the post object's sanitization level.
+	 * If data get from database, map to object.
+	 * Else create new object to save data to database.
 	 *
-	 * Does not correspond to a DB field.
-	 *
-	 * @since 3.5.0
-	 * @var string
+	 * @param array|object|mixed $data
 	 */
-	public $filter;
-
-	/**
-	 * Retrieve EventModel instance.
-	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
-	 *
-	 * @param int $post_id Post ID.
-	 * @return EventModel|false|mixed Post object, false otherwise.
-	 */
-	public static function get_instance( int $event_id ): EventModel {
-		global $wpdb;
-
-		if ( $event_id <= 0 ) {
-			return false;
-		}
-
-		$event_db   = EventDatabase::get_instance();
-		$event_data = $event_db->get_event_data( $event_id );
-
-		if ( ! $event_data ) {
-			return false;
-		}
-
-		// Get data from wp_postmeta
-		$post_meta = get_post_meta( $event_id );
-		
-		if ( is_array($post_meta) ) {
-			// Assign values from wp_postmeta to $event_data
-			foreach ( $post_meta as $meta_key => $meta_value ) {
-				$event_data->{$meta_key} = $meta_value[0];
-			}
-
-			$event_data = sanitize_post( $event_data, 'raw' );
-
-			return new EventModel( $event_data );
+	public function __construct( $data = null ) {
+		if ( $data ) {
+			$this->map_to_object( $data );
 		}
 	}
 
 	/**
-	 * Constructor.
+	 * Map array, object data to UserItemModel.
+	 * Use for data get from database.
 	 *
-	 * @param EventModel|object $event Event object.
+	 * @param  array|object|mixed $data
+	 * @return EventModel
 	 */
-	public function __construct( $event ) {
-		foreach ( get_object_vars( $event ) as $key => $value ) {
-			$this->$key = $value;
+	public function map_to_object( $data ): EventModel {
+		foreach ( $data as $key => $value ) {
+			if ( isset( $this->{$key} ) ) {
+				$this->{$key} = $value;
+			}
 		}
+
+		return $this;
+	}
+
+	/**
+	 * Get event from database by post_id.
+	 * If not exists, return false.
+	 * If exists, return EventModel.
+	 *
+	 * @param Filter $filter
+	 * @param bool $no_cache
+	 * @return EventModel|false
+	 */
+	public static function get_event_model_from_db( Filter $filter, bool $no_cache = false ) {
+		$lp_user_item_db = EventDatabase::getInstance();
+		$event_model     = false;
+
+		try {
+			$lp_user_item_db->get_query_single_row( $filter );
+			$query_single_row = $lp_user_item_db->get_events( $filter );
+			$events_rs        = $lp_user_item_db->wpdb->get_row( $query_single_row );
+			if ( $events_rs instanceof stdClass ) {
+				$event_model = new self( $events_rs );
+			}
+		} catch ( Throwable $e ) {
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
+		}
+
+		return $event_model;
 	}
 }

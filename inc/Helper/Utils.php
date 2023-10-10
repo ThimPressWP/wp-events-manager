@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Class Utils
+ *
+ * @since 3.0.0
+ * @version 1.0.0
+ */
 namespace WPEMS\Helper;
 
 class Utils {
@@ -54,5 +59,11 @@ class Utils {
 		}
 
 		return $value;
+	}
+
+	public static function db_format_array( array $arr, string $format = '%d' ): string {
+		$arr_formatted = array_fill( 0, sizeof( $arr ), $format );
+
+		return join( ',', $arr_formatted );
 	}
 }
