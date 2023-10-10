@@ -10,6 +10,9 @@
 /**
  * Prevent loading this file directly
  */
+
+use WPEMS\Helper\Template;
+
 defined( 'ABSPATH' ) || exit;
 
 class WPEMS_Template {
@@ -43,7 +46,7 @@ class WPEMS_Template {
 		} elseif ( is_single() ) {
 			$file   = 'single-event.php';
 			$find[] = $file;
-			$find[] = wpems_template_path() . '/' . $file;
+			$find[] = Template::instance( false )->get_frontend_template( 'single-event.php' );
 		}
 
 		if ( $file ) {

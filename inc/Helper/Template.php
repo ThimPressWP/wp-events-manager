@@ -65,8 +65,8 @@ class Template {
 	 * @version 1.0.0
 	 */
 	public function get_frontend_template( string $file_name = '', array $args = array() ) {
-		$default_path          = LP_PLUGIN_PATH . "templates/{$file_name}";
-		$folder_name_rewrite   = learn_press_template_path();
+		$default_path          = WPEMS_PATH . "templates/{$file_name}";
+		$folder_name_rewrite   = wpems_template_path();
 		$from_child_theme_path = sprintf(
 			'%s/%s/%s',
 			get_stylesheet_directory(),

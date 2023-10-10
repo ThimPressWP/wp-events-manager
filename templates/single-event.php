@@ -12,6 +12,9 @@
 /**
  * Prevent loading this file directly
  */
+
+use WPEMS\Helper\Template;
+
 defined( 'ABSPATH' ) || exit();
 
 get_header(); ?>
@@ -28,7 +31,7 @@ get_header(); ?>
 			the_post();
 			?>
 
-			<?php wpems_get_template_part( 'content', 'single-event' ); ?>
+			<?php Template::instance()->get_frontend_template( 'content-single-event.php' ); ?>
 
 		<?php endwhile; // end of the loop. ?>
 

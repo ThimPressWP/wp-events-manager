@@ -38,8 +38,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 * Define Plugins Constants
 		 */
 		public function define_constants() {
-			$this->set_define( 'WPEMS_PATH', plugin_dir_path( __FILE__ ) );
-			$this->set_define( 'WPEMS_URI', plugin_dir_url( __FILE__ ) );
 			$this->set_define( 'WPEMS_INC', WPEMS_PATH . 'inc/' );
 			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
 			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
