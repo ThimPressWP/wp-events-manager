@@ -175,6 +175,12 @@ class EventModel {
 	 * @var string
 	 */
 	public $comment_count = 0;
+	/**
+	 * Undocumented variable
+	 *
+	 * @var object { meta_key: {meta_id, event_id, meta_key, meta_value}}
+	 */
+	public $meta_data;
 
 	/**
 	 * If data get from database, map to object.
@@ -196,10 +202,17 @@ class EventModel {
 	 * @return EventModel
 	 */
 	public function map_to_object( $data ): EventModel {
+		// Get data from wp_posts
 		foreach ( $data as $key => $value ) {
-			if ( isset( $this->{$key} ) ) {
+			if ( property_exists( $this, $key ) ) {
 				$this->{$key} = $value;
 			}
+		}
+
+		// Get data from wp_postmeta
+		$meta_data = get_post_meta( $data->ID );
+		foreach ($meta_data as $meta_key => $meta_value) {
+			$this->{$meta_key} = $meta_value[0];
 		}
 
 		return $this;
