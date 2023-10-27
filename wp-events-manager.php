@@ -42,6 +42,9 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
 			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
 			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
+			$this->set_define( 'WPEMS_TEMPLATES', WPEMS_PATH . 'templates/' );
+			$this->set_define( 'WPEMS_TEMPLATES_URI', WPEMS_URI . 'templates/' );
+			$this->set_define( 'WPEMS_MODEL_EVENT', WPEMS_INC . 'Model/' );
 			$this->set_define( 'WPEMS_VER', '2.1.8' );
 			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}
@@ -89,6 +92,16 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/class-wpems-session.php' );
 			$this->_include( 'inc/class-wpems-booking.php' );
 			$this->_include( 'inc/class-wpems-event.php' );
+
+			$this->_include( 'inc/Model/class-wpems-model-event-list.php' );
+			$this->_include( 'templates/class-wpems-event-template.php' );
+			$this->_include( 'inc/class-wpems-pattern-data.php' );
+			$this->_include( 'inc/class-wpems-pattern-request.php' );
+
+			$this->_include( 'inc/database/class-wpems-calendar-admin-data.php' );
+			$this->_include( 'inc/database/class-wpems-event-list-data.php' );
+			$this->_include( 'inc/database/class-wpems-google-calendar.php' );
+
 			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {
@@ -101,7 +114,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			}
 
 			$this->_include( 'inc/class-wpems-gdpr.php' );
-
 		}
 
 		/**

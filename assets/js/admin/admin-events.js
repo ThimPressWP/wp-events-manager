@@ -53,8 +53,7 @@
 					}
 				})
 			}
-		});
-
+		});	
 
 		TP_Event_Admin.admin_meta_boxes.init();
 	};
