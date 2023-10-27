@@ -64,6 +64,8 @@ class PostTypeFilter extends Filter {
 		self::COL_POST_MIME_TYPE,
 		self::COL_COMMENT_COUNT,
 	];
+
+	// const KEY_START_TIME = 'tp_event_start_time';
 	/**
 	 * @var string
 	 */
@@ -101,5 +103,3 @@ class PostTypeFilter extends Filter {
 	 */
 	public $post_ids = array();
 }
-
-

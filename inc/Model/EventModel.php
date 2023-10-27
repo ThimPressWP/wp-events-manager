@@ -175,6 +175,7 @@ class EventModel {
 	 * @var string
 	 */
 	public $comment_count = 0;
+
 	/**
 	 * Undocumented variable
 	 *
@@ -210,10 +211,19 @@ class EventModel {
 		}
 
 		// Get data from wp_postmeta
-		$meta_data = get_post_meta( $data->ID );
-		foreach ($meta_data as $meta_key => $meta_value) {
-			$this->{$meta_key} = $meta_value[0];
-		}
+		// $meta_data = get_post_meta( $data->ID );
+		// foreach ( $meta_data as $meta_key => $meta_value ) {
+		// 	$this->{$meta_key} = $meta_value[0];
+		// }
+
+		$this->meta_data = new EventMetaModel();
+
+		$meta_key                                 = 'tp_event_iframe';
+		$this->meta_data->{$meta_key}             = new EventMetaModel();
+		$this->meta_data->{$meta_key}->meta_id    = 1;
+		$this->meta_data->{$meta_key}->event_id   = $this->ID;
+		$this->meta_data->{$meta_key}->meta_key   = $meta_key;
+		$this->meta_data->{$meta_key}->meta_value = '';
 
 		return $this;
 	}
@@ -237,6 +247,9 @@ class EventModel {
 			$events_rs        = $lp_user_item_db->wpdb->get_row( $query_single_row );
 			if ( $events_rs instanceof stdClass ) {
 				$event_model = new self( $events_rs );
+				echo '<pre>';
+				print_r( $event_model );
+				echo '</pre>';
 			}
 		} catch ( Throwable $e ) {
 			error_log( __METHOD__ . ': ' . $e->getMessage() );
