@@ -2,6 +2,7 @@
 namespace WPEMS\Database;
 
 use Exception;
+use WPEMS\Filter\EventMetaFilter;
 use WPEMS\Filter\Filter;
 use WPEMS\Helper\Utils;
 
@@ -115,5 +116,51 @@ class EventDatabase extends Database {
 		$filter = apply_filters( 'lp/course/query/filter', $filter );
 
 		return $this->execute( $filter, $total_rows );
+	}
+
+	/**
+	 * Insert data
+	 *
+	 * @param array $data [ meta_id, post_id, meta_key, meta_value ]
+	 * @return int
+	 */
+	public function insert_data( array $data ): int {
+		$filter = new EventMetaFilter();
+		foreach ( $data as $col_name => $value ) {
+			if ( ! in_array( $col_name, $filter->all_fields ) ) {
+				unset( $data[ $col_name ] );
+			}
+		}
+
+		$this->wpdb->insert( $this->tb_lp_user_itemmeta, $data );
+		return $this->wpdb->insert_id;
+	}
+
+	/**
+	 * Update data
+	 *
+	 * @param array $data [ meta_id, post_id, meta_key, meta_value ]
+	 * @return bool
+	 *
+	 * @throws Exception
+	 */
+	public function update_data( array $data ): bool {
+		if ( empty( $data['meta_id'] ) ) {
+			throw new Exception( __( 'Invalid meta id!', 'learnpress' ) . ' | ' . __METHOD__ );
+		}
+
+		$filter             = new EventMetaFilter();
+		$filter->collection = $this->tb_lp_user_itemmeta;
+		foreach ( $data as $col_name => $value ) {
+			if ( ! in_array( $col_name, $filter->all_fields ) ) {
+				continue;
+			}
+
+			$filter->set[] = $this->wpdb->prepare( $col_name . ' = %s', $value );
+		}
+		$filter->where[] = $this->wpdb->prepare( 'AND meta_id = %d', $data['meta_id'] );
+		$this->update_execute( $filter );
+
+		return true;
 	}
 }

@@ -25,6 +25,7 @@ class WPEMS_Admin {
 		include( WPEMS_PATH . 'inc/admin/Admin_Metaboxes.php' );
 		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-settings.php' );
 		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-users.php' );
+		include( WPEMS_PATH . 'inc/admin/class-wpems-admin-events-calendars.php' );
 	}
 
 }

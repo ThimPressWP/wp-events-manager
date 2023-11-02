@@ -44,7 +44,7 @@ class EventsTemplate {
 
 				<!-- Right -->
 				<div class="right">
-					<?php echo $this->singleEventTemp->html_img( $event ); ?>
+					<?php echo $this->singleEventTemp->html_thumbnail( $event ); ?>
 					<div class="totalTime">
 
 					</div>
