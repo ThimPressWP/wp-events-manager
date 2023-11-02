@@ -22,10 +22,6 @@ class LoginShortcode extends AbstractShortcode {
 		$template  = 'form-login.php';
 		$shortcode = 'user-login';
 
-		if ( ! wpems_get_page_id( 'login' ) || is_user_logged_in() ) {
-			return '';
-		}
-
 		ob_start();
 		try {
 			if ( empty( $attrs ) ) {

@@ -13,7 +13,10 @@
  * Prevent loading this file directly
  */
 
+use WPEMS\Filter\EventFilter;
 use WPEMS\Helper\Template;
+use WPEMS\Model\EventModel;
+use WPEMS\TemplateHooks\SingleEventTemplate;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -29,6 +32,25 @@ get_header(); ?>
 		<?php
 		while ( have_posts() ) :
 			the_post();
+
+			$event_id            = get_the_ID();
+			$filter              = new EventFilter();
+			$filter->post_status = 'publish';
+			$filter->post_ids    = array( $event_id );
+			$eventModel          = EventModel::get_event_model_from_db( $filter );
+			if ( $eventModel ) {
+				$singleEventTemplate = new SingleEventTemplate();
+				echo '<pre>';
+				// print_r( $eventModel );
+				echo '</pre>';
+
+				// echo $singleEventTemplate->html_date_end( $eventModel );
+				// echo $singleEventTemplate->html_time_end( $eventModel );
+				// echo $singleEventTemplate->html_registration_end_date( $eventModel );
+				// echo $singleEventTemplate->html_map_by_iframe( $eventModel );
+			} else {
+				echo 'Sự kiện không tồn tại.';
+			}
 			?>
 
 			<?php Template::instance()->get_frontend_template( 'content-single-event.php' ); ?>

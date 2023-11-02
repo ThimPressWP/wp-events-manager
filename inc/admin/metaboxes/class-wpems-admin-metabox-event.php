@@ -73,6 +73,7 @@ class WPEMS_Admin_Metabox_Event {
 				)
 			);
 		}
+		// $schedule = ! empty( $_POST['tp_event_schedules'] ) ? sanitize_text_field( $_POST['tp_event_schedules'] ) : '';
 
 		update_post_meta( $post_id, 'tp_event_status', $status );
 

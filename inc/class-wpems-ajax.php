@@ -22,10 +22,11 @@ class WPEMS_Ajax {
 		// key is action ajax: wp_ajax_{action}
 		// value is allow ajax nopriv: wp_ajax_nopriv_{action}
 		$actions = array(
-			'event_remove_notice' => true,
-			'event_auth_register' => false,
-			'event_login_action'  => true,
-			'load_form_register'  => true,
+			'event_remove_notice'        => true,
+			'event_auth_register'        => false,
+			'event_login_action'         => true,
+			'load_form_register'         => true,
+			'save_api_key_and_client_id' => true,
 		);
 
 		foreach ( $actions as $action => $nopriv ) {
@@ -241,6 +242,35 @@ class WPEMS_Ajax {
 		);
 		die();
 	}
+
+
+	// To save user information of google calendar to usermeta
+	public function save_api_key_and_client_id() {
+		// Check nonce for security
+		if ( ! isset( $_POST['api_key_client_id_nonce'] ) || wp_verify_nonce( $_POST['api_key_client_id_nonce'], 'api_key_and_client_id_action' ) ) {
+			wp_send_json_error( array( 'message' => 'Nonce verification failed.' ) );
+
+			// error_log( array( 'message' => 'Nonce verification failed.' ) );
+
+		} else {
+			$user_id = get_current_user_id();
+
+			if ( $user_id ) {
+
+				$client_id = $_POST['clientId'];
+				$api_key   = $_POST['apiKey'];
+
+				// Update user meta with the values
+				update_user_meta( $user_id, 'google_client_id', $client_id );
+				update_user_meta( $user_id, 'google_api_key', $api_key );
+
+				wp_send_json_success( array( 'message' => 'API key and Client ID saved successfully.' ) );
+			} else {
+				wp_send_json_error( array( 'message' => 'User not logged in.' ) );
+			}
+		}
+	}
+
 
 }
 

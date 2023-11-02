@@ -40,11 +40,24 @@ class WPEMS_Assets {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 	}
 
+
 	/**
 	 * register script
 	 */
 	public static function register_script( $handle = '', $src = '', $deps = array(), $ver = false, $in_footer = true ) {
-		self::$_scripts[$handle] = array( $handle, self::_load_file_min( $src ), $deps, $ver, $in_footer );
+		// self::$_scripts[$handle] = array( $handle, self::_load_file_min( $src ), $deps, $ver, $in_footer );
+
+		$uri = $src;
+
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			$ver = uniqid();
+
+		} else {
+			$ver = VERSION_OF_PLUGIN;
+			$uri = self::_load_file_min( $src );
+		}
+
+		self::$_scripts[ $handle ] = array( $handle, $uri, $deps, $ver, $in_footer );
 	}
 
 	/**
@@ -52,16 +65,16 @@ class WPEMS_Assets {
 	 */
 	public static function register_style( $handle, $src, $deps = array(), $ver = false, $media = 'all' ) {
 		$uri = $src;
-		
+
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			$ver = uniqid();
-			
+
 		} else {
-			$ver = VERION_OF_PLUGIN;
+			$ver = VERSION_OF_PLUGIN;
 			$uri = self::_load_file_min( $src );
 		}
 
-		self::$_styles[$handle] = array( $handle, $uri, $deps, $ver, $media );
+		self::$_styles[ $handle ] = array( $handle, $uri, $deps, $ver, $media );
 	}
 
 	/**
@@ -72,7 +85,7 @@ class WPEMS_Assets {
 	 * @param type $data
 	 */
 	public static function localize_script( $handle, $name, $data ) {
-		self::$_localize_scripts[$handle] = array( $handle, $name, $data );
+		self::$_localize_scripts[ $handle ] = array( $handle, $name, $data );
 	}
 
 	/**
@@ -90,12 +103,14 @@ class WPEMS_Assets {
 		wp_enqueue_script( 'wp-util' );
 		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'underscore' );
+		wp_enqueue_style('dashicons');
+		wp_enqueue_style('wpems-admin-fullcalendar-lb');
 
 		if ( self::$_scripts ) {
 			foreach ( self::$_scripts as $handle => $param ) {
 				call_user_func_array( 'wp_register_script', $param );
 				if ( array_key_exists( $handle, self::$_localize_scripts ) ) {
-					call_user_func_array( 'wp_localize_script', self::$_localize_scripts[$handle] );
+					call_user_func_array( 'wp_localize_script', self::$_localize_scripts[ $handle ] );
 				}
 				wp_enqueue_script( $handle );
 			}
@@ -165,3 +180,6 @@ class WPEMS_Assets {
  * init
  */
 WPEMS_Assets::init();
+WPEMS_Assets::register_script( 'admin-events-settings', WPEMS_ASSETS_URI . '/js/admin/admin-events-schedules.js' );
+WPEMS_Assets::register_script( 'admin-events-map', WPEMS_ASSETS_URI . '/js/admin/admin-events-map.js' );
+WPEMS_Assets::register_script( 'sort-table', WPEMS_ASSETS_URI . '/js/admin/libraries/cdnjs.cloudflare.com_ajax_libs_Sortable_1.14.0_Sortable.min.js' );

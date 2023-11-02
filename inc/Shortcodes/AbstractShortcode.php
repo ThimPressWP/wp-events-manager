@@ -28,7 +28,7 @@ abstract class AbstractShortcode {
 		 // Register shortcode.
 		add_shortcode( $this->prefix . $this->shortcode_name, array( $this, 'render' ) );
 
-		// add_action('template_redirect', array($this, 'redirect_logged_in'));
+		add_action('template_redirect', array($this, 'redirect_logged_in'));
 	}
 
 	/**

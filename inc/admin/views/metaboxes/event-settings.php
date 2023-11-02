@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WP Events Manager Event Settings meta box view
  *
@@ -29,6 +30,13 @@ $price    = get_post_meta( $post_id, $prefix . 'price', true );
 $location = get_post_meta( $post_id, $prefix . 'location', true );
 $today    = date( 'Y-m-d', strtotime( 'today' ) );
 $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
+
+$schedules_event	= get_post_meta($post_id, 'tp_event_schedules', true);
+$schedules 			= json_decode($schedules_event, true);
+
+$location_iframe	= get_post_meta($post_id, 'tp_event_iframe', true);
+
+
 ?>
 <div class="event_meta_box_container">
 	<div class="event_meta_panel">
@@ -53,18 +61,14 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 			<div class="form-field" id="event-time-metabox">
 				<label><?php echo esc_html__( 'Start/End', 'wp-events-manager' ); ?></label>
 				<label hidden for="_date_start"></label>
-				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>date_start" id="_date_start"
-					   value="<?php echo $date_start ? esc_attr( $date_start ) : esc_attr( $today ); ?>">
+				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>date_start" id="_date_start" value="<?php echo $date_start ? esc_attr( $date_start ) : esc_attr( $today ); ?>">
 				<label hidden for="_time_start"></label>
-				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>time_start" id="_time_start"
-					   value="<?php echo $time_start ? esc_attr( $time_start ) : ''; ?>">
+				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>time_start" id="_time_start" value="<?php echo $time_start ? esc_attr( $time_start ) : ''; ?>">
 				<span class="time-connect"> <?php echo esc_html__( 'to', 'wp-events-manager' ); ?></span>
 				<label hidden for="_date_end"></label>
-				<input type="text" class="short date-end" name="<?php echo esc_attr( $prefix ); ?>date_end" id="_date_end"
-					   value="<?php echo $date_end ? esc_attr( $date_end ) : esc_attr( $tomorrow ); ?>">
+				<input type="text" class="short date-end" name="<?php echo esc_attr( $prefix ); ?>date_end" id="_date_end" value="<?php echo $date_end ? esc_attr( $date_end ) : esc_attr( $tomorrow ); ?>">
 				<label hidden for="_time_end"></label>
-				<input type="text" class="short time-end" name="<?php echo esc_attr( $prefix ); ?>time_end" id="_time_end"
-					   value="<?php echo $time_end ? esc_attr( $time_end ) : ''; ?>">
+				<input type="text" class="short time-end" name="<?php echo esc_attr( $prefix ); ?>time_end" id="_time_end" value="<?php echo $time_end ? esc_attr( $time_end ) : ''; ?>">
 			</div>
 		</div>
 
@@ -73,11 +77,9 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 			<div class="form-field" id="event-registration-time-metabox">
 				<label><?php echo esc_html__( 'Registration End Date', 'wp-events-manager' ); ?></label>
 				<label hidden for="_registration_end_date"></label>
-				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_date" id="_registration_end_date"
-					   value="<?php echo $registration_end_date ? esc_attr( $registration_end_date ) : esc_attr( $today ); ?>">
+				<input type="text" class="short date-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_date" id="_registration_end_date" value="<?php echo $registration_end_date ? esc_attr( $registration_end_date ) : esc_attr( $today ); ?>">
 				<label hidden for="_registration_end_time"></label>
-				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_time" id="_registration_end_time"
-					   value="<?php echo $registration_end_time ? esc_attr( $registration_end_time ) : ''; ?>">
+				<input type="text" class="short time-start" name="<?php echo esc_attr( $prefix ); ?>registration_end_time" id="_registration_end_time" value="<?php echo $registration_end_time ? esc_attr( $registration_end_time ) : ''; ?>">
 			</div>
 		</div>
 		<!-- End Registration End Date -->
@@ -86,19 +88,42 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_schedule"><?php _e( 'Schedule', 'wp-events-manager' ); ?></label>
-					<input type="checkbox" class="short" name="schedule_check" id="_schedule_check">
-					<span>Enable/Disable Schedule section on the frontend</span>
-			</p>
-			<!-- <div class="form-field">
-				<div class="form_day">
-					<div class="form_day-header">
-
-					</div>
-					<div class="form_day-content">
-
-					</div>
+				<input type="checkbox" class="short" name="<?php echo esc_attr( $prefix ); ?>schedule_checkbox" id="_schedule_checkbox">
+				<span>Enable/Disable Schedule section on the frontend</span>
+				<div class="form_info-container">
+					<button id="add_form_info-btn">+ Add more</button>
+					<?php
+					if( !empty($schedules) ):
+						foreach($schedules as $schedule_id => $schedule_value):
+							?>
+							<div class="form_info" id="<?php echo $schedule_id; ?>">
+								<div class="form_info-header">
+									<div class="form_info-header-left">
+										<div class="dashicons-before dashicons-move"></div>
+									</div>
+									<div class="form_info-header-right">
+										<button class="dashicons-before dashicons-no"></button>
+										<button class="dashicons-before dashicons-minus"></button>
+									</div>
+								</div>
+								<div class="form_info-content">
+									<div class="field-content-title">
+										<label>Title:</label>
+										<input type="text" value="<?php echo $schedule_value['title'] ? wp_kses_post( $schedule_value['title'] ) : ''; ?>">
+									</div>
+									<div class="field-content-desc">
+										<label>Description:</label>
+										<div class="custom-editor" data-form-id="<?php echo $schedule_id; ?>"><?php echo $schedule_value['description'] ? wp_kses_post( $schedule_value['description'] ) : ''; ?></div>
+									</div>
+								</div>
+							</div>
+							<?php
+						endforeach;
+					endif;
+					?>
 				</div>
-			</div> -->
+				<input type="hidden" name="tp_event_schedules" id="tp_event_schedules" value="<?php echo isset($schedules) ? esc_html(json_encode($schedules)) : ''; ?>">
+			</p>
 		</div>
 		<!-- End Schedule -->
 
@@ -116,13 +141,15 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 			<?php endif; ?>
 			<p class="form-field">
 				<label for="_location"></label>
-				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="4"></textarea>
+				<textarea class="short ml-150" name="<?php echo esc_attr( $prefix ); ?>iframe" id="_iframe" cols="30" rows="2"><?php echo isset($location_iframe) ? esc_attr($location_iframe) : ''; ?></textarea>
+				<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
+					<p class="event-meta-notice">
+						<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
+					</p>
+				<?php endif; ?>
+				<div class="show_map_iframe"></div>
+				<div class="error_message" style="color: red;"></div>
 			</p>
-			<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
-				<p class="event-meta-notice">
-					<?php echo esc_html__( 'Use iframe to show map.', 'wp-events-manager' ); ?>
-				</p>
-			<?php endif; ?>
 		</div>
 		<!-- End Location -->
 
