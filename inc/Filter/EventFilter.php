@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class PostTypeFilter
  *
@@ -10,9 +11,9 @@
  */
 
 namespace WPEMS\Filter;
+
 use WPEMS\Filter\Filter;
 class EventFilter extends PostTypeFilter {
+
 	public $post_type = WPEMS_EVENT_CPT;
 }
-
-

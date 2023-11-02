@@ -23,6 +23,8 @@ if ( ! class_exists( 'WPEMS' ) ) {
 
 		public $_session = null;
 
+		public $settings;
+
 		/**
 		 * WPEMS constructor.
 		 */
@@ -76,7 +78,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 * Include files.
 		 */
 		public function includes() {
-
 			$this->_include( 'inc/wpems-core-functions.php' );
 			$this->_include( 'inc/class-wpems-autoloader.php' );
 			$this->_include( 'inc/class-wpems-assets.php' );
@@ -97,7 +98,10 @@ if ( ! class_exists( 'WPEMS' ) ) {
 				$this->_include( 'inc/class-wpems-template.php' );
 				$this->_include( 'inc/class-wpems-frontend-assets.php' );
 				$this->_include( 'inc/class-wpems-user-process.php' );
-				$this->_include( 'inc/class-wpems-shortcodes.php' );
+				// $this->_include( 'inc/class-wpems-shortcodes.php' );
+
+				//Shortcodes
+				$this->_include( 'inc/Shortcodes/ShortcodesInstance.php' );
 			}
 
 			$this->_include( 'inc/class-wpems-gdpr.php' );
@@ -130,7 +134,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 * @return null
 		 */
 		public function text_domain() {
-			// Get mo file
+			 // Get mo file
 			$text_domain = 'wp-events-manager';
 			$locale      = apply_filters( 'plugin_locale', get_locale(), $text_domain );
 			$mo_file     = $text_domain . '-' . $locale . '.mo';
@@ -155,7 +159,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 
 			return self::$_instance = new self();
 		}
-
 	}
 
 	if ( ! function_exists( 'WPEMS' ) ) {

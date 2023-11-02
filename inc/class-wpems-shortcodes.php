@@ -129,6 +129,7 @@ class WPEMS_Shortcodes {
 		if ( ! wpems_get_page_id( 'register' ) ) {
 			return '';
 		}
+
 		if ( ! get_option( 'users_can_register' ) ) {
 			return WPEMS_Shortcodes::render( 'user-register', 'user-cannot-register.php' );
 		} elseif ( ! empty( $_REQUEST['registered'] ) ) {

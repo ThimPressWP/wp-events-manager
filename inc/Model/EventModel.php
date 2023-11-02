@@ -211,7 +211,7 @@ class EventModel {
 
 		// Get data from wp_postmeta
 		$meta_data = get_post_meta( $data->ID );
-		foreach ($meta_data as $meta_key => $meta_value) {
+		foreach ( $meta_data as $meta_key => $meta_value ) {
 			$this->{$meta_key} = $meta_value[0];
 		}
 

@@ -55,7 +55,7 @@ class EventDatabase extends Database {
 			$tag_ids_format  = Utils::db_format_array( $filter->tag_ids, '%d' );
 
 			$filter->join[] = "INNER JOIN $this->tb_term_relationships AS r_term ON e.ID = r_term.object_id";
-			
+
 			// Get all course ids by term ids
 			$filter_course_ids_by_term                      = new LP_Course_Filter();
 			$filter_course_ids_by_term->only_fields         = array( 'ID' );
@@ -79,7 +79,7 @@ class EventDatabase extends Database {
 			// Tag ids
 			if ( ! empty( $filter->tag_ids ) ) {
 				$filter->join[] = "INNER JOIN $this->tb_term_relationships AS r_term ON e.ID = r_term.object_id";
-				
+
 				$tag_ids_format  = Utils::db_format_array( $filter->tag_ids, '%d' );
 				$filter->where[] = $this->wpdb->prepare( 'AND r_term.term_taxonomy_id IN (' . $tag_ids_format . ')', $filter->tag_ids );
 			}

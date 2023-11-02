@@ -7,13 +7,13 @@ class EventsModel {
 	public $data;
 	public $pagination;
 	private static $instances = [];
-	public $filter_search   = '';
-	public $filter_status   = '';
-	public $filter_type     = '';
-	public $filter_category = '';
-	public $filter_date     = [];
-	public $filter_price    = [];
-	public $order_by        = '';
+	public $filter_search     = '';
+	public $filter_status     = '';
+	public $filter_type       = '';
+	public $filter_category   = '';
+	public $filter_date       = [];
+	public $filter_price      = [];
+	public $order_by          = '';
 
 	protected function __construct() {
 		$this->data       = Database\EventsDatabase::getInstance();
@@ -105,8 +105,8 @@ class EventsModel {
 	 */
 	public  function calendar_data() {
 		try {
-			$types            = array();
-			$categories        = array();
+			$types           = array();
+			$categories      = array();
 			$calendar_events = array();
 			$posts           = array();
 			$args            = array();
@@ -141,6 +141,3 @@ class EventsModel {
 		}
 	}
 }
-
-
-
