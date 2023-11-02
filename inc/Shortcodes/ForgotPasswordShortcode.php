@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode list event.
+ * Shortcode forgot password
  */
 namespace WPEMS\Shortcodes;
 
@@ -11,7 +11,7 @@ class ForgotPasswordShortcode extends AbstractShortcode {
 	protected $shortcode_name = 'forgot_password';
 
 	/**
-	 * Show list_event
+	 * 
 	 *
 	 * @param $attrs []
 	 *

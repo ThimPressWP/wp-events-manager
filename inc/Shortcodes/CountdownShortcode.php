@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode list event.
+ * Shortcode countdown
  */
 namespace WPEMS\Shortcodes;
 
@@ -11,7 +11,7 @@ class CountdownShortcode extends AbstractShortcode {
 	protected $shortcode_name = 'countdown';
 
 	/**
-	 * Show list_event
+	 * Show event countdown
 	 *
 	 * @param $attrs []
 	 *

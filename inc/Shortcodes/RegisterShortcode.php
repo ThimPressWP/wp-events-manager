@@ -22,6 +22,7 @@ class RegisterShortcode extends AbstractShortcode {
 		$template  = '';
 		$shortcode = 'user-register';
 
+		// handle the registration function
 		if ( ! get_option( 'users_can_register' ) ) {
 			$template = 'user-cannot-register.php';
 		} elseif ( ! empty( $_REQUEST['registered'] ) ) {

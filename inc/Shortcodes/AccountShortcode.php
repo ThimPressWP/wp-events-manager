@@ -10,7 +10,7 @@ class AccountShortcode extends AbstractShortcode {
 	use singleton;
 	protected $shortcode_name = 'account';
 
-	/**
+		/**
 	 * Show list_event
 	 *
 	 * @param $attrs []
@@ -22,7 +22,8 @@ class AccountShortcode extends AbstractShortcode {
 		$template  = 'user-account.php';
 		$shortcode = 'user-account';
 
-		$user  = wp_get_current_user();
+		// query for articles related to the current user
+		$user = wp_get_current_user();
 		$attrs = array(
 			'post_type'     => 'event_auth_book',
 			'post_per_page' => - 1,
@@ -42,7 +43,7 @@ class AccountShortcode extends AbstractShortcode {
 			}
 
 			self::shortcode_wrapper_start( $shortcode );
-			wpems_get_template( 'shortcodes/' . $template, $attrs );
+			wpems_get_template( 'shortcodes/' . $template, array( 'atts' => $attrs ) );
 			self::shortcode_wrapper_end( $shortcode );
 
 			$content = ob_get_clean();
