@@ -23,6 +23,8 @@ if ( ! class_exists( 'WPEMS' ) ) {
 
 		public $_session = null;
 
+		public $settings;
+
 		/**
 		 * WPEMS constructor.
 		 */
@@ -97,7 +99,10 @@ if ( ! class_exists( 'WPEMS' ) ) {
 				$this->_include( 'inc/class-wpems-template.php' );
 				$this->_include( 'inc/class-wpems-frontend-assets.php' );
 				$this->_include( 'inc/class-wpems-user-process.php' );
-				$this->_include( 'inc/class-wpems-shortcodes.php' );
+				// $this->_include( 'inc/class-wpems-shortcodes.php' );
+
+				//Shortcode
+				$this->_include( 'inc/Shortcodes/Instance/ShortcodesInstance.php' );
 			}
 
 			$this->_include( 'inc/class-wpems-gdpr.php' );
