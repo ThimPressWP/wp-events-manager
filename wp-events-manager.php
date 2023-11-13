@@ -111,10 +111,10 @@ if ( ! class_exists( 'WPEMS' ) ) {
 				$this->_include( 'inc/class-wpems-template.php' );
 				$this->_include( 'inc/class-wpems-frontend-assets.php' );
 				$this->_include( 'inc/class-wpems-user-process.php' );
-				$this->_include( 'inc/class-wpems-shortcodes.php' );
+				// $this->_include( 'inc/class-wpems-shortcodes.php' );
 
 				//Shortcodes
-				// $this->_include( 'inc/Shortcodes/ShortcodesInstance.php' );
+				$this->_include( 'inc/Shortcodes/Instances/ShortcodesInstance.php' );
 			}
 
 			$this->_include( 'inc/class-wpems-gdpr.php' );
