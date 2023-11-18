@@ -43,7 +43,7 @@ class AccountShortcode extends AbstractShortcode {
 			}
 
 			self::shortcode_wrapper_start( $shortcode );
-			wpems_get_template( 'shortcodes/' . $template, array( 'atts' => $attrs ) );
+			wpems_get_template( 'shortcodes/' . $template, array( 'args' => $attrs ) );
 			self::shortcode_wrapper_end( $shortcode );
 
 			$content = ob_get_clean();
