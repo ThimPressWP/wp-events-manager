@@ -42,11 +42,16 @@ class RegisterShortcode extends AbstractShortcode {
 			$template = 'form-register.php';
 		}
 
-		ob_start();
+
 		try {
+            ob_start();
 			if ( empty( $attrs ) ) {
 				$attrs = [];
 			}
+
+            if ( empty( $template ) ) {
+                return $content;
+            }
 
 			self::shortcode_wrapper_start( $shortcode );
 			wpems_get_template( 'shortcodes/' . $template, $attrs );
@@ -54,7 +59,6 @@ class RegisterShortcode extends AbstractShortcode {
 
 			$content = ob_get_clean();
 		} catch ( \Throwable $e ) {
-			ob_end_clean();
 			error_log( $e->getMessage() );
 		}
 

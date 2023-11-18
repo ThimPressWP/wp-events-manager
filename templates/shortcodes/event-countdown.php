@@ -14,7 +14,7 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-if ( $args['event_id'] ) {
+if ( $args['event_id'] ?? 0 ) {
 	$ids = explode( ',', $args['event_id'] );
 	foreach ( $ids as $id ) {
 		$event = get_post( $id );
@@ -23,7 +23,7 @@ if ( $args['event_id'] ) {
 		$current_time = current_time( 'Y-m-d H:i' );
 		$time         = wpems_get_time( 'Y-m-d H:i', $event, false ); ?>
 		<div class="event-countdown">
-			<?php $date = new DateTime( date( 'Y-m-d H:i', strtotime( $time ) ) ); ?>
+			<?php $date = new DateTime( gmdate( 'Y-m-d H:i', strtotime( $time ) ) ); ?>
 			<div class="tp_event_counter" data-time="<?php echo esc_attr( $date->format( 'M j, Y H:i:s O' ) ); ?>"></div>
 		</div>
 		<?php

@@ -68,8 +68,8 @@ if ( ! function_exists( 'wpems_get_template_part' ) ) {
 		}
 
 		// Get default slug-name.php
-		if ( ! $template && $name && file_exists( WPEMS_PATH . "/templates/{$slug}-{$name}.php" ) ) {
-			$template = WPEMS_PATH . "/templates/{$slug}-{$name}.php";
+		if ( ! $template && $name && file_exists( WPEMS_PATH . "templates/{$slug}-{$name}.php" ) ) {
+			$template = WPEMS_PATH . "templates/{$slug}-{$name}.php";
 		}
 
 		// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/courses-manage/slug.php
@@ -107,7 +107,7 @@ if ( ! function_exists( 'wpems_locate_template' ) ) {
 		}
 
 		if ( ! $default_path ) {
-			$default_path = WPEMS_PATH . '/templates/';
+			$default_path = WPEMS_PATH . 'templates/';
 		}
 
 		$template = null;
@@ -1517,7 +1517,7 @@ if ( ! function_exists( 'tp_event_locate_template' ) ) {
 		}
 
 		if ( ! $default_path ) {
-			$default_path = WPEMS_PATH . '/templates/';
+			$default_path = WPEMS_PATH . 'templates/';
 		}
 
 		$template = null;
