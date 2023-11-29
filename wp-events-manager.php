@@ -34,24 +34,9 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 * WPEMS constructor.
 		 */
 		public function __construct() {
-			$this->define_constants();
 			include_once WPEMS_PATH . 'vendor/autoload.php';
 			$this->includes();
 			$this->init_hooks();
-		}
-
-		/**
-		 * Define Plugins Constants
-		 */
-		public function define_constants() {
-			$this->set_define( 'WPEMS_PATH', plugin_dir_path( __FILE__ ) );
-			$this->set_define( 'WPEMS_URI', plugin_dir_url( __FILE__ ) );
-			$this->set_define( 'WPEMS_INC', WPEMS_PATH . 'inc/' );
-			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
-			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
-			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
-			$this->set_define( 'WPEMS_VER', '2.1.8' );
-			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}
 
 		public function set_define( $name = '', $value = '' ) {
