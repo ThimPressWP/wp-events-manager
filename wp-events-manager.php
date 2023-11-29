@@ -12,6 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
+if ( ! defined( 'WPEMS_PLUGIN_FILE' ) ) {
+	define( 'WPEMS_PLUGIN_FILE', __FILE__ );
+	include_once 'Constants.php';
+}
+
 /**
  * WPEMS class
  */
@@ -30,7 +35,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 */
 		public function __construct() {
 			$this->define_constants();
-            include_once WPEMS_PATH . 'vendor/autoload.php';
+			include_once WPEMS_PATH . 'vendor/autoload.php';
 			$this->includes();
 			$this->init_hooks();
 		}
@@ -92,6 +97,9 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/class-wpems-session.php' );
 			$this->_include( 'inc/class-wpems-booking.php' );
 			$this->_include( 'inc/class-wpems-event.php' );
+
+			//Models
+
 			$this->settings = WPEMS_Settings::instance();
 
 			if ( is_admin() ) {
@@ -102,12 +110,11 @@ if ( ! class_exists( 'WPEMS' ) ) {
 				$this->_include( 'inc/class-wpems-user-process.php' );
 				// $this->_include( 'inc/class-wpems-shortcodes.php' );
 
-				//Shortcode
+				//Shortcodes
 				$this->_include( 'inc/Shortcodes/Instance/ShortcodesInstance.php' );
 			}
 
 			$this->_include( 'inc/class-wpems-gdpr.php' );
-
 		}
 
 		/**
@@ -161,7 +168,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 
 			return self::$_instance = new self();
 		}
-
 	}
 
 	if ( ! function_exists( 'WPEMS' ) ) {
