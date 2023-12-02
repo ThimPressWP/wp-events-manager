@@ -5,7 +5,7 @@ namespace WPEMS\Databases\Event;
 use Exception;
 use WPEMS\Databases\Database;
 use WPEMS\Filter\Filter;
-use WPEMS\Helper\Utils;
+use WPEMS\Helpers\Utils;
 
 class EventDatabase extends Database {
 	private static $_instance;

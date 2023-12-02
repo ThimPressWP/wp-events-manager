@@ -4,7 +4,7 @@
  */
 namespace WPEMS\Shortcodes;
 
-use WPEMS\Helper\Singleton;
+use WPEMS\Helpers\Singleton;
 
 class LoginShortcode extends AbstractShortcode {
 	use singleton;

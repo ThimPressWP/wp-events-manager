@@ -9,15 +9,6 @@
  * @version       2.1.7
  */
 
-//Filter
-use WPEMS\Filter\Event\EventFilter;
-use WPEMS\Filter\Event\Meta\EventMetaFilter;
-
-// Model
-use WPEMS\Models\Event\EventModel;
-use WPEMS\Models\Event\Meta\EventMetaModel;
-use	WPEMS\Models\Event\Meta\EventMetaConstants;
-
 /**
  * Prevent loading this file directly
  */

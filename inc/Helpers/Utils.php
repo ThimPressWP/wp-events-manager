@@ -5,7 +5,7 @@
  * @since 3.0.0
  * @version 1.0.0
  */
-namespace WPEMS\Helper;
+namespace WPEMS\Helpers;
 
 class Utils {
 		/**

@@ -4,7 +4,7 @@
  */
 namespace WPEMS\Shortcodes;
 
-use WPEMS\Helper\Singleton;
+use WPEMS\Helpers\Singleton;
 
 class ForgotPasswordShortcode extends AbstractShortcode {
 	use singleton;

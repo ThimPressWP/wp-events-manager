@@ -4,7 +4,7 @@
  * Class Singleton
  */
 
-namespace WPEMS\Helper;
+namespace WPEMS\Helpers;
 
 trait Singleton {
 	private static $instance = null;
