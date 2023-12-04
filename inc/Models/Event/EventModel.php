@@ -4,7 +4,6 @@ namespace WPEMS\Models\Event;
 
 use stdClass;
 use Throwable;
-use WPEMS\Helpers\Singleton;
 use WPEMS\Databases\Event\EventDatabase;
 use WPEMS\Databases\Event\Meta\EventMetaDatabase;
 use WPEMS\Models\Event\Meta\EventMetaModel;
@@ -12,9 +11,6 @@ use WPEMS\Filter\Filter;
 use WPEMS\Filter\Event\Meta\EventMetaFilter;
 
 class EventModel {
-	use Singleton;
-	public function init(){
-	}
 
 	/**
 	 * Post ID.
