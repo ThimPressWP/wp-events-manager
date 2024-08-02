@@ -77,6 +77,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 */
 		public function includes() {
 
+			$this->_include( 'vendor/autoload.php' );
 			$this->_include( 'inc/wpems-core-functions.php' );
 			$this->_include( 'inc/class-wpems-autoloader.php' );
 			$this->_include( 'inc/class-wpems-assets.php' );
