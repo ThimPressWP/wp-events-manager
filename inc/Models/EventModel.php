@@ -10,7 +10,7 @@
 
 namespace WPEventsManager\Models;
 
-use WPEMSBookingDB;
+use WPEventsManager\Databases\WPEMSBookingDB;
 use WPEventsManager\Filters\WPEMSEventFilter;
 
 class EventModel extends PostModel {
@@ -36,7 +36,7 @@ class EventModel extends PostModel {
 	 */
 	public function get_slot_available(): int {
 		$quantity  = $this->get_meta_value_by_key( WPEMSEventFilter::META_KEY_EVENT_QTY ) ?? 0;
-		$booked    = BookingModel::get_booking_quantity_by_id( $this->ID ) ?? 0;
+		$booked    = $this->get_booking_quantity_by_id( $this->ID ) ?? 0;
 		$available = $quantity - $booked;
 
 		return apply_filters( 'event_slot_available', $available );
@@ -47,7 +47,8 @@ class EventModel extends PostModel {
 	 * @return int
 	 */
 	public function get_total_registered(): int {
-		$registered       = WPEMSBookingDB::get_registered();
+		$booking_db       = WPEMSBookingDB::getInstance();
+		$registered       = $booking_db->get_registered( $this->ID );
 		$total_registered = count( $registered );
 		return apply_filters( 'event_registered_time', $total_registered );
 	}
@@ -57,12 +58,13 @@ class EventModel extends PostModel {
 	 * @param event_id
 	 * @return int
 	 */
-	public static function get_booking_quantity_by_id( $event_id ) {
+	public function get_booking_quantity_by_id( $event_id ) {
 		if ( empty( $event_id ) ) {
 			$event_id = $this->ID;
 		}
 
-		return WPEMSBookingDB::get_booked_quantity_by_event_id( $event_id ) ?? 0;
+		$booking_db = WPEMSBookingDB::getInstance();
+		return $booking_db->get_booked_quantity_by_event_id( $event_id ) ?? 0;
 	}
 
 	public static function find( int $event_id ) {

@@ -66,7 +66,7 @@ class WPEMSBookingDB extends WPEMSDatabase {
 	 *
 	 * @return int
 	 */
-	public static function get_booked_quantity_by_event_id( int $event_id, int $user_id = 0, string $status = '' ): int {
+	public function get_booked_quantity_by_event_id( int $event_id, int $user_id = 0, string $status = '' ): int {
 		$query = $this->wpdb->prepare(
 			"
 	         SELECT SUM( pm.meta_value ) AS qty FROM {$this->wpdb->postmeta} AS pm
