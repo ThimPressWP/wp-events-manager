@@ -19,7 +19,7 @@ class EventModel extends PostModel {
 	 * @return bool
 	 */
 	public function is_free(): bool {
-		$price   = $this->get_meta_value_by_key( self::META_KEY_EVENT_PRICE );
+		$price   = $this->get_meta_value_by_key( WPEMSEventFilter::META_KEY_EVENT_PRICE );
 		$is_free = false;
 
 		if ( empty( $price ) ) {
