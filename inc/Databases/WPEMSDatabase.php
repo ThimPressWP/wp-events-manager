@@ -631,13 +631,13 @@ class WPEMSDatabase {
 		$COLLECTION = $filter->collection;
 
 		// SET value
-		$SET = apply_filters( 'lp/query/update/set', $filter->set, $filter );
+		$SET = apply_filters( 'wpems/query/update/set', $filter->set, $filter );
 		$SET = implode( ',', array_unique( $SET ) );
 
 		// Where
 		$WHERE = array( 'WHERE 1=1' );
 		$WHERE = array_merge( $WHERE, $filter->where );
-		$WHERE = apply_filters( 'lp/query/update/where', $WHERE, $filter );
+		$WHERE = apply_filters( 'wpems/query/update/where', $WHERE, $filter );
 		$WHERE = implode( ' ', array_unique( $WHERE ) );
 
 		$query = "

@@ -64,7 +64,7 @@ class WPEMSPostMetaDB extends WPEMSDatabase {
 			$filter->where[] = $this->wpdb->prepare( "AND {$ca}.{$col_meta_key} = %s", $filter->meta_key );
 		}
 
-		$filter = apply_filters( 'lp/post-meta/query/filter', $filter );
+		$filter = apply_filters( 'wpems/post-meta/query/filter', $filter );
 
 		return $this->execute( $filter, $total_rows );
 	}
