@@ -30,15 +30,14 @@ class WPEMSBookingDB extends WPEMSDatabase {
 		return self::$_instance;
 	}
 
-
-		// create booking
+	// create booking
 	public function create_booking( WPEMSBookingFilter $filter_pm ) {
 		$user       = wp_get_current_user();
 		$booking_id = wp_insert_post(
 			array(
-				'post_title'   => sprintf( __( '%1$s booking event %2$s', 'wp-events-manager' ), $user->user_nicename, $args['event_id'] ),
-				'post_content' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
-				'post_exceprt' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+				'post_title'   => sprintf( __( '%1$s booking event %2$s', 'wp-events-manager' ), $user->user_nicename, $filter_pm->ID ),
+				'post_content' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $filter_pm->ID, $filter_pm->qty ),
+				'post_exceprt' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $filter_pm->ID, $filter_pm->qty ),
 				'post_status'  => WPEMSBookingFilter::STATUS_PENDING,
 				'post_type'    => WPEMSBookingFilter::POST_TYPE_BOOKING,
 			)
@@ -46,19 +45,18 @@ class WPEMSBookingDB extends WPEMSDatabase {
 
 		$filter_default = new WPEMSBookingFilter();
 		//update postmeta
-		$filter_default->collection = $this->tb_posts;
-		$filter_default->set[]      = 'ea_booking_user_id = ' . $user->ID;
-		$filter_default->set[]      = 'ea_booking_event_id = 0';
-		$filter_default->set[]      = 'ea_booking_qty = 1';
-		$filter_default->set[]      = 'ea_booking_cost = 0';
-		$filter_default->set[]      = 'ea_booking_payment_id = false';
-		$filter_default->where[]    = 'AND post_id =' . $booking_id;
-		$filter                     = array_merge( $filter_default, $filter_pm );
+		$filter_default->set[]   = 'ea_booking_user_id = ' . $user->ID;
+		$filter_default->set[]   = 'ea_booking_event_id = 0';
+		$filter_default->set[]   = 'ea_booking_qty = 1';
+		$filter_default->set[]   = 'ea_booking_cost = 0';
+		$filter_default->set[]   = 'ea_booking_payment_id = false';
+		$filter_default->where[] = 'AND post_id =' . $booking_id;
+		$filter                  = array_merge( $filter_default, $filter_pm );
 
 		if ( is_wp_error( $booking_id ) ) {
 			return $booking_id;
 		} else {
-			$this->update_execute( $filter );
+			$this->update( $filter );
 			do_action( 'tp_event_create_new_booking', $booking_id, $filter );
 			return $booking_id;
 		}

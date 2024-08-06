@@ -50,5 +50,6 @@ class WPEMSBookingFilter extends WPEMSPostTypeFilter {
 	public $all_status = array( self::STATUS_CANCEL, self::STATUS_PENDING, self::STATUS_PROCESSING, self::STATUS_COMPLETED );
 
 	public $post_type   = self::POST_TYPE_BOOKING;
-	public $post_status = self::STATUS_PENDING;
+	public $post_status = array( self::STATUS_PENDING );
+	public $qty = 0;
 }

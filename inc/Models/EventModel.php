@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class Event
+ * Class EventModel
  *
  * @author VuxMinhThanh
  * @package WP-Events-Manager/Classes

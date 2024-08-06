@@ -33,7 +33,7 @@ class PostModel {
 	 */
 	public $post_author = 0;
 	/**
-	 * @var UserModel author model
+	 * @var object
 	 */
 	public $author;
 	/**
@@ -77,7 +77,7 @@ class PostModel {
 	 */
 	public $meta_data = null;
 	/**
-	 * @var stdClass all meta data
+	 * @var int all meta data
 	 */
 	public $is_got_meta_data = 0;
 	/**
