@@ -16,9 +16,9 @@ use WPEventsManager\Filters\WPEMSBookingFilter;
 class BookingModel extends PostModel {
 	public $post_type = WPEMSBookingFilter::POST_TYPE_BOOKING;
 
-	public function create() {
+	public function create( $args ) {
 		$booking_db = WPEMSBookingDB::getInstance();
-		$booking_db->create_booking();
+		$booking_db->create_booking( $args );
 	}
 
 	public function update_status( $status ) {

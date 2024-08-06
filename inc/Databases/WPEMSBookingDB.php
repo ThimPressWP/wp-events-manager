@@ -31,33 +31,39 @@ class WPEMSBookingDB extends WPEMSDatabase {
 	}
 
 	// create booking
-	public function create_booking( WPEMSBookingFilter $filter_pm ) {
-		$user       = wp_get_current_user();
-		$booking_id = wp_insert_post(
+	public function create_booking( $args = array() ) {
+
+		// current user
+		$user = wp_get_current_user();
+		// merge argument
+		$args       = wp_parse_args(
+			$args,
 			array(
-				'post_title'   => sprintf( __( '%1$s booking event %2$s', 'wp-events-manager' ), $user->user_nicename, $filter_pm->ID ),
-				'post_content' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $filter_pm->ID, $filter_pm->qty ),
-				'post_exceprt' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $filter_pm->ID, $filter_pm->qty ),
-				'post_status'  => WPEMSBookingFilter::STATUS_PENDING,
-				'post_type'    => WPEMSBookingFilter::POST_TYPE_BOOKING,
+				'user_id'    => $user->ID,
+				'event_id'   => 0,
+				'qty'        => 1,
+				'cost'       => 0,
+				'payment_id' => false,
 			)
 		);
-
-		$filter_default = new WPEMSBookingFilter();
-		//update postmeta
-		$filter_default->set[]   = 'ea_booking_user_id = ' . $user->ID;
-		$filter_default->set[]   = 'ea_booking_event_id = 0';
-		$filter_default->set[]   = 'ea_booking_qty = 1';
-		$filter_default->set[]   = 'ea_booking_cost = 0';
-		$filter_default->set[]   = 'ea_booking_payment_id = false';
-		$filter_default->where[] = 'AND post_id =' . $booking_id;
-		$filter                  = array_merge( $filter_default, $filter_pm );
+		$booking_id = wp_insert_post(
+			array(
+				'post_title'   => sprintf( __( '%1$s booking event %2$s', 'wp-events-manager' ), $user->user_nicename, $args['event_id'] ),
+				'post_content' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+				'post_exceprt' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+				'post_status'  => 'ea-pending',
+				'post_type'    => 'event_auth_book',
+			)
+		);
 
 		if ( is_wp_error( $booking_id ) ) {
 			return $booking_id;
 		} else {
-			$this->update( $filter );
-			do_action( 'tp_event_create_new_booking', $booking_id, $filter );
+			foreach ( $args as $key => $val ) {
+				update_post_meta( $booking_id, 'ea_booking_' . $key, $val );
+			}
+
+			do_action( 'tp_event_create_new_booking', $booking_id, $args );
 			return $booking_id;
 		}
 	}
