@@ -210,7 +210,7 @@ class WPEMSDatabase {
 			$query_total = "SELECT COUNT($filter->field_count) FROM ($query) AS $ALIAS_COLLECTION";
 			$total_rows  = (int) $this->wpdb->get_var( $query_total );
 
-			// $this->check_execute_has_error();
+			$this->check_execute_has_error();
 
 			if ( $filter->query_count ) {
 				// Debug string query
@@ -222,7 +222,7 @@ class WPEMSDatabase {
 			}
 		}
 
-		// $this->check_execute_has_error();
+		$this->check_execute_has_error();
 
 		return $result;
 	}
