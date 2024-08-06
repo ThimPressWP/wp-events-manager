@@ -127,5 +127,3 @@ class WPEMSFilter {
 	 */
 	public $filter_extra;
 }
-
-

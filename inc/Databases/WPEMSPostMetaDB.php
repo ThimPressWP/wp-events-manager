@@ -30,7 +30,6 @@ class WPEMSPostMetaDB extends WPEMSDatabase {
 	 *
 	 * @return array|object|null|int|string
 	 * @throws Exception
-	 * @since 4.2.6.9
 	 * @version 1.0.0
 	 */
 	public function get_post_metas( WPEMSPostMetaFilter $filter, &$total_rows = 0 ) {

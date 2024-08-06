@@ -30,35 +30,69 @@ class WPEMSBookingDB extends WPEMSDatabase {
 		return self::$_instance;
 	}
 
+
+		// create booking
+	public function create_booking( WPEMSBookingFilter $filter_pm ) {
+		$user       = wp_get_current_user();
+		$booking_id = wp_insert_post(
+			array(
+				'post_title'   => sprintf( __( '%1$s booking event %2$s', 'wp-events-manager' ), $user->user_nicename, $args['event_id'] ),
+				'post_content' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+				'post_exceprt' => sprintf( __( '%1$s booking event %2$s with %3$s slot', 'wp-events-manager' ), $user->user_nicename, $args['event_id'], $args['qty'] ),
+				'post_status'  => WPEMSBookingFilter::STATUS_PENDING,
+				'post_type'    => WPEMSBookingFilter::POST_TYPE_BOOKING,
+			)
+		);
+
+		$filter_default = new WPEMSBookingFilter();
+		//update postmeta
+		$filter_default->collection = $this->tb_posts;
+		$filter_default->set[]      = 'ea_booking_user_id = ' . $user->ID;
+		$filter_default->set[]      = 'ea_booking_event_id = 0';
+		$filter_default->set[]      = 'ea_booking_qty = 1';
+		$filter_default->set[]      = 'ea_booking_cost = 0';
+		$filter_default->set[]      = 'ea_booking_payment_id = false';
+		$filter_default->where[]    = 'AND post_id =' . $booking_id;
+		$filter                     = array_merge( $filter_default, $filter_pm );
+
+		if ( is_wp_error( $booking_id ) ) {
+			return $booking_id;
+		} else {
+			$this->update_execute( $filter );
+			do_action( 'tp_event_create_new_booking', $booking_id, $filter );
+			return $booking_id;
+		}
+	}
+
+	public function update( WPEMSBookingFilter $filter ) {
+		$filter->collection = $this->tb_posts;
+		$this->update_execute( $filter );
+	}
+
 	/**
 	 * get registered
 	 * @return array
 	 */
 	public function get_registered( $event_id ) {
-		$query = $this->wpdb->prepare(
-			"
-				SELECT booked.* FROM {$this->wpdb->posts} AS booked
-					LEFT JOIN {$this->wpdb->postmeta} AS event ON event.post_id = booked.ID
-					LEFT JOIN {$this->wpdb->postmeta} AS book_quanity ON book_quanity.post_id = booked.ID
-					LEFT JOIN {$this->wpdb->postmeta} AS user_booked ON user_booked.post_id = booked.ID
-					LEFT JOIN {$this->wpdb->users} AS user ON user.ID = user_booked.meta_value
-				WHERE booked.post_type = %s
-					AND event.meta_key = %s
-					AND event.meta_value = %d
-					AND user_booked.meta_key = %s
-					AND book_quanity.meta_key = %s
-			",
-			WPEMSBookingFilter::POST_TYPE_BOOKING,
-			WPEMSBookingFilter::META_KEY_BOOKING_EVENT,
-			$event_id,
-			WPEMSBookingFilter::META_KEY_BOOKING_USER,
-			WPEMSBookingFilter::META_KEY_BOOKING_QTY,
-		);
+		$filter                   = new WPEMSBookingFilter();
+		$filter->collection_alias = 'booked';
+		$filter->collection       = $this->tb_posts;
+		$filter->only_fields      = [ 'booked.*' ];
+		$filter->join[]           = "LEFT JOIN {$this->tb_postmeta} AS event ON event.post_id = booked.ID";
+		$filter->join[]           = "LEFT JOIN {$this->tb_postmeta} AS book_quanity ON book_quanity.post_id = booked.ID";
+		$filter->join[]           = "LEFT JOIN {$this->tb_postmeta} AS user_booked ON user_booked.post_id = booked.ID";
+		$filter->join[]           = "LEFT JOIN {$this->tb_users} AS user ON user.ID = user_booked.meta_value";
+		$filter->where[]          = 'AND booked.post_type = "' . WPEMSBookingFilter::POST_TYPE_BOOKING . '"';
+		$filter->where[]          = 'AND event.meta_key = "' . WPEMSBookingFilter::META_KEY_BOOKING_EVENT . '"';
+		$filter->where[]          = 'AND event.meta_value = ' . $event_id;
+		$filter->where[]          = 'AND user_booked.meta_key = "' . WPEMSBookingFilter::META_KEY_BOOKING_USER . '"';
+		$filter->where[]          = 'AND book_quanity.meta_key = "' . WPEMSBookingFilter::META_KEY_BOOKING_QTY . '"';
 
-		return $this->wpdb->get_results( $query );
+		$db = WPEMSDatabase::getInstance();
+		return $db->execute( $filter );
 	}
 
-		/**
+	/**
 	 * get booked quantity by event id
 	 *
 	 * @param event_id
@@ -67,42 +101,38 @@ class WPEMSBookingDB extends WPEMSDatabase {
 	 * @return int
 	 */
 	public function get_booked_quantity_by_event_id( int $event_id, int $user_id = 0, string $status = '' ): int {
-		$query = $this->wpdb->prepare(
-			"
-	         SELECT SUM( pm.meta_value ) AS qty FROM {$this->wpdb->postmeta} AS pm
-	             INNER JOIN {$this->wpdb->posts} AS book ON book.ID = pm.post_id
-	             INNER JOIN {$this->wpdb->postmeta} AS pm2 ON pm2.post_id = book.ID
-	             INNER JOIN {$this->wpdb->postmeta} AS pm3 ON pm3.post_id = book.ID
-	             INNER JOIN {$this->wpdb->posts} AS event ON event.ID = pm3.meta_value
-	             INNER JOIN {$this->wpdb->users} AS user ON user.ID = pm2.meta_value
-	         WHERE
-	             pm.meta_key = %s
-	             AND book.post_type = %s
-	             AND pm2.meta_key = %s
-	             AND pm3.meta_key = %s
-	             AND event.ID = %d
-	             AND event.post_type = %s
-	     ",
-			WPEMSBookingFilter::META_KEY_BOOKING_QTY,
-			WPEMSBookingFilter::POST_TYPE_BOOKING,
-			WPEMSBookingFilter::META_KEY_BOOKING_USER,
-			WPEMSBookingFilter::META_KEY_BOOKING_EVENT,
-			$event_id,
-			WPEMSEventFilter::POST_TYPE_EVENT
-		);
+		$filter                   = new WPEMSBookingFilter();
+		$filter->only_fields      = [ 'pm.meta_value' ];
+		$filter->collection_alias = 'pm';
+		$filter->collection       = $this->tb_postmeta;
+		$filter->join[]           = "INNER JOIN {$this->tb_posts} AS book ON book.ID = pm.post_id";
+		$filter->join[]           = "INNER JOIN {$this->tb_postmeta} AS pm2 ON pm2.post_id = book.ID";
+		$filter->join[]           = "INNER JOIN {$this->tb_postmeta} AS pm3 ON pm3.post_id = book.ID";
+		$filter->join[]           = "INNER JOIN {$this->tb_posts} AS event ON event.ID = pm3.meta_value";
+		$filter->join[]           = "INNER JOIN {$this->tb_users} AS user ON user.ID = pm2.meta_value";
+		$filter->where[]          = 'AND pm.meta_key = "' . WPEMSBookingFilter::META_KEY_BOOKING_QTY . '"';
+		$filter->where[]          = 'AND book.post_type = "' . WPEMSBookingFilter::POST_TYPE_BOOKING . '"';
+		$filter->where[]          = 'AND pm2.meta_key = "' . WPEMSBookingFilter::META_KEY_BOOKING_USER . '"';
+		$filter->where[]          = 'AND pm3.meta_key = "' . WPEMSBookingFilter::META_KEY_BOOKING_EVENT . '"';
+		$filter->where[]          = 'AND event.ID = ' . $event_id;
+		$filter->where[]          = 'AND event.post_type = "' . WPEMSEventFilter::POST_TYPE_EVENT . '"';
+		$filter->run_query_count  = true;
+		$filter->query_count      = true;
+		$filter->field_count      = 'pm.meta_value';
 
 		if ( empty( $status ) && empty( $user_id ) ) {
-			$query .= $this->wpdb->prepare( ' AND book.post_status = %s', WPEMSBookingFilter::STATUS_COMPLETED );
+			$filter->where[] = 'AND book.post_status = "' . WPEMSBookingFilter::STATUS_COMPLETED . '"';
 		}
 
 		if ( ! empty( $status ) ) {
-			$query .= $this->wpdb->prepare( ' AND book.post_status = %s', $status );
+			$filter->where[] = 'AND book.post_status = "' . $status . '"';
 		}
 
 		if ( ! empty( $user_id ) ) {
-			$query .= $this->wpdb->prepare( ' AND user.ID = %d', $user_id );
+			$filter->where[] = 'AND book.post_status = ' . $user_id;
 		}
 
-		return apply_filters( 'event_auth_booked_quanity', (int) $this->wpdb->get_var( $query ) );
+		$db = WPEMSDatabase::getInstance();
+		return apply_filters( 'event_auth_booked_quanity', (int) $db->execute( $filter ) );
 	}
 }

@@ -14,6 +14,8 @@ use WPEventsManager\Databases\WPEMSBookingDB;
 use WPEventsManager\Filters\WPEMSEventFilter;
 
 class EventModel extends PostModel {
+	public $post_type = WPEMSEventFilter::POST_TYPE_EVENT;
+
 	/**
 	 * is free
 	 * @return bool
@@ -42,7 +44,7 @@ class EventModel extends PostModel {
 		return apply_filters( 'event_slot_available', $available );
 	}
 
-		/**
+	/**
 	 * register time
 	 * @return int
 	 */
@@ -58,18 +60,13 @@ class EventModel extends PostModel {
 	 * @param event_id
 	 * @return int
 	 */
-	public function get_booking_quantity_by_id( $event_id ) {
-		if ( empty( $event_id ) ) {
-			$event_id = $this->ID;
-		}
-
+	public function get_booking_quantity_by_id() {
 		$booking_db = WPEMSBookingDB::getInstance();
-		return $booking_db->get_booked_quantity_by_event_id( $event_id ) ?? 0;
+		return $booking_db->get_booked_quantity_by_event_id( $this->ID ) ?? 0;
 	}
 
-	public static function find( int $event_id ) {
-		$filter_event     = new WPEMSEventFilter();
-		$filter_event->ID = $event_id;
-		return self::get_item_model_from_db( $filter_event );
+	public static function find( $event_id ) {
+		$post_type = WPEMSEventFilter::POST_TYPE_EVENT;
+		return self::find_item( $event_id, $post_type );
 	}
 }

@@ -131,7 +131,7 @@ class PostModel {
 	 */
 	public static function get_item_model_from_db( $filter ) {
 		$wpems_post_db = WPEMSPostDB::getInstance();
-		$post_model = false;
+		$post_model    = false;
 		try {
 			if ( empty( $filter->post_type ) ) {
 				$filter->post_type = ( new static() )->post_type;
@@ -158,7 +158,7 @@ class PostModel {
 	 */
 	public function get_all_metadata() {
 		if ( empty( $this->is_got_meta_data ) ) {
-			$wpems_item_meta_db         = WPEMSPostMetaDB::getInstance();
+			$wpems_item_meta_db      = WPEMSPostMetaDB::getInstance();
 			$filter                  = new WPEMSPostMetaFilter();
 			$filter->post_id         = $this->get_id();
 			$filter->run_query_count = false;
@@ -215,7 +215,7 @@ class PostModel {
 			$image_url = get_the_post_thumbnail_url( $this, $size );
 		}
 
-        return $image_url;
+		return $image_url;
 	}
 
 	/**
@@ -282,5 +282,19 @@ class PostModel {
 		}
 
 		return $permalink;
+	}
+
+	public static function find_item( $post_id, $post_type ) {
+		if ( empty( $post_id ) ) {
+			return null;
+		}
+
+		$filter     = new WPEMSPostTypeFilter();
+		$filter->ID = $post_id;
+		if ( ! empty( $post_type ) ) {
+			$filter->post_type = $post_type;
+		}
+
+		return self::get_item_model_from_db( $filter );
 	}
 }

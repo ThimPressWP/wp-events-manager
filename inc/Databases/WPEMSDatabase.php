@@ -8,26 +8,15 @@ namespace WPEventsManager\Databases;
 
 defined( 'ABSPATH' ) || exit();
 
+use Exception;
 use WPEventsManager\Filters\WPEMSFilter;
 
 class WPEMSDatabase {
 	private static $_instance;
 	public $wpdb, $tb_users;
-	public $tb_wpems_courses;
 	public $tb_wpems_user_items, $tb_wpems_user_itemmeta;
 	public $tb_posts, $tb_postmeta, $tb_options;
 	public $tb_terms, $tb_term_relationships, $tb_term_taxonomy;
-	public $tb_wpems_order_items, $tb_wpems_order_itemmeta;
-	public $tb_wpems_sections, $tb_wpems_section_items;
-	public $tb_wpems_quiz_questions;
-	public $tb_wpems_user_item_results;
-	public $tb_wpems_question_answers;
-	public $tb_wpems_question_answermeta;
-	public $tb_wpems_upgrade_db;
-	public $tb_wpems_sessions;
-	public $tb_wpems_files;
-	public $tb_thim_cache;
-	private $collate         = '';
 	public $max_index_length = '191';
 
 	protected function __construct() {
@@ -78,294 +67,6 @@ class WPEMSDatabase {
 		$this->collate = $collate;
 	}
 
-	public function get_collate(): string {
-		return $this->collate;
-	}
-
-	/**
-	 * Get total Item by post type and user id
-	 *
-	 * @param WPEMSPostTypeFilter $filter
-	 *
-	 * @return int
-	 */
-	public function get_count_post_of_user( WPEMSPostTypeFilter $filter ): int {
-		$query_append = '';
-
-		$cache_key = _count_posts_cache_key( $filter->post_type );
-
-		// Get cache
-		$counts = wp_cache_get( $cache_key );
-		if ( false !== $counts ) {
-			return $counts;
-		}
-
-		if ( ! empty( $filter->post_status ) ) {
-			$query_append .= $this->wpdb->prepare( ' AND post_status = %s', $filter->post_status );
-		}
-
-		$query = $this->wpdb->prepare(
-			"SELECT Count(ID) FROM $this->tb_posts
-			WHERE post_type = %s
-			AND post_author = %d
-			$query_append",
-			$filter->post_type,
-			$filter->post_author
-		);
-
-		$query = apply_filters( 'learnpress/query/get_total_post_of_user', $query );
-
-		$counts = (int) $this->wpdb->get_var( $query );
-
-		// Set cache
-		wp_cache_set( $cache_key, $counts );
-
-		return $counts;
-	}
-
-	/**
-	 * Get post by post_type and slug
-	 *
-	 * @param string $post_type .
-	 * @param string $slug .
-	 *
-	 * @return int
-	 */
-	public function getPostAuthorByTypeAndSlug( string $post_type = '', string $slug = '' ): int {
-		$query = $this->wpdb->prepare(
-			"
-			SELECT post_author FROM $this->tb_posts
-			WHERE post_type = %s
-			AND post_name = %s",
-			$post_type,
-			$slug
-		);
-
-		return (int) $this->wpdb->get_var( $query );
-	}
-
-	/**
-	 * Check table exists.
-	 *
-	 * @param string $name_table
-	 *
-	 * @return bool|int
-	 */
-	public function check_table_exists( string $name_table ) {
-		return $this->wpdb->query( $this->wpdb->prepare( "SHOW TABLES LIKE '%s'", $name_table ) );
-	}
-
-	/**
-	 * Clone table
-	 *
-	 * @param string $name_table .
-	 *
-	 * @throws Exception
-	 */
-	public function clone_table( string $name_table ): bool {
-		if ( ! current_user_can( ADMIN_ROLE ) ) {
-			throw new Exception( 'You don\'t have permission' );
-		}
-
-		$table_bk = $name_table . '_bk';
-
-		// Drop table bk if exists.
-		$this->drop_table( $table_bk );
-
-		// Clone table
-		$this->wpdb->query( "CREATE TABLE $table_bk LIKE $name_table" );
-		$this->wpdb->query( "INSERT INTO $table_bk SELECT * FROM $name_table" );
-
-		/*dbDelta(
-			"CREATE TABLE $table_bk LIKE $name_table;
-			INSERT INTO $table_bk SELECT * FROM $name_table;"
-		);*/
-
-		$this->check_execute_has_error();
-
-		return true;
-	}
-
-	/**
-	 * Check column table
-	 *
-	 * @param string $name_table .
-	 * @param string $name_col .
-	 *
-	 * @return bool|int
-	 */
-	public function check_col_table( string $name_table = '', string $name_col = '' ) {
-		$query = $this->wpdb->prepare( "SHOW COLUMNS FROM $name_table LIKE '%s'", $name_col );
-
-		return $this->wpdb->query( $query );
-	}
-
-	/**
-	 * Drop Column of Table
-	 *
-	 * @param string $name_table .
-	 * @param string $name_col .
-	 *
-	 * @return bool|int
-	 * @throws Exception
-	 */
-	public function drop_col_table( string $name_table = '', string $name_col = '' ) {
-		if ( ! current_user_can( 'administrator' ) ) {
-			return false;
-		}
-
-		$check_table = $this->check_col_table( $this->tb_wpems_user_items, $name_col );
-
-		if ( $check_table ) {
-			$execute = $this->wpdb->query( "ALTER TABLE $name_table DROP COLUMN $name_col" );
-
-			$this->check_execute_has_error();
-
-			return $execute;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Add Column of Table
-	 *
-	 * @param string $name_table .
-	 * @param string $name_col .
-	 * @param string $type .
-	 * @param string $after_col .
-	 *
-	 * @return bool|int
-	 * @throws Exception
-	 */
-	public function add_col_table( string $name_table, string $name_col, string $type, string $after_col = '' ) {
-		if ( ! current_user_can( ADMIN_ROLE ) ) {
-			throw new Exception( 'You don\'t have permission' );
-		}
-
-		$query_add = '';
-
-		$col_exists = $this->check_col_table( $name_table, $name_col );
-
-		if ( ! empty( $after_col ) ) {
-			$query_add .= "AFTER $after_col";
-		}
-
-		if ( ! $col_exists ) {
-			$execute = $this->wpdb->query( "ALTER TABLE $name_table ADD COLUMN $name_col $type $query_add" );
-
-			$this->check_execute_has_error();
-
-			return $execute;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Drop Index of Table
-	 *
-	 * @param string $name_table .
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	public function drop_indexs_table( string $name_table ) {
-		$show_index = "SHOW INDEX FROM $name_table";
-		$indexs     = $this->wpdb->get_results( $show_index );
-
-		foreach ( $indexs as $index ) {
-			if ( 'PRIMARY' === $index->Key_name || '1' !== $index->Seq_in_index ) {
-				continue;
-			}
-
-			$query = "ALTER TABLE $name_table DROP INDEX $index->Key_name";
-
-			$this->wpdb->query( $query );
-			$this->check_execute_has_error();
-		}
-	}
-
-	/**
-	 * Add Index of Table
-	 *
-	 * @param string $name_table .
-	 * @param array $indexs .
-	 *
-	 * @return bool|int
-	 * @throws Exception
-	 */
-	public function add_indexs_table( string $name_table, array $indexs ) {
-		$add_index    = '';
-		$count_indexs = count( $indexs ) - 1;
-
-		// Drop indexs .
-		$this->drop_indexs_table( $name_table );
-
-		foreach ( $indexs as $index ) {
-			if ( $count_indexs === array_search( $index, $indexs ) ) {
-				$add_index .= ' ADD INDEX ' . $index . ' (' . $index . ')';
-			} else {
-				$add_index .= ' ADD INDEX ' . $index . ' (' . $index . '),';
-			}
-		}
-
-		$execute = $this->wpdb->query(
-			"ALTER TABLE $name_table
-			$add_index"
-		);
-
-		$this->check_execute_has_error();
-
-		return $execute;
-	}
-
-	/**
-	 * Drop table
-	 *
-	 * @param string $name_table .
-	 *
-	 * @return bool|int
-	 * @throws Exception
-	 */
-	public function drop_table( string $name_table = '' ) {
-		if ( ! current_user_can( ADMIN_ROLE ) ) {
-			throw new Exception( 'You don\'t have permission' );
-		}
-
-		// Check table exists.
-		$tb_exists = $this->check_table_exists( $name_table );
-		if ( $tb_exists ) {
-			$execute = $this->wpdb->query( "DROP TABLE $name_table" );
-
-			$this->check_execute_has_error();
-
-			return $execute;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Get list columns name of table
-	 *
-	 * @param string $name_table
-	 *
-	 * @return array
-	 * @throws Exception
-	 * @version 1.0.0
-	 * @author tungnx
-	 */
-	public function get_cols_of_table( string $name_table ): array {
-		$query = "SHOW COLUMNS FROM $name_table";
-
-		$result = $this->wpdb->get_col( $query );
-
-		$this->check_execute_has_error();
-
-		return $result;
-	}
-
 	/**
 	 * Check execute current has any errors.
 	 *
@@ -375,100 +76,6 @@ class WPEMSDatabase {
 		if ( $this->wpdb->last_error ) {
 			throw new Exception( $this->wpdb->last_error );
 		}
-	}
-
-	/**
-	 * Important: Reason need set again indexes for table options of WP
-	 * because if want change value of "option_name" will error "database error Duplicate entry"
-	 * So before set must drop and add when done all
-	 *
-	 * @throws Exception
-	 * @version 1.0.0
-	 */
-	public function create_indexes_tb_options() {
-		$this->drop_indexs_table( $this->tb_options );
-		$result = $this->wpdb->query(
-			"
-			ALTER TABLE $this->tb_options
-			ADD UNIQUE option_name (option_name),
-			ADD INDEX autoload (autoload)
-			"
-		);
-
-		$this->check_execute_has_error();
-
-		return $result;
-	}
-
-	/**
-	 * Rename table
-	 *
-	 * @throws Exception
-	 * @version 1.0.0
-	 */
-	public function rename_table( string $name_table = '', string $new_name = '' ) {
-		if ( ! current_user_can( ADMIN_ROLE ) ) {
-			throw new Exception( 'You don\'t have permission' );
-		}
-
-		$tb_exists = $this->check_table_exists( $name_table );
-
-		if ( ! $tb_exists ) {
-			throw new Exception( 'Table not exists' );
-		}
-
-		$result = $this->wpdb->query(
-			"
-			ALTER TABLE $name_table
-			RENAME $new_name
-			"
-		);
-		$this->check_execute_has_error();
-
-		return $result;
-	}
-
-	/**
-	 * Check key postmeta exist on Database
-	 *
-	 * @param int $post_id
-	 * @param string $key
-	 *
-	 * @return bool|int
-	 */
-	public function check_key_postmeta_exists( int $post_id = 0, string $key = '' ) {
-		return $this->wpdb->query(
-			$this->wpdb->prepare(
-				"
-				SELECT meta_id FROM $this->tb_postmeta
-				WHERE meta_key = %s
-				AND post_id = %d
-				",
-				$key,
-				$post_id
-			)
-		);
-	}
-
-	/**
-	 * Get total pages
-	 *
-	 * @param int $limit
-	 * @param int $total_rows
-	 *
-	 * @return int
-	 */
-	public static function get_total_pages( int $limit = 0, int $total_rows = 0 ): int {
-		if ( $limit == 0 ) {
-			return 0;
-		}
-
-		$total_pages = floor( $total_rows / $limit );
-		if ( $total_rows % $limit !== 0 ) {
-			++$total_pages;
-		}
-
-		return (int) $total_pages;
 	}
 
 	/**
@@ -565,7 +172,7 @@ class WPEMSDatabase {
 		}
 
 		// Alias table
-		$ALIAS_COLLECTION = 'X';
+		$ALIAS_COLLECTION = 'p';
 		if ( ! empty( $filter->collection_alias ) ) {
 			$ALIAS_COLLECTION = $filter->collection_alias;
 		}
@@ -603,7 +210,7 @@ class WPEMSDatabase {
 			$query_total = "SELECT COUNT($filter->field_count) FROM ($query) AS $ALIAS_COLLECTION";
 			$total_rows  = (int) $this->wpdb->get_var( $query_total );
 
-			$this->check_execute_has_error();
+			// $this->check_execute_has_error();
 
 			if ( $filter->query_count ) {
 				// Debug string query
@@ -615,7 +222,7 @@ class WPEMSDatabase {
 			}
 		}
 
-		$this->check_execute_has_error();
+		// $this->check_execute_has_error();
 
 		return $result;
 	}
@@ -657,7 +264,7 @@ class WPEMSDatabase {
 	 * Query delete
 	 *
 	 * @throws Exception
-	 * @version 1.0.1
+	 * @version 1.0.0
 	 */
 	public function delete_execute( WPEMSFilter $filter, string $table = '' ) {
 		$COLLECTION = $filter->collection;
