@@ -42,7 +42,7 @@ class BookingModel extends PostModel {
 		$booking_db         = WPEMSBookingDB::getInstance();
 		$filter->collection = $booking_db->tb_posts;
 		$filter->where[]    = "AND ID = ({$this->ID})";
-		$booking_db->update( $filter );
+		$booking_db->delete_execute( $filter );
 	}
 
 	public static function find( $booking_id ) {
