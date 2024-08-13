@@ -526,10 +526,15 @@ class WPEMS_Custom_Post_Types {
 			return $order_by;
 		}
 
-		$order = isset( $_REQUEST['order'] ) ? $_REQUEST['order'] : 'asc';
+		$order          = isset( $_REQUEST['order'] ) ? $_REQUEST['order'] : 'asc';
+		$order          = strtoupper( $order );
+		$allowed_orders = [ 'ASC', 'DESC' ];
+
+		if ( ! in_array( $order, $allowed_orders, true ) ) {
+			$order = 'ASC';
+		}
 
 		return "event_date.meta_value {$order}";
-
 	}
 
 	/**
