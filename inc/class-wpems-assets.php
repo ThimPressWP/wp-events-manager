@@ -52,12 +52,12 @@ class WPEMS_Assets {
 	 */
 	public static function register_style( $handle, $src, $deps = array(), $ver = false, $media = 'all' ) {
 		$uri = $src;
-		
+
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			$ver = uniqid();
-			
+
 		} else {
-			$ver = VERION_OF_PLUGIN;
+			$ver = WPEMS_VER;
 			$uri = self::_load_file_min( $src );
 		}
 
