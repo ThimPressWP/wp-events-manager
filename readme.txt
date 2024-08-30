@@ -1,7 +1,7 @@
 === WP Events Manager ===
 Contributors: thimpress, leehld, phamtungpth
 Donate link: https://thimpress.com/
-Tags: event, event management, events, registration, bookings, tickets, locations, google maps
+Tags: event, event management, events, registration, bookings
 Requires at least: 6.0
 Tested up to: 6.6.1
 Stable tag: 2.2.0
