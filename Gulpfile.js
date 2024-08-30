@@ -70,6 +70,7 @@ const releasesFiles = [
 	'!phpunit.xml',
 	'!changelog.md',
 	'!README.md',
+	'!tests/**',
 ];
 
 // Copy folder to releases.
