@@ -78,6 +78,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 == Changelog ==
 
+= 2.2.0 (2024-08-30) =
+~ Fixed: minor bugs.
+
 = 2.1.11 =
 - Fixed: security.
 
