@@ -30,9 +30,13 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 * WPEMS constructor.
 		 */
 		public function __construct() {
-			$this->define_constants();
-			$this->includes();
-			$this->init_hooks();
+			try {
+				$this->define_constants();
+				$this->includes();
+				$this->init_hooks();
+			} catch ( Throwable $e ) {
+				error_log( $e->getMessage() );
+			}
 		}
 
 		/**
