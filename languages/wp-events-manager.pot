@@ -1,783 +1,37 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Copyright (C) 2024 ThimPress
+# This file is distributed under the same license as the WP Events Manager plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-10 15:37+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: WP Events Manager 2.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-events-manager\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"POT-Creation-Date: 2024-08-30T05:51:49+03:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: wp-events-manager\n"
 
-#: inc/class-wpems-ajax.php:53
-msgid "Remove admin notice successful"
+#. Plugin Name of the plugin
+msgid "WP Events Manager"
 msgstr ""
 
-#: inc/class-wpems-ajax.php:70
-msgid "Event not found."
+#. Plugin URI of the plugin
+msgid "http://thimpress.com/"
 msgstr ""
 
-#: inc/class-wpems-ajax.php:74
-msgid "You must login before register "
+#. Description of the plugin
+msgid "A complete plugin for Events management and online booking system"
 msgstr ""
 
-#: inc/class-wpems-ajax.php:81
-msgid "has been expired"
+#. Author of the plugin
+msgid "ThimPress"
 msgstr ""
 
-#: inc/class-wpems-ajax.php:83
-msgid "You have registered this event before"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:85
-msgid "The event is full, the registration is closed"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:107 inc/class-wpems-ajax.php:111
-msgid "Invalid request"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:116
-msgid "Invalid event request"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:123
-msgid "Quantity must integer"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:137
-msgid "You are registered this event."
-msgstr ""
-
-#: inc/class-wpems-ajax.php:141
-msgid "There is not any slots now. Please try with next future events!"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:162
-msgid "is not ready. Please contact administrator to setup payment gateways"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:185
-#, php-format
-msgid ""
-"Book ID <strong>%s</strong> completed! We'll send mail to <strong>%s</"
-"strong> when it is approve."
-msgstr ""
-
-#: inc/class-wpems-ajax.php:200
-msgid "Payment method is not available"
-msgstr ""
-
-#: inc/class-wpems-ajax.php:225
-#, php-format
-msgid "You Must <a href=\"%s\">Login</a>"
-msgstr ""
-
-#: inc/class-wpems-booking.php:71
-#, php-format
-msgid "%s booking event %s"
-msgstr ""
-
-#: inc/class-wpems-booking.php:72 inc/class-wpems-booking.php:73
-#, php-format
-msgid "%s booking event %s with %s slot"
-msgstr ""
-
-#: inc/class-wpems-booking.php:96
-#, php-format
-msgid "Booking ID #%s is not exists."
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:35 inc/class-wpems-gdpr.php:49
-msgid "WPEMS Booking"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:80 inc/class-wpems-post-types.php:343
-#: templates/emails/register-admin-event.php:45
-#: templates/emails/register-event-body.php:23
-msgid "ID"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:82
-msgid "Created Date"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:86
-msgid "Customer Details"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:89
-msgid "Items"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:91
-#: inc/admin/views/metaboxes/booking-details.php:72
-msgid "Total"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:95
-#: inc/admin/views/metaboxes/booking-details.php:52
-#: templates/emails/register-admin-event.php:51
-#: templates/emails/register-event-body.php:28
-msgid "Payment Method"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:96
-#: inc/admin/views/metaboxes/booking-details.php:62
-#: inc/emails/class-wpems-register-event.php:85
-#: templates/emails/register-admin-event.php:63
-#: templates/shortcodes/user-account.php:49
-msgid "No payment"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:99 inc/class-wpems-post-types.php:264
-#: inc/class-wpems-post-types.php:349
-#: templates/emails/register-admin-event.php:52
-#: templates/emails/register-event-body.php:29
-#: templates/shortcodes/user-account.php:37
-msgid "Status"
-msgstr ""
-
-#: inc/class-wpems-gdpr.php:106 inc/admin/class-wpems-admin-users.php:119
-msgid "Event Booking"
-msgstr ""
-
-#: inc/class-wpems-install.php:129
-msgctxt "Page slug"
-msgid "user-register"
-msgstr ""
-
-#: inc/class-wpems-install.php:130
-msgctxt "Page title"
-msgid "User Register"
-msgstr ""
-
-#: inc/class-wpems-install.php:134
-msgctxt "Page slug"
-msgid "user-login"
-msgstr ""
-
-#: inc/class-wpems-install.php:135
-msgctxt "Page title"
-msgid "User Login"
-msgstr ""
-
-#: inc/class-wpems-install.php:139
-msgctxt "Page slug"
-msgid "forgot-password"
-msgstr ""
-
-#: inc/class-wpems-install.php:140
-msgctxt "Page title"
-msgid "Forgot Password"
-msgstr ""
-
-#: inc/class-wpems-install.php:144
-msgctxt "Page slug"
-msgid "reset-password"
-msgstr ""
-
-#: inc/class-wpems-install.php:145
-msgctxt "Page title"
-msgid "Reset Password"
-msgstr ""
-
-#: inc/class-wpems-install.php:149
-msgctxt "Page slug"
-msgid "user-account"
-msgstr ""
-
-#: inc/class-wpems-install.php:150
-msgctxt "Page title"
-msgid "User Account"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:61
-msgctxt "post type general name"
-msgid "Events"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:62
-msgctxt "post type singular name"
-msgid "Event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:63
-msgctxt "admin menu"
-msgid "Events"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:64
-msgctxt "add new on admin bar"
-msgid "Event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:65
-msgctxt "event"
-msgid "Add New"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:66
-msgid "Add New Event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:67
-msgid "New Event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:68
-msgid "Edit Event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:69
-msgid "View Event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:70 inc/wpems-core-functions.php:1307
-#: templates/shortcodes/user-account.php:32
-msgid "Events"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:71
-msgid "Search Events"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:72
-msgid "Parent Events:"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:73
-msgid "No events found."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:74
-msgid "No events found in Trash."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:79
-msgid "Event post type."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:85
-msgctxt "URL slug"
-msgid "events"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:106
-msgctxt "post type general name"
-msgid "Bookings"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:107
-msgctxt "post type singular name"
-msgid "Booking"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:108
-msgctxt "admin menu"
-msgid "Bookings"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:109
-msgctxt "add new on admin bar"
-msgid "Booking"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:110
-msgctxt "book"
-msgid "Add New"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:111
-msgid "Add New Booking"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:112
-msgid "New Booking"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:113
-#: inc/admin/views/metaboxes/booking-details.php:44
-msgid "Booking Details"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:114
-msgid "View Booking"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:115
-msgid "Bookings"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:116
-msgid "Search Books"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:117
-msgid "Parent Books:"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:118
-msgid "No books found."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:119
-msgid "No books found in Trash."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:124
-msgid "Description."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:131
-msgctxt "URL slug"
-msgid "event-book"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:153
-msgctxt "taxonomy general name"
-msgid "Event Categories"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:154
-msgctxt "taxonomy singular name"
-msgid "Event Category"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:155
-msgid "Search Categories"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:156
-msgid "All Categories"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:157
-msgid "Parent Category"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:158
-msgid "Parent Category:"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:159
-msgid "Edit Category"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:160
-msgid "Update Category"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:161
-msgid "Add New Category"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:162
-msgid "New Category Name"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:163
-msgid "Category"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:184
-msgctxt "taxonomy general name"
-msgid "Event Tags"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:185
-msgctxt "taxonomy singular name"
-msgid "Event Tag"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:186
-msgid "Search Tags"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:187
-msgid "All Tags"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:188
-msgid "Parent Tag"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:189
-msgid "Parent Tag:"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:190
-msgid "Edit Tag"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:191
-msgid "Update Tag"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:192
-msgid "Add New Tag"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:193
-msgid "New Tag Name"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:194
-msgid "Tag"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:216
-msgctxt "Booking status"
-msgid "Cancelled"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:221
-#, php-format
-msgid "Cancelled <span class=\"count\">(%s)</span>"
-msgid_plural "Cancelled <span class=\"count\">(%s)</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: inc/class-wpems-post-types.php:225
-msgctxt "Booking status"
-msgid "Pending"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:230
-#, php-format
-msgid "Pending <span class=\"count\">(%s)</span>"
-msgid_plural "Pending <span class=\"count\">(%s)</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: inc/class-wpems-post-types.php:234
-msgctxt "Booking status"
-msgid "Processing"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:239
-#, php-format
-msgid "Processing <span class=\"count\">(%s)</span>"
-msgid_plural "Processing <span class=\"count\">(%s)</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: inc/class-wpems-post-types.php:243
-msgctxt "Booking status"
-msgid "Completed"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:248
-#, php-format
-msgid "Completed <span class=\"count\">(%s)</span>"
-msgid_plural "Completed <span class=\"count\">(%s)</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: inc/class-wpems-post-types.php:262
-msgid "Start"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:263
-msgid "End"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:265
-#: inc/admin/views/metaboxes/event-settings.php:41
-msgid "Price"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:266
-msgid "Booked / Total"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:319 inc/class-wpems-post-types.php:380
-#: inc/emails/class-wpems-register-event.php:81
-#: templates/emails/register-admin-event.php:60 templates/loop/register.php:54
-#: templates/shortcodes/user-account.php:46
-msgid "Free"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:321
-#, php-format
-msgid "<span class=\"event_auth_event_type\">%s/%s</span>"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:321
-msgid "slot"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:325
-msgid "Unlimited"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:342
-msgid ""
-"<label class=\"screen-reader-text __web-inspector-hide-shortcut__\" for=\"cb-"
-"select-all-1\">Select All</label><input id=\"cb-select-all-1\" type="
-"\"checkbox\">"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:344
-#: templates/emails/register-admin-event.php:47
-#: templates/emails/register-event-body.php:24
-msgid "Event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:345
-msgid "User"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:346
-msgid "Date"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:347
-#: inc/admin/views/metaboxes/booking-details.php:50
-#: inc/emails/class-wpems-register-event.php:81
-#: templates/emails/register-admin-event.php:50
-#: templates/emails/register-admin-event.php:60
-#: templates/emails/register-event-body.php:27
-#: templates/shortcodes/user-account.php:34
-#: templates/shortcodes/user-account.php:46
-msgid "Cost"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:348
-#: inc/admin/views/metaboxes/booking-details.php:51
-#: inc/admin/views/metaboxes/event-settings.php:35
-#: templates/emails/register-admin-event.php:49
-#: templates/emails/register-event-body.php:26
-#: templates/loop/booking-form.php:32 templates/shortcodes/user-account.php:35
-msgid "Quantity"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:372
-#, php-format
-msgid "<a href=\"%s\">%s</a>"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:502 inc/class-wpems-post-types.php:505
-#: inc/class-wpems-post-types.php:508
-msgid "Event updated."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:503
-msgid "Custom field updated."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:504
-msgid "Custom field deleted."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:507
-#, php-format
-msgid "Book restored to revision from %s"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:509
-msgid "Event saved."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:510
-msgid "Event submitted."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:512
-#, php-format
-msgid "Event scheduled for: <strong>%1$s</strong>."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:514
-msgid "M j, Y @ G:i"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:516
-msgid "Event draft updated."
-msgstr ""
-
-#: inc/class-wpems-post-types.php:522
-msgid "View event"
-msgstr ""
-
-#: inc/class-wpems-post-types.php:528
-msgid "Preview event"
-msgstr ""
-
-#: inc/class-wpems-shortcodes.php:183 inc/class-wpems-shortcodes.php:215
-msgid "Check your email for a link to reset your password."
-msgstr ""
-
-#: inc/class-wpems-user-process.php:56
-msgid "You have been sign out!"
-msgstr ""
-
-#: inc/class-wpems-user-process.php:148 inc/class-wpems-user-process.php:152
-#: inc/class-wpems-user-process.php:156 inc/class-wpems-user-process.php:165
-msgid "ERROR"
-msgstr ""
-
-#: inc/class-wpems-user-process.php:152
-msgid "Username is required."
-msgstr ""
-
-#: inc/class-wpems-user-process.php:156
-msgid "Password is required."
-msgstr ""
-
-#: inc/class-wpems-user-process.php:165
-msgid "A user could not be found with this email address."
-msgstr ""
-
-#: inc/class-wpems-user-process.php:187
-msgid "You have logged in"
-msgstr ""
-
-#: inc/wpems-core-functions.php:425
-msgid "Years"
-msgstr ""
-
-#: inc/wpems-core-functions.php:426
-msgid "Months"
-msgstr ""
-
-#: inc/wpems-core-functions.php:427
-msgid "Weeks"
-msgstr ""
-
-#: inc/wpems-core-functions.php:428
-msgid "Days"
-msgstr ""
-
-#: inc/wpems-core-functions.php:429
-msgid "Hours"
-msgstr ""
-
-#: inc/wpems-core-functions.php:430
-msgid "Minutes"
-msgstr ""
-
-#: inc/wpems-core-functions.php:431
-msgid "Seconds"
-msgstr ""
-
-#: inc/wpems-core-functions.php:434
-msgid "Year"
-msgstr ""
-
-#: inc/wpems-core-functions.php:435
-msgid "Month"
-msgstr ""
-
-#: inc/wpems-core-functions.php:436
-msgid "Week"
-msgstr ""
-
-#: inc/wpems-core-functions.php:437
-msgid "Day"
-msgstr ""
-
-#: inc/wpems-core-functions.php:438
-msgid "Hour"
-msgstr ""
-
-#: inc/wpems-core-functions.php:439
-msgid "Minute"
-msgstr ""
-
-#: inc/wpems-core-functions.php:440
-msgid "Second"
-msgstr ""
-
-#: inc/wpems-core-functions.php:444
-msgid "Something went wrong"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1049 inc/wpems-core-functions.php:1078
-#, php-format
-msgid "<span class=\"event_booking_status cancelled\">%s</span>"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1053 inc/wpems-core-functions.php:1079
-#, php-format
-msgid "<span class=\"event_booking_status pending\">%s</span>"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1057 inc/wpems-core-functions.php:1080
-#, php-format
-msgid "<span class=\"event_booking_status processing\">%s</span>"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1061 inc/wpems-core-functions.php:1081
-#, php-format
-msgid "<span class=\"event_booking_status completed\">%s</span>"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1078
-msgid "Cancelled"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1079
-msgid "Pending"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1080
-msgid "Processing"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1081
-msgid "Completed"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1121
-msgid "Confirm Password is not match."
-msgstr ""
-
-#: inc/wpems-core-functions.php:1128 inc/wpems-core-functions.php:1137
-#: inc/wpems-core-functions.php:1139 inc/wpems-core-functions.php:1143
-#: inc/wpems-core-functions.php:1162
-msgid "ERROR: "
-msgstr ""
-
-#: inc/wpems-core-functions.php:1128
-msgid "Username is required field."
-msgstr ""
-
-#: inc/wpems-core-functions.php:1130
-msgid "Username is already exists."
-msgstr ""
-
-#: inc/wpems-core-functions.php:1137
-msgid "Please provide a valid email address."
-msgstr ""
-
-#: inc/wpems-core-functions.php:1139
-msgid "An account is already registered with your email address. Please login."
-msgstr ""
-
-#: inc/wpems-core-functions.php:1143
-msgid "Password is required field."
-msgstr ""
-
-#: inc/wpems-core-functions.php:1162
-msgid "Couldn't register."
-msgstr ""
-
-#: inc/wpems-core-functions.php:1312
-msgid "Categories"
-msgstr ""
-
-#: inc/wpems-core-functions.php:1317
-msgid "Tags"
+#. Author URI of the plugin
+msgid "http://thimpress.com"
 msgstr ""
 
 #: inc/abstracts/class-wpems-abstract-payment-gateway.php:113
@@ -804,15 +58,15 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-metaboxes.php:34
+#: inc/admin/class-wpems-admin-metaboxes.php:35
 msgid "Event Settings"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-metaboxes.php:37
+#: inc/admin/class-wpems-admin-metaboxes.php:43
 msgid "Booking Information"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-metaboxes.php:40
+#: inc/admin/class-wpems-admin-metaboxes.php:51
 msgid "Booking Actions"
 msgstr ""
 
@@ -824,85 +78,88 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:26
+#: inc/admin/class-wpems-admin-users.php:27
 msgid "user"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:27
+#: inc/admin/class-wpems-admin-users.php:28
 msgid "users"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:73
+#: inc/admin/class-wpems-admin-users.php:92
 msgid "View"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:84
+#: inc/admin/class-wpems-admin-users.php:103
 msgid "No users found."
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:116
+#: inc/admin/class-wpems-admin-users.php:135
 #: templates/shortcodes/form-login.php:23
 #: templates/shortcodes/form-register.php:23
 msgid "Username"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:117
-#: templates/emails/register-admin-event.php:46
+#: inc/admin/class-wpems-admin-users.php:136
+#: templates/emails/register-admin-event.php:48
 msgid "Name"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:118
+#: inc/admin/class-wpems-admin-users.php:137
 #: templates/shortcodes/form-register.php:28
 msgid "Email"
 msgstr ""
 
-#: inc/admin/class-wpems-admin-users.php:246
+#: inc/admin/class-wpems-admin-users.php:138
+#: inc/class-wpems-gdpr.php:112
+msgid "Event Booking"
+msgstr ""
+
+#: inc/admin/class-wpems-admin-users.php:268
 msgid "Event Users"
 msgstr ""
 
 #: inc/admin/metaboxes/class-wpems-admin-metabox-event.php:42
-msgid ""
-"Please make sure event time is validate! The end time must be in future of "
-"the start time!"
+msgid "Please make sure event time is validate! The end time must be in future of the start time!"
 msgstr ""
 
 #: inc/admin/settings/class-wpems-admin-setting-checkout.php:31
 msgid "Checkout"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:48
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:50
 msgid "Checkout Process"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:49
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:51
 msgid "General options for system"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:53
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:55
 msgid "Booking times free event/email"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:54
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:56
 msgid "This controls how many time booking free event of an email"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:57
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:59
 msgid "Once"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:58
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:60
 msgid "Many"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:64
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:66
 msgid "Cancel payment status"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:65
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:67
 msgid "How long cancel a payment (hour)"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-checkout.php:85
+#: inc/admin/settings/class-wpems-admin-setting-checkout.php:88
 msgid "Checkout General"
 msgstr ""
 
@@ -910,44 +167,44 @@ msgstr ""
 msgid "Emails"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:48
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:50
 msgid "Email Notifications"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:52
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:54
 msgid "Event register"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:53
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:55
 msgid "Send email to admin and user when user registers event"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:59
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:61
 msgid "From name"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:67
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:69
 msgid "Email from"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:75
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:77
 msgid "Subject"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:76
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:78
 #: inc/emails/class-wpems-register-event.php:50
 msgid "Register event"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:83
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:85
 msgid "Message Body"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:106
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:108
 msgid "Account register"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-emails.php:107
+#: inc/admin/settings/class-wpems-admin-setting-emails.php:109
 msgid "Send notify when user register account"
 msgstr ""
 
@@ -955,119 +212,117 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:49
+#: inc/admin/settings/class-wpems-admin-setting-general.php:51
 msgid "General Options"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:53
+#: inc/admin/settings/class-wpems-admin-setting-general.php:55
 msgid "Event registration"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:54
+#: inc/admin/settings/class-wpems-admin-setting-general.php:56
 msgid "Allows user register events"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:60
+#: inc/admin/settings/class-wpems-admin-setting-general.php:62
 msgid "Currency"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:61
+#: inc/admin/settings/class-wpems-admin-setting-general.php:63
 msgid "This controls what the currency prices"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:69
+#: inc/admin/settings/class-wpems-admin-setting-general.php:71
 msgid "Currency Position"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:70
+#: inc/admin/settings/class-wpems-admin-setting-general.php:72
 msgid "This controls the position of the currency symbol"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:73
+#: inc/admin/settings/class-wpems-admin-setting-general.php:75
 msgid "Left"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:74
+#: inc/admin/settings/class-wpems-admin-setting-general.php:76
 msgid "Right"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:75
+#: inc/admin/settings/class-wpems-admin-setting-general.php:77
 msgid "Left with space"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:76
+#: inc/admin/settings/class-wpems-admin-setting-general.php:78
 msgid "Right with space"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:83
+#: inc/admin/settings/class-wpems-admin-setting-general.php:85
 msgid "Thousand Separator"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:90
+#: inc/admin/settings/class-wpems-admin-setting-general.php:92
 msgid "Decimal Separator"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:97
+#: inc/admin/settings/class-wpems-admin-setting-general.php:99
 msgid "Number of Decimals"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:105
+#: inc/admin/settings/class-wpems-admin-setting-general.php:107
 msgid "Google Map API Key"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-general.php:107
-msgid ""
-"Refer on https://developers.google.com/maps/documentation/javascript/get-api-"
-"key#get-an-api-key"
+#: inc/admin/settings/class-wpems-admin-setting-general.php:109
+msgid "Refer on https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key"
 msgstr ""
 
 #: inc/admin/settings/class-wpems-admin-setting-pages.php:31
 msgid "Pages"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:51
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:53
 msgid "Pages Settings"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:55
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:57
 msgid "Register Page"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:56
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:58
 msgid "This controls which the register page"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:61
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:63
 msgid "Login Page"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:62
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:64
 msgid "This controls which the login page"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:67
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:69
 #: templates/shortcodes/form-login.php:53
 msgid "Forgot Password"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:68
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:70
 msgid "This controls which the forgot password page"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:73
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:75
 #: templates/shortcodes/reset-password.php:60
 msgid "Reset Password"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:74
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:76
 msgid "This controls which the reset password page"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:79
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:81
 msgid "My Account"
 msgstr ""
 
-#: inc/admin/settings/class-wpems-admin-setting-pages.php:80
+#: inc/admin/settings/class-wpems-admin-setting-pages.php:82
 msgid "This controls which the user account page"
 msgstr ""
 
@@ -1084,56 +339,113 @@ msgid "Booking Notes"
 msgstr ""
 
 #: inc/admin/views/metaboxes/booking-details.php:38
-#, php-format
 msgid "Order %s"
 msgstr ""
 
 #: inc/admin/views/metaboxes/booking-details.php:40
-#, php-format
 msgid "Date %s"
+msgstr ""
+
+#: inc/admin/views/metaboxes/booking-details.php:44
+#: inc/class-wpems-post-types.php:118
+msgid "Booking Details"
 msgstr ""
 
 #: inc/admin/views/metaboxes/booking-details.php:49
 msgid "Item"
 msgstr ""
 
+#: inc/admin/views/metaboxes/booking-details.php:50
+#: inc/class-wpems-post-types.php:406
+#: inc/emails/class-wpems-register-event.php:81
+#: templates/emails/register-admin-event.php:52
+#: templates/emails/register-admin-event.php:62
+#: templates/emails/register-event-body.php:27
+#: templates/shortcodes/user-account.php:34
+#: templates/shortcodes/user-account.php:46
+msgid "Cost"
+msgstr ""
+
+#: inc/admin/views/metaboxes/booking-details.php:51
+#: inc/admin/views/metaboxes/event-settings.php:38
+#: inc/class-wpems-post-types.php:407
+#: templates/emails/register-admin-event.php:51
+#: templates/emails/register-event-body.php:26
+#: templates/loop/booking-form.php:32
+#: templates/shortcodes/user-account.php:35
+msgid "Quantity"
+msgstr ""
+
+#: inc/admin/views/metaboxes/booking-details.php:52
+#: inc/class-wpems-gdpr.php:101
+#: templates/emails/register-admin-event.php:53
+#: templates/emails/register-event-body.php:28
+msgid "Payment Method"
+msgstr ""
+
 #: inc/admin/views/metaboxes/booking-details.php:53
 msgid "Amount"
+msgstr ""
+
+#: inc/admin/views/metaboxes/booking-details.php:62
+#: inc/class-wpems-gdpr.php:102
+#: inc/emails/class-wpems-register-event.php:85
+#: templates/emails/register-admin-event.php:65
+#: templates/shortcodes/user-account.php:49
+msgid "No payment"
 msgstr ""
 
 #: inc/admin/views/metaboxes/booking-details.php:68
 msgid "Sub Total"
 msgstr ""
 
-#: inc/admin/views/metaboxes/event-settings.php:45
+#: inc/admin/views/metaboxes/booking-details.php:72
+#: inc/class-wpems-gdpr.php:97
+msgid "Total"
+msgstr ""
+
+#: inc/admin/views/metaboxes/event-settings.php:44
+#: inc/class-wpems-post-types.php:324
+msgid "Price"
+msgstr ""
+
+#: inc/admin/views/metaboxes/event-settings.php:48
 msgid "Set 0 to make it becomes free event"
 msgstr ""
 
-#: inc/admin/views/metaboxes/event-settings.php:51
+#: inc/admin/views/metaboxes/event-settings.php:54
 msgid "Start/End"
 msgstr ""
 
-#: inc/admin/views/metaboxes/event-settings.php:58
+#: inc/admin/views/metaboxes/event-settings.php:61
 msgid "to"
 msgstr ""
 
-#: inc/admin/views/metaboxes/event-settings.php:69
+#: inc/admin/views/metaboxes/event-settings.php:74
+msgid "Registration End Date"
+msgstr ""
+
+#: inc/admin/views/metaboxes/event-settings.php:88
+msgid "Schedule"
+msgstr ""
+
+#: inc/admin/views/metaboxes/event-settings.php:108
 msgid "Location"
 msgstr ""
 
-#: inc/admin/views/metaboxes/event-settings.php:74
+#: inc/admin/views/metaboxes/event-settings.php:113
 msgid "You need set up Google Map API Key to show map."
 msgstr ""
 
-#: inc/admin/views/metaboxes/event-settings.php:75
-msgid "Set up here"
+#: inc/admin/views/metaboxes/event-settings.php:123
+msgid "Use iframe to show map."
 msgstr ""
 
-#: inc/admin/views/metaboxes/event-settings.php:81
+#: inc/admin/views/metaboxes/event-settings.php:131
 msgid "Shortcode"
 msgstr ""
 
-#: inc/admin/views/settings/select-page.php:29
+#: inc/admin/views/settings/select-page.php:30
 msgid "Select Page"
 msgstr ""
 
@@ -1141,8 +453,587 @@ msgstr ""
 msgid "These variables are allowed to use in email content."
 msgstr ""
 
+#: inc/class-wpems-ajax.php:54
+msgid "Remove admin notice successful"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:72
+msgid "Event not found."
+msgstr ""
+
+#: inc/class-wpems-ajax.php:76
+msgid "You must login before register "
+msgstr ""
+
+#: inc/class-wpems-ajax.php:83
+msgid "has been expired"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:85
+msgid "You have registered this event before"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:87
+msgid "The event is full, the registration is closed"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:109
+#: inc/class-wpems-ajax.php:113
+msgid "Invalid request"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:118
+msgid "Invalid event request"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:125
+msgid "Quantity must integer"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:139
+msgid "You are registered this event."
+msgstr ""
+
+#: inc/class-wpems-ajax.php:143
+msgid "There is not any slots now. Please try with next future events!"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:167
+msgid "is not ready. Please contact administrator to setup payment gateways"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:190
+msgid "Book ID <strong>%1$s</strong> completed! We'll send mail to <strong>%2$s</strong> when it is approve."
+msgstr ""
+
+#: inc/class-wpems-ajax.php:211
+msgid "Payment method is not available"
+msgstr ""
+
+#: inc/class-wpems-ajax.php:239
+msgid "You Must <a href=\"%s\">Login</a>"
+msgstr ""
+
+#: inc/class-wpems-booking.php:75
+msgid "%1$s booking event %2$s"
+msgstr ""
+
+#: inc/class-wpems-booking.php:76
+#: inc/class-wpems-booking.php:77
+msgid "%1$s booking event %2$s with %3$s slot"
+msgstr ""
+
+#: inc/class-wpems-booking.php:101
+msgid "Booking ID #%s is not exists."
+msgstr ""
+
+#: inc/class-wpems-gdpr.php:81
+#: inc/class-wpems-post-types.php:402
+#: templates/emails/register-admin-event.php:47
+#: templates/emails/register-event-body.php:23
+msgid "ID"
+msgstr ""
+
+#: inc/class-wpems-gdpr.php:85
+msgid "Created Date"
+msgstr ""
+
+#: inc/class-wpems-gdpr.php:89
+msgid "Customer Details"
+msgstr ""
+
+#: inc/class-wpems-gdpr.php:93
+msgid "Items"
+msgstr ""
+
+#: inc/class-wpems-gdpr.php:105
+#: inc/class-wpems-post-types.php:323
+#: inc/class-wpems-post-types.php:408
+#: templates/emails/register-admin-event.php:54
+#: templates/emails/register-event-body.php:29
+#: templates/shortcodes/user-account.php:37
+msgid "Status"
+msgstr ""
+
+#: inc/class-wpems-install.php:128
+msgctxt "Page slug"
+msgid "user-register"
+msgstr ""
+
+#: inc/class-wpems-install.php:129
+msgctxt "Page title"
+msgid "User Register"
+msgstr ""
+
+#: inc/class-wpems-install.php:133
+msgctxt "Page slug"
+msgid "user-login"
+msgstr ""
+
+#: inc/class-wpems-install.php:134
+msgctxt "Page title"
+msgid "User Login"
+msgstr ""
+
+#: inc/class-wpems-install.php:138
+msgctxt "Page slug"
+msgid "forgot-password"
+msgstr ""
+
+#: inc/class-wpems-install.php:139
+msgctxt "Page title"
+msgid "Forgot Password"
+msgstr ""
+
+#: inc/class-wpems-install.php:143
+msgctxt "Page slug"
+msgid "reset-password"
+msgstr ""
+
+#: inc/class-wpems-install.php:144
+msgctxt "Page title"
+msgid "Reset Password"
+msgstr ""
+
+#: inc/class-wpems-install.php:148
+msgctxt "Page slug"
+msgid "user-account"
+msgstr ""
+
+#: inc/class-wpems-install.php:149
+msgctxt "Page title"
+msgid "User Account"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:63
+msgctxt "post type general name"
+msgid "Events"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:64
+msgctxt "post type singular name"
+msgid "Event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:65
+msgctxt "admin menu"
+msgid "Events"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:66
+msgctxt "add new on admin bar"
+msgid "Event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:67
+msgctxt "event"
+msgid "Add New"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:68
+msgid "Add New Event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:69
+msgid "New Event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:70
+msgid "Edit Event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:71
+msgid "View Event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:72
+#: inc/wpems-core-functions.php:1289
+#: templates/shortcodes/user-account.php:32
+msgid "Events"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:73
+msgid "Search Events"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:74
+msgid "Parent Events:"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:75
+msgid "No events found."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:76
+msgid "No events found in Trash."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:81
+msgid "Event post type."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:88
+msgctxt "URL slug"
+msgid "events"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:111
+msgctxt "post type general name"
+msgid "Bookings"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:112
+msgctxt "post type singular name"
+msgid "Booking"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:113
+msgctxt "admin menu"
+msgid "Bookings"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:114
+msgctxt "add new on admin bar"
+msgid "Booking"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:115
+msgctxt "book"
+msgid "Add New"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:116
+msgid "Add New Booking"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:117
+msgid "New Booking"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:119
+msgid "View Booking"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:120
+msgid "Bookings"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:121
+msgid "Search Books"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:122
+msgid "Parent Books:"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:123
+msgid "No books found."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:124
+msgid "No books found in Trash."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:129
+msgid "Description."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:136
+msgctxt "URL slug"
+msgid "event-book"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:158
+msgctxt "taxonomy general name"
+msgid "Event Categories"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:159
+msgctxt "taxonomy singular name"
+msgid "Event Category"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:160
+msgid "Search Categories"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:161
+msgid "All Categories"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:162
+msgid "Parent Category"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:163
+msgid "Parent Category:"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:164
+msgid "Edit Category"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:165
+msgid "Update Category"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:166
+msgid "Add New Category"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:167
+msgid "New Category Name"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:168
+msgid "Category"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:189
+msgctxt "taxonomy general name"
+msgid "Event Tags"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:190
+msgctxt "taxonomy singular name"
+msgid "Event Tag"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:191
+msgid "Search Tags"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:192
+msgid "All Tags"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:193
+msgid "Parent Tag"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:194
+msgid "Parent Tag:"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:195
+msgid "Edit Tag"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:196
+msgid "Update Tag"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:197
+msgid "Add New Tag"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:198
+msgid "New Tag Name"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:199
+msgid "Tag"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:220
+msgctxt "taxonomy general name"
+msgid "Event Types"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:221
+msgctxt "taxonomy singular name"
+msgid "Event Type"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:222
+msgid "Search Types"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:223
+msgid "All Types"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:224
+msgid "Parent Type"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:225
+msgid "Parent Type:"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:226
+msgid "Edit Type"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:227
+msgid "Update Type"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:228
+msgid "Add New Type"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:229
+msgid "New Type Name"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:230
+#: inc/wpems-core-functions.php:1304
+msgid "Types"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:255
+msgctxt "Booking status"
+msgid "Cancelled"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:270
+msgctxt "Booking status"
+msgid "Pending"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:285
+msgctxt "Booking status"
+msgid "Processing"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:300
+msgctxt "Booking status"
+msgid "Completed"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:321
+msgid "Start"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:322
+msgid "End"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:325
+msgid "Booked / Total"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:378
+#: inc/class-wpems-post-types.php:439
+#: inc/emails/class-wpems-register-event.php:81
+#: templates/emails/register-admin-event.php:62
+#: templates/loop/register.php:54
+#: templates/shortcodes/user-account.php:46
+msgid "Free"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:380
+msgid "<span class=\"event_auth_event_type\">%1$s/%2$s</span>"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:380
+msgid "slot"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:384
+msgid "Unlimited"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:403
+#: templates/emails/register-admin-event.php:49
+#: templates/emails/register-event-body.php:24
+msgid "Event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:404
+msgid "User"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:405
+msgid "Date"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:431
+msgid "<a href=\"%1$s\">%2$s</a>"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:575
+#: inc/class-wpems-post-types.php:578
+#: inc/class-wpems-post-types.php:581
+msgid "Event updated."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:576
+msgid "Custom field updated."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:577
+msgid "Custom field deleted."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: inc/class-wpems-post-types.php:580
+msgid "Book restored to revision from %s"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:582
+msgid "Event saved."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:583
+msgid "Event submitted."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:585
+msgid "Event scheduled for: <strong>%1$s</strong>."
+msgstr ""
+
+#. translators: Publish box date format, see http://php.net/date
+#: inc/class-wpems-post-types.php:587
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:589
+msgid "Event draft updated."
+msgstr ""
+
+#: inc/class-wpems-post-types.php:595
+msgid "View event"
+msgstr ""
+
+#: inc/class-wpems-post-types.php:601
+msgid "Preview event"
+msgstr ""
+
+#: inc/class-wpems-shortcodes.php:183
+#: inc/class-wpems-shortcodes.php:221
+msgid "Check your email for a link to reset your password."
+msgstr ""
+
+#: inc/class-wpems-user-process.php:56
+msgid "You have been sign out!"
+msgstr ""
+
+#: inc/class-wpems-user-process.php:167
+#: inc/class-wpems-user-process.php:171
+#: inc/class-wpems-user-process.php:175
+#: inc/class-wpems-user-process.php:184
+msgid "ERROR"
+msgstr ""
+
+#: inc/class-wpems-user-process.php:171
+msgid "Username is required."
+msgstr ""
+
+#: inc/class-wpems-user-process.php:175
+msgid "Password is required."
+msgstr ""
+
+#: inc/class-wpems-user-process.php:184
+msgid "A user could not be found with this email address."
+msgstr ""
+
+#: inc/class-wpems-user-process.php:206
+msgid "You have logged in"
+msgstr ""
+
 #: inc/emails/class-wpems-register-event.php:33
-#, php-format
 msgid "Error %s booking ID"
 msgstr ""
 
@@ -1155,46 +1046,43 @@ msgid "PayPal"
 msgstr ""
 
 #: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:77
-msgid ""
-"Payment is completed. We will send you email when payment status is completed"
+msgid "Payment is completed. We will send you email when payment status is completed"
 msgstr ""
 
 #: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:79
 msgid "Booking is cancel."
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:148
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:153
 msgid "Paypal Settings"
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:149
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:154
 msgid "Make payment via Paypal"
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:153
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:158
 msgid "Enable"
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:160
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:165
 msgid "Paypal email"
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:167
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:172
 msgid "Sandbox mode"
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:174
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:179
 msgid "Paypal Sandbox email"
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:209
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:217
 msgid "Booking ID is not exists!"
 msgstr ""
 
-#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:251
-msgid ""
-"Email Business PayPal is invalid. Please contact administrator to setup "
-"PayPal email."
+#: inc/gateways/paypal/class-wpems-payment-gateway-paypal.php:277
+msgid "Email Business PayPal is invalid. Please contact administrator to setup PayPal email."
 msgstr ""
 
 #: inc/widgets/class-wpems-widget-countdown.php:26
@@ -1205,64 +1093,174 @@ msgstr ""
 msgid "Countdown timer for event"
 msgstr ""
 
-#: inc/widgets/class-wpems-widget-countdown.php:83
-msgid "Title:"
-msgstr ""
-
-#: inc/widgets/class-wpems-widget-countdown.php:87
-msgid "Carousel Slide:"
-msgstr ""
-
-#: inc/widgets/class-wpems-widget-countdown.php:91
-msgid "Navigation:"
-msgstr ""
-
-#: inc/widgets/class-wpems-widget-countdown.php:95
-msgid "Pagiantion:"
-msgstr ""
-
-#: inc/widgets/class-wpems-widget-countdown.php:99
-msgid "Events:"
-msgstr ""
-
-#: inc/widgets/class-wpems-widget-countdown.php:131
+#: inc/widgets/class-wpems-widget-countdown.php:132
 msgid "Upcoming"
 msgstr ""
 
-#: inc/widgets/class-wpems-widget-countdown.php:132
+#: inc/widgets/class-wpems-widget-countdown.php:133
 msgid "Happening"
 msgstr ""
 
-#: inc/widgets/class-wpems-widget-countdown.php:133
+#: inc/widgets/class-wpems-widget-countdown.php:134
 msgid "Expired"
 msgstr ""
 
-#: templates/pagination.php:30
-msgid "<"
+#: inc/wpems-core-functions.php:414
+msgid "Years"
 msgstr ""
 
-#: templates/pagination.php:31
-msgid ">"
+#: inc/wpems-core-functions.php:415
+msgid "Months"
+msgstr ""
+
+#: inc/wpems-core-functions.php:416
+msgid "Weeks"
+msgstr ""
+
+#: inc/wpems-core-functions.php:417
+msgid "Days"
+msgstr ""
+
+#: inc/wpems-core-functions.php:418
+msgid "Hours"
+msgstr ""
+
+#: inc/wpems-core-functions.php:419
+msgid "Minutes"
+msgstr ""
+
+#: inc/wpems-core-functions.php:420
+msgid "Seconds"
+msgstr ""
+
+#: inc/wpems-core-functions.php:423
+msgid "Year"
+msgstr ""
+
+#: inc/wpems-core-functions.php:424
+msgid "Month"
+msgstr ""
+
+#: inc/wpems-core-functions.php:425
+msgid "Week"
+msgstr ""
+
+#: inc/wpems-core-functions.php:426
+msgid "Day"
+msgstr ""
+
+#: inc/wpems-core-functions.php:427
+msgid "Hour"
+msgstr ""
+
+#: inc/wpems-core-functions.php:428
+msgid "Minute"
+msgstr ""
+
+#: inc/wpems-core-functions.php:429
+msgid "Second"
+msgstr ""
+
+#: inc/wpems-core-functions.php:433
+msgid "Something went wrong"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1029
+#: inc/wpems-core-functions.php:1059
+msgid "<span class=\"event_booking_status cancelled\">%s</span>"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1033
+#: inc/wpems-core-functions.php:1060
+msgid "<span class=\"event_booking_status pending\">%s</span>"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1037
+#: inc/wpems-core-functions.php:1061
+msgid "<span class=\"event_booking_status processing\">%s</span>"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1041
+#: inc/wpems-core-functions.php:1062
+msgid "<span class=\"event_booking_status completed\">%s</span>"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1059
+msgid "Cancelled"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1060
+msgid "Pending"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1061
+msgid "Processing"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1062
+msgid "Completed"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1105
+msgid "Confirm Password is not match."
+msgstr ""
+
+#: inc/wpems-core-functions.php:1112
+#: inc/wpems-core-functions.php:1121
+#: inc/wpems-core-functions.php:1123
+#: inc/wpems-core-functions.php:1127
+#: inc/wpems-core-functions.php:1149
+msgid "ERROR: "
+msgstr ""
+
+#: inc/wpems-core-functions.php:1112
+msgid "Username is required field."
+msgstr ""
+
+#: inc/wpems-core-functions.php:1114
+msgid "Username is already exists."
+msgstr ""
+
+#: inc/wpems-core-functions.php:1121
+msgid "Please provide a valid email address."
+msgstr ""
+
+#: inc/wpems-core-functions.php:1123
+msgid "An account is already registered with your email address. Please login."
+msgstr ""
+
+#: inc/wpems-core-functions.php:1127
+msgid "Password is required field."
+msgstr ""
+
+#: inc/wpems-core-functions.php:1149
+msgid "Couldn't register."
+msgstr ""
+
+#: inc/wpems-core-functions.php:1294
+msgid "Categories"
+msgstr ""
+
+#: inc/wpems-core-functions.php:1299
+msgid "Tags"
 msgstr ""
 
 #: templates/emails/register-admin-event.php:39
-#, php-format
 msgid "User have been registered successful <a href=\"%s\">your event</a>."
 msgstr ""
 
-#: templates/emails/register-admin-event.php:48
+#: templates/emails/register-admin-event.php:50
 #: templates/emails/register-event-body.php:25
 #: templates/shortcodes/user-account.php:33
 msgid "Type"
 msgstr ""
 
-#: templates/loop/booking-form.php:52
-msgid ""
-"There are no payment gateway available. Please contact administrator to "
-"setup it."
+#: templates/loop/booking-form.php:55
+msgid "There are no payment gateway available. Please contact administrator to setup it."
 msgstr ""
 
-#: templates/loop/booking-form.php:61 templates/loop/register.php:66
+#: templates/loop/booking-form.php:65
+#: templates/loop/register.php:67
 msgid "Register Now"
 msgstr ""
 
@@ -1272,6 +1270,14 @@ msgstr ""
 
 #: templates/loop/excerpt.php:21
 msgid "View Detail"
+msgstr ""
+
+#: templates/loop/pagination.php:39
+msgid "Previous"
+msgstr ""
+
+#: templates/loop/pagination.php:40
+msgid "Next"
 msgstr ""
 
 #: templates/loop/register.php:45
@@ -1286,23 +1292,36 @@ msgstr ""
 msgid "Cost:"
 msgstr ""
 
-#: templates/loop/register.php:63
+#: templates/loop/register.php:64
 msgid "You have registered this event before."
 msgstr ""
 
-#: templates/loop/register.php:69
-#, php-format
+#: templates/loop/register.php:70
 msgid "You must <a href=\"%s\">login</a> before register event."
 msgstr ""
 
-#: templates/shortcodes/event-countdown.php:32
+#: templates/pagination.php:34
+msgid "<"
+msgstr ""
+
+#: templates/pagination.php:35
+msgid ">"
+msgstr ""
+
+#: templates/search-form.php:26
+msgid "Search events..."
+msgstr ""
+
+#: templates/search-form.php:28
+msgid "Search"
+msgstr ""
+
+#: templates/shortcodes/event-countdown.php:33
 msgid "Invalid Event ID"
 msgstr ""
 
 #: templates/shortcodes/forgot-password.php:26
-msgid ""
-"Please enter your username or email address. You will receive a link to "
-"create a new password via email."
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
 msgstr ""
 
 #: templates/shortcodes/forgot-password.php:29
@@ -1361,10 +1380,7 @@ msgid "Forgot password?"
 msgstr ""
 
 #: templates/shortcodes/register-completed.php:20
-#, php-format
-msgid ""
-"You have successfully registered to <strong>%s</strong>. We have emailed "
-"your password to <i>%s</i> the email address you entered."
+msgid "You have successfully registered to <strong>%1$s</strong>. We have emailed your password to <i>%2$s</i> the email address you entered."
 msgstr ""
 
 #: templates/shortcodes/register-error.php:19
@@ -1372,7 +1388,6 @@ msgid "Oops! Something went wrong."
 msgstr ""
 
 #: templates/shortcodes/user-account.php:22
-#, php-format
 msgid "You are not <a href=\"%s\">login</a>"
 msgstr ""
 
@@ -1385,20 +1400,20 @@ msgid "Method"
 msgstr ""
 
 #: templates/shortcodes/user-account.php:66
-#: templates/shortcodes/user-account.php:78
+#: templates/shortcodes/user-account.php:79
 msgid "« Previous"
 msgstr ""
 
 #: templates/shortcodes/user-account.php:67
-#: templates/shortcodes/user-account.php:79
+#: templates/shortcodes/user-account.php:80
 msgid "Next »"
 msgstr ""
 
-#: templates/shortcodes/user-account.php:86
+#: templates/shortcodes/user-account.php:88
 msgid "No event booking has been made yet."
 msgstr ""
 
-#: templates/shortcodes/user-account.php:88
+#: templates/shortcodes/user-account.php:90
 msgid "Go to Events"
 msgstr ""
 
