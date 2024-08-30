@@ -67,6 +67,9 @@ const releasesFiles = [
 	'!package-lock.json',
 	'!package.json',
 	'!releases/**',
+	'!phpunit.xml',
+	'!changelog.md',
+	'!README.md',
 ];
 
 // Copy folder to releases.
