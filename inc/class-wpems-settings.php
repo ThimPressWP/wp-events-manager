@@ -56,12 +56,9 @@ class WPEMS_Settings {
 	 * @return array || null
 	 */
 	protected function options() {
+		$options = get_option( $this->_prefix, [] );
 
-		if ( is_array( get_option( $this->_prefix, null ) ) ) {
-			return call_user_func_array( 'array_merge', get_option( $this->_prefix, null ) );
-		}
-
-		return get_option( $this->_prefix, null );
+		return $options;
 	}
 
 	/**
