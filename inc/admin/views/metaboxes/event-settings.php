@@ -24,8 +24,8 @@ $registration_end_date = get_post_meta( $post->ID, $prefix . 'registration_end_d
 $qty      = get_post_meta( $post_id, $prefix . 'qty', true );
 $price    = get_post_meta( $post_id, $prefix . 'price', true );
 $location = get_post_meta( $post_id, $prefix . 'location', true );
-$today    = date( 'Y-m-d', strtotime( 'today' ) );
-$tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
+$today    = date( 'Y-m-d H:i:s', strtotime( 'today' ) );
+$tomorrow = date( 'Y-m-d H:i:s', strtotime( 'tomorrow' ) );
 ?>
 <div class="event_meta_box_container">
 	<div class="event_meta_panel">
@@ -52,12 +52,12 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 				<input type="datetime-local" class="short date-start"
 				name="<?php echo esc_attr( $prefix ); ?>date_start"
 				step="1"
-				value="<?php echo isset( $date_start ) ? $date_start : ''; ?>"/>
+				value="<?php echo ! empty( $date_start ) ? $date_start : $today; ?>"/>
 				<span class="time-connect"> <?php echo esc_html__( 'to', 'wp-events-manager' ); ?></span>
 				<input type="datetime-local" class="short date-end"
 				name="<?php echo esc_attr( $prefix ); ?>date_end"
 				step="1"
-				value="<?php echo isset( $date_end ) ? $date_end : ''; ?>"/>
+				value="<?php echo ! empty( $date_end ) ? $date_end : $tomorrow; ?>"/>
 			</div>
 		</div>
 
@@ -68,7 +68,7 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 				<input type="datetime-local" class="short date-end"
 				name="<?php echo esc_attr( $prefix ); ?>registration_end_date"
 				step="1"
-				value="<?php echo isset( $registration_end_date ) ? $registration_end_date : ''; ?>"/>
+				value="<?php echo ! empty( $registration_end_date ) ? $registration_end_date : $tomorrow; ?>"/>
 			</div>
 		</div>
 		<!-- End Registration End Date -->
