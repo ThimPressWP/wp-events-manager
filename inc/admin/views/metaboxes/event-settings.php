@@ -77,8 +77,8 @@ $tomorrow = date( 'Y-m-d H:i:s', strtotime( 'tomorrow' ) );
 		<div class="option_group">
 			<p class="form-field">
 				<label for="_schedule"><?php _e( 'Schedule', 'wp-events-manager' ); ?></label>
-					<input type="checkbox" class="short" name="schedule_check" id="_schedule_check">
-					<span>Enable/Disable Schedule section on the frontend</span>
+				<input type="checkbox" class="short" name="schedule_check" id="_schedule_check">
+				<span><?php echo esc_html__( 'Enable/Disable Schedule section on the frontend', 'wp-events-manager' ); ?></span>
 			</p>
 			<!-- <div class="form-field">
 				<div class="form_day">
