@@ -14,8 +14,8 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-$current_time = current_time( 'Y-m-d H:i' );
-$time         = wpems_get_time( 'Y-m-d H:i', null, false );
+$current_time = current_time( 'Y-m-d H:i:s' );
+$time         = wpems_get_time( 'Y-m-d H:i:s', null, false );
 
 ?>
 <div class="entry-countdown">

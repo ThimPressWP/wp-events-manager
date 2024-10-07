@@ -39,7 +39,7 @@ if ( ! function_exists( 'wpems_get_template' ) ) {
 
 		do_action( 'tp_event_before_template_part', $template_name, $template_path, $located, $args );
 
-		include( $located );
+		include $located;
 
 		do_action( 'tp_event_after_template_part', $template_name, $template_path, $located, $args );
 	}
@@ -189,15 +189,15 @@ if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 	 *
 	 * @return [type]         [description]
 	 */
-	function wpems_event_start( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
+	function wpems_event_start( $format = 'Y-m-d H:i:s', $post = null, $l10 = true ) {
 		if ( ! $post ) {
 			$post = get_post();
 		}
-
+		$prefix = 'tp_event_';
 		if ( $l10 ) {
-			return date_i18n( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
+			return date_i18n( $format, strtotime( get_post_meta( $post->ID, $prefix . 'date_start', true ) ) );
 		} else {
-			return date( $format, strtotime( $post->tp_event_date_start . ' ' . $post->tp_event_time_start ) );
+			return date( $format, strtotime( get_post_meta( $post->ID, $prefix . 'date_start', true ) ) );
 		}
 	}
 
@@ -212,11 +212,12 @@ if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 		if ( ! $post ) {
 			$post = get_post();
 		}
+		$prefix = 'tp_event_';
 
 		if ( $l10 ) {
-			return date_i18n( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
+			return date_i18n( $format, strtotime( get_post_meta( $post->ID, $prefix . 'date_end', true ) ) );
 		} else {
-			return date( $format, strtotime( $post->tp_event_date_end . ' ' . $post->tp_event_time_end ) );
+			return date( $format, strtotime( get_post_meta( $post->ID, $prefix . 'date_end', true ) ) );
 		}
 	}
 
@@ -227,10 +228,9 @@ if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 	 *
 	 * @return string
 	 */
-	function wpems_get_time( $format = 'Y-m-d H:i', $post = null, $l10 = true ) {
+	function wpems_get_time( $format = 'Y-m-d H:i:s', $post = null, $l10 = true ) {
 		$current_time = current_time( 'timestamp' );
 		$start        = wpems_event_start( 'Y-m-d H:i', $post );
-		$end          = wpems_event_end( 'Y-m-d H:i', $post );
 		if ( $current_time < strtotime( $start ) ) {
 			return wpems_event_start( $format, $post, $l10 );
 		} else {
@@ -296,8 +296,8 @@ if ( ! function_exists( 'wpems_add_property_countdown' ) ) {
 
 		?>
 		<div class="event-google-map-canvas"
-			 style="height: <?php echo $map_args['height']; ?>; width: <?php echo $map_args['width']; ?>"
-			 id="map-canvas-<?php echo $map_args['map_id']; ?>"
+			style="height: <?php echo $map_args['height']; ?>; width: <?php echo $map_args['width']; ?>"
+			id="map-canvas-<?php echo $map_args['map_id']; ?>"
 			<?php foreach ( $map_args['map_data'] as $key => $val ) : ?>
 				<?php if ( ! empty( $val ) ) : ?>
 					data-<?php echo esc_attr( $key ) . '="' . esc_attr( $val ) . '"'; ?>
@@ -311,7 +311,6 @@ add_action( 'tp_event_before_main_content', 'wpems_before_main_content' );
 if ( ! function_exists( 'wpems_before_main_content' ) ) {
 
 	function wpems_before_main_content() {
-
 	}
 }
 
@@ -319,7 +318,6 @@ add_action( 'tp_event_after_main_content', 'wpems_after_main_content' );
 if ( ! function_exists( 'wpems_after_main_content' ) ) {
 
 	function wpems_after_main_content() {
-
 	}
 }
 
@@ -327,7 +325,6 @@ add_action( 'tp_event_before_single_event', 'wpems_before_single_event' );
 if ( ! function_exists( 'wpems_before_single_event' ) ) {
 
 	function wpems_before_single_event() {
-
 	}
 }
 
@@ -335,7 +332,6 @@ add_action( 'tp_event_after_single_event', 'wpems_after_single_event' );
 if ( ! function_exists( 'wpems_after_single_event' ) ) {
 
 	function wpems_after_single_event() {
-
 	}
 }
 
@@ -705,7 +701,6 @@ if ( ! function_exists( 'wpems_print_notices' ) ) {
 			echo $html;
 			WPEMS()->_session->set( 'notices', array() );
 		}
-
 	}
 }
 
@@ -981,7 +976,6 @@ if ( ! function_exists( 'wpems_payment_gateways' ) ) {
 	// List payment gateways
 	function wpems_payment_gateways() {
 		return WPEMS_Payment_Gateways::instance()->get_payment_gateways();
-
 	}
 }
 
@@ -990,7 +984,6 @@ if ( ! function_exists( 'wpems_gateways_enable' ) ) {
 	// List payment gateways
 	function wpems_gateways_enable() {
 		return WPEMS_Payment_Gateways::instance()->get_payment_gateways_enable();
-
 	}
 }
 
@@ -1495,7 +1488,7 @@ if ( ! function_exists( 'tp_event_get_template' ) ) {
 
 		do_action( 'tp_event_before_template_part', $template_name, $template_path, $located, $args );
 
-		include( $located );
+		include $located;
 
 		do_action( 'tp_event_after_template_part', $template_name, $template_path, $located, $args );
 	}
