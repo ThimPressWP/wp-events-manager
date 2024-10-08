@@ -20,9 +20,9 @@ if ( wpems_get_option( 'allow_register_event' ) == 'no' ) {
 
 $event            = new WPEMS_Event( get_the_ID() );
 $user_reg         = $event->booked_quantity( get_current_user_id() );
-$date_start       = $event->__get( 'date_start' ) ? date( 'YmdTHi', strtotime( $event->__get( 'date_start' ) ) ) : '';
+$date_start       = $event->__get( 'date_start' ) ? date( 'Ymd\THis\Z', strtotime( $event->__get( 'date_start' ) ) ) : '';
 $time_start       = $event->__get( 'time_start' ) ? date( 'Hi', strtotime( $event->__get( 'time_start' ) ) ) : '';
-$date_end         = $event->__get( 'date_end' ) ? date( 'YmdTHi', strtotime( $event->__get( 'date_end' ) ) ) : '';
+$date_end         = $event->__get( 'date_end' ) ? date( 'Ymd\THis\Z', strtotime( $event->__get( 'date_end' ) ) ) : '';
 $time_end         = $event->__get( 'time_end' ) ? date( 'Hi', strtotime( $event->__get( 'time_end' ) ) ) : '';
 $g_calendar_link  = 'http://www.google.com/calendar/event?action=TEMPLATE&text=' . urlencode( $event->get_title() );
 $g_calendar_link .= '&dates=' . $date_start . '/' . $date_end;
