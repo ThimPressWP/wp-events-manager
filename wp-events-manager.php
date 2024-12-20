@@ -4,7 +4,7 @@
  * Plugin URI: http://thimpress.com/
  * Description: A complete plugin for Events management and online booking system
  * Author: ThimPress
- * Version: 2.2.0
+ * Version: 2.2.1-beta.1
  * Requires PHP: 7.4
  * Author URI: http://thimpress.com
  */
@@ -65,7 +65,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 */
 		public function init_hooks() {
 			// plugin loaded
-			add_action( 'plugins_loaded', array( $this, 'loaded' ) );
+			add_action( 'init', array( $this, 'loaded' ) );
 		}
 
 		/**
@@ -109,6 +109,8 @@ if ( ! class_exists( 'WPEMS' ) ) {
 
 			$this->_include( 'inc/class-wpems-gdpr.php' );
 
+			// Load addons
+			do_action( 'wpems-plugin-ready' );
 		}
 
 		/**
