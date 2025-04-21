@@ -31,6 +31,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 */
 		public function __construct() {
 			try {
+				// add_action( 'init', array( $this, 'text_domain' ), 0 );
 				$this->define_constants();
 				$this->includes();
 				$this->init_hooks();
@@ -66,6 +67,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		public function init_hooks() {
 			// plugin loaded
 			add_action( 'init', array( $this, 'loaded' ) );
+			add_action( 'init', array( $this, 'included_files_when_plugins_loaded' ), 20 );
 		}
 
 		/**
@@ -90,7 +92,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->_include( 'inc/class-wpems-ajax.php' );
 			$this->_include( 'inc/class-wpems-post-types.php' );
 			$this->_include( 'inc/emails/class-wpems-register-event.php' );
-			$this->_include( 'inc/class-wpems-payment-gateways.php' );
+			// $this->_include( 'inc/class-wpems-payment-gateways.php' );
 			$this->_include( 'inc/class-wpems-install.php' );
 			$this->_include( 'inc/class-wpems-settings.php' );
 			$this->_include( 'inc/class-wpems-session.php' );
@@ -111,6 +113,15 @@ if ( ! class_exists( 'WPEMS' ) ) {
 
 			// Load addons
 			do_action( 'wpems-plugin-ready' );
+		}
+		/**
+		 * Include files when plugins loaded. Prevent translation loading for the wp-events-manager domain was triggered too early.
+		 *
+		 * @return void
+		 * @since 2.2.1
+		 */
+		public function included_files_when_plugins_loaded() {
+			require_once WPEMS_PATH . 'inc/class-wpems-payment-gateways.php';
 		}
 
 		/**
