@@ -31,7 +31,6 @@ if ( ! class_exists( 'WPEMS' ) ) {
 		 */
 		public function __construct() {
 			try {
-				// add_action( 'init', array( $this, 'text_domain' ), 0 );
 				$this->define_constants();
 				$this->includes();
 				$this->init_hooks();
