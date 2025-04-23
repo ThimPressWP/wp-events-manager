@@ -16,7 +16,7 @@ class WPEMS_Payment_Gateways {
 
 	/**
 	 * gateways method
-	 * @var type array
+	 * @var $gateways array
 	 */
 	public $gateways        = array();
 	public static $instance = null;
@@ -29,7 +29,7 @@ class WPEMS_Payment_Gateways {
 		$payment_gateways = array( 'WPEMS_Payment_Gateway_Paypal' );
 
 		foreach ( $payment_gateways as $gateway ) {
-			$gateway                        = is_string( $gateway ) ? new $gateway : $gateway;
+			$gateway                        = is_string( $gateway ) ? new $gateway() : $gateway;
 			$this->gateways[ $gateway->id ] = $gateway;
 		}
 
@@ -78,7 +78,6 @@ class WPEMS_Payment_Gateways {
 		}
 		return self::$instance;
 	}
-
 }
 
 WPEMS_Payment_Gateways::instance();
