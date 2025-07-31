@@ -106,7 +106,7 @@ class WPEMS_Event {
 	 * @return type
 	 */
 	public function get_slot_available() {
-		return apply_filters( 'event_slot_available', $this->qty - $this->booked_quantity() );
+		return apply_filters( 'event_slot_available', (int) $this->qty - $this->booked_quantity() );
 	}
 
 	/**
