@@ -1026,19 +1026,19 @@ if ( ! function_exists( 'wpems_booking_status' ) ) {
 			switch ( $status ) {
 				case 'cancelled':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'wp-events-manager' ), ucfirst( $status ) );
+					$return = sprintf( '<span class="event_booking_status cancelled">%s</span>', ucfirst( $status ) );
 					break;
 				case 'pending':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status pending">%s</span>', 'wp-events-manager' ), ucfirst( $status ) );
+					$return = sprintf( '<span class="event_booking_status pending">%s</span>', ucfirst( $status ) );
 					break;
 				case 'processing':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status processing">%s</span>', 'wp-events-manager' ), ucfirst( $status ) );
+					$return = sprintf( '<span class="event_booking_status processing">%s</span>', ucfirst( $status ) );
 					break;
 				case 'completed':
 					# code...
-					$return = sprintf( __( '<span class="event_booking_status completed">%s</span>', 'wp-events-manager' ), ucfirst( $status ) );
+					$return = sprintf( '<span class="event_booking_status completed">%s</span>', ucfirst( $status ) );
 					break;
 				default:
 					# code...
@@ -1573,4 +1573,5 @@ function wpems_update_status( $post ) {
 }
 
 add_action( 'the_post', 'wpems_update_status' );
+
 
