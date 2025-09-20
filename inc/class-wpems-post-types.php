@@ -257,7 +257,7 @@ class WPEMS_Custom_Post_Types {
 					'exclude_from_search'       => false,
 					'show_in_admin_all_list'    => true,
 					'show_in_admin_status_list' => true,
-					'label_count'               => _n_noop( 'Cancelled <span class="count">(%s)</span>', 'Cancelled <span class="count">(%s)</span>' ),
+					'label_count'               => _n_noop( 'Cancelled <span class="count">(%s)</span>', 'Cancelled <span class="count">(%s)</span>', 'wp-events-manager' ),
 				)
 			)
 		);
@@ -272,7 +272,7 @@ class WPEMS_Custom_Post_Types {
 					'exclude_from_search'       => false,
 					'show_in_admin_all_list'    => true,
 					'show_in_admin_status_list' => true,
-					'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>' ),
+					'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'wp-events-manager' ),
 				)
 			)
 		);
@@ -287,7 +287,7 @@ class WPEMS_Custom_Post_Types {
 					'exclude_from_search'       => false,
 					'show_in_admin_all_list'    => true,
 					'show_in_admin_status_list' => true,
-					'label_count'               => _n_noop( 'Processing <span class="count">(%s)</span>', 'Processing <span class="count">(%s)</span>' ),
+					'label_count'               => _n_noop( 'Processing <span class="count">(%s)</span>', 'Processing <span class="count">(%s)</span>', 'wp-events-manager' ),
 				)
 			)
 		);
@@ -302,7 +302,7 @@ class WPEMS_Custom_Post_Types {
 					'exclude_from_search'       => false,
 					'show_in_admin_all_list'    => true,
 					'show_in_admin_status_list' => true,
-					'label_count'               => _n_noop( 'Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>' ),
+					'label_count'               => _n_noop( 'Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>', 'wp-events-manager' ),
 				)
 			)
 		);
@@ -398,7 +398,7 @@ class WPEMS_Custom_Post_Types {
 	public function booking_columns() {
 		$columns = array();
 		// set
-		$columns['cb']           = __( '<label class="screen-reader-text __web-inspector-hide-shortcut__" for="cb-select-all-1">Select All</label><input id="cb-select-all-1" type="checkbox">' );
+		$columns['cb']           = __( '<label class="screen-reader-text __web-inspector-hide-shortcut__" for="cb-select-all-1">Select All</label><input id="cb-select-all-1" type="checkbox">', 'wp-events-manager' );
 		$columns['ID']           = __( 'ID', 'wp-events-manager' );
 		$columns['event']        = __( 'Event', 'wp-events-manager' );
 		$columns['user']         = __( 'User', 'wp-events-manager' );
@@ -615,3 +615,4 @@ class WPEMS_Custom_Post_Types {
 }
 
 new WPEMS_Custom_Post_Types();
+
