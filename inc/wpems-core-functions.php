@@ -1056,10 +1056,10 @@ if ( ! function_exists( 'wpems_get_payment_status' ) ) {
 		return apply_filters(
 			'wpems_get_payment_status',
 			array(
-				'ea-cancelled'  => sprintf( __( '<span class="event_booking_status cancelled">%s</span>', 'wp-events-manager' ), __( 'Cancelled', 'wp-events-manager' ) ),
-				'ea-pending'    => sprintf( __( '<span class="event_booking_status pending">%s</span>', 'wp-events-manager' ), __( 'Pending', 'wp-events-manager' ) ),
-				'ea-processing' => sprintf( __( '<span class="event_booking_status processing">%s</span>', 'wp-events-manager' ), __( 'Processing', 'wp-events-manager' ) ),
-				'ea-completed'  => sprintf( __( '<span class="event_booking_status completed">%s</span>', 'wp-events-manager' ), __( 'Completed', 'wp-events-manager' ) ),
+				'ea-cancelled'  => sprintf( '<span class="event_booking_status cancelled">%s</span>', __( 'Cancelled', 'wp-events-manager' ) ),
+				'ea-pending'    => sprintf( '<span class="event_booking_status pending">%s</span>', __( 'Pending', 'wp-events-manager' ) ),
+				'ea-processing' => sprintf( '<span class="event_booking_status processing">%s</span>', __( 'Processing', 'wp-events-manager' ) ),
+				'ea-completed'  => sprintf( '<span class="event_booking_status completed">%s</span>', __( 'Completed', 'wp-events-manager' ) ),
 			)
 		);
 	}
@@ -1363,7 +1363,17 @@ if ( is_multisite() ) {
 function wpems_show_remove_tp_event_notice() {
 	?>
 	<div class="notice notice-error tp-event-dismiss-notice is-dismissible">
-		<p><?php echo __( wp_kses( '<strong>WP Events Manager</strong> plugin version ' . WPEMS_VER . ' is an upgrade of <strong>Thim Events</strong> plugin and already included <strong>Thim Event Authentication</strong> add-on. Please deactivate and delete <strong>Thim Events/Thim Event Authentication</strong>.', array( 'strong' => array() ) ), 'wp-events-manager' ); ?></p>
+		<p>
+		<?php
+		echo wp_kses(
+			sprintf(
+				__( '<strong>WP Events Manager</strong> plugin version %s is an upgrade of <strong>Thim Events</strong> plugin and already includes <strong>Thim Event Authentication</strong> add-on. Please deactivate and delete <strong>Thim Events/Thim Event Authentication</strong>.', 'wp-events-manager' ),
+            	WPEMS_VER
+        	),
+        	array( 'strong' => array() )
+    	);
+		?>
+		</p>
 	</div>
 	<?php
 }
@@ -1563,3 +1573,4 @@ function wpems_update_status( $post ) {
 }
 
 add_action( 'the_post', 'wpems_update_status' );
+
