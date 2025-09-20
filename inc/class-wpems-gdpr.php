@@ -32,7 +32,7 @@ class WPEMS_GDPR {
 	 */
 	public function register_booking_personal_data_exporter( $exporters ) {
 		$exporters['wpems-booking'] = array(
-			'exporter_friendly_name' => __( 'WPEMS Booking' ),
+			'exporter_friendly_name' => __( 'WPEMS Booking', 'wp-events-manager' ),
 			'callback'               => array( $this, 'exporter_personal_data' ),
 		);
 
@@ -46,7 +46,7 @@ class WPEMS_GDPR {
 	 */
 	public function register_booking_personal_data_eraser( $erasers ) {
 		$erasers['wpems-booking'] = array(
-			'eraser_friendly_name' => __( 'WPEMS Booking' ),
+			'eraser_friendly_name' => __( 'WPEMS Booking', 'wp-events-manager' ),
 			'callback'             => array( $this, 'eraser_personal_data' ),
 		);
 
@@ -187,3 +187,4 @@ class WPEMS_GDPR {
 }
 
 new WPEMS_GDPR();
+

@@ -111,7 +111,7 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 			<?php if ( ! wpems_get_option( 'google_map_api_key' ) ) : ?>
 				<p class="event-meta-notice">
 					<?php echo esc_html__( 'You need set up Google Map API Key to show map.', 'wp-events-manager' ); ?>
-					<a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here' ); ?></a>
+					<a href="<?php echo esc_url( get_admin_url() . '/admin.php?page=tp-event-setting&tab=event_general' ); ?>"><?php echo esc_html__( 'Set up here', 'wp-events-manager' ); ?></a>
 				</p>
 			<?php endif; ?>
 			<p class="form-field">
@@ -136,3 +136,4 @@ $tomorrow = date( 'Y-m-d', strtotime( 'tomorrow' ) );
 		<?php do_action( 'tp_event_admin_event_metabox_after_fields', $post, $prefix ); ?>
 	</div>
 </div>
+
