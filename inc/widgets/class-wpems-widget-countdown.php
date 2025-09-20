@@ -81,23 +81,23 @@ class WPEMS_Widget_Countdown extends WP_Widget {
 		$slide      = isset( $instance['wp_slide'] ) ? $instance['wp_slide'] : false;
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wp-events-manager' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'wp_slide' ); ?>"><?php _e( 'Carousel Slide:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'wp_slide' ); ?>"><?php _e( 'Carousel Slide:', 'wp-events-manager' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'wp_slide' ); ?>" name="<?php echo $this->get_field_name( 'wp_slide' ); ?>" type="checkbox" value="true"<?php echo $slide == 'true' ? ' checked' : ''; ?>>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'wp_navigation' ); ?>"><?php _e( 'Navigation:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'wp_navigation' ); ?>"><?php _e( 'Navigation:', 'wp-events-manager' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'wp_navigation' ); ?>" name="<?php echo $this->get_field_name( 'wp_navigation' ); ?>" type="checkbox" value="true"<?php echo $nav == 'true' ? ' checked' : ''; ?>>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'wp_pagination' ); ?>"><?php _e( 'Pagiantion:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'wp_pagination' ); ?>"><?php _e( 'Pagiantion:', 'wp-events-manager' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'wp_pagination' ); ?>" name="<?php echo $this->get_field_name( 'wp_pagination' ); ?>" type="checkbox" value="true"<?php echo $pagination == 'true' ? ' checked' : ''; ?>>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'wp_events' ); ?>"><?php _e( 'Events:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'wp_events' ); ?>"><?php _e( 'Events:', 'wp-events-manager' ); ?></label>
 			<?php echo $this->events( $selected ); ?>
 		</p>
 		<?php
@@ -195,3 +195,4 @@ class WPEMS_Widget_Countdown extends WP_Widget {
 	}
 
 }
+
