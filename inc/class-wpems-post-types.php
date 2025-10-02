@@ -474,6 +474,9 @@ class WPEMS_Custom_Post_Types {
 	 * @return bool
 	 */
 	private function _is_admin_sort() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
 		if ( ! ( is_admin() && isset( $_REQUEST['post_type'] ) && $_REQUEST['post_type'] == 'tp_event' ) ) {
 			return false;
 		}
