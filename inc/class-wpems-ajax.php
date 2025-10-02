@@ -42,6 +42,10 @@ class WPEMS_Ajax {
 	 * Remove admin notice
 	 */
 	public function event_remove_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			$error = new WP_Error( __( 'Permission denied', 'wp-events-manager' ) );
+			wp_send_json_error( $error );
+		}
 
 		if ( is_multisite() ) {
 			update_site_option( 'thimpress_events_show_remove_event_auth_notice', 1 );
