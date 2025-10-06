@@ -4,7 +4,7 @@ Donate link: https://thimpress.com/
 Tags: event, event management, events, registration, bookings
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,10 @@ To stay in touch and update about FundPress's future releases and features, you 
 7. Checkout Settings
 
 == Changelog ==
+
+= 2.2.2 (2025-10-06) =
+~ Fixed: security.
+
 = 2.2.1 (2025-04-23) =
 ~ Fixed: error load textdomain just in time.
 
