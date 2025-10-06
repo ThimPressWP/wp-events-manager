@@ -1373,7 +1373,7 @@ function wpems_show_remove_tp_event_notice() {
  */
 if ( ! function_exists( 'wpems_post_type_admin_order' ) ) {
 	function wpems_post_type_admin_order( $wp_query ) {
-		if ( is_admin() && is_user_logged_in() && ! isset( $_GET['orderby'] ) ) {
+		if ( is_admin() && current_user_can( 'edit_posts' ) && ! isset( $_GET['orderby'] ) ) {
 			// Get the post type from the query
 			if ( isset( $wp_query->query['post_type'] ) ) {
 				$post_type = $wp_query->query['post_type'];
