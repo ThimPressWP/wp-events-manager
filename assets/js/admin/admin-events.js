@@ -84,57 +84,57 @@
 
 			_this.attr('data-text', _text).text(_data_text);
 		},
-		datetimepicker: function () {
-			var _date_from = $('#_date_start'),
-				_time_from = $('#_time_start'),
-				_date_end = $('#_date_end'),
-				_time_end = $('#_time_end'),
-				_registration_end_date = $('#_registration_end_date'),
-				_registration_end_time = $('#_registration_end_time');
+		// datetimepicker: function () {
+		// 	var _date_from = $('#_date_start'),
+		// 		_time_from = $('#_time_start'),
+		// 		_date_end = $('#_date_end'),
+		// 		_time_end = $('#_time_end'),
+		// 		_registration_end_date = $('#_registration_end_date'),
+		// 		_registration_end_time = $('#_registration_end_time');
 
-			_date_from.datetimepicker({
-				timepicker: false,
-				format    : 'Y-m-d',
-				onShow    : function (ct) {
-					this.setOptions({
-						maxDate: _date_end.val() ? _date_end.val() : false
-					});
-				}
-			});
-			_time_from.datetimepicker({
-				datepicker: false,
-				format    : 'H:i'
-			});
-			_date_end.datetimepicker({
-				timepicker: false,
-				format    : 'Y-m-d',
-				setDate   : '+1',
-				onShow    : function (ct) {
-					this.setOptions({
-						minDate: _date_from.val() ? _date_from.val() : false
-					});
-				}
-			});
-			_time_end.datetimepicker({
-				datepicker: false,
-				format    : 'H:i'
-			});
+		// 	_date_from.datetimepicker({
+		// 		timepicker: false,
+		// 		format    : 'Y-m-d',
+		// 		onShow    : function (ct) {
+		// 			this.setOptions({
+		// 				maxDate: _date_end.val() ? _date_end.val() : false
+		// 			});
+		// 		}
+		// 	});
+		// 	_time_from.datetimepicker({
+		// 		datepicker: false,
+		// 		format    : 'H:i'
+		// 	});
+		// 	_date_end.datetimepicker({
+		// 		timepicker: false,
+		// 		format    : 'Y-m-d',
+		// 		setDate   : '+1',
+		// 		onShow    : function (ct) {
+		// 			this.setOptions({
+		// 				minDate: _date_from.val() ? _date_from.val() : false
+		// 			});
+		// 		}
+		// 	});
+		// 	_time_end.datetimepicker({
+		// 		datepicker: false,
+		// 		format    : 'H:i'
+		// 	});
 
-			_registration_end_date.datetimepicker({
-				timepicker: false,
-				format    : 'Y-m-d',
-				setDate   : '+1',
-				onShow    : function (ct) {
-					this.setOptions({
-						minDate: 0
-					});
-				}
-			});
-			_registration_end_time.datetimepicker({
-				datepicker: false,
-				format    : 'H:i'
-			});
-		}
+		// 	_registration_end_date.datetimepicker({
+		// 		timepicker: false,
+		// 		format    : 'Y-m-d',
+		// 		setDate   : '+1',
+		// 		onShow    : function (ct) {
+		// 			this.setOptions({
+		// 				minDate: 0
+		// 			});
+		// 		}
+		// 	});
+		// 	_registration_end_time.datetimepicker({
+		// 		datepicker: false,
+		// 		format    : 'H:i'
+		// 	});
+		// }
 
 	};
 

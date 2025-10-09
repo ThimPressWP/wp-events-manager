@@ -20,12 +20,12 @@ if ( wpems_get_option( 'allow_register_event' ) == 'no' ) {
 
 $event            = new WPEMS_Event( get_the_ID() );
 $user_reg         = $event->booked_quantity( get_current_user_id() );
-$date_start       = $event->__get( 'date_start' ) ? date( 'Ymd\THis\Z', strtotime( $event->__get( 'date_start' ) ) ) : '';
+$date_start       = $event->__get( 'date_start' ) ? date( 'Ymd', strtotime( $event->__get( 'date_start' ) ) ) : '';
 $time_start       = $event->__get( 'time_start' ) ? date( 'Hi', strtotime( $event->__get( 'time_start' ) ) ) : '';
-$date_end         = $event->__get( 'date_end' ) ? date( 'Ymd\THis\Z', strtotime( $event->__get( 'date_end' ) ) ) : '';
+$date_end         = $event->__get( 'date_end' ) ? date( 'Ymd', strtotime( $event->__get( 'date_end' ) ) ) : '';
 $time_end         = $event->__get( 'time_end' ) ? date( 'Hi', strtotime( $event->__get( 'time_end' ) ) ) : '';
 $g_calendar_link  = 'http://www.google.com/calendar/event?action=TEMPLATE&text=' . urlencode( $event->get_title() );
-$g_calendar_link .= '&dates=' . $date_start . '/' . $date_end;
+$g_calendar_link .= '&dates=' . $date_start . ( $time_start ? 'T' . $time_start : '' ) . '/' . $date_end . ( $time_end ? 'T' . $time_end : '' );
 $g_calendar_link .= '&details=' . urlencode( $event->post->post_content );
 $g_calendar_link .= '&location=' . urlencode( $event->__get( 'location' ) );
 $g_calendar_link .= '&trp=false&sprop=' . urlencode( get_permalink( $event->ID ) );
@@ -56,7 +56,7 @@ if ( absint( $event->qty ) == 0 || get_post_meta( get_the_ID(), 'tp_event_status
 	</ul>
 
 	<?php if ( is_user_logged_in() ) { ?>
-		<a class="wpems_g_calendar_url" href="<?php esc_attr( $g_calendar_link ); ?>" target="_blank"><img src="https://www.google.com/calendar/images/ext/gc_button2.gif" alt="0" border="0"></a>
+		<a class="wpems_g_calendar_url" href="<?php echo esc_attr( $g_calendar_link ); ?>" target="_blank"><img src="https://www.google.com/calendar/images/ext/gc_button2.gif" alt="0" border="0"></a>
 		<?php
 		$registered_time = $event->booked_quantity( get_current_user_id() );
 		if ( $registered_time && wpems_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) {

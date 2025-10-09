@@ -36,7 +36,7 @@ class WPEMS_Admin_Metabox_Event {
 		$event_start = strtotime( $start );
 		$event_end   = strtotime( $end );
 		if ( strtotime( $start ) == strtotime( $end ) ) {
-			$event_end++;
+			++$event_end;
 		}
 		if ( ( $start && ! $end ) || ( strtotime( $start ) > strtotime( $end ) ) ) {
 			WPEMS_Admin_Metaboxes::add_error( __( 'Please make sure event time is validate! The end time must be in future of the start time!', 'wp-events-manager' ) );
@@ -75,11 +75,9 @@ class WPEMS_Admin_Metabox_Event {
 		}
 
 		update_post_meta( $post_id, 'tp_event_status', $status );
-
 	}
 
 	public static function render() {
-		require_once( WPEMS_INC . 'admin/views/metaboxes/event-settings.php' );
+		require_once WPEMS_INC . 'admin/views/metaboxes/event-settings.php';
 	}
-
 }
