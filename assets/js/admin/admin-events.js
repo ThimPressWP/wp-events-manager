@@ -64,7 +64,7 @@
 		init          : function () {
 			var _doc = $(document);
 			_doc.on('click', '.event_meta_panel .open-extra', this.open_extra);
-			this.datetimepicker();
+			// this.datetimepicker();
 		},
 		open_extra    : function (e) {
 			e.preventDefault();
