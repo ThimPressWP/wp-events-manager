@@ -4,7 +4,8 @@
  * Plugin URI: http://thimpress.com/
  * Description: A complete plugin for Events management and online booking system
  * Author: ThimPress
- * Version: 2.2.2
+ * Version: 2.2.3
+ * Requires at least: 6.0
  * Requires PHP: 7.4
  * Author URI: http://thimpress.com
  */
