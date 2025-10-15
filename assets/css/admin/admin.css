@@ -283,7 +283,7 @@
 	display: inline-block;
 }
 
-#event-time-metabox #_date_start, #event-time-metabox #_date_end,
+/* #event-time-metabox #_date_start, #event-time-metabox #_date_end,
 #event-registration-time-metabox #_registration_end_date {
 	width: 120px;
 	margin-right: 4px;
@@ -292,7 +292,7 @@
 #event-time-metabox #_time_start, #event-time-metabox #_time_end,
 #event-registration-time-metabox #_registration_end_time {
 	width: 90px;
-}
+} */
 
 #event-time-metabox .time-connect {
 	margin: 5px 14px;

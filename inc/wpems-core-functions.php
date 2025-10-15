@@ -1312,11 +1312,13 @@ function wpems_admin_table_tabs() {
 		array_push( $tabs, $key );
 	}
 
-	$pages = apply_filters(
+	$pages = apply_filters( // keep pages show on tabs
 		'tp-event_admin_tabs_on_pages',
 		array(
 			'edit-tp_event',
 			'edit-tp_event_category',
+			'edit-tp_event_tag',
+			'edit-tp_event_type',
 			'tp_event',
 		)
 	);
@@ -1344,6 +1346,25 @@ function wpems_admin_table_tabs() {
 		<?php
 	}
 }
+
+/**
+ * Keep the correct parent menu highlighted
+ * when viewing the events taxonomies page.
+ */
+function wpems_taxonomies_parent_menu_highlight( $parent_file ) {
+    global $current_screen;
+
+	// Ensure we're checking a valid taxonomy screen
+	$cs_taxonomy = isset( $current_screen->taxonomy ) ? $current_screen->taxonomy : '';
+
+    if ( $cs_taxonomy === 'tp_event_category' || $cs_taxonomy === 'tp_event_tag' || $cs_taxonomy === 'tp_event_type' ) {
+        $parent_file = 'tp-event-setting';
+    }
+
+    return $parent_file;
+}
+add_filter( 'parent_file', 'wpems_taxonomies_parent_menu_highlight' );
+
 
 if ( is_multisite() ) {
 	if ( ( file_exists( ABSPATH . 'wp-content/plugins/tp-event-auth/tp-event-auth.php' ) || file_exists( ABSPATH . 'wp-content/plugins/tp-event/tp-event.php' ) ) && ! get_site_option( 'thimpress_events_show_remove_event_auth_notice' ) ) {
