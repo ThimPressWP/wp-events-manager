@@ -32,7 +32,7 @@ class WPEMS_Payment_Gateway_Paypal extends WPEMS_Abstract_Payment_Gateway {
 
 	public function __construct() {
 		$this->title = __( 'PayPal', 'wp-events-manager' );
-		$this->icon  = WPEMS_INC_URI . '/gateways/' . $this->id . '/' . $this->id . '.png';
+		$this->icon  = WPEMS_INC_URI . 'gateways/' . $this->id . '/' . $this->id . '.png';
 		parent::__construct();
 
 		// production environment
