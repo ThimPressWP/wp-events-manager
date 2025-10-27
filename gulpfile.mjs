@@ -59,8 +59,9 @@ export const copyFilesToRelease = (done) => {
 	// Copy source release to release folder
 	const releasesFiles = ['./**', '!node_modules/**', '!assets/src/**', '!webpack.config.js', '!tsconfig.json',
 		'!phpcs.xml', '!.eslintrc.js', '!.eslintignore', '!composer.json', '!composer.lock', '!gulpfile.mjs',
-		'!package-lock.json', '!package.json', '!release/**','!build-release.js', '!changelog.md', '!phpunit.xml', '!README.md'];
-	gulp.src(releasesFiles)
+		'!package-lock.json', '!package.json', '!release/**','!build-release.js', '!changelog.md', '!phpunit.xml',
+        '!README.md', '!.git/**', '!.gitignore','!.travis.yml'];
+	gulp.src(releasesFiles, { encoding: false })
 		.pipe(gulp.dest('release/' + name))
 		.on('end', done);
 }
