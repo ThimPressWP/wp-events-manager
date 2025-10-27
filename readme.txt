@@ -77,6 +77,9 @@ To stay in touch and update about FundPress's future releases and features, you 
 
 == Changelog ==
 
+= 2.2.4 (2025-10-27) =
+~ Fixed: minor bugs.
+
 = 2.2.3 (2025-10-10) =
 ~ Fixed: error date data is valid has expire.
 
