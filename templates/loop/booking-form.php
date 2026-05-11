@@ -66,7 +66,7 @@ $user_reg = $event->booked_quantity( get_current_user_id() );
 			<input type="hidden" name="event_id" value="<?php echo esc_attr( $event_id ); ?>" />
 			<input type="hidden" name="action" value="event_auth_register" />
 			<?php wp_nonce_field( 'event_auth_register_nonce', 'event_auth_register_nonce' ); ?>
-			<button class="event_register_submit event_auth_button" <?php echo $payments ? '' : 'disabled="disabled"'; ?>><?php _e( 'Register Now', 'wp-events-manager' ); ?></button>
+			<button type="submit" class="event_register_submit event_auth_button" <?php echo $payments ? '' : 'disabled="disabled"'; ?>><?php _e( 'Register Now', 'wp-events-manager' ); ?></button>
 		</div>
 
 	</form>

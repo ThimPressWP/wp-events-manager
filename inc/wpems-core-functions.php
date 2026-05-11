@@ -613,6 +613,165 @@ if ( ! function_exists( 'wpems_update_option' ) ) {
 	}
 }
 
+add_action( 'pre_get_posts', 'wpems_apply_event_archive_filters' );
+if ( ! function_exists( 'wpems_apply_event_archive_filters' ) ) {
+	function wpems_apply_event_archive_filters( $query ) {
+		if ( is_admin() || ! $query instanceof WP_Query || ! $query->is_main_query() ) {
+			return;
+		}
+
+		$is_event_archive = $query->is_post_type_archive( 'tp_event' ) || $query->is_tax( array( 'tp_event_category', 'tp_event_tag', 'tp_event_type' ) );
+		$is_event_search  = $query->is_search() && 'tp_event' === $query->get( 'post_type' );
+
+		if ( ! $is_event_archive && ! $is_event_search ) {
+			return;
+		}
+
+		$meta_query = (array) $query->get( 'meta_query' );
+		$tax_query  = (array) $query->get( 'tax_query' );
+
+		if ( ! isset( $meta_query['relation'] ) ) {
+			$meta_query['relation'] = 'AND';
+		}
+
+		if ( ! isset( $tax_query['relation'] ) ) {
+			$tax_query['relation'] = 'AND';
+		}
+
+		$event_status = isset( $_GET['event_status'] ) ? sanitize_key( wp_unslash( $_GET['event_status'] ) ) : '';
+		if ( $event_status && 'all' !== $event_status && in_array( $event_status, array( 'upcoming', 'happening', 'expired' ), true ) ) {
+			$meta_query[] = array(
+				'key'     => 'tp_event_status',
+				'value'   => $event_status,
+				'compare' => '=',
+			);
+		}
+
+		$event_location = isset( $_GET['event_location'] ) ? sanitize_text_field( wp_unslash( $_GET['event_location'] ) ) : '';
+		if ( $event_location ) {
+			$meta_query[] = array(
+				'key'     => 'tp_event_location',
+				'value'   => $event_location,
+				'compare' => 'LIKE',
+			);
+		}
+
+		$event_categories = isset( $_GET['event_category'] ) ? array_filter( array_map( 'sanitize_title', (array) wp_unslash( $_GET['event_category'] ) ) ) : array();
+		if ( $event_categories ) {
+			$tax_query[] = array(
+				'taxonomy' => 'tp_event_category',
+				'field'    => 'slug',
+				'terms'    => $event_categories,
+			);
+		}
+
+		$event_prices = isset( $_GET['event_price'] ) ? array_filter( array_map( 'sanitize_key', (array) wp_unslash( $_GET['event_price'] ) ) ) : array();
+		$event_prices = array_values( array_intersect( $event_prices, array( 'free', 'paid' ) ) );
+		if ( in_array( 'free', $event_prices, true ) && ! in_array( 'paid', $event_prices, true ) ) {
+			$meta_query[] = array(
+				'relation' => 'OR',
+				array(
+					'key'     => 'tp_event_price',
+					'value'   => 0,
+					'compare' => '=',
+					'type'    => 'NUMERIC',
+				),
+				array(
+					'key'     => 'tp_event_price',
+					'compare' => 'NOT EXISTS',
+				),
+			);
+		} elseif ( in_array( 'paid', $event_prices, true ) && ! in_array( 'free', $event_prices, true ) ) {
+			$meta_query[] = array(
+				'key'     => 'tp_event_price',
+				'value'   => 0,
+				'compare' => '>',
+				'type'    => 'NUMERIC',
+			);
+		}
+
+		$event_dates = isset( $_GET['event_date'] ) ? array_filter( array_map( 'sanitize_key', (array) wp_unslash( $_GET['event_date'] ) ) ) : array();
+		if ( $event_dates ) {
+			$current_timestamp = current_time( 'timestamp' );
+			$today             = date( 'Y-m-d', $current_timestamp );
+			$date_query        = array( 'relation' => 'OR' );
+
+			foreach ( $event_dates as $event_date ) {
+				switch ( $event_date ) {
+					case 'today':
+						$date_query[] = array(
+							'key'     => 'tp_event_date_start',
+							'value'   => $today,
+							'compare' => '=',
+							'type'    => 'DATE',
+						);
+						break;
+					case 'tomorrow':
+						$date_query[] = array(
+							'key'     => 'tp_event_date_start',
+							'value'   => date( 'Y-m-d', strtotime( '+1 day', $current_timestamp ) ),
+							'compare' => '=',
+							'type'    => 'DATE',
+						);
+						break;
+					case 'this_week':
+						$date_query[] = array(
+							'key'     => 'tp_event_date_start',
+							'value'   => array( $today, date( 'Y-m-d', strtotime( 'sunday this week', $current_timestamp ) ) ),
+							'compare' => 'BETWEEN',
+							'type'    => 'DATE',
+						);
+						break;
+					case 'this_weekend':
+						$date_query[] = array(
+							'key'     => 'tp_event_date_start',
+							'value'   => array( date( 'Y-m-d', strtotime( 'saturday this week', $current_timestamp ) ), date( 'Y-m-d', strtotime( 'sunday this week', $current_timestamp ) ) ),
+							'compare' => 'BETWEEN',
+							'type'    => 'DATE',
+						);
+						break;
+				}
+			}
+
+			if ( count( $date_query ) > 1 ) {
+				$meta_query[] = $date_query;
+			}
+		}
+
+		$event_order = isset( $_GET['event_order'] ) ? sanitize_key( wp_unslash( $_GET['event_order'] ) ) : '';
+		switch ( $event_order ) {
+			case 'date_asc':
+				$query->set( 'meta_key', 'tp_event_date_start' );
+				$query->set( 'orderby', 'meta_value' );
+				$query->set( 'order', 'ASC' );
+				break;
+			case 'date_desc':
+				$query->set( 'meta_key', 'tp_event_date_start' );
+				$query->set( 'orderby', 'meta_value' );
+				$query->set( 'order', 'DESC' );
+				break;
+			case 'price_asc':
+				$query->set( 'meta_key', 'tp_event_price' );
+				$query->set( 'orderby', 'meta_value_num' );
+				$query->set( 'order', 'ASC' );
+				break;
+			case 'price_desc':
+				$query->set( 'meta_key', 'tp_event_price' );
+				$query->set( 'orderby', 'meta_value_num' );
+				$query->set( 'order', 'DESC' );
+				break;
+		}
+
+		if ( count( $meta_query ) > 1 ) {
+			$query->set( 'meta_query', $meta_query );
+		}
+
+		if ( count( $tax_query ) > 1 ) {
+			$query->set( 'tax_query', $tax_query );
+		}
+	}
+}
+
 /**
  * Create WordPress Page
  */

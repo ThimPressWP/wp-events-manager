@@ -49,7 +49,7 @@ do_action( 'tp_event_archive_description' );
 	do_action( 'tp_event_before_event_loop' );
 	?>
 
-	<ul>
+	<ul class="wpems-event-list wpems-event-list--grid wpems-event-list--shortcode">
 
 		<?php
 		while ( $list_event->have_posts() ) :

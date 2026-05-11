@@ -42,6 +42,7 @@ class WPEMS_Frontend_Assets {
 		// events
 		WPEMS_Assets::register_script( 'wpems-frontend-js', WPEMS_ASSETS_URI . '/dist/js/frontend/events.js', array( 'wpems-modal-js', 'wpems-countdown-js', 'wpems-carousel-js' ) );
 		WPEMS_Assets::register_style( 'wpems-fronted-css', WPEMS_ASSETS_URI . '/css/frontend/events.css' );
+		WPEMS_Assets::register_style( 'wpems-figma-events-css', WPEMS_ASSETS_URI . '/css/frontend/figma-events.css', array( 'wpems-fronted-css' ), WPEMS_VER );
 	}
 }
 
