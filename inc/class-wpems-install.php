@@ -183,3 +183,8 @@ WPEMS_Install::init();
 // active plugin
 register_activation_hook( WPEMS_MAIN_FILE, array( 'WPEMS_Install', 'install' ) );
 register_deactivation_hook( WPEMS_MAIN_FILE, array( 'WPEMS_Install', 'uninstall' ) );
+
+// Custom tables: create on activation, upgrade on every load.
+register_activation_hook( WPEMS_MAIN_FILE, array( \WPEMS\Tables\SchemaManager::class, 'install' ) );
+register_activation_hook( WPEMS_MAIN_FILE, array( \WPEMS\Payments\PaymentWebhookRouter::class, 'flush_rewrite_rules' ) );
+add_action( 'plugins_loaded', array( \WPEMS\Tables\SchemaManager::class, 'upgrade' ), 5 );

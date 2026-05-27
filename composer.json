@@ -36,5 +36,8 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
+	},
+	"require": {
+		"stripe/stripe-php": "^14.0"
 	}
 }

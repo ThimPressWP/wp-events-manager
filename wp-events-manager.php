@@ -23,6 +23,14 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
+if ( class_exists( \WPEMS\Payments\PaymentGatewayRegistry::class ) ) {
+	\WPEMS\Payments\PaymentGatewayRegistry::bootstrap();
+}
+
+if ( class_exists( \WPEMS\Payments\PaymentWebhookRouter::class ) ) {
+	\WPEMS\Payments\PaymentWebhookRouter::bootstrap();
+}
+
 /**
  * WPEMS class
  */
@@ -202,12 +210,14 @@ if ( ! class_exists( 'WPEMS' ) ) {
 				return self::$_instance;
 			}
 
-			return self::$_instance = new self();
+			self::$_instance = new self();
+			return self::$_instance;
 		}
 	}
 
 	if ( ! function_exists( 'WPEMS' ) ) {
 
+		// phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 		function WPEMS() {
 			return WPEMS::instance();
 		}

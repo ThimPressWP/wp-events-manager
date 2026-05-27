@@ -1,0 +1,46 @@
+.wpems-migration-summary {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin: 18px 0 12px;
+}
+
+.wpems-migration-summary span {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	padding: 10px 12px;
+}
+
+.wpems-migration-progress {
+	background: #dcdcde;
+	border-radius: 4px;
+	height: 16px;
+	margin: 0 0 16px;
+	overflow: hidden;
+	width: 100%;
+}
+
+.wpems-migration-progress .bar {
+	background: #2271b1;
+	height: 100%;
+	transition: width 160ms ease;
+	width: 0;
+}
+
+.wpems-migration-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.wpems-migration-log {
+	background: #1d2327;
+	border-radius: 4px;
+	color: #f0f0f1;
+	min-height: 180px;
+	overflow: auto;
+	padding: 12px;
+	white-space: pre-wrap;
+}

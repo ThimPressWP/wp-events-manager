@@ -19,6 +19,9 @@ defined( 'WPEMS_PATH' ) || define( 'WPEMS_PATH', $plugin_dir . '/' );
 defined( 'WPEMS_INC' ) || define( 'WPEMS_INC', WPEMS_PATH . 'inc/' );
 defined( 'WPEMS_INC_URI' ) || define( 'WPEMS_INC_URI', 'https://example.test/wp-content/plugins/wp-events-manager/inc/' );
 defined( 'WPEMS_VER' ) || define( 'WPEMS_VER', 'test' );
+defined( 'ARRAY_A' ) || define( 'ARRAY_A', 'ARRAY_A' );
+defined( 'ARRAY_N' ) || define( 'ARRAY_N', 'ARRAY_N' );
+defined( 'OBJECT' ) || define( 'OBJECT', 'OBJECT' );
 
 require_once $plugin_dir . '/vendor/autoload.php';
 require_once __DIR__ . '/Unit/TestCase.php';
@@ -206,6 +209,59 @@ class WPEMS_Unit_Tests_Bootstrap {
 		}
 
 		return self::$instance;
+	}
+}
+
+if ( ! class_exists( 'WP_List_Table' ) ) {
+	/**
+	 * Minimal WP_List_Table stub for unit tests.
+	 */
+	class WP_List_Table {
+		public $items = array();
+		protected $_column_headers = array();
+		protected $_args = array();
+
+		public function __construct( $args = array() ) {
+			$this->_args = wp_parse_args( $args, array(
+				'singular' => '',
+				'plural'   => '',
+				'ajax'     => false,
+			) );
+		}
+
+		public function get_columns(): array { return array(); }
+		public function get_sortable_columns(): array { return array(); }
+		public function get_bulk_actions(): array { return array(); }
+		public function prepare_items(): void {}
+		public function display(): void {}
+		public function display_filters(): void {}
+		public function search_box( $text, $input_id ): void {}
+		public function no_items(): void {}
+		public function column_default( $item, $column_name ): string { return ''; }
+		public function column_cb( $item ): string { return ''; }
+		public function get_pagenum(): int { return 1; }
+		public function get_items_per_page( $option, $default = 20 ): int { return $default; }
+		public function set_pagination_args( $args ): void {}
+		public function has_items(): bool { return ! empty( $this->items ); }
+		protected function row_actions( $actions, $always_visible = false ): string {
+			$html = '<div class="row-actions">';
+			foreach ( $actions as $action => $link ) {
+				$html .= '<span class="' . esc_attr( $action ) . '">' . $link . '</span>';
+			}
+			$html .= '</div>';
+			return $html;
+		}
+	}
+}
+
+// WP-CLI stubs for unit tests (global namespace).
+if ( ! class_exists( 'WP_CLI' ) ) {
+	class WP_CLI {
+		public static function log( $msg ): void {}
+		public static function success( $msg ): void {}
+		public static function error( $msg ): void { throw new \RuntimeException( 'CLI error: ' . $msg ); }
+		public static function warning( $msg ): void {}
+		public static function add_command( $name, $class ): void {}
 	}
 }
 

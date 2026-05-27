@@ -80,6 +80,43 @@ class Checkout extends AbstractSetting {
 					'default'     => 12,
 					'placeholder' => 12,
 				),
+
+				// --- Tax (new) ---
+				array(
+					'type'    => 'yes_no',
+					'title'   => __( 'Enable tax', 'wp-events-manager' ),
+					'id'      => $prefix . 'tax_enable',
+					'default' => 'no',
+				),
+				array(
+					'type'    => 'number',
+					'title'   => __( 'Tax rate (%)', 'wp-events-manager' ),
+					'desc'    => __( 'Percent applied to (subtotal − discount). 0 to disable.', 'wp-events-manager' ),
+					'id'      => $prefix . 'tax_rate',
+					'default' => '0',
+					'atts'    => array(
+						'min'  => 0,
+						'max'  => 100,
+						'step' => '0.0001',
+					),
+				),
+				array(
+					'type'    => 'text',
+					'title'   => __( 'Tax label', 'wp-events-manager' ),
+					'desc'    => __( 'Label shown on the order summary and receipts.', 'wp-events-manager' ),
+					'id'      => $prefix . 'tax_label',
+					'default' => __( 'Tax', 'wp-events-manager' ),
+				),
+
+				// --- Coupons (new) ---
+				array(
+					'type'    => 'yes_no',
+					'title'   => __( 'Enable coupons', 'wp-events-manager' ),
+					'desc'    => __( 'Show the coupon code field on checkout and apply discounts before tax.', 'wp-events-manager' ),
+					'id'      => $prefix . 'coupon_enable',
+					'default' => 'no',
+				),
+
 				array(
 					'type' => 'section_end',
 					'id'   => 'general_settings',
