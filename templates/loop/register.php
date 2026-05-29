@@ -40,38 +40,56 @@ $g_calendar_link .= '&ctz=' . urlencode( $time_zone );
 if ( $event->get_quantity() == 0 || $event->get_status() === 'expired' ) {
 	return;
 }
+
+$payments       = $event->is_free() ? array() : (array) wpems_gateways_enable();
+$price          = $event->is_free() ? __( 'Free', 'wp-events-manager' ) : wpems_format_price( $event->get_price() );
+$login_url      = add_query_arg( 'redirect_to', get_permalink( $event->get_id() ), wpems_login_url() );
+$can_book_event = $event->is_free() || ! empty( $payments );
 ?>
 
-<div class="entry-register">
+<div class="entry-register wpems-event-panel wpems-event-register-card">
+	<h2><?php esc_html_e( 'Buy Ticket', 'wp-events-manager' ); ?></h2>
 
-	<ul class="event-info">
-		<li class="total">
-			<span class="label"><?php _e( 'Total Slot:', 'wp-events-manager' ); ?></span>
-			<span class="detail"><?php echo esc_html( $event->get_quantity() ); ?></span>
-		</li>
-		<li class="booking_slot">
-			<span class="label"><?php _e( 'Booked Slot:', 'wp-events-manager' ); ?></span>
-			<span class="detail"><?php echo esc_html( absint( $event->booked_quantity() ) ); ?></span>
-		</li>
+	<ul class="event-info wpems-event-register-card__info">
 		<li class="price">
-			<span class="label"><?php _e( 'Cost:', 'wp-events-manager' ); ?></span>
-			<span class="detail"><?php echo $event->is_free() ? esc_html__( 'Free', 'wp-events-manager' ) : wp_kses_post( wpems_format_price( $event->get_price() ) ); ?></span>
+			<span class="label"><?php esc_html_e( 'Cost', 'wp-events-manager' ); ?></span>
+			<span class="detail"><?php echo wp_kses_post( $price ); ?></span>
 		</li>
+		<li class="quantity">
+			<span class="label"><?php esc_html_e( 'Quantity', 'wp-events-manager' ); ?></span>
+			<span class="detail">1</span>
+		</li>
+		<?php if ( $payments ) : ?>
+			<li class="payment-methods">
+				<span class="label"><?php esc_html_e( 'Pay with', 'wp-events-manager' ); ?></span>
+				<span class="detail">
+					<?php
+					$payment_titles = array();
+					foreach ( $payments as $payment ) {
+						$payment_titles[] = $payment->get_title();
+					}
+					echo esc_html( implode( ', ', $payment_titles ) );
+					?>
+				</span>
+			</li>
+		<?php endif; ?>
 	</ul>
 
-	<?php if ( is_user_logged_in() ) { ?>
-		<a class="wpems_g_calendar_url" href="<?php echo esc_url( $g_calendar_link ); ?>" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/calendar/images/ext/gc_button2.gif" alt="0" border="0"></a>
+	<?php if ( is_user_logged_in() ) : ?>
 		<?php
 		$registered_time = $event->booked_quantity( get_current_user_id() );
-		if ( $registered_time && wpems_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) {
+		if ( $registered_time && wpems_get_option( 'email_register_times' ) === 'once' && $event->is_free() ) :
 			?>
-			<p><?php esc_html_e( 'You have registered this event before.', 'wp-events-manager' ); ?></p>
-		<?php } else { ?>
-			<a class="event_register_submit event_auth_button event-load-booking-form"
-				data-event="<?php echo esc_attr( get_the_ID() ); ?>"><?php esc_html_e( 'Register Now', 'wp-events-manager' ); ?></a>
-		<?php } ?>
-	<?php } else { ?>
-		<p><?php printf( wp_kses_post( __( 'You must <a href="%s">login</a> before register event.', 'wp-events-manager' ) ), esc_url( wpems_login_url() ) ); ?></p>
-	<?php } ?>
+			<p class="wpems-event-register-card__notice"><?php esc_html_e( 'You have registered this event before.', 'wp-events-manager' ); ?></p>
+		<?php elseif ( $can_book_event ) : ?>
+			<a class="event_register_submit event_auth_button event-load-booking-form wpems-event-button" href="#" data-event="<?php echo esc_attr( get_the_ID() ); ?>"><?php esc_html_e( 'Buy Ticket', 'wp-events-manager' ); ?></a>
+			<a class="wpems_g_calendar_url wpems-event-register-card__calendar" href="<?php echo esc_url( $g_calendar_link ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Add to Google Calendar', 'wp-events-manager' ); ?></a>
+		<?php else : ?>
+			<p class="wpems-event-register-card__notice"><?php esc_html_e( 'There are no payment gateways available. Please contact the administrator.', 'wp-events-manager' ); ?></p>
+		<?php endif; ?>
+	<?php else : ?>
+		<a class="event_auth_button wpems-event-button" href="<?php echo esc_url( $login_url ); ?>"><?php esc_html_e( 'Login to Buy Ticket', 'wp-events-manager' ); ?></a>
+		<p class="wpems-event-register-card__notice"><?php esc_html_e( 'You must login to our site to book this event!', 'wp-events-manager' ); ?></p>
+	<?php endif; ?>
 
 </div>

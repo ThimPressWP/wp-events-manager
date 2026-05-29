@@ -16,12 +16,21 @@ defined( 'ABSPATH' ) || exit();
 
 get_header(); ?>
 
-	<?php
-		/**
-		 * tp_event_before_main_content hook
-		 */
-		do_action( 'tp_event_before_main_content' );
-	?>
+	<div class="wpems-event-page wpems-event-single-page">
+		<?php do_action( 'tp_event_before_main_content' ); ?>
+
+		<header class="wpems-event-hero">
+			<div class="wpems-event-hero__inner">
+				<h1 class="wpems-event-hero__title"><?php esc_html_e( 'Event', 'wp-events-manager' ); ?></h1>
+				<nav class="wpems-event-breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'wp-events-manager' ); ?>">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'wp-events-manager' ); ?></a>
+					<span aria-hidden="true">/</span>
+					<span><?php esc_html_e( 'Pages', 'wp-events-manager' ); ?></span>
+					<span aria-hidden="true">/</span>
+					<span><?php esc_html_e( 'Event', 'wp-events-manager' ); ?></span>
+				</nav>
+			</div>
+		</header>
 
 		<?php
 		while ( have_posts() ) :
@@ -32,14 +41,8 @@ get_header(); ?>
 
 		<?php endwhile; // end of the loop. ?>
 
-	<?php
-		/**
-		 * tp_event_after_main_content hook
-		 *
-		 * @hooked tp_event_after_main_content - 10 (outputs closing divs for the content)
-		 */
-		do_action( 'tp_event_after_main_content' );
-	?>
+		<?php do_action( 'tp_event_after_main_content' ); ?>
+	</div>
 
 <?php
 get_footer();

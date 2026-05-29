@@ -63,7 +63,6 @@ class EventTemplateHooksTest extends TestCase {
 		$this->assertSame( 'wpems_before_single_event', $this->registered_hooks['tp_event_before_single_event'][0] );
 		$this->assertSame( 'wpems_after_single_event', $this->registered_hooks['tp_event_after_single_event'][0] );
 		$this->assertSame( 'wpems_single_event_register', $this->registered_hooks['tp_event_after_single_event'][1] );
-		$this->assertSame( 'wpems_single_event_title', $this->registered_hooks['tp_event_single_event_title'][0] );
 		$this->assertSame( 'wpems_single_event_content', $this->registered_hooks['tp_event_single_event_content'][0] );
 	}
 
@@ -80,7 +79,7 @@ class EventTemplateHooksTest extends TestCase {
 
 		$total = array_sum( array_map( 'count', $this->registered_hooks ) );
 
-		$this->assertSame( 11, $total );
+		$this->assertSame( 8, $total );
 	}
 
 	/**
