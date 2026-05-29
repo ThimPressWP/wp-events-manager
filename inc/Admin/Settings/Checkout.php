@@ -8,6 +8,7 @@
 namespace WPEMS\Admin\Settings;
 
 use WPEMS\Admin\SettingsManager;
+use WPEMS\Payments\PaymentGatewayRegistry;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -128,15 +129,23 @@ class Checkout extends AbstractSetting {
 	/**
 	 * Get sections.
 	 *
+	 * Iterates every registered gateway (regardless of `is_available()`) so the
+	 * settings UI can always be reached to configure credentials — using
+	 * `wpems_payment_gateways()` here would hide unconfigured gateways and make
+	 * them impossible to set up.
+	 *
 	 * @return array
 	 */
 	public function get_sections() {
-		$sections['']     = __( 'Checkout General', 'wp-events-manager' );
-		$payment_gateways = wpems_payment_gateways();
-		if ( $payment_gateways ) {
-			foreach ( $payment_gateways as $id => $gateway ) {
-				$sections[ $id ] = $gateway->title;
+		$sections[''] = __( 'Checkout General', 'wp-events-manager' );
+
+		foreach ( $this->all_gateways() as $gateway ) {
+			$id    = method_exists( $gateway, 'get_id' ) ? $gateway->get_id() : ( $gateway->id ?? '' );
+			$title = method_exists( $gateway, 'get_title' ) ? $gateway->get_title() : ( $gateway->title ?? '' );
+			if ( '' === $id ) {
+				continue;
 			}
+			$sections[ $id ] = $title;
 		}
 
 		return $sections;
@@ -157,9 +166,9 @@ class Checkout extends AbstractSetting {
 			return;
 		}
 
-		$gateways = wpems_payment_gateways();
-		foreach ( $gateways as $gateway ) {
-			if ( $current_section === $gateway->id ) {
+		foreach ( $this->all_gateways() as $gateway ) {
+			$id = method_exists( $gateway, 'get_id' ) ? $gateway->get_id() : ( $gateway->id ?? '' );
+			if ( $current_section === $id ) {
 				SettingsManager::output_fields( $gateway->admin_fields() );
 				break;
 			}
@@ -179,12 +188,44 @@ class Checkout extends AbstractSetting {
 			return;
 		}
 
-		$gateways = wpems_payment_gateways();
-		foreach ( $gateways as $gateway ) {
-			if ( $current_section === $gateway->id ) {
+		foreach ( $this->all_gateways() as $gateway ) {
+			$id = method_exists( $gateway, 'get_id' ) ? $gateway->get_id() : ( $gateway->id ?? '' );
+			if ( $current_section === $id ) {
 				SettingsManager::save_fields( $gateway->admin_fields() );
 				break;
 			}
 		}
+	}
+
+	/**
+	 * Return every registered gateway (configured or not).
+	 *
+	 * Prefers the new {@see PaymentGatewayRegistry} when available so unconfigured
+	 * gateways still show up as settings tabs. Falls back to the legacy
+	 * `wpems_payment_gateways` filter for back-compat with third-party add-ons.
+	 *
+	 * @return array
+	 */
+	private function all_gateways(): array {
+		$gateways = array();
+
+		if ( class_exists( PaymentGatewayRegistry::class ) ) {
+			foreach ( PaymentGatewayRegistry::instance()->all() as $gateway ) {
+				$id              = $gateway->get_id();
+				$gateways[ $id ] = $gateway;
+			}
+		}
+
+		// Merge any legacy or third-party-registered gateways exposed via the filter.
+		$legacy = apply_filters( 'wpems_payment_gateways', array() );
+		if ( is_array( $legacy ) ) {
+			foreach ( $legacy as $id => $gateway ) {
+				if ( ! isset( $gateways[ $id ] ) ) {
+					$gateways[ $id ] = $gateway;
+				}
+			}
+		}
+
+		return $gateways;
 	}
 }

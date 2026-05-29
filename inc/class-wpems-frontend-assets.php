@@ -42,6 +42,29 @@ class WPEMS_Frontend_Assets {
 		// events
 		WPEMS_Assets::register_script( 'wpems-frontend-js', WPEMS_ASSETS_URI . '/dist/js/frontend/events.js', array( 'wpems-modal-js', 'wpems-countdown-js', 'wpems-carousel-js' ) );
 		WPEMS_Assets::register_style( 'wpems-fronted-css', WPEMS_ASSETS_URI . '/css/frontend/events.css' );
+
+		// New table-backed checkout (Phase 20). Vanilla JS, no jQuery.
+		if ( is_singular( 'tp_event' ) && class_exists( '\\WPEMS\\Frontend\\CheckoutAjax' ) ) {
+			WPEMS_Assets::register_script(
+				'wpems-checkout-js',
+				WPEMS_ASSETS_URI . '/dist/js/frontend/checkout.js',
+				array(),
+				WPEMS_VER,
+				true
+			);
+			WPEMS_Assets::localize_script(
+				'wpems-checkout-js',
+				'wpemsCheckout',
+				array(
+					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+					'nonce'   => wp_create_nonce( \WPEMS\Frontend\CheckoutAjax::NONCE_ACTION ),
+					'i18n'    => array(
+						'couponApplied' => __( 'Coupon applied', 'wp-events-manager' ),
+						'couponInvalid' => __( 'Coupon not valid', 'wp-events-manager' ),
+					),
+				)
+			);
+		}
 	}
 }
 

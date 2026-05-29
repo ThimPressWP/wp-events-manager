@@ -1,29 +1,42 @@
+/* global crypto */
 (function () {
     var data = window.wpemsCheckout;
     if (!data) return;
 
-    var form = document.querySelector('[data-wpems-checkout-form]');
-    if (!form) return;
+    var FORM_SELECTOR = '[data-wpems-checkout-form]';
+    // Per-form state so multiple forms (or re-injected forms) each get a fresh key + debounce.
+    var stateMap = new WeakMap();
 
-    var qtyEl = form.querySelector('[name="qty"]');
-    var couponEl = form.querySelector('[name="coupon_code"]');
-    var methodEls = form.querySelectorAll('[name="payment_method"]');
-    var submitBtn = form.querySelector('[type="submit"]');
-    var summaryEl = document.querySelector('[data-wpems-summary]');
-    var couponMsgEl = form.querySelector('[data-coupon-message]');
-    var errorEl = form.querySelector('[data-form-error]');
+    function newKey() {
+        if (window.crypto && typeof crypto.randomUUID === 'function') {
+            return crypto.randomUUID().replace(/-/g, '');
+        }
+        // Fallback for older browsers — 32 hex chars from Math.random.
+        var s = '';
+        for (var i = 0; i < 32; i++) {
+            s += Math.floor(Math.random() * 16).toString(16);
+        }
+        return s;
+    }
 
-    var idempotencyKey = crypto.randomUUID().replace(/-/g, '');
-    var pendingTimer = null;
+    function getState(form) {
+        var s = stateMap.get(form);
+        if (!s) {
+            s = { key: newKey(), timer: null, bootstrapped: false };
+            stateMap.set(form, s);
+        }
+        return s;
+    }
 
-    function call(action, payload) {
-        var body = new URLSearchParams({
-            action: 'wpems_checkout_' + action,
-            nonce: data.nonce,
-            event_id: form.dataset.eventId,
-        });
+    function call(form, action, payload) {
+        var body = new URLSearchParams();
+        body.append('action', 'wpems_checkout_' + action);
+        body.append('nonce', data.nonce);
+        body.append('event_id', form.dataset.eventId || '');
         Object.keys(payload).forEach(function (k) {
-            body.append(k, payload[k]);
+            if (payload[k] !== undefined && payload[k] !== null) {
+                body.append(k, payload[k]);
+            }
         });
         return fetch(data.ajaxUrl, {
             method: 'POST',
@@ -32,89 +45,143 @@
         }).then(function (r) { return r.json(); });
     }
 
-    function debounce(fn, ms) {
+    function debounce(form, fn, ms) {
+        var state = getState(form);
         return function () {
             var args = arguments;
-            clearTimeout(pendingTimer);
-            pendingTimer = setTimeout(function () { fn.apply(null, args); }, ms);
+            clearTimeout(state.timer);
+            state.timer = setTimeout(function () { fn.apply(null, args); }, ms);
         };
     }
 
-    function refreshQuote() {
-        call('quote', {
-            qty: qtyEl.value,
-            coupon_code: couponEl ? couponEl.value : '',
-        }).then(function (r) {
-            if (!r.success) return;
-            renderSummary(r.data.quote);
+    function renderSummary(form, q) {
+        var summaryEl = document.querySelector('[data-wpems-summary]');
+        if (!summaryEl) return;
+        var fields = {
+            '[data-summary-subtotal]':  q.subtotal,
+            '[data-summary-discount]':  q.discount_total,
+            '[data-summary-tax-label]': q.tax_label,
+            '[data-summary-tax]':       q.tax_total,
+            '[data-summary-total]':     q.total + ' ' + q.currency,
+        };
+        Object.keys(fields).forEach(function (sel) {
+            var el = summaryEl.querySelector(sel);
+            if (el) el.textContent = fields[sel];
         });
     }
 
-    function renderSummary(q) {
-        if (!summaryEl) return;
-        var el;
-        el = summaryEl.querySelector('[data-summary-subtotal]');
-        if (el) el.textContent = q.subtotal;
-        el = summaryEl.querySelector('[data-summary-discount]');
-        if (el) el.textContent = q.discount_total;
-        el = summaryEl.querySelector('[data-summary-tax-label]');
-        if (el) el.textContent = q.tax_label;
-        el = summaryEl.querySelector('[data-summary-tax]');
-        if (el) el.textContent = q.tax_total;
-        el = summaryEl.querySelector('[data-summary-total]');
-        if (el) el.textContent = q.total + ' ' + q.currency;
+    function refreshQuote(form) {
+        var qtyEl    = form.querySelector('[name="qty"]');
+        var couponEl = form.querySelector('[name="coupon_code"]');
+        if (!qtyEl) return;
+        call(form, 'quote', {
+            qty: qtyEl.value,
+            coupon_code: couponEl ? couponEl.value : '',
+        }).then(function (r) {
+            if (r && r.success) renderSummary(form, r.data.quote);
+        });
     }
 
-    function validateCoupon() {
-        if (!couponEl || !couponEl.value) {
+    function validateCoupon(form) {
+        var qtyEl       = form.querySelector('[name="qty"]');
+        var couponEl    = form.querySelector('[name="coupon_code"]');
+        var couponMsgEl = form.querySelector('[data-coupon-message]');
+        if (!couponEl) return;
+        if (!couponEl.value) {
             if (couponMsgEl) couponMsgEl.textContent = '';
             return;
         }
-        call('validate_coupon', {
-            qty: qtyEl.value,
+        call(form, 'validate_coupon', {
+            qty: qtyEl ? qtyEl.value : 1,
             coupon_code: couponEl.value,
         }).then(function (r) {
-            if (!r.success) return;
+            if (!r || !r.success) return;
             if (couponMsgEl) {
                 couponMsgEl.textContent = r.data.valid
                     ? data.i18n.couponApplied
                     : (r.data.message || data.i18n.couponInvalid);
                 couponMsgEl.dataset.state = r.data.valid ? 'ok' : 'error';
             }
-            refreshQuote();
+            refreshQuote(form);
         });
     }
 
-    if (qtyEl) qtyEl.addEventListener('change', debounce(refreshQuote, 200));
-    if (couponEl) couponEl.addEventListener('change', debounce(validateCoupon, 250));
+    function submitForm(form) {
+        var qtyEl     = form.querySelector('[name="qty"]');
+        var couponEl  = form.querySelector('[name="coupon_code"]');
+        var methodEls = form.querySelectorAll('[name="payment_method"]');
+        var submitBtn = form.querySelector('[type="submit"]');
+        var errorEl   = form.querySelector('[data-form-error]');
+        var state     = getState(form);
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        submitBtn.disabled = true;
+        if (submitBtn) submitBtn.disabled = true;
         if (errorEl) errorEl.textContent = '';
 
         var methodValue = '';
         methodEls.forEach(function (el) { if (el.checked) methodValue = el.value; });
 
-        call('submit', {
-            qty: qtyEl.value,
-            coupon_code: couponEl ? couponEl.value : '',
-            payment_method: methodValue,
-            idempotency_key: idempotencyKey,
+        call(form, 'submit', {
+            qty:             qtyEl ? qtyEl.value : 1,
+            coupon_code:     couponEl ? couponEl.value : '',
+            payment_method:  methodValue,
+            idempotency_key: state.key,
         }).then(function (r) {
-            if (!r.success) {
-                submitBtn.disabled = false;
-                if (errorEl) errorEl.textContent = r.data.message;
+            if (!r || !r.success) {
+                if (submitBtn) submitBtn.disabled = false;
+                if (errorEl && r && r.data && r.data.message) errorEl.textContent = r.data.message;
                 return;
             }
             if (r.data.next === 'redirect') {
                 window.location.assign(r.data.url);
             }
         }).catch(function () {
-            submitBtn.disabled = false;
+            if (submitBtn) submitBtn.disabled = false;
         });
+    }
+
+    function bootstrap(form) {
+        var state = getState(form);
+        if (state.bootstrapped) return;
+        state.bootstrapped = true;
+        // Kick off the initial quote so the summary reflects qty=1 + no coupon.
+        refreshQuote(form);
+    }
+
+    // Delegated handlers — survive AJAX-injected forms (modal/lightbox).
+    document.addEventListener('change', function (e) {
+        var form = e.target.closest && e.target.closest(FORM_SELECTOR);
+        if (!form) return;
+        if (e.target.matches('[name="qty"]')) {
+            debounce(form, function () { refreshQuote(form); }, 200)();
+        } else if (e.target.matches('[name="coupon_code"]')) {
+            debounce(form, function () { validateCoupon(form); }, 250)();
+        }
     });
 
-    // Initial quote on page load.
-    refreshQuote();
+    document.addEventListener('submit', function (e) {
+        var form = e.target.closest && e.target.closest(FORM_SELECTOR);
+        if (!form) return;
+        e.preventDefault();
+        submitForm(form);
+    });
+
+    // Bootstrap any forms already in the DOM at script load.
+    document.querySelectorAll(FORM_SELECTOR).forEach(bootstrap);
+
+    // Watch for forms injected later (modal/lightbox via load_form_register AJAX).
+    if (typeof MutationObserver === 'function') {
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (m) {
+                m.addedNodes && m.addedNodes.forEach(function (node) {
+                    if (node.nodeType !== 1) return;
+                    if (node.matches && node.matches(FORM_SELECTOR)) {
+                        bootstrap(node);
+                    } else if (node.querySelectorAll) {
+                        node.querySelectorAll(FORM_SELECTOR).forEach(bootstrap);
+                    }
+                });
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
 })();

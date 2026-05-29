@@ -96,11 +96,15 @@ class AdminBookingManager {
 	/**
 	 * Add submenu page under Events Manager.
 	 *
+	 * The parent menu slug is `tp-event-setting` (registered by
+	 * {@see \WPEMS\Admin\Menu::admin_menu()}); do not change to `tp-event`,
+	 * which would silently fail to render the submenu.
+	 *
 	 * @return void
 	 */
 	public function add_menu(): void {
 		$this->page_hook = add_submenu_page(
-			'tp-event',
+			'tp-event-setting',
 			__( 'Bookings', 'wp-events-manager' ),
 			__( 'Bookings', 'wp-events-manager' ),
 			self::CAPABILITY,
@@ -112,6 +116,9 @@ class AdminBookingManager {
 		if ( $this->page_hook ) {
 			add_action( 'load-' . $this->page_hook, array( $this, 'maybe_handle_action' ) );
 		}
+
+		// Hide the legacy event_auth_book CPT submenu — the new page replaces it.
+		remove_submenu_page( 'tp-event-setting', 'edit.php?post_type=event_auth_book' );
 	}
 
 	/**

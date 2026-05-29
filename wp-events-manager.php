@@ -31,6 +31,25 @@ if ( class_exists( \WPEMS\Payments\PaymentWebhookRouter::class ) ) {
 	\WPEMS\Payments\PaymentWebhookRouter::bootstrap();
 }
 
+if ( class_exists( \WPEMS\BookingSystemBootstrap::class ) ) {
+	add_action(
+		'plugins_loaded',
+		array( \WPEMS\BookingSystemBootstrap::class, 'init' ),
+		30
+	);
+
+	if ( class_exists( \WPEMS\Cron\CronBootstrap::class ) ) {
+		register_activation_hook(
+			__FILE__,
+			array( \WPEMS\Cron\CronBootstrap::class, 'activate_static' )
+		);
+		register_deactivation_hook(
+			__FILE__,
+			array( \WPEMS\Cron\CronBootstrap::class, 'deactivate_static' )
+		);
+	}
+}
+
 /**
  * WPEMS class
  */

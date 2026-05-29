@@ -70,11 +70,14 @@ class AdminCouponManager {
 	/**
 	 * Add submenu page under Events Manager.
 	 *
+	 * Parent slug is `tp-event-setting` (registered by
+	 * {@see \WPEMS\Admin\Menu::admin_menu()}).
+	 *
 	 * @return void
 	 */
 	public function add_menu(): void {
 		add_submenu_page(
-			'tp-event',
+			'tp-event-setting',
 			__( 'Coupons', 'wp-events-manager' ),
 			__( 'Coupons', 'wp-events-manager' ),
 			self::CAPABILITY,
