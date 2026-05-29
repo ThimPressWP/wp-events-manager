@@ -1,37 +1,76 @@
-**2.0.5**
-- Fix revolution slider with content filter
+# Changelog
 
-**2.0.4**
-- Update do shortcodes in default pages
+All notable changes to this repository should be documented in this file.
 
-**2.0.3**
-- Fix deactivate previous version process for multisite
-- Add woocommerce payment add-on
+## [Unreleased]
 
-**2.0.2**
-- Fix register user process
-- Remove event note
+### Added
 
-**2.0.1**
-- Remove unnecessary caps and roles 
+- Added maintainer documentation files for architecture, security, testing, release, and task tracking.
+- Added a payment browser-return router for `wpems_gateway` return and cancel URLs.
 
-**2.0.0**
-- Fix timezone countdown
-- Rebuild Core
-- Update booking detail page
-- Update event countdown widget
-- Update event category template
-- Add event note
-- Add booking note
-- Add map location for event
-- Add setting for set up Google map API key
-- Add event category taxonomy
+### Changed
 
-**1.0.0**
-- Update database
-- Setting update
-- Update Register, Login
-- Remove shortcodes Lost Password, Reset Password
-- Update Capability
-- Update UI Register Event
-- Event metabox UI
+- Aligned plugin version metadata at `2.2.4`.
+
+### Fixed
+
+- Fixed missing dispatch for gateway browser return handling.
+
+### Security
+
+- Unknown / not detected
+
+## [2.2.4] - 2025-10-27
+
+### Fixed
+
+- Minor bugs.
+
+## [2.2.3] - 2025-10-10
+
+### Fixed
+
+- Date validation error for expired data.
+
+## [2.2.2] - 2025-10-06
+
+### Fixed
+
+- Security issue.
+
+## [2.2.1] - 2025-04-23
+
+### Fixed
+
+- Textdomain loading too early.
+
+## [2.2.0] - 2024-08-30
+
+### Fixed
+
+- Minor bugs.
+
+## [2.1.11]
+
+### Fixed
+
+- Security issue.
+
+## [2.1.10]
+
+### Fixed
+
+- PHP 8 compatibility issue.
+
+## Older Visible History
+
+Older entries visible in the previous lower-case changelog are preserved here:
+
+- `2.0.5`: fixed Revolution Slider with content filter.
+- `2.0.4`: updated shortcode handling in default pages.
+- `2.0.3`: fixed previous-version deactivation on multisite and added WooCommerce payment add-on.
+- `2.0.2`: fixed user registration process and removed event note.
+- `2.0.1`: removed unnecessary capabilities and roles.
+- `2.0.0`: rebuilt core, updated booking detail, countdown widget, event category template, map location, Google Map API key setting, event category taxonomy, event note, booking note, and timezone countdown fix.
+- `1.0.0`: updated database, settings, register/login, capabilities, event registration UI, and event metabox UI; removed lost/reset password shortcodes.

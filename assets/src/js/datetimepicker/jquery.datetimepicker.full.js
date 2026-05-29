@@ -2737,7 +2737,7 @@ var DateFormatter;
 					}
 				},
 				setCaretPos = function (node, pos) {
-					node = (typeof node === "string" || node instanceof String) ? document.getElementById(node) : node;
+					node = (typeof node === "string" || node instanceof String) ? document.querySelector('#' + node) : node;
 					if (!node) {
 						return false;
 					}

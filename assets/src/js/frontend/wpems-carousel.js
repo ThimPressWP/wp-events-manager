@@ -22,7 +22,7 @@
 	}
 
 	function dataOptions( element ) {
-		var raw = element.getAttribute( 'data-countdown' );
+		let raw = element.getAttribute( 'data-countdown' );
 
 		if ( ! raw ) {
 			return {};
@@ -71,9 +71,9 @@
 	};
 
 	Carousel.prototype.createNavigation = function () {
-		var nav = document.createElement( 'div' );
-		var previous = document.createElement( 'button' );
-		var next = document.createElement( 'button' );
+		let nav = document.createElement( 'div' );
+		let previous = document.createElement( 'button' );
+		let next = document.createElement( 'button' );
 
 		nav.className = 'wpems-carousel-nav';
 		previous.type = 'button';

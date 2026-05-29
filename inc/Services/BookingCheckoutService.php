@@ -152,6 +152,9 @@ class BookingCheckoutService {
 		}
 
 		// 4. Reserve inventory.
+		$capacity = (int) get_post_meta( $event_id, 'tp_event_qty', true );
+		$this->inventory->ensure_row( $event_id, $capacity );
+
 		$reserved = $this->inventory->reserve( $event_id, $qty );
 		if ( ! $reserved ) {
 			return CheckoutDispatchResult::failure(

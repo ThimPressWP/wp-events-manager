@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-28T01:44:35+00:00\n"
+"POT-Creation-Date: 2026-05-29T07:12:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-events-manager\n"
@@ -43,17 +43,17 @@ msgstr ""
 msgid "Payment completed. We will send you email when payment method verify."
 msgstr ""
 
-#: inc/Admin/Bookings/AdminBookingManager.php:104
-#: inc/Admin/Bookings/AdminBookingManager.php:105
-#: inc/Admin/Bookings/AdminBookingManager.php:188
+#: inc/Admin/Bookings/AdminBookingManager.php:108
+#: inc/Admin/Bookings/AdminBookingManager.php:109
+#: inc/Admin/Bookings/AdminBookingManager.php:195
 #: inc/class-wpems-post-types.php:121
 msgid "Bookings"
 msgstr ""
 
-#: inc/Admin/Bookings/AdminBookingManager.php:165
+#: inc/Admin/Bookings/AdminBookingManager.php:172
 #: inc/Admin/Bookings/BookingAdminActions.php:77
 #: inc/Admin/Bookings/BookingAdminActions.php:266
-#: inc/Admin/Coupons/AdminCouponManager.php:113
+#: inc/Admin/Coupons/AdminCouponManager.php:116
 #: inc/Admin/Coupons/CouponAdminActions.php:82
 #: inc/Admin/SettingsManager.php:163
 #: inc/Admin/SettingsManager.php:184
@@ -61,17 +61,18 @@ msgstr ""
 msgid "Permission denied."
 msgstr ""
 
-#: inc/Admin/Bookings/AdminBookingManager.php:190
+#: inc/Admin/Bookings/AdminBookingManager.php:197
 msgid "Export CSV"
 msgstr ""
 
-#: inc/Admin/Bookings/AdminBookingManager.php:196
-#: inc/Admin/Coupons/AdminCouponManager.php:152
-#: templates/search-form.php:27
+#: inc/Admin/Bookings/AdminBookingManager.php:203
+#: inc/Admin/Coupons/AdminCouponManager.php:155
+#: templates/search-form.php:31
+#: templates/search-form.php:42
 msgid "Search"
 msgstr ""
 
-#: inc/Admin/Bookings/AdminBookingManager.php:217
+#: inc/Admin/Bookings/AdminBookingManager.php:224
 msgid "Booking not found."
 msgstr ""
 
@@ -105,8 +106,11 @@ msgstr ""
 #: inc/class-wpems-post-types.php:407
 #: inc/Frontend/AccountBookings.php:41
 #: inc/Integration/GdprExporter.php:55
+#: templates/archive-event.php:38
 #: templates/emails/register-admin-event.php:49
 #: templates/emails/register-event-body.php:24
+#: templates/single-event.php:24
+#: templates/single-event.php:30
 msgid "Event"
 msgstr ""
 
@@ -222,6 +226,8 @@ msgstr ""
 #: inc/Admin/Bookings/views/booking-detail.php:197
 #: inc/class-wpems-post-types.php:409
 #: inc/Frontend/AccountBookings.php:45
+#: templates/content-single-event.php:131
+#: templates/event-filter.php:56
 msgid "Date"
 msgstr ""
 
@@ -261,23 +267,23 @@ msgstr ""
 #: inc/Admin/Bookings/BookingListTable.php:362
 #: inc/Admin/Bookings/BookingListTable.php:390
 #: inc/Models/PostModel.php:464
-#: inc/wpems-core-functions.php:1268
+#: inc/wpems-core-functions.php:1402
 msgid "Pending"
 msgstr ""
 
 #: inc/Admin/Bookings/BookingListTable.php:363
-#: inc/wpems-core-functions.php:1269
+#: inc/wpems-core-functions.php:1403
 msgid "Processing"
 msgstr ""
 
 #: inc/Admin/Bookings/BookingListTable.php:364
-#: inc/wpems-core-functions.php:1270
+#: inc/wpems-core-functions.php:1404
 msgid "Completed"
 msgstr ""
 
 #: inc/Admin/Bookings/BookingListTable.php:365
 #: inc/Admin/Bookings/BookingListTable.php:393
-#: inc/wpems-core-functions.php:1267
+#: inc/wpems-core-functions.php:1401
 msgid "Cancelled"
 msgstr ""
 
@@ -301,6 +307,7 @@ msgid "Unpaid"
 msgstr ""
 
 #: inc/Admin/Bookings/BookingListTable.php:391
+#: templates/event-filter.php:29
 msgid "Paid"
 msgstr ""
 
@@ -336,6 +343,7 @@ msgstr ""
 #: templates/emails/register-admin-event.php:51
 #: templates/emails/register-event-body.php:26
 #: templates/loop/booking-form.php:53
+#: templates/loop/register.php:59
 #: templates/shortcodes/user-account.php:35
 msgid "Quantity"
 msgstr ""
@@ -350,7 +358,7 @@ msgid "Pricing"
 msgstr ""
 
 #: inc/Admin/Bookings/views/booking-detail.php:123
-#: inc/Admin/Settings/Checkout.php:108
+#: inc/Admin/Settings/Checkout.php:109
 #: templates/loop/booking-form.php:116
 msgid "Tax"
 msgstr ""
@@ -428,13 +436,13 @@ msgstr ""
 msgid "Mark as Failed"
 msgstr ""
 
-#: inc/Admin/Coupons/AdminCouponManager.php:78
-#: inc/Admin/Coupons/AdminCouponManager.php:79
-#: inc/Admin/Coupons/AdminCouponManager.php:144
+#: inc/Admin/Coupons/AdminCouponManager.php:81
+#: inc/Admin/Coupons/AdminCouponManager.php:82
+#: inc/Admin/Coupons/AdminCouponManager.php:147
 msgid "Coupons"
 msgstr ""
 
-#: inc/Admin/Coupons/AdminCouponManager.php:146
+#: inc/Admin/Coupons/AdminCouponManager.php:149
 msgid "Add New"
 msgstr ""
 
@@ -619,71 +627,71 @@ msgstr ""
 msgid "Please make sure event time is validate! The end time must be in future of the start time!"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:38
+#: inc/Admin/Settings/Checkout.php:39
 msgid "Checkout"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:57
+#: inc/Admin/Settings/Checkout.php:58
 msgid "Checkout Process"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:58
+#: inc/Admin/Settings/Checkout.php:59
 msgid "General options for system"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:62
+#: inc/Admin/Settings/Checkout.php:63
 msgid "Booking times free event/email"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:63
+#: inc/Admin/Settings/Checkout.php:64
 msgid "This controls how many time booking free event of an email"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:66
+#: inc/Admin/Settings/Checkout.php:67
 msgid "Once"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:67
+#: inc/Admin/Settings/Checkout.php:68
 msgid "Many"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:73
+#: inc/Admin/Settings/Checkout.php:74
 msgid "Cancel payment status"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:74
+#: inc/Admin/Settings/Checkout.php:75
 msgid "How long cancel a payment (hour)"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:87
+#: inc/Admin/Settings/Checkout.php:88
 msgid "Enable tax"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:93
+#: inc/Admin/Settings/Checkout.php:94
 msgid "Tax rate (%)"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:94
+#: inc/Admin/Settings/Checkout.php:95
 msgid "Percent applied to (subtotal − discount). 0 to disable."
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:105
+#: inc/Admin/Settings/Checkout.php:106
 msgid "Tax label"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:106
+#: inc/Admin/Settings/Checkout.php:107
 msgid "Label shown on the order summary and receipts."
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:114
+#: inc/Admin/Settings/Checkout.php:115
 msgid "Enable coupons"
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:115
+#: inc/Admin/Settings/Checkout.php:116
 msgid "Show the coupon code field on checkout and apply discounts before tax."
 msgstr ""
 
-#: inc/Admin/Settings/Checkout.php:134
+#: inc/Admin/Settings/Checkout.php:140
 msgid "Checkout General"
 msgstr ""
 
@@ -797,6 +805,8 @@ msgid "Refer on https://developers.google.com/maps/documentation/javascript/get-
 msgstr ""
 
 #: inc/Admin/Settings/Pages.php:36
+#: templates/archive-event.php:36
+#: templates/single-event.php:28
 msgid "Pages"
 msgstr ""
 
@@ -1165,7 +1175,7 @@ msgid "View Event"
 msgstr ""
 
 #: inc/class-wpems-post-types.php:73
-#: inc/wpems-core-functions.php:1497
+#: inc/wpems-core-functions.php:1631
 #: templates/shortcodes/user-account.php:32
 msgid "Events"
 msgstr ""
@@ -1305,6 +1315,7 @@ msgid "New Category Name"
 msgstr ""
 
 #: inc/class-wpems-post-types.php:169
+#: templates/event-filter.php:67
 msgid "Category"
 msgstr ""
 
@@ -1397,7 +1408,7 @@ msgid "New Type Name"
 msgstr ""
 
 #: inc/class-wpems-post-types.php:231
-#: inc/wpems-core-functions.php:1512
+#: inc/wpems-core-functions.php:1646
 msgid "Types"
 msgstr ""
 
@@ -1431,6 +1442,7 @@ msgstr ""
 
 #: inc/class-wpems-post-types.php:324
 #: templates/admin/metaboxes/event-settings.php:46
+#: templates/event-filter.php:78
 msgid "Price"
 msgstr ""
 
@@ -1441,8 +1453,10 @@ msgstr ""
 #: inc/class-wpems-post-types.php:382
 #: inc/class-wpems-post-types.php:451
 #: inc/emails/class-wpems-register-event.php:81
+#: templates/content-event.php:38
 #: templates/emails/register-admin-event.php:62
-#: templates/loop/register.php:58
+#: templates/event-filter.php:28
+#: templates/loop/register.php:45
 #: templates/shortcodes/user-account.php:53
 msgid "Free"
 msgstr ""
@@ -1461,6 +1475,7 @@ msgstr ""
 #: templates/emails/register-admin-event.php:52
 #: templates/emails/register-admin-event.php:62
 #: templates/emails/register-event-body.php:27
+#: templates/loop/register.php:55
 #: templates/shortcodes/user-account.php:34
 #: templates/shortcodes/user-account.php:53
 msgid "Cost"
@@ -1840,127 +1855,127 @@ msgstr ""
 msgid "Happening"
 msgstr ""
 
-#: inc/wpems-core-functions.php:613
+#: inc/wpems-core-functions.php:588
 msgid "Years"
 msgstr ""
 
-#: inc/wpems-core-functions.php:614
+#: inc/wpems-core-functions.php:589
 msgid "Months"
 msgstr ""
 
-#: inc/wpems-core-functions.php:615
+#: inc/wpems-core-functions.php:590
 msgid "Weeks"
 msgstr ""
 
-#: inc/wpems-core-functions.php:616
+#: inc/wpems-core-functions.php:591
 msgid "Days"
 msgstr ""
 
-#: inc/wpems-core-functions.php:617
+#: inc/wpems-core-functions.php:592
 msgid "Hours"
 msgstr ""
 
-#: inc/wpems-core-functions.php:618
+#: inc/wpems-core-functions.php:593
 msgid "Minutes"
 msgstr ""
 
-#: inc/wpems-core-functions.php:619
+#: inc/wpems-core-functions.php:594
 msgid "Seconds"
 msgstr ""
 
-#: inc/wpems-core-functions.php:622
+#: inc/wpems-core-functions.php:597
 msgid "Year"
 msgstr ""
 
-#: inc/wpems-core-functions.php:623
+#: inc/wpems-core-functions.php:598
 msgid "Month"
 msgstr ""
 
-#: inc/wpems-core-functions.php:624
+#: inc/wpems-core-functions.php:599
 msgid "Week"
 msgstr ""
 
-#: inc/wpems-core-functions.php:625
+#: inc/wpems-core-functions.php:600
 msgid "Day"
 msgstr ""
 
-#: inc/wpems-core-functions.php:626
+#: inc/wpems-core-functions.php:601
 msgid "Hour"
 msgstr ""
 
-#: inc/wpems-core-functions.php:627
+#: inc/wpems-core-functions.php:602
 msgid "Minute"
 msgstr ""
 
-#: inc/wpems-core-functions.php:628
+#: inc/wpems-core-functions.php:603
 msgid "Second"
 msgstr ""
 
-#: inc/wpems-core-functions.php:632
+#: inc/wpems-core-functions.php:607
 msgid "Something went wrong"
 msgstr ""
 
-#: inc/wpems-core-functions.php:1237
-#: inc/wpems-core-functions.php:1267
+#: inc/wpems-core-functions.php:1371
+#: inc/wpems-core-functions.php:1401
 msgid "<span class=\"event_booking_status cancelled\">%s</span>"
 msgstr ""
 
-#: inc/wpems-core-functions.php:1241
-#: inc/wpems-core-functions.php:1268
+#: inc/wpems-core-functions.php:1375
+#: inc/wpems-core-functions.php:1402
 msgid "<span class=\"event_booking_status pending\">%s</span>"
 msgstr ""
 
-#: inc/wpems-core-functions.php:1245
-#: inc/wpems-core-functions.php:1269
+#: inc/wpems-core-functions.php:1379
+#: inc/wpems-core-functions.php:1403
 msgid "<span class=\"event_booking_status processing\">%s</span>"
 msgstr ""
 
-#: inc/wpems-core-functions.php:1249
-#: inc/wpems-core-functions.php:1270
+#: inc/wpems-core-functions.php:1383
+#: inc/wpems-core-functions.php:1404
 msgid "<span class=\"event_booking_status completed\">%s</span>"
 msgstr ""
 
-#: inc/wpems-core-functions.php:1313
+#: inc/wpems-core-functions.php:1447
 msgid "Confirm Password is not match."
 msgstr ""
 
-#: inc/wpems-core-functions.php:1320
-#: inc/wpems-core-functions.php:1329
-#: inc/wpems-core-functions.php:1331
-#: inc/wpems-core-functions.php:1335
-#: inc/wpems-core-functions.php:1357
+#: inc/wpems-core-functions.php:1454
+#: inc/wpems-core-functions.php:1463
+#: inc/wpems-core-functions.php:1465
+#: inc/wpems-core-functions.php:1469
+#: inc/wpems-core-functions.php:1491
 msgid "ERROR: "
 msgstr ""
 
-#: inc/wpems-core-functions.php:1320
+#: inc/wpems-core-functions.php:1454
 msgid "Username is required field."
 msgstr ""
 
-#: inc/wpems-core-functions.php:1322
+#: inc/wpems-core-functions.php:1456
 msgid "Username is already exists."
 msgstr ""
 
-#: inc/wpems-core-functions.php:1329
+#: inc/wpems-core-functions.php:1463
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: inc/wpems-core-functions.php:1331
+#: inc/wpems-core-functions.php:1465
 msgid "An account is already registered with your email address. Please login."
 msgstr ""
 
-#: inc/wpems-core-functions.php:1335
+#: inc/wpems-core-functions.php:1469
 msgid "Password is required field."
 msgstr ""
 
-#: inc/wpems-core-functions.php:1357
+#: inc/wpems-core-functions.php:1491
 msgid "Couldn't register."
 msgstr ""
 
-#: inc/wpems-core-functions.php:1502
+#: inc/wpems-core-functions.php:1636
 msgid "Categories"
 msgstr ""
 
-#: inc/wpems-core-functions.php:1507
+#: inc/wpems-core-functions.php:1641
 msgid "Tags"
 msgstr ""
 
@@ -2017,6 +2032,9 @@ msgid "Enable/Disable Schedule section on the frontend"
 msgstr ""
 
 #: templates/admin/metaboxes/event-settings.php:104
+#: templates/content-single-event.php:77
+#: templates/content-single-event.php:149
+#: templates/search-form.php:37
 msgid "Location"
 msgstr ""
 
@@ -2040,8 +2058,180 @@ msgstr ""
 msgid "These variables are allowed to use in email content."
 msgstr ""
 
+#: templates/archive-event.php:18
+msgid "Event List"
+msgstr ""
+
+#: templates/archive-event.php:33
+#: templates/single-event.php:25
+msgid "Breadcrumb"
+msgstr ""
+
+#: templates/archive-event.php:34
+#: templates/single-event.php:26
+msgid "Home"
+msgstr ""
+
+#: templates/archive-event.php:65
+msgid "%s event found"
+msgid_plural "%s events found"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/archive-event.php:89
+msgid "Sort events"
+msgstr ""
+
+#: templates/archive-event.php:91
+msgid "All"
+msgstr ""
+
+#: templates/archive-event.php:92
+msgid "Date: soonest"
+msgstr ""
+
+#: templates/archive-event.php:93
+msgid "Date: latest"
+msgstr ""
+
+#: templates/archive-event.php:94
+msgid "Price: low to high"
+msgstr ""
+
+#: templates/archive-event.php:95
+msgid "Price: high to low"
+msgstr ""
+
+#: templates/archive-event.php:97
+msgid "Apply sorting"
+msgstr ""
+
+#: templates/archive-event.php:99
+msgid "Event view"
+msgstr ""
+
+#: templates/archive-event.php:100
+msgid "List view"
+msgstr ""
+
+#: templates/archive-event.php:101
+msgid "Grid view"
+msgstr ""
+
+#: templates/archive-event.php:122
+msgid "No events found"
+msgstr ""
+
+#: templates/archive-event.php:123
+msgid "Try changing your search or filter options."
+msgstr ""
+
+#: templates/content-event.php:96
+msgid "%s attending"
+msgid_plural "%s attending"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/content-event.php:113
+msgid "per ticket"
+msgstr ""
+
+#: templates/content-event.php:116
+#: templates/loop/register.php:51
+#: templates/loop/register.php:85
+msgid "Buy Ticket"
+msgstr ""
+
+#: templates/content-single-event.php:72
+msgid "Event Description"
+msgstr ""
+
+#: templates/content-single-event.php:89
+msgid "Location details will be announced soon."
+msgstr ""
+
+#: templates/content-single-event.php:95
+msgid "Share:"
+msgstr ""
+
+#: templates/content-single-event.php:96
+msgid "Facebook"
+msgstr ""
+
+#: templates/content-single-event.php:97
+msgid "X"
+msgstr ""
+
+#: templates/content-single-event.php:98
+msgid "LinkedIn"
+msgstr ""
+
+#: templates/content-single-event.php:102
+msgid "Event navigation"
+msgstr ""
+
+#: templates/content-single-event.php:105
+msgid "Previous Event"
+msgstr ""
+
+#: templates/content-single-event.php:111
+msgid "Next Event"
+msgstr ""
+
+#: templates/content-single-event.php:127
+msgid "Event Information"
+msgstr ""
+
+#: templates/content-single-event.php:137
+msgid "Start Time"
+msgstr ""
+
+#: templates/content-single-event.php:143
+msgid "Finish Time"
+msgstr ""
+
+#: templates/content-single-event.php:154
+msgid "Remaining Seats"
+msgstr ""
+
 #: templates/emails/register-admin-event.php:39
 msgid "User have been registered successful <a href=\"%s\">your event</a>."
+msgstr ""
+
+#: templates/event-filter.php:22
+msgid "Today"
+msgstr ""
+
+#: templates/event-filter.php:23
+msgid "Tomorrow"
+msgstr ""
+
+#: templates/event-filter.php:24
+msgid "This Week"
+msgstr ""
+
+#: templates/event-filter.php:25
+msgid "This Weekend"
+msgstr ""
+
+#: templates/event-filter.php:40
+msgid "Event filters"
+msgstr ""
+
+#: templates/event-filter.php:49
+msgid "Filters"
+msgstr ""
+
+#: templates/event-filter.php:51
+msgid "Clear"
+msgstr ""
+
+#: templates/event-filter.php:89
+msgid "Reset"
+msgstr ""
+
+#: templates/event-filter.php:91
+msgid "Apply"
 msgstr ""
 
 #: templates/loop/booking-form.php:67
@@ -2053,7 +2243,6 @@ msgid "There are no payment gateway available. Please contact administrator to s
 msgstr ""
 
 #: templates/loop/booking-form.php:134
-#: templates/loop/register.php:71
 msgid "Register Now"
 msgstr ""
 
@@ -2073,24 +2262,28 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: templates/loop/register.php:49
-msgid "Total Slot:"
+#: templates/loop/register.php:64
+msgid "Pay with"
 msgstr ""
 
-#: templates/loop/register.php:53
-msgid "Booked Slot:"
-msgstr ""
-
-#: templates/loop/register.php:57
-msgid "Cost:"
-msgstr ""
-
-#: templates/loop/register.php:68
+#: templates/loop/register.php:83
 msgid "You have registered this event before."
 msgstr ""
 
-#: templates/loop/register.php:74
-msgid "You must <a href=\"%s\">login</a> before register event."
+#: templates/loop/register.php:86
+msgid "Add to Google Calendar"
+msgstr ""
+
+#: templates/loop/register.php:88
+msgid "There are no payment gateways available. Please contact the administrator."
+msgstr ""
+
+#: templates/loop/register.php:91
+msgid "Login to Buy Ticket"
+msgstr ""
+
+#: templates/loop/register.php:92
+msgid "You must login to our site to book this event!"
 msgstr ""
 
 #: templates/pagination.php:35
@@ -2101,8 +2294,12 @@ msgstr ""
 msgid ">"
 msgstr ""
 
-#: templates/search-form.php:25
-msgid "Search events..."
+#: templates/search-form.php:28
+msgid "Search events"
+msgstr ""
+
+#: templates/search-form.php:34
+msgid "Search by location"
 msgstr ""
 
 #: templates/shortcodes/event-countdown.php:38

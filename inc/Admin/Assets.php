@@ -53,7 +53,7 @@ class Assets {
 				'event_remove_notice_nonce' => wp_create_nonce( 'event_remove_notice' ),
 			)
 		);
-		\WPEMS_Assets::register_style( 'wpems-admin-css', WPEMS_ASSETS_URI . '/css/admin/admin.css' );
+		\WPEMS_Assets::register_style( 'wpems-admin-css', WPEMS_ASSETS_URI . '/dist/css/admin/admin.css' );
 	}
 }
 

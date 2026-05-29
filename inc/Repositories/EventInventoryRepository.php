@@ -255,7 +255,7 @@ class EventInventoryRepository {
 		$confirmed = (int) ( $totals['confirmed'] ?? 0 );
 
 		// Read capacity from postmeta (existing key). Default 0 = unlimited.
-		$capacity = (int) get_post_meta( $event_id, '_event_capacity', true );
+		$capacity = (int) get_post_meta( $event_id, 'tp_event_qty', true );
 
 		$now = gmdate( 'Y-m-d H:i:s' );
 

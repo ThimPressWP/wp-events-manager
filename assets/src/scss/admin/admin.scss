@@ -1,0 +1,313 @@
+.tp_event_admin_widget {
+	max-height: 100px;
+	overflow: scroll;
+	border: 1px solid #ddd;
+	padding: 5px 10px;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+#event-settings-metabox .shortcode {
+	min-width: 300px;
+}
+
+.tp_event_widget_tab li {
+	display: inline-block;
+}
+
+.tp_event_admin_widget {
+	display: none;
+
+	&.active {
+		display: block;
+	}
+}
+
+.tp_event_setting_wrapper a.nav-tab:focus {
+	box-shadow: none;
+}
+
+.tp_event_wrapper_content table {
+
+	th {
+		text-align: left;
+		min-width: 300px;
+		max-width: 300px;
+	}
+
+	p {
+		margin: 2px;
+		font-weight: normal;
+	}
+
+	select,
+	input[type="text"],
+	input[type="email"] {
+		width: auto;
+		min-width: 250px;
+	}
+}
+
+#checkout h3 a {
+	font-size: 12px;
+	font-weight: 600;
+	padding: 0 12px;
+
+	&.active {
+		border-bottom: 1px solid #f1f1f1;
+		background: #f1f1f1;
+		color: #000;
+	}
+}
+
+// ── Metabox ──────────────────────────────────────────────────────────────────
+
+#event-settings-metabox .inside {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.event_meta_box_container {
+	overflow: hidden;
+
+	.option_group {
+		border-bottom: 1px solid #eee;
+	}
+
+	.form-field {
+		padding: 5px 20px 5px;
+		overflow: hidden;
+	}
+
+	label {
+		width: 150px;
+		float: left;
+		display: block;
+		font-size: 12px;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="number"],
+	textarea {
+		width: 50%;
+		float: left;
+	}
+
+	.event-meta-notice {
+		margin-left: 170px;
+		margin-top: -15px;
+		font-style: italic;
+	}
+}
+
+.event_metabox_setting {
+	position: relative;
+	float: left;
+	width: 20%;
+	margin: 0;
+	background-color: #fdfdfd;
+	border-right: 1px solid #dfdfdf;
+	box-sizing: border-box;
+
+	&::before {
+		display: block;
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		width: 100%;
+		height: 1000px;
+		background-color: #fdfdfd;
+		border-right: 1px solid #dfdfdf;
+	}
+
+	li {
+		margin: 0;
+
+		a {
+			text-decoration: none;
+			padding: 8px 12px;
+			display: block;
+			line-height: 20px;
+			font-size: 13px;
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
+	}
+}
+
+.event_metabox_setting_container {
+	width: 80%;
+	float: left;
+}
+
+// ── Booking table ────────────────────────────────────────────────────────────
+
+.event_auth_admin_table_booking {
+
+	td,
+	th {
+		padding: 10px;
+		border: 1px solid;
+	}
+}
+
+.event_booking_status {
+	font-size: 13px;
+	font-weight: 500;
+	font-style: italic;
+
+	&.pending {
+		color: #dc3838;
+	}
+
+	&.processing {
+		color: #f9d209;
+	}
+
+	&.completed {
+		color: #38dc55;
+	}
+}
+
+// ── Booking details page ─────────────────────────────────────────────────────
+
+#event-booking-details {
+	margin: 20px;
+
+	.booking-user-data,
+	.booking-data {
+		display: inline-block;
+	}
+
+	.booking-user-data {
+		width: calc(100% - 200px);
+		position: relative;
+
+		.user-avatar,
+		.order-user-meta {
+			display: inline-block;
+		}
+
+		.order-user-meta {
+			position: absolute;
+			margin-left: 20px;
+
+			.user-display-name {
+				margin-bottom: 10px;
+
+				a {
+					text-decoration: none;
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+
+	.booking-data {
+		width: 200px;
+		float: right;
+
+		.booking-data-number {
+			font-size: 24px;
+			font-weight: 700;
+			margin-bottom: 10px;
+		}
+
+		.booking-date {
+			font-size: 14px;
+			font-style: italic;
+			margin-bottom: 5px;
+		}
+	}
+
+	table.booking-table {
+		width: 100%;
+		margin-top: 20px;
+		border: 1px solid #ddd;
+
+		tr {
+			border-bottom: 1px solid #eee;
+
+			th {
+				height: 30px;
+				text-align: left;
+				font-size: 16px;
+				padding: 15px 10px;
+				border: 1px solid #ddd;
+			}
+
+			td {
+				padding: 15px 10px;
+				font-size: 16px;
+				border: 1px solid #ddd;
+			}
+		}
+	}
+}
+
+// ── Booking status side ──────────────────────────────────────────────────────
+
+#booking-status-side {
+
+	label {
+		display: block;
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
+
+	.booking-status-description {
+		font-size: smaller;
+		background: #cee8ff;
+		padding: 5px;
+		font-style: italic;
+		color: #848484;
+		position: relative;
+		margin-top: 10px;
+		border-radius: 3px;
+
+		&::before {
+			content: "";
+			border: 5px solid transparent;
+			border-bottom-color: #cee8ff;
+			position: absolute;
+			top: -10px;
+		}
+	}
+
+	textarea {
+		width: 100%;
+	}
+}
+
+.event-form-field .description {
+	font-style: italic;
+	margin-top: 5px;
+}
+
+// ── Event time metabox ───────────────────────────────────────────────────────
+
+#event-time-metabox {
+	margin: 14px 0;
+
+	input {
+		display: inline-block;
+	}
+
+	.time-connect {
+		margin: 5px 14px;
+	}
+}
+
+.post-type-event_auth_book #postbox-container-2 {
+	margin-top: -20px;
+}
+
+.ml-150 {
+	margin-left: 150px;
+}

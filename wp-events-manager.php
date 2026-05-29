@@ -31,6 +31,10 @@ if ( class_exists( \WPEMS\Payments\PaymentWebhookRouter::class ) ) {
 	\WPEMS\Payments\PaymentWebhookRouter::bootstrap();
 }
 
+if ( class_exists( \WPEMS\Payments\PaymentReturnRouter::class ) ) {
+	\WPEMS\Payments\PaymentReturnRouter::bootstrap();
+}
+
 if ( class_exists( \WPEMS\BookingSystemBootstrap::class ) ) {
 	add_action(
 		'plugins_loaded',
@@ -86,7 +90,7 @@ if ( ! class_exists( 'WPEMS' ) ) {
 			$this->set_define( 'WPEMS_INC_URI', WPEMS_URI . 'inc/' );
 			$this->set_define( 'WPEMS_ASSETS_URI', WPEMS_URI . 'assets/' );
 			$this->set_define( 'WPEMS_LIB_URI', WPEMS_INC_URI . 'libraries/' );
-			$this->set_define( 'WPEMS_VER', '2.1.8' );
+			$this->set_define( 'WPEMS_VER', '2.2.4' );
 			$this->set_define( 'WPEMS_MAIN_FILE', __FILE__ );
 		}
 

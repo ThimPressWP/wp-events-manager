@@ -5,7 +5,7 @@
 		return;
 	}
 
-	const root = document.getElementById( 'wpems-migrate-bookings' );
+	const root = document.querySelector( '#wpems-migrate-bookings' );
 
 	if ( ! root ) {
 		return;

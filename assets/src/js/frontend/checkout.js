@@ -1,26 +1,26 @@
 /* global crypto */
 (function () {
-    var data = window.wpemsCheckout;
+    let data = window.wpemsCheckout;
     if (!data) return;
 
-    var FORM_SELECTOR = '[data-wpems-checkout-form]';
+    let FORM_SELECTOR = '[data-wpems-checkout-form]';
     // Per-form state so multiple forms (or re-injected forms) each get a fresh key + debounce.
-    var stateMap = new WeakMap();
+    let stateMap = new WeakMap();
 
     function newKey() {
         if (window.crypto && typeof crypto.randomUUID === 'function') {
             return crypto.randomUUID().replace(/-/g, '');
         }
         // Fallback for older browsers — 32 hex chars from Math.random.
-        var s = '';
-        for (var i = 0; i < 32; i++) {
+        let s = '';
+        for (let i = 0; i < 32; i++) {
             s += Math.floor(Math.random() * 16).toString(16);
         }
         return s;
     }
 
     function getState(form) {
-        var s = stateMap.get(form);
+        let s = stateMap.get(form);
         if (!s) {
             s = { key: newKey(), timer: null, bootstrapped: false };
             stateMap.set(form, s);
@@ -29,7 +29,7 @@
     }
 
     function call(form, action, payload) {
-        var body = new URLSearchParams();
+        let body = new URLSearchParams();
         body.append('action', 'wpems_checkout_' + action);
         body.append('nonce', data.nonce);
         body.append('event_id', form.dataset.eventId || '');
@@ -40,24 +40,27 @@
         });
         return fetch(data.ajaxUrl, {
             method: 'POST',
-            body: body,
+            body: body.toString(),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
             credentials: 'same-origin',
         }).then(function (r) { return r.json(); });
     }
 
     function debounce(form, fn, ms) {
-        var state = getState(form);
+        let state = getState(form);
         return function () {
-            var args = arguments;
+            let args = arguments;
             clearTimeout(state.timer);
             state.timer = setTimeout(function () { fn.apply(null, args); }, ms);
         };
     }
 
     function renderSummary(form, q) {
-        var summaryEl = document.querySelector('[data-wpems-summary]');
+        let summaryEl = document.querySelector('[data-wpems-summary]');
         if (!summaryEl) return;
-        var fields = {
+        let fields = {
             '[data-summary-subtotal]':  q.subtotal,
             '[data-summary-discount]':  q.discount_total,
             '[data-summary-tax-label]': q.tax_label,
@@ -65,14 +68,14 @@
             '[data-summary-total]':     q.total + ' ' + q.currency,
         };
         Object.keys(fields).forEach(function (sel) {
-            var el = summaryEl.querySelector(sel);
+            let el = summaryEl.querySelector(sel);
             if (el) el.textContent = fields[sel];
         });
     }
 
     function refreshQuote(form) {
-        var qtyEl    = form.querySelector('[name="qty"]');
-        var couponEl = form.querySelector('[name="coupon_code"]');
+        let qtyEl    = form.querySelector('[name="qty"]');
+        let couponEl = form.querySelector('[name="coupon_code"]');
         if (!qtyEl) return;
         call(form, 'quote', {
             qty: qtyEl.value,
@@ -83,9 +86,9 @@
     }
 
     function validateCoupon(form) {
-        var qtyEl       = form.querySelector('[name="qty"]');
-        var couponEl    = form.querySelector('[name="coupon_code"]');
-        var couponMsgEl = form.querySelector('[data-coupon-message]');
+        let qtyEl       = form.querySelector('[name="qty"]');
+        let couponEl    = form.querySelector('[name="coupon_code"]');
+        let couponMsgEl = form.querySelector('[data-coupon-message]');
         if (!couponEl) return;
         if (!couponEl.value) {
             if (couponMsgEl) couponMsgEl.textContent = '';
@@ -107,17 +110,17 @@
     }
 
     function submitForm(form) {
-        var qtyEl     = form.querySelector('[name="qty"]');
-        var couponEl  = form.querySelector('[name="coupon_code"]');
-        var methodEls = form.querySelectorAll('[name="payment_method"]');
-        var submitBtn = form.querySelector('[type="submit"]');
-        var errorEl   = form.querySelector('[data-form-error]');
-        var state     = getState(form);
+        let qtyEl     = form.querySelector('[name="qty"]');
+        let couponEl  = form.querySelector('[name="coupon_code"]');
+        let methodEls = form.querySelectorAll('[name="payment_method"]');
+        let submitBtn = form.querySelector('[type="submit"]');
+        let errorEl   = form.querySelector('[data-form-error]');
+        let state     = getState(form);
 
         if (submitBtn) submitBtn.disabled = true;
         if (errorEl) errorEl.textContent = '';
 
-        var methodValue = '';
+        let methodValue = '';
         methodEls.forEach(function (el) { if (el.checked) methodValue = el.value; });
 
         call(form, 'submit', {
@@ -140,7 +143,7 @@
     }
 
     function bootstrap(form) {
-        var state = getState(form);
+        let state = getState(form);
         if (state.bootstrapped) return;
         state.bootstrapped = true;
         // Kick off the initial quote so the summary reflects qty=1 + no coupon.
@@ -149,7 +152,7 @@
 
     // Delegated handlers — survive AJAX-injected forms (modal/lightbox).
     document.addEventListener('change', function (e) {
-        var form = e.target.closest && e.target.closest(FORM_SELECTOR);
+        let form = e.target.closest && e.target.closest(FORM_SELECTOR);
         if (!form) return;
         if (e.target.matches('[name="qty"]')) {
             debounce(form, function () { refreshQuote(form); }, 200)();
@@ -159,7 +162,7 @@
     });
 
     document.addEventListener('submit', function (e) {
-        var form = e.target.closest && e.target.closest(FORM_SELECTOR);
+        let form = e.target.closest && e.target.closest(FORM_SELECTOR);
         if (!form) return;
         e.preventDefault();
         submitForm(form);
@@ -170,7 +173,7 @@
 
     // Watch for forms injected later (modal/lightbox via load_form_register AJAX).
     if (typeof MutationObserver === 'function') {
-        var observer = new MutationObserver(function (mutations) {
+        let observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (m) {
                 m.addedNodes && m.addedNodes.forEach(function (node) {
                     if (node.nodeType !== 1) return;

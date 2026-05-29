@@ -66,7 +66,9 @@ class WPEMS_Payment_Gateways {
 
 		$enable = array();
 		foreach ( $gateways as $id => $gateway ) {
-			if ( $gateway->is_enable() ) {
+			if ( is_callable( array( $gateway, 'is_enabled' ) ) && $gateway->is_enabled() ) {
+				$enable[ $id ] = $gateway;
+			} elseif ( is_callable( array( $gateway, 'is_enable' ) ) && $gateway->is_enable() ) {
 				$enable[ $id ] = $gateway;
 			}
 		}

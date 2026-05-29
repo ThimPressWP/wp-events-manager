@@ -10,6 +10,7 @@
  */
 use WPEMS\Models\EventPostModel;
 use WPEMS\Payments\PaymentGatewayRegistry;
+use WPEMS\Services\TaxService;
 
 /**
  * Prevent loading this file directly
@@ -103,22 +104,30 @@ $has_payment  = $is_free || ! empty( $gateways );
 		<?php endif; ?>
 
 		<?php if ( ! $is_free ) : ?>
+			<?php
+			$price      = $event->get_price();
+			$discount   = '0.0000';
+			$tax_svc    = new TaxService();
+			$tax_label  = $tax_svc->get_label();
+			$tax_total  = $tax_svc->calculate( $price, $currency );
+			$total      = bcadd( $price, $tax_total, 4 );
+			?>
 			<div class="event_register_summary" data-wpems-summary>
 				<div class="event_register_summary_row">
 					<span class="label"><?php esc_html_e( 'Subtotal', 'wp-events-manager' ); ?></span>
-					<span class="value" data-summary-subtotal>0</span>
+					<span class="value" data-summary-subtotal data-price="<?php echo esc_attr( $price ); ?>"><?php echo esc_html( wpems_format_price( $price ) ); ?></span>
 				</div>
 				<div class="event_register_summary_row">
 					<span class="label"><?php esc_html_e( 'Discount', 'wp-events-manager' ); ?></span>
-					<span class="value" data-summary-discount>0</span>
+					<span class="value" data-summary-discount><?php echo esc_html( $discount ); ?></span>
 				</div>
 				<div class="event_register_summary_row">
-					<span class="label" data-summary-tax-label><?php esc_html_e( 'Tax', 'wp-events-manager' ); ?></span>
-					<span class="value" data-summary-tax>0</span>
+					<span class="label" data-summary-tax-label><?php echo esc_html( $tax_label ); ?></span>
+					<span class="value" data-summary-tax><?php echo esc_html( $tax_total ); ?></span>
 				</div>
 				<div class="event_register_summary_row event_register_summary_total">
 					<span class="label"><?php esc_html_e( 'Total', 'wp-events-manager' ); ?></span>
-					<span class="value" data-summary-total>0 <?php echo esc_html( $currency ); ?></span>
+					<span class="value" data-summary-total><?php echo esc_html( $total . ' ' . $currency ); ?></span>
 				</div>
 			</div>
 		<?php endif; ?>

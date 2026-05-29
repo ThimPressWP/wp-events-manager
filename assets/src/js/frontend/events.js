@@ -51,12 +51,12 @@
 	}
 
 	function escapeHtml( value ) {
-		var wrapper = document.createElement( 'div' );
+		let wrapper = document.createElement( 'div' );
 		wrapper.textContent = value || '';
 		return wrapper.innerHTML;
 	}
 
-	var TPEventFrontend = {
+	let TPEventFrontend = {
 		init: function () {
 			document.addEventListener( 'click', this.onClick.bind( this ) );
 			document.addEventListener( 'submit', this.onSubmit.bind( this ) );
@@ -66,7 +66,7 @@
 		},
 
 		onClick: function ( event ) {
-			var trigger = closest( event.target, '.event-load-booking-form' );
+			let trigger = closest( event.target, '.event-load-booking-form' );
 
 			if ( ! trigger ) {
 				return;
@@ -77,7 +77,7 @@
 		},
 
 		onSubmit: function ( event ) {
-			var form = event.target;
+			let form = event.target;
 
 			if ( form.matches( 'form.event_register:not(.active)' ) ) {
 				event.preventDefault();
@@ -92,9 +92,9 @@
 		},
 
 		loadFormRegister: function ( trigger ) {
-			var settings = config();
-			var spinner = document.createElement( 'i' );
-			var data = new window.URLSearchParams();
+			let settings = config();
+			let spinner = document.createElement( 'i' );
+			let data = new window.URLSearchParams();
 
 			if ( ! settings.ajaxurl ) {
 				return;
@@ -122,8 +122,8 @@
 		},
 
 		bookEventForm: function ( form ) {
-			var settings = config();
-			var button = form.querySelector( 'button[type="submit"]' );
+			let settings = config();
+			let button = form.querySelector( 'button[type="submit"]' );
 
 			if ( ! settings.ajaxurl ) {
 				return;
@@ -178,7 +178,7 @@
 		},
 
 		showCartMessage: function ( eventName ) {
-			var settings = config();
+			let settings = config();
 
 			document.querySelectorAll( '.woocommerce-message' ).forEach( function ( message ) {
 				message.hidden = true;
@@ -195,7 +195,7 @@
 		},
 
 		setMessage: function ( form, message ) {
-			var footer = form.querySelector( '.event_register_foot' );
+			let footer = form.querySelector( '.event_register_foot' );
 
 			if ( ! footer ) {
 				return;
@@ -215,7 +215,7 @@
 
 				input.dataset.wpemsValidated = '1';
 				input.addEventListener( 'blur', function () {
-					var row = closest( input, '.form-row' );
+					let row = closest( input, '.form-row' );
 
 					if ( ! row || ! row.classList.contains( 'form-required' ) ) {
 						return;
@@ -228,7 +228,7 @@
 		},
 
 		lightbox: function ( content ) {
-			var wrapper = document.createElement( 'div' );
+			let wrapper = document.createElement( 'div' );
 
 			if ( ! window.WPEMSModal || 'function' !== typeof window.WPEMSModal.open ) {
 				return;
@@ -251,9 +251,9 @@
 		},
 
 		ajaxLogin: function ( form ) {
-			var settings = config();
-			var button = form.querySelector( '#wp-submit' );
-			var lightbox = document.getElementById( 'event-lightbox' );
+			let settings = config();
+			let button = form.querySelector( '#wp-submit' );
+			let lightbox = document.querySelector( '#event-lightbox' );
 
 			if ( ! settings.ajaxurl ) {
 				return;
@@ -295,7 +295,7 @@
 		},
 
 		initCountdowns: function () {
-			var settings = config();
+			let settings = config();
 
 			if ( 'function' !== typeof window.WPEMSCountdown ) {
 				return;

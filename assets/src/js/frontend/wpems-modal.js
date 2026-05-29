@@ -1,7 +1,7 @@
 ( function ( window, document ) {
 	'use strict';
 
-	var activeModal = null;
+	let activeModal = null;
 
 	function getFocusable( root ) {
 		return Array.prototype.slice.call(
@@ -14,7 +14,7 @@
 	}
 
 	function focusModal( dialog ) {
-		var focusable = getFocusable( dialog );
+		let focusable = getFocusable( dialog );
 
 		if ( focusable.length ) {
 			focusable[0].focus();
@@ -29,15 +29,15 @@
 			return;
 		}
 
-		var focusable = getFocusable( dialog );
+		let focusable = getFocusable( dialog );
 		if ( ! focusable.length ) {
 			event.preventDefault();
 			dialog.focus();
 			return;
 		}
 
-		var first = focusable[0];
-		var last = focusable[ focusable.length - 1 ];
+		let first = focusable[0];
+		let last = focusable[ focusable.length - 1 ];
 
 		if ( event.shiftKey && document.activeElement === first ) {
 			event.preventDefault();
@@ -53,7 +53,7 @@
 			return;
 		}
 
-		var modal = activeModal;
+		let modal = activeModal;
 		activeModal = null;
 
 		document.removeEventListener( 'keydown', modal.onKeyDown );
@@ -80,10 +80,10 @@
 
 		closeActive();
 
-		var overlay = document.createElement( 'div' );
-		var dialog = document.createElement( 'div' );
-		var closeButton = document.createElement( 'button' );
-		var previousFocus = document.activeElement;
+		let overlay = document.createElement( 'div' );
+		let dialog = document.createElement( 'div' );
+		let closeButton = document.createElement( 'button' );
+		let previousFocus = document.activeElement;
 
 		overlay.className = 'wpems-modal-overlay event-fade';
 
@@ -103,7 +103,7 @@
 		if ( options.content instanceof window.HTMLElement ) {
 			dialog.appendChild( options.content );
 		} else {
-			var content = document.createElement( 'div' );
+			let content = document.createElement( 'div' );
 			content.innerHTML = options.content || '';
 			dialog.appendChild( content );
 		}

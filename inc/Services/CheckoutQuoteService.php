@@ -117,7 +117,7 @@ class CheckoutQuoteService {
 	 * @return string DECIMAL(15,4) as string.
 	 */
 	protected function get_event_price( int $event_id ): string {
-		$raw = get_post_meta( $event_id, '_event_price', true );
+		$raw = get_post_meta( $event_id, 'tp_event_price', true );
 
 		if ( empty( $raw ) || ! is_numeric( $raw ) ) {
 			return '0.0000';

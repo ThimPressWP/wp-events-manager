@@ -1,0 +1,107 @@
+@use 'variables' as *;
+
+@media (max-width: 1199px) {
+	.wpems-event-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.wpems-event-detail__layout {
+		grid-template-columns: minmax(0, 1fr) 330px;
+	}
+}
+
+@media (max-width: 991px) {
+
+	.wpems-event-search,
+	.wpems-event-archive__body,
+	.wpems-event-detail__layout {
+		grid-template-columns: 1fr;
+	}
+
+	.wpems-event-archive__toolbar {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.wpems-event-archive__actions {
+		justify-content: space-between;
+	}
+
+	.wpems-event-filter {
+		order: 2;
+	}
+
+	.wpems-event-info-card,
+	.wpems-event-register-card {
+		position: static;
+	}
+
+	.wpems-event-detail__sidebar {
+		display: grid;
+		gap: 20px;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 700px) {
+	.wpems-event-hero {
+		padding: 40px 16px 32px;
+	}
+
+	.wpems-event-hero__title {
+		font-size: 32px;
+	}
+
+	.wpems-event-archive,
+	.wpems-event-detail__layout {
+		padding: 40px 16px 70px;
+	}
+
+	.wpems-event-list,
+	.wpems-event-detail__sidebar,
+	.wpems-event-navigation {
+		grid-template-columns: 1fr;
+	}
+
+	.wpems-event-list--list .wpems-event-card__inner {
+		grid-template-columns: 1fr;
+	}
+
+	.wpems-event-archive__actions {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.wpems-event-order select {
+		width: 100%;
+	}
+
+	.wpems-event-view-switcher {
+		justify-content: flex-end;
+	}
+
+	.wpems-event-detail__title h1 {
+		font-size: 28px;
+	}
+
+	.wpems-event-panel {
+		padding: 22px;
+	}
+
+	.wpems-event-detail__media .entry-countdown {
+		inset: auto 12px 12px;
+		max-width: none;
+		transform: none;
+		width: auto;
+	}
+
+	.wpems-event-detail__media .countdown-section {
+		flex: 1 1 64px;
+		min-width: 64px;
+	}
+
+	.wpems-event-share {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+}

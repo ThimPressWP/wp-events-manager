@@ -1,0 +1,31 @@
+// Design tokens
+$wpems-primary: #2b7bff;
+$wpems-primary-soft: #eef5ff;
+$wpems-secondary: #ffb606;
+$wpems-heading: #111;
+$wpems-text: #555;
+$wpems-caption: #898989;
+$wpems-border: #e6e7eb;
+$wpems-surface: #fff;
+$wpems-muted: #f8f9fb;
+$wpems-success: #00a86b;
+$wpems-error: #c35a2c;
+$wpems-dark: #1a1a1a;
+
+@mixin wpems-card {
+	background: $wpems-surface;
+	border: 1px solid $wpems-border;
+	border-radius: 8px;
+	box-shadow: none;
+}
+
+@mixin wpems-icon-dot {
+	align-items: center;
+	background: $wpems-primary-soft;
+	border-radius: 50%;
+	content: "";
+	display: inline-flex;
+	height: 18px;
+	justify-content: center;
+	width: 18px;
+}

@@ -148,7 +148,7 @@
 		},
 
 		toggleMetaBoxExtra: function ( trigger ) {
-			var target = document.getElementById( trigger.dataset.target || '' );
+			var target = document.querySelector( '#' + trigger.dataset.target || '' );
 
 			if ( ! target ) {
 				return;

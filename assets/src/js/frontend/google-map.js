@@ -6,7 +6,7 @@
 	}
 
 	function dataJson( element, key ) {
-		var value = dataValue( element, key );
+		let value = dataValue( element, key );
 		if ( ! value ) {
 			return null;
 		}
@@ -20,7 +20,7 @@
 
 	window.initialize = function () {
 		document.querySelectorAll( '.event-google-map-canvas' ).forEach( function ( canvas ) {
-			var geocoder = new window.google.maps.Geocoder();
+			let geocoder = new window.google.maps.Geocoder();
 
 			geocoder.geocode( { address: dataValue( canvas, 'address' ) }, function ( results, status ) {
 				if ( status === window.google.maps.GeocoderStatus.ZERO_RESULTS ) {
@@ -32,9 +32,9 @@
 					return;
 				}
 
-				var userMapTypeId = 'user_map_style';
-				var zoom = Number( dataValue( canvas, 'zoom' ) ) || 14;
-				var map = new window.google.maps.Map( canvas, {
+				let userMapTypeId = 'user_map_style';
+				let zoom = Number( dataValue( canvas, 'zoom' ) ) || 14;
+				let map = new window.google.maps.Map( canvas, {
 					zoom: zoom,
 					scrollwheel: 'true' === dataValue( canvas, 'scroll-zoom' ),
 					center: results[0].geometry.location,
@@ -43,9 +43,9 @@
 					}
 				} );
 
-				var userMapStyles = dataJson( canvas, 'map-styles' );
+				let userMapStyles = dataJson( canvas, 'map-styles' );
 				if ( userMapStyles ) {
-					var userMapType = new window.google.maps.StyledMapType( userMapStyles, {
+					let userMapType = new window.google.maps.StyledMapType( userMapStyles, {
 						name: dataValue( canvas, 'map-name' )
 					} );
 
@@ -62,7 +62,7 @@
 					} );
 				}
 
-				var markerPositions = dataJson( canvas, 'marker-positions' );
+				let markerPositions = dataJson( canvas, 'marker-positions' );
 				if ( markerPositions && markerPositions.length ) {
 					markerPositions.forEach( function ( marker ) {
 						geocoder.geocode( { address: marker.place }, function ( markerResults, markerStatus ) {
@@ -78,7 +78,7 @@
 					} );
 				}
 
-				var directions = dataJson( canvas, 'directions' );
+				let directions = dataJson( canvas, 'directions' );
 				if ( directions ) {
 					if ( directions.waypoints && directions.waypoints.length ) {
 						directions.waypoints.forEach( function ( waypoint ) {
@@ -86,8 +86,8 @@
 						} );
 					}
 
-					var directionsRenderer = new window.google.maps.DirectionsRenderer();
-					var directionsService = new window.google.maps.DirectionsService();
+					let directionsRenderer = new window.google.maps.DirectionsRenderer();
+					let directionsService = new window.google.maps.DirectionsService();
 
 					directionsRenderer.setMap( map );
 					directionsService.route( {
@@ -109,13 +109,13 @@
 	};
 
 	document.addEventListener( 'DOMContentLoaded', function () {
-		var canvas = document.querySelector( '.event-google-map-canvas' );
-		var apiKey = canvas ? dataValue( canvas, 'api-key' ) : '';
+		let canvas = document.querySelector( '.event-google-map-canvas' );
+		let apiKey = canvas ? dataValue( canvas, 'api-key' ) : '';
 		if ( ! apiKey ) {
 			return;
 		}
 
-		var script = document.createElement( 'script' );
+		let script = document.createElement( 'script' );
 		script.type = 'text/javascript';
 		script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initialize&key=' + encodeURIComponent( apiKey );
 		document.body.appendChild( script );

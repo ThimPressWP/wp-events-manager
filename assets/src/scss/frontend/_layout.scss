@@ -1,31 +1,6 @@
-$wpems-primary: #2b7bff;
-$wpems-primary-soft: #eef5ff;
-$wpems-secondary: #ffb606;
-$wpems-heading: #111;
-$wpems-text: #555;
-$wpems-caption: #898989;
-$wpems-border: #e6e7eb;
-$wpems-surface: #fff;
-$wpems-muted: #f8f9fb;
-$wpems-success: #00a86b;
+@use 'variables' as *;
 
-@mixin wpems-card {
-	background: $wpems-surface;
-	border: 1px solid $wpems-border;
-	border-radius: 8px;
-	box-shadow: none;
-}
-
-@mixin wpems-icon-dot {
-	align-items: center;
-	background: $wpems-primary-soft;
-	border-radius: 50%;
-	content: "";
-	display: inline-flex;
-	height: 18px;
-	justify-content: center;
-	width: 18px;
-}
+// ── Global scope ─────────────────────────────────────────────────────────────
 
 .wpems-event-page,
 .wpems-event-list,
@@ -44,46 +19,11 @@ $wpems-success: #00a86b;
 
 	a {
 		text-decoration: none;
-		transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+		transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 	}
 }
 
-.wpems-event-button,
-.event_auth_button.wpems-event-button {
-	align-items: center;
-	background: $wpems-primary;
-	border: 1px solid $wpems-primary;
-	border-radius: 8px;
-	color: #fff;
-	display: inline-flex;
-	font-size: 14px;
-	font-weight: 600;
-	justify-content: center;
-	line-height: 1.5;
-	min-height: 40px;
-	padding: 9px 18px;
-	text-align: center;
-
-	&:hover,
-	&:focus {
-		background: #1767e8;
-		border-color: #1767e8;
-		color: #fff;
-	}
-}
-
-.wpems-event-button--secondary {
-	background: #fff;
-	border-color: $wpems-border;
-	color: $wpems-primary;
-
-	&:hover,
-	&:focus {
-		background: $wpems-primary-soft;
-		border-color: $wpems-primary;
-		color: $wpems-primary;
-	}
-}
+// ── Hero ─────────────────────────────────────────────────────────────────────
 
 .wpems-event-hero {
 	background: $wpems-surface;
@@ -126,9 +66,7 @@ $wpems-success: #00a86b;
 	}
 }
 
-.wpems-event-archive {
-	padding: 60px 20px 100px;
-}
+// ── Search ───────────────────────────────────────────────────────────────────
 
 .wpems-event-search {
 	display: grid;
@@ -141,7 +79,7 @@ $wpems-success: #00a86b;
 	position: relative;
 
 	input {
-		background: #fff;
+		background: $wpems-surface;
 		border: 1px solid $wpems-border;
 		border-radius: 8px;
 		color: $wpems-heading;
@@ -156,7 +94,7 @@ $wpems-success: #00a86b;
 
 		&:focus {
 			border-color: $wpems-primary;
-			box-shadow: 0 0 0 3px rgba($wpems-primary, .12);
+			box-shadow: 0 0 0 3px rgba($wpems-primary, 0.12);
 			outline: none;
 		}
 	}
@@ -199,7 +137,7 @@ $wpems-success: #00a86b;
 	}
 
 	&::after {
-		background: #fff;
+		background: $wpems-surface;
 		border-radius: 50%;
 		height: 5px;
 		left: 5px;
@@ -207,6 +145,12 @@ $wpems-success: #00a86b;
 		transform: none;
 		width: 5px;
 	}
+}
+
+// ── Archive ──────────────────────────────────────────────────────────────────
+
+.wpems-event-archive {
+	padding: 60px 20px 100px;
 }
 
 .wpems-event-archive__toolbar {
@@ -231,7 +175,7 @@ $wpems-success: #00a86b;
 
 .wpems-event-order select {
 	appearance: none;
-	background: #fff;
+	background: $wpems-surface;
 	border: 1px solid $wpems-border;
 	border-radius: 8px;
 	color: $wpems-heading;
@@ -247,7 +191,7 @@ $wpems-success: #00a86b;
 
 	a {
 		align-items: center;
-		background: #fff;
+		background: $wpems-surface;
 		border: 1px solid $wpems-border;
 		border-radius: 8px;
 		display: inline-flex;
@@ -256,7 +200,8 @@ $wpems-success: #00a86b;
 		width: 48px;
 
 		span {
-			background: linear-gradient($wpems-caption, $wpems-caption) 0 0 / 18px 2px no-repeat,
+			background:
+				linear-gradient($wpems-caption, $wpems-caption) 0 0 / 18px 2px no-repeat,
 				linear-gradient($wpems-caption, $wpems-caption) 0 8px / 18px 2px no-repeat,
 				linear-gradient($wpems-caption, $wpems-caption) 0 16px / 18px 2px no-repeat;
 			height: 18px;
@@ -264,7 +209,8 @@ $wpems-success: #00a86b;
 		}
 
 		&:last-child span {
-			background: linear-gradient($wpems-caption, $wpems-caption) 0 0 / 7px 7px no-repeat,
+			background:
+				linear-gradient($wpems-caption, $wpems-caption) 0 0 / 7px 7px no-repeat,
 				linear-gradient($wpems-caption, $wpems-caption) 11px 0 / 7px 7px no-repeat,
 				linear-gradient($wpems-caption, $wpems-caption) 0 11px / 7px 7px no-repeat,
 				linear-gradient($wpems-caption, $wpems-caption) 11px 11px / 7px 7px no-repeat;
@@ -278,7 +224,7 @@ $wpems-success: #00a86b;
 
 		&.is-active span,
 		&:hover span {
-			filter: brightness(.9) saturate(2);
+			filter: brightness(0.9) saturate(2);
 		}
 	}
 }
@@ -289,6 +235,8 @@ $wpems-success: #00a86b;
 	gap: 30px;
 	grid-template-columns: 280px minmax(0, 1fr);
 }
+
+// ── Filter sidebar ───────────────────────────────────────────────────────────
 
 .wpems-event-filter {
 	@include wpems-card;
@@ -361,6 +309,8 @@ $wpems-success: #00a86b;
 	}
 }
 
+// ── Event cards ──────────────────────────────────────────────────────────────
+
 .wpems-event-list {
 	display: grid;
 	gap: 30px;
@@ -402,7 +352,7 @@ $wpems-success: #00a86b;
 .wpems-event-detail__media-placeholder {
 	align-items: center;
 	aspect-ratio: 313 / 214;
-	background: linear-gradient(135deg, #eef5ff, #f8f9fb);
+	background: linear-gradient(135deg, $wpems-primary-soft, $wpems-muted);
 	color: $wpems-primary;
 	display: flex;
 	font-weight: 700;
@@ -532,6 +482,8 @@ $wpems-success: #00a86b;
 	}
 }
 
+// ── Detail page ──────────────────────────────────────────────────────────────
+
 .wpems-event-detail__layout {
 	display: grid;
 	gap: 40px;
@@ -588,10 +540,10 @@ $wpems-success: #00a86b;
 	}
 
 	.countdown-section {
-		background: #fff;
+		background: $wpems-surface;
 		border: 0;
 		border-radius: 8px;
-		box-shadow: 0 8px 20px rgba(17, 17, 17, .12);
+		box-shadow: 0 8px 20px rgba(17, 17, 17, 0.12);
 		color: $wpems-primary;
 		flex: 0 0 72px;
 		min-width: 72px;
@@ -656,6 +608,8 @@ $wpems-success: #00a86b;
 	padding: 22px;
 }
 
+// ── Share + navigation ───────────────────────────────────────────────────────
+
 .wpems-event-share {
 	align-items: center;
 	border-bottom: 1px solid $wpems-border;
@@ -715,6 +669,8 @@ $wpems-success: #00a86b;
 .wpems-event-navigation__item--next {
 	text-align: right;
 }
+
+// ── Sidebar ──────────────────────────────────────────────────────────────────
 
 .wpems-event-detail__sidebar {
 	align-self: start;
@@ -822,163 +778,4 @@ $wpems-success: #00a86b;
 	line-height: 1.5;
 	margin: 12px 0 0;
 	text-align: center;
-}
-
-#event-lightbox .event_register_area {
-	@include wpems-card;
-	max-width: 520px;
-	padding: 30px;
-	width: min(520px, calc(100vw - 32px));
-
-	h2 {
-		color: $wpems-heading;
-		font-size: 24px;
-		margin: 0 0 20px;
-	}
-}
-
-#event-lightbox .event_auth_form_field {
-	margin-bottom: 18px;
-
-	label {
-		color: $wpems-heading;
-		display: block;
-		font-weight: 700;
-		margin-bottom: 8px;
-	}
-
-	input {
-		border: 1px solid $wpems-border;
-		border-radius: 8px;
-		height: 44px;
-		padding: 0 14px;
-		width: 100%;
-	}
-}
-
-#event-lightbox .event_auth_payment_methods {
-	list-style: none;
-	margin: 0 0 20px;
-	padding: 0;
-
-	li {
-		align-items: center;
-		display: flex;
-		gap: 10px;
-		margin-bottom: 10px;
-	}
-}
-
-#event-lightbox .event_register_foot {
-	display: grid;
-	gap: 12px;
-
-	.event_auth_button {
-		min-height: 44px;
-	}
-}
-
-@media (max-width: 1199px) {
-	.wpems-event-list {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.wpems-event-detail__layout {
-		grid-template-columns: minmax(0, 1fr) 330px;
-	}
-}
-
-@media (max-width: 991px) {
-	.wpems-event-search,
-	.wpems-event-archive__body,
-	.wpems-event-detail__layout {
-		grid-template-columns: 1fr;
-	}
-
-	.wpems-event-archive__toolbar {
-		align-items: stretch;
-		flex-direction: column;
-	}
-
-	.wpems-event-archive__actions {
-		justify-content: space-between;
-	}
-
-	.wpems-event-filter {
-		order: 2;
-	}
-
-	.wpems-event-info-card,
-	.wpems-event-register-card {
-		position: static;
-	}
-
-	.wpems-event-detail__sidebar {
-		display: grid;
-		gap: 20px;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-}
-
-@media (max-width: 700px) {
-	.wpems-event-hero {
-		padding: 40px 16px 32px;
-	}
-
-	.wpems-event-hero__title {
-		font-size: 32px;
-	}
-
-	.wpems-event-archive,
-	.wpems-event-detail__layout {
-		padding: 40px 16px 70px;
-	}
-
-	.wpems-event-list,
-	.wpems-event-detail__sidebar,
-	.wpems-event-navigation {
-		grid-template-columns: 1fr;
-	}
-
-	.wpems-event-list--list .wpems-event-card__inner {
-		grid-template-columns: 1fr;
-	}
-
-	.wpems-event-archive__actions {
-		align-items: stretch;
-		flex-direction: column;
-	}
-
-	.wpems-event-order select {
-		width: 100%;
-	}
-
-	.wpems-event-view-switcher {
-		justify-content: flex-end;
-	}
-
-	.wpems-event-detail__title h1 {
-		font-size: 28px;
-	}
-
-	.wpems-event-panel {
-		padding: 22px;
-	}
-
-	.wpems-event-detail__media .entry-countdown {
-		inset: auto 12px 12px;
-		max-width: none;
-		transform: none;
-		width: auto;
-	}
-
-	.wpems-event-detail__media .countdown-section {
-		flex: 1 1 64px;
-		min-width: 64px;
-	}
-
-	.wpems-event-share {
-		align-items: flex-start;
-		flex-direction: column;
-	}
 }

@@ -7,6 +7,8 @@
 
 namespace WPEMS\Admin\Metaboxes;
 
+use WPEMS\Repositories\EventInventoryRepository;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -83,6 +85,12 @@ class Event {
 		}
 
 		update_post_meta( $post_id, 'tp_event_status', $status );
+
+		// Sync capacity to the inventory table.
+		if ( class_exists( EventInventoryRepository::class ) ) {
+			$inventory = new EventInventoryRepository();
+			$inventory->rebuild_for_event( $post_id );
+		}
 	}
 
 	/**

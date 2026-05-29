@@ -1,13 +1,13 @@
 ( function ( window ) {
 	'use strict';
 
-	var SECOND = 1000;
-	var MINUTE = 60;
-	var HOUR = 60 * MINUTE;
-	var DAY = 24 * HOUR;
-	var WEEK = 7 * DAY;
-	var MONTH = 30 * DAY;
-	var YEAR = 365 * DAY;
+	const SECOND = 1000;
+	const MINUTE = 60;
+	const HOUR = 60 * MINUTE;
+	const DAY = 24 * HOUR;
+	const WEEK = 7 * DAY;
+	const MONTH = 30 * DAY;
+	const YEAR = 365 * DAY;
 
 	function defaultLabels() {
 		return {
@@ -17,8 +17,8 @@
 	}
 
 	function localizedLabels() {
-		var defaults = defaultLabels();
-		var l10n = window.WPEMS && window.WPEMS.l18n ? window.WPEMS.l18n : {};
+		let defaults = defaultLabels();
+		let l10n = window.WPEMS && window.WPEMS.l18n ? window.WPEMS.l18n : {};
 
 		return {
 			labels: l10n.labels || defaults.labels,
@@ -35,7 +35,7 @@
 			return null;
 		}
 
-		var date = new Date( value );
+		let date = new Date( value );
 
 		return Number.isNaN( date.getTime() ) ? null : date;
 	}
@@ -57,7 +57,7 @@
 	}
 
 	function serverOffset( value ) {
-		var serverDate = parseDate( value );
+		let serverDate = parseDate( value );
 
 		if ( ! serverDate ) {
 			return 0;
@@ -67,30 +67,30 @@
 	}
 
 	function splitSeconds( seconds ) {
-		var remaining = Math.max( 0, seconds );
-		var years = Math.floor( remaining / YEAR );
+		let remaining = Math.max( 0, seconds );
+		let years = Math.floor( remaining / YEAR );
 		remaining -= years * YEAR;
 
-		var months = Math.floor( remaining / MONTH );
+		let months = Math.floor( remaining / MONTH );
 		remaining -= months * MONTH;
 
-		var weeks = Math.floor( remaining / WEEK );
+		let weeks = Math.floor( remaining / WEEK );
 		remaining -= weeks * WEEK;
 
-		var days = Math.floor( remaining / DAY );
+		let days = Math.floor( remaining / DAY );
 		remaining -= days * DAY;
 
-		var hours = Math.floor( remaining / HOUR );
+		let hours = Math.floor( remaining / HOUR );
 		remaining -= hours * HOUR;
 
-		var minutes = Math.floor( remaining / MINUTE );
+		let minutes = Math.floor( remaining / MINUTE );
 		remaining -= minutes * MINUTE;
 
 		return [ years, months, weeks, days, hours, minutes, remaining ];
 	}
 
 	function visibleParts( parts ) {
-		var firstVisible = parts.findIndex( function ( value ) {
+		let firstVisible = parts.findIndex( function ( value ) {
 			return value > 0;
 		} );
 
@@ -107,7 +107,7 @@
 	}
 
 	function Countdown( element, options ) {
-		var labels = localizedLabels();
+		let labels = localizedLabels();
 
 		this.element = element;
 		this.options = options || {};
@@ -126,22 +126,22 @@
 	};
 
 	Countdown.prototype.labelFor = function ( index, value ) {
-		var source = 1 === value ? this.labels1 : this.labels;
+		let source = 1 === value ? this.labels1 : this.labels;
 
 		return source[ index ] || '';
 	};
 
 	Countdown.prototype.render = function () {
-		var parts = splitSeconds( this.remainingSeconds() );
-		var fragment = document.createDocumentFragment();
+		let parts = splitSeconds( this.remainingSeconds() );
+		let fragment = document.createDocumentFragment();
 
 		this.element.setAttribute( 'data-seconds-left', String( this.remainingSeconds() ) );
 		this.element.textContent = '';
 
 		visibleParts( parts ).forEach( function ( part ) {
-			var section = document.createElement( 'span' );
-			var amount = document.createElement( 'span' );
-			var period = document.createElement( 'span' );
+			let section = document.createElement( 'span' );
+			let amount = document.createElement( 'span' );
+			let period = document.createElement( 'span' );
 
 			section.className = 'countdown-section';
 			amount.className = 'countdown-amount';
@@ -159,7 +159,7 @@
 	};
 
 	Countdown.prototype.start = function () {
-		var self = this;
+		let self = this;
 
 		this.stop();
 		this.render();
