@@ -193,4 +193,67 @@ class WPEMSAjaxTest extends TestCase {
 		$handler = new \WPEMS_Ajax();
 		$handler->event_auth_register();
 	}
+
+	/**
+	 * It rejects zero quantity before creating a booking.
+	 *
+	 * @return void
+	 */
+	public function test_event_auth_register_rejects_zero_quantity(): void {
+		Functions\when( 'add_action' )->justReturn( true );
+		require_once WPEMS_INC . 'class-wpems-ajax.php';
+
+		$_SERVER['REQUEST_METHOD']          = 'POST';
+		$_POST['action']                    = 'event_auth_register';
+		$_POST['event_id']                  = '88';
+		$_POST['qty']                       = '0';
+		$_POST['event_auth_register_nonce'] = 'nonce';
+
+		Functions\expect( 'check_ajax_referer' )
+			->once()
+			->with( 'event_auth_register_nonce', 'event_auth_register_nonce' )
+			->andReturn( true );
+
+		Functions\expect( 'wpems_add_notice' )
+			->once()
+			->with( 'error', 'Quantity must integer' )
+			->andReturn( true );
+
+		Functions\expect( 'wpems_print_notices' )
+			->once()
+			->andReturnUsing(
+				function () {
+					echo 'Quantity must integer';
+				}
+			);
+
+		Functions\expect( 'get_post' )->never();
+		Functions\expect( 'wp_insert_post' )->never();
+
+		Functions\expect( 'wp_send_json' )
+			->once()
+			->andReturnUsing(
+				function ( $response ) {
+					$this->assertFalse( $response['status'] );
+					$this->assertStringContainsString( 'Quantity must integer', $response['message'] );
+
+					throw new \Error( 'wp_send_json intercepted' );
+				}
+			);
+
+		$buffer_level = ob_get_level();
+		ob_start();
+
+		try {
+			$this->expectException( \Error::class );
+			$this->expectExceptionMessage( 'wp_send_json intercepted' );
+
+			$handler = new \WPEMS_Ajax();
+			$handler->event_auth_register();
+		} finally {
+			while ( ob_get_level() > $buffer_level ) {
+				ob_end_clean();
+			}
+		}
+	}
 }
