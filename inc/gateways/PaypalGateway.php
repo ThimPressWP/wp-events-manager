@@ -461,8 +461,11 @@ class PaypalGateway extends \WPEMS_Abstract_Payment_Gateway {
 	 */
 	private function verify_paypal_ipn( array $post_data ): bool {
 		$raw_post = wp_unslash( $post_data );
-		$body     = array_merge( array( 'cmd' => '_notify-validate' ), $raw_post );
-		$url      = ! empty( $raw_post['test_ipn'] ) && '1' === (string) $raw_post['test_ipn']
+
+		$body = array_merge( array( 'cmd' => '_notify-validate' ), $raw_post );
+
+		// Use site configuration instead of POST data to determine verification endpoint
+		$url = wpems_get_option( 'paypal_sandbox_mode' )
 			? 'https://www.sandbox.paypal.com/cgi-bin/webscr'
 			: 'https://www.paypal.com/cgi-bin/webscr';
 
