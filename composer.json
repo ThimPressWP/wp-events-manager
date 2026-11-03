@@ -25,7 +25,8 @@
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml --report-summary --report-source",
 		"lint": "phpcs --standard=phpcs.xml",
-		"phpcs": "phpcs --standard=phpcs.xml"
+		"phpcs": "phpcs --standard=phpcs.xml",
+		"test": "phpunit"
 	},
 	"autoload": {
 		"psr-4": {

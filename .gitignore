@@ -5,3 +5,4 @@ composer.lock
 /releases
 release
 /assets/dist/
+.DS_Store

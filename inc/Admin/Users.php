@@ -39,58 +39,85 @@ class Users extends \WP_List_Table {
 	}
 
 	/**
-	 * Load event users.
+	 * Total users count for pagination.
+	 *
+	 * @var int
+	 */
+	public $total_users = 0;
+
+	/**
+	 * Load event users with database pagination and sorting.
+	 *
+	 * @param int $per_page     Items per page.
+	 * @param int $current_page Current page number.
 	 *
 	 * @return array
 	 */
-	public function load_users() {
+	public function load_users( $per_page = 10, $current_page = 1 ) {
 		global $wpdb;
 
 		if ( ! current_user_can( 'list_users' ) ) {
 			return array();
 		}
 
-		if ( isset( $_GET['user_id'] ) && $_GET['user_id'] ) {
-			$query = $wpdb->prepare(
-				"
-					SELECT user.* FROM $wpdb->users AS user
-					LEFT JOIN $wpdb->postmeta AS pm ON user.ID = pm.meta_value
-					LEFT JOIN $wpdb->posts AS book ON pm.post_id = book.ID
-					WHERE
-						pm.meta_key = %s
-						AND book.post_type = %s
-						AND book.post_status IN (%s,%s,%s,%s)
-						AND user.ID = %d
-					GROUP BY user.ID
-				",
-				'ea_booking_user_id',
-				'event_auth_book',
-				'ea-cancelled',
-				'ea-pending',
-				'ea-processing',
-				'ea-completed',
-				absint( wp_unslash( $_GET['user_id'] ) )
-			);
-		} else {
-			$query = $wpdb->prepare(
-				"
-					SELECT user.* FROM $wpdb->users AS user
-					LEFT JOIN $wpdb->postmeta AS pm ON user.ID = pm.meta_value
-					LEFT JOIN $wpdb->posts AS book ON pm.post_id = book.ID
-					WHERE
-						pm.meta_key = %s
-						AND book.post_type = %s
-						AND book.post_status IN (%s,%s,%s,%s)
-					GROUP BY user.ID
-				",
-				'ea_booking_user_id',
-				'event_auth_book',
-				'ea-cancelled',
-				'ea-pending',
-				'ea-processing',
-				'ea-completed'
-			);
+		$user_id_filter = isset( $_GET['user_id'] ) ? absint( wp_unslash( $_GET['user_id'] ) ) : 0;
+
+		$allowed_orderby = array(
+			'id'            => 'user.ID',
+			'user_login'    => 'user.user_login',
+			'user_nicename' => 'user.user_nicename',
+			'user_email'    => 'user.user_email',
+		);
+		$orderby_key = ( ! empty( $_GET['orderby'] ) ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : 'user_login';
+		$orderby     = isset( $allowed_orderby[ $orderby_key ] ) ? $allowed_orderby[ $orderby_key ] : 'user.user_login';
+
+		$order = ( ! empty( $_GET['order'] ) ) ? strtoupper( sanitize_key( wp_unslash( $_GET['order'] ) ) ) : 'ASC';
+		$order = in_array( $order, array( 'ASC', 'DESC' ), true ) ? $order : 'ASC';
+
+		$statuses   = array( 'ea-cancelled', 'ea-pending', 'ea-processing', 'ea-completed' );
+		$user_where = $user_id_filter ? $wpdb->prepare( 'AND CAST(pm.meta_value AS UNSIGNED) = %d', $user_id_filter ) : '';
+
+		$booked_users_sql = $wpdb->prepare(
+			"
+				SELECT DISTINCT CAST(pm.meta_value AS UNSIGNED) AS user_id
+				FROM {$wpdb->posts} AS book
+				INNER JOIN {$wpdb->postmeta} AS pm ON book.ID = pm.post_id
+				WHERE
+					pm.meta_key = %s
+					AND book.post_type = %s
+					AND book.post_status IN (%s,%s,%s,%s)
+					{$user_where}
+			",
+			'ea_booking_user_id',
+			'event_auth_book',
+			$statuses[0],
+			$statuses[1],
+			$statuses[2],
+			$statuses[3]
+		);
+
+		$this->total_users = (int) $wpdb->get_var(
+			"SELECT COUNT(*) FROM {$wpdb->users} AS user INNER JOIN ({$booked_users_sql}) AS booked_users ON user.ID = booked_users.user_id"
+		);
+
+		if ( 0 === $this->total_users ) {
+			return array();
 		}
+
+		$per_page     = max( 1, absint( $per_page ) );
+		$current_page = max( 1, absint( $current_page ) );
+		$offset       = ( $current_page - 1 ) * $per_page;
+
+		$query = $wpdb->prepare(
+			"
+				SELECT user.* FROM {$wpdb->users} AS user
+				INNER JOIN ({$booked_users_sql}) AS booked_users ON user.ID = booked_users.user_id
+				ORDER BY {$orderby} {$order}
+				LIMIT %d OFFSET %d
+			",
+			$per_page,
+			$offset
+		);
 
 		$users = $wpdb->get_results( $query );
 
@@ -324,29 +351,20 @@ class Users extends \WP_List_Table {
 		// process bulk action
 		$this->process_bulk_action();
 
-		// load items
-		$this->items = $this->load_users();
-
 		$columns               = $this->get_columns();
 		$hidden                = array();
 		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
-		usort( $this->items, array( $this, 'sort_data' ) );
 
 		$per_page    = 10;
-		$total_items = count( $this->items );
-		// pagination
-		if ( $total_items > $per_page ) {
-			$this->items = array_slice( $this->items, ( $this->get_pagenum() - 1 ) * $per_page, $per_page );
-		}
+		$this->items = $this->load_users( $per_page, $this->get_pagenum() );
+
 		$this->set_pagination_args(
 			array(
-				'total_items' => $total_items,
+				'total_items' => $this->total_users,
 				'per_page'    => $per_page,
 			)
 		);
-
-		$this->items = $this->items;
 	}
 
 	/**

@@ -226,10 +226,13 @@ class EventDB extends DataBase {
 			$filter->where[] = $this->wpdb->prepare( 'AND book.post_status = %s', $booking_status );
 		}
 
-		// Join user meta + users table.
-		$filter->join[]  = "INNER JOIN $this->tb_postmeta AS pm2 ON pm2.post_id = book.ID";
-		$filter->where[] = $this->wpdb->prepare( 'AND pm2.meta_key = %s', 'ea_booking_user_id' );
-		$filter->join[]  = "INNER JOIN $this->tb_users AS user ON user.ID = pm2.meta_value";
+		// Join user meta + users table only when user filtering is requested.
+		if ( $user_id ) {
+			$filter->join[]  = "INNER JOIN $this->tb_postmeta AS pm2 ON pm2.post_id = book.ID";
+			$filter->where[] = $this->wpdb->prepare( 'AND pm2.meta_key = %s', 'ea_booking_user_id' );
+			$filter->join[]  = "INNER JOIN $this->tb_users AS user ON user.ID = pm2.meta_value";
+			$filter->where[] = $this->wpdb->prepare( 'AND user.ID = %d', $user_id );
+		}
 
 		// Join event meta + events table.
 		$filter->join[]  = "INNER JOIN $this->tb_postmeta AS pm3 ON pm3.post_id = book.ID";
@@ -237,11 +240,6 @@ class EventDB extends DataBase {
 		$filter->join[]  = "INNER JOIN $this->tb_posts AS event ON event.ID = pm3.meta_value";
 		$filter->where[] = $this->wpdb->prepare( 'AND event.ID = %d', $event_id );
 		$filter->where[] = $this->wpdb->prepare( 'AND event.post_type = %s', 'tp_event' );
-
-		// Scope by user when provided.
-		if ( $user_id ) {
-			$filter->where[] = $this->wpdb->prepare( 'AND user.ID = %d', $user_id );
-		}
 
 		$filter->run_query_count = false;
 		$filter->limit           = -1;

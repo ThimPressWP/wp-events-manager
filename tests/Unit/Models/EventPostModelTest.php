@@ -124,8 +124,8 @@ class EventPostModelTest extends TestCase {
 		$wpdb->posts    = 'wp_posts';
 		$wpdb->postmeta = 'wp_postmeta';
 		$wpdb->users    = 'wp_users';
-		$wpdb->shouldReceive( 'prepare' )->once()->andReturn( 'prepared sql' );
-		$wpdb->shouldReceive( 'get_var' )->once()->with( 'prepared sql' )->andReturn( '3' );
+		$wpdb->shouldReceive( 'prepare' )->andReturn( 'prepared sql' );
+		$wpdb->shouldReceive( 'get_results' )->once()->andReturn( array( (object) array( 'qty' => '3' ) ) );
 
 		$event                          = new EventPostModel( $this->makePost( 14, 'tp_event' ) );
 		$event->meta_data               = new stdClass();

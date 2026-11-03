@@ -16,7 +16,7 @@ export const clearAll = (done) => {
 	if (!fs.existsSync('release')) {
 		fs.mkdirSync('release', { recursive: true });
 	}
-	deleteSync(['./release/**', 'assets/dist/css']);
+	deleteSync(['./release/**', 'assets/dist/css'], { dot: true });
 	return gulp.src(['./release/**'])
 		.on('end', done);
 }
@@ -57,10 +57,41 @@ export const minCss = (done) => {
 
 export const copyFilesToRelease = (done) => {
 	// Copy source release to release folder
-	const releasesFiles = ['./**', '!node_modules/**', '!assets/src/**', '!webpack.config.js', '!tsconfig.json',
-		'!phpcs.xml', '!.eslintrc.js', '!.eslintignore', '!composer.json', '!composer.lock', '!gulpfile.mjs',
-		'!package-lock.json', '!package.json', '!release/**','!build-release.js', '!changelog.md', '!phpunit.xml',
-        '!README.md', '!.git/**', '!.gitignore','!.travis.yml'];
+	const releasesFiles = [
+		'./**',
+		'!tests',
+		'!tests/**',
+		'!.phpunit.result.cache',
+		'!node_modules',
+		'!node_modules/**',
+		'!assets/src',
+		'!assets/src/**',
+		'!webpack.config.js',
+		'!tsconfig.json',
+		'!phpcs.xml',
+		'!eslint.config.mjs',
+		'!.eslintrc.js',
+		'!.eslintrc.json',
+		'!.eslintignore',
+		'!composer.json',
+		'!composer.lock',
+		'!gulpfile.mjs',
+		'!package-lock.json',
+		'!package.json',
+		'!release',
+		'!release/**',
+		'!releases',
+		'!releases/**',
+		'!build-release.js',
+		'!changelog.md',
+		'!phpunit.xml',
+		'!README.md',
+		'!.git',
+		'!.git/**',
+		'!.gitignore',
+		'!.travis.yml',
+		'!**/.DS_Store',
+	];
 	gulp.src(releasesFiles, { encoding: false })
 		.pipe(gulp.dest('release/' + name))
 		.on('end', done);
@@ -78,7 +109,7 @@ export const zipRelease = ( done ) => {
 
 	const zipFileName = `${name}_${getCurrentVer()}.zip`;
 
-	return gulp.src(releasesFiles)
+	return gulp.src(releasesFiles, { encoding: false })
 		.pipe(zip(`${zipFileName}`))
 		.pipe(gulp.dest('release'))
 		.on( 'end', done );
