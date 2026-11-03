@@ -33,7 +33,7 @@
 		"format": "wp-scripts format assets/src/**/*.js",
 		"lint:js": "eslint assets/src/js/**/*.js",
 		"makepot": "wp i18n make-pot . languages/wp-events-manager.pot --skip-audit --exclude=\"test,release,build,tools,dist,node_modules,vendor,assets,languages\"",
-		"build-makepot-zip": "composer update --no-dev && npm run build && npm run makepot && gulp",
-		"release": "node build-release.js"
+		"build-makepot-zip": "composer update --no-dev && npm run build && NODE_ENV=development wp-scripts build && npm run makepot && gulp",
+		"release": "npm run build-makepot-zip"
 	}
 }
